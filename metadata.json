@@ -1,0 +1,7 @@
+{
+  "name": "HondAanZee.be - Jouw gids voor de Belgische Kust",
+  "description": "De ultieme gids voor honden aan alle 10 kustgemeentes van België. Mag je hond nu op het strand in Knokke, Oostende of Blankenberge? Ontdek het hier.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
