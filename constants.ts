@@ -220,7 +220,7 @@ export const SERVICES: Service[] = [
     type: 'Dierenarts',
     description: 'Moderne dierenartsenpraktijk waar persoonlijke aanpak en het welzijn van uw huisdier centraal staan.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],
-    image: '/placeholder.webp',
+    image: '/dierenartsfredericgalle.webp',
     city: 'oostende',
     address: 'Onafhankelijkheidsstraat 19, 8400 Oostende',
     website: 'https://www.dierenartsgalle.be'
@@ -231,7 +231,7 @@ export const SERVICES: Service[] = [
     type: 'Dierenspeciaalzaak',
     description: 'Familiezaak met meer dan 20 jaar ervaring en een enorm aanbod aan voeding en accessoires.',
     tags: ['Hondensnacks', 'Ruime plaatsen', 'Indoor toegelaten', 'Hondvriendelijk team'],
-    image: '/placeholder.webp',
+    image: '/diertuincenterrommel.webp',
     city: 'oostende',
     address: 'Rosmolenstraat 4, 8400 Oostende',
     website: 'https://www.dier-tuin-rommel.be'
@@ -242,7 +242,7 @@ export const SERVICES: Service[] = [
     type: 'Dierenarts',
     description: 'Professionele praktijk in Westkapelle met een groot hart voor honden en katten.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],
-    image: '/placeholder.webp',
+    image: '/dierenartsilsekerckhof.webp',
     city: 'knokke-heist',
     address: 'Westkapellestraat 438, 8300 Knokke-Heist',
     website: 'https://www.dierenarts-ilse.be'
@@ -253,7 +253,7 @@ export const SERVICES: Service[] = [
     type: 'Dierenspeciaalzaak',
     description: 'Gezellige dierenwinkel waar u deskundig advies krijgt en uw hond mee mag komen shoppen.',
     tags: ['Hondensnacks', 'Indoor toegelaten', 'Hondvriendelijk team', 'Nabij strand'],
-    image: '/placeholder.webp',
+    image: '/dierenplezierheist.webp',
     city: 'knokke-heist',
     address: 'Westkapellestraat 176, 8300 Knokke-Heist',
     website: 'https://www.dierenplezierknokke-heist.com'
@@ -264,7 +264,7 @@ export const SERVICES: Service[] = [
     type: 'Dierenarts',
     description: 'Moderne dierenartsenpraktijk met ruime openingsuren en aandacht voor elk huisdier.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Waterbak aanwezig'],
-    image: '/placeholder.webp',
+    image: '/praktijk227.webp',
     city: 'blankenberge',
     address: 'Kerkstraat 227, 8370 Blankenberge',
     website: 'https://www.depraktijk227.be'
@@ -275,7 +275,7 @@ export const SERVICES: Service[] = [
     type: 'Dierenspeciaalzaak',
     description: 'Hondenboetiek en trimsalon met een mooi assortiment aan accessoires en snacks.',
     tags: ['Hondensnacks', 'Indoor toegelaten', 'Hondvriendelijk team'],
-    image: '/placeholder.webp',
+    image: '/snuffels.webp',
     city: 'blankenberge',
     address: 'Vissersstraat 29, 8370 Blankenberge',
     website: 'https://www.snuffels-blankenberge.be'
@@ -286,84 +286,62 @@ export const SERVICES: Service[] = [
     type: 'Dierenarts',
     description: 'Ervaren dierenarts die ook \'Cat Friendly\' gecertificeerd is, maar honden met open armen ontvangt.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],
-    image: '/placeholder.webp',
+    image: '/dedierendokter.webp',
     city: 'de-panne',
     address: 'Kasteelstraat 68, 8660 De Panne',
     website: 'https://www.dedierendokter.be'
   },
   {
     id: 8,
-    name: 'Faunami',
-    type: 'Dierenspeciaalzaak',
-    description: 'Ruime winkel met alles voor uw huisdier, van voeding tot speelgoed en verzorging.',
-    tags: ['Ruime plaatsen', 'Hondensnacks', 'Indoor toegelaten'],
-    image: '/placeholder.webp',
-    city: 'de-panne',
-    address: 'Veurnestraat 61, 8660 De Panne',
-    website: ''
-  },
-  {
-    id: 9,
     name: 'Dierenarts Elise Buyse',
     type: 'Dierenarts',
     description: 'Betrokken dierenarts in het centrum van Nieuwpoort, gespecialiseerd in kleine huisdieren.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],
-    image: '/placeholder.webp',
+    image: '/dierenartselisebuyse.webp',
     city: 'nieuwpoort',
     address: 'Kerkstraat 17, 8620 Nieuwpoort',
     website: 'https://www.dierenartselisebuyse.be'
   },
   {
-    id: 10,
-    name: 'DogTime',
-    type: 'Dierenspeciaalzaak',
-    description: 'Gespecialiseerde winkel met een ruim aanbod aan voeding en accessoires voor uw viervoeter.',
-    tags: ['Hondensnacks', 'Indoor toegelaten', 'Hondvriendelijk team'],
-    image: '/placeholder.webp',
-    city: 'nieuwpoort',
-    address: 'Albert I laan 274, 8620 Nieuwpoort',
-    website: ''
-  },
-  {
-    id: 11,
+    id: 9,
     name: 'Dierenartsenpraktijk Katty',
     type: 'Dierenarts',
     description: 'Warme praktijk waar uw hond de beste medische zorgen krijgt in een rustige omgeving.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Waterbak aanwezig'],
-    image: '/placeholder.webp',
+    image: '/dierenartsenpraktijkkatty.webp',
     city: 'middelkerke',
     address: 'Rietstraat 18, 8430 Middelkerke',
     website: 'https://www.dierenartskatty.be'
   },
   {
-    id: 12,
+    id: 10,
     name: 'Dogs & Co',
     type: 'Dierenspeciaalzaak',
     description: 'Combinatie van trimsalon en winkel met kwalitatieve producten voor honden en katten.',
     tags: ['Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team'],
-    image: '/placeholder.webp',
+    image: '/dogsandco.webp',
     city: 'middelkerke',
     address: 'Leopoldlaan 94, 8430 Middelkerke',
     website: 'https://www.dogsandco.be'
   },
   {
-    id: 13,
+    id: 11,
     name: 'Dierenartsenpraktijk Breemersch',
     type: 'Dierenarts',
     description: 'Goed uitgeruste praktijk waar een persoonlijke band met dier en eigenaar voorop staat.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],
-    image: '/placeholder.webp',
+    image: '/dierenartsenpraktijkbreemersch.webp',
     city: 'de-haan',
     address: 'Driftweg 30, 8420 De Haan',
     website: ''
   },
   {
-    id: 14,
+    id: 12,
     name: 'Happy Dog',
     type: 'Dierenspeciaalzaak',
     description: 'Hondentrimsalon dat ook voeding en verzorgingsproducten verkoopt in het centrum.',
     tags: ['Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team'],
-    image: '/placeholder.webp',
+    image: '/happydog.webp',
     city: 'de-haan',
     address: 'Nieuwstraat 5, 8420 De Haan',
     website: ''
@@ -412,17 +390,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.0058,
     city: 'de-haan',
     description: 'Omheinde zone naast de parking.',
-    image: '/placeholder.webp',
-    rating: 4
-  },
-  { 
-    name: 'Losloopzone Centrum/Sport', 
-    address: 'Nieuwe Steenweg, De Haan', 
-    lat: 51.2756, 
-    lng: 3.0248,
-    city: 'de-haan',
-    description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.',
-    image: '/placeholder.webp',
+    image: '/losloopzonevosseslag.webp',
     rating: 4
   },
   { 
@@ -432,7 +400,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.0212,
     city: 'de-haan',
     description: 'Zone nabij het sportcomplex Haneveld.',
-    image: '/placeholder.webp',
+    image: '/losloopzonehaneveld.webp',
     rating: 4
   },
   { 
@@ -442,7 +410,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.0385,
     city: 'de-haan',
     description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).',
-    image: '/placeholder.webp',
+    image: '/losloopzoneduinbossen.webp',
     rating: 5
   },
   { 
@@ -452,7 +420,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.0712,
     city: 'de-haan',
     description: 'Omheinde hondenweide in Wenduine.',
-    image: '/placeholder.webp',
+    image: '/losloopzonewenduinemanitobastraat.webp',
     rating: 4
   },
   { 
@@ -462,30 +430,30 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.0685,
     city: 'de-haan',
     description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
-    image: '/placeholder.webp',
+    image: '/losloopzonewenduinewesthinderlaan.webp',
     rating: 4
   },
   // Bredene
   { 
     name: 'Hondenweide Brouwerijstraat', 
-    address: 'Brouwerijstraat, Bredene', 
+    address: 'Brouwerijstraat, 8450 Bredene', 
     lat: 51.2398, 
     lng: 2.9715,
     city: 'bredene',
-    description: 'Omheinde weide nabij de watertoren/schakelstation.',
+    description: 'Volledig omheind grasveld direct naast de grote watertoren en het elektriciteitsstation. Op Street View lijkt het een braakliggend terrein.',
     image: '/placeholder.webp',
     rating: 4
   },
   // Oostende
   { 
     name: 'Maria Hendrikapark (Grootste)', 
-    address: 'Iependreef / Cederdreef, Oostende', 
+    address: 'Iependreef / Cederdreef, 8400 Oostende', 
     lat: 51.2089, 
     lng: 2.9148,
     city: 'oostende',
-    description: 'Grootste hondenweide, achter het Blauwe Kruis dierenasiel.',
+    description: 'Grootste en populairste hondenloopweide van Oostende. De weide ligt achter het Dierenasiel "Het Blauwe Kruis". Niet zichtbaar vanaf de hoofdweg.',
     image: '/placeholder.webp',
-    rating: 5
+    rating: 4
   },
   { 
     name: 'Losloopzone Raversijde', 
@@ -494,148 +462,150 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 2.8645,
     city: 'oostende',
     description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
-    image: '/placeholder.webp',
+    image: '/losloopzoneraversijde.webp',
     rating: 4
   },
   { 
     name: 'Losloopzone Leffingestraat', 
-    address: 'Leffingestraat, Oostende', 
+    address: 'Leffingestraat 40, 8400 Oostende', 
     lat: 51.2185, 
     lng: 2.9325,
     city: 'oostende',
-    description: 'Achter de tennisclub.',
+    description: 'Veilige, omheinde zone achter de Ostend Tennis Club. Volledig verborgen achter de tennisvelden, je moet langs het tennisgebouw kijken.',
     image: '/placeholder.webp',
-    rating: 3
+    rating: 4
   },
   { 
-    name: 'Losloopzone Slachthuiskaai', 
-    address: 'Slachthuiskaai, Oostende', 
+    name: 'Losloopzone Lijndraaiersstraat', 
+    address: 'Lijndraaiersstraat, 8400 Oostende', 
     lat: 51.2245, 
     lng: 2.9198,
     city: 'oostende',
-    description: 'Nabij de kruising met Lijndraaiersstraat.',
+    description: 'Omheind stuk gras op de hoek van Stapelshuisstraat en Lijndraaiersstraat (Oosteroever). Voorheen bekend als "Slachthuiskaai".',
     image: '/placeholder.webp',
     rating: 3
   },
   { 
     name: 'Losloopzone Ankerstraat', 
-    address: 'Ankerstraat, Oostende', 
+    address: 'Ankerstraat, 8400 Oostende', 
     lat: 51.2312, 
     lng: 2.9285,
     city: 'oostende',
-    description: 'Nabij tramhalte "Weg naar Vismijn".',
+    description: 'Smalle, langgerekte strook gras die parallel loopt aan de tramsporen. Ziet eruit als een berm, maar is omheind voor honden.',
     image: '/placeholder.webp',
-    rating: 3
+    rating: 4
   },
   { 
     name: 'Hondenbos', 
-    address: 'Karperstraat / A10, Oostende', 
+    address: 'Karperstraat, 8400 Oostende', 
     lat: 51.2125, 
     lng: 2.9425,
     city: 'oostende',
-    description: 'Bosstrook tussen Karperstraat en de A10 (nabij "Groene 62").',
+    description: 'Groot hondenbos (ca. 3,5 hectare) in natuurzone nabij de brug van de A10. Je moet de Karperstraat inrijden (doodlopend) om de toegang te vinden.',
     image: '/placeholder.webp',
     rating: 4
   },
   { 
     name: 'Losloopzone Schietbaanstraat', 
-    address: 'Schietbaanstraat, Oostende', 
+    address: 'Schietbaanstraat, 8400 Oostende', 
     lat: 51.2168, 
     lng: 2.9385,
     city: 'oostende',
+    description: 'Rustige zone gelegen aan de rand van de woonwijk.',
     image: '/placeholder.webp',
-    rating: 3
+    rating: 4
   },
   { 
     name: 'Losloopzone Brigade Pironlaan', 
-    address: 'Brigade Pironlaan, Oostende', 
+    address: 'Brigade Pironlaan, 8400 Oostende', 
     lat: 51.2098, 
     lng: 2.9215,
     city: 'oostende',
+    description: 'Praktische zone in de groene strook voor buurtbewoners. Recent vernieuwd met speeltoestellen (april 2023).',
     image: '/placeholder.webp',
-    rating: 3
+    rating: 4
+  },
+  { 
+    name: 'Provinciedomein Raversijde', 
+    address: 'Nieuwpoortsesteenweg 636 / Westlaan, 8400 Oostende', 
+    lat: 51.2045, 
+    lng: 2.8625,
+    city: 'oostende',
+    description: 'Specifieke speelweide binnen het provinciedomein (ingang via Westlaan). In de rest van het park moeten honden aan de leiband.',
+    image: '/placeholder.webp',
+    rating: 5
   },
   // Middelkerke
   { 
     name: 'Hondenweide Middelkerke', 
-    address: 'Koninginnelaan, Middelkerke', 
+    address: 'Koninginnelaan, 8430 Middelkerke', 
     lat: 51.1832, 
     lng: 2.8198,
     city: 'middelkerke',
-    description: 'Direct tegenover WZC Haerlebout.',
+    description: 'Goed onderhouden, omheind stuk in de duinengordel. Ligt recht tegenover het Woonzorgcentrum (WZC) Haerlebout.',
     image: '/placeholder.webp',
     rating: 4
   },
   { 
     name: 'Hondenweide Westende', 
-    address: 'Hofstraat, Westende', 
+    address: 'Hofstraat, 8434 Westende', 
     lat: 51.1698, 
     lng: 2.7856,
     city: 'middelkerke',
-    description: 'Nabij de kruising met Voetbalstraat.',
+    description: 'Rustige plek vlakbij Sportpark "De Krokodiel". Zoek naar de kruising met de Voetbalstraat.',
     image: '/placeholder.webp',
     rating: 4
   },
   // Nieuwpoort
   { 
     name: 'Hondenweide Prins Mauritspark', 
-    address: 'Louisweg / Dienstweg Havengeul, Nieuwpoort', 
+    address: 'Louisweg (nabij Halve Maanstraat), 8620 Nieuwpoort', 
     lat: 51.1425, 
     lng: 2.7312,
     city: 'nieuwpoort',
-    description: 'Alternatief voor strand in de zomer! Omheinde losloopweide op de hoek van Louisweg en Dienstweg Havengeul.',
+    description: 'Grote omheinde zone (ca. 2.500 m²) aan de kant van de havengeul, vlakbij het vakantiepark. Uitstekend alternatief voor het strand in de zomer!',
     image: '/placeholder.webp',
     rating: 5
   },
   { 
     name: 'Hondenweide Leopold II Park', 
-    address: 'Albert I Laan, Nieuwpoort', 
+    address: 'Leopold II Park / Albert I Laan, 8620 Nieuwpoort', 
     lat: 51.1285, 
     lng: 2.7485,
     city: 'nieuwpoort',
-    description: 'Kleinere omheinde zone binnen het park.',
+    description: 'Kleinere omheinde zone binnenin het park, voorzien van een saskluis bij de ingang.',
     image: '/placeholder.webp',
     rating: 4
   },
   // Koksijde
   { 
-    name: 'Losloopzone Sportpark Oostduinkerke', 
-    address: 'Hazebeekstraat, Oostduinkerke', 
+    name: 'Losloopzone Sportpark Hazebeek', 
+    address: 'Hazebeekstraat 11, 8670 Oostduinkerke', 
     lat: 51.1185, 
     lng: 2.6698,
     city: 'koksijde',
-    description: 'Gelegen bij Sportpark Oostduinkerke.',
+    description: 'Ruime zone aan de rand van sportcomplex "Hazebeek".',
     image: '/placeholder.webp',
     rating: 4
   },
   { 
     name: 'Losloopzone Sint-Idesbald', 
-    address: 'Gladiolenlaan 17, Koksijde', 
+    address: 'Gladiolenlaan, 8670 Koksijde', 
     lat: 51.0985, 
     lng: 2.6125,
     city: 'koksijde',
-    description: 'Nabij het Abdijmuseum Ten Duinen.',
+    description: 'Hondenspeelzone nabij het Abdijmuseum Ten Duinen. Ingang via de Gladiolenlaan.',
     image: '/placeholder.webp',
     rating: 4
   },
   // De Panne
   { 
     name: 'Hondenweide Kerkstraat', 
-    address: 'Kerkstraat / Artiestenpad, De Panne', 
+    address: 'Kerkstraat 69, 8660 De Panne', 
     lat: 51.0998, 
     lng: 2.5912,
     city: 'de-panne',
-    description: 'Nabij motorclub "t Motosiekeltje" en tramhalte "Moeder Lambik".',
-    image: '/placeholder.webp',
-    rating: 4
-  },
-  { 
-    name: 'Hondenweide Vijvers Markey', 
-    address: 'Doornstraat, Adinkerke', 
-    lat: 51.0785, 
-    lng: 2.5985,
-    city: 'de-panne',
-    description: 'Gelegen op domein "Vijvers Markey".',
+    description: 'Belangrijkste omheinde losloopweide in De Panne. Je moet helemaal naar achteren, naast de begraafplaats en motorclub "t Motosiekeltje".',
     image: '/placeholder.webp',
     rating: 4
   }

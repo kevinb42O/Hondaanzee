@@ -32,6 +32,7 @@ const AllOffLeashAreas: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
+  const areaDetailRef = useRef<HTMLDivElement>(null);
 
   useSEO(SEO_DATA.losloopzones);
 
@@ -50,6 +51,15 @@ const AllOffLeashAreas: React.FC = () => {
       }
     }
   }, [location.search]);
+
+  // Scroll to area detail when selected
+  useEffect(() => {
+    if (selectedArea !== null && areaDetailRef.current) {
+      setTimeout(() => {
+        areaDetailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+  }, [selectedArea]);
 
   const filteredAreas = useMemo(() => {
     let areas = [...OFF_LEASH_AREAS];
@@ -326,11 +336,10 @@ const AllOffLeashAreas: React.FC = () => {
           </div>
 
           {/* Grid Layout */}
-          <div>
+          <div ref={areaDetailRef}>
             {displayedArea ? (
               // Single Area Detail View
-              <div className="max-w-4xl mx-auto">
-                <button
+              <div className="max-w-4xl mx-auto">\n                <button
                   onClick={() => setSelectedArea(null)}
                   className="mb-4 text-sky-600 hover:text-sky-700 font-bold flex items-center gap-2"
                 >
@@ -399,10 +408,10 @@ const AllOffLeashAreas: React.FC = () => {
                       const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
                       const cityData = CITIES.find(c => c.slug === area.city);
                       return (
-                        <div 
+                        <button 
                           key={`${area.city}-${area.name}`}
                           onClick={() => setSelectedArea(globalIndex)}
-                          className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group"
+                          className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group w-full text-left"
                         >
                           <div className="relative h-56 bg-slate-200 overflow-hidden">
                             <img 
@@ -434,7 +443,7 @@ const AllOffLeashAreas: React.FC = () => {
                               </span>
                             </div>
                           </div>
-                        </div>
+                        </button>
                       );
                     })}
                   </div>

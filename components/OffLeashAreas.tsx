@@ -1,7 +1,7 @@
 
-import React, { useMemo, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { MapPin, Navigation, Info, ExternalLink, Clock } from 'lucide-react';
+import React, { useMemo, useEffect, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { MapPin, Navigation, Info, Clock, ExternalLink } from 'lucide-react';
 import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
 import { OFF_LEASH_AREAS } from '../constants.ts';
@@ -74,8 +74,6 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
   const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
-  const markersRef = useRef<L.Marker[]>([]);
-  const [selectedArea, setSelectedArea] = useState<string | null>(null);
 
   const isAreaOpen = (area: OffLeashArea): boolean => {
     if (!area.openingHours) return true; // Default to always open if not specified
@@ -152,7 +150,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
       setTimeout(() => map.invalidateSize(), 100);
 
       const cityAreas = OFF_LEASH_AREAS.filter(area => area.city === city.slug);
-      const areasToShow = selectedArea ? cityAreas.filter(area => area.name === selectedArea) : cityAreas;
+      const areasToShow = cityAreas;
       const hasAreas = areasToShow.length > 0;
       const markers: L.Marker[] = [];
 
@@ -225,7 +223,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
         leafletInstance.current = null;
       }
     };
-  }, [city, nearestInfo, selectedArea]);
+  }, [city, nearestInfo]);
 
   return (
     <section className="py-10 sm:py-12 md:py-24 bg-slate-50 border-y border-slate-200">
@@ -240,21 +238,18 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
             </div>
 
             {OFF_LEASH_AREAS.some(area => area.city === city.slug) ? (
+              <>
               <div className="space-y-4">
                 {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
                   const isOpen = isAreaOpen(area);
                   const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
                   return (
-                    <div 
+                    <button 
                       key={area.name}
                       onClick={() => {
-                        if (selectedArea === area.name) {
-                          setSelectedArea(null);
-                        } else {
-                          setSelectedArea(area.name);
-                        }
+                        navigate(`/losloopzones?area=${globalIndex}`);
                       }}
-                      className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'} ${selectedArea === area.name ? 'ring-2 ring-sky-500 shadow-lg' : ''}`}
+                      className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer w-full text-left ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
                     >
                       <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-400'}`}>
                         <MapPin size={24} />
@@ -275,25 +270,32 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                           <p className="text-slate-400 text-xs mb-3 leading-relaxed">{area.description}</p>
                         )}
                         <div className="flex items-center gap-4">
-                          <a 
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(area.name + ' ' + area.address)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs hover:underline"
-                          >
-                            Navigeer <ExternalLink size={12} />
-                          </a>
                           {area.openingHours && (
                             <div className="flex items-center gap-1.5 text-slate-400 font-bold text-[10px] uppercase">
                                <Clock size={12} /> {area.openingHours.open} - {area.openingHours.close}
                             </div>
                           )}
+                          <div className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs">
+                            Bekijk details →
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
+              <div className="mt-6">
+                <Link
+                  to="/losloopzones"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 text-white rounded-xl font-bold text-sm hover:bg-sky-700 transition-colors shadow-md hover:shadow-lg active:scale-95 w-full sm:w-auto"
+                >
+                  Bekijk alle losloopzones
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
+              </>
             ) : (
               <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 text-center lg:text-left">
                 <div className="bg-amber-50 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-6 text-amber-500">

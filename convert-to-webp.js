@@ -7,15 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const jpegFiles = [
-  'wenduine.jpg',
-  'oostende.jpg',
-  'oostduinkerke.jpg',
-  'nieuwpoort.jpg',
-  'middelkerke.jpg',
-  'knokke-heist.jpg',
-  'depanne.jpg',
-  'bredene.jpg',
-  'blankenberge.jpg'
+  'praktijk227.jpg',
+  'snuffels.jpg'
 ];
 
 console.log('Converting JPEG files to WebP...\n');
