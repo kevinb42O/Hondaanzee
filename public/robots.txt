@@ -1,0 +1,49 @@
+# HondAanZee.be - Robots.txt
+# Updated: 2026-01-22
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://hondaanzee.be/sitemap.xml
+
+# Crawl-delay (be nice to smaller bots)
+Crawl-delay: 1
+
+# Block specific paths (if needed in future)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all images and assets
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.css$
+Allow: /*.js$
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots (optional - add as needed)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10

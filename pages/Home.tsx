@@ -6,40 +6,14 @@ import { CITIES } from '../cityData.ts';
 
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [parallaxOffset, setParallaxOffset] = useState(0);
 
-  // Premium smooth parallax effect
-  useEffect(() => {
-    let ticking = false;
-    let currentOffset = 0;
-    let targetOffset = 0;
-
-    const smoothParallax = () => {
-      // Smooth interpolation (ease out) - slower for premium feel
-      currentOffset += (targetOffset - currentOffset) * 0.05;
-      
-      if (Math.abs(targetOffset - currentOffset) > 0.1) {
-        setParallaxOffset(currentOffset);
-        requestAnimationFrame(smoothParallax);
-      } else {
-        setParallaxOffset(targetOffset);
-        ticking = false;
-      }
-    };
-
-    const handleScroll = () => {
-      // Very subtle parallax - only 10% of scroll speed for premium feel
-      targetOffset = window.scrollY * 0.1;
-      
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(smoothParallax);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Scroll to results section
+  const scrollToResults = () => {
+    const stedenSection = document.getElementById('steden');
+    if (stedenSection) {
+      stedenSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const filteredCities = useMemo(() => {
     return CITIES.filter((city) =>
@@ -48,31 +22,29 @@ const Home: React.FC = () => {
   }, [searchQuery]);
 
   return (
-    <div className="pb-12 md:pb-24 overflow-hidden">
+    <div className="pb-12 md:pb-24 overflow-x-clip overflow-y-visible">
       {/* Hero Section with Dynamic Background */}
-      <div className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
-        {/* Background Image with Premium Parallax Effect */}
+      <div className="relative -mt-[72px] sm:-mt-[80px] md:-mt-[96px] pt-[72px] sm:pt-[80px] md:pt-[96px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
+        {/* Background Image with CSS Parallax */}
         <div 
-          className="absolute inset-0 z-0 transition-transform duration-75 ease-out" 
-          style={{ transform: `translate3d(0, ${parallaxOffset}px, 0)` }}
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/lexi.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 30%',
+            backgroundAttachment: 'fixed',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
-          <img 
-            src="/lexi.webp" 
-            alt="Blije hond op het strand"
-            className="w-full h-[120%] object-cover animate-in fade-in duration-1000"
-            style={{ objectPosition: 'center 30%' }}
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
           {/* Multi-layer Overlay for contrast */}
           <div className="absolute inset-0 bg-slate-900/60"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[9px] sm:text-[10px] md:text-[11px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-6 sm:mb-8 animate-in fade-in slide-in-from-bottom-4 shadow-xl">
-             <Sparkles size={12} className="text-sky-300 sm:w-[14px] sm:h-[14px]" /> De meest complete kustgids van België
+          <div className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 text-[9px] sm:text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-6 sm:mb-8 mt-4 sm:mt-6 md:mt-8 animate-in fade-in slide-in-from-bottom-4 shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-300" style={{ boxShadow: '0 10px 30px -5px rgba(0,0,0,0.4), 0 4px 10px -2px rgba(0,0,0,0.3)' }}>
+            <Sparkles size={12} className="text-sky-500 sm:w-[14px] sm:h-[14px]" strokeWidth={3} /> 
+            <span className="bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">De meest complete kustgids van België</span>
           </div>
           
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 drop-shadow-2xl font-heading" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3)', letterSpacing: '-0.5px', fontWeight: 700 }}>
@@ -100,6 +72,11 @@ const Home: React.FC = () => {
                 placeholder="Waar gaan jullie wandelen?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    scrollToResults();
+                  }
+                }}
                 className="search-input flex-1 px-2 sm:px-3 md:px-4 py-3 sm:py-4 md:py-5 bg-transparent text-base sm:text-lg md:text-xl text-slate-900 font-semibold placeholder:text-slate-300 focus:outline-none font-heading min-w-0"
                 enterKeyHint="search"
                 autoComplete="off"
@@ -115,7 +92,10 @@ const Home: React.FC = () => {
                   <X size={20} className="sm:w-[22px] sm:h-[22px]" />
                 </button>
               )}
-              <button className="btn-lift bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white font-bold px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-full text-sm sm:text-base md:text-lg font-heading whitespace-nowrap touch-target">
+              <button 
+                onClick={scrollToResults}
+                className="btn-lift bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white font-bold px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-full text-sm sm:text-base md:text-lg font-heading whitespace-nowrap touch-target"
+              >
                 Zoeken
               </button>
             </div>
@@ -126,22 +106,15 @@ const Home: React.FC = () => {
                  <button 
                   key={pop}
                   onClick={() => setSearchQuery(pop)}
-                  className="popular-pill group relative text-xs sm:text-sm font-medium text-white/90 hover:text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-heading transition-all duration-300 active:scale-95 touch-target"
+                  className="popular-pill group relative text-xs sm:text-sm font-semibold text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-heading transition-all duration-300 hover:scale-105 hover:bg-white hover:text-slate-900 active:scale-95 touch-target bg-white/20 backdrop-blur-sm border border-white/30"
                   style={{ 
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
-                    backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    boxShadow: '0 4px 24px -1px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.2)',
                     animationDelay: `${0.6 + index * 0.1}s`
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%)';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
-                    e.currentTarget.style.boxShadow = '0 8px 32px -1px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3)';
+                    // Hover handled by Tailwind classes
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+                    // Hover handled by Tailwind classes
                     e.currentTarget.style.boxShadow = '0 4px 24px -1px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.2)';
                   }}
                  >
@@ -152,20 +125,34 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Organic Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10 rotate-180">
-          <svg 
-            className="relative block w-[calc(100%+1.3px)] h-[60px] sm:h-[80px] md:h-[120px]" 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-          >
-            <path 
-              d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
-              className="fill-current text-stone-50"
-            />
-          </svg>
+        {/* Organic Wave Divider with Infinite Animation */}
+        <div className="absolute bottom-0 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
+            <svg 
+              className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 1200 120" 
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
+                className="fill-current text-stone-50"
+              />
+            </svg>
+            <svg 
+              className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 1200 120" 
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
+                className="fill-current text-stone-50"
+              />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -184,39 +171,52 @@ const Home: React.FC = () => {
           </div>
 
           {filteredCities.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 md:gap-8">
-              {filteredCities.map((city, index) => (
-                <Link 
-                  key={city.slug} 
-                  to={`/${city.slug}`}
-                  className="city-card group relative h-64 sm:h-80 md:h-[500px] rounded-2xl overflow-hidden shadow-sm block bg-slate-100 active:scale-[0.98] md:hover:-translate-y-1 md:hover:shadow-xl transition-all duration-300"
-                  style={{ animationDelay: `${Math.min(index * 0.1, 0.5)}s` }}
-                >
-                  <img 
-                    src={city.image} 
-                    alt={city.name} 
-                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
-                    loading={index < 3 ? "eager" : "lazy"}
-                    decoding="async"
-                    fetchPriority={index < 3 ? "high" : "low"}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 sm:p-8 md:p-14 text-white">
-                    <div className="flex items-center gap-2 text-sky-300 font-black text-[10px] md:text-xs uppercase tracking-[0.25em] mb-4 drop-shadow-sm">
-                      <MapPin size={16} />
-                      Ontdek {city.name}
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-4 flex items-center justify-between tracking-tighter">
-                      {city.name}
-                      <div className="bg-white/10 backdrop-blur-2xl p-2.5 sm:p-3.5 rounded-full md:transition-colors md:duration-300 md:group-hover:bg-sky-600 shadow-xl">
-                        <ArrowRight size={20} strokeWidth={3} className="sm:w-6 sm:h-6" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[280px]">
+              {filteredCities.map((city, index) => {
+                // Z-Pattern Anchor Layout: Perfect 10 items grid
+                const isFirstItem = index === 0;
+                const isLastItem = index === filteredCities.length - 1;
+                const isFeatured = isFirstItem || isLastItem;
+                
+                const gridClass = isFeatured ? 'md:col-span-2' : 'md:col-span-1';
+
+                return (
+                  <Link 
+                    key={city.slug} 
+                    to={`/${city.slug}`}
+                    className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-md block bg-slate-100 active:scale-[0.98] md:hover:-translate-y-1 md:hover:shadow-2xl transition-all duration-300 ${gridClass}`}
+                    style={{ animationDelay: `${Math.min(index * 0.08, 0.5)}s` }}
+                  >
+                    <img 
+                      src={city.image} 
+                      alt={city.name} 
+                      className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
+                      loading={index < 3 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={index < 3 ? "high" : "low"}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white">
+                      <div className="flex items-center gap-2 text-sky-300 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3 drop-shadow-lg">
+                        <MapPin size={14} className="sm:w-4 sm:h-4" />
+                        Ontdek {city.name}
                       </div>
-                    </h3>
-                    <p className="text-slate-100 text-xs sm:text-sm md:text-lg line-clamp-2 font-semibold leading-relaxed opacity-90">
-                      {city.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                      <h3 className={`font-black mb-2 sm:mb-3 flex items-center justify-between tracking-tighter drop-shadow-lg ${
+                        isFeatured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl lg:text-3xl'
+                      }`}>
+                        {city.name}
+                        <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:scale-110 shadow-xl flex-shrink-0">
+                          <ArrowRight size={18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+                        </div>
+                      </h3>
+                      <p className={`text-slate-100 font-medium leading-relaxed opacity-95 drop-shadow-md ${
+                        isFeatured ? 'hidden md:block text-sm lg:text-base line-clamp-2' : 'text-xs sm:text-sm line-clamp-2'
+                      }`}>
+                        {city.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-20 md:py-32 px-6 bg-white rounded-[4rem] border-2 border-dashed border-slate-100 animate-in fade-in shadow-inner">

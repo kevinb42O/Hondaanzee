@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { PawPrint, Menu, X, ChevronRight, Megaphone, Globe, MapPin, Coffee, Home } from 'lucide-react';
+import { PawPrint, Menu, X, ChevronRight, Megaphone, Globe, MapPin, Coffee, Home, ShoppingBag, TreePine } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { CITIES } from '../cityData.ts';
 
@@ -8,6 +8,14 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+
+  // Helper function to check if a link is active
+  const isActive = (hash: string) => {
+    if (hash === '#steden') {
+      return location.hash === '#steden' || (location.pathname === '/' && !location.hash);
+    }
+    return location.hash === hash;
+  };
 
   // Close menu on route change
   useEffect(() => {
@@ -40,6 +48,7 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
+    <>
     <header className={`sticky top-0 z-[100] transition-all duration-300 safe-area-top ${
       isScrolled ? 'bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20 py-2 md:py-3' : 'bg-white/70 backdrop-blur-lg py-3 sm:py-4 md:py-6'
     }`}>
@@ -61,66 +70,172 @@ const Header: React.FC = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-2 lg:gap-6">
+        <nav className="hidden md:flex items-center gap-1 lg:gap-3">
           <Link 
             to="/#steden" 
-            className={`px-4 py-2 rounded-full font-bold text-sm transition-all ${
-              location.hash === '#steden' || (location.pathname === '/' && !location.hash) ? 'text-sky-600 bg-sky-50' : 'text-slate-600 hover:text-sky-600 hover:bg-slate-50'
+            className={`relative px-4 py-2 text-sm transition-all ${
+              isActive('#steden') 
+                ? 'text-sky-600 font-bold' 
+                : 'text-slate-700 font-medium hover:text-sky-600'
             }`}
           >
             Alle Badsteden
+            {isActive('#steden') && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
+            )}
           </Link>
           <Link 
-            to="/#hotspots" 
-            className="px-4 py-2 rounded-full font-bold text-sm text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all"
+            to="/hotspots" 
+            className={`relative px-4 py-2 text-sm transition-all ${
+              location.pathname === '/hotspots'
+                ? 'text-sky-600 font-bold' 
+                : 'text-slate-700 font-medium hover:text-sky-600'
+            }`}
           >
             Hotspots
+            {location.pathname === '/hotspots' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
+            )}
+          </Link>
+          <Link 
+            to="/diensten" 
+            className={`relative px-4 py-2 text-sm transition-all ${
+              location.pathname === '/diensten'
+                ? 'text-sky-600 font-bold' 
+                : 'text-slate-700 font-medium hover:text-sky-600'
+            }`}
+          >
+            Diensten
+            {location.pathname === '/diensten' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
+            )}
+          </Link>
+          <Link 
+            to="/losloopzones" 
+            className={`relative px-4 py-2 text-sm transition-all ${
+              location.pathname === '/losloopzones'
+                ? 'text-sky-600 font-bold' 
+                : 'text-slate-700 font-medium hover:text-sky-600'
+            }`}
+          >
+            Losloopzones
+            {location.pathname === '/losloopzones' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
+            )}
           </Link>
           <div className="h-4 w-[1px] bg-slate-200 mx-2 hidden lg:block"></div>
-          <Link 
-            to="/#business" 
-            className="btn-lift flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full font-black text-sm hover:bg-sky-600 shadow-md hover:shadow-sky-100 group"
+          <a
+            href={`https://wa.me/32494816714?text=${encodeURIComponent(`Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-lift flex items-center gap-2 bg-gradient-to-r from-sky-600 to-sky-700 text-white px-6 py-3 rounded-full font-black text-sm hover:from-sky-700 hover:to-sky-800 shadow-lg shadow-sky-600/30 hover:shadow-sky-600/50 group"
           >
             <Megaphone size={16} className="group-hover:rotate-12 transition-transform" />
             <span>Meld je zaak aan</span>
-          </Link>
+          </a>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-3 -mr-2 text-slate-900 bg-slate-100 rounded-xl active:scale-90 transition-transform z-[110] touch-target"
+          className="md:hidden p-3 -mr-2 text-slate-900 bg-slate-100 rounded-xl active:scale-90 transition-transform relative z-[120] touch-target"
           aria-label={isMenuOpen ? "Sluit menu" : "Open menu"}
           aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
+    </header>
 
       {/* Mobile Menu Drawer (Enhanced Overlay) */}
       <div 
-        className={`fixed inset-0 top-0 md:hidden bg-white z-[105] transition-transform duration-300 ease-out will-change-transform ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 top-0 md:hidden bg-white z-[110] transition-all duration-300 ease-out ${
+          isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : 'translate-x-full opacity-0 pointer-events-none'
         }`}
         aria-hidden={!isMenuOpen}
       >
-        <div className="flex flex-col h-full pt-20 md:pt-24 safe-area-top">
+        {/* Close Button Inside Menu */}
+        <div className="absolute top-0 right-0 p-4 z-[120] safe-area-top safe-area-right">
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="p-3 text-slate-900 bg-slate-100 rounded-xl active:scale-90 transition-transform touch-target shadow-lg"
+            aria-label="Sluit menu"
+          >
+            <X size={22} />
+          </button>
+        </div>
+        
+        {/* Logo in Menu */}
+        <div className="absolute top-0 left-0 p-4 safe-area-top safe-area-left">
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="bg-sky-600 p-1.5 rounded-lg text-white shadow-lg">
+              <PawPrint size={18} />
+            </div>
+            <span className="text-lg font-black tracking-tighter leading-none">
+              <span className="text-slate-900">Hond</span><span className="text-sky-600">Aan</span><span className="text-slate-900">Zee</span>
+            </span>
+          </Link>
+        </div>
+        
+        <div className="flex flex-col h-full pt-20 pb-6 safe-area-top safe-area-bottom">
           <div className="flex-grow overflow-y-auto px-4 sm:px-6 py-4 custom-scrollbar overscroll-contain safe-area-left safe-area-right">
             {/* Quick Links Section */}
             <div className="mb-6 sm:mb-8">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 block mb-3 sm:mb-4">Navigatie</span>
               <div className="space-y-2">
-                <Link to="/" className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl font-bold text-slate-900 hover:bg-sky-50 hover:text-sky-600 transition-all active:scale-[0.98] touch-target">
+                <Link 
+                  to="/" 
+                  className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${
+                    location.pathname === '/' && !location.hash
+                      ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
+                      : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
+                  }`}
+                >
                   <div className="flex items-center gap-3">
-                    <Home size={20} className="text-sky-600" />
+                    <Home size={20} className={location.pathname === '/' && !location.hash ? 'text-sky-600' : 'text-slate-400'} />
                     <span>Home</span>
                   </div>
                   <ChevronRight size={18} className="text-slate-300" />
                 </Link>
-                <Link to="/#hotspots" className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl font-bold text-slate-900 hover:bg-sky-50 hover:text-sky-600 transition-all active:scale-[0.98] touch-target">
+                <Link 
+                  to="/hotspots" 
+                  className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${
+                    location.pathname === '/hotspots'
+                      ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
+                      : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
+                  }`}
+                >
                   <div className="flex items-center gap-3">
-                    <Coffee size={20} className="text-sky-600" />
+                    <Coffee size={20} className={location.pathname === '/hotspots' ? 'text-sky-600' : 'text-slate-400'} />
                     <span>Hotspots</span>
+                  </div>
+                  <ChevronRight size={18} className="text-slate-300" />
+                </Link>
+                <Link 
+                  to="/diensten" 
+                  className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${
+                    location.pathname === '/diensten'
+                      ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
+                      : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <ShoppingBag size={20} className={location.pathname === '/diensten' ? 'text-sky-600' : 'text-slate-400'} />
+                    <span>Diensten</span>
+                  </div>
+                  <ChevronRight size={18} className="text-slate-300" />
+                </Link>
+                <Link 
+                  to="/losloopzones" 
+                  className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${
+                    location.pathname === '/losloopzones'
+                      ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
+                      : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <TreePine size={20} className={location.pathname === '/losloopzones' ? 'text-sky-600' : 'text-slate-400'} />
+                    <span>Losloopzones</span>
                   </div>
                   <ChevronRight size={18} className="text-slate-300" />
                 </Link>
@@ -161,12 +276,14 @@ const Header: React.FC = () => {
               <p className="text-slate-400 text-sm mb-6 relative z-10 font-medium leading-relaxed">
                 Zet jouw café, hotel of restaurant gratis op onze kaart.
               </p>
-              <Link 
-                to="/#business"
+              <a
+                href={`https://wa.me/32494816714?text=${encodeURIComponent(`Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full py-4 bg-sky-600 text-white rounded-2xl font-black text-center relative z-10 hover:bg-sky-500 transition-colors shadow-lg shadow-sky-900/20 active:scale-95"
               >
                 Nu Aanmelden
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -177,7 +294,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 };
 

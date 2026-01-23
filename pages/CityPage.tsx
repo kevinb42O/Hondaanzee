@@ -4,14 +4,22 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import StatusCheck from '../components/StatusCheck.tsx';
 import Hotspots from '../components/Hotspots.tsx';
+import Services from '../components/Services.tsx';
 import OffLeashAreas from '../components/OffLeashAreas.tsx';
 import BusinessCTA from '../components/BusinessCTA.tsx';
 import { CITIES } from '../cityData.ts';
+import { useSEO, getCitySEO } from '../utils/seo.ts';
 
 const CityPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const city = CITIES.find(c => c.slug === slug);
+
+  // Apply SEO metadata
+  useSEO(city ? getCitySEO(city.name, city.slug) : {
+    title: 'Stad niet gevonden | HondAanZee.be',
+    description: 'Deze stad werd niet gevonden in onze database'
+  });
 
   useEffect(() => {
     if (!city) {
@@ -40,7 +48,10 @@ const CityPage: React.FC = () => {
 
       <OffLeashAreas city={city} />
       
-      <Hotspots />
+      <Hotspots city={city} />
+      
+      <Services city={city} />
+      
       <BusinessCTA />
     </div>
   );

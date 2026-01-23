@@ -3,62 +3,6 @@ import { City } from './types.ts';
 
 export const CITIES: City[] = [
   {
-    slug: 'knokke-heist',
-    name: 'Knokke-Heist',
-    description: 'De mondaine badstad met luxe beachclubs en een unieke 24/7 losloopzone aan het Zwin.',
-    image: '/knokke.webp',
-    lat: 51.3486,
-    lng: 3.2847,
-    offLeashAreas: [
-      { 
-        name: 'Losloopweide Heist', 
-        address: 'Gustave Van Nieuwenhuysestraat, Heist', 
-        lat: 51.3419, 
-        lng: 3.2351,
-        description: 'Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.'
-      }
-    ],
-    rules: {
-      summer: {
-        start: '03-15',
-        end: '10-15',
-        startTime: '10:00',
-        endTime: '20:00',
-        rule: '🚫 HOOFDSTRANDEN (Knokke, Heist, Duinbergen): Verboden 10u-20u. Vóór 10u en na 20u aan leiband toegelaten. ✅ ALTIJD VRIJ: Strand Het Zoute vanaf watersportclub "Surfers Paradise" richting Nederlandse grens (Zwin) - hier mag je hond 24/7 vrij loslopen, het hele jaar door!',
-        status: 'DEELS'
-      },
-      winter: {
-        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand (mits onder controle).',
-        status: 'JA'
-      },
-      special: 'Assistentiehonden altijd toegelaten. Hondenpoepzakjes verplicht!'
-    }
-  },
-  {
-    slug: 'zeebrugge',
-    name: 'Zeebrugge',
-    description: 'Breed strand met een jaarrond hondenzone richting Blankenberge.',
-    image: '/zeebrugge.webp',
-    lat: 51.3306,
-    lng: 3.2056,
-    offLeashAreas: [],
-    rules: {
-      summer: {
-        start: '03-15',
-        end: '10-15',
-        startTime: '10:00',
-        endTime: '20:00',
-        rule: '✅ GROENE ZONE (altijd toegelaten): Vanaf einde Zeedijk bij Surfclub Icarus richting Blankenberge - vrij loslopen het hele jaar! 🚫 RODE ZONE (hoofdstrand): Vanaf Surfclub Icarus tot aan de St. George\'s Day-wandeling (pier) - verboden 10u-20u, vóór 10u en na 20u aan leiband.',
-        status: 'DEELS'
-      },
-      winter: {
-        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand.',
-        status: 'JA'
-      },
-      special: 'Nieuwe politieverordening februari 2025. Let op de borden!'
-    }
-  },
-  {
     slug: 'blankenberge',
     name: 'Blankenberge',
     description: 'Bruisende badstad - strand ten westen van de pier is 24/7 vrij voor honden.',
@@ -93,6 +37,62 @@ export const CITIES: City[] = [
         status: 'JA'
       },
       special: 'Drie duidelijke zones - herkenbaar aan de pieren (staketsels). Zone West is de hondenvriendelijkste!'
+    }
+  },
+  {
+    slug: 'zeebrugge',
+    name: 'Zeebrugge',
+    description: 'Breed strand met een jaarrond hondenzone richting Blankenberge.',
+    image: '/zeebrugge.webp',
+    lat: 51.3306,
+    lng: 3.2056,
+    offLeashAreas: [],
+    rules: {
+      summer: {
+        start: '03-15',
+        end: '10-15',
+        startTime: '10:00',
+        endTime: '20:00',
+        rule: '✅ GROENE ZONE (altijd toegelaten): Vanaf einde Zeedijk bij Surfclub Icarus richting Blankenberge - vrij loslopen het hele jaar! 🚫 RODE ZONE (hoofdstrand): Vanaf Surfclub Icarus tot aan de St. George\'s Day-wandeling (pier) - verboden 10u-20u, vóór 10u en na 20u aan leiband.',
+        status: 'DEELS'
+      },
+      winter: {
+        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand.',
+        status: 'JA'
+      },
+      special: 'Nieuwe politieverordening februari 2025. Let op de borden!'
+    }
+  },
+  {
+    slug: 'knokke-heist',
+    name: 'Knokke-Heist',
+    description: 'De mondaine badstad met luxe beachclubs en een unieke 24/7 losloopzone aan het Zwin.',
+    image: '/knokke.webp',
+    lat: 51.3486,
+    lng: 3.2847,
+    offLeashAreas: [
+      { 
+        name: 'Losloopweide Heist', 
+        address: 'Gustave Van Nieuwenhuysestraat, Heist', 
+        lat: 51.3419, 
+        lng: 3.2351,
+        description: 'Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.'
+      }
+    ],
+    rules: {
+      summer: {
+        start: '03-15',
+        end: '10-15',
+        startTime: '10:00',
+        endTime: '20:00',
+        rule: '🚫 HOOFDSTRANDEN (Knokke, Heist, Duinbergen): Verboden 10u-20u. Vóór 10u en na 20u aan leiband toegelaten. ✅ ALTIJD VRIJ: Strand Het Zoute vanaf watersportclub "Surfers Paradise" richting Nederlandse grens (Zwin) - hier mag je hond 24/7 vrij loslopen, het hele jaar door!',
+        status: 'DEELS'
+      },
+      winter: {
+        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand (mits onder controle).',
+        status: 'JA'
+      },
+      special: 'Assistentiehonden altijd toegelaten. Hondenpoepzakjes verplicht!'
     }
   },
   {
@@ -349,7 +349,7 @@ export const CITIES: City[] = [
   },
   {
     slug: 'koksijde',
-    name: 'Koksijde - Oostduinkerke - Sint-Idesbald',
+    name: 'Koksijde - Oostduinkerke',
     description: 'Drie jaarrond hondenzones (±3km totaal) - maar altijd aan leiband (max 10m).',
     image: '/oostduinkerke.webp',
     lat: 51.1118,

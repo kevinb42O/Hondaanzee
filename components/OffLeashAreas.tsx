@@ -1,16 +1,38 @@
 
-import React, { useMemo, useEffect, useRef } from 'react';
+import React, { useMemo, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapPin, Navigation, Info, ExternalLink, Clock } from 'lucide-react';
 import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
+import { OFF_LEASH_AREAS } from '../constants.ts';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+// Fix Leaflet's default icon path issues
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import iconRetina from 'leaflet/dist/images/marker-icon-2x.png';
+
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  iconRetinaUrl: iconRetina,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 interface OffLeashAreasProps {
   city: City;
 }
 
 const createCustomIcon = (isOpen: boolean, isPulsing: boolean) => {
-  const gradientId = isOpen ? 'openGradient' : 'closedGradient';
+  const uniqueId = `marker-${Math.random().toString(36).substr(2, 9)}`;
+  const gradientId = `${uniqueId}-gradient`;
+  const filterId = `${uniqueId}-filter`;
   const primaryColor = isOpen ? '#10b981' : '#f43f5e';
   const secondaryColor = isOpen ? '#059669' : '#e11d48';
   const glowColor = isOpen ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.4)';
@@ -24,11 +46,11 @@ const createCustomIcon = (isOpen: boolean, isPulsing: boolean) => {
               <stop offset="0%" stop-color="${primaryColor}"/>
               <stop offset="100%" stop-color="${secondaryColor}"/>
             </linearGradient>
-            <filter id="shadow" x="-20%" y="-10%" width="140%" height="140%">
+            <filter id="${filterId}" x="-20%" y="-10%" width="140%" height="140%">
               <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="${glowColor}" flood-opacity="1"/>
             </filter>
           </defs>
-          <g filter="url(#shadow)">
+          <g filter="url(#${filterId})">
             <path d="M22 2C12.06 2 4 10.06 4 20C4 34 22 50 22 50C22 50 40 34 40 20C40 10.06 31.94 2 22 2Z" fill="url(#${gradientId})"/>
             <circle cx="22" cy="18" r="8" fill="white" fill-opacity="0.95"/>
             <circle cx="22" cy="18" r="4" fill="${primaryColor}"/>
@@ -49,8 +71,11 @@ const createCustomIcon = (isOpen: boolean, isPulsing: boolean) => {
 };
 
 const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
+  const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
+  const markersRef = useRef<L.Marker[]>([]);
+  const [selectedArea, setSelectedArea] = useState<string | null>(null);
 
   const isAreaOpen = (area: OffLeashArea): boolean => {
     if (!area.openingHours) return true; // Default to always open if not specified
@@ -61,13 +86,15 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
   };
 
   const nearestInfo = useMemo(() => {
-    if (city.offLeashAreas.length > 0) return null;
+    const cityAreas = OFF_LEASH_AREAS.filter(area => area.city === city.slug);
+    if (cityAreas.length > 0) return null;
 
     let nearestCity = CITIES[0];
     let minDistance = Infinity;
 
     CITIES.forEach((c) => {
-      if (c.slug === city.slug || c.offLeashAreas.length === 0) return;
+      const cAreas = OFF_LEASH_AREAS.filter(area => area.city === c.slug);
+      if (c.slug === city.slug || cAreas.length === 0) return;
       
       const dist = Math.sqrt(
         Math.pow(c.lat - city.lat, 2) + Math.pow(c.lng - city.lng, 2)
@@ -79,9 +106,11 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
       }
     });
 
+    const nearestAreas = OFF_LEASH_AREAS.filter(area => area.city === nearestCity.slug);
+    const nearestArea = nearestAreas.length > 0 ? nearestAreas[0] : null;
     return {
       city: nearestCity,
-      area: nearestCity.offLeashAreas[0],
+      area: nearestArea,
       distanceLabel: minDistance < 0.1 ? 'Vlakbij' : 'In de buurt'
     };
   }, [city]);
@@ -92,38 +121,47 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
     // Cleanup existing map
     if (leafletInstance.current) {
       leafletInstance.current.remove();
+      leafletInstance.current = null;
     }
 
-    // Initialize map
-    const map = L.map(mapRef.current, {
-      scrollWheelZoom: false,
-      zoomControl: false,
-      dragging: !L.Browser.mobile,
-      tap: true,
-      touchZoom: true
-    });
-    
-    leafletInstance.current = map;
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(() => {
+      if (!mapRef.current) return;
 
-    // Modern colorful map style - Carto Voyager (colorful & modern)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
-    }).addTo(map);
+      // Initialize map
+      const map = L.map(mapRef.current, {
+        scrollWheelZoom: false,
+        zoomControl: false,
+        dragging: !L.Browser.mobile,
+        tap: true,
+        touchZoom: true
+      });
+      
+      leafletInstance.current = map;
 
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
+      // Modern colorful map style - Carto Voyager (colorful & modern)
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      }).addTo(map);
 
-    const hasAreas = city.offLeashAreas.length > 0;
-    const markers: L.Marker[] = [];
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
+      
+      // Force map to recognize its container size
+      setTimeout(() => map.invalidateSize(), 100);
 
-    if (hasAreas) {
-      city.offLeashAreas.forEach((area, index) => {
-        const isOpen = isAreaOpen(area);
-        // We pulse the "Open" markers to show they are live, or specifically the first one
-        const icon = createCustomIcon(isOpen, isOpen);
-        
-        const marker = L.marker([area.lat, area.lng], { icon }).addTo(map)
+      const cityAreas = OFF_LEASH_AREAS.filter(area => area.city === city.slug);
+      const areasToShow = selectedArea ? cityAreas.filter(area => area.name === selectedArea) : cityAreas;
+      const hasAreas = areasToShow.length > 0;
+      const markers: L.Marker[] = [];
+
+      if (hasAreas) {
+        areasToShow.forEach((area, index) => {
+          const isOpen = isAreaOpen(area);
+          // TEMPORARILY USE DEFAULT MARKER FOR TESTING
+          
+          const marker = L.marker([area.lat, area.lng]).addTo(map)
           .bindPopup(`
             <div class="p-2 font-sans min-w-[180px] max-w-[240px]">
               <div class="flex items-center justify-between mb-2">
@@ -140,53 +178,54 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
               </div>
             </div>
           `);
-        markers.push(marker);
-      });
+          markers.push(marker);
+        });
 
-      if (markers.length > 1) {
-        const group = L.featureGroup(markers);
-        map.fitBounds(group.getBounds().pad(0.4));
-      } else {
-        map.setView([city.offLeashAreas[0].lat, city.offLeashAreas[0].lng], 15);
-      }
-    } else if (nearestInfo) {
-      const currentMarker = L.circleMarker([city.lat, city.lng], {
-        color: '#0284c7',
-        fillColor: '#0ea5e9',
-        fillOpacity: 0.2,
-        radius: 12
-      }).addTo(map).bindPopup(`<b class="font-sans">${city.name} Centrum</b>`);
+        if (markers.length > 1) {
+          const group = L.featureGroup(markers);
+          map.fitBounds(group.getBounds().pad(0.4));
+        } else if (markers.length === 1 && cityAreas.length > 0) {
+          map.setView([cityAreas[0].lat, cityAreas[0].lng], 15);
+        }
+      } else if (nearestInfo) {
+        const currentMarker = L.circleMarker([city.lat, city.lng], {
+          color: '#0284c7',
+          fillColor: '#0ea5e9',
+          fillOpacity: 0.2,
+          radius: 12
+        }).addTo(map).bindPopup(`<b class="font-sans">${city.name} Centrum</b>`);
 
-      const isOpen = isAreaOpen(nearestInfo.area);
-      const nearestMarker = L.marker([nearestInfo.area.lat, nearestInfo.area.lng], { 
-        icon: createCustomIcon(isOpen, isOpen) 
-      }).addTo(map)
-        .bindPopup(`
-           <div class="p-2 font-sans min-w-[160px]">
-            <span class="text-[10px] uppercase font-black text-sky-600 block mb-1">Dichtstbijzijnde</span>
-            <div class="flex items-center justify-between mb-2">
-               <b class="text-slate-900 text-sm leading-tight">${nearestInfo.area.name}</b>
-               <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
-                  ${isOpen ? 'Open' : 'Gesloten'}
-               </span>
+        const isOpen = isAreaOpen(nearestInfo.area);
+        const nearestMarker = L.marker([nearestInfo.area.lat, nearestInfo.area.lng]).addTo(map)
+          .bindPopup(`
+             <div class="p-2 font-sans min-w-[160px]">
+              <span class="text-[10px] uppercase font-black text-sky-600 block mb-1">Dichtstbijzijnde</span>
+              <div class="flex items-center justify-between mb-2">
+                 <b class="text-slate-900 text-sm leading-tight">${nearestInfo.area.name}</b>
+                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
+                    ${isOpen ? 'Open' : 'Gesloten'}
+                 </span>
+              </div>
+              <p class="text-slate-500 text-xs">${nearestInfo.area.address}</p>
             </div>
-            <p class="text-slate-500 text-xs">${nearestInfo.area.address}</p>
-          </div>
-        `);
-      
-      const group = L.featureGroup([currentMarker, nearestMarker]);
-      map.fitBounds(group.getBounds().pad(0.5));
-    } else {
-      map.setView([city.lat, city.lng], 13);
-    }
+          `);
+        
+        const group = L.featureGroup([currentMarker, nearestMarker]);
+        map.fitBounds(group.getBounds().pad(0.5));
+      } else {
+        map.setView([city.lat, city.lng], 13);
+      }
+
+    }, 100);
 
     return () => {
+      clearTimeout(timeoutId);
       if (leafletInstance.current) {
         leafletInstance.current.remove();
         leafletInstance.current = null;
       }
     };
-  }, [city, nearestInfo]);
+  }, [city, nearestInfo, selectedArea]);
 
   return (
     <section className="py-10 sm:py-12 md:py-24 bg-slate-50 border-y border-slate-200">
@@ -200,14 +239,22 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
               </p>
             </div>
 
-            {city.offLeashAreas.length > 0 ? (
+            {OFF_LEASH_AREAS.some(area => area.city === city.slug) ? (
               <div className="space-y-4">
-                {city.offLeashAreas.map((area, idx) => {
+                {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
                   const isOpen = isAreaOpen(area);
+                  const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
                   return (
                     <div 
-                      key={idx}
-                      className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
+                      key={area.name}
+                      onClick={() => {
+                        if (selectedArea === area.name) {
+                          setSelectedArea(null);
+                        } else {
+                          setSelectedArea(area.name);
+                        }
+                      }}
+                      className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'} ${selectedArea === area.name ? 'ring-2 ring-sky-500 shadow-lg' : ''}`}
                     >
                       <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-400'}`}>
                         <MapPin size={24} />

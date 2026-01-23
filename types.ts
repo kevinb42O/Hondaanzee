@@ -6,6 +6,21 @@ export interface Hotspot {
   description: string;
   tags: string[];
   image: string;
+  city: string; // city slug
+  address: string;
+  website: string;
+}
+
+export interface Service {
+  id: number;
+  name: string;
+  type: 'Dierenarts' | 'Dierenspeciaalzaak';
+  description: string;
+  tags: string[];
+  image: string;
+  city: string; // city slug
+  address: string;
+  website: string;
 }
 
 export type StatusValue = 'JA' | 'DEELS' | 'NEE';
@@ -15,7 +30,10 @@ export interface OffLeashArea {
   address: string;
   lat: number;
   lng: number;
+  city: string; // city slug
   description?: string;
+  image?: string; // Path to image
+  rating?: number; // 1-5 stars
   openingHours?: {
     open: string; // HH:mm
     close: string; // HH:mm
