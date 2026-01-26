@@ -7,8 +7,8 @@ export const HOTSPOTS: Hotspot[] = [
     name: 'Lakaiann Blankenberge',
     type: 'Café',
     description: 'De gezelligste plek voor een koffie na een lange strandwandeling.',
-    tags: ['Waterbak aanwezig', 'Hondensnacks', 'Terras'],
-    image: '/lakaian.webp',
+    tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee'],
+    image: '/gucci.webp',
     city: 'blankenberge',
     address: 'Zeedijk 205/01, 8370 Blankenberge',
     website: 'https://lakaiann.com/'
@@ -332,7 +332,7 @@ export const SERVICES: Service[] = [
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],
     image: '/dierenartsenpraktijkbreemersch.webp',
     city: 'de-haan',
-    address: 'Driftweg 30, 8420 De Haan',
+    address: 'Grotestraat 144, 8421 De Haan',
     website: ''
   },
   {
@@ -344,6 +344,17 @@ export const SERVICES: Service[] = [
     image: '/happydog.webp',
     city: 'de-haan',
     address: 'Nieuwstraat 5, 8420 De Haan',
+    website: ''
+  },
+  {
+    id: 13,
+    name: 'Dogs & Cats',
+    type: 'Dierenspeciaalzaak',
+    description: 'Complete dierenwinkel voor honden en katten met voeding, accessoires en verzorgingsproducten van topkwaliteit.',
+    tags: ['Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team', 'Kattenvriendelijk'],
+    image: '/dogsandcats.webp',
+    city: 'blankenberge',
+    address: 'Langestraat, 8370 Blankenberge',
     website: ''
   }
 ];
