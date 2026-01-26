@@ -10,17 +10,17 @@ export const CITIES: City[] = [
     lat: 51.3126,
     lng: 3.1287,
     offLeashAreas: [
-      { 
-        name: 'Hondenweide J. Vande Puttelaan', 
-        address: 'J. Vande Puttelaan 7, Blankenberge', 
-        lat: 51.3078, 
+      {
+        name: 'Hondenweide J. Vande Puttelaan',
+        address: 'J. Vande Puttelaan 7, Blankenberge',
+        lat: 51.3078,
         lng: 3.1298,
         description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.'
       },
-      { 
-        name: 'Hondenweide A. Van Ackersquare', 
-        address: 'A. Van Ackersquare 1, Blankenberge', 
-        lat: 51.3142, 
+      {
+        name: 'Hondenweide A. Van Ackersquare',
+        address: 'A. Van Ackersquare 1, Blankenberge',
+        lat: 51.3142,
         lng: 3.1365,
         description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.'
       }
@@ -28,15 +28,15 @@ export const CITIES: City[] = [
     rules: {
       summer: {
         start: '03-15',
-        end: '09-15',
-        rule: '✅ ZONE WEST (24/7 vrij loslopen): Vanaf de Westelijke Pier richting De Haan/Wenduine - altijd toegelaten! 🚫 CENTRUM (verboden): Tussen de Oostelijke en Westelijke Pier (paasvakantie t/m 15 sept). ⚠️ ZONE OOST: Vanaf strandopgang J. Gadeynehelling richting Zeebrugge - aan leiband.',
+        end: '10-15',
+        rule: '✅ ZONE WEST (24/7 vrij loslopen): Vanaf de westelijke strekdam richting Wenduine - honden steeds welkom zonder leiband, heel het jaar door! ⚠️ ZONE MIDDEN**: Tussen Oosterstaketsel en J. Gadeynehelling - honden niet toegelaten (paasvakantie t/m 15 sept)*, buiten deze periode aan leiband. ⚠️ ZONE OOST***: Vanaf J. Gadeynehelling richting Zeebrugge - aan leiband (15 maart - 15 okt), zonder leiband (16 okt - 14 maart).',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Zone West: Jaarrond vrij loslopen. Zone Oost: Vrij loslopen (16 sept - paasvakantie). Centrum: Aan leiband toegelaten.',
+        rule: 'Zone West: Jaarrond vrij loslopen zonder leiband. Zone Midden: Aan leiband toegelaten (16 sept - paasvakantie). Zone Oost: Vrij loslopen zonder leiband (16 okt - 14 maart).',
         status: 'JA'
       },
-      special: 'Drie duidelijke zones - herkenbaar aan de pieren (staketsels). Zone West is de hondenvriendelijkste!'
+      special: '*Gecertificeerde assistentiehonden zijn altijd toegelaten. **Zone Midden = centraal strand tussen de twee staketsels (pieren). ***Zone Oost = strand richting Zeebrugge vanaf strandopgang J. Gadeynehelling.'
     }
   },
   {
@@ -71,10 +71,10 @@ export const CITIES: City[] = [
     lat: 51.3486,
     lng: 3.2847,
     offLeashAreas: [
-      { 
-        name: 'Losloopweide Heist', 
-        address: 'Gustave Van Nieuwenhuysestraat, Heist', 
-        lat: 51.3419, 
+      {
+        name: 'Losloopweide Heist',
+        address: 'Gustave Van Nieuwenhuysestraat, Heist',
+        lat: 51.3419,
         lng: 3.2351,
         description: 'Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.'
       }
@@ -85,14 +85,14 @@ export const CITIES: City[] = [
         end: '10-15',
         startTime: '10:00',
         endTime: '20:00',
-        rule: '🚫 HOOFDSTRANDEN (Knokke, Heist, Duinbergen): Verboden 10u-20u. Vóór 10u en na 20u aan leiband toegelaten. ✅ ALTIJD VRIJ: Strand Het Zoute vanaf watersportclub "Surfers Paradise" richting Nederlandse grens (Zwin) - hier mag je hond 24/7 vrij loslopen, het hele jaar door!',
+        rule: '🚫 HOOFDSTRANDEN (Knokke, Heist, Duinbergen): Verboden 10u-20u (15 maart - 15 okt). Vóór 10u en na 20u aan leiband toegelaten. ✅ HET ZOUTE - ALTIJD VRIJ LOSLOPEN: Vanaf ten oosten van watersportclub "Surfers Paradise" richting Nederlandse grens (Zwin) - honden mogen hier 24/7 vrij loslopen, het hele jaar door!',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand (mits onder controle).',
+        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand. Het Zoute blijft jaarrond vrij loslopen.',
         status: 'JA'
       },
-      special: 'Assistentiehonden altijd toegelaten. Hondenpoepzakjes verplicht!'
+      special: 'Honden mogen onder begeleiding loslopen buiten de bebouwde kom op openbaar domein waar geen verbod geldt. Assistentiehonden altijd toegelaten.'
     }
   },
   {
@@ -103,45 +103,45 @@ export const CITIES: City[] = [
     lat: 51.2727,
     lng: 3.0315,
     offLeashAreas: [
-      { 
-        name: 'Losloopzone Vosseslag', 
-        address: 'Kennedyplein, Vosseslag', 
-        lat: 51.2612, 
+      {
+        name: 'Losloopzone Vosseslag',
+        address: 'Kennedyplein, Vosseslag',
+        lat: 51.2612,
         lng: 3.0058,
         description: 'Omheinde zone naast de parking.'
       },
-      { 
-        name: 'Losloopzone Centrum/Sport', 
-        address: 'Nieuwe Steenweg, De Haan', 
-        lat: 51.2756, 
+      {
+        name: 'Losloopzone Centrum/Sport',
+        address: 'Nieuwe Steenweg, De Haan',
+        lat: 51.2756,
         lng: 3.0248,
         description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.'
       },
-      { 
-        name: 'Losloopzone Haneveld', 
-        address: 'Lindenlaan, De Haan', 
-        lat: 51.2742, 
+      {
+        name: 'Losloopzone Haneveld',
+        address: 'Lindenlaan, De Haan',
+        lat: 51.2742,
         lng: 3.0212,
         description: 'Zone nabij het sportcomplex Haneveld.'
       },
-      { 
-        name: 'Losloopzone Duinbossen', 
-        address: 'Zwarte Kiezel, De Haan', 
-        lat: 51.2685, 
+      {
+        name: 'Losloopzone Duinbossen',
+        address: 'Zwarte Kiezel, De Haan',
+        lat: 51.2685,
         lng: 3.0385,
         description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).'
       },
-      { 
-        name: 'Losloopzone Wenduine - Manitobastraat', 
-        address: 'Manitobastraat, Wenduine', 
-        lat: 51.2948, 
+      {
+        name: 'Losloopzone Wenduine - Manitobastraat',
+        address: 'Manitobastraat, Wenduine',
+        lat: 51.2948,
         lng: 3.0712,
         description: 'Omheinde hondenweide in Wenduine.'
       },
-      { 
-        name: 'Losloopzone Wenduine - Westhinderlaan', 
-        address: 'Westhinderlaan / Wancourstraat, Wenduine', 
-        lat: 51.2935, 
+      {
+        name: 'Losloopzone Wenduine - Westhinderlaan',
+        address: 'Westhinderlaan / Wancourstraat, Wenduine',
+        lat: 51.2935,
         lng: 3.0685,
         description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.'
       }
@@ -170,10 +170,10 @@ export const CITIES: City[] = [
     lat: 51.2468,
     lng: 2.9731,
     offLeashAreas: [
-      { 
-        name: 'Hondenweide Brouwerijstraat', 
-        address: 'Brouwerijstraat, Bredene', 
-        lat: 51.2398, 
+      {
+        name: 'Hondenweide Brouwerijstraat',
+        address: 'Brouwerijstraat, Bredene',
+        lat: 51.2398,
         lng: 2.9715,
         description: 'Omheinde weide nabij de watertoren/schakelstation.'
       }
@@ -202,58 +202,58 @@ export const CITIES: City[] = [
     lat: 51.2154,
     lng: 2.927,
     offLeashAreas: [
-      { 
-        name: 'Maria Hendrikapark (Grootste)', 
-        address: 'Iependreef / Cederdreef, Oostende', 
-        lat: 51.2089, 
+      {
+        name: 'Maria Hendrikapark (Grootste)',
+        address: 'Iependreef / Cederdreef, Oostende',
+        lat: 51.2089,
         lng: 2.9148,
         description: 'Grootste hondenweide, achter het Blauwe Kruis dierenasiel.'
       },
-      { 
-        name: 'Losloopzone Raversijde', 
-        address: 'Westlaan 1, Raversijde', 
-        lat: 51.2056, 
+      {
+        name: 'Losloopzone Raversijde',
+        address: 'Westlaan 1, Raversijde',
+        lat: 51.2056,
         lng: 2.8645,
         description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.'
       },
-      { 
-        name: 'Losloopzone Leffingestraat', 
-        address: 'Leffingestraat, Oostende', 
-        lat: 51.2185, 
+      {
+        name: 'Losloopzone Leffingestraat',
+        address: 'Leffingestraat, Oostende',
+        lat: 51.2185,
         lng: 2.9325,
         description: 'Achter de tennisclub.'
       },
-      { 
-        name: 'Losloopzone Slachthuiskaai', 
-        address: 'Slachthuiskaai, Oostende', 
-        lat: 51.2245, 
+      {
+        name: 'Losloopzone Slachthuiskaai',
+        address: 'Slachthuiskaai, Oostende',
+        lat: 51.2245,
         lng: 2.9198,
         description: 'Nabij de kruising met Lijndraaiersstraat.'
       },
-      { 
-        name: 'Losloopzone Ankerstraat', 
-        address: 'Ankerstraat, Oostende', 
-        lat: 51.2312, 
+      {
+        name: 'Losloopzone Ankerstraat',
+        address: 'Ankerstraat, Oostende',
+        lat: 51.2312,
         lng: 2.9285,
         description: 'Nabij tramhalte "Weg naar Vismijn".'
       },
-      { 
-        name: 'Hondenbos', 
-        address: 'Karperstraat / A10, Oostende', 
-        lat: 51.2125, 
+      {
+        name: 'Hondenbos',
+        address: 'Karperstraat / A10, Oostende',
+        lat: 51.2125,
         lng: 2.9425,
         description: 'Bosstrook tussen Karperstraat en de A10 (nabij "Groene 62").'
       },
-      { 
-        name: 'Losloopzone Schietbaanstraat', 
-        address: 'Schietbaanstraat, Oostende', 
-        lat: 51.2168, 
+      {
+        name: 'Losloopzone Schietbaanstraat',
+        address: 'Schietbaanstraat, Oostende',
+        lat: 51.2168,
         lng: 2.9385
       },
-      { 
-        name: 'Losloopzone Brigade Pironlaan', 
-        address: 'Brigade Pironlaan, Oostende', 
-        lat: 51.2098, 
+      {
+        name: 'Losloopzone Brigade Pironlaan',
+        address: 'Brigade Pironlaan, Oostende',
+        lat: 51.2098,
         lng: 2.9215
       }
     ],
@@ -281,17 +281,17 @@ export const CITIES: City[] = [
     lat: 51.1852,
     lng: 2.8224,
     offLeashAreas: [
-      { 
-        name: 'Hondenweide Middelkerke', 
-        address: 'Koninginnelaan, Middelkerke', 
-        lat: 51.1832, 
+      {
+        name: 'Hondenweide Middelkerke',
+        address: 'Koninginnelaan, Middelkerke',
+        lat: 51.1832,
         lng: 2.8198,
         description: 'Direct tegenover WZC Haerlebout.'
       },
-      { 
-        name: 'Hondenweide Westende', 
-        address: 'Hofstraat, Westende', 
-        lat: 51.1698, 
+      {
+        name: 'Hondenweide Westende',
+        address: 'Hofstraat, Westende',
+        lat: 51.1698,
         lng: 2.7856,
         description: 'Nabij de kruising met Voetbalstraat.'
       }
@@ -318,17 +318,17 @@ export const CITIES: City[] = [
     lat: 51.1301,
     lng: 2.752,
     offLeashAreas: [
-      { 
-        name: 'Hondenweide Prins Mauritspark', 
-        address: 'Louisweg / Dienstweg Havengeul, Nieuwpoort', 
-        lat: 51.1425, 
+      {
+        name: 'Hondenweide Prins Mauritspark',
+        address: 'Louisweg / Dienstweg Havengeul, Nieuwpoort',
+        lat: 51.1425,
         lng: 2.7312,
         description: 'Alternatief voor strand in de zomer! Omheinde losloopweide op de hoek van Louisweg en Dienstweg Havengeul.'
       },
-      { 
-        name: 'Hondenweide Leopold II Park', 
-        address: 'Albert I Laan, Nieuwpoort', 
-        lat: 51.1285, 
+      {
+        name: 'Hondenweide Leopold II Park',
+        address: 'Albert I Laan, Nieuwpoort',
+        lat: 51.1285,
         lng: 2.7485,
         description: 'Kleinere omheinde zone binnen het park.'
       }
@@ -355,17 +355,17 @@ export const CITIES: City[] = [
     lat: 51.1118,
     lng: 2.645,
     offLeashAreas: [
-      { 
-        name: 'Losloopzone Sportpark Oostduinkerke', 
-        address: 'Hazebeekstraat, Oostduinkerke', 
-        lat: 51.1185, 
+      {
+        name: 'Losloopzone Sportpark Oostduinkerke',
+        address: 'Hazebeekstraat, Oostduinkerke',
+        lat: 51.1185,
         lng: 2.6698,
         description: 'Gelegen bij Sportpark Oostduinkerke.'
       },
-      { 
-        name: 'Losloopzone Sint-Idesbald', 
-        address: 'Gladiolenlaan 17, Koksijde', 
-        lat: 51.0985, 
+      {
+        name: 'Losloopzone Sint-Idesbald',
+        address: 'Gladiolenlaan 17, Koksijde',
+        lat: 51.0985,
         lng: 2.6125,
         description: 'Nabij het Abdijmuseum Ten Duinen.'
       }
@@ -394,17 +394,17 @@ export const CITIES: City[] = [
     lat: 51.0963,
     lng: 2.5898,
     offLeashAreas: [
-      { 
-        name: 'Hondenweide Kerkstraat', 
-        address: 'Kerkstraat / Artiestenpad, De Panne', 
-        lat: 51.0998, 
+      {
+        name: 'Hondenweide Kerkstraat',
+        address: 'Kerkstraat / Artiestenpad, De Panne',
+        lat: 51.0998,
         lng: 2.5912,
         description: 'Nabij motorclub "t Motosiekeltje" en tramhalte "Moeder Lambik".'
       },
-      { 
-        name: 'Hondenweide Vijvers Markey', 
-        address: 'Doornstraat, Adinkerke', 
-        lat: 51.0785, 
+      {
+        name: 'Hondenweide Vijvers Markey',
+        address: 'Doornstraat, Adinkerke',
+        lat: 51.0785,
         lng: 2.5985,
         description: 'Gelegen op domein "Vijvers Markey".'
       }

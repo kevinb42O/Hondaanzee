@@ -8,11 +8,11 @@ const Footer: React.FC = () => {
     <footer className="relative bg-gradient-to-b from-slate-900 via-slate-950 to-black pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 safe-area-bottom">
       {/* Ocean depth gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-blue-950/20 pointer-events-none"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 safe-area-left safe-area-right relative z-10">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-16 mb-12 sm:mb-16 text-center sm:text-left">
-          
+
           {/* Column 1: Brand Identity */}
           <div className="lg:col-span-1 flex flex-col items-center sm:items-start">
             <div className="flex items-center gap-2 mb-4">
@@ -26,10 +26,10 @@ const Footer: React.FC = () => {
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
               Jouw digitale gids voor een zorgeloos verblijf met je viervoeter aan de Belgische kust. Altijd up-to-date met de laatste politieverordeningen.
             </p>
-            
+
             {/* Contact Email */}
-            <a 
-              href="mailto:info@hondaanzee.be" 
+            <a
+              href="mailto:info@hondaanzee.be"
               className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors"
               aria-label="Email contact"
             >
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
               <span className="text-sm font-medium">info@hondaanzee.be</span>
             </a>
           </div>
-          
+
           {/* Column 2: Navigatie */}
           <div className="flex flex-col items-center sm:items-start">
             <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Navigatie</h4>
@@ -48,18 +48,43 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#hotspots" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                <Link to="/hotspots" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Hotspots
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#business" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
-                  Bedrijven
+                <Link to="/diensten" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Diensten
+                </Link>
+              </li>
+              <li>
+                <Link to="/losloopzones" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Losloopzones
+                </Link>
+              </li>
+              <li>
+                <Link to="/kaart" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Kaart
+                </Link>
+              </li>
+              <li>
+                <Link to="/steun-ons" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Steun ons
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={`https://wa.me/32494816714?text=${encodeURIComponent(`Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
+                >
+                  Meld je zaak aan
                 </a>
               </li>
             </ul>
           </div>
-          
+
           {/* Column 3: Populaire Regio's */}
           <div className="flex flex-col items-center sm:items-start">
             <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Populaire Regio's</h4>
@@ -118,10 +143,10 @@ const Footer: React.FC = () => {
               <span className="text-slate-400">Hond</span><span className="text-cyan-400">Aan</span><span className="text-slate-400">Zee</span>.be &copy; 2026
             </div>
             <div className="flex items-center gap-1.5 text-slate-500 text-xs">
-              <span>website door</span> 
-              <a 
-                href="https://webaanzee.be" 
-                target="_blank" 
+              <span>website door</span>
+              <a
+                href="https://webaanzee.be"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold hover:text-cyan-400 flex items-center gap-1 group transition-colors duration-300"
               >

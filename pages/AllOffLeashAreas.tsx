@@ -63,11 +63,11 @@ const AllOffLeashAreas: React.FC = () => {
 
   const filteredAreas = useMemo(() => {
     let areas = [...OFF_LEASH_AREAS];
-    
+
     if (selectedCity !== 'all') {
       areas = areas.filter(area => area.city === selectedCity);
     }
-    
+
     return areas;
   }, [selectedCity]);
 
@@ -84,7 +84,7 @@ const AllOffLeashAreas: React.FC = () => {
     const filterId = `${uniqueId}-filter`;
     const primaryColor = isSelected ? '#10b981' : '#0ea5e9';
     const secondaryColor = isSelected ? '#059669' : '#0284c7';
-    
+
     return L.divIcon({
       html: `
         <div class="relative ${isSelected ? 'marker-pulse' : ''}">
@@ -137,7 +137,7 @@ const AllOffLeashAreas: React.FC = () => {
       }).addTo(map);
 
       leafletInstance.current = map;
-      
+
       // Force map to recognize its container size
       setTimeout(() => map.invalidateSize(), 100);
 
@@ -221,8 +221,8 @@ const AllOffLeashAreas: React.FC = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-sky-200 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
           >
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -253,7 +253,7 @@ const AllOffLeashAreas: React.FC = () => {
       {/* Main Content */}
       <div className="bg-slate-50 min-h-screen -mt-1">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
-          
+
           {/* Filters */}
           <div className="mb-6 md:mb-8 bg-white rounded-xl p-4 md:p-6 shadow-sm border border-slate-200">
             <div className="flex items-center justify-between mb-4">
@@ -282,11 +282,10 @@ const AllOffLeashAreas: React.FC = () => {
                     setSelectedCity('all');
                     setSelectedArea(null);
                   }}
-                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-                    selectedCity === 'all'
+                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
                       ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   Alle ({OFF_LEASH_AREAS.length})
                 </button>
@@ -300,11 +299,10 @@ const AllOffLeashAreas: React.FC = () => {
                         setSelectedCity(city.slug);
                         setSelectedArea(null);
                       }}
-                      className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-                        selectedCity === city.slug
+                      className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
                           ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                           : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                      }`}
+                        }`}
                     >
                       {city.name} ({count})
                     </button>
@@ -317,8 +315,8 @@ const AllOffLeashAreas: React.FC = () => {
           {/* Full Width Map */}
           <div className="mb-8">
             <div className="bg-white rounded-xl shadow-md overflow-hidden border border-slate-200">
-              <div 
-                ref={mapRef} 
+              <div
+                ref={mapRef}
                 className="w-full h-[500px] md:h-[600px]"
               />
               {selectedArea !== null && displayedArea && (
@@ -340,17 +338,17 @@ const AllOffLeashAreas: React.FC = () => {
             {displayedArea ? (
               // Single Area Detail View
               <div className="max-w-4xl mx-auto">\n                <button
-                  onClick={() => setSelectedArea(null)}
-                  className="mb-4 text-sky-600 hover:text-sky-700 font-bold flex items-center gap-2"
-                >
-                  <X size={20} />
-                  Terug naar overzicht
-                </button>
-                
+                onClick={() => setSelectedArea(null)}
+                className="mb-4 text-sky-600 hover:text-sky-700 font-bold flex items-center gap-2"
+              >
+                <X size={20} />
+                Terug naar overzicht
+              </button>
+
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
                   <div className="relative h-80 bg-slate-200">
-                    <img 
-                      src={displayedArea.image || '/placeholder.webp'} 
+                    <img
+                      src={displayedArea.image || '/placeholder.webp'}
                       alt={displayedArea.name}
                       className="w-full h-full object-cover"
                     />
@@ -370,7 +368,7 @@ const AllOffLeashAreas: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     {displayedArea.description && (
                       <p className="text-slate-600 text-lg leading-relaxed mb-8">{displayedArea.description}</p>
                     )}
@@ -408,14 +406,14 @@ const AllOffLeashAreas: React.FC = () => {
                       const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
                       const cityData = CITIES.find(c => c.slug === area.city);
                       return (
-                        <button 
+                        <button
                           key={`${area.city}-${area.name}`}
                           onClick={() => setSelectedArea(globalIndex)}
                           className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group w-full text-left"
                         >
                           <div className="relative h-56 bg-slate-200 overflow-hidden">
-                            <img 
-                              src={area.image || '/placeholder.webp'} 
+                            <img
+                              src={area.image || '/placeholder.webp'}
                               alt={area.name}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />

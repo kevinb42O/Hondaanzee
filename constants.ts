@@ -362,20 +362,20 @@ export const SERVICES: Service[] = [
 // Off-Leash Dog Areas / Losloopzones
 export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Blankenberge
-  { 
-    name: 'Hondenweide J. Vande Puttelaan', 
-    address: 'J. Vande Puttelaan 7, Blankenberge', 
-    lat: 51.3078, 
+  {
+    name: 'Hondenweide J. Vande Puttelaan',
+    address: 'J. Vande Puttelaan 7, Blankenberge',
+    lat: 51.3078,
     lng: 3.1298,
     city: 'blankenberge',
     description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.',
     image: '/weideputtelaan.webp',
     rating: 4
   },
-  { 
-    name: 'Hondenweide A. Van Ackersquare', 
-    address: 'A. Van Ackersquare 1, Blankenberge', 
-    lat: 51.3142, 
+  {
+    name: 'Hondenweide A. Van Ackersquare',
+    address: 'A. Van Ackersquare 1, Blankenberge',
+    lat: 51.3142,
     lng: 3.1365,
     city: 'blankenberge',
     description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.',
@@ -383,10 +383,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   // Knokke-Heist
-  { 
-    name: 'Losloopweide Heist', 
-    address: 'Gustave Van Nieuwenhuysestraat, Heist', 
-    lat: 51.3419, 
+  {
+    name: 'Losloopweide Heist',
+    address: 'Gustave Van Nieuwenhuysestraat, Heist',
+    lat: 51.3419,
     lng: 3.2351,
     city: 'knokke-heist',
     description: 'Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.',
@@ -394,50 +394,50 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 5
   },
   // De Haan - Wenduine
-  { 
-    name: 'Losloopzone Vosseslag', 
-    address: 'Kennedyplein, Vosseslag', 
-    lat: 51.2612, 
+  {
+    name: 'Losloopzone Vosseslag',
+    address: 'Kennedyplein, Vosseslag',
+    lat: 51.2612,
     lng: 3.0058,
     city: 'de-haan',
     description: 'Omheinde zone naast de parking.',
     image: '/losloopzonevosseslag.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Haneveld', 
-    address: 'Lindenlaan, De Haan', 
-    lat: 51.2742, 
+  {
+    name: 'Losloopzone Haneveld',
+    address: 'Lindenlaan, De Haan',
+    lat: 51.2742,
     lng: 3.0212,
     city: 'de-haan',
     description: 'Zone nabij het sportcomplex Haneveld.',
     image: '/losloopzonehaneveld.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Duinbossen', 
-    address: 'Zwarte Kiezel, De Haan', 
-    lat: 51.2685, 
+  {
+    name: 'Losloopzone Duinbossen',
+    address: 'Zwarte Kiezel, De Haan',
+    lat: 51.2685,
     lng: 3.0385,
     city: 'de-haan',
     description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).',
     image: '/losloopzoneduinbossen.webp',
     rating: 5
   },
-  { 
-    name: 'Losloopzone Wenduine - Manitobastraat', 
-    address: 'Manitobastraat, Wenduine', 
-    lat: 51.2948, 
+  {
+    name: 'Losloopzone Wenduine - Manitobastraat',
+    address: 'Manitobastraat, Wenduine',
+    lat: 51.2948,
     lng: 3.0712,
     city: 'de-haan',
     description: 'Omheinde hondenweide in Wenduine.',
     image: '/losloopzonewenduinemanitobastraat.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Wenduine - Westhinderlaan', 
-    address: 'Westhinderlaan / Wancourstraat, Wenduine', 
-    lat: 51.2935, 
+  {
+    name: 'Losloopzone Wenduine - Westhinderlaan',
+    address: 'Westhinderlaan / Wancourstraat, Wenduine',
+    lat: 51.2935,
     lng: 3.0685,
     city: 'de-haan',
     description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
@@ -445,10 +445,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   // Bredene
-  { 
-    name: 'Hondenweide Brouwerijstraat', 
-    address: 'Brouwerijstraat, 8450 Bredene', 
-    lat: 51.2398, 
+  {
+    name: 'Hondenweide Brouwerijstraat',
+    address: 'Brouwerijstraat, 8450 Bredene',
+    lat: 51.2398,
     lng: 2.9715,
     city: 'bredene',
     description: 'Volledig omheind grasveld direct naast de grote watertoren en het elektriciteitsstation. Op Street View lijkt het een braakliggend terrein.',
@@ -456,90 +456,90 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   // Oostende
-  { 
-    name: 'Maria Hendrikapark (Grootste)', 
-    address: 'Iependreef / Cederdreef, 8400 Oostende', 
-    lat: 51.2089, 
+  {
+    name: 'Maria Hendrikapark (Grootste)',
+    address: 'Iependreef / Cederdreef, 8400 Oostende',
+    lat: 51.2089,
     lng: 2.9148,
     city: 'oostende',
     description: 'Grootste en populairste hondenloopweide van Oostende. De weide ligt achter het Dierenasiel "Het Blauwe Kruis". Niet zichtbaar vanaf de hoofdweg.',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Raversijde', 
-    address: 'Westlaan 1, Raversijde', 
-    lat: 51.2056, 
+  {
+    name: 'Losloopzone Raversijde',
+    address: 'Westlaan 1, Raversijde',
+    lat: 51.2056,
     lng: 2.8645,
     city: 'oostende',
     description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
     image: '/losloopzoneraversijde.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Leffingestraat', 
-    address: 'Leffingestraat 40, 8400 Oostende', 
-    lat: 51.2185, 
+  {
+    name: 'Losloopzone Leffingestraat',
+    address: 'Leffingestraat 40, 8400 Oostende',
+    lat: 51.2185,
     lng: 2.9325,
     city: 'oostende',
     description: 'Veilige, omheinde zone achter de Ostend Tennis Club. Volledig verborgen achter de tennisvelden, je moet langs het tennisgebouw kijken.',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Lijndraaiersstraat', 
-    address: 'Lijndraaiersstraat, 8400 Oostende', 
-    lat: 51.2245, 
+  {
+    name: 'Losloopzone Lijndraaiersstraat',
+    address: 'Lijndraaiersstraat, 8400 Oostende',
+    lat: 51.2245,
     lng: 2.9198,
     city: 'oostende',
     description: 'Omheind stuk gras op de hoek van Stapelshuisstraat en Lijndraaiersstraat (Oosteroever). Voorheen bekend als "Slachthuiskaai".',
     image: '/placeholder.webp',
     rating: 3
   },
-  { 
-    name: 'Losloopzone Ankerstraat', 
-    address: 'Ankerstraat, 8400 Oostende', 
-    lat: 51.2312, 
+  {
+    name: 'Losloopzone Ankerstraat',
+    address: 'Ankerstraat, 8400 Oostende',
+    lat: 51.2312,
     lng: 2.9285,
     city: 'oostende',
     description: 'Smalle, langgerekte strook gras die parallel loopt aan de tramsporen. Ziet eruit als een berm, maar is omheind voor honden.',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Hondenbos', 
-    address: 'Karperstraat, 8400 Oostende', 
-    lat: 51.2125, 
+  {
+    name: 'Hondenbos',
+    address: 'Karperstraat, 8400 Oostende',
+    lat: 51.2125,
     lng: 2.9425,
     city: 'oostende',
     description: 'Groot hondenbos (ca. 3,5 hectare) in natuurzone nabij de brug van de A10. Je moet de Karperstraat inrijden (doodlopend) om de toegang te vinden.',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Schietbaanstraat', 
-    address: 'Schietbaanstraat, 8400 Oostende', 
-    lat: 51.2168, 
+  {
+    name: 'Losloopzone Schietbaanstraat',
+    address: 'Schietbaanstraat, 8400 Oostende',
+    lat: 51.2168,
     lng: 2.9385,
     city: 'oostende',
     description: 'Rustige zone gelegen aan de rand van de woonwijk.',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Brigade Pironlaan', 
-    address: 'Brigade Pironlaan, 8400 Oostende', 
-    lat: 51.2098, 
+  {
+    name: 'Losloopzone Brigade Pironlaan',
+    address: 'Brigade Pironlaan, 8400 Oostende',
+    lat: 51.2098,
     lng: 2.9215,
     city: 'oostende',
     description: 'Praktische zone in de groene strook voor buurtbewoners. Recent vernieuwd met speeltoestellen (april 2023).',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Provinciedomein Raversijde', 
-    address: 'Nieuwpoortsesteenweg 636 / Westlaan, 8400 Oostende', 
-    lat: 51.2045, 
+  {
+    name: 'Provinciedomein Raversijde',
+    address: 'Nieuwpoortsesteenweg 636 / Westlaan, 8400 Oostende',
+    lat: 51.2045,
     lng: 2.8625,
     city: 'oostende',
     description: 'Specifieke speelweide binnen het provinciedomein (ingang via Westlaan). In de rest van het park moeten honden aan de leiband.',
@@ -547,20 +547,20 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 5
   },
   // Middelkerke
-  { 
-    name: 'Hondenweide Middelkerke', 
-    address: 'Koninginnelaan, 8430 Middelkerke', 
-    lat: 51.1832, 
+  {
+    name: 'Hondenweide Middelkerke',
+    address: 'Koninginnelaan, 8430 Middelkerke',
+    lat: 51.1832,
     lng: 2.8198,
     city: 'middelkerke',
     description: 'Goed onderhouden, omheind stuk in de duinengordel. Ligt recht tegenover het Woonzorgcentrum (WZC) Haerlebout.',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Hondenweide Westende', 
-    address: 'Hofstraat, 8434 Westende', 
-    lat: 51.1698, 
+  {
+    name: 'Hondenweide Westende',
+    address: 'Hofstraat, 8434 Westende',
+    lat: 51.1698,
     lng: 2.7856,
     city: 'middelkerke',
     description: 'Rustige plek vlakbij Sportpark "De Krokodiel". Zoek naar de kruising met de Voetbalstraat.',
@@ -568,20 +568,20 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   // Nieuwpoort
-  { 
-    name: 'Hondenweide Prins Mauritspark', 
-    address: 'Louisweg (nabij Halve Maanstraat), 8620 Nieuwpoort', 
-    lat: 51.1425, 
+  {
+    name: 'Hondenweide Prins Mauritspark',
+    address: 'Louisweg (nabij Halve Maanstraat), 8620 Nieuwpoort',
+    lat: 51.1425,
     lng: 2.7312,
     city: 'nieuwpoort',
     description: 'Grote omheinde zone (ca. 2.500 m²) aan de kant van de havengeul, vlakbij het vakantiepark. Uitstekend alternatief voor het strand in de zomer!',
     image: '/placeholder.webp',
     rating: 5
   },
-  { 
-    name: 'Hondenweide Leopold II Park', 
-    address: 'Leopold II Park / Albert I Laan, 8620 Nieuwpoort', 
-    lat: 51.1285, 
+  {
+    name: 'Hondenweide Leopold II Park',
+    address: 'Leopold II Park / Albert I Laan, 8620 Nieuwpoort',
+    lat: 51.1285,
     lng: 2.7485,
     city: 'nieuwpoort',
     description: 'Kleinere omheinde zone binnenin het park, voorzien van een saskluis bij de ingang.',
@@ -589,20 +589,20 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   // Koksijde
-  { 
-    name: 'Losloopzone Sportpark Hazebeek', 
-    address: 'Hazebeekstraat 11, 8670 Oostduinkerke', 
-    lat: 51.1185, 
+  {
+    name: 'Losloopzone Sportpark Hazebeek',
+    address: 'Hazebeekstraat 11, 8670 Oostduinkerke',
+    lat: 51.1185,
     lng: 2.6698,
     city: 'koksijde',
     description: 'Ruime zone aan de rand van sportcomplex "Hazebeek".',
     image: '/placeholder.webp',
     rating: 4
   },
-  { 
-    name: 'Losloopzone Sint-Idesbald', 
-    address: 'Gladiolenlaan, 8670 Koksijde', 
-    lat: 51.0985, 
+  {
+    name: 'Losloopzone Sint-Idesbald',
+    address: 'Gladiolenlaan, 8670 Koksijde',
+    lat: 51.0985,
     lng: 2.6125,
     city: 'koksijde',
     description: 'Hondenspeelzone nabij het Abdijmuseum Ten Duinen. Ingang via de Gladiolenlaan.',
@@ -610,10 +610,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   // De Panne
-  { 
-    name: 'Hondenweide Kerkstraat', 
-    address: 'Kerkstraat 69, 8660 De Panne', 
-    lat: 51.0998, 
+  {
+    name: 'Hondenweide Kerkstraat',
+    address: 'Kerkstraat 69, 8660 De Panne',
+    lat: 51.0998,
     lng: 2.5912,
     city: 'de-panne',
     description: 'Belangrijkste omheinde losloopweide in De Panne. Je moet helemaal naar achteren, naast de begraafplaats en motorclub "t Motosiekeltje".',
@@ -626,11 +626,12 @@ export const RULES_BLANKENBERGE = {
   summer: {
     start: '03-15', // March 15
     end: '10-15',   // October 15
-    rule: 'Verboden tussen Oosterstaketsel en Grote Helling. Toegelaten buiten deze zones aan de leiband.',
+    rule: 'Zone West (westelijke strekdam → Wenduine): Jaarrond vrij loslopen. Zone Midden (Oosterstaketsel → J. Gadeynehelling): Verboden tijdens paasvakantie t/m 15 sept*, buiten deze periode aan leiband. Zone Oost (J. Gadeynehelling → Zeebrugge): Aan leiband.',
     status: 'DEELS'
   },
   winter: {
-    rule: 'Overal toegelaten op het strand, ook zonder leiband!',
+    rule: 'Zone West: Jaarrond vrij loslopen. Zone Midden: Aan leiband. Zone Oost: Vrij loslopen zonder leiband.',
     status: 'JA'
   }
 };
+

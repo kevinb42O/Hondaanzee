@@ -12,6 +12,8 @@ import Privacy from './pages/Privacy.tsx';
 import Terms from './pages/Terms.tsx';
 import Cookies from './pages/Cookies.tsx';
 import NotFound from './pages/NotFound.tsx';
+import CoastalMap from './pages/CoastalMap.tsx';
+import Support from './pages/Support.tsx';
 import ResponsibilityBanner from './components/ResponsibilityBanner.tsx';
 
 // Custom component to handle scroll-to-hash functionality
@@ -49,10 +51,12 @@ function App() {
             <Route path="/hotspots" element={<AllHotspots />} />
             <Route path="/diensten" element={<AllServices />} />
             <Route path="/losloopzones" element={<AllOffLeashAreas />} />
+            <Route path="/kaart" element={<CoastalMap />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/algemene-voorwaarden" element={<Terms />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/:slug" element={<CityPage />} />
+            <Route path="/steun-ons" element={<Support />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

@@ -14,7 +14,7 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
     const day = now.getDate();
     const currentTimeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     const currentDateStr = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    
+
     const rules = city.rules;
     const summer = rules.summer;
 
@@ -74,6 +74,11 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-relaxed max-w-lg text-slate-800 px-2">
             {statusInfo.rule}
           </p>
+          {city.rules.special && (
+            <p className="text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-2xl text-slate-600 px-2 mt-3 sm:mt-4 md:mt-6">
+              {city.rules.special}
+            </p>
+          )}
         </div>
       </div>
 

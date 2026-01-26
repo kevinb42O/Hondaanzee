@@ -1,15 +1,29 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Stethoscope, ShoppingBag, ChevronRight } from 'lucide-react';
 import { SERVICES } from '../constants.ts';
-import { City } from '../types.ts';
+import { City, Service } from '../types.ts';
+import PlaceModal from './PlaceModal.tsx';
 
 interface ServicesProps {
   city: City;
 }
 
 const Services: React.FC<ServicesProps> = ({ city }) => {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleServiceClick = (service: Service) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedService(null), 300); // Clear after animation
+  };
+
   const getIcon = (type: string) => {
     switch (type) {
       case 'Dierenarts': return <Stethoscope size={14} />;
@@ -32,7 +46,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
             <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Dierenartsen en winkels waar u en uw hond met een gerust hart terecht kunt.</p>
           </div>
           {cityServices.length > 3 && (
-            <Link 
+            <Link
               to="/diensten"
               className="flex items-center gap-2 text-emerald-600 font-bold hover:gap-3 transition-all text-sm md:text-base active:opacity-70 touch-target"
             >
@@ -43,11 +57,15 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {displayServices.map((service) => (
-            <div key={service.id} className="group cursor-pointer active:scale-[0.98] transition-transform">
+            <div
+              key={service.id}
+              className="group cursor-pointer active:scale-[0.98] transition-transform"
+              onClick={() => handleServiceClick(service)}
+            >
               <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-emerald-100">
-                <img 
-                  src={service.image} 
-                  alt={service.name} 
+                <img
+                  src={service.image}
+                  alt={service.name}
                   className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
                   loading="lazy"
                   decoding="async"
@@ -69,7 +87,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                 ))}
               </div>
               {service.website && (
-                <a 
+                <a
                   href={service.website}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -83,6 +101,14 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      <PlaceModal
+        place={selectedService}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        accentColor="emerald"
+      />
     </section>
   );
 };
