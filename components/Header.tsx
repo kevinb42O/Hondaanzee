@@ -59,7 +59,7 @@ const Header: React.FC = () => {
               <PawPrint size={20} className="sm:w-[22px] sm:h-[22px] md:w-6 md:h-6" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter leading-none font-['Patrick_Hand']">
+              <span className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter leading-none">
                 <span className="text-slate-900">Hond</span><span className="text-sky-600">Aan</span><span className="text-slate-900">Zee</span>
               </span>
               <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mt-0.5 sm:mt-1 hidden sm:block">
@@ -175,7 +175,7 @@ const Header: React.FC = () => {
             <div className="bg-sky-600 p-1.5 rounded-lg text-white shadow-lg">
               <PawPrint size={18} />
             </div>
-            <span className="text-lg font-black tracking-tighter leading-none font-['Patrick_Hand']">
+            <span className="text-lg font-black tracking-tighter leading-none">
               <span className="text-slate-900">Hond</span><span className="text-sky-600">Aan</span><span className="text-slate-900">Zee</span>
             </span>
           </Link>
