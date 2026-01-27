@@ -5,10 +5,24 @@ import { ArrowLeft, Stethoscope, ShoppingBag, MapPin, Filter, X } from 'lucide-r
 import { SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import PlaceModal from '../components/PlaceModal.tsx';
+import { Service } from '../types.ts';
 
 const AllServices: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleServiceClick = (service: Service) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedService(null), 300); // Clear after animation
+  };
 
   // Apply SEO metadata
   useSEO(SEO_DATA.diensten);
@@ -60,10 +74,10 @@ const AllServices: React.FC = () => {
         <div className="absolute top-1/2 right-8 text-sky-700/20 hidden md:block rotate-12">
           <ShoppingBag size={50} strokeWidth={1.5} />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-sky-200 font-bold hover:text-white transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
           >
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -86,27 +100,27 @@ const AllServices: React.FC = () => {
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-            <svg 
-              className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[120px]"
               style={{ minWidth: '100vw', flex: '0 0 100vw' }}
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 1200 120" 
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
               preserveAspectRatio="none"
             >
-              <path 
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
+              <path
+                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-white"
               />
             </svg>
-            <svg 
-              className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[120px]"
               style={{ minWidth: '100vw', flex: '0 0 100vw' }}
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 1200 120" 
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
               preserveAspectRatio="none"
             >
-              <path 
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
+              <path
+                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-white"
               />
             </svg>
@@ -123,7 +137,7 @@ const AllServices: React.FC = () => {
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Filters</h2>
             {hasFilters && (
-              <button 
+              <button
                 onClick={() => {
                   setSelectedCity('all');
                   setSelectedType('all');
@@ -145,11 +159,10 @@ const AllServices: React.FC = () => {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedCity('all')}
-                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-                    selectedCity === 'all'
-                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
+                    ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }`}
                 >
                   Alle
                 </button>
@@ -157,11 +170,10 @@ const AllServices: React.FC = () => {
                   <button
                     key={city.slug}
                     onClick={() => setSelectedCity(city.slug)}
-                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-                      selectedCity === city.slug
-                        ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
+                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
+                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
                   >
                     {city.name}
                   </button>
@@ -179,11 +191,10 @@ const AllServices: React.FC = () => {
                   <button
                     key={type}
                     onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${
-                      selectedType === type
-                        ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
+                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${selectedType === type
+                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
                   >
                     {type !== 'all' && <span className="opacity-70">{getIcon(type)}</span>}
                     {type === 'all' ? 'Alle' : type}
@@ -205,11 +216,15 @@ const AllServices: React.FC = () => {
         {filteredServices.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {filteredServices.map((service) => (
-              <div key={service.id} className="group cursor-pointer active:scale-[0.98] transition-transform">
+              <div
+                key={service.id}
+                className="group cursor-pointer active:scale-[0.98] transition-transform"
+                onClick={() => handleServiceClick(service)}
+              >
                 <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
-                  <img 
-                    src={service.image} 
-                    alt={service.name} 
+                  <img
+                    src={service.image}
+                    alt={service.name}
                     className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
@@ -237,7 +252,7 @@ const AllServices: React.FC = () => {
                   ))}
                 </div>
                 {service.website && (
-                  <a 
+                  <a
                     href={service.website}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -261,7 +276,7 @@ const AllServices: React.FC = () => {
                 Er zijn geen diensten die aan deze filters voldoen. Probeer andere filters te selecteren.
               </p>
               {hasFilters && (
-                <button 
+                <button
                   onClick={() => {
                     setSelectedCity('all');
                     setSelectedType('all');
@@ -275,6 +290,14 @@ const AllServices: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      <PlaceModal
+        place={selectedService}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        accentColor="emerald"
+      />
     </div>
   );
 };

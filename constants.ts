@@ -210,6 +210,39 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'de-haan',
     address: 'Leopoldlaan 18-20, 8420 De Haan',
     website: 'http://www.deconcessie-dehaan.be'
+  },
+  {
+    id: 20,
+    name: "Bel'air",
+    type: 'Restaurant',
+    description: 'Charmant restaurant op de Zeedijk waar gastronomie en een warme sfeer hand in hand gaan. Jouw viervoeter is hier van harte welkom om mee te genieten van een culinaire ervaring met zicht op zee.',
+    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Hondvriendelijk team'],
+    image: '/belair.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 154, 8370 Blankenberge',
+    website: 'https://www.belairblankenberge.com/'
+  },
+  {
+    id: 21,
+    name: 'Beach Palace Hotel',
+    type: 'Hotel',
+    description: 'Luxueus 5-sterren hotel direct aan de Zeedijk met 20 prachtig uitgeruste kamers speciaal ingericht voor gasten met honden. Geniet van topservice en comfort terwijl je viervoeter zich thuis voelt in dit exclusieve strandhotel.',
+    tags: ['Honden toegelaten op kamer', '5-sterren', 'Nabij strand', 'Luxe accommodatie', 'Waterbak aanwezig'],
+    image: '/beachpalace.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 77-79, 8370 Blankenberge',
+    website: 'https://beach-palace.com/'
+  },
+  {
+    id: 22,
+    name: 'Sixtines',
+    type: 'Café',
+    description: 'Gezellig café op de Grote Markt waar honden hartelijk welkom zijn voor een drankje en versnapering. Perfect om even uit te rusten na een wandeling door het centrum, terwijl je viervoeter geniet van de aandacht en een waterbakje.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondensnacks', 'Hondvriendelijk team', 'Centrum'],
+    image: '/sixtines.webp',
+    city: 'blankenberge',
+    address: 'Grote Markt 2/0002, 8370 Blankenberge',
+    website: 'https://www.sixtines.place/'
   }
 ];
 

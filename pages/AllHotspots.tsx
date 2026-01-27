@@ -5,10 +5,24 @@ import { ArrowLeft, Coffee, Utensils, Bed, Star, MapPin, Filter, X } from 'lucid
 import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import PlaceModal from '../components/PlaceModal.tsx';
+import { Hotspot } from '../types.ts';
 
 const AllHotspots: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
+  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleHotspotClick = (hotspot: Hotspot) => {
+    setSelectedHotspot(hotspot);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedHotspot(null), 300); // Clear after animation
+  };
 
   // Apply SEO metadata
   useSEO(SEO_DATA.hotspots);
@@ -62,10 +76,10 @@ const AllHotspots: React.FC = () => {
         <div className="absolute bottom-40 left-20 text-slate-700/30 hidden lg:block" style={{ animation: 'float 3s ease-in-out infinite', animationDelay: '0.5s' }}>
           <MapPin size={55} strokeWidth={1.5} />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-slate-300 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
           >
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -88,27 +102,27 @@ const AllHotspots: React.FC = () => {
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-            <svg 
-              className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[120px]"
               style={{ minWidth: '100vw', flex: '0 0 100vw' }}
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 1200 120" 
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
               preserveAspectRatio="none"
             >
-              <path 
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
+              <path
+                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-white"
               />
             </svg>
-            <svg 
-              className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[120px]"
               style={{ minWidth: '100vw', flex: '0 0 100vw' }}
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 1200 120" 
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
               preserveAspectRatio="none"
             >
-              <path 
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
+              <path
+                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-white"
               />
             </svg>
@@ -125,7 +139,7 @@ const AllHotspots: React.FC = () => {
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Filters</h2>
             {hasFilters && (
-              <button 
+              <button
                 onClick={() => {
                   setSelectedCity('all');
                   setSelectedType('all');
@@ -147,11 +161,10 @@ const AllHotspots: React.FC = () => {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedCity('all')}
-                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-                    selectedCity === 'all'
-                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
+                    ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }`}
                 >
                   Alle
                 </button>
@@ -159,11 +172,10 @@ const AllHotspots: React.FC = () => {
                   <button
                     key={city.slug}
                     onClick={() => setSelectedCity(city.slug)}
-                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-                      selectedCity === city.slug
-                        ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
+                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
+                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
                   >
                     {city.name}
                   </button>
@@ -181,11 +193,10 @@ const AllHotspots: React.FC = () => {
                   <button
                     key={type}
                     onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${
-                      selectedType === type
-                        ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
+                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${selectedType === type
+                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      }`}
                   >
                     {type !== 'all' && <span className="opacity-70">{getIcon(type)}</span>}
                     {type === 'all' ? 'Alle' : type}
@@ -207,11 +218,15 @@ const AllHotspots: React.FC = () => {
         {filteredHotspots.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
             {filteredHotspots.map((spot) => (
-              <div key={spot.id} className="group cursor-pointer active:scale-[0.98] transition-transform">
+              <div
+                key={spot.id}
+                className="group cursor-pointer active:scale-[0.98] transition-transform"
+                onClick={() => handleHotspotClick(spot)}
+              >
                 <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
-                  <img 
-                    src={spot.image} 
-                    alt={spot.name} 
+                  <img
+                    src={spot.image}
+                    alt={spot.name}
                     className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
@@ -239,7 +254,7 @@ const AllHotspots: React.FC = () => {
                   ))}
                 </div>
                 {spot.website && (
-                  <a 
+                  <a
                     href={spot.website}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -263,7 +278,7 @@ const AllHotspots: React.FC = () => {
                 Er zijn geen hotspots die aan deze filters voldoen. Probeer andere filters te selecteren.
               </p>
               {hasFilters && (
-                <button 
+                <button
                   onClick={() => {
                     setSelectedCity('all');
                     setSelectedType('all');
@@ -277,6 +292,14 @@ const AllHotspots: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      <PlaceModal
+        place={selectedHotspot}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        accentColor="sky"
+      />
     </div>
   );
 };
