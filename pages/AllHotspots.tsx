@@ -100,7 +100,7 @@ const AllHotspots: React.FC = () => {
         </div>
 
         {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+        <div className="absolute -bottom-[1px] left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
@@ -111,7 +111,7 @@ const AllHotspots: React.FC = () => {
             >
               <path
                 d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-white"
+                className="fill-current text-slate-50"
               />
             </svg>
             <svg
@@ -123,7 +123,7 @@ const AllHotspots: React.FC = () => {
             >
               <path
                 d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-white"
+                className="fill-current text-slate-50"
               />
             </svg>
           </div>
