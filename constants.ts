@@ -235,11 +235,12 @@ export const HOTSPOTS: Hotspot[] = [
   },
   {
     id: 22,
-    name: 'Sixtines',
+    name: 'Cozy Moments',
     type: 'Café',
     description: 'Gezellig café op de Grote Markt waar honden hartelijk welkom zijn voor een drankje en versnapering. Perfect om even uit te rusten na een wandeling door het centrum, terwijl je viervoeter geniet van de aandacht en een waterbakje.',
     tags: ['Terras', 'Waterbak aanwezig', 'Hondensnacks', 'Hondvriendelijk team', 'Centrum'],
     image: '/sixtines.webp',
+    imagePosition: 'center 25%',
     city: 'blankenberge',
     address: 'Grote Markt 2/0002, 8370 Blankenberge',
     website: 'https://www.sixtines.place/'

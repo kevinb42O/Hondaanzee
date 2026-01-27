@@ -64,6 +64,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                     src={spot.image}
                     alt={spot.name}
                     className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
+                    style={{ objectPosition: spot.imagePosition || 'center' }}
                     loading="lazy"
                     decoding="async"
                   />

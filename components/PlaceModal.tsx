@@ -92,6 +92,7 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                                 src={place.image}
                                 alt={place.name}
                                 className="w-full h-full object-cover"
+                                style={{ objectPosition: (place as any).imagePosition || 'center' }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                         </div>

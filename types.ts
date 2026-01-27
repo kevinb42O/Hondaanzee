@@ -6,6 +6,7 @@ export interface Hotspot {
   description: string;
   tags: string[];
   image: string;
+  imagePosition?: string; // e.g. 'center top' or '50% 25%'
   city: string; // city slug
   address: string;
   website: string;
