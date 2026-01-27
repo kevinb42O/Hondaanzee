@@ -15,14 +15,16 @@ export const CITIES: City[] = [
         address: 'J. Vande Puttelaan 7, Blankenberge',
         lat: 51.3078,
         lng: 3.1298,
-        description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.'
+        description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.',
+        city: 'blankenberge'
       },
       {
         name: 'Hondenweide A. Van Ackersquare',
         address: 'A. Van Ackersquare 1, Blankenberge',
         lat: 51.3142,
         lng: 3.1365,
-        description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.'
+        description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.',
+        city: 'blankenberge'
       }
     ],
     rules: {
@@ -76,7 +78,8 @@ export const CITIES: City[] = [
         address: 'Gustave Van Nieuwenhuysestraat, Heist',
         lat: 51.3419,
         lng: 3.2351,
-        description: 'Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.'
+        description: 'Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.',
+        city: 'knokke-heist'
       }
     ],
     rules: {
@@ -108,42 +111,48 @@ export const CITIES: City[] = [
         address: 'Kennedyplein, Vosseslag',
         lat: 51.2612,
         lng: 3.0058,
-        description: 'Omheinde zone naast de parking.'
+        description: 'Omheinde zone naast de parking.',
+        city: 'de-haan'
       },
       {
         name: 'Losloopzone Centrum/Sport',
         address: 'Nieuwe Steenweg, De Haan',
         lat: 51.2756,
         lng: 3.0248,
-        description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.'
+        description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.',
+        city: 'de-haan'
       },
       {
         name: 'Losloopzone Haneveld',
         address: 'Lindenlaan, De Haan',
         lat: 51.2742,
         lng: 3.0212,
-        description: 'Zone nabij het sportcomplex Haneveld.'
+        description: 'Zone nabij het sportcomplex Haneveld.',
+        city: 'de-haan'
       },
       {
         name: 'Losloopzone Duinbossen',
         address: 'Zwarte Kiezel, De Haan',
         lat: 51.2685,
         lng: 3.0385,
-        description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).'
+        description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).',
+        city: 'de-haan'
       },
       {
         name: 'Losloopzone Wenduine - Manitobastraat',
         address: 'Manitobastraat, Wenduine',
         lat: 51.2948,
         lng: 3.0712,
-        description: 'Omheinde hondenweide in Wenduine.'
+        description: 'Omheinde hondenweide in Wenduine.',
+        city: 'de-haan'
       },
       {
         name: 'Losloopzone Wenduine - Westhinderlaan',
         address: 'Westhinderlaan / Wancourstraat, Wenduine',
         lat: 51.2935,
         lng: 3.0685,
-        description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.'
+        description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
+        city: 'de-haan'
       }
     ],
     rules: {
@@ -175,7 +184,8 @@ export const CITIES: City[] = [
         address: 'Brouwerijstraat, Bredene',
         lat: 51.2398,
         lng: 2.9715,
-        description: 'Omheinde weide nabij de watertoren/schakelstation.'
+        description: 'Omheinde weide nabij de watertoren/schakelstation.',
+        city: 'bredene'
       }
     ],
     rules: {
@@ -207,54 +217,62 @@ export const CITIES: City[] = [
         address: 'Iependreef / Cederdreef, Oostende',
         lat: 51.2089,
         lng: 2.9148,
-        description: 'Grootste hondenweide, achter het Blauwe Kruis dierenasiel.'
+        description: 'Grootste hondenweide, achter het Blauwe Kruis dierenasiel.',
+        city: 'oostende'
       },
       {
         name: 'Losloopzone Raversijde',
         address: 'Westlaan 1, Raversijde',
         lat: 51.2056,
         lng: 2.8645,
-        description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.'
+        description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
+        city: 'oostende'
       },
       {
         name: 'Losloopzone Leffingestraat',
         address: 'Leffingestraat, Oostende',
         lat: 51.2185,
         lng: 2.9325,
-        description: 'Achter de tennisclub.'
+        description: 'Achter de tennisclub.',
+        city: 'oostende'
       },
       {
         name: 'Losloopzone Slachthuiskaai',
         address: 'Slachthuiskaai, Oostende',
         lat: 51.2245,
         lng: 2.9198,
-        description: 'Nabij de kruising met Lijndraaiersstraat.'
+        description: 'Nabij de kruising met Lijndraaiersstraat.',
+        city: 'oostende'
       },
       {
         name: 'Losloopzone Ankerstraat',
         address: 'Ankerstraat, Oostende',
         lat: 51.2312,
         lng: 2.9285,
-        description: 'Nabij tramhalte "Weg naar Vismijn".'
+        description: 'Nabij tramhalte "Weg naar Vismijn".',
+        city: 'oostende'
       },
       {
         name: 'Hondenbos',
         address: 'Karperstraat / A10, Oostende',
         lat: 51.2125,
         lng: 2.9425,
-        description: 'Bosstrook tussen Karperstraat en de A10 (nabij "Groene 62").'
+        description: 'Bosstrook tussen Karperstraat en de A10 (nabij "Groene 62").',
+        city: 'oostende'
       },
       {
         name: 'Losloopzone Schietbaanstraat',
         address: 'Schietbaanstraat, Oostende',
         lat: 51.2168,
-        lng: 2.9385
+        lng: 2.9385,
+        city: 'oostende'
       },
       {
         name: 'Losloopzone Brigade Pironlaan',
         address: 'Brigade Pironlaan, Oostende',
         lat: 51.2098,
-        lng: 2.9215
+        lng: 2.9215,
+        city: 'oostende'
       }
     ],
     rules: {
@@ -286,14 +304,16 @@ export const CITIES: City[] = [
         address: 'Koninginnelaan, Middelkerke',
         lat: 51.1832,
         lng: 2.8198,
-        description: 'Direct tegenover WZC Haerlebout.'
+        description: 'Direct tegenover WZC Haerlebout.',
+        city: 'middelkerke'
       },
       {
         name: 'Hondenweide Westende',
         address: 'Hofstraat, Westende',
         lat: 51.1698,
         lng: 2.7856,
-        description: 'Nabij de kruising met Voetbalstraat.'
+        description: 'Nabij de kruising met Voetbalstraat.',
+        city: 'middelkerke'
       }
     ],
     rules: {
@@ -323,14 +343,16 @@ export const CITIES: City[] = [
         address: 'Louisweg / Dienstweg Havengeul, Nieuwpoort',
         lat: 51.1425,
         lng: 2.7312,
-        description: 'Alternatief voor strand in de zomer! Omheinde losloopweide op de hoek van Louisweg en Dienstweg Havengeul.'
+        description: 'Alternatief voor strand in de zomer! Omheinde losloopweide op de hoek van Louisweg en Dienstweg Havengeul.',
+        city: 'nieuwpoort'
       },
       {
         name: 'Hondenweide Leopold II Park',
         address: 'Albert I Laan, Nieuwpoort',
         lat: 51.1285,
         lng: 2.7485,
-        description: 'Kleinere omheinde zone binnen het park.'
+        description: 'Kleinere omheinde zone binnen het park.',
+        city: 'nieuwpoort'
       }
     ],
     rules: {
@@ -360,14 +382,16 @@ export const CITIES: City[] = [
         address: 'Hazebeekstraat, Oostduinkerke',
         lat: 51.1185,
         lng: 2.6698,
-        description: 'Gelegen bij Sportpark Oostduinkerke.'
+        description: 'Gelegen bij Sportpark Oostduinkerke.',
+        city: 'koksijde'
       },
       {
         name: 'Losloopzone Sint-Idesbald',
         address: 'Gladiolenlaan 17, Koksijde',
         lat: 51.0985,
         lng: 2.6125,
-        description: 'Nabij het Abdijmuseum Ten Duinen.'
+        description: 'Nabij het Abdijmuseum Ten Duinen.',
+        city: 'koksijde'
       }
     ],
     rules: {
@@ -399,14 +423,16 @@ export const CITIES: City[] = [
         address: 'Kerkstraat / Artiestenpad, De Panne',
         lat: 51.0998,
         lng: 2.5912,
-        description: 'Nabij motorclub "t Motosiekeltje" en tramhalte "Moeder Lambik".'
+        description: 'Nabij motorclub "t Motosiekeltje" en tramhalte "Moeder Lambik".',
+        city: 'de-panne'
       },
       {
         name: 'Hondenweide Vijvers Markey',
         address: 'Doornstraat, Adinkerke',
         lat: 51.0785,
         lng: 2.5985,
-        description: 'Gelegen op domein "Vijvers Markey".'
+        description: 'Gelegen op domein "Vijvers Markey".',
+        city: 'de-panne'
       }
     ],
     rules: {

@@ -36,7 +36,7 @@ const createCustomIcon = (isOpen: boolean, isPulsing: boolean) => {
   const primaryColor = isOpen ? '#10b981' : '#f43f5e';
   const secondaryColor = isOpen ? '#059669' : '#e11d48';
   const glowColor = isOpen ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.4)';
-  
+
   return L.divIcon({
     html: `
       <div class="relative ${isPulsing ? 'marker-pulse' : ''}">
@@ -77,7 +77,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
 
   const isAreaOpen = (area: OffLeashArea): boolean => {
     if (!area.openingHours) return true; // Default to always open if not specified
-    
+
     const now = new Date();
     const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     return currentTime >= area.openingHours.open && currentTime <= area.openingHours.close;
@@ -93,11 +93,11 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
     CITIES.forEach((c) => {
       const cAreas = OFF_LEASH_AREAS.filter(area => area.city === c.slug);
       if (c.slug === city.slug || cAreas.length === 0) return;
-      
+
       const dist = Math.sqrt(
         Math.pow(c.lat - city.lat, 2) + Math.pow(c.lng - city.lng, 2)
       );
-      
+
       if (dist < minDistance) {
         minDistance = dist;
         nearestCity = c;
@@ -131,10 +131,9 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
         scrollWheelZoom: false,
         zoomControl: false,
         dragging: !L.Browser.mobile,
-        tap: true,
         touchZoom: true
       });
-      
+
       leafletInstance.current = map;
 
       // Modern colorful map style - Carto Voyager (colorful & modern)
@@ -145,7 +144,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
       }).addTo(map);
 
       L.control.zoom({ position: 'bottomright' }).addTo(map);
-      
+
       // Force map to recognize its container size
       setTimeout(() => map.invalidateSize(), 100);
 
@@ -158,9 +157,9 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
         areasToShow.forEach((area, index) => {
           const isOpen = isAreaOpen(area);
           // TEMPORARILY USE DEFAULT MARKER FOR TESTING
-          
+
           const marker = L.marker([area.lat, area.lng]).addTo(map)
-          .bindPopup(`
+            .bindPopup(`
             <div class="p-2 font-sans min-w-[180px] max-w-[240px]">
               <div class="flex items-center justify-between mb-2">
                  <b class="text-slate-900 text-sm leading-tight">${area.name}</b>
@@ -207,7 +206,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
               <p class="text-slate-500 text-xs">${nearestInfo.area.address}</p>
             </div>
           `);
-        
+
         const group = L.featureGroup([currentMarker, nearestMarker]);
         map.fitBounds(group.getBounds().pad(0.5));
       } else {
@@ -239,62 +238,62 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
 
             {OFF_LEASH_AREAS.some(area => area.city === city.slug) ? (
               <>
-              <div className="space-y-4">
-                {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
-                  const isOpen = isAreaOpen(area);
-                  const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
-                  return (
-                    <button 
-                      key={area.name}
-                      onClick={() => {
-                        navigate(`/losloopzones?area=${globalIndex}`);
-                      }}
-                      className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer w-full text-left ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
-                    >
-                      <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-400'}`}>
-                        <MapPin size={24} />
-                      </div>
-                      <div className="flex-grow">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-lg font-black text-slate-900 leading-tight">{area.name}</h3>
-                          {isOpen ? (
-                            <span className="bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Open</span>
-                          ) : (
-                            <span className="bg-rose-100 text-rose-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Gesloten</span>
-                          )}
+                <div className="space-y-4">
+                  {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
+                    const isOpen = isAreaOpen(area);
+                    const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
+                    return (
+                      <button
+                        key={area.name}
+                        onClick={() => {
+                          navigate(`/losloopzones?area=${globalIndex}`);
+                        }}
+                        className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer w-full text-left ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
+                      >
+                        <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-400'}`}>
+                          <MapPin size={24} />
                         </div>
-                        <p className="text-slate-500 font-medium mb-2 text-xs md:text-sm flex items-center gap-1.5">
-                           {area.address}
-                        </p>
-                        {area.description && (
-                          <p className="text-slate-400 text-xs mb-3 leading-relaxed">{area.description}</p>
-                        )}
-                        <div className="flex items-center gap-4">
-                          {area.openingHours && (
-                            <div className="flex items-center gap-1.5 text-slate-400 font-bold text-[10px] uppercase">
-                               <Clock size={12} /> {area.openingHours.open} - {area.openingHours.close}
-                            </div>
+                        <div className="flex-grow">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-lg font-black text-slate-900 leading-tight">{area.name}</h3>
+                            {isOpen ? (
+                              <span className="bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Open</span>
+                            ) : (
+                              <span className="bg-rose-100 text-rose-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Gesloten</span>
+                            )}
+                          </div>
+                          <p className="text-slate-500 font-medium mb-2 text-xs md:text-sm flex items-center gap-1.5">
+                            {area.address}
+                          </p>
+                          {area.description && (
+                            <p className="text-slate-400 text-xs mb-3 leading-relaxed">{area.description}</p>
                           )}
-                          <div className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs">
-                            Bekijk details →
+                          <div className="flex items-center gap-4">
+                            {area.openingHours && (
+                              <div className="flex items-center gap-1.5 text-slate-400 font-bold text-[10px] uppercase">
+                                <Clock size={12} /> {area.openingHours.open} - {area.openingHours.close}
+                              </div>
+                            )}
+                            <div className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs">
+                              Bekijk details →
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="mt-6">
-                <Link
-                  to="/losloopzones"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 text-white rounded-xl font-bold text-sm hover:bg-sky-700 transition-colors shadow-md hover:shadow-lg active:scale-95 w-full sm:w-auto"
-                >
-                  Bekijk alle losloopzones
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </Link>
-              </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-6">
+                  <Link
+                    to="/losloopzones"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 text-white rounded-xl font-bold text-sm hover:bg-sky-700 transition-colors shadow-md hover:shadow-lg active:scale-95 w-full sm:w-auto"
+                  >
+                    Bekijk alle losloopzones
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
+                </div>
               </>
             ) : (
               <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 text-center lg:text-left">
@@ -305,7 +304,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                 <p className="text-slate-500 font-medium mb-8 leading-relaxed text-sm">
                   Er zijn momenteel geen officiële losloopweides geregistreerd in deze gemeente.
                 </p>
-                
+
                 {nearestInfo && (
                   <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left">
                     <span className="text-[10px] uppercase font-black tracking-widest text-sky-600 mb-2 block">Dichtstbijzijnde optie</span>
@@ -317,7 +316,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                         <h4 className="font-bold text-slate-900 text-sm truncate">{nearestInfo.area.name}</h4>
                         <p className="text-slate-500 text-[11px] font-medium">{nearestInfo.city.name} ({nearestInfo.distanceLabel})</p>
                       </div>
-                      <a 
+                      <a
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nearestInfo.area.name + ' ' + nearestInfo.area.address)}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -333,27 +332,27 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
           </div>
 
           <div className="aspect-[4/3] lg:aspect-auto min-h-[280px] sm:min-h-[350px] md:min-h-[400px] relative group">
-             <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-emerald-50 rounded-[1.5rem] sm:rounded-[2rem]" />
-             <div className="absolute -inset-1 bg-gradient-to-br from-sky-400/20 via-emerald-400/20 to-cyan-400/20 rounded-[1.75rem] sm:rounded-[2.25rem] blur-sm opacity-60 md:group-hover:opacity-100 transition-opacity duration-500" />
-             <div ref={mapRef} className="absolute inset-0 border-2 sm:border-4 border-white/80 shadow-xl sm:shadow-2xl shadow-sky-500/10 ring-1 ring-slate-200/50 rounded-[1.5rem] sm:rounded-[2rem]" style={{ touchAction: 'pan-x pan-y' }} />
-             <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 z-[20] lg:hidden">
-               <div className="bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase text-slate-600 shadow-lg border border-white/50 flex items-center gap-1.5 sm:gap-2">
-                 <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
-                 </svg>
-                 Pinch om te zoomen
-               </div>
-             </div>
-             <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-[20] flex flex-col gap-1.5 sm:gap-2">
-                <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-emerald-100 shadow-lg shadow-emerald-500/10">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 ring-2 ring-emerald-400/30"></div>
-                  <span className="text-[9px] sm:text-[10px] font-black uppercase text-emerald-700">Nu open</span>
-                </div>
-                <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-rose-100 shadow-lg shadow-rose-500/10">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-rose-400 to-rose-600"></div>
-                  <span className="text-[9px] sm:text-[10px] font-black uppercase text-rose-700">Gesloten</span>
-                </div>
-             </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-emerald-50 rounded-[1.5rem] sm:rounded-[2rem]" />
+            <div className="absolute -inset-1 bg-gradient-to-br from-sky-400/20 via-emerald-400/20 to-cyan-400/20 rounded-[1.75rem] sm:rounded-[2.25rem] blur-sm opacity-60 md:group-hover:opacity-100 transition-opacity duration-500" />
+            <div ref={mapRef} className="absolute inset-0 border-2 sm:border-4 border-white/80 shadow-xl sm:shadow-2xl shadow-sky-500/10 ring-1 ring-slate-200/50 rounded-[1.5rem] sm:rounded-[2rem]" style={{ touchAction: 'pan-x pan-y' }} />
+            <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 z-[20] lg:hidden">
+              <div className="bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase text-slate-600 shadow-lg border border-white/50 flex items-center gap-1.5 sm:gap-2">
+                <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                </svg>
+                Pinch om te zoomen
+              </div>
+            </div>
+            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-[20] flex flex-col gap-1.5 sm:gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-emerald-100 shadow-lg shadow-emerald-500/10">
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 ring-2 ring-emerald-400/30"></div>
+                <span className="text-[9px] sm:text-[10px] font-black uppercase text-emerald-700">Nu open</span>
+              </div>
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-rose-100 shadow-lg shadow-rose-500/10">
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-rose-400 to-rose-600"></div>
+                <span className="text-[9px] sm:text-[10px] font-black uppercase text-rose-700">Gesloten</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
