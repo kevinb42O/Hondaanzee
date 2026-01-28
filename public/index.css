@@ -419,3 +419,55 @@ body {
     transform: rotate(90deg);
   }
 }
+
+/* Map 3D Effect - Exquisite Shadow */
+.map-3d-shadow {
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s ease;
+}
+
+/* Subtle levitation on hover */
+.map-3d-shadow:hover {
+  filter: drop-shadow(0 30px 50px rgba(10, 40, 70, 0.45));
+  transform: translateY(-2px);
+}
+
+/* KUSTKAART STYLES */
+.kaart-wrapper {
+  background: transparent;
+  width: 100%;
+  /* max-width: 1000px; - Removed to fill container or handled by parent */
+  border-radius: 20px;
+  padding: 20px;
+  /* Reduced slightly for mobile fits, can adjust */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  /* overflow: hidden; - Removed to allow 3D shadows to extend */
+  overflow: visible;
+}
+
+.leaflet-container {
+  background: transparent !important;
+}
+
+.kust-gemeente {
+  /* fill: #fdfcdc !important; - Removed: Handled by JS inline styles */
+  /* Mooi zacht wit/geel zand */
+  stroke: #004e64 !important;
+  /* Lijnen in de kleur van de zee */
+  stroke-width: 1px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Smoother bezier */
+  cursor: pointer;
+  transform-origin: center;
+}
+
+/* Hover kleur (Jouw felle geel/oranje) */
+.kust-gemeente:hover {
+  fill: #FFC107 !important;
+  transform: translateY(-5px) scale(1.02);
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+  display: block;
+  /* Ensure z-index works? SVG z-index is DOM order. */
+  /* To bring to front in SVG, we often need to re-append, but let's trust the filter provides enough pop */
+}

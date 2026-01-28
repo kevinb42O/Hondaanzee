@@ -9,6 +9,8 @@ export const CITIES: City[] = [
     image: '/blankenberge-new.webp',
     lat: 51.3126,
     lng: 3.1287,
+    mapX: 441.6,
+    mapY: 255.1,
     offLeashAreas: [
       {
         name: 'Hondenweide J. Vande Puttelaan',
@@ -48,6 +50,8 @@ export const CITIES: City[] = [
     image: '/zeebrugge.webp',
     lat: 51.3306,
     lng: 3.2056,
+    mapX: 496.3,
+    mapY: 284.5,
     offLeashAreas: [],
     rules: {
       summer: {
@@ -72,6 +76,8 @@ export const CITIES: City[] = [
     image: '/knokke.webp',
     lat: 51.3486,
     lng: 3.2847,
+    mapX: 552.5,
+    mapY: 314.7,
     offLeashAreas: [
       {
         name: 'Losloopweide Heist',
@@ -105,6 +111,8 @@ export const CITIES: City[] = [
     image: '/wenduine.webp',
     lat: 51.2727,
     lng: 3.0315,
+    mapX: 368.2,
+    mapY: 215.7,
     offLeashAreas: [
       {
         name: 'Losloopzone Vosseslag',
@@ -178,6 +186,8 @@ export const CITIES: City[] = [
     image: '/bredene.webp',
     lat: 51.2468,
     lng: 2.9731,
+    mapX: 323.7,
+    mapY: 191.8,
     offLeashAreas: [
       {
         name: 'Hondenweide Brouwerijstraat',
@@ -211,6 +221,8 @@ export const CITIES: City[] = [
     image: '/oostende.webp',
     lat: 51.2154,
     lng: 2.927,
+    mapX: 285.9,
+    mapY: 171.5,
     offLeashAreas: [
       {
         name: 'Maria Hendrikapark (Grootste)',
@@ -298,6 +310,8 @@ export const CITIES: City[] = [
     image: '/middelkerke.webp',
     lat: 51.1852,
     lng: 2.8224,
+    mapX: 210.1,
+    mapY: 130.8,
     offLeashAreas: [
       {
         name: 'Hondenweide Middelkerke',
@@ -337,6 +351,8 @@ export const CITIES: City[] = [
     image: '/nieuwpoort.webp',
     lat: 51.1301,
     lng: 2.752,
+    mapX: 150.8,
+    mapY: 99.0,
     offLeashAreas: [
       {
         name: 'Hondenweide Prins Mauritspark',
@@ -376,6 +392,8 @@ export const CITIES: City[] = [
     image: '/oostduinkerke.webp',
     lat: 51.1118,
     lng: 2.645,
+    mapX: 76.2,
+    mapY: 58.9,
     offLeashAreas: [
       {
         name: 'Losloopzone Sportpark Oostduinkerke',
@@ -417,6 +435,8 @@ export const CITIES: City[] = [
     image: '/depanne.webp',
     lat: 51.0963,
     lng: 2.5898,
+    mapX: 36.3,
+    mapY: 37.5,
     offLeashAreas: [
       {
         name: 'Hondenweide Kerkstraat',

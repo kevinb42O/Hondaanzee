@@ -65,5 +65,7 @@ export interface City {
   description: string;
   lat: number;
   lng: number;
+  mapX?: number; // X coordinate on the SVG map (0-625)
+  mapY?: number; // Y coordinate on the SVG map (0-372)
   offLeashAreas: OffLeashArea[];
 }
