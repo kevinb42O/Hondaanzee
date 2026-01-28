@@ -5,6 +5,7 @@ import { ArrowLeft, X, Star, MapPin, Navigation, TreePine, Palmtree } from 'luci
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import ImagePlaceholder from '../components/ImagePlaceholder.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -283,8 +284,8 @@ const AllOffLeashAreas: React.FC = () => {
                     setSelectedArea(null);
                   }}
                   className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
-                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                 >
                   Alle ({OFF_LEASH_AREAS.length})
@@ -300,8 +301,8 @@ const AllOffLeashAreas: React.FC = () => {
                         setSelectedArea(null);
                       }}
                       className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
-                          ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                         }`}
                     >
                       {city.name} ({count})
@@ -347,11 +348,15 @@ const AllOffLeashAreas: React.FC = () => {
 
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
                   <div className="relative h-80 bg-slate-200">
-                    <img
-                      src={displayedArea.image || '/placeholder.webp'}
-                      alt={displayedArea.name}
-                      className="w-full h-full object-cover"
-                    />
+                    {displayedArea.image && displayedArea.image !== '/placeholder.webp' ? (
+                      <img
+                        src={displayedArea.image}
+                        alt={displayedArea.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <ImagePlaceholder areaName={displayedArea.name} className="w-full h-full" />
+                    )}
                   </div>
                   <div className="p-8">
                     <div className="flex items-start justify-between mb-4">
@@ -412,11 +417,15 @@ const AllOffLeashAreas: React.FC = () => {
                           className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group w-full text-left"
                         >
                           <div className="relative h-56 bg-slate-200 overflow-hidden">
-                            <img
-                              src={area.image || '/placeholder.webp'}
-                              alt={area.name}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
+                            {area.image && area.image !== '/placeholder.webp' ? (
+                              <img
+                                src={area.image}
+                                alt={area.name}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            ) : (
+                              <ImagePlaceholder areaName={area.name} className="w-full h-full" />
+                            )}
                             {area.rating && (
                               <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg">
                                 {renderStars(area.rating)}
