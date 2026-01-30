@@ -20,20 +20,21 @@ export const HOTSPOTS: Hotspot[] = [
     description: 'Overnachten met je viervoeter was nog nooit zo comfortabel.',
     tags: ['Honden toegelaten op kamer', 'Nabij strand'],
     image: '/dunehotel.webp',
+    imagePosition: 'center 30%',
     city: 'nieuwpoort',
-    address: '',
-    website: ''
+    address: 'Nieuwlandplein 1, 8620 Nieuwpoort',
+    website: 'https://www.dunehotel.be/'
   },
   {
     id: 3,
-    name: 'Restaurant De Kwinte Middelkerke',
-    type: 'Restaurant',
+    name: 'Beachbar De Kwinte',
+    type: 'Beach Bar',
     description: 'Geniet van lokale gerechten terwijl je hond rustig onder tafel ligt.',
-    tags: ['Ruime plaatsen', 'Waterbak aanwezig', 'Hondvriendelijk team'],
+    tags: ['Ruime plaatsen', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Surfclub'],
     image: '/dekwintemiddelkerke.webp',
     city: 'middelkerke',
-    address: '',
-    website: ''
+    address: 'Koning Ridderdijk 100/90, 8434 Middelkerke',
+    website: 'https://www.surfclubwn.be/'
   },
   {
     id: 4,
@@ -142,7 +143,7 @@ export const HOTSPOTS: Hotspot[] = [
     tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand'],
     image: '/brasserielolodepanne.webp',
     city: 'de-panne',
-    address: 'Zeedijk 26, 8660 De Panne',
+    address: 'Zeelaan 83, 8660 De Panne',
     website: ''
   },
   {
@@ -646,7 +647,7 @@ export const SERVICES: Service[] = [
     image: '/dogsandcats.webp',
     city: 'blankenberge',
     address: 'Langestraat, 8370 Blankenberge',
-    website: ''
+    website: 'https://www.dogsandcats.be/'
   },
   {
     id: 14,
@@ -668,7 +669,7 @@ export const SERVICES: Service[] = [
     image: '/anicura.webp',
     city: 'oostende',
     address: 'Verhelststraat 1, 8460 Oudenburg',
-    website: ''
+    website: 'https://www.anicura.be/klinieken/west-vlaanderen/causus/'
   }
 ];
 
@@ -683,7 +684,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.13734,
     city: 'blankenberge',
     description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.',
-    image: '/weideputtelaan.webp',
+    image: '/vandeputtelaan.webp',
     rating: 4
   },
   {

@@ -35,7 +35,8 @@ export interface OffLeashArea {
   lng: number;
   city: string; // city slug
   description: string; // Changed from optional to required
-  image?: string; // Path to image
+  image?: string; // Path to primary image (for backwards compatibility)
+  images?: string[]; // Array of image paths for gallery
   imagePosition?: string;
   rating?: number; // 1-5 stars
   openingHours?: {

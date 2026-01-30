@@ -6,6 +6,7 @@ import { OFF_LEASH_AREAS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import ImagePlaceholder from '../components/ImagePlaceholder.tsx';
+import ImageModal from '../components/ImageModal.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ReviewSection from '../components/ReviewSection';
@@ -31,6 +32,7 @@ const AllOffLeashAreas: React.FC = () => {
   const location = useLocation();
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [selectedArea, setSelectedArea] = useState<number | null>(null);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
@@ -368,22 +370,37 @@ const AllOffLeashAreas: React.FC = () => {
           <div ref={areaDetailRef}>
             {displayedArea ? (
               // Single Area Detail View
-              <div className="max-w-4xl mx-auto">\n                <button
-                onClick={() => setSelectedArea(null)}
-                className="mb-4 text-sky-600 hover:text-sky-700 font-bold flex items-center gap-2"
-              >
-                <X size={20} />
-                Terug naar overzicht
-              </button>
+              <div className="max-w-4xl mx-auto">
+                <button
+                  onClick={() => setSelectedArea(null)}
+                  className="mb-4 text-sky-600 hover:text-sky-700 font-bold flex items-center gap-2"
+                >
+                  <X size={20} />
+                  Terug naar overzicht
+                </button>
 
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
-                  <div className="relative h-80 bg-slate-200">
+                  <div className="relative h-80 bg-slate-200 group">
                     {displayedArea.image && displayedArea.image !== '/placeholder.webp' ? (
-                      <img
-                        src={displayedArea.image}
-                        alt={displayedArea.name}
-                        className="w-full h-full object-cover"
-                      />
+                      <button
+                        onClick={() => setIsImageModalOpen(true)}
+                        className="w-full h-full cursor-pointer relative overflow-hidden"
+                        aria-label="Klik om afbeelding te vergroten"
+                      >
+                        <img
+                          src={displayedArea.image}
+                          alt={displayedArea.name}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/40 transition-all duration-300 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/95 backdrop-blur-sm rounded-full p-4 shadow-lg">
+                            <svg className="w-8 h-8 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </button>
                     ) : (
                       <ImagePlaceholder areaName={displayedArea.name} className="w-full h-full" />
                     )}
@@ -495,6 +512,16 @@ const AllOffLeashAreas: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      {displayedArea && (
+        <ImageModal
+          images={displayedArea.images || (displayedArea.image && displayedArea.image !== '/placeholder.webp' ? [displayedArea.image] : [])}
+          altText={displayedArea.name}
+          isOpen={isImageModalOpen}
+          onClose={() => setIsImageModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
