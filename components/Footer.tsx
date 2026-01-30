@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { PawPrint, ExternalLink, Mail, Check } from 'lucide-react';
+import { PawPrint, ExternalLink, Mail, Check, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -30,11 +30,23 @@ const Footer: React.FC = () => {
             {/* Contact Email */}
             <a
               href="mailto:info@hondaanzee.be"
-              className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors"
+              className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors mb-3"
               aria-label="Email contact"
             >
               <Mail size={18} />
               <span className="text-sm font-medium">info@hondaanzee.be</span>
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/hondaanzee/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-slate-400 hover:text-pink-400 transition-colors group"
+              aria-label="Volg ons op Instagram"
+            >
+              <Instagram size={18} className="group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium">@hondaanzee</span>
             </a>
           </div>
 
