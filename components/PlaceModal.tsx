@@ -147,7 +147,10 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                                     {place.tags.map((tag) => (
                                         <span
                                             key={tag}
-                                            className={`text-xs font-black uppercase tracking-widest ${colors.bg} ${colors.text} px-3 py-2 rounded-lg border ${colors.border}`}
+                                            className={`text-xs font-black uppercase tracking-widest px-3 py-2 rounded-lg border ${tag === 'Aanrader'
+                                                    ? 'bg-amber-50 text-amber-700 border-amber-200'
+                                                    : `${colors.bg} ${colors.text} ${colors.border}`
+                                                }`}
                                         >
                                             {tag}
                                         </span>

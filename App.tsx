@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header.tsx';
 import Footer from './components/Footer.tsx';
 import Home from './pages/Home.tsx';
@@ -41,7 +41,7 @@ const ScrollToHash = () => {
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-clip">
         <ScrollToHash />
         <Header />
@@ -63,7 +63,7 @@ function App() {
         <ResponsibilityBanner />
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

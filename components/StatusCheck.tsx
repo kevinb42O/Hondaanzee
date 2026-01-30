@@ -56,7 +56,7 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
           <MapPin size={12} className="text-sky-600 sm:w-[14px] sm:h-[14px]" /> {city.name}, België
         </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.15] mb-3 sm:mb-4 px-2">
-          Mag mijn hond <span className="text-sky-600 underline decoration-sky-300 decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8">nu</span> op het strand?
+          Mag mijn hond <span className="text-sky-600">nu</span> op het strand in <span className="text-sky-600 relative inline-block">{city.name}<svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" /></svg></span>?
         </h1>
       </div>
 

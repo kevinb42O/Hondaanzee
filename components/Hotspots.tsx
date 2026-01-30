@@ -79,7 +79,13 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                 )}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
                   {spot.tags.map((tag) => (
-                    <span key={tag} className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black bg-slate-50 text-slate-600 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-slate-100">
+                    <span
+                      key={tag}
+                      className={`text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border ${tag === 'Aanrader'
+                          ? 'bg-amber-50 text-amber-700 border-amber-200'
+                          : 'bg-slate-50 text-slate-600 border-slate-100'
+                        }`}
+                    >
                       {tag}
                     </span>
                   ))}

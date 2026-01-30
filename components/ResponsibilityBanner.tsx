@@ -1,237 +1,241 @@
 
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Trash2, Heart, ShieldAlert, Users, Sparkles } from 'lucide-react';
 
 const ResponsibilityBanner: React.FC = () => {
+  const location = useLocation();
+  const isMapPage = location.pathname === '/kaart';
+
   return (
     <section className="relative py-20 sm:py-28 md:py-36 overflow-hidden">
       {/* Wave Divider at Top */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-10 rotate-180">
         <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-          <svg 
-            className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+          <svg
+            className="block h-[60px] sm:h-[80px] md:h-[120px]"
             style={{ minWidth: '100vw', flex: '0 0 100vw' }}
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
             preserveAspectRatio="none"
           >
-            <path 
-              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
-              className="fill-current text-stone-50"
+            <path
+              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+              className={`fill-current ${isMapPage ? 'text-slate-950' : 'text-stone-50'}`}
             />
           </svg>
-          <svg 
-            className="block h-[60px] sm:h-[80px] md:h-[120px]" 
+          <svg
+            className="block h-[60px] sm:h-[80px] md:h-[120px]"
             style={{ minWidth: '100vw', flex: '0 0 100vw' }}
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
             preserveAspectRatio="none"
           >
-            <path 
-              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z" 
-              className="fill-current text-stone-50"
+            <path
+              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+              className={`fill-current ${isMapPage ? 'text-slate-950' : 'text-stone-50'}`}
             />
           </svg>
         </div>
       </div>
-      
+
       {/* Sailboat riding on the wave surface */}
       <div className="absolute top-[8px] sm:top-[15px] md:top-[28px] left-0 z-[15] pointer-events-none sailboat-journey">
-        <svg 
-          width="140" 
-          height="80" 
-          viewBox="0 0 150 90" 
+        <svg
+          width="140"
+          height="80"
+          viewBox="0 0 150 90"
           className="sm:w-[164px] sm:h-[94px] md:w-[190px] md:h-[112px] drop-shadow-2xl"
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Wind lines behind the boat */}
           <g className="wind-trails" opacity="0.6">
-            <path 
-              d="M5,30 Q10,28 15,30" 
-              stroke="#cbd5e1" 
-              strokeWidth="2" 
+            <path
+              d="M5,30 Q10,28 15,30"
+              stroke="#cbd5e1"
+              strokeWidth="2"
               fill="none"
               strokeLinecap="round"
             />
-            <path 
-              d="M8,40 Q15,38 22,40" 
-              stroke="#cbd5e1" 
-              strokeWidth="2.5" 
+            <path
+              d="M8,40 Q15,38 22,40"
+              stroke="#cbd5e1"
+              strokeWidth="2.5"
               fill="none"
               strokeLinecap="round"
             />
-            <path 
-              d="M3,50 Q12,48 20,50" 
-              stroke="#cbd5e1" 
-              strokeWidth="2" 
+            <path
+              d="M3,50 Q12,48 20,50"
+              stroke="#cbd5e1"
+              strokeWidth="2"
               fill="none"
               strokeLinecap="round"
             />
-            <path 
-              d="M10,60 Q18,58 25,60" 
-              stroke="#e2e8f0" 
-              strokeWidth="1.5" 
+            <path
+              d="M10,60 Q18,58 25,60"
+              stroke="#e2e8f0"
+              strokeWidth="1.5"
               fill="none"
               strokeLinecap="round"
             />
           </g>
-          
+
           {/* Water reflection */}
-          <ellipse cx="70" cy="82" rx="35" ry="4" fill="#0369a1" opacity="0.2"/>
-          
+          <ellipse cx="70" cy="82" rx="35" ry="4" fill="#0369a1" opacity="0.2" />
+
           {/* Hull - Realistic boat shape */}
           {/* Main hull body */}
-          <path 
-            d="M48,68 L48,73 Q70,78 92,73 L92,68 Q70,72 48,68 Z" 
+          <path
+            d="M48,68 L48,73 Q70,78 92,73 L92,68 Q70,72 48,68 Z"
             fill="#6b4423"
             stroke="#4a2f1a"
             strokeWidth="1"
           />
-          
+
           {/* Hull top edge - deck */}
-          <ellipse 
-            cx="70" 
-            cy="68" 
-            rx="22" 
-            ry="4" 
+          <ellipse
+            cx="70"
+            cy="68"
+            rx="22"
+            ry="4"
             fill="#8b5a3c"
             stroke="#5d3a26"
             strokeWidth="0.8"
           />
-          
+
           {/* Hull shadow/depth */}
-          <path 
-            d="M48,68 L48,73 Q55,75 62,75 L62,70 Z" 
+          <path
+            d="M48,68 L48,73 Q55,75 62,75 L62,70 Z"
             fill="#4a2f1a"
             opacity="0.4"
           />
-          
+
           {/* Keel/bottom detail */}
-          <path 
-            d="M65,76 Q70,79 75,76" 
+          <path
+            d="M65,76 Q70,79 75,76"
             stroke="#3d2517"
             strokeWidth="2"
             fill="none"
             strokeLinecap="round"
           />
-          
+
           {/* Hull planks detail */}
-          <path 
-            d="M50,69.5 Q70,73 90,69.5" 
+          <path
+            d="M50,69.5 Q70,73 90,69.5"
             stroke="#5d3a26"
             strokeWidth="0.5"
             opacity="0.6"
             fill="none"
           />
-          <path 
-            d="M49,71 Q70,74.5 91,71" 
+          <path
+            d="M49,71 Q70,74.5 91,71"
             stroke="#5d3a26"
             strokeWidth="0.5"
             opacity="0.6"
             fill="none"
           />
-          
+
           {/* Cabin/cockpit area */}
-          <ellipse 
-            cx="70" 
-            cy="67" 
-            rx="12" 
-            ry="3" 
+          <ellipse
+            cx="70"
+            cy="67"
+            rx="12"
+            ry="3"
             fill="#5d3a26"
             opacity="0.3"
           />
-          
+
           {/* Main Mast - positioned on deck */}
-          <line 
-            x1="70" 
-            y1="67" 
-            x2="70" 
-            y2="15" 
-            stroke="#654321" 
+          <line
+            x1="70"
+            y1="67"
+            x2="70"
+            y2="15"
+            stroke="#654321"
             strokeWidth="2.5"
           />
-          
+
           {/* Mast base */}
-          <rect 
-            x="68" 
-            y="65" 
-            width="4" 
-            height="3" 
+          <rect
+            x="68"
+            y="65"
+            width="4"
+            height="3"
             fill="#4a2f1a"
             rx="1"
           />
-          
+
           {/* Main Sail - Large with gradient effect */}
-          <path 
-            d="M70,67 L70,18 L98,60 Z" 
+          <path
+            d="M70,67 L70,18 L98,60 Z"
             fill="url(#mainSailGradient)"
             stroke="#cbd5e1"
             strokeWidth="1.5"
           />
-          
+
           {/* Front Sail - Jib with gradient */}
-          <path 
-            d="M70,67 L70,25 L45,58 Z" 
+          <path
+            d="M70,67 L70,25 L45,58 Z"
             fill="url(#jibGradient)"
             stroke="#bae6fd"
             strokeWidth="1.5"
           />
-          
+
           {/* Sail details - seams */}
-          <line x1="70" y1="25" x2="88" y2="50" stroke="#e2e8f0" strokeWidth="0.8" opacity="0.6"/>
-          <line x1="70" y1="35" x2="92" y2="56" stroke="#e2e8f0" strokeWidth="0.8" opacity="0.6"/>
-          <line x1="70" y1="45" x2="95" y2="62" stroke="#e2e8f0" strokeWidth="0.8" opacity="0.6"/>
-          
-          <line x1="70" y1="30" x2="52" y2="50" stroke="#e0f2fe" strokeWidth="0.8" opacity="0.6"/>
-          <line x1="70" y1="40" x2="48" y2="55" stroke="#e0f2fe" strokeWidth="0.8" opacity="0.6"/>
-          
+          <line x1="70" y1="25" x2="88" y2="50" stroke="#e2e8f0" strokeWidth="0.8" opacity="0.6" />
+          <line x1="70" y1="35" x2="92" y2="56" stroke="#e2e8f0" strokeWidth="0.8" opacity="0.6" />
+          <line x1="70" y1="45" x2="95" y2="62" stroke="#e2e8f0" strokeWidth="0.8" opacity="0.6" />
+
+          <line x1="70" y1="30" x2="52" y2="50" stroke="#e0f2fe" strokeWidth="0.8" opacity="0.6" />
+          <line x1="70" y1="40" x2="48" y2="55" stroke="#e0f2fe" strokeWidth="0.8" opacity="0.6" />
+
           {/* Rigging lines */}
-          <line x1="70" y1="15" x2="98" y2="60" stroke="#94a3b8" strokeWidth="0.8" opacity="0.7"/>
-          <line x1="70" y1="15" x2="45" y2="58" stroke="#94a3b8" strokeWidth="0.8" opacity="0.7"/>
-          
+          <line x1="70" y1="15" x2="98" y2="60" stroke="#94a3b8" strokeWidth="0.8" opacity="0.7" />
+          <line x1="70" y1="15" x2="45" y2="58" stroke="#94a3b8" strokeWidth="0.8" opacity="0.7" />
+
           {/* Boom for main sail */}
-          <line x1="70" y1="67" x2="98" y2="60" stroke="#654321" strokeWidth="1.5" opacity="0.8"/>
-          
+          <line x1="70" y1="67" x2="98" y2="60" stroke="#654321" strokeWidth="1.5" opacity="0.8" />
+
           {/* Flag at top */}
-          <path 
-            d="M70,15 L80,18 L70,21 Z" 
+          <path
+            d="M70,15 L80,18 L70,21 Z"
             fill="#dc2626"
           />
-          
+
           {/* Mast cap */}
-          <circle cx="70" cy="15" r="2" fill="#654321"/>
-          
+          <circle cx="70" cy="15" r="2" fill="#654321" />
+
           {/* Gradients */}
           <defs>
             <linearGradient id="mainSailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#f8fafc', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#e2e8f0', stopOpacity: 0.95}} />
-              <stop offset="100%" style={{stopColor: '#cbd5e1', stopOpacity: 0.9}} />
+              <stop offset="0%" style={{ stopColor: '#f8fafc', stopOpacity: 1 }} />
+              <stop offset="50%" style={{ stopColor: '#e2e8f0', stopOpacity: 0.95 }} />
+              <stop offset="100%" style={{ stopColor: '#cbd5e1', stopOpacity: 0.9 }} />
             </linearGradient>
             <linearGradient id="jibGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#e0f2fe', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#bae6fd', stopOpacity: 0.95}} />
-              <stop offset="100%" style={{stopColor: '#7dd3fc', stopOpacity: 0.85}} />
+              <stop offset="0%" style={{ stopColor: '#e0f2fe', stopOpacity: 1 }} />
+              <stop offset="50%" style={{ stopColor: '#bae6fd', stopOpacity: 0.95 }} />
+              <stop offset="100%" style={{ stopColor: '#7dd3fc', stopOpacity: 0.85 }} />
             </linearGradient>
           </defs>
         </svg>
       </div>
 
       {/* Parallax Background Image - Fixed only on larger screens */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: 'url(/blankenberge.webp)' }}
       />
-      
+
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/80 to-slate-900" />
-      
+
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-20">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest mb-6 shadow-xl">
-            <Sparkles size={12} className="text-amber-300" strokeWidth={2.5} /> 
+            <Sparkles size={12} className="text-amber-300" strokeWidth={2.5} />
             Samen houden we de kust fijn
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>

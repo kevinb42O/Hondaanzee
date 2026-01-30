@@ -57,29 +57,13 @@ body {
     transform: translateX(0);
   }
 
-  25% {
-    transform: translateX(-30vw);
-  }
-
-  50% {
-    transform: translateX(-60vw);
-  }
-
-  65% {
-    transform: translateX(-45vw);
-  }
-
-  85% {
-    transform: translateX(-80vw);
-  }
-
   100% {
     transform: translateX(-100vw);
   }
 }
 
 .wave-animation {
-  animation: wave 20s ease-in-out infinite;
+  animation: wave 15s linear infinite;
 }
 
 /* Sailboat Animation - Sailing across the wave horizon */

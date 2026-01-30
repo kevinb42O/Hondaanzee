@@ -1,13 +1,14 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, X, Star, MapPin, Navigation, TreePine, Palmtree } from 'lucide-react';
+import { ArrowLeft, X, Star, MapPin, Navigation } from 'lucide-react';
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import ImagePlaceholder from '../components/ImagePlaceholder.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import ReviewSection from '../components/ReviewSection';
 
 // Fix Leaflet's default icon path issues
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -34,6 +35,7 @@ const AllOffLeashAreas: React.FC = () => {
   const leafletInstance = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
   const areaDetailRef = useRef<HTMLDivElement>(null);
+
 
   useSEO(SEO_DATA.losloopzones);
 
@@ -146,7 +148,10 @@ const AllOffLeashAreas: React.FC = () => {
       markersRef.current = [];
       const bounds = L.latLngBounds([]);
 
-      filteredAreas.forEach((area) => {
+      // Map logic: If an area is selected, ONLY show that pin. Otherwise show all filtered areas.
+      const mapAreas = (selectedArea !== null && displayedArea) ? [displayedArea] : filteredAreas;
+
+      mapAreas.forEach((area) => {
         const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
         const isSelected = selectedArea === globalIndex;
         const marker = L.marker([area.lat, area.lng]).addTo(map);
@@ -170,7 +175,7 @@ const AllOffLeashAreas: React.FC = () => {
       });
 
       // Fit map to show all markers
-      if (filteredAreas.length > 0) {
+      if (mapAreas.length > 0) {
         if (selectedArea !== null && displayedArea) {
           map.setView([displayedArea.lat, displayedArea.lng], 14);
         } else {
@@ -206,20 +211,22 @@ const AllOffLeashAreas: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-clip">
-      <div className="relative bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white py-12 sm:py-16 md:py-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden">
+      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/offleash.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }}
+        >
+          <div className="absolute inset-0 bg-slate-900/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/40"></div>
+        </div>
         {/* Decorative Elements */}
-        <div className="absolute top-10 right-10 text-sky-700/30 hidden md:block" style={{ animation: 'float 3s ease-in-out infinite' }}>
-          <TreePine size={70} strokeWidth={1.5} />
-        </div>
-        <div className="absolute bottom-32 right-20 text-sky-700/40 hidden lg:block" style={{ animation: 'float 4s ease-in-out infinite', animationDelay: '1s' }}>
-          <Palmtree size={65} strokeWidth={1.5} />
-        </div>
-        <div className="absolute top-32 left-16 text-sky-700/30 hidden md:block" style={{ animation: 'pulse 3s ease-in-out infinite' }}>
-          <MapPin size={60} strokeWidth={1.5} />
-        </div>
-        <div className="absolute top-1/2 right-8 text-sky-700/25 hidden md:block rotate-12">
-          <Star size={50} strokeWidth={1.5} />
-        </div>
+
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <Link
@@ -244,10 +251,33 @@ const AllOffLeashAreas: React.FC = () => {
         </div>
 
         {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180" style={{ zIndex: 5 }}>
-          <svg className="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f8fafc"></path>
-          </svg>
+        <div className="absolute -bottom-3 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[120px]"
+              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                className="fill-current text-slate-50"
+              />
+            </svg>
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[120px]"
+              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                className="fill-current text-white"
+              />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -388,6 +418,11 @@ const AllOffLeashAreas: React.FC = () => {
                       Navigeer naar deze zone
                     </a>
                   </div>
+                </div>
+
+                {/* Reviews Section */}
+                <div className="mt-8">
+                  <ReviewSection areaSlug={displayedArea.slug} />
                 </div>
               </div>
             ) : (

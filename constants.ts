@@ -6,8 +6,8 @@ export const HOTSPOTS: Hotspot[] = [
     id: 1,
     name: 'Lakaiann Blankenberge',
     type: 'Café',
-    description: 'De gezelligste plek voor een koffie na een lange strandwandeling.',
-    tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee'],
+    description: 'Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars. Geniet van een heerlijke specialty coffee terwijl je rondneust tussen prachtige kristallen, handgemaakte juwelen en andere unieke schatten. De ideale stop na een strandwandeling voor wie houdt van goede vibes, lekkere koffie en… pure verwennerij voor je hond!',
+    tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee', 'Aanrader'],
     image: '/gucci.webp',
     city: 'blankenberge',
     address: 'Zeedijk 205/01, 8370 Blankenberge',
@@ -218,6 +218,7 @@ export const HOTSPOTS: Hotspot[] = [
     description: 'Charmant restaurant op de Zeedijk waar gastronomie en een warme sfeer hand in hand gaan. Jouw viervoeter is hier van harte welkom om mee te genieten van een culinaire ervaring met zicht op zee.',
     tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Hondvriendelijk team'],
     image: '/belair.webp',
+    imagePosition: 'center bottom',
     city: 'blankenberge',
     address: 'Zeedijk 154, 8370 Blankenberge',
     website: 'https://www.belairblankenberge.com/'
@@ -244,6 +245,261 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'blankenberge',
     address: 'Grote Markt 2/0002, 8370 Blankenberge',
     website: 'https://www.sixtines.place/'
+  },
+  {
+    id: 23,
+    name: 'Alaska',
+    type: 'Restaurant',
+    description: 'Authentiek eethuis en frituur in het hart van Bredene waar je hond welkom is terwijl jij geniet van klassieke Belgische gerechten en verse frietjes. Een gezellige, ongedwongen sfeer waar iedereen zich thuis voelt.',
+    tags: ['Hondvriendelijk team', 'Waterbak aanwezig', 'Belgische keuken'],
+    image: '/alaska.webp',
+    city: 'bredene',
+    address: 'Kapelstraat 127, 8450 Bredene',
+    website: ''
+  },
+  {
+    id: 24,
+    name: 'Coffee & Wine De Golf',
+    type: 'Café',
+    description: 'Stijlvolle zaak waar je overdag kunt genieten van een heerlijke koffie en \'s avonds van een goed glas wijn. Je viervoeter is hier van harte welkom om mee te relaxen in de gezellige sfeer.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Specialty Coffee', 'Wijnbar'],
+    image: '/coffeewinedegolf.webp',
+    city: 'bredene',
+    address: 'Kapelstraat 73, 8450 Bredene',
+    website: 'https://www.coffeeandwine.be'
+  },
+  {
+    id: 25,
+    name: 'Brasserie Shop \'n Lunch P&P',
+    type: 'Café',
+    description: 'Gezellige zaak waar je kunt genieten van een heerlijk ontbijt, verse koffie en smakelijke broodjes.Daarnaast worden ook diverse middagsnacks en pannekoeken,gebak en ijscoupes geserveerd om jouw middagpauze compleet te maken.Je hond is hier van harte welkom om mee te genieten van de relaxte sfeer.',
+    tags: ['Ontbijt', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Specialty Coffee', 'Winkel', 'Ijscoupes', 'Brasserie', 'Aanrader'],
+    image: '/shopnlunch.webp',
+    city: 'bredene',
+    address: 'Duinenstraat 316, 8450 Bredene',
+    website: ''
+  },
+  // Oostende Hotels & Accommodations
+  {
+    id: 26,
+    name: 'Mercure Oostende',
+    type: 'Hotel',
+    description: 'Modern 4-sterrenhotel in het centrum, vlakbij het strand en het casino. Huisdieren zijn welkom in dit comfortabele hotel met uitstekende ligging.',
+    tags: ['Honden toegelaten op kamer', '4-sterren', 'Nabij strand', 'Centrum'],
+    image: '/mercurehotel.webp',
+    city: 'oostende',
+    address: 'Leopold II-laan 20, 8400 Oostende',
+    website: 'https://www.mercureoostende.be'
+  },
+  {
+    id: 27,
+    name: 'Hotel Pacific',
+    type: 'Hotel',
+    description: 'Gezellig driesterrenhotel op 50 meter van het strand. Perfect voor een ontspannen verblijf met je viervoeter aan zee.',
+    tags: ['Honden toegelaten op kamer', '3-sterren', 'Nabij strand'],
+    image: '/hotelpacific.webp',
+    city: 'oostende',
+    address: 'Hofstraat 11, 8400 Oostende',
+    website: 'https://www.pacifichotel.com'
+  },
+  {
+    id: 28,
+    name: 'Hotel Royal Astrid',
+    type: 'Hotel',
+    description: '3-sterrenhotel met wellnessfaciliteiten (1000m²), gelegen nabij het strand. Geniet van ontspanning terwijl je hond welkom is.',
+    tags: ['Honden toegelaten op kamer', '3-sterren', 'Nabij strand', 'Wellness'],
+    image: '/hotelroyalastrid.webp',
+    city: 'oostende',
+    address: 'Wellingtonstraat 15, 8400 Oostende',
+    website: 'https://www.royalastrid.com'
+  },
+  {
+    id: 29,
+    name: 'Hotel Albert II',
+    type: 'Hotel',
+    description: 'Historisch pand met Belle Époque sfeer in het centrum, vlakbij de markt. Een charmant hotel waar geschiedenis en comfort samenkomen.',
+    tags: ['Honden toegelaten op kamer', 'Centrum', 'Historisch pand', 'Belle Époque'],
+    image: '/hotelalbert2.webp',
+    city: 'oostende',
+    address: 'Vlaanderenstraat 42, 8400 Oostende',
+    website: 'https://www.hotelalbert2.be'
+  },
+  {
+    id: 30,
+    name: 'Charmehotel \'t Kruishof',
+    type: 'Hotel',
+    description: 'Gelegen tussen stad en polders, met veel ruimte en groen. Ideaal voor wandelingen met je hond in een rustige omgeving.',
+    tags: ['Honden toegelaten op kamer', 'Veel groen', 'Wandelgebied', 'Charmehotel'],
+    image: '/charmehotelkruishof.webp',
+    city: 'oostende',
+    address: 'Kruishofstraat 1, 8400 Oostende',
+    website: 'https://www.kruishof.be'
+  },
+  {
+    id: 31,
+    name: 'B&B Huyze Elimonica',
+    type: 'Hotel',
+    description: 'Stijlvolle B&B in een geklasseerd pand uit 1899, hondvriendelijk. Geniet van de charme van een historisch gebouw met moderne comfort.',
+    tags: ['Honden toegelaten op kamer', 'B&B', 'Historisch pand', 'Stijlvol'],
+    image: '/huyzeelimonica.webp',
+    city: 'oostende',
+    address: 'Euphrosina Beernaertstraat 39, 8400 Oostende',
+    website: 'https://www.elimonica.be'
+  },
+  {
+    id: 32,
+    name: 'Villa Cecha B&B & Wellness',
+    type: 'Hotel',
+    description: 'Kleinschalige B&B met wellness in het rustige Stene-dorp. Perfect voor een ontspannen uitje met je viervoeter.',
+    tags: ['Honden toegelaten op kamer', 'B&B', 'Wellness', 'Rustig'],
+    image: '/villacecha.webp',
+    city: 'oostende',
+    address: 'Lavendelstraat 4, 8400 Oostende (Stene)',
+    website: 'https://www.villacecha.be'
+  },
+  {
+    id: 33,
+    name: 'Maison Martha',
+    type: 'Hotel',
+    description: 'Ruime vakantiewoning (tot 12 personen) met sauna en jacuzzi. Ideaal voor een groepsverblijf met je hond.',
+    tags: ['Honden toegelaten', 'Vakantiewoning', 'Sauna', 'Jacuzzi', 'Grote groepen'],
+    image: '/maisonmartha.webp',
+    city: 'oostende',
+    address: 'Edith Cavellstraat 14, 8400 Oostende',
+    website: 'https://www.maisonmartha.eu'
+  },
+  {
+    id: 34,
+    name: 'Villa Odette',
+    type: 'Hotel',
+    description: 'Luxe vakantiehuis voor grote groepen (tot 14 personen), ingericht in beach-style. Perfect voor een strandvakantie met familie en hond.',
+    tags: ['Honden toegelaten', 'Vakantiewoning', 'Beach-style', 'Grote groepen', 'Luxe'],
+    image: '/villaodette.webp',
+    city: 'oostende',
+    address: 'Leffingestraat 170, 8400 Oostende',
+    website: 'https://www.villaodette.be'
+  },
+  {
+    id: 35,
+    name: 'Sea Breeze',
+    type: 'Hotel',
+    description: 'Appartement in het centrum, op wandelafstand van de zeedijk. Ideale uitvalsbasis voor een stedentrip met je hond.',
+    tags: ['Honden toegelaten', 'Appartement', 'Centrum', 'Nabij strand'],
+    image: '/seabreeze.webp',
+    city: 'oostende',
+    address: 'Ooststraat 71, 8400 Oostende',
+    website: ''
+  },
+  {
+    id: 36,
+    name: 'Zilte Stilte',
+    type: 'Hotel',
+    description: 'Vakantiewoning met focus op rust, huisdieren welkom. Geniet van een rustige vakantie in een hondvriendelijke omgeving.',
+    tags: ['Honden toegelaten', 'Vakantiewoning', 'Rustig'],
+    image: '/ziltestilte.webp',
+    city: 'oostende',
+    address: 'Plakkersstraat 69B, 8400 Oostende',
+    website: ''
+  },
+  {
+    id: 37,
+    name: 'Les Cabanes d\'Ostende',
+    type: 'Hotel',
+    description: 'Unieke \'cabins\' in het groen nabij het Ensorpark, een oase van rust aan de rand van de stad. Bijzondere ervaring voor jou en je hond.',
+    tags: ['Honden toegelaten', 'Cabins', 'Veel groen', 'Unieke ervaring', 'Rustig'],
+    image: '/lescabanes.webp',
+    city: 'oostende',
+    address: 'Mariakerke (nabij het Ensorpark), 8400 Oostende',
+    website: 'https://www.lescabanes.be'
+  },
+  // Oostende Restaurants & Cafés
+  {
+    id: 38,
+    name: 'Taverne De Klokke',
+    type: 'Café',
+    description: 'Authentieke bruine kroeg/brasserie waar je hond welkom is. Geniet van een gezellige sfeer en klassieke gerechten.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Authentiek'],
+    image: '/tavernedeklokke.webp',
+    city: 'oostende',
+    address: 'Christinastraat 35, 8400 Oostende',
+    website: 'https://www.tavernedeklokke.be'
+  },
+  {
+    id: 39,
+    name: 'Yuzu',
+    type: 'Restaurant',
+    description: 'Sushi en seafood restaurant, fusion van Japans en Frans-Belgisch. Je hond mag mee genieten van deze culinaire ervaring.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Sushi', 'Fusion'],
+    image: '/yuzu.webp',
+    city: 'oostende',
+    address: 'Christinastraat 75, 8400 Oostende',
+    website: 'https://www.yuzuoostende.be'
+  },
+  {
+    id: 40,
+    name: 'Brasserie David',
+    type: 'Restaurant',
+    description: 'Gezellige zaak met klassieke gerechten en verse vis. Je viervoeter is hier van harte welkom.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Verse vis', 'Klassieke gerechten'],
+    image: '/brasseriedavid.webp',
+    city: 'oostende',
+    address: 'Christinastraat 45, 8400 Oostende',
+    website: 'https://www.brasseriedavid.be'
+  },
+  {
+    id: 41,
+    name: 'Moby Dick',
+    type: 'Restaurant',
+    description: 'Bekend visrestaurant met een toog in de vorm van een vissersboot. Een unieke ervaring waar je hond welkom is.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Verse vis', 'Unieke locatie'],
+    image: '/mobydick.webp',
+    city: 'oostende',
+    address: 'Visserskaai 6, 8400 Oostende',
+    website: 'https://www.mobydickoostende.be'
+  },
+  {
+    id: 42,
+    name: 'Bottarga',
+    type: 'Restaurant',
+    description: 'Trendy brasserie op de zeedijk met zeezicht. Geniet van een heerlijke maaltijd terwijl je uitkijkt over zee met je hond naast je.',
+    tags: ['Terras', 'Nabij strand', 'Zeezicht', 'Trendy'],
+    image: '/bottarga.webp',
+    city: 'oostende',
+    address: 'Albert I-Promenade 64, 8400 Oostende',
+    website: 'https://www.bottarga.be'
+  },
+  {
+    id: 43,
+    name: 'Cappuccino Rooftop Bar',
+    type: 'Café',
+    description: 'Tearoom en rooftop bar voor ontbijt, wafels en cocktails. Je hond mag mee genieten van het uitzicht.',
+    tags: ['Terras', 'Rooftop', 'Ontbijt', 'Cocktails', 'Waterbak aanwezig'],
+    image: '/cappuccinorooftopbar.webp',
+    city: 'oostende',
+    address: 'Ooststraat 22, 8400 Oostende',
+    website: 'https://www.cappuccino-oostende.be'
+  },
+  {
+    id: 44,
+    name: 'HAN\'s centrum',
+    type: 'Café',
+    description: 'Gezonde lunch, soep en boterhammen. Perfect voor een snelle, gezonde hap met je viervoeter.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Gezonde lunch'],
+    image: '/hanscentrum.webp',
+    city: 'oostende',
+    address: 'Rogierlaan 64, 8400 Oostende',
+    website: ''
+  },
+  {
+    id: 45,
+    name: 'Lloyd Coffee Eatery',
+    type: 'Café',
+    description: 'Koffiebar met ontbijt, bagels en zoetigheden. Je hond is welkom om mee te genieten van de gezellige sfeer.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Ontbijt', 'Specialty Coffee', 'Bagels'],
+    image: '/lloydcoffeeeatery.webp',
+    city: 'oostende',
+    address: 'Kapellestraat 1, 8400 Oostende',
+    website: 'https://www.lloydcoffee.com'
   }
 ];
 
@@ -307,9 +563,10 @@ export const SERVICES: Service[] = [
     id: 6,
     name: 'Snuffels',
     type: 'Dierenspeciaalzaak',
-    description: 'Hondenboetiek en trimsalon met een mooi assortiment aan accessoires en snacks.',
+    description: 'Honden- en kattenspeciaalzaak met een ruim aanbod aan buggy\'s, draagtasjes en kledij. Daarnaast vind je hier een uitgebreide collectie harnasjes en halsbandjes.',
     tags: ['Hondensnacks', 'Indoor toegelaten', 'Hondvriendelijk team'],
     image: '/snuffels.webp',
+    imagePosition: 'center top',
     city: 'blankenberge',
     address: 'Vissersstraat 29, 8370 Blankenberge',
     website: 'https://www.snuffels-blankenberge.be'
@@ -390,6 +647,28 @@ export const SERVICES: Service[] = [
     city: 'blankenberge',
     address: 'Langestraat, 8370 Blankenberge',
     website: ''
+  },
+  {
+    id: 14,
+    name: 'Q-ties',
+    type: 'Dierenspeciaalzaak',
+    description: 'Gespecialiseerde hondenwinkel met een breed assortiment aan kwaliteitsvoeding, speelgoed en accessoires voor je trouwe viervoeter. Deskundig advies en persoonlijke service staan hier centraal.',
+    tags: ['Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team', 'Speelgoed', 'Accessoires'],
+    image: '/q-ties.webp',
+    city: 'bredene',
+    address: 'Kapelstraat 173, 8450 Bredene',
+    website: 'https://www.q-ties.be'
+  },
+  {
+    id: 15,
+    name: 'Dierenkliniek AniCura',
+    type: 'Dierenarts',
+    description: 'Moderne spoedkliniek nabij Oostende, dagelijks bereikbaar van 7.30u tot 21.00u. Professionele zorg voor je huisdier wanneer je het nodig hebt.',
+    tags: ['Spoed', 'Hondvriendelijk team', 'Indoor toegelaten', 'Dagelijks open'],
+    image: '/anicura.webp',
+    city: 'oostende',
+    address: 'Verhelststraat 1, 8460 Oudenburg',
+    website: ''
   }
 ];
 
@@ -398,9 +677,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Blankenberge
   {
     name: 'Hondenweide J. Vande Puttelaan',
+    slug: 'blankenberge-vande-puttelaan',
     address: 'J. Vande Puttelaan 7, Blankenberge',
-    lat: 51.3078,
-    lng: 3.1298,
+    lat: 51.30994,
+    lng: 3.13734,
     city: 'blankenberge',
     description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.',
     image: '/weideputtelaan.webp',
@@ -408,9 +688,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Hondenweide A. Van Ackersquare',
+    slug: 'blankenberge-van-ackersquare',
     address: 'A. Van Ackersquare 1, Blankenberge',
-    lat: 51.3142,
-    lng: 3.1365,
+    lat: 51.318202,
+    lng: 3.144520,
     city: 'blankenberge',
     description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.',
     image: '/noordzeebad.webp',
@@ -419,6 +700,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Knokke-Heist
   {
     name: 'Losloopweide Heist',
+    slug: 'knokke-heist-losloopweide-heist',
     address: 'Gustave Van Nieuwenhuysestraat, Heist',
     lat: 51.3419,
     lng: 3.2351,
@@ -430,19 +712,32 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // De Haan - Wenduine
   {
     name: 'Losloopzone Vosseslag',
+    slug: 'de-haan-vosseslag',
     address: 'Kennedyplein, Vosseslag',
-    lat: 51.2612,
-    lng: 3.0058,
+    lat: 51.26066,
+    lng: 3.00840,
     city: 'de-haan',
     description: 'Omheinde zone naast de parking.',
     image: '/losloopzonevosseslag.webp',
     rating: 4
   },
   {
+    name: 'Losloopzone Centrum/Sport',
+    slug: 'de-haan-centrum-sport',
+    address: 'Nieuwe Steenweg, De Haan',
+    lat: 51.2687,
+    lng: 3.0360,
+    city: 'de-haan',
+    description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.',
+    image: '/placeholder.webp',
+    rating: 4
+  },
+  {
     name: 'Losloopzone Haneveld',
+    slug: 'de-haan-haneveld',
     address: 'Lindenlaan, De Haan',
-    lat: 51.2742,
-    lng: 3.0212,
+    lat: 51.25942,
+    lng: 3.02770,
     city: 'de-haan',
     description: 'Zone nabij het sportcomplex Haneveld.',
     image: '/losloopzonehaneveld.webp',
@@ -450,9 +745,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Duinbossen',
+    slug: 'de-haan-duinbossen',
     address: 'Zwarte Kiezel, De Haan',
-    lat: 51.2685,
-    lng: 3.0385,
+    lat: 51.28507,
+    lng: 3.059305,
     city: 'de-haan',
     description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).',
     image: '/losloopzoneduinbossen.webp',
@@ -460,9 +756,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Wenduine - Manitobastraat',
+    slug: 'wenduine-manitobastraat',
     address: 'Manitobastraat, Wenduine',
-    lat: 51.2948,
-    lng: 3.0712,
+    lat: 51.3025,
+    lng: 3.0864,
     city: 'de-haan',
     description: 'Omheinde hondenweide in Wenduine.',
     image: '/losloopzonewenduinemanitobastraat.webp',
@@ -470,9 +767,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Wenduine - Westhinderlaan',
+    slug: 'wenduine-westhinderlaan',
     address: 'Westhinderlaan / Wancourstraat, Wenduine',
-    lat: 51.2935,
-    lng: 3.0685,
+    lat: 51.2950,
+    lng: 3.0780,
     city: 'de-haan',
     description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
     image: '/losloopzonewenduinewesthinderlaan.webp',
@@ -481,6 +779,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Bredene
   {
     name: 'Hondenweide Brouwerijstraat',
+    slug: 'bredene-brouwerijstraat',
     address: 'Brouwerijstraat, 8450 Bredene',
     lat: 51.2398,
     lng: 2.9715,
@@ -492,6 +791,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Oostende
   {
     name: 'Maria Hendrikapark (Grootste)',
+    slug: 'oostende-maria-hendrikapark',
     address: 'Iependreef / Cederdreef, 8400 Oostende',
     lat: 51.2089,
     lng: 2.9148,
@@ -502,6 +802,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Raversijde',
+    slug: 'oostende-raversijde',
     address: 'Westlaan 1, Raversijde',
     lat: 51.2056,
     lng: 2.8645,
@@ -512,6 +813,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Leffingestraat',
+    slug: 'oostende-leffingestraat',
     address: 'Leffingestraat 40, 8400 Oostende',
     lat: 51.2185,
     lng: 2.9325,
@@ -522,6 +824,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Lijndraaiersstraat',
+    slug: 'oostende-lijndraaiersstraat',
     address: 'Lijndraaiersstraat, 8400 Oostende',
     lat: 51.2245,
     lng: 2.9198,
@@ -532,7 +835,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Ankerstraat',
-    address: 'Ankerstraat, 8400 Oostende',
+    slug: 'oostende-ankerstraat',
+    address: 'Ankerstraat, Oostende',
     lat: 51.2312,
     lng: 2.9285,
     city: 'oostende',
@@ -542,7 +846,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Hondenbos',
-    address: 'Karperstraat, 8400 Oostende',
+    slug: 'oostende-hondenbos',
+    address: 'Karperstraat / A10, Oostende',
     lat: 51.2125,
     lng: 2.9425,
     city: 'oostende',
@@ -551,8 +856,9 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   {
-    name: 'Losloopzone Schietbaanstraat',
-    address: 'Schietbaanstraat, 8400 Oostende',
+    name: 'Losloopzone Slachthuiskaai',
+    slug: 'oostende-slachthuiskaai',
+    address: 'Slachthuiskaai, Oostende',
     lat: 51.2168,
     lng: 2.9385,
     city: 'oostende',
@@ -562,7 +868,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Brigade Pironlaan',
-    address: 'Brigade Pironlaan, 8400 Oostende',
+    slug: 'oostende-brigade-pironlaan',
+    address: 'Brigade Pironlaan, Oostende',
     lat: 51.2098,
     lng: 2.9215,
     city: 'oostende',
@@ -572,6 +879,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Provinciedomein Raversijde',
+    slug: 'oostende-provinciedomein-raversijde',
     address: 'Nieuwpoortsesteenweg 636 / Westlaan, 8400 Oostende',
     lat: 51.2045,
     lng: 2.8625,
@@ -583,7 +891,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Middelkerke
   {
     name: 'Hondenweide Middelkerke',
-    address: 'Koninginnelaan, 8430 Middelkerke',
+    slug: 'middelkerke-koninginnelaan',
+    address: 'Koninginnelaan, Middelkerke',
     lat: 51.1832,
     lng: 2.8198,
     city: 'middelkerke',
@@ -593,7 +902,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Hondenweide Westende',
-    address: 'Hofstraat, 8434 Westende',
+    slug: 'middelkerke-westende',
+    address: 'Hofstraat, Westende',
     lat: 51.1698,
     lng: 2.7856,
     city: 'middelkerke',
@@ -604,7 +914,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // Nieuwpoort
   {
     name: 'Hondenweide Prins Mauritspark',
-    address: 'Louisweg (nabij Halve Maanstraat), 8620 Nieuwpoort',
+    slug: 'nieuwpoort-prins-mauritspark',
+    address: 'Louisweg / Dienstweg Havengeul, Nieuwpoort',
     lat: 51.1425,
     lng: 2.7312,
     city: 'nieuwpoort',
@@ -614,7 +925,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Hondenweide Leopold II Park',
-    address: 'Leopold II Park / Albert I Laan, 8620 Nieuwpoort',
+    slug: 'nieuwpoort-leopold-ii-park',
+    address: 'Albert I Laan, Nieuwpoort',
     lat: 51.1285,
     lng: 2.7485,
     city: 'nieuwpoort',
@@ -624,8 +936,9 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   // Koksijde
   {
-    name: 'Losloopzone Sportpark Hazebeek',
-    address: 'Hazebeekstraat 11, 8670 Oostduinkerke',
+    name: 'Losloopzone Sportpark Oostduinkerke',
+    slug: 'koksijde-sportpark-oostduinkerke',
+    address: 'Hazebeekstraat, Oostduinkerke',
     lat: 51.1185,
     lng: 2.6698,
     city: 'koksijde',
@@ -635,7 +948,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   {
     name: 'Losloopzone Sint-Idesbald',
-    address: 'Gladiolenlaan, 8670 Koksijde',
+    slug: 'koksijde-sint-idesbald',
+    address: 'Gladiolenlaan 17, Koksijde',
     lat: 51.0985,
     lng: 2.6125,
     city: 'koksijde',
@@ -646,7 +960,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   // De Panne
   {
     name: 'Hondenweide Kerkstraat',
-    address: 'Kerkstraat 69, 8660 De Panne',
+    slug: 'de-panne-kerkstraat',
+    address: 'Kerkstraat / Artiestenpad, De Panne',
     lat: 51.0998,
     lng: 2.5912,
     city: 'de-panne',

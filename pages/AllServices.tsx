@@ -61,16 +61,22 @@ const AllServices: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-clip">
-      <div className="relative bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white py-12 sm:py-16 md:py-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden">
+      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/diensten.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }}
+        >
+          <div className="absolute inset-0 bg-slate-900/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-sky-900/90 via-sky-900/40 to-slate-900/40"></div>
+        </div>
         {/* Decorative Elements */}
-        <div className="absolute top-10 right-10 text-sky-600/20 hidden md:block animate-bounce" style={{ animationDuration: '3s' }}>
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor" />
-          </svg>
-        </div>
-        <div className="absolute top-32 left-16 text-sky-600/20 hidden md:block" style={{ animation: 'pulse 2s ease-in-out infinite' }}>
-          <Stethoscope size={60} strokeWidth={1.5} />
-        </div>
+
         <div className="absolute top-1/2 right-8 text-sky-700/20 hidden md:block rotate-12">
           <ShoppingBag size={50} strokeWidth={1.5} />
         </div>
@@ -98,7 +104,7 @@ const AllServices: React.FC = () => {
         </div>
 
         {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+        <div className="absolute -bottom-3 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
@@ -108,7 +114,7 @@ const AllServices: React.FC = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-white"
               />
             </svg>
@@ -120,7 +126,7 @@ const AllServices: React.FC = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-white"
               />
             </svg>

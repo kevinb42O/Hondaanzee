@@ -3,12 +3,16 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Waves, MapPin, Search, X, Sparkles } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
+
 import { findNearestCity } from '../utils/geo.ts';
+import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLocating, setIsLocating] = useState(false);
   const navigate = useNavigate();
+
+  useSEO(SEO_DATA.home);
 
   // Scroll to results section
   const scrollToResults = () => {
@@ -94,7 +98,7 @@ const Home: React.FC = () => {
             <span className="text-white font-semibold"> verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
           </p>
 
-          <div className="max-w-2xl mx-auto relative px-2 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+          <div className="max-w-lg md:max-w-3xl mx-auto relative px-6 sm:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
             <div className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
               <div className="pl-3 sm:pl-4 md:pl-6 flex items-center pointer-events-none">
                 <Search size={20} className="search-icon text-slate-400 sm:w-[22px] sm:h-[22px]" />
@@ -168,7 +172,7 @@ const Home: React.FC = () => {
         </div>
 
         {/* Organic Wave Divider with Infinite Animation */}
-        <div className="absolute bottom-0 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+        <div className="absolute -bottom-3 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
@@ -178,7 +182,7 @@ const Home: React.FC = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-stone-50"
               />
             </svg>
@@ -190,7 +194,7 @@ const Home: React.FC = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-stone-50"
               />
             </svg>

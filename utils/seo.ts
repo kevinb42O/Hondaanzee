@@ -28,7 +28,7 @@ export const useSEO = ({
     const updateMeta = (name: string, content: string, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let element = document.querySelector(`meta[${attribute}="${name}"]`);
-      
+
       if (!element) {
         element = document.createElement('meta');
         element.setAttribute(attribute, name);
@@ -87,13 +87,13 @@ export const SEO_DATA = {
     description: '✓ Actuele strandregels voor honden ✓ Losloopzones en hondenweides ✓ Hondvriendelijke cafés, restaurants & hotels ✓ Alle badsteden van De Panne tot Knokke ✓ Gratis & up-to-date info 2026',
     keywords: 'hond strand belgië, hond aan zee, hondenstrand belgië, losloopzone hond kust, hondvriendelijk strand, strand met hond belgie, wandelen hond zee, hondvriendelijk restaurant kust, strandregels honden 2026'
   },
-  
+
   hotspots: {
     title: 'Hondvriendelijke Hotspots Belgische Kust | Cafés, Restaurants & Hotels waar Honden Welkom Zijn',
     description: 'Ontdek de beste hondvriendelijke cafés, restaurants en hotels aan de Belgische kust. Van Oostende tot Knokke - waar je hond écht welkom is. Filter op stad en type.',
     keywords: 'hondvriendelijk restaurant belgië kust, hondvriendelijk café aan zee, hotel honden toegelaten kust, hondvriendelijk terras zee, hond welkom restaurant, hond toegestaan café, hondvriendelijke horeca kust'
   },
-  
+
   diensten: {
     title: 'Dierenartsen & Dierenwinkels Belgische Kust | Praktische Diensten voor Hondenbezitters',
     description: 'Vind de beste dierenartsen en dierenwinkels aan de Belgische kust. Van Oostende tot Knokke - alle praktische diensten voor je hond op één plek. Filter op stad en type.',
@@ -105,19 +105,19 @@ export const SEO_DATA = {
     description: 'Interactieve kaart met alle losloopzones en hondenweides aan de Belgische kust. Van De Panne tot Knokke - vind de perfecte plek waar je hond vrij kan loslopen. Met ratings, foto\'s en routebeschrijvingen.',
     keywords: 'losloopzone hond kust belgië, hondenweide aan zee, hondenlosloopgebied strand, vrij loslopen hond zee, omheinde hondenweide kust, losloopzone oostende, hondenweide knokke, losloopgebied de haan'
   },
-  
+
   privacy: {
     title: 'Privacybeleid | HondAanZee.be',
     description: 'Privacybeleid van HondAanZee.be - Hoe wij omgaan met je gegevens volgens AVG/GDPR',
     keywords: ''
   },
-  
+
   terms: {
     title: 'Algemene Voorwaarden | HondAanZee.be',
     description: 'Algemene voorwaarden voor het gebruik van HondAanZee.be',
     keywords: ''
   },
-  
+
   cookies: {
     title: 'Cookiebeleid | HondAanZee.be',
     description: 'Cookiebeleid van HondAanZee.be - Welke cookies we gebruiken en waarom',
@@ -142,13 +142,13 @@ export const getCitySEO = (cityName: string, citySlug: string) => {
     title: `Hond Strand ${cityName} 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken ${cityName}`,
     description: `✓ Actuele strandregels voor honden in ${cityName} ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in ${cityName}`,
     keywords: searchTerms.join(', '),
-    canonical: `https://hondaanzee.be/#/${citySlug}`,
+    canonical: `https://hondaanzee.be/${citySlug}`,
     structuredData: {
       "@context": "https://schema.org",
       "@type": "TouristDestination",
       "name": `${cityName} - Hondvriendelijk Strand`,
       "description": `Informatie over strandregels en faciliteiten voor honden in ${cityName} aan de Belgische kust`,
-      "url": `https://hondaanzee.be/#/${citySlug}`,
+      "url": `https://hondaanzee.be/${citySlug}`,
       "isAccessibleForFree": true,
       "publicAccess": true,
       "geo": {

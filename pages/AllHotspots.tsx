@@ -62,7 +62,20 @@ const AllHotspots: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-clip">
-      <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-12 sm:py-16 md:py-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden">
+      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/coffeedog.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }}
+        >
+          <div className="absolute inset-0 bg-slate-900/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/40"></div>
+        </div>
         {/* Decorative Elements */}
         <div className="absolute top-10 right-10 text-slate-700/30 hidden md:block" style={{ animation: 'float 3.5s ease-in-out infinite' }}>
           <Coffee size={70} strokeWidth={1.5} />
@@ -100,7 +113,7 @@ const AllHotspots: React.FC = () => {
         </div>
 
         {/* Wave Divider */}
-        <div className="absolute -bottom-[1px] left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+        <div className="absolute -bottom-3 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
@@ -110,7 +123,7 @@ const AllHotspots: React.FC = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-slate-50"
               />
             </svg>
@@ -122,7 +135,7 @@ const AllHotspots: React.FC = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
                 className="fill-current text-slate-50"
               />
             </svg>
@@ -248,7 +261,13 @@ const AllHotspots: React.FC = () => {
                 )}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
                   {spot.tags.map((tag) => (
-                    <span key={tag} className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black bg-slate-50 text-slate-600 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-slate-100">
+                    <span
+                      key={tag}
+                      className={`text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border ${tag === 'Aanrader'
+                        ? 'bg-amber-50 text-amber-700 border-amber-200'
+                        : 'bg-slate-50 text-slate-600 border-slate-100'
+                        }`}
+                    >
                       {tag}
                     </span>
                   ))}

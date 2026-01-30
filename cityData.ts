@@ -14,17 +14,19 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Hondenweide J. Vande Puttelaan',
+        slug: 'blankenberge-vande-puttelaan',
         address: 'J. Vande Puttelaan 7, Blankenberge',
-        lat: 51.3078,
-        lng: 3.1298,
+        lat: 51.30994,
+        lng: 3.13734,
         description: 'Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.',
         city: 'blankenberge'
       },
       {
         name: 'Hondenweide A. Van Ackersquare',
+        slug: 'blankenberge-van-ackersquare',
         address: 'A. Van Ackersquare 1, Blankenberge',
-        lat: 51.3142,
-        lng: 3.1365,
+        lat: 51.318202,
+        lng: 3.144520,
         description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.',
         city: 'blankenberge'
       }
@@ -52,6 +54,7 @@ export const CITIES: City[] = [
     lng: 3.2056,
     mapX: 496.3,
     mapY: 284.5,
+    labelOverride: { x: 490, y: 45 },
     offLeashAreas: [],
     rules: {
       summer: {
@@ -81,6 +84,7 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Losloopweide Heist',
+        slug: 'knokke-heist-losloopweide-heist',
         address: 'Gustave Van Nieuwenhuysestraat, Heist',
         lat: 51.3419,
         lng: 3.2351,
@@ -116,49 +120,55 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Losloopzone Vosseslag',
+        slug: 'de-haan-vosseslag',
         address: 'Kennedyplein, Vosseslag',
-        lat: 51.2612,
-        lng: 3.0058,
+        lat: 51.26066,
+        lng: 3.00840,
         description: 'Omheinde zone naast de parking.',
         city: 'de-haan'
       },
       {
         name: 'Losloopzone Centrum/Sport',
+        slug: 'de-haan-centrum-sport',
         address: 'Nieuwe Steenweg, De Haan',
-        lat: 51.2756,
-        lng: 3.0248,
+        lat: 51.2687,
+        lng: 3.0360,
         description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.',
         city: 'de-haan'
       },
       {
         name: 'Losloopzone Haneveld',
+        slug: 'de-haan-haneveld',
         address: 'Lindenlaan, De Haan',
-        lat: 51.2742,
-        lng: 3.0212,
+        lat: 51.25942,
+        lng: 3.02770,
         description: 'Zone nabij het sportcomplex Haneveld.',
         city: 'de-haan'
       },
       {
         name: 'Losloopzone Duinbossen',
+        slug: 'de-haan-duinbossen',
         address: 'Zwarte Kiezel, De Haan',
-        lat: 51.2685,
-        lng: 3.0385,
+        lat: 51.28507,
+        lng: 3.059305,
         description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).',
         city: 'de-haan'
       },
       {
         name: 'Losloopzone Wenduine - Manitobastraat',
+        slug: 'wenduine-manitobastraat',
         address: 'Manitobastraat, Wenduine',
-        lat: 51.2948,
-        lng: 3.0712,
+        lat: 51.3025,
+        lng: 3.0864,
         description: 'Omheinde hondenweide in Wenduine.',
         city: 'de-haan'
       },
       {
         name: 'Losloopzone Wenduine - Westhinderlaan',
+        slug: 'wenduine-westhinderlaan',
         address: 'Westhinderlaan / Wancourstraat, Wenduine',
-        lat: 51.2935,
-        lng: 3.0685,
+        lat: 51.2950,
+        lng: 3.0780,
         description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
         city: 'de-haan'
       }
@@ -191,6 +201,7 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Hondenweide Brouwerijstraat',
+        slug: 'bredene-brouwerijstraat',
         address: 'Brouwerijstraat, Bredene',
         lat: 51.2398,
         lng: 2.9715,
@@ -226,6 +237,7 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Maria Hendrikapark (Grootste)',
+        slug: 'oostende-maria-hendrikapark',
         address: 'Iependreef / Cederdreef, Oostende',
         lat: 51.2089,
         lng: 2.9148,
@@ -234,6 +246,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Losloopzone Raversijde',
+        slug: 'oostende-raversijde',
         address: 'Westlaan 1, Raversijde',
         lat: 51.2056,
         lng: 2.8645,
@@ -242,6 +255,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Losloopzone Leffingestraat',
+        slug: 'oostende-leffingestraat',
         address: 'Leffingestraat, Oostende',
         lat: 51.2185,
         lng: 2.9325,
@@ -250,6 +264,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Losloopzone Slachthuiskaai',
+        slug: 'oostende-slachthuiskaai',
         address: 'Slachthuiskaai, Oostende',
         lat: 51.2245,
         lng: 2.9198,
@@ -258,6 +273,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Losloopzone Ankerstraat',
+        slug: 'oostende-ankerstraat',
         address: 'Ankerstraat, Oostende',
         lat: 51.2312,
         lng: 2.9285,
@@ -266,6 +282,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Hondenbos',
+        slug: 'oostende-hondenbos',
         address: 'Karperstraat / A10, Oostende',
         lat: 51.2125,
         lng: 2.9425,
@@ -274,16 +291,20 @@ export const CITIES: City[] = [
       },
       {
         name: 'Losloopzone Schietbaanstraat',
+        slug: 'oostende-schietbaanstraat',
         address: 'Schietbaanstraat, Oostende',
         lat: 51.2168,
         lng: 2.9385,
+        description: 'Zone in de Schietbaanstraat.',
         city: 'oostende'
       },
       {
         name: 'Losloopzone Brigade Pironlaan',
+        slug: 'oostende-brigade-pironlaan',
         address: 'Brigade Pironlaan, Oostende',
         lat: 51.2098,
         lng: 2.9215,
+        description: 'Zone in de Brigade Pironlaan.',
         city: 'oostende'
       }
     ],
@@ -312,9 +333,11 @@ export const CITIES: City[] = [
     lng: 2.8224,
     mapX: 210.1,
     mapY: 130.8,
+    labelOverride: { x: 215, y: 210 },
     offLeashAreas: [
       {
         name: 'Hondenweide Middelkerke',
+        slug: 'middelkerke-koninginnelaan',
         address: 'Koninginnelaan, Middelkerke',
         lat: 51.1832,
         lng: 2.8198,
@@ -323,6 +346,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Hondenweide Westende',
+        slug: 'middelkerke-westende',
         address: 'Hofstraat, Westende',
         lat: 51.1698,
         lng: 2.7856,
@@ -353,9 +377,11 @@ export const CITIES: City[] = [
     lng: 2.752,
     mapX: 150.8,
     mapY: 99.0,
+    labelOverride: { x: 165, y: 245 },
     offLeashAreas: [
       {
         name: 'Hondenweide Prins Mauritspark',
+        slug: 'nieuwpoort-prins-mauritspark',
         address: 'Louisweg / Dienstweg Havengeul, Nieuwpoort',
         lat: 51.1425,
         lng: 2.7312,
@@ -364,6 +390,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Hondenweide Leopold II Park',
+        slug: 'nieuwpoort-leopold-ii-park',
         address: 'Albert I Laan, Nieuwpoort',
         lat: 51.1285,
         lng: 2.7485,
@@ -397,6 +424,7 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Losloopzone Sportpark Oostduinkerke',
+        slug: 'koksijde-sportpark-oostduinkerke',
         address: 'Hazebeekstraat, Oostduinkerke',
         lat: 51.1185,
         lng: 2.6698,
@@ -405,6 +433,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Losloopzone Sint-Idesbald',
+        slug: 'koksijde-sint-idesbald',
         address: 'Gladiolenlaan 17, Koksijde',
         lat: 51.0985,
         lng: 2.6125,
@@ -440,6 +469,7 @@ export const CITIES: City[] = [
     offLeashAreas: [
       {
         name: 'Hondenweide Kerkstraat',
+        slug: 'de-panne-kerkstraat',
         address: 'Kerkstraat / Artiestenpad, De Panne',
         lat: 51.0998,
         lng: 2.5912,
@@ -448,6 +478,7 @@ export const CITIES: City[] = [
       },
       {
         name: 'Hondenweide Vijvers Markey',
+        slug: 'de-panne-vijvers-markey',
         address: 'Doornstraat, Adinkerke',
         lat: 51.0785,
         lng: 2.5985,

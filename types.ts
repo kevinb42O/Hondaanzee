@@ -19,6 +19,7 @@ export interface Service {
   description: string;
   tags: string[];
   image: string;
+  imagePosition?: string; // e.g. 'center top' or '50% 25%'
   city: string; // city slug
   address: string;
   website: string;
@@ -28,12 +29,14 @@ export type StatusValue = 'JA' | 'DEELS' | 'NEE';
 
 export interface OffLeashArea {
   name: string;
+  slug: string; // Unique identifier for reviews
   address: string;
   lat: number;
   lng: number;
   city: string; // city slug
-  description?: string;
+  description: string; // Changed from optional to required
   image?: string; // Path to image
+  imagePosition?: string;
   rating?: number; // 1-5 stars
   openingHours?: {
     open: string; // HH:mm
@@ -67,5 +70,6 @@ export interface City {
   lng: number;
   mapX?: number; // X coordinate on the SVG map (0-625)
   mapY?: number; // Y coordinate on the SVG map (0-372)
+  labelOverride?: { x: number; y: number }; // Manual override for label position
   offLeashAreas: OffLeashArea[];
 }
