@@ -16,7 +16,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 2,
     name: 'Dune Hotel Nieuwpoort',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Overnachten met je viervoeter was nog nooit zo comfortabel.',
     tags: ['Honden toegelaten op kamer', 'Nabij strand'],
     image: '/dunehotel.webp',
@@ -50,7 +50,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 5,
     name: 'C-Hotels Andromeda',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Luxe hotel aan de zeedijk waar honden (max. 10kg) van harte welkom zijn op de kamer.',
     tags: ['Honden toegelaten op kamer', 'Nabij strand', 'Waterbak aanwezig'],
     image: '/c-hotelsandromedaoostende.webp',
@@ -72,7 +72,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 7,
     name: 'Upstairs Hotel',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Hip en modern hotel vlakbij het strand waar honden welkom zijn in specifieke kamertypes.',
     tags: ['Honden toegelaten op kamer', 'Nabij strand', 'Buitenplaats'],
     image: '/upstairshoteloostende.webp',
@@ -227,7 +227,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 21,
     name: 'Beach Palace Hotel',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Luxueus 5-sterren hotel direct aan de Zeedijk met 20 prachtig uitgeruste kamers speciaal ingericht voor gasten met honden. Geniet van topservice en comfort terwijl je viervoeter zich thuis voelt in dit exclusieve strandhotel.',
     tags: ['Honden toegelaten op kamer', '5-sterren', 'Nabij strand', 'Luxe accommodatie', 'Waterbak aanwezig'],
     image: '/beachpalace.webp',
@@ -284,7 +284,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 26,
     name: 'Mercure Oostende',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Modern 4-sterrenhotel in het centrum, vlakbij het strand en het casino. Huisdieren zijn welkom in dit comfortabele hotel met uitstekende ligging.',
     tags: ['Honden toegelaten op kamer', '4-sterren', 'Nabij strand', 'Centrum'],
     image: '/mercurehotel.webp',
@@ -295,7 +295,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 27,
     name: 'Hotel Pacific',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Gezellig driesterrenhotel op 50 meter van het strand. Perfect voor een ontspannen verblijf met je viervoeter aan zee.',
     tags: ['Honden toegelaten op kamer', '3-sterren', 'Nabij strand'],
     image: '/hotelpacific.webp',
@@ -306,7 +306,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 28,
     name: 'Hotel Royal Astrid',
-    type: 'Hotel',
+    type: 'Slapen',
     description: '3-sterrenhotel met wellnessfaciliteiten (1000m²), gelegen nabij het strand. Geniet van ontspanning terwijl je hond welkom is.',
     tags: ['Honden toegelaten op kamer', '3-sterren', 'Nabij strand', 'Wellness'],
     image: '/hotelroyalastrid.webp',
@@ -317,7 +317,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 29,
     name: 'Hotel Albert II',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Historisch pand met Belle Époque sfeer in het centrum, vlakbij de markt. Een charmant hotel waar geschiedenis en comfort samenkomen.',
     tags: ['Honden toegelaten op kamer', 'Centrum', 'Historisch pand', 'Belle Époque'],
     image: '/hotelalbert2.webp',
@@ -328,7 +328,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 30,
     name: 'Charmehotel \'t Kruishof',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Gelegen tussen stad en polders, met veel ruimte en groen. Ideaal voor wandelingen met je hond in een rustige omgeving.',
     tags: ['Honden toegelaten op kamer', 'Veel groen', 'Wandelgebied', 'Charmehotel'],
     image: '/charmehotelkruishof.webp',
@@ -339,7 +339,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 31,
     name: 'B&B Huyze Elimonica',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Stijlvolle B&B in een geklasseerd pand uit 1899, hondvriendelijk. Geniet van de charme van een historisch gebouw met moderne comfort.',
     tags: ['Honden toegelaten op kamer', 'B&B', 'Historisch pand', 'Stijlvol'],
     image: '/huyzeelimonica.webp',
@@ -350,7 +350,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 32,
     name: 'Villa Cecha B&B & Wellness',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Kleinschalige B&B met wellness in het rustige Stene-dorp. Perfect voor een ontspannen uitje met je viervoeter.',
     tags: ['Honden toegelaten op kamer', 'B&B', 'Wellness', 'Rustig'],
     image: '/villacecha.webp',
@@ -361,7 +361,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 33,
     name: 'Maison Martha',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Ruime vakantiewoning (tot 12 personen) met sauna en jacuzzi. Ideaal voor een groepsverblijf met je hond.',
     tags: ['Honden toegelaten', 'Vakantiewoning', 'Sauna', 'Jacuzzi', 'Grote groepen'],
     image: '/maisonmartha.webp',
@@ -372,7 +372,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 34,
     name: 'Villa Odette',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Luxe vakantiehuis voor grote groepen (tot 14 personen), ingericht in beach-style. Perfect voor een strandvakantie met familie en hond.',
     tags: ['Honden toegelaten', 'Vakantiewoning', 'Beach-style', 'Grote groepen', 'Luxe'],
     image: '/villaodette.webp',
@@ -383,7 +383,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 35,
     name: 'Sea Breeze',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Appartement in het centrum, op wandelafstand van de zeedijk. Ideale uitvalsbasis voor een stedentrip met je hond.',
     tags: ['Honden toegelaten', 'Appartement', 'Centrum', 'Nabij strand'],
     image: '/seabreeze.webp',
@@ -394,7 +394,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 36,
     name: 'Zilte Stilte',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Vakantiewoning met focus op rust, huisdieren welkom. Geniet van een rustige vakantie in een hondvriendelijke omgeving.',
     tags: ['Honden toegelaten', 'Vakantiewoning', 'Rustig'],
     image: '/ziltestilte.webp',
@@ -405,7 +405,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 37,
     name: 'Les Cabanes d\'Ostende',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Unieke \'cabins\' in het groen nabij het Ensorpark, een oase van rust aan de rand van de stad. Bijzondere ervaring voor jou en je hond.',
     tags: ['Honden toegelaten', 'Cabins', 'Veel groen', 'Unieke ervaring', 'Rustig'],
     image: '/lescabanes.webp',
@@ -595,7 +595,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 54,
     name: "B&B Chez Ba'Nus",
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Unieke bed & breakfast met stijlvol ingerichte themakamers: de Manhattan Room, Shanghai Room, Waikiki Family Suite en London Suite. Geniet van een luxueus ontbijt met streekproducten, huisbereide confituren en eigen gebak. Ontspan in de gezellige lounge met poolbiljart, zithoek, boeken, strips en gezelschapsspelen die uitgeeft op het charmante stadstuintje. Het beste van alles? Honden zijn welkom in de hele B&B – jullie viervoeter is hier echt thuis!',
     tags: ['Honden toegelaten op kamer', 'B&B', 'Nabij strand', 'Persoonlijke service', 'Aanrader'],
     image: '/chezbanus.webp',
@@ -606,7 +606,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 55,
     name: 'Vakantieappartement LD383277',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Comfortabel vakantieappartement ideaal gelegen nabij het Leopoldpark, lunapark en strandbars. Perfect voor een ontspannen vakantie met je hond in het hart van Blankenberge.',
     tags: ['Honden toegelaten', 'Appartement', 'Nabij strand', 'Centrum', 'Nabij park'],
     image: '/LD383277.webp',
@@ -650,7 +650,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 59,
     name: 'Sea Sparkle',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Prachtig afgewerkt vakantieappartement met adembenemend zeezicht voor maximaal zes personen. Chris en Tatiana verwennen hun gasten graag in dit luxueuze verblijf in het centrum van Blankenberge, tussen de pier en het casino. Alle activiteiten en bezienswaardigheden liggen op wandelafstand. Perfect voor een zorgeloze vakantie met je hond aan zee!',
     tags: ['Honden toegelaten', 'Appartement', 'Zeezicht', 'Centrum', 'Nabij strand', 'Luxeverblijf'],
     image: '/seasparkle.webp',
@@ -661,7 +661,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 60,
     name: 'Pancho',
-    type: 'Hotel',
+    type: 'Slapen',
     description: 'Charmant vakantieappartement dat alle comfort biedt voor vier personen op een boogscheut van het strand. Chris en Tatiana verhuren dit gezellige appartement al drie jaar en maken er een punt van om hun gasten een zorgeloze vakantie te bezorgen. Dieren zijn hier van harte welkom!',
     tags: ['Honden toegelaten', 'Appartement', 'Nabij strand', 'Luxeverblijf', 'Alle comfort'],
     image: '/pancho.webp',

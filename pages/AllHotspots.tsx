@@ -35,7 +35,7 @@ const AllHotspots: React.FC = () => {
     switch (type) {
       case 'Café': return <Coffee size={14} />;
       case 'Restaurant': return <Utensils size={14} />;
-      case 'Hotel': return <Bed size={14} />;
+      case 'Slapen': return <Bed size={14} />;
       default: return <Star size={14} />;
     }
   };

@@ -28,7 +28,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
     switch (type) {
       case 'Café': return <Coffee size={14} />;
       case 'Restaurant': return <Utensils size={14} />;
-      case 'Hotel': return <Bed size={14} />;
+      case 'Slapen': return <Bed size={14} />;
       default: return <Star size={14} />;
     }
   };
@@ -82,8 +82,8 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                     <span
                       key={tag}
                       className={`text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border ${tag === 'Aanrader'
-                          ? 'bg-amber-50 text-amber-700 border-amber-200'
-                          : 'bg-slate-50 text-slate-600 border-slate-100'
+                        ? 'bg-amber-50 text-amber-700 border-amber-200'
+                        : 'bg-slate-50 text-slate-600 border-slate-100'
                         }`}
                     >
                       {tag}
