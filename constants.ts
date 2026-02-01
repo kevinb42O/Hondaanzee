@@ -218,7 +218,7 @@ export const HOTSPOTS: Hotspot[] = [
     type: 'Restaurant',
     description: 'Charmant restaurant op de Zeedijk waar gastronomie en een warme sfeer hand in hand gaan. Jouw viervoeter is hier van harte welkom om mee te genieten van een culinaire ervaring met zicht op zee.',
     tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Hondvriendelijk team'],
-    image: '/belair.webp',
+    image: '/belairv2.webp',
     imagePosition: 'center bottom',
     city: 'blankenberge',
     address: 'Zeedijk 154, 8370 Blankenberge',
@@ -240,12 +240,12 @@ export const HOTSPOTS: Hotspot[] = [
     name: 'Cozy Moments',
     type: 'Café',
     description: 'Gezellig café op de Grote Markt waar honden hartelijk welkom zijn voor een drankje en versnapering. Perfect om even uit te rusten na een wandeling door het centrum, terwijl je viervoeter geniet van de aandacht en een waterbakje.',
-    tags: ['Terras', 'Waterbak aanwezig', 'Hondensnacks', 'Hondvriendelijk team', 'Centrum'],
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondensnacks', 'Hondvriendelijk team', 'Centrum', 'Aanrader'],
     image: '/sixtines.webp',
     imagePosition: 'center 25%',
     city: 'blankenberge',
     address: 'Grote Markt 2/0002, 8370 Blankenberge',
-    website: 'https://www.sixtines.place/'
+    website: 'www.cozy-moments.be'
   },
   {
     id: 23,
@@ -501,6 +501,151 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'oostende',
     address: 'Kapellestraat 1, 8400 Oostende',
     website: 'https://www.lloydcoffee.com'
+  },
+  // Blankenberge - New Additions
+  {
+    id: 46,
+    name: 'Grand Café',
+    type: 'Café',
+    description: 'Een echte trekpleister op de zeedijk van Blankenberge! Of je nu uitgebreid wilt dineren of op zoek bent naar een snelle lunch, in de gevarieerde menukaart en seizoensgebonden dagschotels vind je altijd je gading. De uitgebreide wijnkaart met selecties uit verschillende landen en wijnstreken biedt bij elk gerecht een passende wijn. Het topteam staat elke dag paraat om je de best mogelijke ervaring te geven met een sterke prijs-kwaliteit verhouding. Let op: reserveren is niet mogelijk, dus kom gewoon langs met je viervoeter!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Klassieke sfeer'],
+    image: '/grandcafe.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 145, 8370 Blankenberge',
+    website: 'https://legrandcafe-blankenberge.be/'
+  },
+  {
+    id: 47,
+    name: "Fondue & Co 't Keteltje",
+    type: 'Restaurant',
+    description: 'Gezellig restaurant gespecialiseerd in heerlijke fondues en Zwitserse specialiteiten. Een warme, huiselijke sfeer waar je hond van harte welkom is om mee te genieten van een culinaire ervaring.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Fondue specialiteit', 'Gezellig'],
+    image: '/fonduetketeltje.webp',
+    city: 'blankenberge',
+    address: 'Weststraat 5, 8370 Blankenberge',
+    website: 'https://mymenuweb.com/bel/restaurants/2054296/?utm_source=google_profile&utm_medium=google_profile&utm_campaign=admin'
+  },
+  {
+    id: 48,
+    name: 'Frituur Sparkle Chips',
+    type: 'Restaurant',
+    description: 'Moderne frituur op de Zeedijk waar je kunt genieten van krokante frietjes en klassieke frituursnacks. Je hond mag mee aanschuiven terwijl jij geniet van authentieke Belgische frietcultuur met zicht op zee.',
+    tags: ['Terras', 'Nabij strand', 'Belgische frietjes', 'Snacks', 'Hondvriendelijk team'],
+    image: '/frituursparklechips.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 174, 8370 Blankenberge',
+    website: 'https://sparkle-chips-bv.unipage.eu/landing'
+  },
+  {
+    id: 49,
+    name: 'De Sleutel & La Clef',
+    type: 'Restaurant',
+    description: 'Charmant restaurant op de Zeedijk met een uitgebreide kaart en prachtig uitzicht op zee. Een perfecte plek om te genieten van verse gerechten terwijl je viervoeter rustig naast je ligt. Bij reservatie graag vermelden dat je met hond komt.',
+    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Zeezicht', 'Hondvriendelijk team', 'Vleesgerechten'],
+    image: '/desleutel.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 182, 8370 Blankenberge',
+    website: 'https://restaurantdesleutel.be/'
+  },
+  {
+    id: 50,
+    name: 'Frituur Taste',
+    type: 'Restaurant',
+    description: 'Populaire frituur in het centrum waar kwaliteit en smaak voorop staan. Geniet van verse frietjes en een ruim aanbod aan snacks, terwijl je hond welkom is om mee te genieten.',
+    tags: ['Indoor toegelaten', 'Belgische frietjes', 'Snacks', 'Hondvriendelijk team', 'Centrum'],
+    image: '/tasteV2.webp',
+    imagePosition: 'center bottom',
+    city: 'blankenberge',
+    address: 'Kerkstraat 131, 8370 Blankenberge',
+    website: 'https://www.strandverblijf.be/nl/eten-en-drinken/1620/taste-food-drinks'
+  },
+  {
+    id: 51,
+    name: 'Huisje van Majutte',
+    type: 'Café',
+    description: 'Welkom in het oudste vissershuisje van de kust uit 1775! Charlotte en Luc staan met hun team klaar met hun gerenommeerde garnaalkroketten (gemaakt volgens oud familierecept) en tal van andere Noordzee-specialiteiten. Proef ook de dagelijks vers gebakken taarten van Charlotte. Met 70 zitplaatsen verdeeld over gelijkvloers (15), binnenkoer (20) en boven (35). Altijd welkom zonder reservatie – vraag gerust een drankje aan de bar tijdens het wachten. Reserveren mogelijk vanaf 6 personen of voor de luxe zeevruchtenschotel Majutte. Je hond is hier van harte welkom!',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Authentiek'],
+    image: '/majutte.webp',
+    city: 'blankenberge',
+    address: 'Breydelstraat 10, 8370 Blankenberge',
+    website: 'https://majutte.be/'
+  },
+  {
+    id: 52,
+    name: 'Tearoom Koffiepotje',
+    type: 'Café',
+    description: 'Charmante tearoom waar je kunt genieten van verse koffie, thee en heerlijke gebakjes. Een rustige plek om even uit te rusten met je hond na een wandeling door het centrum.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Gebak', 'Koffie & Thee', 'Hondvriendelijk team'],
+    image: '/koffiepotje.webp',
+    city: 'blankenberge',
+    address: 'Molenstraat 48, 8370 Blankenberge',
+    website: 'www.koffiepotje.be'
+  },
+  {
+    id: 53,
+    name: 'My Home My Coffee',
+    type: 'Café',
+    description: 'Gezellige koffiebar met een huiselijke sfeer waar je kunt genieten van specialty coffee en verse lekkernijen. Je hond is hier welkom om mee te genieten van de relaxte ambiance.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Specialty Coffee', 'Hondvriendelijk team', 'Gezellig'],
+    image: '/myhomemycoffee.webp',
+    city: 'blankenberge',
+    address: 'Vredelaan 60, 8370 Blankenberge',
+    website: ''
+  },
+  {
+    id: 54,
+    name: "B&B Chez Ba'Nus",
+    type: 'Hotel',
+    description: 'Unieke bed & breakfast met stijlvol ingerichte themakamers: de Manhattan Room, Shanghai Room, Waikiki Family Suite en London Suite. Geniet van een luxueus ontbijt met streekproducten, huisbereide confituren en eigen gebak. Ontspan in de gezellige lounge met poolbiljart, zithoek, boeken, strips en gezelschapsspelen die uitgeeft op het charmante stadstuintje. Het beste van alles? Honden zijn welkom in de hele B&B – jullie viervoeter is hier echt thuis!',
+    tags: ['Honden toegelaten op kamer', 'B&B', 'Nabij strand', 'Persoonlijke service', 'Aanrader'],
+    image: '/chezbanus.webp',
+    city: 'blankenberge',
+    address: 'Rogierlaan, 8370 Blankenberge',
+    website: 'https://www.chezbanus.be/'
+  },
+  {
+    id: 55,
+    name: 'Vakantieappartement LD383277',
+    type: 'Hotel',
+    description: 'Comfortabel vakantieappartement ideaal gelegen nabij het Leopoldpark, lunapark en strandbars. Perfect voor een ontspannen vakantie met je hond in het hart van Blankenberge.',
+    tags: ['Honden toegelaten', 'Appartement', 'Nabij strand', 'Centrum', 'Nabij park'],
+    image: '/LD383277.webp',
+    city: 'blankenberge',
+    address: 'Nabij Leopoldpark, lunapark & strandbars, 8370 Blankenberge',
+    website: ''
+  },
+  {
+    id: 56,
+    name: 'Brasserie Eloïse',
+    type: 'Café',
+    description: 'Charmante brasserie in het hart van Wenduine waar kleine honden van harte welkom zijn! Geniet van een gezellige sfeer en heerlijke gerechten terwijl je kleine viervoeter comfortabel naast je kan zitten. Perfect voor een ontspannen moment met je trouwe metgezel.',
+    tags: ['Kleine honden welkom', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Terras'],
+    image: '/eloise.webp',
+    city: 'de-haan',
+    address: 'Graaf Jansdijk 3, 8420 Wenduine',
+    website: ''
+  },
+  {
+    id: 57,
+    name: 'Hippo 12',
+    type: 'Café',
+    description: 'Gezellig café met een levendige sfeer waar je kunt genieten van heerlijke cocktails en live muziek. Het ruime buitenterras is perfect om te ontspannen met je hond terwijl je geniet van de gezellige ambiance en de bruisende energie van dit populaire hotspot aan de kust.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Cocktails', 'Live muziek', 'Hondvriendelijk team', 'Nabij strand'],
+    image: '/hippo12.webp',
+    city: 'bredene',
+    address: 'Duindoornstraat, 8450 Bredene',
+    website: 'https://hippo12.be/'
+  },
+  {
+    id: 58,
+    name: 'Bar Delta',
+    type: 'Café',
+    description: 'Gezellige bar aan het einde van de zeedijk in Heist, richting Zeebrugge. Perfect om even tot rust te komen met een huisbereide specialty coffee terwijl je viervoeter naast je ligt. Een ideale plek voor koffieliefhebbers die op zoek zijn naar kwaliteit en een warme, ontspannen sfeer.',
+    tags: ['Specialty Coffee', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Gezellig'],
+    image: '/bardeltaV2.webp',
+    city: 'knokke-heist',
+    address: 'Zeedijk 83, 8301 Heist aan Zee',
+    website: ''
   }
 ];
 
