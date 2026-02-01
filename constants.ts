@@ -563,7 +563,7 @@ export const HOTSPOTS: Hotspot[] = [
     id: 51,
     name: 'Huisje van Majutte',
     type: 'Café',
-    description: 'Het oudste vissershuisje van de kust (1775) waar Charlotte en Luc je verwelkomen met hun beroemde garnaalkroketten volgens oud familierecept en dagelijks verse taarten. Reserveren niet nodig, tenzij je met een groep komt. Je hond is hier van harte welkom!',
+    description: 'Stap binnen in het oudste vissershuisje van de kust (1775) en laat je terugvoeren in de tijd. Gastheer Luc en gastvrouw Charlotte leggen je in de watten met hun dagverse taarten en — de absolute favoriet — garnaalkroketten volgens geheim familierecept. Kom spontaan langs, reserveren is niet nodig tenzij je met een groep komt. Ook je trouwe viervoeter is hier meer dan welkom!',
     tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Authentiek'],
     image: '/majutte.webp',
     city: 'blankenberge',
