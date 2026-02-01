@@ -646,6 +646,28 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'knokke-heist',
     address: 'Zeedijk 83, 8301 Heist aan Zee',
     website: ''
+  },
+  {
+    id: 59,
+    name: 'Sea Sparkle',
+    type: 'Hotel',
+    description: 'Prachtig afgewerkt vakantieappartement met adembenemend zeezicht voor maximaal zes personen. Chris en Tatiana verwennen hun gasten graag in dit luxueuze verblijf in het centrum van Blankenberge, tussen de pier en het casino. Alle activiteiten en bezienswaardigheden liggen op wandelafstand. Perfect voor een zorgeloze vakantie met je hond aan zee!',
+    tags: ['Honden toegelaten', 'Appartement', 'Zeezicht', 'Centrum', 'Nabij strand', 'Luxeverblijf'],
+    image: '/seasparkle.webp',
+    city: 'blankenberge',
+    address: 'Centrum Blankenberge (tussen pier en casino), 8370 Blankenberge',
+    website: 'https://hureninblankenberge.be/sea-sparkle/'
+  },
+  {
+    id: 60,
+    name: 'Pancho',
+    type: 'Hotel',
+    description: 'Charmant vakantieappartement dat alle comfort biedt voor vier personen op een boogscheut van het strand. Chris en Tatiana verhuren dit gezellige appartement al drie jaar en maken er een punt van om hun gasten een zorgeloze vakantie te bezorgen. Dieren zijn hier van harte welkom!',
+    tags: ['Honden toegelaten', 'Appartement', 'Nabij strand', 'Luxeverblijf', 'Alle comfort'],
+    image: '/pancho.webp',
+    city: 'blankenberge',
+    address: 'Nabij strand, 8370 Blankenberge',
+    website: 'https://hureninblankenberge.be/pancho/'
   }
 ];
 
