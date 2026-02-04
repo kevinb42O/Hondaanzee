@@ -33,7 +33,13 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
     }
   };
 
-  const cityHotspots = HOTSPOTS.filter(spot => spot.city === city.slug);
+  const cityHotspots = HOTSPOTS
+    .filter(spot => spot.city === city.slug)
+    .sort((a, b) => {
+      const aIsAanrader = a.tags.includes('Aanrader') ? 1 : 0;
+      const bIsAanrader = b.tags.includes('Aanrader') ? 1 : 0;
+      return bIsAanrader - aIsAanrader;
+    });
 
   return (
     <section id="hotspots" className="py-10 sm:py-12 md:py-24 bg-white scroll-mt-24">

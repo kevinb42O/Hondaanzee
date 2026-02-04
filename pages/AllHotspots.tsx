@@ -41,11 +41,17 @@ const AllHotspots: React.FC = () => {
   };
 
   const filteredHotspots = useMemo(() => {
-    return HOTSPOTS.filter(spot => {
-      const cityMatch = selectedCity === 'all' || spot.city === selectedCity;
-      const typeMatch = selectedType === 'all' || spot.type === selectedType;
-      return cityMatch && typeMatch;
-    });
+    return HOTSPOTS
+      .filter(spot => {
+        const cityMatch = selectedCity === 'all' || spot.city === selectedCity;
+        const typeMatch = selectedType === 'all' || spot.type === selectedType;
+        return cityMatch && typeMatch;
+      })
+      .sort((a, b) => {
+        const aIsAanrader = a.tags.includes('Aanrader') ? 1 : 0;
+        const bIsAanrader = b.tags.includes('Aanrader') ? 1 : 0;
+        return bIsAanrader - aIsAanrader;
+      });
   }, [selectedCity, selectedType]);
 
   const types = ['all', ...Array.from(new Set(HOTSPOTS.map(spot => spot.type)))];

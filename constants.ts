@@ -506,7 +506,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 46,
     name: 'Grand Café',
-    type: 'Café',
+    type: 'Restaurant',
     description: 'Een echte trekpleister op de zeedijk van Blankenberge! Of je nu uitgebreid wilt dineren of op zoek bent naar een snelle lunch, in de gevarieerde menukaart en seizoensgebonden dagschotels vind je altijd je gading. De uitgebreide wijnkaart met selecties uit verschillende landen en wijnstreken biedt bij elk gerecht een passende wijn. Het topteam staat elke dag paraat om je de best mogelijke ervaring te geven met een sterke prijs-kwaliteit verhouding. Let op: reserveren is niet mogelijk, dus kom gewoon langs met je viervoeter!',
     tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Klassieke sfeer'],
     image: '/grandcafe.webp',
@@ -598,7 +598,7 @@ export const HOTSPOTS: Hotspot[] = [
     type: 'Slapen',
     description: 'Unieke bed & breakfast met stijlvol ingerichte themakamers: de Manhattan Room, Shanghai Room, Waikiki Family Suite en London Suite. Geniet van een luxueus ontbijt met streekproducten, huisbereide confituren en eigen gebak. Ontspan in de gezellige lounge met poolbiljart, zithoek, boeken, strips en gezelschapsspelen die uitgeeft op het charmante stadstuintje. Het beste van alles? Honden zijn welkom in de hele B&B – jullie viervoeter is hier echt thuis!',
     tags: ['Honden toegelaten op kamer', 'B&B', 'Nabij strand', 'Persoonlijke service', 'Aanrader'],
-    image: '/chezbanus.webp',
+    image: '/chezbanusV3.webp',
     city: 'blankenberge',
     address: 'Rogierlaan, 8370 Blankenberge',
     website: 'https://www.chezbanus.be/'
@@ -621,7 +621,7 @@ export const HOTSPOTS: Hotspot[] = [
     description: 'Charmante brasserie in het hart van Wenduine waar kleine honden van harte welkom zijn! Geniet van een gezellige sfeer en heerlijke gerechten terwijl je kleine viervoeter comfortabel naast je kan zitten. Perfect voor een ontspannen moment met je trouwe metgezel.',
     tags: ['Kleine honden welkom', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Terras'],
     image: '/eloise.webp',
-    city: 'de-haan',
+    city: 'wenduine',
     address: 'Graaf Jansdijk 3, 8420 Wenduine',
     website: ''
   },
@@ -668,6 +668,74 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'blankenberge',
     address: 'Nabij strand, 8370 Blankenberge',
     website: 'https://hureninblankenberge.be/pancho/'
+  },
+  {
+    id: 61,
+    name: "Restaurant 't Pomptje",
+    type: 'Restaurant',
+    description: 'Midden in het pittoreske Stene-dorp vind je dit gezellige restaurant waar de lekkerste gegrilde gerechten en gemarineerde ribbetjes in een rustiek kader worden geserveerd. Patron Miguel danst tussen de tafeltjes door en maakt van elk bezoek een echte belevenis met zijn leuke kwinkslag. Je viervoeter is hier van harte welkom om mee te genieten van de warme, huiselijke sfeer.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Grill specialiteiten', 'Gezellig', 'Aanrader'],
+    image: '/tpomptje.webp',
+    city: 'oostende',
+    address: 'Zilverlaan 2, 8400 Oostende (Stene)',
+    website: 'https://www.tpomptje.be/'
+  },
+  // Wenduine Hotspots
+  {
+    id: 62,
+    name: 'Tearoom Wielingen Bar',
+    type: 'Café',
+    description: 'Gezellige tearoom en restaurant gelegen aan het zwembad van Wenduine, met twee grote windvrije terrassen in een aangenaam kader grenzend aan de duinen. Voor de kleinste bezoekers zijn er twee speelpleintjes om zich uit te leven. De hedendaagse keuken wordt aangevuld met dagverse suggesties van de chefs. Je viervoeter is hier van harte welkom om mee te genieten van de relaxte sfeer. Let op: gesloten op donderdag.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Speelplein', 'Nabij strand', 'Hondvriendelijk team'],
+    image: '/wielingenbar.webp',
+    city: 'wenduine',
+    address: 'Graaf Jansdijk 18, 8420 Wenduine',
+    website: 'https://www.wielingenbar.be/'
+  },
+  {
+    id: 63,
+    name: 'Maison Elza',
+    type: 'Café',
+    description: 'Hippe nieuwe koffiebar in het hart van Wenduine waar je kunt genieten van heerlijke specialty coffee en huisgemaakte lekkernijen. Een modern en gezellig plekje waar koffieliefhebbers helemaal tot hun recht komen. Je trouwe viervoeter is hier meer dan welkom om mee te relaxen.',
+    tags: ['Specialty Coffee', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Centrum'],
+    image: '/maisonelza.webp',
+    city: 'wenduine',
+    address: 'Kerkstraat 21, 8420 Wenduine',
+    website: ''
+  },
+  {
+    id: 64,
+    name: 'Café Central',
+    type: 'Café',
+    description: 'Authentiek volkscafé met een fantastische eigenaar die honden supergraag ziet! Hier proef je de echte Vlaamse cafésfeer waar iedereen welkom is. Met vogelpiek en een gezellige ambiance is dit dé plek voor een ongedwongen pintje met je trouwe viervoeter.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Volkscafé', 'Vogelpiek'],
+    image: '/central.webp',
+    city: 'wenduine',
+    address: 'Kerkstraat 46, 8420 Wenduine',
+    website: ''
+  },
+  {
+    id: 65,
+    name: 'Praatcafé De Spioenkop',
+    type: 'Café',
+    description: 'Gezellig praatcafé op de Zeedijk met een heerlijke ambiance en prachtig zicht op zee. De volkse sfeer en hartelijke eigenaars maken dit tot een ideale plek om te genieten van een drankje terwijl je uitkijkt over het strand. Honden zijn hier hartelijk welkom!',
+    tags: ['Terras', 'Zeezicht', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Volkscafé', 'Nabij strand'],
+    image: '/spioenkop.webp',
+    city: 'wenduine',
+    address: 'Zeedijk 6, 8420 Wenduine',
+    website: ''
+  },
+  // De Haan Hotspot
+  {
+    id: 66,
+    name: 'De Zoete Zonde',
+    type: 'Café',
+    description: 'Knus café waar je komt voor de gezellige sfeer en heerlijke koffie. De fantastische eigenaars zorgen ervoor dat iedereen zich thuis voelt, inclusief je viervoeter. Een echte aanrader voor wie op zoek is naar warmte, goede gesprekken en een lekkere kop koffie.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Koffie'],
+    image: '/zoetezonde.webp',
+    city: 'wenduine',
+    address: 'Kerkstraat 54, 8420 Wenduine',
+    website: ''
   }
 ];
 
@@ -928,7 +996,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     address: 'Manitobastraat, Wenduine',
     lat: 51.3025,
     lng: 3.0864,
-    city: 'de-haan',
+    city: 'wenduine',
     description: 'Omheinde hondenweide in Wenduine.',
     image: '/losloopzonewenduinemanitobastraat.webp',
     rating: 4
@@ -937,9 +1005,9 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     name: 'Losloopzone Wenduine - Westhinderlaan',
     slug: 'wenduine-westhinderlaan',
     address: 'Westhinderlaan / Wancourstraat, Wenduine',
-    lat: 51.2950,
-    lng: 3.0780,
-    city: 'de-haan',
+    lat: 51.295,
+    lng: 3.078,
+    city: 'wenduine',
     description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
     image: '/losloopzonewenduinewesthinderlaan.webp',
     rating: 4

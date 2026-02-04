@@ -110,9 +110,9 @@ export const CITIES: City[] = [
   },
   {
     slug: 'de-haan',
-    name: 'De Haan - Wenduine',
+    name: 'De Haan',
     description: 'Eén van de meest hondvriendelijke badplaatsen - grote onbewaakte stranddelen altijd toegankelijk.',
-    image: '/wenduine.webp',
+    image: '/dehaan.webp',
     lat: 51.2727,
     lng: 3.0315,
     mapX: 368.2,
@@ -123,7 +123,7 @@ export const CITIES: City[] = [
         slug: 'de-haan-vosseslag',
         address: 'Kennedyplein, Vosseslag',
         lat: 51.26066,
-        lng: 3.00840,
+        lng: 3.0084,
         description: 'Omheinde zone naast de parking.',
         city: 'de-haan'
       },
@@ -132,7 +132,7 @@ export const CITIES: City[] = [
         slug: 'de-haan-centrum-sport',
         address: 'Nieuwe Steenweg, De Haan',
         lat: 51.2687,
-        lng: 3.0360,
+        lng: 3.036,
         description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.',
         city: 'de-haan'
       },
@@ -141,7 +141,7 @@ export const CITIES: City[] = [
         slug: 'de-haan-haneveld',
         address: 'Lindenlaan, De Haan',
         lat: 51.25942,
-        lng: 3.02770,
+        lng: 3.0277,
         description: 'Zone nabij het sportcomplex Haneveld.',
         city: 'de-haan'
       },
@@ -152,24 +152,6 @@ export const CITIES: City[] = [
         lat: 51.28507,
         lng: 3.059305,
         description: 'Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).',
-        city: 'de-haan'
-      },
-      {
-        name: 'Losloopzone Wenduine - Manitobastraat',
-        slug: 'wenduine-manitobastraat',
-        address: 'Manitobastraat, Wenduine',
-        lat: 51.3025,
-        lng: 3.0864,
-        description: 'Omheinde hondenweide in Wenduine.',
-        city: 'de-haan'
-      },
-      {
-        name: 'Losloopzone Wenduine - Westhinderlaan',
-        slug: 'wenduine-westhinderlaan',
-        address: 'Westhinderlaan / Wancourstraat, Wenduine',
-        lat: 51.2950,
-        lng: 3.0780,
-        description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
         city: 'de-haan'
       }
     ],
@@ -186,7 +168,52 @@ export const CITIES: City[] = [
         rule: 'Zeer hondvriendelijk! Overal toegelaten. Onbewaakte zones: vrij loslopen. Bewaakte zones: geen tijdsbeperkingen.',
         status: 'JA'
       },
-      special: 'De Haan-Wenduine is één van de meest hondvriendelijke badplaatsen! Grote onbewaakte stranddelen zijn 365 dagen per jaar toegankelijk.'
+      special: 'De Haan is één van de meest hondvriendelijke badplaatsen! Grote onbewaakte stranddelen zijn 365 dagen per jaar toegankelijk.'
+    }
+  },
+  {
+    slug: 'wenduine',
+    name: 'Wenduine',
+    description: 'Charmant kustdorpje met gezellige cafés en restaurants waar honden overal welkom zijn.',
+    image: '/wenduine.webp',
+    lat: 51.3025,
+    lng: 3.0864,
+    mapX: 395,
+    mapY: 235,
+    offLeashAreas: [
+      {
+        name: 'Losloopzone Wenduine - Manitobastraat',
+        slug: 'wenduine-manitobastraat',
+        address: 'Manitobastraat, Wenduine',
+        lat: 51.3025,
+        lng: 3.0864,
+        description: 'Omheinde hondenweide in Wenduine.',
+        city: 'wenduine'
+      },
+      {
+        name: 'Losloopzone Wenduine - Westhinderlaan',
+        slug: 'wenduine-westhinderlaan',
+        address: 'Westhinderlaan / Wancourstraat, Wenduine',
+        lat: 51.295,
+        lng: 3.078,
+        description: 'Gelegen op de hoek van Westhinderlaan en Wancourstraat.',
+        city: 'wenduine'
+      }
+    ],
+    rules: {
+      summer: {
+        start: '06-01',
+        end: '09-15',
+        startTime: '10:00',
+        endTime: '19:00',
+        rule: '🚫 BEWAAKTE ZWEMZONES (met redders): Verboden 10u-19u. ✅ ONBEWAAKTE STRANDDELEN (tussen de zwemzones): 24/7 vrij loslopen, het hele jaar door!',
+        status: 'DEELS'
+      },
+      winter: {
+        rule: 'Zeer hondvriendelijk! Overal toegelaten. Onbewaakte zones: vrij loslopen. Bewaakte zones: geen tijdsbeperkingen.',
+        status: 'JA'
+      },
+      special: 'Wenduine deelt dezelfde hondvriendelijke regels als De Haan. Grote onbewaakte stranddelen zijn 365 dagen per jaar toegankelijk.'
     }
   },
   {
