@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PawPrint, X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe } from 'lucide-react';
+import { PawPrint, X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info } from 'lucide-react';
 import { CITIES } from '../../cityData.ts';
 import { SupportCard } from './SupportCard.tsx';
 
@@ -118,8 +118,25 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, current
                                 </div>
                                 <ChevronRight size={18} className="text-slate-300" />
                             </Link>
+                            <Link
+                                to="/over-ons"
+                                onClick={onClose}
+                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/over-ons'
+                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
+                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
+                                    }`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <Info size={20} className={currentPath === '/over-ons' ? 'text-sky-600' : 'text-slate-400'} />
+                                    <span>Over ons</span>
+                                </div>
+                                <ChevronRight size={18} className="text-slate-300" />
+                            </Link>
                         </div>
                     </div>
+
+                    {/* Business Section Card */}
+                    <SupportCard />
 
                     {/* Cities Section */}
                     <div className="mb-6 sm:mb-8">
@@ -146,9 +163,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, current
                             ))}
                         </div>
                     </div>
-
-                    {/* Business Section Card */}
-                    <SupportCard />
                 </div>
 
                 <div className="p-6 border-t border-slate-100 bg-slate-50/50">

@@ -56,7 +56,7 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
           <MapPin size={12} className="text-sky-600 sm:w-[14px] sm:h-[14px]" /> {city.name}, België
         </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.15] mb-3 sm:mb-4 px-2">
-          Mag mijn hond <span className="text-sky-600">nu</span> op het strand in <span className="text-sky-600 relative inline-block">{city.name}<svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" /></svg></span>?
+          Mag mijn hond <span className="text-sky-600">nu</span> op het strand in{' '}<span className="text-sky-600 relative inline-block whitespace-nowrap">{city.name}<svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" /></svg>?</span>
         </h1>
       </div>
 
@@ -71,16 +71,22 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
           <div className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black leading-none mb-3 sm:mb-4 md:mb-8 tracking-tighter">
             {statusInfo.status}
           </div>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-relaxed max-w-lg text-slate-800 px-2">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-relaxed max-w-lg text-slate-800 px-2 whitespace-pre-line">
             {statusInfo.rule}
           </p>
           {city.rules.special && (
-            <p className="text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-2xl text-slate-600 px-2 mt-3 sm:mt-4 md:mt-6">
+            <p className="text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-2xl text-slate-600 px-2 mt-3 sm:mt-4 md:mt-6 whitespace-pre-line">
               {city.rules.special}
             </p>
           )}
         </div>
       </div>
+
+      {city.rules.note && (
+        <p className="text-xs sm:text-sm md:text-base font-medium text-slate-600 text-center mt-3 sm:mt-4 md:mt-6 px-4">
+          {city.rules.note}
+        </p>
+      )}
 
       <div className="mt-4 sm:mt-6 md:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div className="bg-white p-4 sm:p-5 md:p-6 rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-3xl border border-slate-200 flex items-center sm:items-start gap-3 sm:gap-4 shadow-sm active:bg-slate-50 transition-colors">

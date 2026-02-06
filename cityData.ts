@@ -39,10 +39,11 @@ export const CITIES: City[] = [
         status: 'DEELS'
       },
       winter: {
-        rule: 'Zone West: Jaarrond vrij loslopen zonder leiband. Zone Midden: Aan leiband toegelaten (16 sept - paasvakantie). Zone Oost: Vrij loslopen zonder leiband (16 okt - 14 maart).',
+        rule: 'Zone West: Jaarrond vrij loslopen zonder leiband.\n\nZone Midden: Aan leiband toegelaten\n(16 sept - paasvakantie).\n\nZone Oost: Vrij loslopen zonder leiband (16 okt - 14 maart).',
         status: 'JA'
       },
-      special: '*Gecertificeerde assistentiehonden zijn altijd toegelaten. **Zone Midden = centraal strand tussen de twee staketsels (pieren). ***Zone Oost = strand richting Zeebrugge vanaf strandopgang J. Gadeynehelling.'
+      special: '*Zone West:\nStrand vanaf Westerstaketsel richting Wenduine.\n\n**Zone Midden:\nCentraal strand tussen het Oosterstaketsel & Pier.\n\n***Zone Oost:\nStrand richting Zeebrugge vanaf strandopgang J. Gadeynehelling.',
+      note: 'Gecertificeerde assistentiehonden zijn altijd toegelaten.'
     }
   },
   {
@@ -478,7 +479,7 @@ export const CITIES: City[] = [
         status: 'DEELS'
       },
       winter: {
-        rule: 'Vóór 10u30 en na 18u30 overal toegelaten. Altijd aan leiband (max 10m).',
+        rule: '24/7 overal toegelaten aan leiband.\nLeiband van maximaal 10 meter toegelaten.',
         status: 'JA'
       },
       special: 'Let op: Honden mogen NIET vrij loslopen op het strand, ook niet in de hondenzones. Altijd aan leiband (max 10m). Zoek de wit-blauwe borden!'

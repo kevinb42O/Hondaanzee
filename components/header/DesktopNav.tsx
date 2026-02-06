@@ -78,6 +78,18 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
                 )}
             </Link>
+            <Link
+                to="/over-ons"
+                className={`relative px-4 py-2 text-sm transition-all ${currentPath === '/over-ons'
+                    ? 'text-sky-600 font-bold'
+                    : 'text-slate-700 font-medium hover:text-sky-600'
+                    }`}
+            >
+                Over ons
+                {currentPath === '/over-ons' && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
+                )}
+            </Link>
             <div className="h-4 w-[1px] bg-slate-200 mx-2 hidden lg:block"></div>
             <Link
                 to="/steun-ons"

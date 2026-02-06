@@ -80,6 +80,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/over-ons" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Over ons
+                </Link>
+              </li>
+              <li>
                 <Link to="/steun-ons" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Steun ons
                 </Link>

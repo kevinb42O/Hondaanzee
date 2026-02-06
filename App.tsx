@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import Footer from './components/Footer.tsx';
+import { FloatingSupport } from './components/FloatingSupport.tsx';
 import Home from './pages/Home.tsx';
 import CityPage from './pages/CityPage.tsx';
 import AllHotspots from './pages/AllHotspots.tsx';
@@ -15,6 +16,7 @@ import Cookies from './pages/Cookies.tsx';
 import NotFound from './pages/NotFound.tsx';
 import CoastalMap from './pages/CoastalMap.tsx';
 import Support from './pages/Support.tsx';
+import About from './pages/About.tsx';
 import ResponsibilityBanner from './components/ResponsibilityBanner.tsx';
 
 // Custom component to handle scroll-to-hash functionality
@@ -56,6 +58,7 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/algemene-voorwaarden" element={<Terms />} />
             <Route path="/cookies" element={<Cookies />} />
+            <Route path="/over-ons" element={<About />} />
             <Route path="/:slug" element={<CityPage />} />
             <Route path="/steun-ons" element={<Support />} />
             <Route path="*" element={<NotFound />} />
@@ -63,6 +66,7 @@ function App() {
         </main>
         <ResponsibilityBanner />
         <Footer />
+        <FloatingSupport />
         <Analytics />
       </div>
     </BrowserRouter>

@@ -136,6 +136,16 @@ body {
   }
 }
 
+/* Subtle shine effect for floating button */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
 /* Wind trail animation - intermittent bursts */
 @keyframes wind-burst {
   0% {

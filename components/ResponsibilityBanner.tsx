@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Trash2, Heart, ShieldAlert, Users, Sparkles } from 'lucide-react';
+import { Trash2, Heart, ShieldAlert, Users, Sparkles, Fish } from 'lucide-react';
 
 const ResponsibilityBanner: React.FC = () => {
   const location = useLocation();
@@ -242,14 +242,14 @@ const ResponsibilityBanner: React.FC = () => {
             Code van de <span className="text-amber-400">Goede Kustvriend</span>
           </h2>
           <p className="mt-4 sm:mt-6 text-gray-200 font-normal max-w-2xl mx-auto leading-relaxed text-base sm:text-lg px-2" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.4)' }}>
-            Een dagje zee is voor iedereen plezierig als we rekening houden met elkaar en de natuur. Volg deze vier gouden regels.
+            Een dagje zee is voor iedereen plezierig als we rekening houden met elkaar en de natuur. Volg deze zes gouden regels.
           </p>
         </div>
 
         {/* Glassmorphism Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Rule 1: Cleanliness */}
-          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/20 cursor-pointer">
+          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/20">
             <div className="mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/10 group-hover:bg-sky-500/20 transition-colors duration-300">
                 <Trash2 size={24} strokeWidth={2} className="text-sky-400 group-hover:text-sky-300 transition-colors duration-300" />
@@ -264,7 +264,7 @@ const ResponsibilityBanner: React.FC = () => {
           </div>
 
           {/* Rule 2: Respect Rules */}
-          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/20 cursor-pointer">
+          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/20">
             <div className="mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/10 group-hover:bg-sky-500/20 transition-colors duration-300">
                 <ShieldAlert size={24} strokeWidth={2} className="text-sky-400 group-hover:text-sky-300 transition-colors duration-300" />
@@ -279,7 +279,7 @@ const ResponsibilityBanner: React.FC = () => {
           </div>
 
           {/* Rule 3: Ask First */}
-          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/20 cursor-pointer">
+          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/20">
             <div className="mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/10 group-hover:bg-sky-500/20 transition-colors duration-300">
                 <Users size={24} strokeWidth={2} className="text-sky-400 group-hover:text-sky-300 transition-colors duration-300" />
@@ -294,7 +294,7 @@ const ResponsibilityBanner: React.FC = () => {
           </div>
 
           {/* Rule 4: Be Social */}
-          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/20 cursor-pointer">
+          <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/20">
             <div className="mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/10 group-hover:bg-sky-500/20 transition-colors duration-300">
                 <Heart size={24} strokeWidth={2} className="text-sky-400 group-hover:text-sky-300 transition-colors duration-300" />
@@ -305,6 +305,36 @@ const ResponsibilityBanner: React.FC = () => {
             </h3>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed group-hover:text-white transition-colors duration-300">
               Houd je hond onder controle in drukke zones. Zo geniet iedereen zorgeloos van de gezonde zeelucht.
+            </p>
+          </div>
+
+          {/* Rule 5: Seals */}
+          <div className="group bg-white/10 backdrop-blur-xl border border-amber-400 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 shadow-lg shadow-amber-500/20">
+            <div className="mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/20 transition-colors duration-300">
+                <Fish size={24} strokeWidth={2} className="text-sky-300 transition-colors duration-300" />
+              </div>
+            </div>
+            <h3 className="font-bold text-amber-400 text-lg sm:text-xl mb-3 tracking-tight transition-colors duration-300">
+              Zeehonden? Afstand!
+            </h3>
+            <p className="text-white text-sm sm:text-base leading-relaxed transition-colors duration-300">
+              Zie je een zeehond? Houd minstens 30m afstand, hou je hond aangelijnd en bel 0491/74 32 78 (NorthSealTeam).
+            </p>
+          </div>
+
+          {/* Rule 6: Pick up extra */}
+          <div className="group bg-white/10 backdrop-blur-xl border border-amber-400 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:-translate-y-1 shadow-lg shadow-amber-500/20 cursor-pointer">
+            <div className="mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/20 transition-colors duration-300">
+                <Sparkles size={24} strokeWidth={2} className="text-sky-300 transition-colors duration-300" />
+              </div>
+            </div>
+            <h3 className="font-bold text-amber-400 text-lg sm:text-xl mb-3 tracking-tight transition-colors duration-300">
+              Extra inzet
+            </h3>
+            <p className="text-white text-sm sm:text-base leading-relaxed transition-colors duration-300">
+              Zie je zwerfvuil? Raap het op en neem het mee in een poepzakje naar de eerstvolgende vuilbak. Samen houden we de kust schoon.
             </p>
           </div>
         </div>

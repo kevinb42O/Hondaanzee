@@ -202,6 +202,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://www.delekpot.be'
   },
   {
+    id: 68,
+    name: 'Bistra Liva',
+    type: 'Restaurant',
+    description: 'Gezellige bistro op de Zeedijk waar "Liva" staat voor liefde voor allen – en dat geldt zeker ook voor je viervoeter! Geniet van de warme sfeer met prachtig zicht op zee, terwijl je proeft van de verse homemade kitchen. Van verse vol-au-vent en smelten-in-je-mond stoofvlees tot kabeljauw en pannenkoeken op grootmoeders wijze – alles à la minute bereid. Keuken doorlopend open tot 21u. Rustig genieten aan zee met je trouwe metgezel, dat is hier het concept!',
+    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Zeezicht', 'Hondvriendelijk team', 'Homemade keuken', 'Aanrader'],
+    image: '/bistraliva.webp',
+    city: 'middelkerke',
+    address: 'Zeedijk 224, 8430 Middelkerke',
+    website: ''
+  },
+  {
     id: 19,
     name: 'Restaurant De Concessie',
     type: 'Restaurant',
@@ -211,6 +222,17 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'de-haan',
     address: 'Leopoldlaan 18-20, 8420 De Haan',
     website: 'http://www.deconcessie-dehaan.be'
+  },
+  {
+    id: 69,
+    name: 'Ibis Hotel',
+    type: 'Slapen',
+    description: 'Modern en comfortabel hotel met 83 eigentijdse kamers, elk voorzien van airco, gratis WiFi en smart tv. Ontspan in het verwarmde buitenzwembad of in de groene tuin, en geniet van een drankje in de gezellige bar. Het hotel ligt in een rustige omgeving op wandelafstand van zee – de perfecte uitvalsbasis voor wie de natuur wil verkennen of gewoon wil relaxen op het strand. Jouw viervoeter is hier van harte welkom voor een zorgeloos verblijf aan de kust!',
+    tags: ['Honden toegelaten op kamer', 'Hotel', 'Zwembad', 'Nabij strand', 'Gratis WiFi', 'Bar', 'Tuin'],
+    image: '/ibisdehaan.webp',
+    city: 'de-haan',
+    address: 'Wenduinesteenweg 136, 8420 De Haan',
+    website: 'https://ibisdehaan.be/'
   },
   {
     id: 20,
@@ -502,6 +524,17 @@ export const HOTSPOTS: Hotspot[] = [
     address: 'Kapellestraat 1, 8400 Oostende',
     website: 'https://www.lloydcoffee.com'
   },
+  {
+    id: 71,
+    name: 'Residence Du Centre',
+    type: 'Slapen',
+    description: 'Gezellig vakantieappartement op toplocatie in het centrum van Oostende, met het grootste pluspunt: een ruim terras waar je viervoeter naar hartenlust kan ontspannen en van de buitenlucht genieten! Het appartement beschikt over 2 slaapkamers, een comfortabele woonkamer met flatscreen-tv, een volledig uitgeruste keuken en een moderne badkamer. Geniet van tuinzicht vanaf het balkon en gratis WiFi in de hele accommodatie. Deze accommodatie aan het strand biedt ook toegang tot een patio – perfect voor een zorgeloze vakantie met je trouwe metgezel!',
+    tags: ['Honden toegelaten', 'Appartement', 'Nabij strand', 'Groot terras', 'Centrum', 'Gratis WiFi', 'Balkon', 'Tuinzicht'],
+    image: '/app_oostende.webp',
+    city: 'oostende',
+    address: 'Christianastraat 50, 8400 Oostende',
+    website: 'https://www.booking.com/hotel/be/res-du-centre.nl.html'
+  },
   // Blankenberge - New Additions
   {
     id: 46,
@@ -670,6 +703,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://hureninblankenberge.be/pancho/'
   },
   {
+    id: 67,
+    name: 'Casa MaTi',
+    type: 'Slapen',
+    description: 'Knus vakantieappartement op enkele minuten van het strand, met alle comfort voor een onvergetelijke strandvakantie. Het appartement beschikt over een gezellig balkon en een ruim terras met uitzicht over de stad. Extra fijn: er ligt een deken klaar zodat je viervoeter lekker met jou op de zetel kan relaxen. Ook zijn er voer- en drinkbakken voorzien – handig detail voor een zorgeloze vakantie! De omgeving nodigt uit voor mooie wandelingen en fietstochten.',
+    tags: ['Honden toegelaten', 'Appartement', 'Nabij strand', 'Hond op zetel', 'Voer/drinkbak aanwezig', 'Terras', 'Balkon'],
+    image: '/casamati.webp',
+    city: 'blankenberge',
+    address: 'Graaf Jansdijk 55, 8370 Blankenberge',
+    website: 'https://www.booking.com/hotel/be/casa-mati.nl.html'
+  },
+  {
     id: 61,
     name: "Restaurant 't Pomptje",
     type: 'Restaurant',
@@ -707,8 +751,8 @@ export const HOTSPOTS: Hotspot[] = [
     id: 64,
     name: 'Café Central',
     type: 'Café',
-    description: 'Authentiek volkscafé met een fantastische eigenaar die honden supergraag ziet! Hier proef je de echte Vlaamse cafésfeer waar iedereen welkom is. Met vogelpiek en een gezellige ambiance is dit dé plek voor een ongedwongen pintje met je trouwe viervoeter.',
-    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Volkscafé', 'Vogelpiek'],
+    description: 'Authentiek volkscafé met een fantastische eigenaar die honden supergraag ziet! Hier proef je de echte Vlaamse cafésfeer waar iedereen welkom is. Met een gezellige ambiance is dit dé plek voor een ongedwongen pintje met je trouwe viervoeter.',
+    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Volkscafé'],
     image: '/central.webp',
     city: 'wenduine',
     address: 'Kerkstraat 46, 8420 Wenduine',
@@ -736,6 +780,17 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'wenduine',
     address: 'Kerkstraat 54, 8420 Wenduine',
     website: ''
+  },
+  {
+    id: 70,
+    name: 'Bistro THUUS',
+    type: 'Restaurant',
+    description: 'Bistro THUUS voelt als thuiskomen, maar dan zonder de afwas! De eigenaars zijn zelf trotse baasjes van Tess, hun Golden Retriever, en begrijpen als geen ander hoe fijn het is om samen met je viervoeter uit eten te gaan. Geniet zorgeloos van een topmaaltijd en lekkere cocktails op het gezellige buitenterras. Reserveren is aan te raden voor deze populaire hotspot, waar honden meer dan welkom zijn en zich meteen thuis voelen!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Cocktails', 'Reserveren nodig', 'Aanrader', 'Hondenbaasjes'],
+    image: '/bistrothuus.webp',
+    city: 'wenduine',
+    address: 'De Smet de Naeyerlaan 1, 8420 Wenduine',
+    website: 'https://welkomthuus.be/'
   }
 ];
 
@@ -1020,8 +1075,8 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lat: 51.2398,
     lng: 2.9715,
     city: 'bredene',
-    description: 'Volledig omheind grasveld direct naast de grote watertoren en het elektriciteitsstation. Op Street View lijkt het een braakliggend terrein.',
-    image: '/placeholder.webp',
+    description: 'Volledig omheind grasveld direct naast de grote watertoren en het elektriciteitsstation, vlakbij jeugdhuis Creatuur.',
+    image: '/brouwerijstraatbredene.webp',
     rating: 4
   },
   // Oostende
