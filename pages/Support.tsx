@@ -1,17 +1,25 @@
 import React, { useEffect } from 'react';
-import { Heart, Coffee, Bone, Wallet, QrCode, Copy, Check } from 'lucide-react';
+import { Heart, Bone, Wallet, QrCode, Copy, Check } from 'lucide-react';
+import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
 const Support: React.FC = () => {
+    useSEO(SEO_DATA.steunOns);
+
     const [copied, setCopied] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText("BE43 7380 0488 6701");
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText("BE43 7380 0488 6701");
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            // Fallback: selecteer de tekst manueel
+            setCopied(false);
+        }
     };
 
     return (
@@ -65,6 +73,10 @@ const Support: React.FC = () => {
                                             src="https://epc-qr.eu/?bname=Kevin%20Bourguignon&iban=BE43738004886701&euro=&info=Donatie%20Hond%20aan%20Zee&zero=blank"
                                             alt="Payconiq/Bancontact QR Code"
                                             className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
+                                            width={224}
+                                            height={224}
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     </div>
                                     <div className="flex items-center gap-2 text-sm font-bold text-slate-500 uppercase tracking-wider">

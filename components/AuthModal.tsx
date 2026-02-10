@@ -27,8 +27,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         });
 
         if (error) {
-            console.error('Login error:', error);
-            setMessage({ type: 'error', text: error.message || JSON.stringify(error) });
+            setMessage({ type: 'error', text: error.message || 'Er is een fout opgetreden bij het inloggen.' });
         } else {
             setMessage({ type: 'success', text: 'Check je email voor de inloglink!' });
         }
@@ -41,6 +40,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 <button
                     onClick={onClose}
                     className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+                    aria-label="Sluiten"
                 >
                     <X size={20} />
                 </button>

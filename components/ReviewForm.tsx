@@ -15,7 +15,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (rating === 0) {
@@ -49,9 +49,9 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
             setTimeout(() => {
                 onReviewSubmitted();
             }, 500);
-        } catch (error: any) {
-            console.error('Review submission error:', error);
-            setMessage({ type: 'error', text: error.message || 'Kon review niet plaatsen.' });
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : 'Kon review niet plaatsen.';
+            setMessage({ type: 'error', text: message });
         } finally {
             setLoading(false);
         }
@@ -64,14 +64,14 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                <fieldset>
+                    <legend className="block text-sm font-bold text-slate-700 mb-2">
                         Hoeveel sterren geef je?
-                    </label>
+                    </legend>
                     <div className="flex justify-center md:justify-start">
                         <StarRating rating={rating} onRate={setRating} size={36} />
                     </div>
-                </div>
+                </fieldset>
 
                 <div>
                     <label htmlFor="userName" className="block text-sm font-bold text-slate-700 mb-2">

@@ -82,9 +82,9 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
         </div>
       </div>
 
-      {city.rules.note && (
+      {city.rules.special && (
         <p className="text-xs sm:text-sm md:text-base font-medium text-slate-600 text-center mt-3 sm:mt-4 md:mt-6 px-4">
-          {city.rules.note}
+          {city.rules.special}
         </p>
       )}
 

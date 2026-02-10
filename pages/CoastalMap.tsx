@@ -4,8 +4,10 @@ import 'leaflet/dist/leaflet.css';
 import { CITIES } from '../cityData.ts';
 import { ArrowLeft } from 'lucide-react';
 import { CoastalMapRenderer } from '../components/CoastalMapRenderer.tsx';
+import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
 const CoastalMap: React.FC = () => {
+    useSEO(SEO_DATA.kaart);
     const mapRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ const CoastalMap: React.FC = () => {
     const [userCity, setUserCity] = useState<string | null>(null);
     const [showInstructions, setShowInstructions] = useState<boolean>(() => {
         // Check if user has dismissed instructions before
-        if (typeof window !== 'undefined') {
+        if (globalThis.window !== undefined) {
             return !localStorage.getItem('mapInstructionsDismissed');
         }
         return true;
@@ -45,8 +47,7 @@ const CoastalMap: React.FC = () => {
                         setUserCity(closestCity);
                     }
                 },
-                (error) => {
-                    console.log("Geolocation error or denied:", error);
+                (_error) => {
                 }
             );
         }
@@ -78,13 +79,15 @@ const CoastalMap: React.FC = () => {
                 <button
                     onClick={() => navigate('/')}
                     className="pointer-events-auto bg-white/90 backdrop-blur-md shadow-xl p-3 rounded-2xl hover:bg-white transition-all active:scale-95 text-slate-700 border border-white/50"
+                    aria-label="Terug naar home"
                 >
                     <ArrowLeft size={24} />
                 </button>
+                {/* sr-only label for back button */}
 
                 <div className="pointer-events-auto bg-white/90 backdrop-blur-md shadow-xl px-4 py-2 rounded-2xl border border-white/50 text-center transition-all duration-300">
                     <h1 className="text-sm font-black text-slate-900 uppercase tracking-widest">
-                        {hoveredCity ? hoveredCity : 'Kustkaart'}
+                        {hoveredCity || 'Kustkaart'}
                     </h1>
                 </div>
 
@@ -103,7 +106,7 @@ const CoastalMap: React.FC = () => {
                                     localStorage.setItem('mapInstructionsDismissed', 'true');
                                 }}
                                 className="absolute top-2 right-2 w-5 h-5 flex items-center justify-center rounded-full bg-sky-200/50 hover:bg-sky-300/70 transition-colors text-sky-700 text-xs font-bold"
-                                aria-label="Dismiss instructions"
+                                aria-label="Instructies sluiten"
                             >
                                 ✕
                             </button>

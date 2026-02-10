@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, MapPin, ExternalLink, Tag } from 'lucide-react';
 import { Hotspot, Service } from '../types.ts';
 
@@ -11,28 +11,31 @@ interface PlaceModalProps {
 }
 
 const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentColor = 'sky' }) => {
-    // Prevent body scroll when modal is open
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isOpen]);
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
-    // Close on ESC key
+    // Open/close the native dialog
     useEffect(() => {
-        const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && isOpen) {
-                onClose();
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+
+        if (isOpen && place) {
+            if (!dialog.open) {
+                dialog.showModal();
             }
-        };
-        window.addEventListener('keydown', handleEscape);
-        return () => window.removeEventListener('keydown', handleEscape);
-    }, [isOpen, onClose]);
+        } else if (dialog.open) {
+            dialog.close();
+        }
+    }, [isOpen, place]);
+
+    // Handle native close event (ESC key, etc.)
+    useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+
+        const handleClose = () => onClose();
+        dialog.addEventListener('close', handleClose);
+        return () => dialog.removeEventListener('close', handleClose);
+    }, [onClose]);
 
     if (!isOpen || !place) return null;
 
@@ -62,23 +65,30 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
     const colors = accentColors[accentColor as keyof typeof accentColors] || accentColors.sky;
 
     return (
-        <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-            onClick={onClose}
+        <dialog
+            ref={dialogRef}
+            className="fixed inset-0 z-50 m-auto p-4 sm:p-6 bg-transparent backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm max-w-2xl w-full rounded-[2rem] overflow-visible"
+            aria-label={place?.name}
+            onClick={(e) => {
+                if (e.target === dialogRef.current) {
+                    onClose();
+                }
+            }}
+            onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                    onClose();
+                }
+            }}
         >
-            {/* Backdrop */}
-            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-fadeIn" />
-
             {/* Modal */}
             <div
-                className="relative bg-white w-full max-w-2xl rounded-[2rem] shadow-2xl max-h-[90vh] overflow-hidden animate-scaleIn"
-                onClick={(e) => e.stopPropagation()}
+                className="relative bg-white w-full rounded-[2rem] shadow-2xl max-h-[90vh] overflow-hidden animate-scaleIn"
             >
                 {/* Close Button */}
                 <button
                     onClick={onClose}
                     className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur rounded-full p-2.5 shadow-lg hover:bg-slate-50 transition-colors active:scale-95"
-                    aria-label="Close modal"
+                    aria-label="Sluiten"
                 >
                     <X size={20} className="text-slate-700" />
                 </button>
@@ -92,7 +102,11 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                                 src={place.image}
                                 alt={place.name}
                                 className="w-full h-full object-cover"
-                                style={{ objectPosition: (place as any).imagePosition || 'center' }}
+                                width={600}
+                                height={300}
+                                loading="eager"
+                                decoding="async"
+                                style={{ objectPosition: place.imagePosition || 'center' }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                         </div>
@@ -176,29 +190,15 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
             </div>
 
             <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes slideUp {
-          from { transform: translateY(100%); }
-          to { transform: translateY(0); }
-        }
         @keyframes scaleIn {
           from { transform: scale(0.95); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.2s ease-out;
-        }
-        .animate-slideUp {
-          animation: slideUp 0.3s ease-out;
         }
         .animate-scaleIn {
           animation: scaleIn 0.2s ease-out;
         }
       `}</style>
-        </div>
+        </dialog>
     );
 };
 

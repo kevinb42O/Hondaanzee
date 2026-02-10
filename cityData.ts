@@ -26,7 +26,7 @@ export const CITIES: City[] = [
         slug: 'blankenberge-van-ackersquare',
         address: 'A. Van Ackersquare 1, Blankenberge',
         lat: 51.318202,
-        lng: 3.144520,
+        lng: 3.14452,
         description: 'Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.',
         city: 'blankenberge'
       }
@@ -404,7 +404,7 @@ export const CITIES: City[] = [
     lat: 51.1301,
     lng: 2.752,
     mapX: 150.8,
-    mapY: 99.0,
+    mapY: 99,
     labelOverride: { x: 165, y: 245 },
     offLeashAreas: [
       {

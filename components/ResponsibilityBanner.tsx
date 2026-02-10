@@ -47,6 +47,7 @@ const ResponsibilityBanner: React.FC = () => {
           viewBox="0 0 150 90"
           className="sm:w-[164px] sm:h-[94px] md:w-[190px] md:h-[112px] drop-shadow-2xl"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           {/* Wind lines behind the boat */}
           <g className="wind-trails" opacity="0.6">

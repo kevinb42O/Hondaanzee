@@ -30,7 +30,7 @@ interface OffLeashAreasProps {
 }
 
 const createCustomIcon = (isOpen: boolean, isPulsing: boolean) => {
-  const uniqueId = `marker-${Math.random().toString(36).substr(2, 9)}`;
+  const uniqueId = `marker-${Math.random().toString(36).substring(2, 11)}`;
   const gradientId = `${uniqueId}-gradient`;
   const filterId = `${uniqueId}-filter`;
   const primaryColor = isOpen ? '#10b981' : '#f43f5e';

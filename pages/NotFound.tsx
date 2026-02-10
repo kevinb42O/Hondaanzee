@@ -2,8 +2,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Search, MapPin } from 'lucide-react';
+import { useSEO } from '../utils/seo.ts';
 
 const NotFound: React.FC = () => {
+  useSEO({
+    title: 'Pagina niet gevonden | HondAanZee.be',
+    description: 'Deze pagina bestaat helaas niet (meer). Ga terug naar de homepage voor alle informatie over honden aan de Belgische kust.',
+  });
+
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="max-w-2xl mx-auto text-center">
@@ -48,7 +54,7 @@ const NotFound: React.FC = () => {
                 className="inline-flex items-center gap-2 text-sky-600 font-bold px-4 py-2 rounded-xl hover:bg-sky-50 transition-colors text-sm"
               >
                 <MapPin size={14} />
-                {city === 'de-haan' ? 'De Haan' : city.charAt(0).toUpperCase() + city.slice(1)}
+                {city === 'de-haan' ? 'De Haan' : city === 'knokke-heist' ? 'Knokke-Heist' : city.charAt(0).toUpperCase() + city.slice(1)}
               </Link>
             ))}
           </div>

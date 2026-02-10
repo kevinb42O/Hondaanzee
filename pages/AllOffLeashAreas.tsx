@@ -28,6 +28,36 @@ const DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+type OffLeashArea = typeof OFF_LEASH_AREAS[number];
+
+const addAreaMarker = (
+  area: OffLeashArea,
+  map: L.Map,
+  onSelect: (index: number) => void,
+  markers: L.Marker[],
+  bounds: L.LatLngBounds
+) => {
+  const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
+  const marker = L.marker([area.lat, area.lng]).addTo(map);
+
+  marker.on('click', () => {
+    onSelect(globalIndex);
+    map.setView([area.lat, area.lng], 14, { animate: true });
+  });
+
+  const cityData = CITIES.find(c => c.slug === area.city);
+  marker.bindPopup(`
+    <div class="text-center">
+      <strong class="text-sky-600 text-lg">${area.name}</strong><br>
+      <span class="text-slate-600">${cityData?.name || area.city}</span><br>
+      <span class="text-sm text-slate-500">${area.address}</span>
+    </div>
+  `);
+
+  markers.push(marker);
+  bounds.extend([area.lat, area.lng]);
+};
+
 const AllOffLeashAreas: React.FC = () => {
   const location = useLocation();
   const [selectedCity, setSelectedCity] = useState<string>('all');
@@ -46,8 +76,8 @@ const AllOffLeashAreas: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const areaParam = params.get('area');
     if (areaParam) {
-      const areaIndex = parseInt(areaParam, 10);
-      if (!isNaN(areaIndex) && areaIndex >= 0 && areaIndex < OFF_LEASH_AREAS.length) {
+      const areaIndex = Number.parseInt(areaParam, 10);
+      if (!Number.isNaN(areaIndex) && areaIndex >= 0 && areaIndex < OFF_LEASH_AREAS.length) {
         setSelectedArea(areaIndex);
         const area = OFF_LEASH_AREAS[areaIndex];
         if (area) {
@@ -82,41 +112,6 @@ const AllOffLeashAreas: React.FC = () => {
     }
     return null;
   }, [selectedArea]);
-
-  const createCustomIcon = (isSelected: boolean) => {
-    const uniqueId = `marker-${Math.random().toString(36).substr(2, 9)}`;
-    const gradientId = `${uniqueId}-gradient`;
-    const filterId = `${uniqueId}-filter`;
-    const primaryColor = isSelected ? '#10b981' : '#0ea5e9';
-    const secondaryColor = isSelected ? '#059669' : '#0284c7';
-
-    return L.divIcon({
-      html: `
-        <div class="relative ${isSelected ? 'marker-pulse' : ''}">
-          <svg width="44" height="52" viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg" class="custom-marker-pin">
-            <defs>
-              <linearGradient id="${gradientId}" x1="22" y1="0" x2="22" y2="44" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="${primaryColor}"/>
-                <stop offset="100%" stop-color="${secondaryColor}"/>
-              </linearGradient>
-              <filter id="${filterId}" x="-20%" y="-10%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="${isSelected ? 'rgba(16, 185, 129, 0.4)' : 'rgba(14, 165, 233, 0.4)'}" flood-opacity="1"/>
-              </filter>
-            </defs>
-            <g filter="url(#${filterId})">
-              <path d="M22 2C12.06 2 4 10.06 4 20C4 34 22 50 22 50C22 50 40 34 40 20C40 10.06 31.94 2 22 2Z" fill="url(#${gradientId})"/>
-              <circle cx="22" cy="18" r="8" fill="white" fill-opacity="0.95"/>
-              <circle cx="22" cy="18" r="4" fill="${primaryColor}"/>
-            </g>
-          </svg>
-        </div>
-      `,
-      className: '',
-      iconSize: [44, 52],
-      iconAnchor: [22, 52],
-      popupAnchor: [0, -52]
-    });
-  };
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -153,28 +148,7 @@ const AllOffLeashAreas: React.FC = () => {
       // Map logic: If an area is selected, ONLY show that pin. Otherwise show all filtered areas.
       const mapAreas = (selectedArea !== null && displayedArea) ? [displayedArea] : filteredAreas;
 
-      mapAreas.forEach((area) => {
-        const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
-        const isSelected = selectedArea === globalIndex;
-        const marker = L.marker([area.lat, area.lng]).addTo(map);
-
-        marker.on('click', () => {
-          setSelectedArea(globalIndex);
-          map.setView([area.lat, area.lng], 14, { animate: true });
-        });
-
-        const cityData = CITIES.find(c => c.slug === area.city);
-        marker.bindPopup(`
-          <div class="text-center">
-            <strong class="text-sky-600 text-lg">${area.name}</strong><br>
-            <span class="text-slate-600">${cityData?.name || area.city}</span><br>
-            <span class="text-sm text-slate-500">${area.address}</span>
-          </div>
-        `);
-
-        markersRef.current.push(marker);
-        bounds.extend([area.lat, area.lng]);
-      });
+      mapAreas.forEach((area) => addAreaMarker(area, map, setSelectedArea, markersRef.current, bounds));
 
       // Fit map to show all markers
       if (mapAreas.length > 0) {
@@ -276,7 +250,7 @@ const AllOffLeashAreas: React.FC = () => {
             >
               <path
                 d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-white"
+                className="fill-current text-slate-50"
               />
             </svg>
           </div>
@@ -391,6 +365,10 @@ const AllOffLeashAreas: React.FC = () => {
                           src={displayedArea.image}
                           alt={displayedArea.name}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          width={800}
+                          height={320}
+                          loading="eager"
+                          decoding="async"
                         />
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/40 transition-all duration-300 flex items-center justify-center">
@@ -413,7 +391,7 @@ const AllOffLeashAreas: React.FC = () => {
                           <MapPin size={18} className="text-sky-500" />
                           <span className="text-lg">{displayedArea.address}</span>
                         </div>
-                        {displayedArea.rating && (
+                        {!!displayedArea.rating && (
                           <div className="mb-4">
                             {renderStars(displayedArea.rating)}
                           </div>
@@ -474,11 +452,15 @@ const AllOffLeashAreas: React.FC = () => {
                                 src={area.image}
                                 alt={area.name}
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                width={400}
+                                height={224}
+                                loading="lazy"
+                                decoding="async"
                               />
                             ) : (
                               <ImagePlaceholder areaName={area.name} className="w-full h-full" />
                             )}
-                            {area.rating && (
+                            {!!area.rating && (
                               <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg">
                                 {renderStars(area.rating)}
                               </div>
@@ -497,8 +479,8 @@ const AllOffLeashAreas: React.FC = () => {
                             )}
                             <div className="pt-3 border-t border-slate-100">
                               <span className="text-sky-600 font-bold text-sm group-hover:gap-2 flex items-center transition-all">
-                                Bekijk details
-                                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                Bekijk details{' '}
+                                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                               </span>
                             </div>
                           </div>

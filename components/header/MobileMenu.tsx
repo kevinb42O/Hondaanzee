@@ -1,9 +1,34 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PawPrint, X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info } from 'lucide-react';
+import { PawPrint, X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, type LucideIcon } from 'lucide-react';
 import { CITIES } from '../../cityData.ts';
 import { SupportCard } from './SupportCard.tsx';
+
+interface NavItem {
+    readonly to: string;
+    readonly label: string;
+    readonly icon: LucideIcon;
+    readonly isHome?: boolean;
+    readonly startsWith?: boolean;
+}
+
+const MOBILE_NAV_ITEMS: readonly NavItem[] = [
+    { to: '/', label: 'Home', icon: Home, isHome: true },
+    { to: '/hotspots', label: 'Hotspots', icon: Coffee },
+    { to: '/diensten', label: 'Diensten', icon: ShoppingBag },
+    { to: '/losloopzones', label: 'Losloopzones', icon: TreePine },
+    { to: '/kaart', label: 'Kaart', icon: MapPin },
+    { to: '/goed-om-te-weten', label: 'Goed om te weten', icon: ShieldAlert },
+    { to: '/blog', label: 'Blog', icon: BookOpen, startsWith: true },
+    { to: '/over-ons', label: 'Over ons', icon: Info },
+];
+
+function isNavActive(item: NavItem, currentPath: string, currentHash: string): boolean {
+    if (item.isHome) return currentPath === '/' && !currentHash;
+    if (item.startsWith) return currentPath.startsWith(item.to);
+    return currentPath === item.to;
+}
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -48,90 +73,27 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, current
                     <div className="mb-6 sm:mb-8">
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 block mb-3 sm:mb-4">Navigatie</span>
                         <div className="space-y-2">
-                            <Link
-                                to="/"
-                                onClick={onClose}
-                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/' && !currentHash
-                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
-                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <Home size={20} className={currentPath === '/' && !currentHash ? 'text-sky-600' : 'text-slate-400'} />
-                                    <span>Home</span>
-                                </div>
-                                <ChevronRight size={18} className="text-slate-300" />
-                            </Link>
-                            <Link
-                                to="/hotspots"
-                                onClick={onClose}
-                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/hotspots'
-                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
-                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <Coffee size={20} className={currentPath === '/hotspots' ? 'text-sky-600' : 'text-slate-400'} />
-                                    <span>Hotspots</span>
-                                </div>
-                                <ChevronRight size={18} className="text-slate-300" />
-                            </Link>
-                            <Link
-                                to="/diensten"
-                                onClick={onClose}
-                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/diensten'
-                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
-                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <ShoppingBag size={20} className={currentPath === '/diensten' ? 'text-sky-600' : 'text-slate-400'} />
-                                    <span>Diensten</span>
-                                </div>
-                                <ChevronRight size={18} className="text-slate-300" />
-                            </Link>
-                            <Link
-                                to="/losloopzones"
-                                onClick={onClose}
-                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/losloopzones'
-                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
-                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <TreePine size={20} className={currentPath === '/losloopzones' ? 'text-sky-600' : 'text-slate-400'} />
-                                    <span>Losloopzones</span>
-                                </div>
-                                <ChevronRight size={18} className="text-slate-300" />
-                            </Link>
-                            <Link
-                                to="/kaart"
-                                onClick={onClose}
-                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/kaart'
-                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
-                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <MapPin size={20} className={currentPath === '/kaart' ? 'text-sky-600' : 'text-slate-400'} />
-                                    <span>Kaart</span>
-                                </div>
-                                <ChevronRight size={18} className="text-slate-300" />
-                            </Link>
-                            <Link
-                                to="/over-ons"
-                                onClick={onClose}
-                                className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${currentPath === '/over-ons'
-                                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
-                                    : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <Info size={20} className={currentPath === '/over-ons' ? 'text-sky-600' : 'text-slate-400'} />
-                                    <span>Over ons</span>
-                                </div>
-                                <ChevronRight size={18} className="text-slate-300" />
-                            </Link>
+                            {MOBILE_NAV_ITEMS.map((item) => {
+                                const active = isNavActive(item, currentPath, currentHash);
+                                const Icon = item.icon;
+                                return (
+                                    <Link
+                                        key={item.to}
+                                        to={item.to}
+                                        onClick={onClose}
+                                        className={`flex items-center justify-between p-4 rounded-2xl transition-all active:scale-[0.98] touch-target ${active
+                                            ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-600'
+                                            : 'bg-slate-50 text-slate-900 font-semibold hover:bg-sky-50 hover:text-sky-600'
+                                            }`}
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <Icon size={20} className={active ? 'text-sky-600' : 'text-slate-400'} />
+                                            <span>{item.label}</span>
+                                        </div>
+                                        <ChevronRight size={18} className="text-slate-300" />
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
 

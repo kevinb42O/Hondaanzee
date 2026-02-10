@@ -40,7 +40,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ areaSlug }) => {
                     <button
                         onClick={() => setIsFormOpen(false)}
                         className="absolute top-4 right-4 text-sky-400 hover:text-sky-700 transition-colors p-2 hover:bg-sky-100 rounded-full"
-                        title="Sluiten"
+                        aria-label="Sluiten"
                     >
                         <X size={20} />
                     </button>

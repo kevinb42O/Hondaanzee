@@ -98,7 +98,7 @@ const AllServices: React.FC = () => {
               Praktische <span className="text-sky-300">Diensten</span>
             </h1>
             <p className="text-sky-100 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-              Alle dierenartsen en dierenwinkels aan de Belgische kust waar u met uw hond terecht kunt.
+              Alle dierenartsen en dierenwinkels aan de Belgische kust waar je met je hond terecht kunt.
             </p>
           </div>
         </div>
@@ -157,11 +157,11 @@ const AllServices: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* City Filter */}
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-3">
+            <fieldset>
+              <legend className="block text-sm font-bold text-slate-700 mb-3">
                 <MapPin size={14} className="inline mr-2" />
                 Gemeente
-              </label>
+              </legend>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedCity('all')}
@@ -185,13 +185,13 @@ const AllServices: React.FC = () => {
                   </button>
                 ))}
               </div>
-            </div>
+            </fieldset>
 
             {/* Type Filter */}
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-3">
+            <fieldset>
+              <legend className="block text-sm font-bold text-slate-700 mb-3">
                 Type
-              </label>
+              </legend>
               <div className="flex flex-wrap gap-2">
                 {types.map(type => (
                   <button
@@ -207,7 +207,7 @@ const AllServices: React.FC = () => {
                   </button>
                 ))}
               </div>
-            </div>
+            </fieldset>
           </div>
         </div>
 
@@ -222,28 +222,33 @@ const AllServices: React.FC = () => {
         {filteredServices.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {filteredServices.map((service) => (
-              <div
+              <button
                 key={service.id}
-                className="group cursor-pointer active:scale-[0.98] transition-transform"
+                type="button"
+                className="group cursor-pointer active:scale-[0.98] transition-transform text-left"
                 onClick={() => handleServiceClick(service)}
               >
                 <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
-                    loading="lazy"
+                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"                      width={400}
+                      height={256}                    loading="lazy"
                     decoding="async"
                   />
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/95 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-800 shadow-sm border border-white/20">
                     <span className="text-sky-600">{getIcon(service.type)}</span> {service.type}
                   </div>
-                  <Link
-                    to={`/${service.city}`}
-                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors"
+                  <span
+                    role="link"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `/${service.city}`;
+                    }}
+                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer"
                   >
                     <MapPin size={10} /> {getCityName(service.city)}
-                  </Link>
+                  </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2 md:group-hover:text-sky-600 md:transition-colors">{service.name}</h3>
                 <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed font-medium">{service.description}</p>
@@ -258,17 +263,18 @@ const AllServices: React.FC = () => {
                   ))}
                 </div>
                 {service.website && (
-                  <a
-                    href={service.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline"
-                    onClick={(e) => e.stopPropagation()}
+                  <span
+                    role="link"
+                    className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(service.website, '_blank', 'noopener,noreferrer');
+                    }}
                   >
                     Bezoek website →
-                  </a>
+                  </span>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         ) : (

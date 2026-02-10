@@ -6,6 +6,8 @@ import { HOTSPOTS } from '../constants.ts';
 import { City, Hotspot } from '../types.ts';
 import PlaceModal from './PlaceModal.tsx';
 
+const HOTSPOT_WHATSAPP_MESSAGE = `Dag! 👋\n\nIk ben een hondvriendelijke ondernemer en ik zou graag mijn zaak op hondaanzee.be laten tonen bij de hotspots.\n\nKun je me meer info geven over de mogelijkheden?\n\nBedankt!`;
+
 interface HotspotsProps {
   city: City;
 }
@@ -60,17 +62,18 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
         {cityHotspots.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
             {cityHotspots.map((spot, index) => (
-              <div
+              <button
                 key={spot.id}
-                className="group cursor-pointer active:scale-[0.98] transition-transform"
+                type="button"
+                className="group cursor-pointer active:scale-[0.98] transition-transform text-left"
                 onClick={() => handleHotspotClick(spot)}
               >
                 <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                   <img
                     src={spot.image}
                     alt={spot.name}
-                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
-                    style={{ objectPosition: spot.imagePosition || 'center' }}
+                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"                      width={400}
+                      height={256}                    style={{ objectPosition: spot.imagePosition || 'center' }}
                     loading="lazy"
                     decoding="async"
                   />
@@ -97,22 +100,23 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                   ))}
                 </div>
                 {spot.website && (
-                  <a
-                    href={spot.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline"
-                    onClick={(e) => e.stopPropagation()}
+                  <span
+                    role="link"
+                    className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(spot.website, '_blank', 'noopener,noreferrer');
+                    }}
                   >
                     Bezoek website →
-                  </a>
+                  </span>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         ) : (
           <a
-            href={`https://wa.me/32494816714?text=${encodeURIComponent(`Dag! 👋\n\nIk ben een hondvriendelijke ondernemer in ${city.name} en ik zou graag mijn zaak op hondaanzee.be laten tonen bij de hotspots.\n\nKun je me meer info geven over de mogelijkheden?\n\nBedankt!`)}`}
+            href={`https://wa.me/32494816714?text=${encodeURIComponent(HOTSPOT_WHATSAPP_MESSAGE)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="block bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-8 sm:p-12 md:p-16 text-center hover:border-sky-300 hover:bg-sky-50/30 transition-all cursor-pointer group"

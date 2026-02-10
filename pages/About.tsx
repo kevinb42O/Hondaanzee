@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Heart, MapPin, Clock, Database, Coffee, PawPrint, Mail, MessageCircle, Camera } from 'lucide-react';
+import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
 const About: React.FC = () => {
+    useSEO(SEO_DATA.about);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -34,6 +37,10 @@ const About: React.FC = () => {
                         src="/jaxenikV5.webp" 
                         alt="Kevin en Jax aan zee" 
                         className="w-full h-auto object-contain"
+                        width={1200}
+                        height={675}
+                        loading="eager"
+                        decoding="async"
                     />
                 </div>
 

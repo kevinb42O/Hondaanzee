@@ -1,7 +1,17 @@
 
 import React from 'react';
-import { PawPrint, ExternalLink, Mail, Check, Instagram } from 'lucide-react';
+import { PawPrint, ExternalLink, Mail, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+const WHATSAPP_URL = `https://wa.me/32494816714?text=${encodeURIComponent('Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!')}`;
+
+const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 18, className }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 const Footer: React.FC = () => {
   return (
@@ -45,7 +55,7 @@ const Footer: React.FC = () => {
               className="inline-flex items-center gap-2 text-slate-400 hover:text-pink-400 transition-colors group"
               aria-label="Volg ons op Instagram"
             >
-              <Instagram size={18} className="group-hover:scale-110 transition-transform" />
+              <InstagramIcon size={18} className="group-hover:scale-110 transition-transform" />
               <span className="text-sm font-medium">@hondaanzee</span>
             </a>
           </div>
@@ -80,6 +90,16 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/goed-om-te-weten" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Goed om te weten
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link to="/over-ons" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Over ons
                 </Link>
@@ -91,7 +111,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href={`https://wa.me/32494816714?text=${encodeURIComponent(`Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!`)}`}
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
@@ -134,7 +154,7 @@ const Footer: React.FC = () => {
             <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Status</h4>
             <div className="inline-flex items-center gap-2 bg-black/20 border border-white/5 rounded-full px-3 py-1.5 text-xs font-mono mb-4">
               <Check size={14} className="text-emerald-400" strokeWidth={3} />
-              <span className="text-emerald-400">Up to date</span>
+              <span className="text-emerald-400">Actueel</span>
             </div>
             <p className="text-slate-500 text-xs leading-relaxed">
               Alle diensten operationeel.<br />

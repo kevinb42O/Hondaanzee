@@ -24,28 +24,28 @@ const ReviewList: React.FC<ReviewListProps> = ({ areaSlug, refreshTrigger }) => 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const fetchReviews = async () => {
+            setLoading(true);
+            const { data, error } = await supabase
+                .from('reviews')
+                .select(`
+                    id,
+                    rating,
+                    comment,
+                    created_at,
+                    user_name
+                `)
+                .eq('area_slug', areaSlug)
+                .order('created_at', { ascending: false });
+
+            if (!error && data) {
+                setReviews(data as Review[]);
+            }
+            setLoading(false);
+        };
+
         fetchReviews();
     }, [areaSlug, refreshTrigger]);
-
-    const fetchReviews = async () => {
-        setLoading(true);
-        const { data, error } = await supabase
-            .from('reviews')
-            .select(`
-        id,
-        rating,
-        comment,
-        created_at,
-        user_name
-      `)
-            .eq('area_slug', areaSlug)
-            .order('created_at', { ascending: false });
-
-        if (!error && data) {
-            setReviews(data as any);
-        }
-        setLoading(false);
-    };
 
     if (loading) {
         return <div className="py-8 text-center text-slate-400">Reviews laden...</div>;

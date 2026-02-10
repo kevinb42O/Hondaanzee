@@ -67,7 +67,7 @@ export const useSEO = ({
       if (!script) {
         script = document.createElement('script');
         script.setAttribute('type', 'application/ld+json');
-        script.setAttribute('data-dynamic', 'true');
+        (script as HTMLElement).dataset.dynamic = 'true';
         document.head.appendChild(script);
       }
       script.textContent = JSON.stringify(structuredData);
@@ -91,19 +91,43 @@ export const SEO_DATA = {
   hotspots: {
     title: 'Hondvriendelijke Hotspots Belgische Kust | Cafés, Restaurants & Hotels waar Honden Welkom Zijn',
     description: 'Ontdek de beste hondvriendelijke cafés, restaurants en hotels aan de Belgische kust. Van Oostende tot Knokke - waar je hond écht welkom is. Filter op stad en type.',
-    keywords: 'hondvriendelijk restaurant belgië kust, hondvriendelijk café aan zee, hotel honden toegelaten kust, hondvriendelijk terras zee, hond welkom restaurant, hond toegestaan café, hondvriendelijke horeca kust'
+    keywords: 'hondvriendelijk restaurant belgië kust, hondvriendelijk café aan zee, hotel honden toegelaten kust, hondvriendelijk terras zee, hond welkom restaurant, hond toegestaan café, hondvriendelijke horeca kust',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+        { "@type": "ListItem", "position": 2, "name": "Hotspots", "item": "https://hondaanzee.be/hotspots" }
+      ]
+    }
   },
 
   diensten: {
     title: 'Dierenartsen & Dierenwinkels Belgische Kust | Praktische Diensten voor Hondenbezitters',
     description: 'Vind de beste dierenartsen en dierenwinkels aan de Belgische kust. Van Oostende tot Knokke - alle praktische diensten voor je hond op één plek. Filter op stad en type.',
-    keywords: 'dierenarts aan zee belgië, dierenwinkel kust belgië, dierenspeciaalzaak strand, dierenarts oostende, petshop aan zee, hondentrimsalon kust, dierenarts knokke, dierenwinkel blankenberge'
+    keywords: 'dierenarts aan zee belgië, dierenwinkel kust belgië, dierenspeciaalzaak strand, dierenarts oostende, petshop aan zee, hondentrimsalon kust, dierenarts knokke, dierenwinkel blankenberge',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+        { "@type": "ListItem", "position": 2, "name": "Diensten", "item": "https://hondaanzee.be/diensten" }
+      ]
+    }
   },
 
   losloopzones: {
     title: 'Losloopzones Belgische Kust | Overzicht Hondenweides & Losloopgebieden aan Zee',
     description: 'Interactieve kaart met alle losloopzones en hondenweides aan de Belgische kust. Van De Panne tot Knokke - vind de perfecte plek waar je hond vrij kan loslopen. Met ratings, foto\'s en routebeschrijvingen.',
-    keywords: 'losloopzone hond kust belgië, hondenweide aan zee, hondenlosloopgebied strand, vrij loslopen hond zee, omheinde hondenweide kust, losloopzone oostende, hondenweide knokke, losloopgebied de haan'
+    keywords: 'losloopzone hond kust belgië, hondenweide aan zee, hondenlosloopgebied strand, vrij loslopen hond zee, omheinde hondenweide kust, losloopzone oostende, hondenweide knokke, losloopgebied de haan',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+        { "@type": "ListItem", "position": 2, "name": "Losloopzones", "item": "https://hondaanzee.be/losloopzones" }
+      ]
+    }
   },
 
   privacy: {
@@ -122,6 +146,90 @@ export const SEO_DATA = {
     title: 'Cookiebeleid | HondAanZee.be',
     description: 'Cookiebeleid van HondAanZee.be - Welke cookies we gebruiken en waarom',
     keywords: ''
+  },
+
+  about: {
+    title: 'Over HondAanZee.be | Ons Verhaal & Missie – De Belgische Kust voor Hondenbezitters',
+    description: 'Leer het team achter HondAanZee.be kennen. Onze missie: de meest complete, gratis gids voor hondeneigenaars aan de Belgische kust. Van De Panne tot Knokke.',
+    keywords: 'over hondaanzee, hondaanzee team, hondvriendelijke kust belgie, missie hondaanzee',
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+          { "@type": "ListItem", "position": 2, "name": "Over ons", "item": "https://hondaanzee.be/over-ons" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "Over HondAanZee.be",
+        "url": "https://hondaanzee.be/over-ons",
+        "description": "De meest complete en actuele gids voor hondeneigenaars die de Belgische kust bezoeken.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "HondAanZee.be",
+          "url": "https://hondaanzee.be"
+        }
+      }
+    ]
+  },
+
+  kaart: {
+    title: 'Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart – HondAanZee.be',
+    description: 'Bekijk alle hondvriendelijke stranden, losloopzones, cafés, restaurants en dierenartsen op onze interactieve kaart van de Belgische kust. Van De Panne tot Knokke.',
+    keywords: 'kaart hondvriendelijk strand belgie, interactieve kaart belgische kust hond, hondenstrand kaart, losloopzone kaart kust',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+        { "@type": "ListItem", "position": 2, "name": "Kaart", "item": "https://hondaanzee.be/kaart" }
+      ]
+    }
+  },
+
+  steunOns: {
+    title: 'Steun HondAanZee.be | Trakteer ons op een Hondenkoekje 🐾',
+    description: 'HondAanZee.be is 100% gratis. Steun ons werk en help ons de leukste plekken aan de Belgische kust te blijven delen voor hondenbezitters.',
+    keywords: 'steun hondaanzee, donatie hondaanzee, hondaanzee ondersteunen',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+        { "@type": "ListItem", "position": 2, "name": "Steun ons", "item": "https://hondaanzee.be/steun-ons" }
+      ]
+    }
+  },
+
+  blog: {
+    title: 'Blog | HondAanZee.be — Tips, Natuur & Nieuws over Honden aan de Belgische Kust',
+    description: 'Lees onze blogs over honden aan de Belgische kust: van zeehonden op het strand tot opruimacties. Nuttige info, tips en achtergronden voor elke hondenbezitter.',
+    keywords: 'blog hondaanzee, zeehonden belgische kust hond, opruimacties strand, proper strand lopers, hond aan zee blog, natuur belgische kust, strand opruimen hond',
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hondaanzee.be/blog" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "HondAanZee Blog",
+        "url": "https://hondaanzee.be/blog",
+        "description": "Blog over honden aan de Belgische kust: natuur, veiligheid en duurzaamheid",
+        "publisher": {
+          "@type": "Organization",
+          "name": "HondAanZee.be",
+          "url": "https://hondaanzee.be"
+        }
+      }
+    ]
   }
 };
 
@@ -143,9 +251,18 @@ export const getCitySEO = (cityName: string, citySlug: string) => {
     description: `✓ Actuele strandregels voor honden in ${cityName} ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in ${cityName}`,
     keywords: searchTerms.join(', '),
     canonical: `https://hondaanzee.be/${citySlug}`,
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "TouristDestination",
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+          { "@type": "ListItem", "position": 2, "name": cityName, "item": `https://hondaanzee.be/${citySlug}` }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "TouristDestination",
       "name": `${cityName} - Hondvriendelijk Strand`,
       "description": `Informatie over strandregels en faciliteiten voor honden in ${cityName} aan de Belgische kust`,
       "url": `https://hondaanzee.be/${citySlug}`,
@@ -164,5 +281,6 @@ export const getCitySEO = (cityName: string, citySlug: string) => {
         }
       ]
     }
+    ]
   };
 };

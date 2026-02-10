@@ -4,6 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import { CITIES } from '../cityData.ts';
 import { COASTAL_PATHS } from '../pages/CoastalPathsData.ts';
+import type { City } from '../types.ts';
+
+const STATUS_GRADIENTS: Record<string, string> = {
+    JA: 'url(#grad-vrij)',
+    VRIJ: 'url(#grad-vrij)',
+    DEELS: 'url(#grad-deels)',
+    NEE: 'url(#grad-verboden)',
+    VERBODEN: 'url(#grad-verboden)',
+};
+
+const getCurrentStatus = (city: City): string => {
+    const today = new Date();
+    const dateString = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    const { summer, winter } = city.rules;
+
+    if (summer?.start && summer?.end && dateString >= summer.start && dateString <= summer.end) {
+        return summer.status;
+    }
+    return winter.status;
+};
+
+const getFillUrl = (city: City): string => {
+    return STATUS_GRADIENTS[getCurrentStatus(city)] ?? 'url(#grad-default)';
+};
 
 interface CoastalMapRendererProps {
     mapRef: React.RefObject<HTMLDivElement | null>;
@@ -124,34 +148,7 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
                 path.setAttribute('id', `sector-${city.slug}`);
                 path.classList.add('kust-gemeente');
 
-                // --- Dynamic Status Coloring ---
-                const today = new Date();
-                const currentMonth = today.getMonth() + 1;
-                const currentDay = today.getDate();
-                const dateString = `${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
-
-                let currentStatus = city.rules.winter.status;
-
-                if (city.rules.summer) {
-                    const start = city.rules.summer.start;
-                    const end = city.rules.summer.end;
-
-                    if (start && end) {
-                        if (dateString >= start && dateString <= end) {
-                            currentStatus = city.rules.summer.status;
-                        }
-                    }
-                }
-
-                let fillUrl = 'url(#grad-default)';
-
-                if (currentStatus === 'JA' || (currentStatus as string) === 'VRIJ') {
-                    fillUrl = 'url(#grad-vrij)';
-                } else if (currentStatus === 'DEELS') {
-                    fillUrl = 'url(#grad-deels)';
-                } else if (currentStatus === 'NEE' || (currentStatus as string) === 'VERBODEN') {
-                    fillUrl = 'url(#grad-verboden)';
-                }
+                const fillUrl = getFillUrl(city);
 
                 path.style.fill = fillUrl;
                 path.style.fillOpacity = '0.95';
@@ -165,8 +162,8 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
                     path.style.fill = 'url(#grad-hover)';
                     onHoverCity(city.name);
 
-                    const label = svgElement.querySelector(`#label-${city.slug}`) as SVGTextElement;
-                    if (label) {
+                    const label = svgElement.querySelector(`#label-${city.slug}`);
+                    if (label instanceof SVGTextElement) {
                         label.setAttribute('fill', '#FFC107');
                         label.setAttribute('font-weight', '800');
                         label.setAttribute('font-size', '12px');
@@ -178,8 +175,8 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
                     path.style.fill = fillUrl;
                     onHoverCity(null);
 
-                    const label = svgElement.querySelector(`#label-${city.slug}`) as SVGTextElement;
-                    if (label) {
+                    const label = svgElement.querySelector(`#label-${city.slug}`);
+                    if (label instanceof SVGTextElement) {
                         label.setAttribute('fill', 'white');
                         label.setAttribute('font-weight', '600');
                         label.setAttribute('font-size', '8px');
@@ -295,7 +292,7 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
             }
         }
 
-        document.body.removeChild(tempContainer);
+        tempContainer.remove();
         L.svgOverlay(svgElement, mapBounds, { interactive: true }).addTo(map);
 
         return () => {

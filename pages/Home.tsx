@@ -1,11 +1,75 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Waves, MapPin, Search, X, Sparkles } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
+import type { City } from '../types.ts';
 
 import { findNearestCity } from '../utils/geo.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+
+const getGridClass = (index: number, total: number): string => {
+  if (total >= 5) {
+    if (index === 0) return total % 2 === 1 ? 'sm:col-span-2 lg:col-span-3' : 'lg:col-span-3';
+    if (index === 1) return 'lg:col-span-3';
+    return 'lg:col-span-2';
+  }
+  if (index === 0 && total % 2 === 1) return 'sm:col-span-2';
+  return '';
+};
+
+const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city, index, total }) => {
+  const isHero = total >= 5 && index < 2;
+  const gridClass = getGridClass(index, total);
+  const heightClass = isHero ? 'h-[300px] sm:h-[340px] lg:h-[380px]' : 'h-[260px] sm:h-[280px]';
+
+  return (
+    <Link
+      key={city.slug}
+      to={`/${city.slug}`}
+      className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] md:hover:-translate-y-1.5 transition-all duration-500 ease-out ${gridClass} ${heightClass} ${
+        isHero
+          ? 'shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5'
+          : 'shadow-md hover:shadow-xl'
+      }`}
+      style={{ animationDelay: `${Math.min(index * 0.06, 0.5)}s` }}
+    >
+      <img
+        src={city.image}
+        alt={city.name}
+        className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
+        width={isHero ? 800 : 400}
+        height={isHero ? 380 : 280}
+        loading={index < 4 ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={index < 4 ? "high" : "low"}
+      />
+      <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white ${
+        isHero
+          ? 'bg-gradient-to-t from-black/90 via-black/25 to-transparent'
+          : 'bg-gradient-to-t from-black/85 via-black/40 to-transparent'
+      }`}>
+        <div className="flex items-center gap-2 text-sky-300 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3 drop-shadow-lg">
+          <MapPin size={isHero ? 16 : 14} className="sm:w-4 sm:h-4" />
+          <span>Ontdek {city.name}</span>
+        </div>
+        <h3 className={`font-black mb-2 sm:mb-3 flex items-center justify-between tracking-tighter drop-shadow-lg ${
+          isHero ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'
+        }`}>
+          {city.name}
+          <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:scale-110 shadow-xl flex-shrink-0">
+            <ArrowRight size={isHero ? 22 : 18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+          </div>
+        </h3>
+        <p className={`text-slate-100 font-medium leading-relaxed opacity-95 drop-shadow-md ${
+          isHero ? 'text-sm lg:text-base line-clamp-2' : 'text-xs sm:text-sm line-clamp-2'
+        }`}>
+          {city.description}
+        </p>
+      </div>
+    </Link>
+  );
+};
 
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,6 +77,48 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useSEO(SEO_DATA.home);
+
+  // Parallax effect for hero background
+  const heroRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number>(0);
+  const lastScrollY = useRef<number>(0);
+
+  const handleParallax = useCallback(() => {
+    if (!heroRef.current || !bgRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const heroHeight = heroRef.current.offsetHeight;
+    // Only animate when hero is in viewport
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    // Calculate scroll progress (0 at top, 1 when hero scrolled out)
+    const scrollProgress = -rect.top / heroHeight;
+    const translateY = scrollProgress * heroHeight * 0.35;
+    const scale = 1 + scrollProgress * 0.08;
+    bgRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+  }, []);
+
+  useEffect(() => {
+    // Check for reduced motion preference
+    const prefersReduced = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const onScroll = () => {
+      if (lastScrollY.current !== window.scrollY) {
+        lastScrollY.current = window.scrollY;
+        cancelAnimationFrame(rafId.current);
+        rafId.current = requestAnimationFrame(handleParallax);
+      }
+    };
+
+    // Initial position
+    handleParallax();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId.current);
+    };
+  }, [handleParallax]);
 
   // Scroll to results section
   const scrollToResults = () => {
@@ -43,8 +149,7 @@ const Home: React.FC = () => {
         }
         setIsLocating(false);
       },
-      (error) => {
-        console.error(error);
+      (_error) => {
         alert('Kon je locatie niet bepalen. Controleer of je locatietoegang hebt toegestaan.');
         setIsLocating(false);
       }
@@ -60,16 +165,20 @@ const Home: React.FC = () => {
   return (
     <div className="pb-12 md:pb-24 overflow-x-clip overflow-y-visible">
       {/* Hero Section with Dynamic Background */}
-      <div className="relative -mt-[72px] sm:-mt-[80px] md:-mt-[96px] pt-[72px] sm:pt-[80px] md:pt-[96px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
-        {/* Background Image with CSS Parallax */}
+      <div ref={heroRef} className="relative -mt-[72px] sm:-mt-[80px] md:-mt-[96px] pt-[72px] sm:pt-[80px] md:pt-[96px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
+        {/* Parallax Background Image */}
         <div
+          ref={bgRef}
           className="absolute inset-0 z-0"
           style={{
             backgroundImage: 'url(/lexi.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center 30%',
-            backgroundAttachment: 'fixed',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            willChange: 'transform',
+            transform: 'translate3d(0, 0, 0) scale(1)',
+            top: '-15%',
+            bottom: '-15%',
           }}
         >
           {/* Multi-layer Overlay for contrast */}
@@ -94,8 +203,8 @@ const Home: React.FC = () => {
           </h1>
 
           <p className="text-slate-100 max-w-3xl mx-auto leading-relaxed px-4 mb-10 sm:mb-14 text-sm sm:text-base md:text-lg" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.4)', fontWeight: 400 }}>
-            Nooit meer gissen naar strandregels. Ontdek real-time toegankelijkheid,
-            <span className="text-white font-semibold"> verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
+            Nooit meer gissen naar strandregels. Ontdek actuele toegankelijkheid,{' '}
+            <span className="text-white font-semibold">verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
           </p>
 
           <div className="max-w-lg md:max-w-3xl mx-auto relative px-6 sm:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
@@ -217,50 +326,14 @@ const Home: React.FC = () => {
           </div>
 
           {filteredCities.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[280px]">
-              {filteredCities.map((city, index) => {
-                // Z-Pattern Anchor Layout: Perfect 10 items grid
-                const isFirstItem = index === 0;
-                const isLastItem = index === filteredCities.length - 1;
-                const isFeatured = isFirstItem || isLastItem;
-
-                const gridClass = isFeatured ? 'md:col-span-2' : 'md:col-span-1';
-
-                return (
-                  <Link
-                    key={city.slug}
-                    to={`/${city.slug}`}
-                    className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-md block bg-slate-100 active:scale-[0.98] md:hover:-translate-y-1 md:hover:shadow-2xl transition-all duration-300 ${gridClass}`}
-                    style={{ animationDelay: `${Math.min(index * 0.08, 0.5)}s` }}
-                  >
-                    <img
-                      src={city.image}
-                      alt={city.name}
-                      className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
-                      loading={index < 3 ? "eager" : "lazy"}
-                      decoding="async"
-                      fetchPriority={index < 3 ? "high" : "low"}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white">
-                      <div className="flex items-center gap-2 text-sky-300 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3 drop-shadow-lg">
-                        <MapPin size={14} className="sm:w-4 sm:h-4" />
-                        Ontdek {city.name}
-                      </div>
-                      <h3 className={`font-black mb-2 sm:mb-3 flex items-center justify-between tracking-tighter drop-shadow-lg ${isFeatured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl lg:text-3xl'
-                        }`}>
-                        {city.name}
-                        <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:scale-110 shadow-xl flex-shrink-0">
-                          <ArrowRight size={18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                        </div>
-                      </h3>
-                      <p className={`text-slate-100 font-medium leading-relaxed opacity-95 drop-shadow-md ${isFeatured ? 'hidden md:block text-sm lg:text-base line-clamp-2' : 'text-xs sm:text-sm line-clamp-2'
-                        }`}>
-                        {city.description}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
+            <div className={
+              filteredCities.length >= 5
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
+                : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
+            }>
+              {filteredCities.map((city, index) => (
+                <CityCard key={city.slug} city={city} index={index} total={filteredCities.length} />
+              ))}
             </div>
           ) : (
             <div className="text-center py-20 md:py-32 px-6 bg-white rounded-[4rem] border-2 border-dashed border-slate-100 animate-in fade-in shadow-inner">

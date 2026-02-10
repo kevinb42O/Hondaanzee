@@ -43,7 +43,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 md:mb-14 gap-4">
           <div className="max-w-xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Praktische Diensten in {city.name}</h2>
-            <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Dierenartsen en winkels waar u en uw hond met een gerust hart terecht kunt.</p>
+            <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Dierenartsen en winkels waar jij en je hond met een gerust hart terecht kunt.</p>
           </div>
           {cityServices.length > 3 && (
             <Link
@@ -57,9 +57,10 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {displayServices.map((service) => (
-            <div
+            <button
               key={service.id}
-              className="group cursor-pointer active:scale-[0.98] transition-transform"
+              type="button"
+              className="group cursor-pointer active:scale-[0.98] transition-transform text-left"
               onClick={() => handleServiceClick(service)}
             >
               <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-emerald-100">
@@ -67,6 +68,8 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                   src={service.image}
                   alt={service.name}
                   className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
+                  width={400}
+                  height={256}
                   loading="lazy"
                   decoding="async"
                 />
@@ -87,17 +90,18 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                 ))}
               </div>
               {service.website && (
-                <a
-                  href={service.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-[10px] sm:text-xs text-emerald-600 hover:text-emerald-700 font-bold hover:underline"
-                  onClick={(e) => e.stopPropagation()}
+                <span
+                  role="link"
+                  className="inline-block text-[10px] sm:text-xs text-emerald-600 hover:text-emerald-700 font-bold hover:underline cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(service.website, '_blank', 'noopener,noreferrer');
+                  }}
                 >
                   Bezoek website →
-                </a>
+                </span>
               )}
-            </div>
+            </button>
           ))}
         </div>
       </div>

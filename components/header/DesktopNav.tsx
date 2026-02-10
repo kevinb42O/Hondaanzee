@@ -8,92 +8,55 @@ interface DesktopNavProps {
     currentHash: string;
 }
 
+interface NavItem {
+    to: string;
+    label: string;
+    matchHash?: string;
+    isHome?: boolean;
+    startsWith?: boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
+    { to: '/#steden', label: 'Badsteden', matchHash: '#steden', isHome: true },
+    { to: '/hotspots', label: 'Hotspots' },
+    { to: '/diensten', label: 'Diensten' },
+    { to: '/losloopzones', label: 'Losloopzones' },
+    { to: '/kaart', label: 'Kaart' },
+    { to: '/goed-om-te-weten', label: 'Info' },
+    { to: '/blog', label: 'Blog', startsWith: true },
+    { to: '/over-ons', label: 'Over ons' },
+];
+
 export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash }) => {
-    const isActive = (hash: string) => {
-        if (hash === '#steden') {
+    const isActive = (item: NavItem) => {
+        if (item.isHome) {
             return currentHash === '#steden' || (currentPath === '/' && !currentHash);
         }
-        return currentHash === hash;
+        if (item.startsWith) return currentPath.startsWith(item.to);
+        return currentPath === item.to;
     };
 
     return (
-        <nav className="hidden md:flex items-center gap-1 lg:gap-3">
-            <Link
-                to="/#steden"
-                className={`relative px-4 py-2 text-sm transition-all ${isActive('#steden')
-                    ? 'text-sky-600 font-bold'
-                    : 'text-slate-700 font-medium hover:text-sky-600'
-                    }`}
-            >
-                Alle Badsteden
-                {isActive('#steden') && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
-                )}
-            </Link>
-            <Link
-                to="/hotspots"
-                className={`relative px-4 py-2 text-sm transition-all ${currentPath === '/hotspots'
-                    ? 'text-sky-600 font-bold'
-                    : 'text-slate-700 font-medium hover:text-sky-600'
-                    }`}
-            >
-                Hotspots
-                {currentPath === '/hotspots' && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
-                )}
-            </Link>
-            <Link
-                to="/diensten"
-                className={`relative px-4 py-2 text-sm transition-all ${currentPath === '/diensten'
-                    ? 'text-sky-600 font-bold'
-                    : 'text-slate-700 font-medium hover:text-sky-600'
-                    }`}
-            >
-                Diensten
-                {currentPath === '/diensten' && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
-                )}
-            </Link>
-            <Link
-                to="/losloopzones"
-                className={`relative px-4 py-2 text-sm transition-all ${currentPath === '/losloopzones'
-                    ? 'text-sky-600 font-bold'
-                    : 'text-slate-700 font-medium hover:text-sky-600'
-                    }`}
-            >
-                Losloopzones
-                {currentPath === '/losloopzones' && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
-                )}
-            </Link>
-            <Link
-                to="/kaart"
-                className={`relative px-4 py-2 text-sm transition-all ${currentPath === '/kaart'
-                    ? 'text-sky-600 font-bold'
-                    : 'text-slate-700 font-medium hover:text-sky-600'
-                    }`}
-            >
-                Kaart
-                {currentPath === '/kaart' && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
-                )}
-            </Link>
-            <Link
-                to="/over-ons"
-                className={`relative px-4 py-2 text-sm transition-all ${currentPath === '/over-ons'
-                    ? 'text-sky-600 font-bold'
-                    : 'text-slate-700 font-medium hover:text-sky-600'
-                    }`}
-            >
-                Over ons
-                {currentPath === '/over-ons' && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-600 rounded-full"></span>
-                )}
-            </Link>
-            <div className="h-4 w-[1px] bg-slate-200 mx-2 hidden lg:block"></div>
+        <nav className="hidden lg:flex items-center gap-0 xl:gap-1" aria-label="Hoofdnavigatie">
+            {NAV_ITEMS.map((item) => (
+                <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`relative px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm whitespace-nowrap transition-all duration-300 rounded-lg group/nav ${isActive(item)
+                        ? 'text-sky-600 font-bold bg-sky-50'
+                        : 'text-slate-700 font-medium hover:text-sky-600 hover:bg-sky-50/60'
+                        }`}
+                >
+                    <span>{item.label}</span>
+                    <span
+                        className={`absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full bg-sky-500 transition-all duration-300 ${isActive(item) ? 'w-4' : 'w-0 group-hover/nav:w-4'}`}
+                    />
+                </Link>
+            ))}
+            <div className="h-4 w-[1px] bg-slate-200 mx-1 xl:mx-2"></div>
             <Link
                 to="/steun-ons"
-                className="btn-lift flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white px-4 py-2.5 rounded-full font-black text-sm hover:from-amber-500 hover:to-amber-600 shadow-lg shadow-amber-400/30 hover:shadow-amber-400/50 group transition-all transform hover:-translate-y-0.5"
+                className="btn-lift flex items-center gap-1.5 bg-gradient-to-r from-amber-400 to-amber-500 text-white px-3 xl:px-4 py-2 rounded-full font-black text-[13px] xl:text-sm hover:from-amber-500 hover:to-amber-600 shadow-lg shadow-amber-400/30 hover:shadow-amber-400/50 group transition-all transform hover:-translate-y-0.5 whitespace-nowrap"
             >
                 <span>Steun ons</span>
                 <Bone size={16} className="fill-white group-hover:rotate-12 transition-transform" />

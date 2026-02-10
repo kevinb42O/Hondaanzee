@@ -59,6 +59,7 @@ export interface CityRule {
     status: StatusValue;
   };
   special?: string;
+  note?: string;
 }
 
 export interface City {
