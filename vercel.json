@@ -1,31 +1,32 @@
 {
+    "buildCommand": "npm run build:no-prerender",
     "headers": [
         {
-            "source": "/assets/(.*)",
+            "source": "/assets/:path*",
             "headers": [
                 { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
             ]
         },
         {
-            "source": "/(.*\\.webp)",
+            "source": "/:path*.webp",
             "headers": [
                 { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
             ]
         },
         {
-            "source": "/(.*\\.(js|css))",
+            "source": "/:path*.(js|css)",
             "headers": [
                 { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
             ]
         },
         {
-            "source": "/(.*\\.(svg|ico|png|jpg|jpeg))",
+            "source": "/:path*.(svg|ico|png|jpg|jpeg)",
             "headers": [
                 { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
             ]
         },
         {
-            "source": "/(.*)",
+            "source": "/:path*",
             "headers": [
                 { "key": "X-Content-Type-Options", "value": "nosniff" },
                 { "key": "X-Frame-Options", "value": "DENY" },
@@ -36,7 +37,7 @@
     ],
     "rewrites": [
         {
-            "source": "/(.*)",
+            "source": "/:path*",
             "destination": "/index.html"
         }
     ]
