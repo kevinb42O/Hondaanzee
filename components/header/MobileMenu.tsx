@@ -55,23 +55,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, current
                 </button>
             </div>
 
-            {/* Logo in Menu */}
-            <div className="absolute top-0 left-0 p-4 safe-area-top safe-area-left">
-                <Link to="/" className="flex items-center gap-2 group" onClick={onClose}>
-                    <div className="bg-sky-600 p-1.5 rounded-lg text-white shadow-lg">
-                        <PawPrint size={18} />
-                    </div>
-                    <span className="text-lg font-black tracking-tighter leading-none">
-                        <span className="text-slate-900">Hond</span><span className="text-sky-600">Aan</span><span className="text-slate-900">Zee</span>
-                    </span>
-                </Link>
-            </div>
+
 
             <div className="flex flex-col h-full pt-20 pb-6 safe-area-top safe-area-bottom">
                 <div className="flex-grow overflow-y-auto px-4 sm:px-6 py-4 custom-scrollbar overscroll-contain safe-area-left safe-area-right">
                     {/* Quick Links Section */}
                     <div className="mb-6 sm:mb-8">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 block mb-3 sm:mb-4">Navigatie</span>
                         <div className="space-y-2">
                             {MOBILE_NAV_ITEMS.map((item) => {
                                 const active = isNavActive(item, currentPath, currentHash);
