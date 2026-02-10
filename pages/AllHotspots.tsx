@@ -235,20 +235,22 @@ const AllHotspots: React.FC = () => {
 
         {/* Hotspots Grid */}
         {filteredHotspots.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
             {filteredHotspots.map((spot) => (
               <button
                 key={spot.id}
                 type="button"
-                className="group cursor-pointer active:scale-[0.98] transition-transform text-left"
+                className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col"
                 onClick={() => handleHotspotClick(spot)}
               >
                 <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                   <img
                     src={spot.image}
                     alt={spot.name}
-                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"                      width={400}
-                      height={256}                    loading="lazy"
+                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
+                    width={400}
+                    height={256}
+                    loading="lazy"
                     decoding="async"
                   />
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/95 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-800 shadow-sm border border-white/20">
@@ -264,38 +266,38 @@ const AllHotspots: React.FC = () => {
                   >
                     <MapPin size={10} /> {getCityName(spot.city)}
                   </span>
+                  {spot.tags.includes('Aanrader') && (
+                    <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex flex-col items-center" style={{ filter: 'drop-shadow(0 2px 8px rgba(161, 98, 7, 0.5))' }}>
+                      <svg width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="starGoldAll" x1="0" y1="0" x2="40" y2="38" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stopColor="#fbbf24" />
+                            <stop offset="50%" stopColor="#f59e0b" />
+                            <stop offset="100%" stopColor="#d97706" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M20 0l5.09 12.26L38.04 14.6 28.02 23.74 30.18 37 20 30.76 9.82 37l2.16-13.26L2 14.6l12.91-2.34z" fill="url(#starGoldAll)" stroke="#fde68a" strokeWidth="1" />
+                      </svg>
+                      <span className="mt-0.5 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em] text-amber-700" style={{ textShadow: '0 0 8px rgba(251, 191, 36, 0.6)' }}>Aanrader</span>
+                    </div>
+                  )}
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2 md:group-hover:text-sky-600 md:transition-colors">{spot.name}</h3>
                 <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed font-medium">{spot.description}</p>
-                {spot.address && (
-                  <p className="text-slate-400 text-[10px] sm:text-xs mb-2 font-medium">{spot.address}</p>
-                )}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-                  {spot.tags.map((tag) => (
+                <div className="mt-auto">
+                  {spot.address && (
+                    <p className="text-slate-400 text-[10px] sm:text-xs mb-2 font-medium">{spot.address}</p>
+                  )}
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                  {spot.tags.filter(tag => tag !== 'Aanrader').map((tag) => (
                     <span
                       key={tag}
-                      className={`text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border ${tag === 'Aanrader'
-                        ? 'bg-amber-50 text-amber-700 border-amber-200'
-                        : 'bg-slate-50 text-slate-600 border-slate-100'
-                        }`}
+                      className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border bg-sky-50 text-sky-600 border-sky-100"
                     >
                       {tag}
                     </span>
                   ))}
-                </div>
-                {spot.website && (
-                  <span
-                    role="link"
-                    className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(spot.website, '_blank', 'noopener,noreferrer');
-                    }}
-                  >
-                    Bezoek website →
-                  </span>
-                )}
-              </button>
+                </div>                </div>              </button>
             ))}
           </div>
         ) : (
@@ -304,9 +306,19 @@ const AllHotspots: React.FC = () => {
               <div className="text-slate-300 mb-6">
                 <Coffee size={48} className="mx-auto" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">Geen hotspots gevonden</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+                {selectedCity !== 'all' && selectedType !== 'all'
+                  ? `Geen ${selectedType.toLowerCase()} in ${getCityName(selectedCity)}`
+                  : selectedType !== 'all'
+                  ? `Geen ${selectedType.toLowerCase()} gevonden`
+                  : selectedCity !== 'all'
+                  ? `Geen hotspots in ${getCityName(selectedCity)}`
+                  : 'Geen hotspots gevonden'}
+              </h3>
               <p className="text-slate-600 font-medium leading-relaxed mb-6">
-                Er zijn geen hotspots die aan deze filters voldoen. Probeer andere filters te selecteren.
+                {selectedCity !== 'all' && selectedType !== 'all'
+                  ? `Momenteel zijn er geen hotspots van het type "${selectedType}" in ${getCityName(selectedCity)}. Probeer een ander type of bekijk alle locaties in deze gemeente.`
+                  : 'Er zijn geen hotspots die aan deze filters voldoen. Probeer andere filters te selecteren.'}
               </p>
               {hasFilters && (
                 <button

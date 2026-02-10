@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Heart, Bone, Wallet, QrCode, Copy, Check } from 'lucide-react';
+import { Heart, Bone, Wallet, QrCode, Copy, Check, MapPin } from 'lucide-react';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
 const Support: React.FC = () => {
@@ -132,6 +132,78 @@ const Support: React.FC = () => {
 
                     </div>
                 </div>
+
+                {/* Keurmerk Sticker Section */}
+                <div className="mt-16">
+                    <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
+
+                        {/* Hero: Sticker groot & centraal */}
+                        <div className="relative bg-slate-50">
+                            <img
+                                src="/sticker.webp"
+                                alt="Hondaanzee keurmerk sticker"
+                                className="w-full object-cover"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div className="px-6 pt-8 pb-2 sm:px-10 text-center">
+                            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+                                Vraag onze sticker aan voor jouw zaak 🏆
+                            </h2>
+                            <p className="text-slate-500 text-base mt-2 max-w-md mx-auto">
+                                Laat jouw zaak stralen als officieel hondvriendelijke hotspot aan de kust.
+                            </p>
+                        </div>
+
+                        {/* Info content */}
+                        <div className="p-6 sm:p-10 md:p-12">
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 text-center">
+                                Wat betekent het keurmerk?
+                            </h3>
+                            <div className="space-y-3 text-slate-600 mb-8 max-w-2xl mx-auto text-center">
+                                <p>
+                                    Met de <span className="font-semibold text-slate-800">Hond aan Zee keurmerk sticker</span> op je deur of raam weten hondeneigenaars die jouw zaak passeren onmiddellijk:
+                                    <br />
+                                    <em className="text-sky-600 font-medium">"Hier zijn we van harte welkom met onze viervoeter(s)!"</em>
+                                </p>
+                                <p>
+                                    Jouw zaak wordt onderdeel van het groeiende <span className="font-semibold text-slate-800">Hond aan Zee netwerk</span> — een community van kustondernemers die samen de Belgische kust tot de meest hondvriendelijke plek van het land maken.
+                                </p>
+                                <p>
+                                    Hondeneigenaars herkennen de sticker en weten direct dat ze bij jou terechtkunnen, zonder twijfel of ongemak. Dat zorgt voor vertrouwen, meer bezoekers én een warm gevoel.
+                                </p>
+                            </div>
+
+                            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8 max-w-lg mx-auto">
+                                <div className="flex items-start gap-3">
+                                    <MapPin className="text-amber-500 mt-0.5 flex-shrink-0" size={20} />
+                                    <div>
+                                        <p className="font-bold text-slate-800 text-lg mb-1">
+                                            €20 <span className="text-sm font-normal text-slate-500">— eenmalig</span>
+                                        </p>
+                                        <p className="text-sm text-slate-600">
+                                            Jax 🐕 en ik komen de sticker persoonlijk bij je afleveren! Zo maken we er meteen een leuk kennismakingsmoment van.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="text-center">
+                                <a
+                                    href="https://wa.me/32494816714?text=Hallo%20Kevin%20en%20Jax!%20%F0%9F%90%BE%0A%0AIk%20zou%20graag%20een%20Hondaanzee%20keurmerk%20sticker%20aanvragen%20voor%20mijn%20zaak.%0A%0ANaam%20zaak%3A%20%0AAdres%3A%20"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 text-lg"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    <span>Vraag je sticker aan via WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

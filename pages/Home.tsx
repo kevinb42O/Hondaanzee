@@ -8,27 +8,61 @@ import type { City } from '../types.ts';
 import { findNearestCity } from '../utils/geo.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
-const getGridClass = (index: number, total: number): string => {
+// Kustlijn volgorde NO → ZW
+const COASTLINE_ORDER = [
+  'knokke-heist', 'zeebrugge', 'blankenberge', 'wenduine', 'de-haan',
+  'bredene', 'oostende', 'middelkerke', 'nieuwpoort', 'koksijde', 'de-panne'
+];
+
+// Grid layout (6-col): elke rij telt op tot 6
+// Rij 1: [3][3]     — Knokke + Zeebrugge gelijk
+// Rij 2: [4][2]     — Blankenberge groot
+// Rij 3: [2][4]     — Bredene groot (zigzag)
+// Rij 4: [2][2][2]  — 3 gelijk (rustpunt)
+// Rij 5: [4][2]     — Koksijde groot
+const FULL_LAYOUT = [3, 3, 4, 2, 2, 4, 2, 2, 2, 4, 2];
+
+// Fallback: repeating pattern for filtered results
+const FALLBACK_PATTERN = [2, 2, 2];
+
+const getGridSpan = (index: number, total: number): number => {
+  if (total === FULL_LAYOUT.length) return FULL_LAYOUT[index];
   if (total >= 5) {
-    if (index === 0) return total % 2 === 1 ? 'sm:col-span-2 lg:col-span-3' : 'lg:col-span-3';
-    if (index === 1) return 'lg:col-span-3';
-    return 'lg:col-span-2';
+    // Repeating pattern: [3,3] then [2,2,2,...]
+    if (index < 2) return 3;
+    return 2;
   }
-  if (index === 0 && total % 2 === 1) return 'sm:col-span-2';
-  return '';
+  return FALLBACK_PATTERN[index % FALLBACK_PATTERN.length];
 };
 
+const getGridClass = (index: number, total: number): string => {
+  const span = getGridSpan(index, total);
+  if (span === 4) return 'sm:col-span-2 lg:col-span-4';
+  if (span === 3) return 'lg:col-span-3';
+  return 'lg:col-span-2';
+};
+
+// Steden die dezelfde hoogte krijgen als de grote kaarten
+const TALL_CARDS = new Set(['wenduine', 'de-haan', 'de-panne']);
+
 const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city, index, total }) => {
-  const isHero = total >= 5 && index < 2;
+  const span = getGridSpan(index, total);
+  const isFeatured = span >= 4;
+  const isMedium = span === 3;
+  const isTall = TALL_CARDS.has(city.slug);
   const gridClass = getGridClass(index, total);
-  const heightClass = isHero ? 'h-[300px] sm:h-[340px] lg:h-[380px]' : 'h-[260px] sm:h-[280px]';
+  const heightClass = isFeatured || isTall
+    ? 'h-[300px] sm:h-[340px] lg:h-[380px]'
+    : isMedium
+      ? 'h-[280px] sm:h-[300px] lg:h-[340px]'
+      : 'h-[260px] sm:h-[280px]';
 
   return (
     <Link
       key={city.slug}
       to={`/${city.slug}`}
       className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] md:hover:-translate-y-1.5 transition-all duration-500 ease-out ${gridClass} ${heightClass} ${
-        isHero
+        isFeatured || isMedium
           ? 'shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5'
           : 'shadow-md hover:shadow-xl'
       }`}
@@ -38,31 +72,31 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
         src={city.image}
         alt={city.name}
         className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
-        width={isHero ? 800 : 400}
-        height={isHero ? 380 : 280}
+        width={isFeatured ? 800 : isMedium ? 600 : 400}
+        height={isFeatured ? 380 : isMedium ? 340 : 280}
         loading={index < 4 ? "eager" : "lazy"}
         decoding="async"
         fetchPriority={index < 4 ? "high" : "low"}
       />
       <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white ${
-        isHero
+        isFeatured || isMedium
           ? 'bg-gradient-to-t from-black/90 via-black/25 to-transparent'
           : 'bg-gradient-to-t from-black/85 via-black/40 to-transparent'
       }`}>
         <div className="flex items-center gap-2 text-sky-300 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3 drop-shadow-lg">
-          <MapPin size={isHero ? 16 : 14} className="sm:w-4 sm:h-4" />
+          <MapPin size={isFeatured ? 16 : 14} className="sm:w-4 sm:h-4" />
           <span>Ontdek {city.name}</span>
         </div>
         <h3 className={`font-black mb-2 sm:mb-3 flex items-center justify-between tracking-tighter drop-shadow-lg ${
-          isHero ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'
+          isFeatured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'
         }`}>
           {city.name}
           <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:scale-110 shadow-xl flex-shrink-0">
-            <ArrowRight size={isHero ? 22 : 18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+            <ArrowRight size={isFeatured ? 22 : 18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
           </div>
         </h3>
         <p className={`text-slate-100 font-medium leading-relaxed opacity-95 drop-shadow-md ${
-          isHero ? 'text-sm lg:text-base line-clamp-2' : 'text-xs sm:text-sm line-clamp-2'
+          isFeatured ? 'text-sm lg:text-base line-clamp-2' : 'text-xs sm:text-sm line-clamp-2'
         }`}>
           {city.description}
         </p>
@@ -157,9 +191,15 @@ const Home: React.FC = () => {
   };
 
   const filteredCities = useMemo(() => {
-    return CITIES.filter((city) =>
+    const filtered = CITIES.filter((city) =>
       city.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    // Sorteer op kustlijn volgorde (NO → ZW)
+    return [...filtered].sort((a, b) => {
+      const idxA = COASTLINE_ORDER.indexOf(a.slug);
+      const idxB = COASTLINE_ORDER.indexOf(b.slug);
+      return (idxA === -1 ? 999 : idxA) - (idxB === -1 ? 999 : idxB);
+    });
   }, [searchQuery]);
 
   return (

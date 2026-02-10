@@ -109,6 +109,21 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                                 style={{ objectPosition: place.imagePosition || 'center' }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                            {place.tags?.includes('Aanrader') && (
+                                <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex flex-col items-center" style={{ filter: 'drop-shadow(0 2px 8px rgba(161, 98, 7, 0.5))' }}>
+                                    <svg width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="starGoldModal" x1="0" y1="0" x2="40" y2="38" gradientUnits="userSpaceOnUse">
+                                                <stop offset="0%" stopColor="#fbbf24" />
+                                                <stop offset="50%" stopColor="#f59e0b" />
+                                                <stop offset="100%" stopColor="#d97706" />
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M20 0l5.09 12.26L38.04 14.6 28.02 23.74 30.18 37 20 30.76 9.82 37l2.16-13.26L2 14.6l12.91-2.34z" fill="url(#starGoldModal)" stroke="#fde68a" strokeWidth="1" />
+                                    </svg>
+                                    <span className="mt-0.5 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em] text-amber-700" style={{ textShadow: '0 0 8px rgba(251, 191, 36, 0.6)' }}>Aanrader</span>
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -151,20 +166,17 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                         )}
 
                         {/* Tags */}
-                        {place.tags && place.tags.length > 0 && (
+                        {place.tags && place.tags.filter(tag => tag !== 'Aanrader').length > 0 && (
                             <div className="mb-6">
                                 <div className="flex items-center gap-2 mb-3">
                                     <Tag size={16} className="text-slate-400" />
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Kenmerken</p>
                                 </div>
                                 <div className="flex flex-wrap gap-2">
-                                    {place.tags.map((tag) => (
+                                    {place.tags.filter(tag => tag !== 'Aanrader').map((tag) => (
                                         <span
                                             key={tag}
-                                            className={`text-xs font-black uppercase tracking-widest px-3 py-2 rounded-lg border ${tag === 'Aanrader'
-                                                    ? 'bg-amber-50 text-amber-700 border-amber-200'
-                                                    : `${colors.bg} ${colors.text} ${colors.border}`
-                                                }`}
+                                            className={`text-xs font-black uppercase tracking-widest px-3 py-2 rounded-lg border ${colors.bg} ${colors.text} ${colors.border}`}
                                         >
                                             {tag}
                                         </span>

@@ -790,5 +790,16 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'wenduine',
     address: 'De Smet de Naeyerlaan 1, 8420 Wenduine',
     website: 'https://welkomthuus.be/'
+  },
+  {
+    id: 72,
+    name: 'Brasserie Bon Appetit',
+    type: 'Restaurant',
+    description: 'Genieten met zicht op zee en je trouwe viervoeter aan je zijde? Bij Brasserie Bon Appetit op de Zeedijk van Blankenberge ben je aan het juiste adres! De sympathieke eigenaars verwelkomen je met een brede glimlach en serveren heerlijke gerechten en verfrissende cocktails terwijl je uitkijkt over de golven. Water staat altijd klaar voor dorstige viervoeters, en wie wil kan zelfs een snoepje krijgen voor de trouwe vriend onder de tafel. De warme sfeer, het prachtige zeezicht en de oprechte gastvrijheid maken dit de perfecte tussenstop voor een verwenmoment aan de kust — voor baasje én hond!',
+    tags: ['Zicht op zee', 'Waterbak aanwezig', 'Hondensnacks', 'Cocktails', 'Hondvriendelijk team', 'Terras'],
+    image: '/bonappetit.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 178, 8370 Blankenberge',
+    website: 'https://www.brasserie-restaurant-bon-appetit.be/'
   }
 ];
