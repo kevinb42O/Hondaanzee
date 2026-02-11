@@ -647,6 +647,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: ''
   },
   {
+    id: 74,
+    name: 'Vakantieappartement Maison Clementine',
+    type: 'Slapen',
+    description: 'Luxueus ingericht appartement met alle voorzieningen, vlakbij de haven van Blankenberge. Geniet van het prachtige zicht op de haven vanaf je eigen balkon. Kleine huisdieren zijn hier van harte welkom voor een zorgeloos verblijf aan de kust.',
+    tags: ['Kleine huisdieren welkom', 'Appartement', 'Havenzicht', 'Balkon', 'Luxe'],
+    image: '/maisonclementine.webp',
+    city: 'blankenberge',
+    address: 'Franchommelaan 106/102, 8370 Blankenberge',
+    website: ''
+  },
+  {
     id: 56,
     name: 'Brasserie Eloïse',
     type: 'Café',
@@ -801,5 +812,27 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'blankenberge',
     address: 'Zeedijk 178, 8370 Blankenberge',
     website: 'https://www.brasserie-restaurant-bon-appetit.be/'
+  },
+  {
+    id: 73,
+    name: 'Vakantiehuis Zee-Hond',
+    type: 'Slapen',
+    description: 'Hondvriendelijk vakantiehuisje in De Panne met een mooie grote tuin. Op 3 km van het centrum, met een supermarkt in de straat. Aan de overkant ligt natuurreservaat De Westhoek en via daar wandel je in 1,5 km naar het strand. Richting Frankrijk zijn honden het hele jaar door los toegelaten. Het domein biedt gratis faciliteiten zoals een verwarmd openluchtzwembad (half juni tot half september), tennis en speelpleinen.',
+    tags: ['Honden toegelaten', 'Vakantiewoning', 'Grote tuin', 'Nabij strand', 'Zwembad'],
+    image: '/zee-hond.webp',
+    city: 'de-panne',
+    address: 'Duinhoekstraat 127/129 huisje 292, 8660 De Panne, Belgie',
+    website: 'https://www.zee-hond.be'
+  },
+  {
+    id: 75,
+    name: 'Bungalowpark Jonckershof',
+    type: 'Slapen',
+    description: 'Geniet samen met je hond van een heerlijke vakantie in Westende-Bad. Jonckershof is een uitgestrekt domein (11 ha) waar je viervoeter alle ruimte heeft. Je wandelt zo naar het hondenstrand (Louis Logierlaan) of het gezellige centrum, beide op slechts 300 meter afstand. De perfecte mix van natuur, ruimte en comfort.',
+    tags: ['Honden toegelaten', 'Bungalowpark', 'Nabij strand', 'Groot domein', 'Hondenstrand nabij'],
+    image: '/jonckershof.webp',
+    city: 'middelkerke',
+    address: 'Duinenweg 539, 8430 Middelkerke',
+    website: 'https://www.jonckershof.be'
   }
 ];

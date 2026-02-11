@@ -1,7 +1,7 @@
 # Aangesloten Zaken - Administratief Overzicht
 
-**Laatste update:** 10 februari 2026  
-**Totaal aantal partners:** 86
+**Laatste update:** 11 februari 2026  
+**Totaal aantal partners:** 89
 
 ---
 
@@ -10,18 +10,18 @@
 | Stad | Aantal |
 |------|--------|
 | Oostende | 29 |
-| Blankenberge | 22 |
+| Blankenberge | 23 |
 | Wenduine | 7 |
 | Knokke-Heist | 6 |
-| Middelkerke | 6 |
+| Middelkerke | 7 |
 | Bredene | 5 |
 | De Haan | 4 |
 | Nieuwpoort | 4 |
-| De Panne | 3 |
+| De Panne | 4 |
 
 ---
 
-## Blankenberge (22)
+## Blankenberge (23)
 
 | Naam | Type | Website | Sticker | Gedoneerd |
 |------|------|---------|---------|-----------|
@@ -44,9 +44,10 @@
 | My Home My Coffee | Café | — | [ ] | [ ] |
 | Pancho | Slapen | https://hureninblankenberge.be/pancho/ | [ ] | [ ] |
 | Sea Sparkle | Slapen | https://hureninblankenberge.be/sea-sparkle/ | [ ] | [ ] |
-| Snuffels | Dierenspeciaalzaak | https://www.snuffels-blankenberge.be | [ ] | [ ] |
+| Snuffels | Dierenspeciaalzaak | https://www.snuffelsblankenberge.be | [ ] | [ ] |
 | Tearoom Koffiepotje | Café | www.koffiepotje.be | [ ] | [ ] |
 | Vakantieappartement LD383277 | Slapen | — | [ ] | [ ] |
+| Vakantieappartement Maison Clementine | Slapen | — | [ ] | [ ] |
 
 ---
 
@@ -73,13 +74,14 @@
 
 ---
 
-## De Panne (3)
+## De Panne (4)
 
 | Naam | Type | Website | Sticker | Gedoneerd |
 |------|------|---------|---------|-----------|
 | Brasserie Lolo | Restaurant | — | [ ] | [ ] |
 | De Dierendokter (Alex Salomez) | Dierenarts | https://www.dedierendokter.be | [ ] | [ ] |
 | De Verloren Gernoare | Café | https://www.deverlorengernoare.com | [ ] | [ ] |
+| Vakantiehuis Zee-Hond | Slapen | https://www.zee-hond.be | [ ] | [ ] |
 
 ---
 
@@ -96,13 +98,14 @@
 
 ---
 
-## Middelkerke (6)
+## Middelkerke (7)
 
 | Naam | Type | Website | Sticker | Gedoneerd |
 |------|------|---------|---------|-----------|
 | Beachbar De Kwinte | Beach Bar | https://www.surfclubwn.be/ | [ ] | [ ] |
 | Bistra Liva | Restaurant | — | [ ] | [ ] |
 | Bistro Noordzee | Restaurant | https://www.bistronoordzee.be | [ ] | [ ] |
+| Bungalowpark Jonckershof | Slapen | https://www.jonckershof.be | [ ] | [ ] |
 | De Lekpot | Restaurant | https://www.delekpot.be | [ ] | [ ] |
 | Dierenartsenpraktijk Katty | Dierenarts | https://www.dierenartskatty.be | [ ] | [ ] |
 | Dogs & Co | Dierenspeciaalzaak | https://www.dogsandco.be | [ ] | [ ] |
@@ -209,9 +212,10 @@ Lakaiann Blankenberge;Blankenberge;Café;https://lakaiann.com/;;
 My Home My Coffee;Blankenberge;Café;;;
 Pancho;Blankenberge;Slapen;https://hureninblankenberge.be/pancho/;;
 Sea Sparkle;Blankenberge;Slapen;https://hureninblankenberge.be/sea-sparkle/;;
-Snuffels;Blankenberge;Dierenspeciaalzaak;https://www.snuffels-blankenberge.be;;
+Snuffels;Blankenberge;Dierenspeciaalzaak;https://www.snuffelsblankenberge.be;;
 Tearoom Koffiepotje;Blankenberge;Café;www.koffiepotje.be;;
 Vakantieappartement LD383277;Blankenberge;Slapen;;;
+Vakantieappartement Maison Clementine;Blankenberge;Slapen;;;
 Alaska;Bredene;Restaurant;;;
 Brasserie Shop 'n Lunch P&P;Bredene;Café;;;
 Coffee & Wine De Golf;Bredene;Café;https://www.coffeeandwine.be;;
@@ -224,6 +228,7 @@ Restaurant De Concessie;De Haan;Restaurant;http://www.deconcessie-dehaan.be;;
 Brasserie Lolo;De Panne;Restaurant;;;
 De Dierendokter (Alex Salomez);De Panne;Dierenarts;https://www.dedierendokter.be;;
 De Verloren Gernoare;De Panne;Café;https://www.deverlorengernoare.com;;
+Vakantiehuis Zee-Hond;De Panne;Slapen;https://www.zee-hond.be;;
 Bar Delta;Knokke-Heist;Café;;;
 Brasserie Rubens;Knokke-Heist;Restaurant;https://www.rubens-knokke.be;;
 Dierenarts Ilse Kerckhof;Knokke-Heist;Dierenarts;https://www.dierenarts-ilse.be;;
@@ -236,6 +241,7 @@ Bistro Noordzee;Middelkerke;Restaurant;https://www.bistronoordzee.be;;
 De Lekpot;Middelkerke;Restaurant;https://www.delekpot.be;;
 Dierenartsenpraktijk Katty;Middelkerke;Dierenarts;https://www.dierenartskatty.be;;
 Dogs & Co;Middelkerke;Dierenspeciaalzaak;https://www.dogsandco.be;;
+Bungalowpark Jonckershof;Middelkerke;Slapen;https://www.jonckershof.be;;
 Brasserie Carrousel;Nieuwpoort;Restaurant;https://www.brasseriecarrousel.be;;
 Brasserie Het Kompas;Nieuwpoort;Restaurant;https://www.hetkompas.be;;
 Dierenarts Elise Buyse;Nieuwpoort;Dierenarts;https://www.dierenartselisebuyse.be;;

@@ -66,7 +66,7 @@ export const SERVICES: Service[] = [
     imagePosition: 'center top',
     city: 'blankenberge',
     address: 'Vissersstraat 29, 8370 Blankenberge',
-    website: 'https://www.snuffels-blankenberge.be'
+    website: 'https://www.snuffelsblankenberge.be'
   },
   {
     id: 7,

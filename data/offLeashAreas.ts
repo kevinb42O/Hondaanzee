@@ -275,14 +275,14 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     rating: 4
   },
   {
-    name: 'Losloopzone Sint-Idesbald',
-    slug: 'koksijde-sint-idesbald',
+    name: 'Losloopzone Koksijde Ster Der Zee',
+    slug: 'koksijde-ster-der-zee',
     address: 'Gladiolenlaan 17, Koksijde',
     lat: 51.0985,
     lng: 2.6125,
     city: 'koksijde',
     description: 'Hondenspeelzone nabij het Abdijmuseum Ten Duinen. Ingang via de Gladiolenlaan.',
-    image: '/placeholder.webp',
+    image: '/losloopzonekoksijdesterderzee.webp',
     rating: 4
   },
   // De Panne
@@ -295,6 +295,17 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     city: 'de-panne',
     description: 'Belangrijkste omheinde losloopweide in De Panne. Je moet helemaal naar achteren, naast de begraafplaats en motorclub "t Motosiekeltje".',
     image: '/placeholder.webp',
+    rating: 4
+  },
+  {
+    name: 'Hondenweide Doornstraat',
+    slug: 'adinkerke-doornstraat',
+    address: 'Doornstraat, 8660 Adinkerke',
+    lat: 51.070347,
+    lng: 2.595182,
+    city: 'de-panne',
+    description: 'Ruime omheinde hondenlosloopzone op het domein van Vijvers Markey, ook bereikbaar via de Moersesteenweg. De weide heeft twee ingangen en is heuvelachtig aangelegd. Er kan langs de weg geparkeerd worden. Een hondentoilet ligt op ongeveer 30 meter van de losloopzone. Zitbank aanwezig.',
+    image: '/weidedoornstraat.webp',
     rating: 4
   }
 ];
