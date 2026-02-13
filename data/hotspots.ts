@@ -27,7 +27,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 3,
     name: 'Beachbar De Kwinte',
-    type: 'Beach Bar',
+    type: 'Café',
     description: 'Geniet van lokale gerechten terwijl je hond rustig onder tafel ligt.',
     tags: ['Ruime plaatsen', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Surfclub'],
     image: '/dekwintemiddelkerke.webp',
@@ -89,17 +89,6 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'knokke-heist',
     address: 'Dumortierlaan 127, 8300 Knokke-Heist',
     website: 'https://www.thesiesta.be'
-  },
-  {
-    id: 9,
-    name: 'The Beach Restaurant',
-    type: 'Restaurant',
-    description: 'Gezellig restaurant op de zeedijk waar honden zowel binnen als op het terras welkom zijn.',
-    tags: ['Terras', 'Indoor toegelaten', 'Waterbak aanwezig', 'Nabij strand'],
-    image: '/thebeachrestaurantknokke.webp',
-    city: 'knokke-heist',
-    address: 'Zeedijk-Albertstrand 552, 8300 Knokke-Heist',
-    website: 'https://thebeachrestaurant.be'
   },
   {
     id: 10,
@@ -834,5 +823,38 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'middelkerke',
     address: 'Duinenweg 539, 8430 Middelkerke',
     website: 'https://www.jonckershof.be'
+  },
+  {
+    id: 76,
+    name: 'Surfers Paradise',
+    type: 'Café',
+    description: 'Terwijl jij geniet van een cocktail in de Sunset lounge, kan je hond heerlijk bij de zitzakken of hangmatten liggen. Het is de ideale plek voor een hapje of drankje na een stevige strandwandeling. Of je nu met vrienden bent of met de familie: hier hangt een sfeer die je nergens anders aan de kust vindt.',
+    tags: ['Waterbak aanwezig', 'Cocktails', 'Lounge', 'Hangmatten', 'Zitzakken'],
+    image: '/surfersparadise.webp',
+    city: 'knokke-heist',
+    address: 'Zeedijk-Het Zoute thv Appelzakstraat, 8300 Knokke-Heist',
+    website: 'https://www.surfersparadise.be/home/'
+  },
+  {
+    id: 77,
+    name: 'ZAELIG Hotel',
+    type: 'Slapen',
+    description: 'De naam zegt het zelf: hier beleef je echt een zaelig verblijf! Dit hotel in de polders is een droom voor hondenbaasjes. Terwijl jij geniet van het verwarmd zwembad of de honesty bar, kan je viervoeter ravotten in de gigantische tuin en speelweide. Uniek: je hond is hier gewoon welkom aan de ontbijttafel! TIP: Vraag bij boeking naar een kamer op het gelijkvloers voor je eigen privéterras.',
+    tags: ['Grote tuin & weide', 'Hond welkom bij ontbijt', 'Zwembad', 'Privéterras', 'Rustige ligging', 'Aanrader'],
+    image: '/zaelig.webp',
+    city: 'knokke-heist',
+    address: 'Oostkerkestraat 40, 8300 Knokke-Heist',
+    website: 'https://zaelighotel.com/'
+  },
+  {
+    id: 78,
+    name: 'Restaurant Imperial',
+    type: 'Restaurant',
+    description: 'In een hip en vernieuwd interieur introduceert Imperial een gezellig foodsharing concept. Ideaal om samen te proeven van tapas, visgerechten of kreeft met zicht op zee! Zowel binnen als op het zonnige loungeterras (met privéstrand-vibes!) zit je heerlijk. Extra pluspunt: terwijl jij geniet, kunnen de kinderen zich uitleven in de Kids Room met PlayStation. Een feest voor de hele familie, inclusief de viervoeter.',
+    tags: ['Foodsharing & Tapas', 'Zicht op Zee', 'Loungeterras', 'Kids Room (PlayStation)', 'Hip Interieur'],
+    image: '/imperial.webp',
+    city: 'de-panne',
+    address: 'Leopold I Esplanade 9, 8660 De Panne',
+    website: 'https://imperialdepanne.be/'
   }
 ];

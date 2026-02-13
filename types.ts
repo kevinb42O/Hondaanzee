@@ -2,7 +2,7 @@
 export interface Hotspot {
   id: number;
   name: string;
-  type: 'Café' | 'Slapen' | 'Restaurant' | 'Beach Bar';
+  type: 'Café' | 'Slapen' | 'Restaurant';
   description: string;
   tags: string[];
   image: string;

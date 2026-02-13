@@ -1,7 +1,7 @@
 # Aangesloten Zaken - Administratief Overzicht
 
-**Laatste update:** 11 februari 2026  
-**Totaal aantal partners:** 89
+**Laatste update:** 13 februari 2026  
+**Totaal aantal partners:** 91
 
 ---
 
@@ -12,12 +12,12 @@
 | Oostende | 29 |
 | Blankenberge | 23 |
 | Wenduine | 7 |
-| Knokke-Heist | 6 |
+| Knokke-Heist | 7 |
 | Middelkerke | 7 |
 | Bredene | 5 |
 | De Haan | 4 |
 | Nieuwpoort | 4 |
-| De Panne | 4 |
+| De Panne | 5 |
 
 ---
 
@@ -74,18 +74,19 @@
 
 ---
 
-## De Panne (4)
+## De Panne (5)
 
 | Naam | Type | Website | Sticker | Gedoneerd |
 |------|------|---------|---------|-----------|
 | Brasserie Lolo | Restaurant | — | [ ] | [ ] |
 | De Dierendokter (Alex Salomez) | Dierenarts | https://www.dedierendokter.be | [ ] | [ ] |
 | De Verloren Gernoare | Café | https://www.deverlorengernoare.com | [ ] | [ ] |
+| Restaurant Imperial | Restaurant | https://imperialdepanne.be/ | [ ] | [ ] |
 | Vakantiehuis Zee-Hond | Slapen | https://www.zee-hond.be | [ ] | [ ] |
 
 ---
 
-## Knokke-Heist (6)
+## Knokke-Heist (7)
 
 | Naam | Type | Website | Sticker | Gedoneerd |
 |------|------|---------|---------|-----------|
@@ -94,15 +95,15 @@
 | Dierenarts Ilse Kerckhof | Dierenarts | https://www.dierenarts-ilse.be | [ ] | [ ] |
 | Dierenplezier Heist | Dierenspeciaalzaak | https://www.dierenplezierknokke-heist.com | [ ] | [ ] |
 | Siesta Bar | Restaurant | https://www.thesiesta.be | [ ] | [ ] |
-| The Beach Restaurant | Restaurant | https://thebeachrestaurant.be | [ ] | [ ] |
-
+| Surfers Paradise | Café | https://www.surfersparadise.be/home/ | [ ] | [ ] |
+| ZAELIG Hotel | Slapen | https://zaelighotel.com/ | [ ] | [ ] |
 ---
 
 ## Middelkerke (7)
 
 | Naam | Type | Website | Sticker | Gedoneerd |
 |------|------|---------|---------|-----------|
-| Beachbar De Kwinte | Beach Bar | https://www.surfclubwn.be/ | [ ] | [ ] |
+| Beachbar De Kwinte | Café | https://www.surfclubwn.be/ | [ ] | [ ] |
 | Bistra Liva | Restaurant | — | [ ] | [ ] |
 | Bistro Noordzee | Restaurant | https://www.bistronoordzee.be | [ ] | [ ] |
 | Bungalowpark Jonckershof | Slapen | https://www.jonckershof.be | [ ] | [ ] |
@@ -228,14 +229,16 @@ Restaurant De Concessie;De Haan;Restaurant;http://www.deconcessie-dehaan.be;;
 Brasserie Lolo;De Panne;Restaurant;;;
 De Dierendokter (Alex Salomez);De Panne;Dierenarts;https://www.dedierendokter.be;;
 De Verloren Gernoare;De Panne;Café;https://www.deverlorengernoare.com;;
+Restaurant Imperial;De Panne;Restaurant;https://imperialdepanne.be/;;
 Vakantiehuis Zee-Hond;De Panne;Slapen;https://www.zee-hond.be;;
 Bar Delta;Knokke-Heist;Café;;;
 Brasserie Rubens;Knokke-Heist;Restaurant;https://www.rubens-knokke.be;;
 Dierenarts Ilse Kerckhof;Knokke-Heist;Dierenarts;https://www.dierenarts-ilse.be;;
 Dierenplezier Heist;Knokke-Heist;Dierenspeciaalzaak;https://www.dierenplezierknokke-heist.com;;
 Siesta Bar;Knokke-Heist;Restaurant;https://www.thesiesta.be;;
-The Beach Restaurant;Knokke-Heist;Restaurant;https://thebeachrestaurant.be;;
-Beachbar De Kwinte;Middelkerke;Beach Bar;https://www.surfclubwn.be/;;
+Surfers Paradise;Knokke-Heist;Café;https://www.surfersparadise.be/home/;;
+ZAELIG Hotel;Knokke-Heist;Slapen;https://zaelighotel.com/;;
+Beachbar De Kwinte;Middelkerke;Café;https://www.surfclubwn.be/;;
 Bistra Liva;Middelkerke;Restaurant;;;
 Bistro Noordzee;Middelkerke;Restaurant;https://www.bistronoordzee.be;;
 De Lekpot;Middelkerke;Restaurant;https://www.delekpot.be;;

@@ -262,7 +262,7 @@ const GoedOmTeWeten: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50" itemScope itemType="https://schema.org/FAQPage">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50">
       {/* ─── Hero Section ─── */}
       <section className="relative pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden">
         {/* Decorative Background */}
