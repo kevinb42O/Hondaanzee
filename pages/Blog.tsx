@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, Calendar, Clock, Leaf, Shield, Trees, Droplets } from 'lucide-react';
+import { BookOpen, ArrowRight, Calendar, Clock, Leaf, Shield, Trees, Droplets, Brain, Star } from 'lucide-react';
 import { useSEO } from '../utils/seo.ts';
 import { blogPosts } from '../data/blogs.ts';
 
@@ -9,6 +9,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   'sky': <Leaf size={16} className="text-sky-600" />,
   'green': <Trees size={16} className="text-green-600" />,
   'amber': <Droplets size={16} className="text-amber-600" />,
+  'blue': <Brain size={16} className="text-blue-600" />,
 };
 
 const categoryStyles: Record<string, string> = {
@@ -16,6 +17,7 @@ const categoryStyles: Record<string, string> = {
   'sky': 'bg-sky-50 text-sky-700 border-sky-200',
   'green': 'bg-green-50 text-green-700 border-green-200',
   'amber': 'bg-amber-50 text-amber-700 border-amber-200',
+  'blue': 'bg-blue-50 text-blue-700 border-blue-200',
 };
 
 const Blog: React.FC = () => {
@@ -69,9 +71,85 @@ const Blog: React.FC = () => {
           </p>
         </div>
 
+        {/* Featured Blog Post */}
+        {blogPosts.filter(p => p.featured).map((post) => (
+          <div key={post.slug} className="mb-12">
+            <Link
+              to={`/blog/${post.slug}`}
+              className="group relative block bg-white rounded-3xl shadow-xl hover:shadow-2xl border-2 border-amber-200 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-300"
+            >
+              {/* Animated gold accent bar */}
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-amber-400 via-yellow-400 to-amber-500 rounded-l-3xl z-10" />
+
+              {/* Subtle gold shimmer overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-50/30 to-yellow-50/20 group-hover:from-amber-50/60 group-hover:to-yellow-50/40 transition-all duration-500 rounded-3xl pointer-events-none" />
+
+              {/* Aanrader badge */}
+              <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-xs font-black rounded-full shadow-lg shadow-amber-200/50 animate-pulse">
+                <Star size={14} fill="currentColor" />
+                Aanrader
+              </div>
+
+              <div className="flex flex-col md:flex-row">
+                {/* Hero image — larger for featured */}
+                {post.image && (
+                  <div className="relative w-full md:w-1/2 h-56 md:h-auto md:min-h-[320px] overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.imageAlt || post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 md:bg-gradient-to-r md:from-transparent md:to-white/30" />
+                  </div>
+                )}
+
+                {/* Content */}
+                <div className="relative p-6 sm:p-8 md:p-10 flex flex-col justify-center md:w-1/2">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition-transform duration-300 group-hover:scale-105 ${categoryStyles[post.categoryColor]}`}>
+                      {categoryIcons[post.categoryColor]}
+                      {post.category}
+                    </span>
+                  </div>
+
+                  <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2 leading-tight group-hover:text-amber-600 transition-colors">
+                    {post.title}
+                  </h2>
+
+                  <p className="text-base text-amber-700/70 font-semibold mb-3 italic">
+                    {post.subtitle}
+                  </p>
+
+                  <p className="text-slate-600 leading-relaxed mb-6 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-sm text-slate-400">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar size={14} />
+                        {formatDate(post.date)}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock size={14} />
+                        {post.readTime}
+                      </span>
+                    </div>
+                    <span className="flex items-center gap-1 text-amber-600 font-bold text-sm group-hover:gap-2.5 transition-all duration-300">
+                      Lees meer
+                      <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+
         {/* Blog Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogPosts.map((post) => (
+          {blogPosts.filter(p => !p.featured).map((post) => (
             <Link
               key={post.slug}
               to={`/blog/${post.slug}`}
