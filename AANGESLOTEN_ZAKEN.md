@@ -32,7 +32,7 @@
 | Belgium Pier Brasserie | Restaurant | https://www.belgiumpier.be | [ ] | [ ] |
 | Brasserie Montmartre | Restaurant | https://www.brasseriemontmartre.be | [ ] | [ ] |
 | Casa MaTi | Slapen | https://www.booking.com/hotel/be/casa-mati.nl.html | [ ] | [ ] |
-| Cozy Moments | Café | www.cozy-moments.be | [ ] | [ ] |
+| Cozy Moments | Café | https://www.cozy-moments.be/ | [ ] | [ ] |
 | De Praktijk 227 | Dierenarts | https://www.depraktijk227.be | [ ] | [ ] |
 | De Sleutel & La Clef | Restaurant | https://restaurantdesleutel.be/ | [ ] | [ ] |
 | Dogs & Cats | Dierenspeciaalzaak | https://www.dogsandcats.be/ | [ ] | [ ] |
@@ -46,7 +46,7 @@
 | Pancho | Slapen | https://hureninblankenberge.be/pancho/ | [ ] | [ ] |
 | Sea Sparkle | Slapen | https://hureninblankenberge.be/sea-sparkle/ | [ ] | [ ] |
 | Snuffels | Dierenspeciaalzaak | https://www.snuffelsblankenberge.be | [ ] | [ ] |
-| Tearoom Koffiepotje | Café | www.koffiepotje.be | [ ] | [ ] |
+| Tearoom Koffiepotje | Café | https://www.koffiepotje.be | [ ] | [ ] |
 | Vakantieappartement LD383277 | Slapen | — | [ ] | [ ] |
 | Vakantieappartement Maison Clementine | Slapen | — | [ ] | [ ] |
 
@@ -209,7 +209,7 @@ Bel'air;Blankenberge;Restaurant;https://www.belairblankenberge.com/;;
 Belgium Pier Brasserie;Blankenberge;Restaurant;https://www.belgiumpier.be;;
 Brasserie Montmartre;Blankenberge;Restaurant;https://www.brasseriemontmartre.be;;
 Casa MaTi;Blankenberge;Slapen;https://www.booking.com/hotel/be/casa-mati.nl.html;;
-Cozy Moments;Blankenberge;Café;www.cozy-moments.be;;
+Cozy Moments;Blankenberge;Café;https://www.cozy-moments.be/;;
 De Praktijk 227;Blankenberge;Dierenarts;https://www.depraktijk227.be;;
 De Sleutel & La Clef;Blankenberge;Restaurant;https://restaurantdesleutel.be/;;
 Dogs & Cats;Blankenberge;Dierenspeciaalzaak;https://www.dogsandcats.be/;;
@@ -223,7 +223,7 @@ My Home My Coffee;Blankenberge;Café;;;
 Pancho;Blankenberge;Slapen;https://hureninblankenberge.be/pancho/;;
 Sea Sparkle;Blankenberge;Slapen;https://hureninblankenberge.be/sea-sparkle/;;
 Snuffels;Blankenberge;Dierenspeciaalzaak;https://www.snuffelsblankenberge.be;;
-Tearoom Koffiepotje;Blankenberge;Café;www.koffiepotje.be;;
+Tearoom Koffiepotje;Blankenberge;Café;https://www.koffiepotje.be;;
 Vakantieappartement LD383277;Blankenberge;Slapen;;;
 Vakantieappartement Maison Clementine;Blankenberge;Slapen;;;
 Alaska;Bredene;Restaurant;;;
