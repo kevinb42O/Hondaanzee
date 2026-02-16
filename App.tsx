@@ -5,10 +5,6 @@ import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
 
-// Hide the static hero prerender after React mounts
-const prerenderEl = document.getElementById('hero-prerender');
-if (prerenderEl) prerenderEl.style.display = 'none';
-
 // Lazy-loaded below-the-fold components
 const ResponsibilityBanner = React.lazy(() => import('./components/ResponsibilityBanner.tsx'));
 const Footer = React.lazy(() => import('./components/Footer.tsx'));
@@ -100,6 +96,12 @@ const ScrollToHash = () => {
 };
 
 function App() {
+  // Hide static hero prerender AFTER React has painted (avoids blank viewport CLS)
+  useEffect(() => {
+    const el = document.getElementById('hero-prerender');
+    if (el) el.style.display = 'none';
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-clip">
