@@ -1,7 +1,7 @@
 # Aangesloten Zaken - Administratief Overzicht
 
 **Laatste update:** 13 februari 2026  
-**Totaal aantal partners:** 91
+**Totaal aantal partners:** 92
 
 ---
 
@@ -12,6 +12,7 @@
 | Oostende | 29 |
 | Blankenberge | 23 |
 | Wenduine | 7 |
+| Zeebrugge | 1 |
 | Knokke-Heist | 7 |
 | Middelkerke | 7 |
 | Bredene | 5 |
@@ -174,6 +175,14 @@
 
 ---
 
+## Zeebrugge (1)
+
+| Naam | Type | Website | Sticker | Gedoneerd |
+|------|------|---------|---------|-----------||
+| Club North by Icarus | Café | https://www.clubnorthzeebrugge.be/ | [ ] | [ ] |
+
+---
+
 ## Notities
 
 **Zaken zonder website (15):**
@@ -285,4 +294,5 @@ De Zoete Zonde;Wenduine;Café;;;
 Maison Elza;Wenduine;Café;;;
 Praatcafé De Spioenkop;Wenduine;Café;;;
 Tearoom Wielingen Bar;Wenduine;Café;https://www.wielingenbar.be/;;
+Club North by Icarus;Zeebrugge;Café;https://www.clubnorthzeebrugge.be/;;
 ```

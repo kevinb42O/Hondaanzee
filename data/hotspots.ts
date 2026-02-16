@@ -856,5 +856,16 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'de-panne',
     address: 'Leopold I Esplanade 9, 8660 De Panne',
     website: 'https://imperialdepanne.be/'
+  },
+  {
+    id: 79,
+    name: 'Club North by Icarus',
+    type: 'Café',
+    description: 'Dé ultieme surfclub aan de rand van de Blankenbergse duinen waar honden het hele jaar door welkom zijn – zowel op het strand als binnen! Club North staat bij kenners bekend als een van de meest hondvriendelijke beachbars aan de kust. Met hun speciale dogs bar en een groot hart voor elke viervoeter die binnenstapt, is dit de perfecte plek om na een strandwandeling bij te komen met een drankje terwijl je hond geniet van zijn eigen verwennerij.',
+    tags: ['Aanrader', 'Dogs Bar', 'Jaarrond Strand', 'Indoor toegelaten', 'Surfclub'],
+    image: '/clubnorthicarus.webp',
+    city: 'zeebrugge',
+    address: 'Zeedijk 50, 8380 Zeebrugge',
+    website: 'https://www.clubnorthzeebrugge.be/'
   }
 ];
