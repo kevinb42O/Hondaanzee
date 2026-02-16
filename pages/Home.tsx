@@ -250,6 +250,8 @@ const Home: React.FC = () => {
         >
           <img
             src="/lexi.webp"
+            srcSet="/lexi-mobile.webp 800w, /lexi.webp 1920w"
+            sizes="100vw"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: 'center 30%' }}
