@@ -76,7 +76,8 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
         height={isFeatured ? 380 : isMedium ? 340 : 280}
         loading={index < 4 ? "eager" : "lazy"}
         decoding="async"
-        fetchPriority={index < 4 ? "high" : "low"}
+        fetchPriority={index < 2 ? "high" : "auto"}
+        sizes={isFeatured ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 66vw' : isMedium ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
       />
       <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white ${
         isFeatured || isMedium
@@ -211,16 +212,23 @@ const Home: React.FC = () => {
           ref={bgRef}
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: 'url(/lexi.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 30%',
-            backgroundRepeat: 'no-repeat',
             willChange: 'transform',
             transform: 'translate3d(0, 0, 0) scale(1)',
             top: '-15%',
             bottom: '-15%',
           }}
         >
+          <img
+            src="/lexi.webp"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: 'center 30%' }}
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+          />
           {/* Multi-layer Overlay for contrast */}
           <div className="absolute inset-0 bg-slate-900/60"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>

@@ -3,9 +3,11 @@ import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
-import Footer from './components/Footer.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
-import ResponsibilityBanner from './components/ResponsibilityBanner.tsx';
+
+// Lazy-loaded below-the-fold components
+const Footer = React.lazy(() => import('./components/Footer.tsx'));
+const ResponsibilityBanner = React.lazy(() => import('./components/ResponsibilityBanner.tsx'));
 
 // Lazy-loaded pages for code-splitting
 const Home = React.lazy(() => import('./pages/Home.tsx'));

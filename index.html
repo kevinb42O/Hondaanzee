@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=5.0, viewport-fit=cover">
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#0284c7">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,12 +29,14 @@
     <link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/">
     <link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/">
 
-    <!-- Google Fonts - Single optimized request -->
+    <!-- Google Fonts - Non-render-blocking with preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
+    <link rel="preload" as="style"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap"
-        rel="stylesheet">
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap"></noscript>
 
     <!-- Favicon & App Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -107,6 +109,9 @@
     }
     </script>
 
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="/lexi.webp" type="image/webp" fetchpriority="high">
+
     <!-- Preconnect for faster resource loading -->
     <link rel="dns-prefetch" href="https://basemaps.cartocdn.com">
 
@@ -114,10 +119,15 @@
         /* Critical CSS - only what's needed for above-the-fold rendering */
         * { -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-        body { font-family: 'Inter', sans-serif; overscroll-behavior-y: contain; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeSpeed; }
-        h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Poppins', sans-serif; }
+
+        /* Font fallback with size-adjust to prevent CLS on font swap */
+        @font-face { font-family: 'Inter Fallback'; src: local('Arial'); size-adjust: 107.64%; ascent-override: 90%; descent-override: 22.43%; line-gap-override: 0%; }
+        @font-face { font-family: 'Poppins Fallback'; src: local('Arial'); size-adjust: 112.5%; ascent-override: 88%; descent-override: 25%; line-gap-override: 0%; }
+
+        body { font-family: 'Inter', 'Inter Fallback', sans-serif; overscroll-behavior-y: contain; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeSpeed; }
+        h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Poppins', 'Poppins Fallback', sans-serif; }
         .city-card-gradient { background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent); }
-        img { content-visibility: auto; }
+        img[loading="lazy"] { content-visibility: auto; contain-intrinsic-size: 300px 200px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .animate-in { animation-duration: 500ms; animation-fill-mode: both; }
