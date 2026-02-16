@@ -1206,8 +1206,8 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mentale-leiband-vrijheid-met-connectie',
-    title: 'De Mentale Leiband: Vrijheid met Connectie',
-    subtitle: 'Waarom \'Loslopen\' aan Zee een Mentale Kunstvorm Is',
+    title: 'De Mentale Leiband: Vrijheid met Connectie [+ VIDEO]',
+    subtitle: 'Waarom \'loslopen\' aan zee een mentale kunstvorm is',
     excerpt: 'De Belgische kust is voor honden een zintuiglijk paradijs. Maar achter het idyllische beeld van een loslopende hond schuilt een complexe realiteit. Ontdek de filosofie van de "mentale leiband" en hoe je een wandeling transformeert van controle naar vertrouwen.',
     date: '2026-02-16',
     readTime: '12 min',
@@ -1215,7 +1215,7 @@ export const blogPosts: BlogPost[] = [
     categoryColor: 'blue',
     icon: '🧠',
     image: '/verantwoordlos.webp',
-    imageAlt: 'VZW Verantwoord Los - hond geniet van vrijheid aan de Belgische kust',
+    imageAlt: 'Hond loopt los aan zee met mentale connectie - VZW Verantwoord Los',
     featured: true,
     content: [
       {
@@ -1232,15 +1232,15 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'heading',
-        text: '1. De Paradox van de Vrijheid: Waarom \'Los\' nooit écht los is'
+        text: '1. De paradox van de vrijheid: waarom \'los\' nooit écht los is'
       },
       {
         type: 'paragraph',
-        text: 'De meeste hondeneigenaars zien de leiband als een noodzakelijk kwaad, een beperking die we zo snel mogelijk willen verwijderen zodra we het strand betreden. Marc Serneel draait die gedachte om. Hij stelt dat een verantwoorde hond altijd aangeleijnd is. De vraag is alleen: welke lijn gebruik je?'
+        text: 'De meeste hondeneigenaars zien de leiband als een noodzakelijk kwaad, een beperking die we zo snel mogelijk willen verwijderen zodra we het strand betreden. Marc Serneel draait die gedachte om. Hij stelt dat een verantwoorde hond altijd aangelijnd is. De vraag is alleen: welke lijn gebruik je?'
       },
       {
         type: 'subheading',
-        text: 'De Fysieke versus de Mentale Connectie'
+        text: 'De fysieke versus de mentale connectie'
       },
       {
         type: 'paragraph',
@@ -1259,7 +1259,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'heading',
-        text: '2. De Fysieke Lijn: Meer dan een Touwtje'
+        text: '2. De fysieke lijn: meer dan een touwtje'
       },
       {
         type: 'paragraph',
@@ -1267,31 +1267,31 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'subheading',
-        text: 'Ruimte voor de Neus'
+        text: 'Ruimte voor de neus'
       },
       {
         type: 'paragraph',
-        text: 'Aan de kust adviseert Marc het gebruik van een lange lijn (een sleeplijn of een kwalitatieve flexielijn van 5 tot 8 meter). Waarom?'
+        text: 'Aan de kust adviseert Marc het gebruik van een lange lijn (een sleeplijn of een kwalitatieve flexilijn van 5 tot 8 meter). Waarom?'
       },
       {
         type: 'list',
         items: [
           'Snuffelvrijheid: Een hond die mag snuffelen, verlaagt zijn hartslag en verwerkt prikkels beter.',
           'Bewegingsvrijheid: Honden wandelen van nature sneller dan mensen en in een zigzaggend patroon. Een langere lijn geeft hen de ruimte om hun natuurlijke ritme te volgen zonder dat de lijn voortdurend strak staat.',
-          'De Veilige Haven: Jij blijft het fysieke ankerpunt, maar je hond ervaart de autonomie die hij nodig heeft om psychologisch in balans te blijven.'
+          'De veilige haven: Jij blijft het fysieke ankerpunt, maar je hond ervaart de autonomie die hij nodig heeft om psychologisch in balans te blijven.'
         ]
       },
       {
         type: 'heading',
-        text: '3. De Mentale Leiband: Hoe Smeed je die Verbinding?'
+        text: '3. De mentale leiband: hoe smeed je die verbinding?'
       },
       {
         type: 'paragraph',
-        text: 'De mentale leiband is geen commando; het is een toestand van zijn. Het betekent dat je hond, ondanks de afleidingen, een deel van zijn bewustzijn bij jou houdt. Marc Serneel noemt dit "ingetuned" zijn.'
+        text: 'De mentale leiband is geen commando; het is een toestand van zijn. Het betekent dat je hond, ondanks de afleidingen, een deel van zijn bewustzijn bij jou houdt. Marc Serneel noemt dit "afgestemd" zijn — volledig in verbinding met jou.'
       },
       {
         type: 'subheading',
-        text: 'De Onzichtbare Cirkel'
+        text: 'De onzichtbare cirkel'
       },
       {
         type: 'paragraph',
@@ -1299,7 +1299,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'subheading',
-        text: 'Gecontroleerde Vrijheid'
+        text: 'Gecontroleerde vrijheid'
       },
       {
         type: 'paragraph',
@@ -1307,7 +1307,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'heading',
-        text: '4. De Zee als Ultieme Testomgeving'
+        text: '4. De zee als ultieme testomgeving'
       },
       {
         type: 'paragraph',
@@ -1328,7 +1328,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'heading',
-        text: '5. De Gereedschapskist: Cruciale Vaardigheden'
+        text: '5. De gereedschapskist: cruciale vaardigheden'
       },
       {
         type: 'paragraph',
@@ -1336,7 +1336,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'subheading',
-        text: 'I. De Recall (De Noodrem)'
+        text: 'I. De recall (de noodrem)'
       },
       {
         type: 'paragraph',
@@ -1349,7 +1349,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'subheading',
-        text: 'II. Het Stop-signaal (Het Anker)'
+        text: 'II. Het stop-signaal (het anker)'
       },
       {
         type: 'paragraph',
@@ -1369,7 +1369,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'heading',
-        text: '6. Educatie boven Bestraffing'
+        text: '6. Educatie boven bestraffing'
       },
       {
         type: 'paragraph',
@@ -1377,7 +1377,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'subheading',
-        text: 'Wanneer Leren Onmogelijk Is'
+        text: 'Wanneer leren onmogelijk is'
       },
       {
         type: 'paragraph',
@@ -1391,20 +1391,20 @@ export const blogPosts: BlogPost[] = [
         type: 'list',
         items: [
           'Zoek de rust op: Ga naar een stiller gedeelte van het strand of kies een ander tijdstip.',
-          'Natuurlijke ondersteuning: Soms kunnen natuurlijke supplementen helpen om de basis-stress van een hond te verlagen, waardoor er weer ruimte ontstaat in het hoofd om de mentale leiband te voelen.'
+          'Natuurlijke ondersteuning: Soms kunnen natuurlijke supplementen helpen om de basis-stress van een hond te verlagen, waardoor er weer ruimte ontstaat in het hoofd om de mentale leiband te voelen. Raadpleeg altijd eerst je dierenarts of een erkende hondengedragstherapeut voordat je supplementen toedient.'
         ]
       },
       {
         type: 'heading',
-        text: '7. De Rol van de Maatschappij'
+        text: '7. De rol van de maatschappij'
       },
       {
         type: 'paragraph',
-        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Marc Serneel pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband—dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen—creëren we het nodige draagvlak om deze vrije zones te behouden.'
+        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneel pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband—dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen—creëren we het nodige draagvlak om deze vrije zones te behouden.'
       },
       {
         type: 'heading',
-        text: 'Conclusie: De Dans aan de Vloedlijn'
+        text: 'Conclusie: de dans aan de vloedlijn'
       },
       {
         type: 'paragraph',
@@ -1412,7 +1412,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De "Kunst van de Mentale Leiband" is een proces. Het vraagt tijd, training en vooral: empathie. Het vraagt dat je leert kijken naar je hond en begrijpt wanneer de wereld om hem heen te groot wordt voor de connectie die jullie op dat moment hebben.'
+        text: 'De "kunst van de mentale leiband" is een proces. Het vraagt tijd, training en vooral: empathie. Het vraagt dat je leert kijken naar je hond en begrijpt wanneer de wereld om hem heen te groot wordt voor de connectie die jullie op dat moment hebben.'
       },
       {
         type: 'paragraph',
