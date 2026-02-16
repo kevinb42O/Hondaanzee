@@ -1206,7 +1206,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mentale-leiband-vrijheid-met-connectie',
-    title: 'De Mentale Leiband: Vrijheid met Connectie [+ VIDEO]',
+    title: 'De Mentale Leiband: Vrijheid met Connectie',
     subtitle: 'Waarom \'loslopen\' aan zee een mentale kunstvorm is',
     excerpt: 'De Belgische kust is voor honden een zintuiglijk paradijs. Maar achter het idyllische beeld van een loslopende hond schuilt een complexe realiteit. Ontdek de filosofie van de "mentale leiband" en hoe je een wandeling transformeert van controle naar vertrouwen.',
     date: '2026-02-16',
