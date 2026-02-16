@@ -45,6 +45,17 @@ const getGridClass = (index: number, total: number): string => {
 // Steden die dezelfde hoogte krijgen als de grote kaarten
 const TALL_CARDS = new Set(['wenduine', 'de-haan', 'de-panne']);
 
+// Images with pre-generated 640w responsive variants
+const RESPONSIVE_IMAGES = new Set([
+  '/knokke.webp', '/zeebrugge.webp', '/blankenberge-new.webp', '/wenduine.webp'
+]);
+
+const getResponsiveSrcSet = (image: string): string | undefined => {
+  if (!RESPONSIVE_IMAGES.has(image)) return undefined;
+  const base = image.replace('.webp', '');
+  return `${base}-640w.webp 640w, ${image} 960w`;
+};
+
 const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city, index, total }) => {
   const span = getGridSpan(index, total);
   const isFeatured = span >= 4;
@@ -56,6 +67,7 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
     : isMedium
       ? 'h-[280px] sm:h-[300px] lg:h-[340px]'
       : 'h-[260px] sm:h-[280px]';
+  const srcSet = getResponsiveSrcSet(city.image);
 
   return (
     <Link
@@ -70,6 +82,7 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
     >
       <img
         src={city.image}
+        srcSet={srcSet}
         alt={city.name}
         className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
         width={isFeatured ? 800 : isMedium ? 600 : 400}
@@ -118,11 +131,16 @@ const Home: React.FC = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>(0);
   const lastScrollY = useRef<number>(0);
+  const cachedHeroHeight = useRef<number>(0);
 
   const handleParallax = useCallback(() => {
     if (!heroRef.current || !bgRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
-    const heroHeight = heroRef.current.offsetHeight;
+    // Cache hero height to avoid repeated forced reflows
+    if (!cachedHeroHeight.current) {
+      cachedHeroHeight.current = heroRef.current.offsetHeight;
+    }
+    const heroHeight = cachedHeroHeight.current;
     // Only animate when hero is in viewport
     if (rect.bottom < 0 || rect.top > window.innerHeight) return;
     // Calculate scroll progress (0 at top, 1 when hero scrolled out)
@@ -149,8 +167,14 @@ const Home: React.FC = () => {
     handleParallax();
 
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Invalidate cached height on resize
+    const onResize = () => { cachedHeroHeight.current = 0; };
+    window.addEventListener('resize', onResize, { passive: true });
+
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
       cancelAnimationFrame(rafId.current);
     };
   }, [handleParallax]);

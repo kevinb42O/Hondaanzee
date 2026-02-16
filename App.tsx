@@ -4,10 +4,10 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
+import ResponsibilityBanner from './components/ResponsibilityBanner.tsx';
 
 // Lazy-loaded below-the-fold components
 const Footer = React.lazy(() => import('./components/Footer.tsx'));
-const ResponsibilityBanner = React.lazy(() => import('./components/ResponsibilityBanner.tsx'));
 
 // Lazy-loaded pages for code-splitting
 const Home = React.lazy(() => import('./pages/Home.tsx'));
@@ -126,7 +126,9 @@ function App() {
           </ErrorBoundary>
         </main>
         <ResponsibilityBanner />
-        <Footer />
+        <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
+          <Footer />
+        </Suspense>
         <FloatingSupport />
         <Analytics />
       </div>
