@@ -67,7 +67,7 @@ const AllHotspots: React.FC = () => {
   const hasFilters = selectedCity !== 'all' || selectedType !== 'all';
 
   return (
-    <div className="animate-in fade-in overflow-x-clip">
+    <div className="animate-in fade-in overflow-x-hidden">
       <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
         {/* Background Image */}
         <div
@@ -119,11 +119,11 @@ const AllHotspots: React.FC = () => {
         </div>
 
         {/* Wave Divider */}
-        <div className="absolute -bottom-3 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1200 120"
               preserveAspectRatio="none"
@@ -135,7 +135,7 @@ const AllHotspots: React.FC = () => {
             </svg>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1200 120"
               preserveAspectRatio="none"

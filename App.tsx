@@ -104,7 +104,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-clip">
+      <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-hidden">
         <ScrollToHash />
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">Ga naar inhoud</a>
         <Header />

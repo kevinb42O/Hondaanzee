@@ -234,7 +234,7 @@ const Home: React.FC = () => {
   }, [searchQuery]);
 
   return (
-    <div className="pb-12 md:pb-24 overflow-x-clip overflow-y-visible">
+    <div className="pb-12 md:pb-24 overflow-x-hidden overflow-y-visible">
       {/* Hero Section with Dynamic Background */}
       <div ref={heroRef} className="relative -mt-[72px] sm:-mt-[80px] md:-mt-[96px] pt-[72px] sm:pt-[80px] md:pt-[96px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
         {/* Parallax Background Image */}
@@ -266,15 +266,15 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right">
-          <div className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 text-[9px] sm:text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-6 sm:mb-8 mt-4 sm:mt-6 md:mt-8 animate-in fade-in slide-in-from-bottom-4 shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-300" style={{ boxShadow: '0 10px 30px -5px rgba(0,0,0,0.4), 0 4px 10px -2px rgba(0,0,0,0.3)' }}>
+        <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2">
+          <div className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-900 px-4 sm:px-6 py-2.5 sm:py-3 text-[8px] sm:text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.1em] sm:tracking-[0.2em] mb-6 sm:mb-8 mt-4 sm:mt-6 md:mt-8 animate-in fade-in slide-in-from-bottom-4 shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-300" style={{ boxShadow: '0 10px 30px -5px rgba(0,0,0,0.4), 0 4px 10px -2px rgba(0,0,0,0.3)', maxWidth: 'calc(100% - 2rem)' }}>
             <Sparkles size={12} className="text-sky-500 sm:w-[14px] sm:h-[14px]" strokeWidth={3} />
             <span className="bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">De meest complete kustgids van België</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 drop-shadow-2xl font-heading" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3)', letterSpacing: '-0.5px', fontWeight: 700 }}>
+          <h1 className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 drop-shadow-2xl font-heading" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}>
             Met je hond naar zee? <br className="hidden sm:block" />
-            <span className="text-sky-300 relative inline-block">
+            <span className="text-sky-300 relative inline-block max-w-full">
               Wij weten precies
               <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
@@ -287,7 +287,7 @@ const Home: React.FC = () => {
             <span className="text-white font-semibold">verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
           </p>
 
-          <div className="max-w-lg md:max-w-3xl mx-auto relative px-6 sm:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+          <div className="max-w-lg md:max-w-3xl mx-auto relative px-2 sm:px-4 md:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
             <div className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
               <div className="pl-3 sm:pl-4 md:pl-6 flex items-center pointer-events-none">
                 <Search size={20} className="search-icon text-slate-400 sm:w-[22px] sm:h-[22px]" />
@@ -361,11 +361,11 @@ const Home: React.FC = () => {
         </div>
 
         {/* Organic Wave Divider with Infinite Animation */}
-        <div className="absolute -bottom-3 left-0 w-full overflow-x-clip overflow-y-visible leading-[0] z-10">
+        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
           <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1200 120"
               preserveAspectRatio="none"
@@ -377,7 +377,7 @@ const Home: React.FC = () => {
             </svg>
             <svg
               className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1200 120"
               preserveAspectRatio="none"

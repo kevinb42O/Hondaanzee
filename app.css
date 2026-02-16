@@ -9,13 +9,19 @@
 
 html,
 body {
-  overflow-x: clip;
-  max-width: 100vw;
+  overflow-x: hidden; /* Fallback for older WebViews (Facebook in-app browser) */
+  overflow-x: clip;   /* Modern browsers: same as hidden but doesn't create scroll container */
+  max-width: 100%;    /* 100vw includes scrollbar width — use 100% instead */
   position: relative;
 }
 
-* {
-  /* Prevent any element from causing horizontal overflow */
+#root {
+  overflow-x: hidden; /* Extra safety net for in-app browsers */
+  overflow-x: clip;
+}
+
+/* Prevent media from causing horizontal overflow (targeted, not blanket *) */
+img, video, iframe, embed, object, svg:not([class]) {
   max-width: 100%;
 }
 
@@ -169,7 +175,7 @@ body {
   }
 
   100% {
-    transform: translateX(-100vw);
+    transform: translateX(-50%); /* Was -100vw — use percentage to avoid vw overflow in WebViews */
   }
 }
 
@@ -180,39 +186,39 @@ body {
 /* Sailboat Animation - Sailing across the wave horizon */
 @keyframes sailboat-journey {
   0% {
-    transform: translateX(-5vw) translateY(0) rotate(-7deg);
+    transform: translateX(-5%) translateY(0) rotate(-7deg);
   }
 
   12.5% {
-    transform: translateX(7.5vw) translateY(-18px) rotate(5deg);
+    transform: translateX(7.5%) translateY(-18px) rotate(5deg);
   }
 
   25% {
-    transform: translateX(25vw) translateY(12px) rotate(-6deg);
+    transform: translateX(25%) translateY(12px) rotate(-6deg);
   }
 
   37.5% {
-    transform: translateX(37.5vw) translateY(-20px) rotate(6deg);
+    transform: translateX(37.5%) translateY(-20px) rotate(6deg);
   }
 
   50% {
-    transform: translateX(52.5vw) translateY(8px) rotate(-4deg);
+    transform: translateX(52.5%) translateY(8px) rotate(-4deg);
   }
 
   62.5% {
-    transform: translateX(67.5vw) translateY(-16px) rotate(7deg);
+    transform: translateX(67.5%) translateY(-16px) rotate(7deg);
   }
 
   75% {
-    transform: translateX(77.5vw) translateY(14px) rotate(-5deg);
+    transform: translateX(77.5%) translateY(14px) rotate(-5deg);
   }
 
   87.5% {
-    transform: translateX(90vw) translateY(-12px) rotate(5deg);
+    transform: translateX(90%) translateY(-12px) rotate(5deg);
   }
 
   100% {
-    transform: translateX(105vw) translateY(0) rotate(-7deg);
+    transform: translateX(105%) translateY(0) rotate(-7deg);
   }
 }
 
@@ -572,5 +578,31 @@ body {
 @supports (-webkit-touch-callout: none) {
   .bg-fixed {
     background-attachment: scroll !important;
+  }
+}
+
+/* ====================================
+   HERO UNDERLINE EFFECT
+   Works with inline elements (allows text wrapping)
+   ==================================== */
+.hero-underline {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: rgba(125, 211, 252, 0.35);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 3px;
+}
+
+@media (min-width: 640px) {
+  .hero-underline {
+    text-underline-offset: 6px;
+    text-decoration-thickness: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-underline {
+    text-underline-offset: 8px;
+    text-decoration-thickness: 5px;
   }
 }
