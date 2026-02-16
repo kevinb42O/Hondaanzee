@@ -8,7 +8,7 @@ const ResponsibilityBanner: React.FC = () => {
   const isMapPage = location.pathname === '/kaart';
 
   return (
-    <section className="relative py-20 sm:py-28 md:py-36 overflow-hidden" style={{ contain: 'layout style paint' }}>
+    <section className="relative py-20 sm:py-28 md:py-36 overflow-hidden">
       {/* Wave Divider at Top */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-10 rotate-180">
         <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>

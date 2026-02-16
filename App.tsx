@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
-import ResponsibilityBanner from './components/ResponsibilityBanner.tsx';
 
 // Lazy-loaded below-the-fold components
+const ResponsibilityBanner = React.lazy(() => import('./components/ResponsibilityBanner.tsx'));
 const Footer = React.lazy(() => import('./components/Footer.tsx'));
 
 // Lazy-loaded pages for code-splitting
@@ -125,7 +125,9 @@ function App() {
             </Suspense>
           </ErrorBoundary>
         </main>
-        <ResponsibilityBanner />
+        <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
+          <ResponsibilityBanner />
+        </Suspense>
         <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
           <Footer />
         </Suspense>
