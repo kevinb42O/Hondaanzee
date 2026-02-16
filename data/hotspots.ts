@@ -255,7 +255,7 @@ export const HOTSPOTS: Hotspot[] = [
     imagePosition: 'center 25%',
     city: 'blankenberge',
     address: 'Grote Markt 2/0002, 8370 Blankenberge',
-    website: 'www.cozy-moments.be'
+    website: 'https://www.cozy-moments.be'
   },
   {
     id: 23,
@@ -600,7 +600,7 @@ export const HOTSPOTS: Hotspot[] = [
     image: '/koffiepotje.webp',
     city: 'blankenberge',
     address: 'Molenstraat 48, 8370 Blankenberge',
-    website: 'www.koffiepotje.be'
+    website: 'https://www.koffiepotje.be'
   },
   {
     id: 53,

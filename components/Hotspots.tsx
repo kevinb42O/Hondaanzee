@@ -112,18 +112,18 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                       <span className="text-sky-600">{getIcon(spot.type)}</span> {spot.type}
                     </div>
                     {spot.tags.includes('Aanrader') && (
-                      <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex flex-col items-center" style={{ filter: 'drop-shadow(0 2px 8px rgba(161, 98, 7, 0.5))' }}>
-                        <svg width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex items-center gap-1.5 bg-slate-900/80 backdrop-blur-sm px-2.5 py-1.5 rounded-full" style={{ filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))' }}>
+                        <svg width="16" height="16" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <defs>
-                            <linearGradient id="starGold" x1="0" y1="0" x2="40" y2="38" gradientUnits="userSpaceOnUse">
+                            <linearGradient id="starGoldHotspots" x1="0" y1="0" x2="40" y2="38" gradientUnits="userSpaceOnUse">
                               <stop offset="0%" stopColor="#fbbf24" />
                               <stop offset="50%" stopColor="#f59e0b" />
                               <stop offset="100%" stopColor="#d97706" />
                             </linearGradient>
                           </defs>
-                          <path d="M20 0l5.09 12.26L38.04 14.6 28.02 23.74 30.18 37 20 30.76 9.82 37l2.16-13.26L2 14.6l12.91-2.34z" fill="url(#starGold)" stroke="#fde68a" strokeWidth="1" />
+                          <path d="M20 0l5.09 12.26L38.04 14.6 28.02 23.74 30.18 37 20 30.76 9.82 37l2.16-13.26L2 14.6l12.91-2.34z" fill="url(#starGoldHotspots)" />
                         </svg>
-                        <span className="mt-0.5 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em] text-amber-700" style={{ textShadow: '0 0 8px rgba(251, 191, 36, 0.6)' }}>Aanrader</span>
+                        <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em] text-amber-300">Aanrader</span>
                       </div>
                     )}
                   </div>
