@@ -131,20 +131,26 @@ const Home: React.FC = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>(0);
   const lastScrollY = useRef<number>(0);
+  // Cache hero geometry to avoid forced reflows on every scroll frame
   const cachedHeroHeight = useRef<number>(0);
+  const cachedHeroOffsetTop = useRef<number>(0);
 
   const handleParallax = useCallback(() => {
     if (!heroRef.current || !bgRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    // Cache hero height to avoid repeated forced reflows
+    // Measure hero geometry only once (invalidated on resize)
     if (!cachedHeroHeight.current) {
-      cachedHeroHeight.current = heroRef.current.offsetHeight;
+      const rect = heroRef.current.getBoundingClientRect();
+      cachedHeroHeight.current = rect.height;
+      cachedHeroOffsetTop.current = rect.top + window.scrollY;
     }
     const heroHeight = cachedHeroHeight.current;
+    // Derive viewport-relative position from scroll without forcing reflow
+    const rectTop = cachedHeroOffsetTop.current - window.scrollY;
+    const rectBottom = rectTop + heroHeight;
     // Only animate when hero is in viewport
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    if (rectBottom < 0 || rectTop > window.innerHeight) return;
     // Calculate scroll progress (0 at top, 1 when hero scrolled out)
-    const scrollProgress = -rect.top / heroHeight;
+    const scrollProgress = -rectTop / heroHeight;
     const translateY = scrollProgress * heroHeight * 0.35;
     const scale = 1 + scrollProgress * 0.08;
     bgRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
@@ -168,8 +174,8 @@ const Home: React.FC = () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Invalidate cached height on resize
-    const onResize = () => { cachedHeroHeight.current = 0; };
+    // Invalidate cached geometry on resize
+    const onResize = () => { cachedHeroHeight.current = 0; cachedHeroOffsetTop.current = 0; };
     window.addEventListener('resize', onResize, { passive: true });
 
     return () => {

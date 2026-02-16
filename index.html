@@ -140,7 +140,13 @@
 </head>
 
 <body class="bg-slate-50 text-slate-900">
-    <div id="root"></div>
+    <div id="root">
+        <!-- Static hero shell for instant LCP - replaced by React on mount -->
+        <div style="position:relative;min-height:85vh;overflow:hidden;background:#0f172a">
+            <img src="/lexi.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync">
+            <div style="position:absolute;inset:0;background:rgba(15,23,42,0.6)"></div>
+        </div>
+    </div>
     <script type="module" src="/index.tsx"></script>
 </body>
 
