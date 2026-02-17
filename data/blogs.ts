@@ -1224,7 +1224,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Het beeld van een hond die in volle galop door de branding klieft, is het icoon van pure vrijheid. Maar achter dat idyllische plaatje schuilt een complexe realiteit. Volgens Marc Serneel, de drijvende kracht achter VZW Verantwoord Los en te gast in de Olly & Molly Podcast, bestaat "echte" vrijheid voor een hond eigenlijk niet—of zou die althans niet mogen bestaan in de vorm die wij vaak voor ogen hebben.'
+        text: 'Het beeld van een hond die in volle galop door de branding klieft, is het icoon van pure vrijheid. Maar achter dat idyllische plaatje schuilt een complexe realiteit. Volgens Marc Serneels, de drijvende kracht achter VZW Verantwoord Los en te gast in de Olly & Molly Podcast, bestaat "echte" vrijheid voor een hond eigenlijk niet—of zou die althans niet mogen bestaan in de vorm die wij vaak voor ogen hebben.'
       },
       {
         type: 'paragraph',
@@ -1236,7 +1236,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De meeste hondeneigenaars zien de leiband als een noodzakelijk kwaad, een beperking die we zo snel mogelijk willen verwijderen zodra we het strand betreden. Marc Serneel draait die gedachte om. Hij stelt dat een verantwoorde hond altijd aangelijnd is. De vraag is alleen: welke lijn gebruik je?'
+        text: 'De meeste hondeneigenaars zien de leiband als een noodzakelijk kwaad, een beperking die we zo snel mogelijk willen verwijderen zodra we het strand betreden. Marc Serneels draait die gedachte om. Hij stelt dat een verantwoorde hond altijd aangelijnd is. De vraag is alleen: welke lijn gebruik je?'
       },
       {
         type: 'subheading',
@@ -1263,7 +1263,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Laten we eerlijk zijn: de standaard leiband van 1,5 meter is voor een hond vaak een bron van frustratie. Marc Serneel is daar heel duidelijk over. Een hond beleeft de wereld via zijn neus. Als hij aan een korte lijn loopt, wordt hij voortdurend beperkt in zijn natuurlijke exploratiegedrag.'
+        text: 'Laten we eerlijk zijn: de standaard leiband van 1,5 meter is voor een hond vaak een bron van frustratie. Marc Serneels is daar heel duidelijk over. Een hond beleeft de wereld via zijn neus. Als hij aan een korte lijn loopt, wordt hij voortdurend beperkt in zijn natuurlijke exploratiegedrag.'
       },
       {
         type: 'subheading',
@@ -1287,7 +1287,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De mentale leiband is geen commando; het is een toestand van zijn. Het betekent dat je hond, ondanks de afleidingen, een deel van zijn bewustzijn bij jou houdt. Marc Serneel noemt dit "afgestemd" zijn — volledig in verbinding met jou.'
+        text: 'De mentale leiband is geen commando; het is een toestand van zijn. Het betekent dat je hond, ondanks de afleidingen, een deel van zijn bewustzijn bij jou houdt. Marc Serneels noemt dit "afgestemd" zijn — volledig in verbinding met jou.'
       },
       {
         type: 'subheading',
@@ -1332,7 +1332,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Marc Serneel spreekt liever over signalen of verzoeken dan over rigide commando\'s. Een commando impliceert dwang; een signaal impliceert een afspraak. Voor een veilige strandervaring heb je er drie nodig die rotsvast moeten zijn:'
+        text: 'Marc Serneels spreekt liever over signalen of verzoeken dan over rigide commando\'s. Een commando impliceert dwang; een signaal impliceert een afspraak. Voor een veilige strandervaring heb je er drie nodig die rotsvast moeten zijn:'
       },
       {
         type: 'subheading',
@@ -1400,7 +1400,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneel pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband—dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen—creëren we het nodige draagvlak om deze vrije zones te behouden.'
+        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneels pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband—dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen—creëren we het nodige draagvlak om deze vrije zones te behouden.'
       },
       {
         type: 'heading',
@@ -1425,11 +1425,11 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'callout',
         title: 'Wil je dieper in de materie duiken?',
-        text: 'De inzichten van Marc Serneel zijn slechts het topje van de ijsberg. Voor iedereen die meer wil leren over de psychologie achter het loslopen, de werking van prikkels en praktische trainingstips, raden we de volledige podcastaflevering van Olly & Molly aan. Hierin gaat Marc nog dieper in op specifieke casussen en de missie van VZW Verantwoord Los.'
+        text: 'De inzichten van Marc Serneels zijn slechts het topje van de ijsberg. Voor iedereen die meer wil leren over de psychologie achter het loslopen, de werking van prikkels en praktische trainingstips, raden we de volledige podcastaflevering van Olly & Molly aan. Hierin gaat Marc nog dieper in op specifieke casussen en de missie van VZW Verantwoord Los.'
       },
       {
         type: 'youtube',
-        title: 'Bekijk de volledige podcast: Olly & Molly met Marc Serneel',
+        title: 'Bekijk de volledige podcast: Olly & Molly met Marc Serneels',
         url: 'https://www.youtube.com/watch?v=xthJFBVNVRk'
       }
     ]
