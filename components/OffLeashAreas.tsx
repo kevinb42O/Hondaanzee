@@ -1,12 +1,13 @@
 
-import React, { useMemo, useEffect, useRef } from 'react';
+import React, { useMemo, useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { MapPin, Navigation, Info, Clock, ExternalLink } from 'lucide-react';
+import { MapPin, Navigation, Info, Clock, ExternalLink, MessageSquare } from 'lucide-react';
 import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { supabase } from '../utils/supabaseClient';
 
 // Fix Leaflet's default icon path issues
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -74,6 +75,27 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
   const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
+  const [reviewCounts, setReviewCounts] = useState<Record<string, number>>({});
+
+  // Fetch review counts for city areas
+  useEffect(() => {
+    const citySlugs = OFF_LEASH_AREAS.filter(a => a.city === city.slug).map(a => a.slug);
+    if (citySlugs.length === 0) return;
+    const fetchCounts = async () => {
+      const { data, error } = await supabase
+        .from('reviews')
+        .select('area_slug')
+        .in('area_slug', citySlugs);
+      if (!error && data) {
+        const counts: Record<string, number> = {};
+        data.forEach((row: { area_slug: string }) => {
+          counts[row.area_slug] = (counts[row.area_slug] || 0) + 1;
+        });
+        setReviewCounts(counts);
+      }
+    };
+    fetchCounts();
+  }, [city.slug]);
 
   const isAreaOpen = (area: OffLeashArea): boolean => {
     if (!area.openingHours) return true; // Default to always open if not specified
@@ -277,6 +299,12 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                             <div className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs">
                               Bekijk details →
                             </div>
+                            {reviewCounts[area.slug] > 0 && (
+                              <div className="inline-flex items-center gap-1 text-slate-400 font-semibold text-[10px]">
+                                <MessageSquare size={11} />
+                                {reviewCounts[area.slug]} {reviewCounts[area.slug] === 1 ? 'review' : 'reviews'}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </button>

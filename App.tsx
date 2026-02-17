@@ -25,6 +25,7 @@ const About = React.lazy(() => import('./pages/About.tsx'));
 const GoedOmTeWeten = React.lazy(() => import('./pages/GoedOmTeWeten.tsx'));
 const Blog = React.lazy(() => import('./pages/Blog.tsx'));
 const BlogDetail = React.lazy(() => import('./pages/BlogDetail.tsx'));
+const Community = React.lazy(() => import('./pages/Community.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -125,6 +126,7 @@ function App() {
                 <Route path="/steun-ons" element={<Support />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
+                <Route path="/community" element={<Community />} />
                 <Route path="/:slug" element={<CityPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

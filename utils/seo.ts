@@ -204,6 +204,34 @@ export const SEO_DATA = {
     }
   },
 
+  community: {
+    title: 'Kusthonden Community 📸 | Foto van de Maand — HondAanZee.be',
+    description: 'Word deel van de HondAanZee community! Stuur je mooiste hondenfotos aan de Belgische kust via WhatsApp. Elke maand een nieuw thema, elke gemeente een Wall of Fame.',
+    keywords: 'hondenfoto kust, community hondaanzee, foto van de maand hond zee, hondenfoto belgische kust, kusthonden community, wall of fame hond strand',
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+          { "@type": "ListItem", "position": 2, "name": "Community", "item": "https://hondaanzee.be/community" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Kusthonden Community",
+        "url": "https://hondaanzee.be/community",
+        "description": "Community pagina waar hondeneigenaars hun mooiste fotos aan de Belgische kust delen",
+        "publisher": {
+          "@type": "Organization",
+          "name": "HondAanZee.be",
+          "url": "https://hondaanzee.be"
+        }
+      }
+    ]
+  },
+
   blog: {
     title: 'Blog | HondAanZee.be — Tips, Natuur & Nieuws over Honden aan de Belgische Kust',
     description: 'Lees onze blogs over honden aan de Belgische kust: van zeehonden op het strand tot opruimacties. Nuttige info, tips en achtergronden voor elke hondenbezitter.',

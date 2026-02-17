@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 /* ====================================
+   KOEKJES METER POPUP ANIMATION
+   ==================================== */
+
+@keyframes koekje-pop-in {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.92); }
+  60%  { opacity: 1; transform: translateY(-4px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ====================================
    GLOBAL OVERFLOW PROTECTION
    Prevent horizontal scroll on mobile
    ==================================== */

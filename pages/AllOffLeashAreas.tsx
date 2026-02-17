@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, X, Star, MapPin, Navigation } from 'lucide-react';
+import { ArrowLeft, X, Star, MapPin, Navigation, MessageSquare } from 'lucide-react';
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
@@ -10,6 +10,7 @@ import ImageModal from '../components/ImageModal.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ReviewSection from '../components/ReviewSection';
+import { supabase } from '../utils/supabaseClient';
 
 // Fix Leaflet's default icon path issues
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -67,9 +68,27 @@ const AllOffLeashAreas: React.FC = () => {
   const leafletInstance = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
   const areaDetailRef = useRef<HTMLDivElement>(null);
+  const [reviewCounts, setReviewCounts] = useState<Record<string, number>>({});
 
 
   useSEO(SEO_DATA.losloopzones);
+
+  // Fetch review counts for all areas
+  useEffect(() => {
+    const fetchReviewCounts = async () => {
+      const { data, error } = await supabase
+        .from('reviews')
+        .select('area_slug');
+      if (!error && data) {
+        const counts: Record<string, number> = {};
+        data.forEach((row: { area_slug: string }) => {
+          counts[row.area_slug] = (counts[row.area_slug] || 0) + 1;
+        });
+        setReviewCounts(counts);
+      }
+    };
+    fetchReviewCounts();
+  }, []);
 
   // Handle URL parameter for direct area selection
   useEffect(() => {
@@ -477,11 +496,17 @@ const AllOffLeashAreas: React.FC = () => {
                             {area.description && (
                               <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-4">{area.description}</p>
                             )}
-                            <div className="pt-3 border-t border-slate-100">
+                            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                               <span className="text-sky-600 font-bold text-sm group-hover:gap-2 flex items-center transition-all">
                                 Bekijk details{' '}
                                 <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                               </span>
+                              {reviewCounts[area.slug] > 0 && (
+                                <span className="text-slate-400 text-xs font-semibold flex items-center gap-1">
+                                  <MessageSquare size={12} />
+                                  {reviewCounts[area.slug]} {reviewCounts[area.slug] === 1 ? 'review' : 'reviews'}
+                                </span>
+                              )}
                             </div>
                           </div>
                         </button>

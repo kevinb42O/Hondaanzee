@@ -24,6 +24,7 @@ const NAV_ITEMS: NavItem[] = [
     { to: '/kaart', label: 'Kaart' },
     { to: '/goed-om-te-weten', label: 'Info' },
     { to: '/blog', label: 'Blog', startsWith: true },
+    { to: '/community', label: 'Community 📸' },
     { to: '/over-ons', label: 'Over ons' },
 ];
 
