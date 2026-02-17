@@ -25,7 +25,7 @@ const TOPPER_VAN_DE_MAAND = {
   dogName: 'Billie',
   ownerName: 'Sarissa M.',
   city: 'Oostende',
-  caption: 'Billie als koningin van Oostende — altijd klaar voor avontuur aan zee! 👑',
+  caption: 'Billie als koning van Oostende — altijd klaar voor avontuur aan zee! 👑',
 };
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
