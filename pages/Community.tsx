@@ -19,8 +19,8 @@ const MONTHLY_THEMES = [
   { month: 11, label: 'December',  emoji: '🎄', theme: 'Kerst aan de Kust',           description: 'Kerstmuts, lichtjes, kerstboom op het strand — maak er iets magisch van! De feestelijkste hondenfoto wint eeuwige roem.' },
 ];
 
-// ─── TOPPER VAN DE MAAND ──────────────────────────────────────────────
-const TOPPER_VAN_DE_MAAND = {
+// ─── TOPPER VAN DE WEEK ───────────────────────────────────────────────
+const TOPPER_VAN_DE_WEEK = {
   image: '/community/oostende.webp',
   dogName: 'Billie',
   ownerName: 'Sarissa M.',
@@ -64,7 +64,7 @@ const Community: React.FC = () => {
     `Hey Kevin & Jax! 🐾\n\nIk wil graag een foto insturen voor de community!\n\n📍 Gemeente: \n🐶 Naam hond: \n📸 Thema: ${currentTheme.theme}\n\n[Foto hieronder toevoegen]`
   )}`;
 
-  const topper = TOPPER_VAN_DE_MAAND;
+  const topper = TOPPER_VAN_DE_WEEK;
 
   return (
     <div className="min-h-screen bg-white">
@@ -89,7 +89,7 @@ const Community: React.FC = () => {
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-5 sm:mb-6">
             Word de volgende{' '}
             <span className="text-sky-600 relative inline-block">
-              Topper van de Maand
+              Topper van de Week
               <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-400/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
               </svg>
@@ -97,7 +97,7 @@ const Community: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-slate-500 leading-relaxed max-w-lg mx-auto">
-            Elke maand kiezen we één hond als Topper van de Maand — groot in beeld op onze site. Stuur je foto via WhatsApp en wie weet sta jij er volgende maand!
+            Elke week kiezen we één hond als Topper van de Week — groot in beeld op onze site. Stuur je foto via WhatsApp en wie weet sta jij er volgende week!
           </p>
         </div>
       </section>
@@ -196,7 +196,7 @@ const Community: React.FC = () => {
         )}
       </section>
 
-      {/* ═══════════ TOPPER VAN DE MAAND ═══════════ */}
+      {/* ═══════════ TOPPER VAN DE WEEK ═══════════ */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
         {/* Section header */}
         <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-14">
@@ -205,10 +205,10 @@ const Community: React.FC = () => {
             <span>{currentTheme.label} {now.getFullYear()}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
-            Topper van de Maand
+            Topper van de Week
           </h2>
           <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-            Elke maand zetten we één hond in de spotlights. <span className="font-semibold text-slate-700">Wordt de volgende de jouwe?</span>
+            Elke week zetten we één hond in de spotlights. <span className="font-semibold text-slate-700">Wordt de volgende de jouwe?</span>
           </p>
         </div>
 
@@ -226,7 +226,7 @@ const Community: React.FC = () => {
                 <Star size={14} className="text-amber-900/70 fill-amber-900/70" />
               </div>
               <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-amber-900/60">
-                Topper van de Maand
+                Topper van de Week
               </p>
             </div>
           </div>
@@ -266,7 +266,7 @@ const Community: React.FC = () => {
                   >
                     <img
                       src={topper.image}
-                      alt={`${topper.dogName} — Topper van de Maand in ${topper.city}`}
+                      alt={`${topper.dogName} — Topper van de Week in ${topper.city}`}
                       className="w-full h-[340px] sm:h-[440px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                       loading="eager"
                       decoding="async"
@@ -303,7 +303,7 @@ const Community: React.FC = () => {
         {/* CTA under showcase */}
         <div className="text-center mt-8 sm:mt-12">
           <p className="text-sm sm:text-base text-slate-500 mb-5 leading-relaxed">
-            Wil jij dat jouw hond volgende maand hier staat? Stuur je leukste foto!
+            Wil jij dat jouw hond volgende week hier staat? Stuur je leukste foto!
           </p>
           <a
             href={whatsappLink}

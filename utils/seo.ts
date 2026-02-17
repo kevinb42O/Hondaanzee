@@ -205,9 +205,9 @@ export const SEO_DATA = {
   },
 
   community: {
-    title: 'Kusthonden Community 📸 | Foto van de Maand — HondAanZee.be',
-    description: 'Word deel van de HondAanZee community! Stuur je mooiste hondenfotos aan de Belgische kust via WhatsApp. Elke maand een nieuw thema, elke gemeente een Wall of Fame.',
-    keywords: 'hondenfoto kust, community hondaanzee, foto van de maand hond zee, hondenfoto belgische kust, kusthonden community, wall of fame hond strand',
+    title: 'Kusthonden Community 📸 | Topper van de Week — HondAanZee.be',
+    description: 'Word deel van de HondAanZee community! Stuur je mooiste hondenfotos aan de Belgische kust via WhatsApp. Elke week een nieuwe topper, elke gemeente een Wall of Fame.',
+    keywords: 'hondenfoto kust, community hondaanzee, topper van de week hond zee, hondenfoto belgische kust, kusthonden community, wall of fame hond strand',
     structuredData: [
       {
         "@context": "https://schema.org",
