@@ -223,6 +223,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://ibisdehaan.be/'
   },
   {
+    id: 86,
+    name: 'Pizzeria Piano Piano',
+    type: 'Restaurant',
+    description: 'Authentieke Italiaanse pizzeria met 34 jaar ervaring en een hart van goud. Dit warme familiebedrijf, nu overgenomen door de nieuwe generatie, serveert nog steeds dezelfde overheerlijke pizza\'s en pasta\'s die je van vroeger kent - misschien zelfs nog beter! Geniet van verse gerechten in een gezellige sfeer waar verhalen, lachen en uiteraard heerlijke pizza gedeeld worden. Je viervoeter is hier van harte welkom! Check hun website om te reserveren.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Authentiek', 'Pizza', 'Pasta', 'Familie-vriendelijk', '34 jaar ervaring'],
+    image: '/pianopiano.webp',
+    city: 'de-haan',
+    address: 'Kapellestraat 10, 8420 De Haan',
+    website: 'https://pizzeriapianopiano.be/'
+  },
+  {
     id: 20,
     name: "Bel'air",
     type: 'Restaurant',
@@ -557,6 +568,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: ''
   },
   {
+    id: 85,
+    name: 'La Vie',
+    type: 'Restaurant',
+    description: 'Gezellig tapasrestaurant centraal gelegen vlak aan de zeedijk van Oostende. Geniet van vers bereide tapas, verrassende cocktails en goede wijnen in een warme, gedeelde sfeer – perfect voor een avondje uit met vrienden of familie! Honden zijn hier hartelijk welkom, groot of klein, en er staat een waterbak klaar. Betaalbare gastronomie zonder rekeningstress. Wil je reserveren? Check hun prachtige website voor meer info!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Tapas', 'Sharing', 'Cocktails', 'Betaalbaar', 'Centrum'],
+    image: '/lavie.webp',
+    city: 'oostende',
+    address: 'Kadzandstraat 14, 8400 Oostende',
+    website: 'https://tapas-lavie.be/'
+  },
+  {
     id: 71,
     name: 'Residence Du Centre',
     type: 'Slapen',
@@ -834,6 +856,17 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'wenduine',
     address: 'De Smet de Naeyerlaan 1, 8420 Wenduine',
     website: 'https://welkomthuus.be/'
+  },
+  {
+    id: 87,
+    name: 'Vissershuisje 89',
+    type: 'Slapen',
+    description: 'Charmant vissershuisje in het rustige Zeepark Haerendycke, perfect gelegen tussen Wenduine en Blankenberge. De ideale uitvalsbasis voor strandplezier en verkenning van de kust! Het strand is op wandelafstand via de Wrakhoutbrug, en de kusttram stopt voor het park - een auto is niet nodig. Comfortabel ingericht met parkeerplaats en alles voor een ontspannen verblijf. Maximaal 2 hondjes welkom na overleg. Ontdek de badsteden, ga fietsen in de zeepolders of geniet gewoon van de rust!',
+    tags: ['Honden toegelaten', 'Vakantiewoning', 'Nabij strand', 'Rustig', 'Kusttram', 'Parking', 'Max 2 honden'],
+    image: '/vissershuisje.jpeg',
+    city: 'wenduine',
+    address: 'Wulpjesweg 3_0089, 8420 Wenduine',
+    website: 'https://www.vissershuisje89.be/'
   },
   {
     id: 72,
