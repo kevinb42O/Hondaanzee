@@ -983,7 +983,7 @@ export const HOTSPOTS: Hotspot[] = [
     name: 'De Zeegeuzen',
     type: 'Café',
     description: 'Legendarisch visserscafé tussen de zeedijk en het stadscentrum waar geschiedenis voelbaar is. Hier komen mariniers, vissers, kunstenaars en schrijvers al sinds jaar en dag samen voor een goeie babbel en het befaamde biertje "De Zeegeuze". Dit authentieke praatcafé biedt een platform voor live muziek, jamsessies, comedy en quizavonden. Een échte cultpub waar verhalen worden verteld, muziek wordt gemaakt en gedichten worden geschreven. Ver genoeg van het bruisende nachtleven om comfortabel te zijn, dichtbij genoeg om altijd gezellig te blijven. Je viervoeter is hier vanzelfsprekend welkom!',
-    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Live muziek', 'Authentiek', 'Cultcafé', 'Aanrader'],
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Live muziek', 'Authentiek', 'Cultcafé'],
     image: '/zeegeuzen2.webp',
     city: 'oostende',
     address: 'Kapucijnenstraat 38, 8400 Oostende',
