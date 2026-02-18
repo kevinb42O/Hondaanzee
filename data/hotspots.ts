@@ -966,5 +966,27 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'middelkerke',
     address: 'Lombardsijde, 8434 Middelkerke',
     website: 'https://www.wheredogscomehome.eu/'
+  },
+  {
+    id: 90,
+    name: 'New Poseidon',
+    type: 'Café',
+    description: 'Op een boogscheut van de zee ligt Brasserie New Poseidon, gerund door zaakvoerders Jeroen en Tessa. Dit sfeervolle café & brasserie combineert een warme cafésfeer met een keuken die focust op dagverse producten en toegankelijke smaken. Een plek waar locals en bezoekers zich thuis voelen – voor een koffie, een dagschotel, gezellige babbel of een leuke feestje. En als je geluk hebt, maak je kennis met Yoekie, hun eigen viervoeter die regelmatig gasten verwelkomt en zorgt voor extra gezelligheid. Ontspannen genieten van een heerlijk drankje, een snack, een verrukkelijk ijsje of verse pannenkoek!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Dagverse producten', 'Huishond aanwezig', 'Aanrader'],
+    image: '/newposeidon.webp',
+    city: 'blankenberge',
+    address: 'A. Ruzettelaan 157, 8370 Blankenberge',
+    website: 'https://newposeidon.be/nl/'
+  },
+  {
+    id: 89,
+    name: 'De Zeegeuzen',
+    type: 'Café',
+    description: 'Legendarisch visserscafé tussen de zeedijk en het stadscentrum waar geschiedenis voelbaar is. Hier komen mariniers, vissers, kunstenaars en schrijvers al sinds jaar en dag samen voor een goeie babbel en het befaamde biertje "De Zeegeuze". Dit authentieke praatcafé biedt een platform voor live muziek, jamsessies, comedy en quizavonden. Een échte cultpub waar verhalen worden verteld, muziek wordt gemaakt en gedichten worden geschreven. Ver genoeg van het bruisende nachtleven om comfortabel te zijn, dichtbij genoeg om altijd gezellig te blijven. Je viervoeter is hier vanzelfsprekend welkom!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Live muziek', 'Authentiek', 'Cultcafé', 'Aanrader'],
+    image: '/zeegeuzen2.webp',
+    city: 'oostende',
+    address: 'Kapucijnenstraat 38, 8400 Oostende',
+    website: ''
   }
 ];

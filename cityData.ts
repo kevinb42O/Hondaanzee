@@ -228,12 +228,12 @@ export const CITIES: City[] = [
     mapY: 191.8,
     offLeashAreas: [
       {
-        name: 'Hondenweide Brouwerijstraat',
-        slug: 'bredene-brouwerijstraat',
-        address: 'Brouwerijstraat, Bredene',
+        name: 'Hondenweide Kerkstraat',
+        slug: 'bredene-kerkstraat',
+        address: 'Kerkstraat, Bredene',
         lat: 51.2398,
         lng: 2.9715,
-        description: 'Omheinde weide nabij de watertoren/schakelstation.',
+        description: 'Omheinde weide naast jeugdhuis Creatuur.',
         city: 'bredene'
       }
     ],

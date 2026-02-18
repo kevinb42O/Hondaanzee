@@ -106,13 +106,13 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   // Bredene
   {
-    name: 'Hondenweide Brouwerijstraat',
-    slug: 'bredene-brouwerijstraat',
-    address: 'Brouwerijstraat, 8450 Bredene',
+    name: 'Hondenweide Kerkstraat',
+    slug: 'bredene-kerkstraat',
+    address: 'Kerkstraat, 8450 Bredene',
     lat: 51.2398,
     lng: 2.9715,
     city: 'bredene',
-    description: 'Volledig omheind grasveld direct naast de grote watertoren en het elektriciteitsstation, vlakbij jeugdhuis Creatuur.',
+    description: 'Volledig omheind grasveld naast jeugdhuis Creatuur.',
     image: '/brouwerijstraatbredene.webp',
     rating: 4
   },
