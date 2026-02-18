@@ -349,7 +349,7 @@ export const CITIES: City[] = [
         rule: 'Van 1 okt t/m 31 maart: Overal vrij loslopen op het hoofdstrand. De permanente zones blijven ongewijzigd.',
         status: 'JA'
       },
-      special: 'Oostende heeft 3 strandzones die het hele jaar door toegankelijk zijn! Sportstrand (bij Beachhouse) altijd aan leiband.'
+      special: 'Oostende heeft 3 strandzones die het hele jaar door toegankelijk zijn! Klein Strand en Sportstrand (bij Beachhouse) altijd aan leiband.'
     }
   },
   {

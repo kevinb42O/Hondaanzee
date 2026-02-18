@@ -166,6 +166,17 @@ export const SERVICES: Service[] = [
     city: 'oostende',
     address: 'Verhelststraat 1, 8460 Oudenburg',
     website: 'https://www.anicura.be/klinieken/west-vlaanderen/causus/'
+  },
+  {
+    id: 16,
+    name: 'Dierenarts Vanhee S.',
+    type: 'Dierenarts',
+    description: 'Warme praktijk voor kleine huisdieren waar persoonlijke zorg en vertrouwen centraal staan. Dankzij moderne apparatuur en nauwe samenwerking met collega-dierenartsen krijgt uw viervoeter steeds de beste behandeling. Ruime hospitalisatie en parkeermogelijkheid aanwezig.',
+    tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak', 'Ruime parking'],
+    image: '/dierenartsvanhee.webp',
+    city: 'blankenberge',
+    address: 'Monseigneur Waffelaertlaan 9, 8370 Blankenberge',
+    website: 'https://www.zoekdierenarts.be/Dierenarts/west-vlaanderen/blankenberge/Dierenarts-S--Vanhee'
   }
 ];
 

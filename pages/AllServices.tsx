@@ -225,7 +225,7 @@ const AllServices: React.FC = () => {
               <button
                 key={service.id}
                 type="button"
-                className="group cursor-pointer active:scale-[0.98] transition-transform text-left"
+                className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col h-full"
                 onClick={() => handleServiceClick(service)}
               >
                 <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
@@ -255,7 +255,7 @@ const AllServices: React.FC = () => {
                 {service.address && (
                   <p className="text-slate-400 text-[10px] sm:text-xs mb-2 font-medium">{service.address}</p>
                 )}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 mt-auto">
                   {service.tags.map((tag) => (
                     <span key={tag} className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black bg-sky-50 text-sky-700 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-sky-100">
                       {tag}

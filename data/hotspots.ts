@@ -513,6 +513,50 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://www.lloydcoffee.com'
   },
   {
+    id: 81,
+    name: 'Manuscript',
+    type: 'Café',
+    description: 'Authentiek bruin café met karakter in het hart van de uitgaansbuurt, opgericht in 1991. Deze legendarische muziekkroeg is een topper voor bier- en muziekliefhebbers én je viervoeter is hier hartelijk welkom! Kies uit maar liefst 71 verschillende Belgische bieren, waaronder het huisbier PoppoLou (6% blond). De sfeervolle kroeg draait op rock, blues en jazz, met maandelijks live concerten van nationale en internationale artiesten. Op het gezellige outdoor terras kun je samen met je hond genieten van de ongelofelijke ambiance waar het enthousiaste team van Glenn en Vanessa dagelijks voor zorgt. Open vanaf 11u.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Belgische bieren', 'Live muziek', 'Authentiek'],
+    image: '/manuscript.jpg',
+    city: 'oostende',
+    address: 'Langestraat 23, 8400 Oostende',
+    website: 'https://www.manuscriptoostende.be'
+  },
+  {
+    id: 82,
+    name: 'Restaurant De Golf',
+    type: 'Restaurant',
+    description: 'Hondenvriendelijk restaurant aan de zeedijk van Mariakerke waar je viervoeter écht koning is! Dit gezellige restaurant gaat nét dat stapje verder: naast een warme welkom en waterbak kun je hier zelfs speciale hondenmaaltijden en hondenijsjes bestellen voor je trouwe metgezel. Geniet van een heerlijke maaltijd met zeezicht terwijl je hond wordt verwend met zijn eigen culinaire traktatie. De perfecte plek voor hondenliefhebbers die hun viervoeter graag meenemen op restaurant!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondenmaaltijden', 'Hondenijsjes', 'Nabij strand', 'Hondvriendelijk team', 'Zeezicht'],
+    image: '/degolf.webp',
+    city: 'oostende',
+    address: 'Zeedijk 146, 8400 Oostende',
+    website: 'https://degolfzeedijkoostende.eatbu.com/?lang=nl'
+  },
+  {
+    id: 83,
+    name: 'Restaurant Le Touquet',
+    type: 'Restaurant',
+    description: 'Authentiek restaurant op de Albert I-promenade met traditionele keuken en verse lokale producten. Je hond is hier van harte welkom en er staat een drinkbak voor hem klaar! Geniet van heerlijke gerechten op het terras met zeezicht, terwijl je viervoeter rustig naast je ligt. Het restaurant biedt vegetarische, lactosevrije en glutenvrije opties. Perfect voor families en hondenliefhebbers die willen genieten van een gezellige sfeer aan zee.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Traditionele keuken', 'Vegetarisch', 'Glutenvrij', 'Familie-vriendelijk'],
+    image: '/letouqet.webp',
+    city: 'oostende',
+    address: 'Albert I-promenade 51, 8400 Oostende',
+    website: 'https://letouquetoostende.metro.rest/?lang=nl'
+  },
+  {
+    id: 84,
+    name: 'De Witte Ezel',
+    type: 'Restaurant',
+    description: 'Charmant restaurant-tearoom in Gistel (vlakbij Oostende) waar je met je viervoeter terecht kan voor een heerlijk ontbijt, een verzorgde lunch of een gezellige namiddag met koffie en gebak. Bij mooi weer is het heerlijk vertoeven op het zonnige terras, perfect om samen met je hond te genieten van een ontspannen moment. Een warme, hondvriendelijke plek waar je altijd welkom bent!',
+    tags: ['Terras', 'Waterbak aanwezig', 'Ontbijt', 'Lunch', 'Tearoom', 'Hondvriendelijk team', 'Gezellig'],
+    image: '/witteezel.jpeg',
+    city: 'oostende',
+    address: 'Oostendsebaan 143, 8470 Gistel',
+    website: ''
+  },
+  {
     id: 71,
     name: 'Residence Du Centre',
     type: 'Slapen',
@@ -867,5 +911,16 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'zeebrugge',
     address: 'Zeedijk 50, 8380 Zeebrugge',
     website: 'https://www.clubnorthzeebrugge.be/'
+  },
+  {
+    id: 80,
+    name: 'Zina\'s Place',
+    type: 'Slapen',
+    description: 'Op zoek naar een vakantiehuisje waar je met meerdere honden welkom bent? Zina\'s Place, een charmant vissershuisje in Lombardsijde, is dé uitvalsbasis voor hondeneigenaars die écht willen uitwaaien aan de Belgische kust. Op amper 10 minuten van het hondenstrand en vlakbij de mooiste wandelknooppunten geniet je hier van totale rust – met een volledig afgesloten tuin waar je viervoeter(s) vrij kunnen ravotten. Het huisje biedt plaats aan 4 personen met 2 slaapkamers, een gezellige living met open keuken en alle comfort. Neem het oversteekbootje naar Nieuwpoort, ontdek de stripfiguurtjes op de Middelkerkse dijk, of rij in een halfuurtje naar De Panne. Vernoemd naar Zina – de allereerste hond van de eigenaars en hun trouwe metgezel bij hun eerste uitstapje naar zee – draagt dit huisje een verhaal van liefde, avontuur en samen uitwaaien. Hier voelen mens én hond zich thuis.',
+    tags: ['Aanrader', 'Meerdere honden welkom', 'Afgesloten tuin', 'Nabij hondenstrand', 'Vrijstaand huis'],
+    image: '/zinasplace.webp',
+    city: 'middelkerke',
+    address: 'Lombardsijde, 8434 Middelkerke',
+    website: 'https://www.wheredogscomehome.eu/'
   }
 ];
