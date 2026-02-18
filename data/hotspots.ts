@@ -579,6 +579,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://tapas-lavie.be/'
   },
   {
+    id: 88,
+    name: 'Gastro Na\'Jo',
+    type: 'Restaurant',
+    description: 'Verborgen parel in Stene waar passie en creativiteit samenkomen. De chef kookt met eigen zin en laat zich leiden door zijn gevoel - geen vaste kaart, maar een wisselend menu dat regelmatig verrassende wendingen neemt. Klassieke gerechten krijgen hier een hedendaagse twist met invloeden van over de hele wereld. Het warme, huiselijke interieur en groene terras nodigen uit tot een rustgevende culinaire ervaring. Je viervoeter is welkom! Reserveren gewenst.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Creatieve keuken', 'Wisselend menu', 'Reserveren nodig', 'Huiselijk', 'Verborgen parel'],
+    image: '/najov2.jpeg',
+    city: 'oostende',
+    address: 'Steensedijk 60, 8400 Oostende',
+    website: 'https://www.najo.be/'
+  },
+  {
     id: 71,
     name: 'Residence Du Centre',
     type: 'Slapen',
