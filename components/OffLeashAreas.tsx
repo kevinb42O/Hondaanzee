@@ -5,6 +5,7 @@ import { MapPin, Navigation, Info, Clock, ExternalLink, MessageSquare } from 'lu
 import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
 import { OFF_LEASH_AREAS } from '../constants.ts';
+import { getDistanceFromLatLonInKm } from '../utils/geo.ts';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { supabase } from '../utils/supabaseClient';
@@ -116,9 +117,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
       const cAreas = OFF_LEASH_AREAS.filter(area => area.city === c.slug);
       if (c.slug === city.slug || cAreas.length === 0) return;
 
-      const dist = Math.sqrt(
-        Math.pow(c.lat - city.lat, 2) + Math.pow(c.lng - city.lng, 2)
-      );
+      const dist = getDistanceFromLatLonInKm(city.lat, city.lng, c.lat, c.lng);
 
       if (dist < minDistance) {
         minDistance = dist;

@@ -220,7 +220,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     name: 'Losloopweide Schorrepark',
     slug: 'oostende-schorrepark',
     address: 'Schorredijk, 8400 Oostende',
-    lat: 51.2385,
+    lat: 51.2115,
     lng: 2.9045,
     city: 'oostende',
     description: 'Eén van de mooiste en grootste losloopweiden aan de kust. Dit uitgestrekte natuurgebied aan de rand van Oostende (Stene) biedt vijvers waar honden kunnen zwemmen, bunkers, heuvels en prachtige wilde bloemen. Het terrein is niet omheind maar afgelegen genoeg voor honden om voluit te lopen. Een toplocatie voor grotere rassen en honden die graag zwemmen.',

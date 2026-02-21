@@ -21,10 +21,10 @@ const NAV_ITEMS: NavItem[] = [
     { to: '/hotspots', label: 'Hotspots' },
     { to: '/diensten', label: 'Diensten' },
     { to: '/losloopzones', label: 'Losloopzones' },
-    { to: '/kaart', label: 'Kaart' },
+    { to: '/agenda', label: 'Agenda' },
     { to: '/goed-om-te-weten', label: 'Info' },
     { to: '/blog', label: 'Blog', startsWith: true },
-    { to: '/community', label: 'Community 📸' },
+    { to: '/community', label: 'Community' },
     { to: '/over-ons', label: 'Over ons' },
 ];
 

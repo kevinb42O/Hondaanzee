@@ -87,9 +87,8 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
         className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
         width={isFeatured ? 800 : isMedium ? 600 : 400}
         height={isFeatured ? 380 : isMedium ? 340 : 280}
-        loading={index < 4 ? "eager" : "lazy"}
+        loading={index < 2 ? "eager" : "lazy"}
         decoding="async"
-        fetchPriority={index < 2 ? "high" : "auto"}
         sizes={isFeatured ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 66vw' : isMedium ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
       />
       <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white ${
@@ -122,21 +121,26 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLocating, setIsLocating] = useState(false);
+  const [locationMsg, setLocationMsg] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useSEO(SEO_DATA.home);
 
   // Parallax effect for hero background
+  // Reuses the prerender hero from index.html (#hero-prerender) instead of
+  // rendering a duplicate image. This ensures the preloaded img stays as the LCP element.
   const heroRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>(0);
   const lastScrollY = useRef<number>(0);
   // Cache hero geometry to avoid forced reflows on every scroll frame
   const cachedHeroHeight = useRef<number>(0);
   const cachedHeroOffsetTop = useRef<number>(0);
+  // Reference to the prerender hero element from index.html
+  const prerenderRef = useRef<HTMLElement | null>(null);
 
   const handleParallax = useCallback(() => {
-    if (!heroRef.current || !bgRef.current) return;
+    const bgEl = prerenderRef.current;
+    if (!heroRef.current || !bgEl) return;
     // Measure hero geometry only once (invalidated on resize)
     if (!cachedHeroHeight.current) {
       const rect = heroRef.current.getBoundingClientRect();
@@ -153,13 +157,34 @@ const Home: React.FC = () => {
     const scrollProgress = -rectTop / heroHeight;
     const translateY = scrollProgress * heroHeight * 0.35;
     const scale = 1 + scrollProgress * 0.08;
-    bgRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+    bgEl.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
   }, []);
 
   useEffect(() => {
     // Check for reduced motion preference
     const prefersReduced = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
+    
+    // Grab the prerender hero from index.html for parallax
+    const prerender = document.getElementById('hero-prerender');
+    if (prerender) {
+      prerenderRef.current = prerender;
+      // Make it clip to the hero section height instead of fixed full-screen
+      prerender.style.position = 'absolute';
+      prerender.style.zIndex = '0';
+      prerender.style.willChange = 'transform';
+      // Give extra height for parallax travel
+      prerender.style.top = '-15%';
+      prerender.style.bottom = '-15%';
+      prerender.style.left = '0';
+      prerender.style.right = '0';
+      prerender.style.height = 'auto';
+      // Move it inside the hero section for proper clipping
+      if (heroRef.current) {
+        heroRef.current.prepend(prerender);
+      }
+    }
+    
+    if (prefersReduced || !prerender) return;
 
     const onScroll = () => {
       if (lastScrollY.current !== window.scrollY) {
@@ -195,11 +220,12 @@ const Home: React.FC = () => {
 
   const handleUseLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocatie wordt niet ondersteund door je browser');
+      setLocationMsg('Geolocatie wordt niet ondersteund door je browser');
       return;
     }
 
     setIsLocating(true);
+    setLocationMsg(null);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const coords = {
@@ -210,12 +236,12 @@ const Home: React.FC = () => {
         if (nearest) {
           navigate(`/${nearest.slug}`);
         } else {
-          alert('Geen kuststad gevonden in de buurt');
+          setLocationMsg('Geen kuststad gevonden in de buurt');
         }
         setIsLocating(false);
       },
       (_error) => {
-        alert('Kon je locatie niet bepalen. Controleer of je locatietoegang hebt toegestaan.');
+        setLocationMsg('Kon je locatie niet bepalen. Controleer of je locatietoegang hebt toegestaan.');
         setIsLocating(false);
       }
     );
@@ -237,34 +263,10 @@ const Home: React.FC = () => {
     <div className="pb-12 md:pb-24 overflow-x-hidden overflow-y-visible">
       {/* Hero Section with Dynamic Background */}
       <div ref={heroRef} className="relative -mt-[72px] sm:-mt-[80px] md:-mt-[96px] pt-[72px] sm:pt-[80px] md:pt-[96px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
-        {/* Parallax Background Image */}
-        <div
-          ref={bgRef}
-          className="absolute inset-0 z-0"
-          style={{
-            willChange: 'transform',
-            transform: 'translate3d(0, 0, 0) scale(1)',
-            top: '-15%',
-            bottom: '-15%',
-          }}
-        >
-          <img
-            src="/lexi.webp"
-            srcSet="/lexi-mobile.webp 800w, /lexi.webp 1920w"
-            sizes="100vw"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: 'center 30%' }}
-            width={1920}
-            height={1080}
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-          />
-          {/* Multi-layer Overlay for contrast */}
-          <div className="absolute inset-0 bg-slate-900/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
-        </div>
+        {/* Prerender hero from index.html is moved here by useEffect for parallax.
+            The gradient overlays are rendered below to ensure contrast. */}
+        <div className="absolute inset-0 z-[1] bg-slate-900/60"></div>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
 
         <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2">
           <div className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-900 px-4 sm:px-6 py-2.5 sm:py-3 text-[8px] sm:text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.1em] sm:tracking-[0.2em] mb-6 sm:mb-8 mt-4 sm:mt-6 md:mt-8 animate-in fade-in slide-in-from-bottom-4 shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-300" style={{ boxShadow: '0 10px 30px -5px rgba(0,0,0,0.4), 0 4px 10px -2px rgba(0,0,0,0.3)', maxWidth: 'calc(100% - 2rem)' }}>
@@ -303,6 +305,7 @@ const Home: React.FC = () => {
                   }
                 }}
                 className="search-input flex-1 px-2 sm:px-3 md:px-4 py-3 sm:py-4 md:py-5 bg-transparent text-base sm:text-lg md:text-xl text-slate-900 font-semibold placeholder:text-slate-300 focus:outline-none font-heading min-w-0"
+                aria-label="Zoek een kuststad"
                 enterKeyHint="search"
                 autoComplete="off"
                 autoCorrect="off"
@@ -335,6 +338,15 @@ const Home: React.FC = () => {
               </button>
             </div>
 
+            {locationMsg && (
+              <div className="mt-4 bg-white/95 backdrop-blur-sm text-slate-700 text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center justify-between gap-3 animate-in fade-in">
+                <span>{locationMsg}</span>
+                <button onClick={() => setLocationMsg(null)} className="text-slate-400 hover:text-slate-600 shrink-0" aria-label="Sluiten">
+                  <X size={16} />
+                </button>
+              </div>
+            )}
+
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
               <span className="popular-label text-[9px] sm:text-[10px] font-medium text-white/70 uppercase tracking-[0.15em] sm:tracking-[0.2em] w-full sm:w-auto text-center mb-2 sm:mb-0">Populair</span>
               {['Oostende', 'Blankenberge', 'Knokke'].map((pop, index) => (
@@ -345,17 +357,22 @@ const Home: React.FC = () => {
                   style={{
                     animationDelay: `${0.6 + index * 0.1}s`
                   }}
-                  onMouseEnter={(e) => {
-                    // Hover handled by Tailwind classes
-                  }}
-                  onMouseLeave={(e) => {
-                    // Hover handled by Tailwind classes
-                    e.currentTarget.style.boxShadow = '0 4px 24px -1px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.2)';
-                  }}
                 >
                   {pop}
                 </button>
               ))}
+            </div>
+            
+            {/* Kaart CTA Button */}
+            <div className="mt-6 sm:mt-8 flex justify-center">
+              <Link
+                to="/kaart"
+                className="group inline-flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm border-2 border-white/40 hover:bg-white hover:border-white text-white hover:text-sky-700 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base md:text-lg font-heading transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 touch-target"
+              >
+                <MapPin size={20} className="sm:w-[22px] sm:h-[22px] transition-transform group-hover:scale-110" />
+                <span>Bekijk interactieve kaart</span>
+                <ArrowRight size={18} className="sm:w-[20px] sm:h-[20px] transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
         </div>

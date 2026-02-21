@@ -60,7 +60,7 @@ export const FloatingSupport: React.FC = () => {
             </Link>
             <button
                 onClick={handleMinimize}
-                className="absolute -top-1 -right-1 w-5 h-5 bg-slate-800 rounded-full flex items-center justify-center text-white shadow-lg active:scale-90 transition-transform"
+                className="absolute -top-2 -right-2 w-6 h-6 bg-slate-800 rounded-full flex items-center justify-center text-white shadow-lg active:scale-90 transition-transform touch-target"
                 aria-label="Minimaliseer steun knop"
             >
                 <X size={12} strokeWidth={3} />

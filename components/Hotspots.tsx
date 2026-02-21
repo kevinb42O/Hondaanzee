@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Coffee, Utensils, Bed, ChevronRight } from 'lucide-react';
+import { Star, Coffee, Utensils, Bed, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { City, Hotspot } from '../types.ts';
 import PlaceModal from './PlaceModal.tsx';
@@ -12,10 +12,14 @@ interface HotspotsProps {
   city: City;
 }
 
+const INITIAL_SHOW = 6;
+
 const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
   const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<string>('Alles');
+  const [showAll, setShowAll] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const handleHotspotClick = (hotspot: Hotspot) => {
     setSelectedHotspot(hotspot);
@@ -89,8 +93,9 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
         )}
 
         {cityHotspots.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
-            {cityHotspots.map((spot) => (
+          <>
+          <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
+            {(showAll ? cityHotspots : cityHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
               <div key={spot.id} className="flex">
                 <button
                   type="button"
@@ -148,6 +153,34 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
               </div>
             ))}
           </div>
+
+          {/* Show more / Show less button */}
+          {cityHotspots.length > INITIAL_SHOW && (
+            <div className="flex justify-center mt-8 sm:mt-10">
+              <button
+                onClick={() => {
+                  if (showAll && gridRef.current) {
+                    gridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                  setShowAll(!showAll);
+                }}
+                className="group flex items-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm sm:text-base bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-sky-700 border-2 border-transparent hover:border-sky-200 transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+              >
+                {showAll ? (
+                  <>
+                    Toon minder
+                    <ChevronUp size={18} className="transition-transform group-hover:-translate-y-0.5" />
+                  </>
+                ) : (
+                  <>
+                    Toon alle {cityHotspots.length} hotspots
+                    <ChevronDown size={18} className="transition-transform group-hover:translate-y-0.5" />
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+          </>
         ) : (
           <>
             {selectedFilter !== 'Alles' && allCityHotspots.length > 0 ? (

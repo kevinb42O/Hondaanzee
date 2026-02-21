@@ -13,12 +13,25 @@ interface WeatherData {
     weatherCode: number;
 }
 
+// Simple in-memory cache: key = "lat,lng", value = { data, timestamp }
+const weatherCache = new Map<string, { data: WeatherData; timestamp: number }>();
+const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
+
 export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
     const [weather, setWeather] = useState<WeatherData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
+        const cacheKey = `${city.lat},${city.lng}`;
+        const cached = weatherCache.get(cacheKey);
+
+        if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+            setWeather(cached.data);
+            setLoading(false);
+            return;
+        }
+
         const fetchWeather = async () => {
             try {
                 setLoading(true);
@@ -29,11 +42,13 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
                 if (!response.ok) throw new Error('Weer ophalen mislukt');
                 const data = await response.json();
 
-                setWeather({
+                const weatherData: WeatherData = {
                     temperature: data.current.temperature_2m,
                     windSpeed: data.current.wind_speed_10m,
                     weatherCode: data.current.weather_code
-                });
+                };
+                weatherCache.set(cacheKey, { data: weatherData, timestamp: Date.now() });
+                setWeather(weatherData);
             } catch (_err) {
                 setError(true);
             } finally {
@@ -42,7 +57,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
         };
 
         fetchWeather();
-    }, [city]);
+    }, [city.lat, city.lng]);
 
     if (loading || error || !weather) return null;
 

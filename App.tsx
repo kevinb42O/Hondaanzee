@@ -26,6 +26,7 @@ const GoedOmTeWeten = React.lazy(() => import('./pages/GoedOmTeWeten.tsx'));
 const Blog = React.lazy(() => import('./pages/Blog.tsx'));
 const BlogDetail = React.lazy(() => import('./pages/BlogDetail.tsx'));
 const Community = React.lazy(() => import('./pages/Community.tsx'));
+const Agenda = React.lazy(() => import('./pages/Agenda.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -97,10 +98,15 @@ const ScrollToHash = () => {
 };
 
 function App() {
-  // Hide static hero prerender AFTER React has painted (avoids blank viewport CLS)
+  // Keep static hero prerender visible on homepage (it's the LCP element).
+  // On other pages, remove it after mount. It sits behind #root (z-index:0 vs 1).
   useEffect(() => {
     const el = document.getElementById('hero-prerender');
-    if (el) el.style.display = 'none';
+    if (!el) return;
+    // On non-homepage routes, remove the prerender hero after a brief delay
+    if (globalThis.location.pathname !== '/') {
+      el.style.display = 'none';
+    }
   }, []);
 
   return (
@@ -126,6 +132,7 @@ function App() {
                 <Route path="/steun-ons" element={<Support />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
+                <Route path="/agenda" element={<Agenda />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/:slug" element={<CityPage />} />
                 <Route path="*" element={<NotFound />} />

@@ -7,6 +7,7 @@ import Hotspots from '../components/Hotspots.tsx';
 import Services from '../components/Services.tsx';
 import OffLeashAreas from '../components/OffLeashAreas.tsx';
 import BusinessCTA from '../components/BusinessCTA.tsx';
+import LocalHero from '../components/LocalHero.tsx';
 import { CITIES } from '../cityData.ts';
 import { useSEO, getCitySEO } from '../utils/seo.ts';
 import { WeatherWidget } from '../components/WeatherWidget.tsx';
@@ -53,6 +54,13 @@ const CityPage: React.FC = () => {
       <Hotspots city={city} />
 
       <Services city={city} />
+
+      {/* Local Hero: random aanrader shout-out for this city */}
+      <section className="py-10 sm:py-12 md:py-16 bg-white">
+        <div className="max-w-3xl mx-auto px-4 md:px-6">
+          <LocalHero citySlug={city.slug} cityName={city.name} />
+        </div>
+      </section>
 
       <BusinessCTA />
     </div>

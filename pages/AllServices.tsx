@@ -44,6 +44,10 @@ const AllServices: React.FC = () => {
       const cityMatch = selectedCity === 'all' || service.city === selectedCity;
       const typeMatch = selectedType === 'all' || service.type === selectedType;
       return cityMatch && typeMatch;
+    }).sort((a, b) => {
+      const aIsAanrader = a.tags.includes('Aanrader') ? 1 : 0;
+      const bIsAanrader = b.tags.includes('Aanrader') ? 1 : 0;
+      return bIsAanrader - aIsAanrader;
     });
   }, [selectedCity, selectedType]);
 
@@ -239,16 +243,30 @@ const AllServices: React.FC = () => {
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/95 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-800 shadow-sm border border-white/20">
                     <span className="text-sky-600">{getIcon(service.type)}</span> {service.type}
                   </div>
-                  <span
-                    role="link"
+                  {service.tags.includes('Aanrader') && (
+                    <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 flex items-center gap-1.5 bg-slate-900/80 backdrop-blur-sm px-2.5 py-1.5 rounded-full" style={{ filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))' }}>
+                      <svg width="16" height="16" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="starGoldAllServices" x1="0" y1="0" x2="40" y2="38" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stopColor="#fbbf24" />
+                            <stop offset="50%" stopColor="#f59e0b" />
+                            <stop offset="100%" stopColor="#d97706" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M20 0l5.09 12.26L38.04 14.6 28.02 23.74 30.18 37 20 30.76 9.82 37l2.16-13.26L2 14.6l12.91-2.34z" fill="url(#starGoldAllServices)" />
+                      </svg>
+                      <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em] text-amber-300">Aanrader</span>
+                    </div>
+                  )}
+                  <a
+                    href={`/${service.city}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.location.href = `/${service.city}`;
                     }}
-                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer"
+                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer no-underline"
                   >
                     <MapPin size={10} /> {getCityName(service.city)}
-                  </span>
+                  </a>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2 md:group-hover:text-sky-600 md:transition-colors">{service.name}</h3>
                 <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed font-medium">{service.description}</p>
@@ -256,23 +274,24 @@ const AllServices: React.FC = () => {
                   <p className="text-slate-400 text-[10px] sm:text-xs mb-2 font-medium">{service.address}</p>
                 )}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 mt-auto">
-                  {service.tags.map((tag) => (
+                  {service.tags.filter(tag => tag !== 'Aanrader').map((tag) => (
                     <span key={tag} className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black bg-sky-50 text-sky-700 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-sky-100">
                       {tag}
                     </span>
                   ))}
                 </div>
                 {service.website && (
-                  <span
-                    role="link"
+                  <a
+                    href={service.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.open(service.website, '_blank', 'noopener,noreferrer');
                     }}
                   >
                     Bezoek website →
-                  </span>
+                  </a>
                 )}
               </button>
             ))}

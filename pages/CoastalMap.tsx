@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import { CITIES } from '../cityData.ts';
+import { getDistanceFromLatLonInKm } from '../utils/geo.ts';
 import { ArrowLeft } from 'lucide-react';
 import { CoastalMapRenderer } from '../components/CoastalMapRenderer.tsx';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
@@ -34,9 +35,7 @@ const CoastalMap: React.FC = () => {
                     let minDistance = Infinity;
 
                     CITIES.forEach(city => {
-                        const distance = Math.sqrt(
-                            Math.pow(city.lat - userLat, 2) + Math.pow(city.lng - userLng, 2)
-                        );
+                        const distance = getDistanceFromLatLonInKm(userLat, userLng, city.lat, city.lng);
                         if (distance < minDistance) {
                             minDistance = distance;
                             closestCity = city.slug;

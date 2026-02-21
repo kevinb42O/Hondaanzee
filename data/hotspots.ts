@@ -102,17 +102,6 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://www.rubens-knokke.be'
   },
   {
-    id: 11,
-    name: 'Brasserie Montmartre',
-    type: 'Restaurant',
-    description: 'Ruime brasserie op de Zeedijk waar gezinnen met honden graag gezien zijn.',
-    tags: ['Terras', 'Ruime plaatsen', 'Nabij strand', 'Indoor toegelaten'],
-    image: '/brasseriemontmatreblankenberge.webp',
-    city: 'blankenberge',
-    address: 'Zeedijk 157, 8370 Blankenberge',
-    website: 'https://www.brasseriemontmartre.be'
-  },
-  {
     id: 12,
     name: 'Belgium Pier Brasserie',
     type: 'Restaurant',
@@ -232,29 +221,6 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'de-haan',
     address: 'Kapellestraat 10, 8420 De Haan',
     website: 'https://pizzeriapianopiano.be/'
-  },
-  {
-    id: 20,
-    name: "Bel'air",
-    type: 'Restaurant',
-    description: 'Charmant restaurant op de Zeedijk waar gastronomie en een warme sfeer hand in hand gaan. Jouw viervoeter is hier van harte welkom om mee te genieten van een culinaire ervaring met zicht op zee.',
-    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Hondvriendelijk team'],
-    image: '/belairv2.webp',
-    imagePosition: 'center bottom',
-    city: 'blankenberge',
-    address: 'Zeedijk 154, 8370 Blankenberge',
-    website: 'https://www.belairblankenberge.com/'
-  },
-  {
-    id: 21,
-    name: 'Beach Palace Hotel',
-    type: 'Slapen',
-    description: 'Luxueus 5-sterren hotel direct aan de Zeedijk met 20 prachtig uitgeruste kamers speciaal ingericht voor gasten met honden. Geniet van topservice en comfort terwijl je viervoeter zich thuis voelt in dit exclusieve strandhotel.',
-    tags: ['Honden toegelaten op kamer', '5-sterren', 'Nabij strand', 'Luxe accommodatie', 'Waterbak aanwezig'],
-    image: '/beachpalace.webp',
-    city: 'blankenberge',
-    address: 'Zeedijk 77-79, 8370 Blankenberge',
-    website: 'https://beach-palace.com/'
   },
   {
     id: 22,
@@ -749,8 +715,8 @@ export const HOTSPOTS: Hotspot[] = [
     id: 58,
     name: 'Bar Delta',
     type: 'Café',
-    description: 'Gezellige bar aan het einde van de zeedijk in Heist, richting Zeebrugge. Perfect om even tot rust te komen met een huisbereide specialty coffee terwijl je viervoeter naast je ligt. Een ideale plek voor koffieliefhebbers die op zoek zijn naar kwaliteit en een warme, ontspannen sfeer.',
-    tags: ['Specialty Coffee', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Gezellig'],
+    description: 'Gezellige bar aan het einde van de zeedijk in Heist, richting Zeebrugge. Perfect om even tot rust te komen met een hele lekkere koffie terwijl je viervoeter naast je ligt. De waterbak met vers water staat altijd klaar voor elke viervoeter op de zeedijk. Een ontspannen plek met een enorme liefde voor honden en een warme, gezellige sfeer.',
+    tags: ['Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Gezellig', 'Aanrader'],
     image: '/bardeltaV2.webp',
     city: 'knokke-heist',
     address: 'Zeedijk 83, 8301 Heist aan Zee',
@@ -988,5 +954,50 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'oostende',
     address: 'Kapucijnenstraat 38, 8400 Oostende',
     website: ''
+  },
+  {
+    id: 90,
+    name: 'IJssalon/Tearoom Zeebries',
+    type: 'Café',
+    description: 'Pure passie en vakmanschap in elke hap en elke slok! Al 40 jaar draait deze gedreven eigenaar zelf het allerlekkerste ambachtelijke ijs van de kust, bereid met warme zorg en ingrediënten van topkwaliteit. Naast het hemelse ijs geniet je hier van overheerlijke koffie en heerlijke broodjes, elk met oog voor detail en smaak. De perfecte beloning na een lange strandwandeling met je viervoeter! Een verborgen juweeltje van de Belgische kust waar traditie, kwaliteit en échte gastvrijheid samensmelten. Wie hier één keer geproefd heeft, komt zeker terug. Mis deze ontdekking niet!',
+    tags: ['Ambachtelijk ijs', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Terras', 'Artisanale bereiding', 'Aanrader'],
+    image: '/zeebriesfinal.webp',
+    city: 'knokke-heist',
+    address: 'Parkstraat 15, 8301 Heist',
+    website: ''
+  },
+  {
+    id: 11,
+    name: 'Brasserie Montmartre',
+    type: 'Restaurant',
+    description: 'Ruime brasserie op de Zeedijk waar gezinnen met honden graag gezien zijn.',
+    tags: ['Terras', 'Ruime plaatsen', 'Nabij strand', 'Indoor toegelaten'],
+    image: '/brasseriemontmatreblankenberge.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 157, 8370 Blankenberge',
+    website: 'https://www.brasseriemontmartre.be'
+  },
+  {
+    id: 20,
+    name: "Bel'air",
+    type: 'Restaurant',
+    description: 'Charmant restaurant op de Zeedijk waar gastronomie en een warme sfeer hand in hand gaan. Jouw viervoeter is hier van harte welkom om mee te genieten van een culinaire ervaring met zicht op zee.',
+    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Hondvriendelijk team'],
+    image: '/belairv2.webp',
+    imagePosition: 'center bottom',
+    city: 'blankenberge',
+    address: 'Zeedijk 154, 8370 Blankenberge',
+    website: 'https://www.belairblankenberge.com/'
+  },
+  {
+    id: 21,
+    name: 'Beach Palace Hotel',
+    type: 'Slapen',
+    description: 'Luxueus 5-sterren hotel direct aan de Zeedijk met 20 prachtig uitgeruste kamers speciaal ingericht voor gasten met honden. Geniet van topservice en comfort terwijl je viervoeter zich thuis voelt in dit exclusieve strandhotel.',
+    tags: ['Honden toegelaten op kamer', '5-sterren', 'Nabij strand', 'Luxe accommodatie', 'Waterbak aanwezig'],
+    image: '/beachpalace.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 77-79, 8370 Blankenberge',
+    website: 'https://beach-palace.com/'
   }
 ];

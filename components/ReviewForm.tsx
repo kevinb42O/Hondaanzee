@@ -81,7 +81,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                         type="text"
                         id="userName"
                         value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
+                        onChange={(e) => setUserName(e.target.value.slice(0, 50))}
+                        maxLength={50}
                         className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium placeholder:text-slate-400"
                         placeholder="Jouw naam"
                         required
@@ -96,7 +97,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                         id="comment"
                         rows={4}
                         value={comment}
-                        onChange={(e) => setComment(e.target.value)}
+                        onChange={(e) => setComment(e.target.value.slice(0, 500))}
+                        maxLength={500}
                         className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium resize-none placeholder:text-slate-400"
                         placeholder="Was het druk? Is de omheining goed? Is er water in de buurt?..."
                     />

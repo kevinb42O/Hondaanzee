@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PawPrint, X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, type LucideIcon } from 'lucide-react';
+import { PawPrint, X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, CalendarDays, type LucideIcon } from 'lucide-react';
 import { CITIES } from '../../cityData.ts';
 import { SupportCard } from './SupportCard.tsx';
 
@@ -18,10 +18,10 @@ const MOBILE_NAV_ITEMS: readonly NavItem[] = [
     { to: '/hotspots', label: 'Hotspots', icon: Coffee },
     { to: '/diensten', label: 'Diensten', icon: ShoppingBag },
     { to: '/losloopzones', label: 'Losloopzones', icon: TreePine },
-    { to: '/kaart', label: 'Kaart', icon: MapPin },
+    { to: '/agenda', label: 'Agenda', icon: CalendarDays },
     { to: '/goed-om-te-weten', label: 'Goed om te weten', icon: ShieldAlert },
     { to: '/blog', label: 'Blog', icon: BookOpen, startsWith: true },
-    { to: '/community', label: 'Community 📸', icon: Camera },
+    { to: '/community', label: 'Community', icon: Camera },
     { to: '/over-ons', label: 'Over ons', icon: Info },
 ];
 
@@ -44,6 +44,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, current
             className={`fixed inset-0 top-0 md:hidden bg-white z-[110] transition-all duration-300 ease-out ${isOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : 'translate-x-full opacity-0 pointer-events-none'
                 }`}
             aria-hidden={!isOpen}
+            inert={!isOpen}
         >
             {/* Close Button Inside Menu */}
             <div className="absolute top-0 right-0 p-4 z-[120] safe-area-top safe-area-right">

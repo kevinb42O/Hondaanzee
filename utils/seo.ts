@@ -80,12 +80,14 @@ export const useSEO = ({
   }, [title, description, keywords, ogImage, canonical, structuredData, location]);
 };
 
+const YEAR = new Date().getFullYear();
+
 // SEO Metadata for each page type
 export const SEO_DATA = {
   home: {
-    title: 'Honden aan Zee België 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken aan de Belgische Kust',
-    description: '✓ Actuele strandregels voor honden ✓ Losloopzones en hondenweides ✓ Hondvriendelijke cafés, restaurants & hotels ✓ Alle badsteden van De Panne tot Knokke ✓ Gratis & up-to-date info 2026',
-    keywords: 'hond strand belgië, hond aan zee, hondenstrand belgië, losloopzone hond kust, hondvriendelijk strand, strand met hond belgie, wandelen hond zee, hondvriendelijk restaurant kust, strandregels honden 2026'
+    title: `Honden aan Zee België ${YEAR} | Strandregels, Losloopzones & Hondvriendelijke Plekken aan de Belgische Kust`,
+    description: `✓ Actuele strandregels voor honden ✓ Losloopzones en hondenweides ✓ Hondvriendelijke cafés, restaurants & hotels ✓ Alle badsteden van De Panne tot Knokke ✓ Gratis & up-to-date info ${YEAR}`,
+    keywords: `hond strand belgië, hond aan zee, hondenstrand belgië, losloopzone hond kust, hondvriendelijk strand, strand met hond belgie, wandelen hond zee, hondvriendelijk restaurant kust, strandregels honden ${YEAR}`
   },
 
   hotspots: {
@@ -146,6 +148,173 @@ export const SEO_DATA = {
     title: 'Cookiebeleid | HondAanZee.be',
     description: 'Cookiebeleid van HondAanZee.be - Welke cookies we gebruiken en waarom',
     keywords: ''
+  },
+
+  agenda: {
+    title: 'Hondvriendelijke Evenementen Belgische Kust 2026 | Agenda & Events – HondAanZee.be',
+    description: 'Ontdek alle hondvriendelijke evenementen aan de Belgische kust in 2026: Kwispelfestival De Panne, Groot Oostends Hondenfestival & Grote Hondenwandeling Bredene. Festivals, wandelingen & meer voor jou en je viervoeter!',
+    keywords: 'hondenevenement belgische kust 2026, hondenfestival aan zee, kwispelfestival de panne 2026, groot oostends hondenfestival 2026, hondenwandeling bredene, hondvriendelijk event kust, hondendag strand belgie, hondenwandeling aan zee, pinksterweekend honden oostende, losloopzone festival, evenementen honden belgie 2026, hondenfestival gratis',
+    canonical: 'https://hondaanzee.be/agenda',
+    ogImage: 'https://hondaanzee.be/kwispelfestival.webp',
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
+          { "@type": "ListItem", "position": 2, "name": "Agenda", "item": "https://hondaanzee.be/agenda" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Hondvriendelijke Evenementen Belgische Kust 2026",
+        "description": "Overzicht van alle hondvriendelijke evenementen aan de Belgische kust",
+        "url": "https://hondaanzee.be/agenda",
+        "numberOfItems": 3,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Event",
+              "name": "Kwispelfestival De Panne",
+              "description": "Hét jaarlijkse feest voor hond & baasje aan de Belgische kust. Wandeltocht, workshops, hondenfotografie, hondenmarkt en demonstraties.",
+              "startDate": "2026-05-17T11:00:00+02:00",
+              "endDate": "2026-05-17T17:00:00+02:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": {
+                "@type": "Place",
+                "name": "Leopold I-Esplanade",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Zeelaan 21",
+                  "addressLocality": "De Panne",
+                  "postalCode": "8660",
+                  "addressCountry": "BE"
+                }
+              },
+              "image": "https://hondaanzee.be/kwispelfestival.webp",
+              "url": "https://hondaanzee.be/agenda",
+              "isAccessibleForFree": true,
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "url": "https://hondaanzee.be/agenda"
+              },
+              "organizer": {
+                "@type": "Organization",
+                "name": "Visit De Panne",
+                "url": "https://www.visitdepanne.be"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Event",
+              "name": "Groot Oostends Hondenfestival",
+              "description": "Tweedaags hondenfestival op 12.000 m² met losloopzone, demonstraties, hondenboetiekjes en food corner aan zee in Oostende.",
+              "startDate": "2026-05-23T10:00:00+02:00",
+              "endDate": "2026-05-24T18:00:00+02:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": {
+                "@type": "Place",
+                "name": "Domein Duin & Zee",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Fortstraat 128",
+                  "addressLocality": "Oostende",
+                  "postalCode": "8400",
+                  "addressCountry": "BE"
+                }
+              },
+              "image": "https://hondaanzee.be/oostendshondenfestival.webp",
+              "url": "https://hondaanzee.be/agenda",
+              "isAccessibleForFree": true,
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "url": "https://hondaanzee.be/agenda"
+              },
+              "organizer": {
+                "@type": "Organization",
+                "name": "Pooches.be & vzw Hondenfestival",
+                "url": "https://www.pooches.be"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Event",
+              "name": "Grote Hondenwandeling Bredene",
+              "description": "Jaarlijkse bewegwijzerde hondenwandeling door de Bredense duinen en langs het strand. Verkorte route beschikbaar voor oudere honden.",
+              "startDate": "2026-05-24T11:00:00+02:00",
+              "endDate": "2026-05-24T17:00:00+02:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": {
+                "@type": "Place",
+                "name": "Jeugdhuis Creatuur",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Kerkstraat 9",
+                  "addressLocality": "Bredene",
+                  "postalCode": "8450",
+                  "addressCountry": "BE"
+                }
+              },
+              "image": "https://hondaanzee.be/hondenbredene.webp",
+              "url": "https://hondaanzee.be/agenda",
+              "isAccessibleForFree": false,
+              "offers": {
+                "@type": "Offer",
+                "price": "5",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "url": "https://hondaanzee.be/agenda"
+              },
+              "organizer": {
+                "@type": "Organization",
+                "name": "SOS Reptiel - Reptile Rescue Center Belgium",
+                "url": "https://www.sosreptiel.be"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Hondvriendelijke Evenementen Belgische Kust 2026",
+        "description": "Overzicht van alle hondvriendelijke evenementen, festivals en wandelingen aan de Belgische kust in 2026",
+        "url": "https://hondaanzee.be/agenda",
+        "inLanguage": "nl-BE",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "HondAanZee.be",
+          "url": "https://hondaanzee.be"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "HondAanZee.be",
+          "url": "https://hondaanzee.be",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://hondaanzee.be/zee-hond2.avif"
+          }
+        }
+      }
+    ]
   },
 
   about: {
@@ -275,7 +444,7 @@ export const getCitySEO = (cityName: string, citySlug: string) => {
   ];
 
   return {
-    title: `Hond Strand ${cityName} 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken ${cityName}`,
+    title: `Hond Strand ${cityName} ${YEAR} | Strandregels, Losloopzones & Hondvriendelijke Plekken ${cityName}`,
     description: `✓ Actuele strandregels voor honden in ${cityName} ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in ${cityName}`,
     keywords: searchTerms.join(', '),
     canonical: `https://hondaanzee.be/${citySlug}`,

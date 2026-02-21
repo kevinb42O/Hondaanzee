@@ -54,7 +54,9 @@ const NotFound: React.FC = () => {
                 className="inline-flex items-center gap-2 text-sky-600 font-bold px-4 py-2 rounded-xl hover:bg-sky-50 transition-colors text-sm"
               >
                 <MapPin size={14} />
-                {city === 'de-haan' ? 'De Haan' : city === 'knokke-heist' ? 'Knokke-Heist' : city.charAt(0).toUpperCase() + city.slice(1)}
+                {city === 'de-haan' ? 'De Haan'
+                  : city === 'knokke-heist' ? 'Knokke-Heist'
+                  : city.charAt(0).toUpperCase() + city.slice(1)}
               </Link>
             ))}
           </div>

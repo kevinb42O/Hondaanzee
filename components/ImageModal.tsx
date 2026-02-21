@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImageModalProps {
@@ -73,10 +74,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
     const showNavigation = images.length > 1;
 
-    return (
+    return createPortal(
         <dialog
             ref={dialogRef}
-            className="fixed inset-0 z-50 m-auto p-4 bg-transparent backdrop:bg-slate-900/90 backdrop:backdrop-blur-sm max-w-7xl w-full overflow-visible"
+            className="fixed inset-0 z-[9999] m-auto p-4 bg-transparent backdrop:bg-slate-900/90 backdrop:backdrop-blur-sm max-w-7xl w-full overflow-visible"
             aria-label={`${altText} - Afbeeldingen`}
             onClick={(e) => {
                 if (e.target === dialogRef.current) onClose();
@@ -170,7 +171,8 @@ const ImageModal: React.FC<ImageModalProps> = ({
           animation: scaleIn 0.2s ease-out;
         }
       `}</style>
-        </dialog>
+        </dialog>,
+        document.body
     );
 };
 

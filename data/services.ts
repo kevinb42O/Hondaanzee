@@ -177,6 +177,39 @@ export const SERVICES: Service[] = [
     city: 'blankenberge',
     address: 'Monseigneur Waffelaertlaan 9, 8370 Blankenberge',
     website: 'https://www.zoekdierenarts.be/Dierenarts/west-vlaanderen/blankenberge/Dierenarts-S--Vanhee'
+  },
+  {
+    id: 17,
+    name: 'Panimalia Trimsalon & Hondenboetiek',
+    type: 'Dierenspeciaalzaak',
+    description: 'Panimalia is een gepassioneerde hondenboetiek en trimsalon in het hart van De Panne, pal op de Markt. Hier draait alles om het welzijn van jouw viervoeter: van premium hondenvoeding en verzorgingsproducten tot stijlvolle accessoires en speelgoed. Daarnaast biedt Panimalia professionele trimbehandelingen en toilettage aan, uitgevoerd door ervaren vakmensen. Ze organiseren ook trimopleidingen en workshops voor wie zelf de kneepjes van het vak wil leren. Een vaste waarde voor elke hondeneigenaar aan de kust!',
+    tags: ['Trimsalon', 'Hondensnacks', 'Indoor toegelaten', 'Hondvriendelijk team', 'Workshops', 'Aanrader'],
+    image: '/panimalia.webp',
+    city: 'de-panne',
+    address: 'Markt 17, 8660 De Panne',
+    website: 'http://www.panimalia.be/'
+  },
+  {
+    id: 18,
+    name: 'Famiflora De Panne',
+    type: 'Dierenspeciaalzaak',
+    description: 'Famiflora is het grootste tuin- en decoratiecenter van België en de vestiging in De Panne beschikt over een uitgebreide dierenafdeling waar hondeneigenaars hun hart kunnen ophalen. Je vindt er een ruim assortiment hondenvoeding van topmerken zoals Royal Canin, Pedigree, Purina en Hills, aangevuld met een brede selectie accessoires, speelgoed, mandjes, harnassen en verzorgingsproducten. De deskundige medewerkers staan klaar om je te adviseren over de beste voeding en producten voor jouw hond. Famiflora is 7 dagen op 7 geopend — ideaal voor een bezoekje tijdens je vakantie aan de kust.',
+    tags: ['Hondensnacks', 'Ruime plaatsen', 'Hondvriendelijk team', 'Accessoires', 'Dagelijks open'],
+    image: '/famiflora.webp',
+    city: 'de-panne',
+    address: 'Duinhoekstraat 149, 8660 De Panne',
+    website: 'https://www.famiflora.be/'
+  },
+  {
+    id: 19,
+    name: 'Dierenarts Johan Devloo',
+    type: 'Dierenarts',
+    description: 'Derde generatie dierenarts met een hart van goud voor viervoeters. Sinds 1985 runt Johan Devloo zijn privépraktijk voor kleine huisdieren in De Panne, recht tegenover de Leopold I Esplanade. Met jarenlange ervaring, een persoonlijke aanpak en voortdurende bijscholing garandeert hij kwalitatieve diergeneeskunde. Gratis privéparking vlak voor de deur maakt een bezoek extra vlot. Al sinds 1989 zet hij zich ook vrijwillig in voor dierenasiel Ganzeweide — want de liefde voor dieren zit in zijn genen.',
+    tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak', 'Ruime parking'],
+    image: '/devloo2.webp',
+    city: 'de-panne',
+    address: 'Westhoeklaan 76, 8660 De Panne',
+    website: 'https://www.dierenartsdevloo.be'
   }
 ];
 

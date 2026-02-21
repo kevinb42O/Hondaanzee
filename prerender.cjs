@@ -116,6 +116,45 @@ async function prerender() {
       
       const html = await page.content();
       
+      // Post-process: fix elements that Puppeteer serializes incorrectly
+      let processedHtml = html;
+      
+      // 1. Restore non-render-blocking font loading pattern.
+      //    After JS execution, the preload→stylesheet onload hack fires,
+      //    so Puppeteer serializes it as rel="stylesheet" which is render-blocking.
+      //    Restore the async font loading pattern.
+      processedHtml = processedHtml.replace(
+        /<link\s+rel="stylesheet"\s+[^>]*href="(https:\/\/fonts\.googleapis\.com\/css2\?[^"]+)"[^>]*>/gi,
+        '<link rel="preload" as="style" href="$1" onload="this.onload=null;this.rel=\'stylesheet\'">\n<noscript><link rel="stylesheet" href="$1"></noscript>'
+      );
+      
+      // 2. Restore viewport meta tag to correct values.
+      //    Puppeteer may serialize a modified viewport on small viewports.
+      processedHtml = processedHtml.replace(
+        /<meta\s+name="viewport"\s+content="[^"]*">/gi,
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">'
+      );
+      
+      // 3. Restore hero-prerender if React moved/modified it.
+      //    The homepage hero mounts the prerender div into the React hero section.
+      //    Restore the original position in body for clean HTML output.
+      if (route === '/') {
+        // Remove any duplicated hero-prerender inside #root
+        processedHtml = processedHtml.replace(
+          /<div id="hero-prerender"[^>]*>[\s\S]*?<\/div>\s*<\/div>/gi,
+          ''
+        );
+        // Re-insert clean prerender hero before #root
+        const heroHtml = `<div id="hero-prerender" style="position:fixed;inset:0;z-index:0;background:#0f172a">` +
+          `<img srcset="/lexi-mobile.webp 800w, /lexi.webp 1920w" sizes="100vw" src="/lexi.webp" alt="Hond aan het strand" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync">` +
+          `<div style="position:absolute;inset:0;background:rgba(15,23,42,0.6)"></div>` +
+          `</div>`;
+        processedHtml = processedHtml.replace(
+          /<div id="root"/,
+          heroHtml + '\n    <div id="root"'
+        );
+      }
+      
       // Determine output path
       const outputDir = route === '/' 
         ? DIST_DIR 
@@ -126,7 +165,7 @@ async function prerender() {
       }
       
       const outputFile = path.join(outputDir, 'index.html');
-      fs.writeFileSync(outputFile, html);
+      fs.writeFileSync(outputFile, processedHtml);
       
       console.log(`  OK ${route}`);
       rendered++;

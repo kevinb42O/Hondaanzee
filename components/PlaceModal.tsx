@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { X, MapPin, ExternalLink, Tag } from 'lucide-react';
 import { Hotspot, Service } from '../types.ts';
 
@@ -12,6 +13,26 @@ interface PlaceModalProps {
 
 const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentColor = 'sky' }) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
+
+    // Lock background scroll when modal is open
+    useEffect(() => {
+        if (isOpen && place) {
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.style.overflow = 'hidden';
+            return () => {
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.overflow = '';
+                window.scrollTo(0, scrollY);
+            };
+        }
+    }, [isOpen, place]);
 
     // Open/close the native dialog
     useEffect(() => {
@@ -64,10 +85,10 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
 
     const colors = accentColors[accentColor as keyof typeof accentColors] || accentColors.sky;
 
-    return (
+    return createPortal(
         <dialog
             ref={dialogRef}
-            className="fixed inset-0 z-50 m-auto p-4 sm:p-6 bg-transparent backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm max-w-2xl w-full rounded-[2rem] overflow-visible"
+            className="fixed inset-0 z-[9999] m-auto p-4 sm:p-6 bg-transparent backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm max-w-2xl w-full rounded-[2rem] overflow-visible"
             aria-label={place?.name}
             onClick={(e) => {
                 if (e.target === dialogRef.current) {
@@ -94,7 +115,7 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                 </button>
 
                 {/* Scrollable Content */}
-                <div className="overflow-y-auto max-h-[95vh] sm:max-h-[90vh]">
+                <div className="overflow-y-auto max-h-[95vh] sm:max-h-[90vh]" style={{ overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}>
                     {/* Image */}
                     {place.image && (
                         <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
@@ -210,7 +231,8 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
           animation: scaleIn 0.2s ease-out;
         }
       `}</style>
-        </dialog>
+        </dialog>,
+        document.body
     );
 };
 

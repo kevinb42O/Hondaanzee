@@ -32,6 +32,9 @@
     <!-- Google Fonts - Non-render-blocking with preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload critical font files to break the CSS→woff2 chain -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2">
     <link rel="preload" as="style"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -141,9 +144,9 @@
 </head>
 
 <body class="bg-slate-50 text-slate-900">
-    <!-- Static hero for instant LCP - sits behind React, hidden after mount -->
+    <!-- Static hero for instant LCP - moved into React hero section on homepage for parallax -->
     <div id="hero-prerender" style="position:fixed;inset:0;z-index:0;background:#0f172a">
-        <img srcset="/lexi-mobile.webp 800w, /lexi.webp 1920w" sizes="100vw" src="/lexi.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync">
+        <img srcset="/lexi-mobile.webp 800w, /lexi.webp 1920w" sizes="100vw" src="/lexi.webp" alt="Hond aan het strand" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync">
         <div style="position:absolute;inset:0;background:rgba(15,23,42,0.6)"></div>
     </div>
     <div id="root" style="position:relative;z-index:1;background:transparent"></div>

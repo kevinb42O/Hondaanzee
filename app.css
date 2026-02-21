@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 /* ====================================
+   MODAL / DIALOG Z-INDEX SAFETY
+   ==================================== */
+dialog[open],
+dialog[open]::backdrop {
+  z-index: 9999 !important;
+}
+
+/* ====================================
    KOEKJES METER POPUP ANIMATION
    ==================================== */
 

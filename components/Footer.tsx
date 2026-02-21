@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { PawPrint, ExternalLink, Mail, Check } from 'lucide-react';
+import { PawPrint, ExternalLink, Mail, Check, Bike, Caravan, Baby } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const WHATSAPP_URL = `https://wa.me/32494816714?text=${encodeURIComponent('Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!')}`;
@@ -15,7 +15,7 @@ const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size =
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative bg-gradient-to-b from-slate-900 via-slate-950 to-black pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 safe-area-bottom">
+    <footer className="relative z-[1] bg-gradient-to-b from-slate-900 via-slate-950 to-black pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 safe-area-bottom">
       {/* Ocean depth gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-blue-950/20 pointer-events-none"></div>
 
@@ -41,9 +41,9 @@ const Footer: React.FC = () => {
             <a
               href="mailto:info@hondaanzee.be"
               className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors mb-3"
-              aria-label="Email contact"
+              aria-label="Email contact: info@hondaanzee.be"
             >
-              <Mail size={18} />
+              <Mail size={18} aria-hidden="true" />
               <span className="text-sm font-medium">info@hondaanzee.be</span>
             </a>
 
@@ -53,9 +53,9 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-slate-400 hover:text-pink-400 transition-colors group"
-              aria-label="Volg ons op Instagram"
+              aria-label="Volg @hondaanzee op Instagram"
             >
-              <InstagramIcon size={18} className="group-hover:scale-110 transition-transform" />
+              <InstagramIcon size={18} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
               <span className="text-sm font-medium">@hondaanzee</span>
             </a>
           </div>
@@ -85,8 +85,8 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/kaart" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
-                  Kaart
+                <Link to="/agenda" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Evenementen
                 </Link>
               </li>
               <li>
@@ -161,6 +161,74 @@ const Footer: React.FC = () => {
               <span className="text-slate-400">Laadsnelheid: </span>
               <span className="text-emerald-400 font-mono">0.04s</span>
             </p>
+            <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
+              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-black text-white">21</span>
+                <span className="text-sm font-bold text-cyan-400">feb</span>
+                <span className="text-xs font-mono text-slate-400">2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Partner Sites */}
+        <div className="mb-12 sm:mb-16">
+          <h4 className="font-bold text-slate-500 mb-6 uppercase tracking-[0.2em] text-xs text-center">Onze Familie</h4>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+            {/* FietsAanZee */}
+            <a
+              href="https://fietsaanzee.be"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group"
+            >
+              <div className="bg-amber-500 p-2 rounded-xl text-white group-hover:scale-110 transition-transform">
+                <Bike size={20} strokeWidth={2.5} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold">
+                  <span className="text-white">Fiets</span><span className="text-amber-400">Aan</span><span className="text-white">Zee</span>
+                </span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider">Binnenkort beschikbaar</span>
+              </div>
+            </a>
+
+            {/* CamperAanZee */}
+            <a
+              href="https://camperaanzee.be"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group"
+            >
+              <div className="bg-emerald-500 p-2 rounded-xl text-white group-hover:scale-110 transition-transform">
+                <Caravan size={20} strokeWidth={2.5} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold">
+                  <span className="text-white">Camper</span><span className="text-emerald-400">Aan</span><span className="text-white">Zee</span>
+                </span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider">Binnenkort beschikbaar</span>
+              </div>
+            </a>
+
+            {/* KidsAanZee */}
+            <a
+              href="https://kidsaanzee.be"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group"
+            >
+              <div className="bg-orange-500 p-2 rounded-xl text-white group-hover:scale-110 transition-transform">
+                <Baby size={20} strokeWidth={2.5} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold">
+                  <span className="text-white">Kids</span><span className="text-orange-400">Aan</span><span className="text-white">Zee</span>
+                </span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider">Binnenkort beschikbaar</span>
+              </div>
+            </a>
           </div>
         </div>
 

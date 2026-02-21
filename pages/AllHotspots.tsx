@@ -1,18 +1,22 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Coffee, Utensils, Bed, Star, MapPin, Filter, X } from 'lucide-react';
+import { ArrowLeft, Coffee, Utensils, Bed, Star, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import PlaceModal from '../components/PlaceModal.tsx';
 import { Hotspot } from '../types.ts';
 
+const INITIAL_SHOW = 12;
+
 const AllHotspots: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
   const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const handleHotspotClick = (hotspot: Hotspot) => {
     setSelectedHotspot(hotspot);
@@ -39,6 +43,11 @@ const AllHotspots: React.FC = () => {
       default: return <Star size={14} />;
     }
   };
+
+  // Reset show-all when filters change
+  useEffect(() => {
+    setShowAll(false);
+  }, [selectedCity, selectedType]);
 
   const filteredHotspots = useMemo(() => {
     return HOTSPOTS
@@ -235,8 +244,9 @@ const AllHotspots: React.FC = () => {
 
         {/* Hotspots Grid */}
         {filteredHotspots.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
-            {filteredHotspots.map((spot) => (
+          <>
+          <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
+            {(showAll ? filteredHotspots : filteredHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
               <button
                 key={spot.id}
                 type="button"
@@ -256,16 +266,15 @@ const AllHotspots: React.FC = () => {
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/95 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-800 shadow-sm border border-white/20">
                     <span className="text-sky-600">{getIcon(spot.type)}</span> {spot.type}
                   </div>
-                  <span
-                    role="link"
+                  <a
+                    href={`/${spot.city}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.location.href = `/${spot.city}`;
                     }}
-                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer"
+                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer no-underline"
                   >
                     <MapPin size={10} /> {getCityName(spot.city)}
-                  </span>
+                  </a>
                   {spot.tags.includes('Aanrader') && (
                     <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex items-center gap-1.5 bg-slate-900/80 backdrop-blur-sm px-2.5 py-1.5 rounded-full" style={{ filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))' }}>
                       <svg width="16" height="16" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -300,6 +309,34 @@ const AllHotspots: React.FC = () => {
                 </div>                </div>              </button>
             ))}
           </div>
+
+          {/* Show more / Show less button */}
+          {filteredHotspots.length > INITIAL_SHOW && (
+            <div className="flex justify-center mt-10 sm:mt-12">
+              <button
+                onClick={() => {
+                  if (showAll && gridRef.current) {
+                    gridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                  setShowAll(!showAll);
+                }}
+                className="group flex items-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm sm:text-base bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-sky-700 border-2 border-transparent hover:border-sky-200 transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+              >
+                {showAll ? (
+                  <>
+                    Toon minder
+                    <ChevronUp size={18} className="transition-transform group-hover:-translate-y-0.5" />
+                  </>
+                ) : (
+                  <>
+                    Toon alle {filteredHotspots.length} hotspots
+                    <ChevronDown size={18} className="transition-transform group-hover:translate-y-0.5" />
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+          </>
         ) : (
           <div className="text-center py-16 sm:py-20 md:py-24">
             <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-8 sm:p-12 md:p-16 max-w-2xl mx-auto">
