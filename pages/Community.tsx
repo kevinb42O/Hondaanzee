@@ -21,7 +21,7 @@ const MONTHLY_THEMES = [
 
 // ─── TOPPER VAN DE WEEK ───────────────────────────────────────────────
 const TOPPER_VAN_DE_WEEK = {
-  image: '/gucci_topper.jpeg',
+  image: '/gucci_topper.webp',
   dogName: 'Gucci',
   ownerName: 'Frank & Ann',
   city: 'Blankenberge',
