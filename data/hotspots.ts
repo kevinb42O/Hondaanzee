@@ -7,7 +7,7 @@ export const HOTSPOTS: Hotspot[] = [
     type: 'Café',
     description: 'Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars. Geniet van een heerlijke specialty coffee terwijl je rondneust tussen prachtige kristallen, handgemaakte juwelen en andere unieke schatten. De ideale stop na een strandwandeling voor wie houdt van goede vibes, lekkere koffie en… pure verwennerij voor je hond!',
     tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee', 'Aanrader'],
-    image: '/gucci.webp',
+    image: '/lakaiannfinal.webp',
     city: 'blankenberge',
     address: 'Zeedijk 205/01, 8370 Blankenberge',
     website: 'https://lakaiann.com/'
@@ -999,5 +999,16 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'blankenberge',
     address: 'Zeedijk 77-79, 8370 Blankenberge',
     website: 'https://beach-palace.com/'
+  },
+  {
+    id: 91,
+    name: 'Seascape Penthouse',
+    type: 'Slapen',
+    description: 'Wakker worden met de Noordzee aan je voeten? In dit stijlvolle penthouse op de bovenste verdieping geniet je van een adembenemend panoramisch zeezicht. Schuif de deuren open naar je privé dakterras en sluit de dag af met de meest fotogenieke zonsondergangen. Binnen baadt de open leefruimte in het licht en is de keuken van alle gemakken voorzien. Na een lange strandwandeling is het heerlijk thuiskomen en plof je neer in uiterst comfortabele bedden. Honden meer dan welkom! Dit penthouse is de perfecte uitvalsbasis om samen met je trouwe viervoeter de Blankenbergse zeedijk, het uitgestrekte strand en de gezellige stad te verkennen. Praktisch: Je fietsen berg je veilig op in onze fietsenstalling en optioneel bieden we een handige verhuurservice voor fris bad- en bedlinnen.',
+    tags: ['Aanrader', 'Honden welkom', 'Panoramisch zeezicht', 'Privé dakterras', 'Nabij strand', 'Volledig uitgerust'],
+    image: '/seascapeV4.webp',
+    city: 'blankenberge',
+    address: 'Zeedijk 115 B/10, 8370 Blankenberge',
+    website: 'https://www.booking.com/hotel/be/seascape-penthouse.nl.html'
   }
 ];
