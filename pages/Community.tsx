@@ -125,44 +125,54 @@ const Community: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="animate-in fade-in overflow-x-hidden min-h-screen bg-white">
       <Confetti />
 
       {/* ═══════════ HERO ═══════════ */}
-      <section className="relative overflow-hidden pt-32 sm:pt-40 pb-16 sm:pb-24">
-        {/* Layered background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-50/90 via-sky-50/30 to-white" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[700px] rounded-full opacity-[0.06]" style={{ background: 'radial-gradient(circle, #0ea5e9 0%, transparent 70%)' }} />
-        {/* Decorative paw prints */}
-        <div className="absolute top-24 left-[10%] text-sky-200/30 text-4xl rotate-[-15deg] select-none hidden sm:block">🐾</div>
-        <div className="absolute top-40 right-[8%] text-sky-200/25 text-3xl rotate-[20deg] select-none hidden sm:block">🐾</div>
-        <div className="absolute bottom-20 left-[15%] text-sky-200/20 text-2xl rotate-[10deg] select-none hidden lg:block">🐾</div>
+      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url(/gucci_topper.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }}
+        >
+          <div className="absolute inset-0 bg-slate-900/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/40"></div>
+        </div>
+        {/* Decorative Elements */}
+        <div className="absolute top-10 right-10 text-slate-700/30 hidden md:block" style={{ animation: 'float 3.5s ease-in-out infinite' }}>
+          <Camera size={70} strokeWidth={1.5} />
+        </div>
+        <div className="absolute top-32 left-16 text-slate-700/30 hidden md:block" style={{ animation: 'pulse 3s ease-in-out infinite' }}>
+          <Heart size={60} strokeWidth={1.5} />
+        </div>
 
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          {/* Small badge */}
-          <div className="inline-flex items-center gap-1.5 bg-sky-100/80 text-sky-700 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-6 sm:mb-8">
-            <Heart size={12} className="fill-current" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full mt-8 sm:mt-12">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+            <Heart size={14} className="text-pink-400" />
             <span>Community</span>
           </div>
-
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-5 sm:mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight drop-shadow-lg">
             Word de volgende{' '}
-            <span className="text-sky-600 relative inline-block">
+            <span className="text-sky-400 relative inline-block">
               Topper van de Week
               <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-400/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
               </svg>
             </span>
           </h1>
-
-          <p className="text-base sm:text-lg text-slate-500 leading-relaxed max-w-lg mx-auto">
+          <p className="text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed drop-shadow">
             Elke week kiezen we één hond als Topper van de Week — groot in beeld op onze site. Stuur je foto via WhatsApp en wie weet sta jij er volgende week!
           </p>
         </div>
-      </section>
+      </div>
 
       {/* ═══════════ MAANDTHEMA ═══════════ */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 mb-16 sm:mb-24">
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 -mt-12 sm:-mt-16 relative z-20 mb-16 sm:mb-24">
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-sky-900/20" style={{
           background: 'linear-gradient(135deg, #0c1929 0%, #0f2847 30%, #143a6b 60%, #0f2847 80%, #0c1929 100%)',
         }}>
