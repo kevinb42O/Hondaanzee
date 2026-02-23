@@ -10,6 +10,7 @@ export interface BlogPost {
   icon: string;
   image?: string;
   imageAlt?: string;
+  ogImage?: string;
   featured?: boolean;
   content: BlogSection[];
 }
@@ -1248,8 +1249,9 @@ export const blogPosts: BlogPost[] = [
     category: 'Training & Gedrag',
     categoryColor: 'blue',
     icon: '🧠',
-    image: '/OG_verantwoordelijklos.webp',
+    image: '/verantwoordlos.webp',
     imageAlt: 'Hond loopt los aan zee met mentale connectie - VZW Verantwoord Los',
+    ogImage: '/OG_verantwoordelijklos.webp',
     featured: true,
     content: [
       {

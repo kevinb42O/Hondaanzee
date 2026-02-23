@@ -16,7 +16,7 @@ const BlogDetail: React.FC = () => {
     title: post ? `${post.title} | HondAanZee.be Blog` : 'Blog niet gevonden | HondAanZee.be',
     description: post?.excerpt || 'Dit blogartikel werd niet gevonden.',
     keywords: post ? `${post.category}, ${post.slug.split('-').join(', ')}, hondaanzee blog, belgische kust hond, hond aan zee` : '',
-    ogImage: post?.image ? `https://hondaanzee.be${post.image}` : undefined,
+    ogImage: post?.ogImage ? `https://hondaanzee.be${post.ogImage}` : post?.image ? `https://hondaanzee.be${post.image}` : undefined,
     canonical: post ? `https://hondaanzee.be/blog/${post.slug}` : undefined,
     structuredData: post ? [
       {
