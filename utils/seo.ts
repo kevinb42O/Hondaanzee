@@ -14,7 +14,7 @@ export const useSEO = ({
   title,
   description,
   keywords,
-  ogImage = 'https://hondaanzee.be/og-image.webp',
+  ogImage = 'https://hondaanzee.be/og-imagefinal.webp',
   canonical,
   structuredData
 }: SEOProps) => {

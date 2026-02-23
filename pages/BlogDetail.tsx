@@ -38,7 +38,7 @@ const BlogDetail: React.FC = () => {
           "url": "https://hondaanzee.be",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://hondaanzee.be/og-image.webp"
+            "url": "https://hondaanzee.be/og-imagefinal.webp"
           }
         },
         "author": {
