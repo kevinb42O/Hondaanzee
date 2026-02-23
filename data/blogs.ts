@@ -15,7 +15,7 @@ export interface BlogPost {
 }
 
 export interface BlogSection {
-  type: 'paragraph' | 'heading' | 'subheading' | 'list' | 'tip' | 'warning' | 'quote' | 'callout' | 'youtube';
+  type: 'paragraph' | 'heading' | 'subheading' | 'list' | 'tip' | 'warning' | 'quote' | 'callout' | 'youtube' | 'cta';
   text?: string;
   items?: string[];
   title?: string;
@@ -137,6 +137,11 @@ export const blogPosts: BlogPost[] = [
         ]
       },
       {
+        type: 'warning',
+        title: 'Opgelet: loslopende honden op het strand',
+        text: 'Een veelvoorkomend probleem zijn hondeneigenaars die hun hond veel te ver laten loslopen op het strand — soms 100 tot 300 meter ver. Als zo\'n hond een zeehond opmerkt, is er geen enkel middel om hem nog terug te roepen. Houd je hond daarom altijd dicht bij je en onder controle, zeker op uitgestrekte stranden waar zeehonden kunnen rusten.'
+      },
+      {
         type: 'callout',
         title: 'Waarom is contact tussen hond en zeehond gevaarlijk?',
         text: 'Een hond die naar een zeehond rent, veroorzaakt enorme stress bij het dier. De zeehond kan in paniek het water invluchten terwijl hij nog niet voldoende uitgerust is. Daarnaast zijn zeehonden wilde roofdieren — het zijn de grootste roofdieren van onze kust. Een grijze zeehond kan tot 280 kg wegen en heeft scherpe tanden. Een confrontatie met een hond kan voor beide dieren ernstige verwondingen opleveren. Zeehonden kunnen bovendien ziektes overdragen zoals zeehondengriep (Phocine Distemper Virus) en bacteriële infecties.'
@@ -155,7 +160,8 @@ export const blogPosts: BlogPost[] = [
           'Neem afstand (minstens 30 meter) en neem je hond aan de lijn',
           'Geniet van de observatie op afstand',
           'Informeer andere wandelaars en hondenbezitters in de buurt',
-          'Stoor het dier niet — het zal vanzelf terug de zee ingaan wanneer het klaar is'
+          'Stoor het dier niet — het zal vanzelf terug de zee ingaan wanneer het klaar is',
+          '📞 Bel het NorthSealTeam (+32 491 74 32 78) — niet alleen bij nood, maar bij élke waarneming. Zij komen ter plaatse om een veiligheidsperimeter op te stellen en de gezondheid van de zeehond te evalueren. Bij problemen wordt overlegd met SEA LIFE Blankenberge'
         ]
       },
       {
@@ -190,6 +196,11 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'paragraph',
         text: 'In de zomer (vooral juni-juli) kunnen jonge gewone zeehonden aanspoelen. Ze worden geboren op zandbanken of stranden en wegen bij de geboorte ongeveer 10 kg. Na zo\'n 6 weken zoogtijd zijn ze op zichzelf aangewezen. De overgang naar een zelfstandig leven is zwaar, en soms stranden verzwakte jonge dieren aan onze kust.'
+      },
+      {
+        type: 'tip',
+        title: 'Grijze zeehondenpups en hun geboortevacht',
+        text: 'Jonge grijze zeehonden komen niet alleen aan land om uit te rusten. Soms rollen ze in het zand om zich te ontdoen van hun witte geboortevacht (lanugo). Dit is volledig normaal gedrag en geen teken van nood.'
       },
       {
         type: 'warning',
@@ -238,6 +249,28 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'paragraph',
         text: 'Zeehonden aan onze kust zijn een prachtig teken dat de natuur zich herstelt. Door als hondenbezitters verantwoordelijk om te gaan met deze bijzondere dieren, zorgen we ervoor dat ze hier welkom blijven. En dat we nog vele jaren kunnen genieten van die nieuwsgierige kopjes die boven de golven uitsteken. 🦭'
+      },
+      {
+        type: 'heading',
+        text: 'Steun het NorthSealTeam'
+      },
+      {
+        type: 'callout',
+        title: 'Doneren aan het NorthSealTeam',
+        text: 'Het NorthSealTeam draait volledig op vrijwilligers en is afhankelijk van giften om hun werking te ondersteunen. Een gift — groot of klein — kan je overmaken op BE43 7370 6628 5601 op naam van NorthSealTeam VZW. Elke bijdrage helpt om de zeehonden aan onze kust te beschermen!'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wil je zelf actief meehelpen? Het NorthSealTeam is altijd op zoek naar gemotiveerde vrijwilligers die willen bijdragen aan de bescherming van zeehonden aan de Belgische kust.'
+      },
+      {
+        type: 'cta',
+        text: '🤝 Word vrijwilliger bij het NorthSealTeam',
+        url: 'https://www.northsealteam.be/aanmelden.html'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dit artikel werd opgesteld in samenspraak met Frank Durinckx, bestuurslid van het NorthSealTeam VZW.'
       }
     ]
   },
