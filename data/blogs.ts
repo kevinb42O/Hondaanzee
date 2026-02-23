@@ -1248,7 +1248,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Training & Gedrag',
     categoryColor: 'blue',
     icon: '🧠',
-    image: '/verantwoordlos.webp',
+    image: '/OG_verantwoordelijklos.webp',
     imageAlt: 'Hond loopt los aan zee met mentale connectie - VZW Verantwoord Los',
     featured: true,
     content: [
