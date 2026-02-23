@@ -15,11 +15,12 @@ export interface BlogPost {
 }
 
 export interface BlogSection {
-  type: 'paragraph' | 'heading' | 'subheading' | 'list' | 'tip' | 'warning' | 'quote' | 'callout' | 'youtube' | 'cta';
+  type: 'paragraph' | 'heading' | 'subheading' | 'list' | 'tip' | 'warning' | 'quote' | 'callout' | 'youtube' | 'cta' | 'cta-callout';
   text?: string;
   items?: string[];
   title?: string;
   url?: string;
+  ctaText?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -1239,7 +1240,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mentale-leiband-vrijheid-met-connectie',
-    title: 'De Mentale Leiband: Vrijheid met Connectie',
+    title: 'De Mentale Leiband: Vrijheid door middel van Connectie en Controle',
     subtitle: 'Waarom \'loslopen\' aan zee een mentale kunstvorm is',
     excerpt: 'De Belgische kust is voor honden een zintuiglijk paradijs. Maar achter het idyllische beeld van een loslopende hond schuilt een complexe realiteit. Ontdek de filosofie van de "mentale leiband" en hoe je een wandeling transformeert van controle naar vertrouwen.',
     date: '2026-02-16',
@@ -1257,11 +1258,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Het beeld van een hond die in volle galop door de branding klieft, is het icoon van pure vrijheid. Maar achter dat idyllische plaatje schuilt een complexe realiteit. Volgens Marc Serneels, de drijvende kracht achter VZW Verantwoord Los en te gast in de Olly & Molly Podcast, bestaat "echte" vrijheid voor een hond eigenlijk niet—of zou die althans niet mogen bestaan in de vorm die wij vaak voor ogen hebben.'
+        text: 'Het beeld van een hond die in volle galop door de branding klieft, is het icoon van pure vrijheid. Maar achter dat idyllische plaatje schuilt een complexe realiteit. Volgens Marc Serneels, de drijvende kracht achter VZW Verantwoord Los en te gast in de Olly & Molly Podcast, bestaat "volledige" vrijheid voor een hond eigenlijk niet — of zou die althans niet mogen bestaan in de vorm die wij vaak voor ogen hebben.'
       },
       {
         type: 'paragraph',
-        text: 'In dit uitgebreide dossier duiken we diep in de filosofie van de "mentale leiband". Hoe transformeer je een wandeling van een voortdurende strijd om controle naar een dans van wederzijds vertrouwen?'
+        text: 'In dit uitgebreide dossier duiken we diep in de filosofie van de "mentale leiband" als synoniem voor hond onder controle zonder overlast. Hoe transformeer je een wandeling van een voortdurende strijd om controle naar een dans van wederzijds vertrouwen?'
       },
       {
         type: 'heading',
@@ -1269,7 +1270,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De meeste hondeneigenaars zien de leiband als een noodzakelijk kwaad, een beperking die we zo snel mogelijk willen verwijderen zodra we het strand betreden. Marc Serneels draait die gedachte om. Hij stelt dat een verantwoorde hond altijd aangelijnd is. De vraag is alleen: welke lijn gebruik je?'
+        text: 'De meeste hondeneigenaars zien de leiband als een noodzakelijk kwaad, een beperking die we zo snel mogelijk willen verwijderen zodra we het strand betreden. Marc Serneels draait die gedachte om. Hij stelt dat een hond van een verantwoord baasje altijd aangelijnd moet zijn (fysieke of mentale lijn) vanwege de noodzakelijke veiligheid en het vermijden van overlast.'
       },
       {
         type: 'subheading',
@@ -1277,7 +1278,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Zodra de musketon van de halsband klikt, denken we vaak dat de verantwoordelijkheid stopt. "Hij is nu vrij," zeggen we dan. Maar dat is waar het misgaat. Volgens Serneel verplaatsen we op dat moment de verbinding simpelweg van de hand naar de geest.'
+        text: 'Zodra de musketon van de halsband klikt, denken we vaak dat de verantwoordelijkheid stopt. "Hij is nu vrij," zeggen we dan. Maar dat is waar het misgaat. Volgens Serneels verplaatsen we op dat moment de verbinding simpelweg van de hand naar de geest.'
       },
       {
         type: 'list',
@@ -1296,7 +1297,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Laten we eerlijk zijn: de standaard leiband van 1,5 meter is voor een hond vaak een bron van frustratie. Marc Serneels is daar heel duidelijk over. Een hond beleeft de wereld via zijn neus. Als hij aan een korte lijn loopt, wordt hij voortdurend beperkt in zijn natuurlijke exploratiegedrag.'
+        text: 'Laten we eerlijk zijn: de standaard leiband van 1,5 meter is voor een hond vaak een bron van frustratie. Marc Serneels is daar heel duidelijk over. Een hond beleeft de wereld via zijn neus. Als hij aan een korte lijn loopt, wordt hij voortdurend beperkt in zijn natuurlijke zoektocht naar interessante geurtjes.'
       },
       {
         type: 'subheading',
@@ -1304,7 +1305,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Aan de kust adviseert Marc het gebruik van een lange lijn (een sleeplijn of een kwalitatieve flexilijn van 5 tot 8 meter). Waarom?'
+        text: 'Een paar meter extra lijn geeft de hond de ruimte om de geurtjes die wij niet opmerken te vinden en te onderzoeken/lezen.'
       },
       {
         type: 'list',
@@ -1336,7 +1337,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Het doel is niet een hond die als een robot naast je loopt, maar een hond die geniet van zijn vrijheid terwijl hij rekening houdt met de grenzen die jij aangeeft. Hij loopt niet blindelings op andere honden af, hij stormt niet op picknickende families af, en hij blijft binnen het bereik van je stem.'
+        text: 'Het doel is niet een hond die als een robot naast je loopt, maar een hond die geniet van zijn vrijheid terwijl hij rekening houdt met de grenzen die jij aangeeft. Hij loopt niet blindelings op andere honden af, hij stormt niet op picknickende families af, en hij blijft binnen het bereik van je stem. Tijdens het passeren wordt de hond teruggeroepen en blijft bij het baasje.'
       },
       {
         type: 'heading',
@@ -1350,7 +1351,7 @@ export const blogPosts: BlogPost[] = [
         type: 'list',
         items: [
           'Zintuiglijke Overload: De wind draagt geuren van kilometers ver mee. Het geluid van de golven maskeert jouw stem (het "witte ruis"-effect).',
-          'Visuele Triggers: Meeuwen die opvliegen, surfers in de verte, spelende kinderen met vliegers—alles nodigt uit tot jacht- of speelgedrag.',
+          'Visuele Triggers: Meeuwen die opvliegen, surfers in de verte, spelende kinderen met vliegers — alles nodigt uit tot jacht- of speelgedrag.',
           'De Ruimte-illusie: De enorme weidsheid geeft honden het gevoel dat ze eindeloos kunnen rennen, waardoor ze de connectie met hun "basis" (jou) sneller verliezen.'
         ]
       },
@@ -1398,7 +1399,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'quote',
-        text: '"Wie is die andere hond?" vraagt Marc retorisch. Misschien is die andere hond herstellende van een operatie, is hij angstig, of is hij in training. Een verantwoordelijke baas vraagt altijd eerst toestemming of houdt zijn hond bij zich bij het passeren van andere wandelaars.'
+        text: '"Wie is die andere hond?" vraagt Marc retorisch. Misschien is die andere hond herstellende van een operatie, is hij angstig, of is hij in training. Misschien is de hond oud en wordt hij daarom liever met rust gelaten. De hond is misschien ook minder sociaal waardoor hij/zij liever geen contact heeft met andere of onbekende honden. Een verantwoordelijk baasje houdt daarom de hond altijd bij zich tijdens het passeren. De honden krijgen dan even de tijd om op afstand te wennen aan elkaar. De baasjes kunnen dan bekijken of de honden positieve signalen naar mekaar sturen. Contact tussen de honden is steeds mogelijk als beide baasjes daarmee instemmen.'
       },
       {
         type: 'heading',
@@ -1406,7 +1407,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Een cruciaal onderdeel van de filosofie van VZW Verantwoord Los is dat we moeten stoppen met oordelen en moeten beginnen met begrijpen. Veel incidenten aan de kust gebeuren niet uit slechtheid, maar uit onwetendheid of een gebrek aan inzicht in de emotionele staat van de hond.'
+        text: 'Een cruciaal onderdeel van de filosofie van VZW Verantwoord Los is dat we moeten stoppen met oordelen en veroordelen. Veel incidenten aan de kust gebeuren niet uit slechtheid, maar uit onwetendheid en vanwege het simpele feit dat baasjes soms te weinig rekening houden met de wensen van de andere mensen op het strand.'
       },
       {
         type: 'subheading',
@@ -1414,7 +1415,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Als een hond overprikkeld is (door stress, angst of extreme opwinding), is zijn prefrontale cortex—het deel van de hersenen dat nadenkt en leert—als het ware "offline". Je kunt dan roepen wat je wilt, de informatie komt niet aan.'
+        text: 'Als een hond overprikkeld is (door stress, angst of extreme opwinding), is zijn prefrontale cortex — het deel van de hersenen dat nadenkt en leert — als het ware "offline". Je kunt dan roepen wat je wilt, de informatie komt niet aan.'
       },
       {
         type: 'paragraph',
@@ -1424,8 +1425,12 @@ export const blogPosts: BlogPost[] = [
         type: 'list',
         items: [
           'Zoek de rust op: Ga naar een stiller gedeelte van het strand of kies een ander tijdstip.',
-          'Natuurlijke ondersteuning: Soms kunnen natuurlijke supplementen helpen om de basis-stress van een hond te verlagen, waardoor er weer ruimte ontstaat in het hoofd om de mentale leiband te voelen. Raadpleeg altijd eerst je dierenarts of een erkende hondengedragstherapeut voordat je supplementen toedient.'
+          'Natuurlijke ondersteuning: Natuurlijke supplementen kunnen als extraatje nuttig zijn om de basisstress van een hond te verlagen, al is hun invloed beperkt.'
         ]
+      },
+      {
+        type: 'paragraph',
+        text: 'Door de afstand tot de prikkels die stress, frustratie, angst of opwinding veroorzaken te vergroten, komt de hond opnieuw tot rust. Vanuit deze rust ontstaat opnieuw connectie en kan het proces van (her)opvoeden en (her)trainen opnieuw gestart worden. Door te oefenen op die afstand verhoog je het trainingsniveau van de hond waardoor je de afstand tot deze prikkels weer kan verkleinen. Het resultaat wordt dan een hond die steeds verbonden blijft.'
       },
       {
         type: 'heading',
@@ -1433,7 +1438,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneels pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband—dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen—creëren we het nodige draagvlak om deze vrije zones te behouden.'
+        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneels pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband — dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen — creëren we het nodige draagvlak om deze vrije zones te behouden.'
       },
       {
         type: 'heading',
@@ -1454,6 +1459,13 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'paragraph',
         text: 'Is het antwoord nee? Geen probleem. Gebruik de lange lijn, geniet van de veiligheid en werk aan de verbinding. Is het antwoord ja? Geniet dan van dat magische moment waarop de fysieke wereld wegvalt en er alleen nog de onzichtbare navelstreng is tussen jou en je beste vriend.'
+      },
+      {
+        type: 'cta-callout',
+        title: 'Meer weten over verantwoord(elijk) los?',
+        text: 'Deze blog is slechts het begin! Op de website van VZW Verantwoord Los vind je uitgebreide informatie over verantwoord(elijk) loslopen, trainingstips, educatieve materialen en kun je lid worden om de missie van Marc Serneels en zijn team actief te ondersteunen. Ontdek hoe jij het verschil kunt maken voor alle hondeneigenaars aan de kust.',
+        ctaText: '🐕 Bezoek VZW Verantwoord Los & Word Lid',
+        url: 'https://verantwoordelijklos.be/'
       },
       {
         type: 'callout',
