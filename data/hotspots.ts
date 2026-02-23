@@ -605,7 +605,7 @@ export const HOTSPOTS: Hotspot[] = [
     name: 'De Sleutel & La Clef',
     type: 'Restaurant',
     description: 'Charmant restaurant op de Zeedijk met een uitgebreide kaart en prachtig uitzicht op zee. Een perfecte plek om te genieten van verse gerechten terwijl je viervoeter rustig naast je ligt. Bij reservatie graag vermelden dat je met hond komt.',
-    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Zeezicht', 'Hondvriendelijk team', 'Vleesgerechten'],
+    tags: ['Aanrader', 'Terras', 'Nabij strand', 'Waterbak aanwezig', 'Zeezicht', 'Hondvriendelijk team', 'Vleesgerechten'],
     image: '/desleutel.webp',
     city: 'blankenberge',
     address: 'Zeedijk 182, 8370 Blankenberge',
