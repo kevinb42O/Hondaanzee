@@ -36,6 +36,8 @@ const ROUTES = [
   '/nieuwpoort',
   '/koksijde',
   '/de-panne',
+  // Blog posts
+  '/blog/mentale-leiband-vrijheid-met-connectie',
 ];
 
 // Simple static file server for the dist folder
