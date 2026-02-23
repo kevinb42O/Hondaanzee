@@ -31,7 +31,7 @@ const BlogDetail: React.FC = () => {
           "@type": "WebPage",
           "@id": `https://hondaanzee.be/blog/${post.slug}`
         },
-        ...(post.image ? { "image": { "@type": "ImageObject", "url": `https://hondaanzee.be${post.image}`, "width": 1200, "height": 800 } } : {}),
+        ...(post.ogImage ? { "image": { "@type": "ImageObject", "url": `https://hondaanzee.be${post.ogImage}`, "width": 1200, "height": 630 } } : post.image ? { "image": { "@type": "ImageObject", "url": `https://hondaanzee.be${post.image}`, "width": 1200, "height": 800 } } : {}),
         "publisher": {
           "@type": "Organization",
           "name": "HondAanZee.be",
