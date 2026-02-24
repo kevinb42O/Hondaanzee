@@ -103,12 +103,33 @@ const BlogDetail: React.FC = () => {
             {section.text}
           </h3>
         );
-      case 'paragraph':
+      case 'paragraph': {
+        if (section.links && section.links.length > 0 && section.text) {
+          const parts: React.ReactNode[] = [];
+          let remaining = section.text;
+          section.links.forEach((link) => {
+            const idx = remaining.indexOf(link.text);
+            if (idx !== -1) {
+              if (idx > 0) parts.push(remaining.slice(0, idx));
+              parts.push(
+                <a key={link.text} href={link.url} className="text-blue-600 hover:text-blue-800 underline font-medium" target="_blank" rel="noopener noreferrer">{link.text}</a>
+              );
+              remaining = remaining.slice(idx + link.text.length);
+            }
+          });
+          if (remaining) parts.push(remaining);
+          return (
+            <p key={index} className="text-slate-700 leading-relaxed mb-4 text-lg">
+              {parts}
+            </p>
+          );
+        }
         return (
           <p key={index} className="text-slate-700 leading-relaxed mb-4 text-lg">
             {section.text}
           </p>
         );
+      }
       case 'list':
         return (
           <ul key={index} className="space-y-2.5 mb-6 ml-1">

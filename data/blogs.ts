@@ -22,6 +22,7 @@ export interface BlogSection {
   title?: string;
   url?: string;
   ctaText?: string;
+  links?: { text: string; url: string }[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -1280,7 +1281,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Zodra de musketon van de halsband klikt, denken we vaak dat de verantwoordelijkheid stopt. "Hij is nu vrij," zeggen we dan. Maar dat is waar het misgaat. Volgens Serneels verplaatsen we op dat moment de verbinding simpelweg van de hand naar de geest.'
+        text: 'Zodra de musketon van de halsband klikt, denken we vaak dat de verantwoordelijkheid stopt. "Hij is nu vrij," zeggen we dan. Maar dat is waar het misgaat. Volgens Marc verplaatsen we op dat moment de verbinding simpelweg van de hand naar de geest.'
       },
       {
         type: 'list',
@@ -1440,7 +1441,8 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneels pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband — dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen — creëren we het nodige draagvlak om deze vrije zones te behouden.'
+        text: 'Hondenbaasjes staan soms onder druk. Er is steeds minder ruimte waar honden nog los mogen. Benieuwd waar je hond wél los mag? Bekijk ons overzicht van alle losloopzones aan de Belgische kust. Marc Serneels pleit voor een dialoog. Als wij als hondenbezitters laten zien dat we controle hebben via die mentale leiband — dat we onze honden bij ons roepen voor joggers, dat we uitwerpselen opruimen en dat we andere strandbezoekers niet storen — creëren we het nodige draagvlak om deze vrije zones te behouden.',
+        links: [{ text: 'alle losloopzones aan de Belgische kust', url: 'https://www.hondaanzee.be/losloopzones' }]
       },
       {
         type: 'heading',
