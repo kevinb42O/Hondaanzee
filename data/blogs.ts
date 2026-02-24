@@ -109,7 +109,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'warning',
         title: 'Belangrijk',
-        text: 'Een zeehond die op het strand ligt, heeft rust nodig. Word het dier te vaak verstoord, dan kan het uitgeput raken en mogelijk verdrinken. Verstoring van zeehonden is strafbaar — ze zijn wettelijk beschermd.'
+        text: 'Een zeehond die op het strand ligt, heeft rust nodig. Wordt het dier te vaak verstoord, dan kan het uitgeput raken en mogelijk verdrinken. Verstoring van zeehonden is strafbaar — ze zijn wettelijk beschermd.'
       },
       {
         type: 'heading',
@@ -147,7 +147,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'callout',
         title: 'Waarom is contact tussen hond en zeehond gevaarlijk?',
-        text: 'Een hond die naar een zeehond rent, veroorzaakt enorme stress bij het dier. De zeehond kan in paniek het water invluchten terwijl hij nog niet voldoende uitgerust is. Daarnaast zijn zeehonden wilde roofdieren — het zijn de grootste roofdieren van onze kust. Een grijze zeehond kan tot 280 kg wegen en heeft scherpe tanden. Een confrontatie met een hond kan voor beide dieren ernstige verwondingen opleveren. Zeehonden kunnen bovendien ziektes overdragen zoals zeehondengriep (Phocine Distemper Virus) en bacteriële infecties.'
+        text: 'Een hond die naar een zeehond rent, veroorzaakt enorme stress bij het dier. De zeehond kan in paniek het water in vluchten terwijl hij nog niet voldoende uitgerust is. Daarnaast zijn zeehonden wilde roofdieren — het zijn de grootste roofdieren van onze kust. Een grijze zeehond kan tot 280 kg wegen en heeft scherpe tanden. Een confrontatie met een hond kan voor beide dieren ernstige verwondingen opleveren. Zeehonden kunnen bovendien ziektes overdragen zoals zeehondengriep (Phocine Distemper Virus) en bacteriële infecties.'
       },
       {
         type: 'heading',
@@ -221,7 +221,7 @@ export const blogPosts: BlogPost[] = [
           'Een gewone zeehond kan tot 50 km van zijn rustplaats jagen',
           'Op rustplaatsen kunnen groepen variëren van 1 tot meer dan 600 dieren',
           'De grijze zeehond kan duiken tot 100 meter diep',
-          'Mannetjes grijze zeehond kunnen tot 3 meter lang en 280 kg zwaar worden',
+          'Mannelijke grijze zeehonden kunnen tot 3 meter lang en 280 kg zwaar worden',
           'Zeehondenpups van de gewone zeehond kunnen al zwemmen vanaf de geboorte',
           'Zeehonden zijn eigenlijk "roofdieren" — ze behoren tot de orde Carnivora, net als beren, wolven en leeuwen',
           'De dikke speklaag van een zeehond (blubber) beschermt hen niet alleen tegen de kou, maar dient ook als energiereserve',
