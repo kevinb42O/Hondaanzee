@@ -1030,7 +1030,7 @@ export const HOTSPOTS: Hotspot[] = [
     name: 'Hotel Lehouck',
     type: 'Slapen',
     description: 'Charmant, familiaal gerund hotel in Koksijde dat er écht om bekend staat extreem gastvrij te zijn voor honden en hun baasjes. Dit gaat verder dan een tolerante houding: hier wordt je viervoeter oprecht verwelkomd als een volwaardige gast.',
-    tags: ['Honden toegelaten op kamer', 'Hondvriendelijk team', 'Familiaal', 'Aanrader'],
+    tags: ['Honden toegelaten op kamer', 'Hondvriendelijk team', 'Familiaal'],
     image: '/lehouck.webp',
     city: 'koksijde',
     address: 'Pierre Sorellaan 8, 8670 Koksijde',
@@ -1096,7 +1096,7 @@ export const HOTSPOTS: Hotspot[] = [
     name: "'t Zoet Genot",
     type: 'Café',
     description: 'De absolute hotspot op de Zeedijk van Oostduinkerke voor een fantastische koffie, ambachtelijke pannenkoeken of een ijsje na het strandwandelen. Het team is hier oprecht dol op honden en je mag met je viervoeter gewoon naar binnen — zo hoort het.',
-    tags: ['Indoor toegelaten', 'Hondensnacks', 'Waterbak aanwezig', 'Nabij strand', 'Aanrader', 'Specialty Coffee'],
+    tags: ['Indoor toegelaten', 'Hondensnacks', 'Waterbak aanwezig', 'Nabij strand', 'Specialty Coffee'],
     image: '/zoetgenot.webp',
     city: 'koksijde',
     address: 'Zeedijk 46, 8670 Koksijde',
@@ -1167,5 +1167,27 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'koksijde',
     address: 'Zeelaan 198, 8670 Koksijde',
     website: ''
+  },
+  {
+    id: 109,
+    name: "Eethuis 't Blekkertje",
+    type: 'Restaurant',
+    description: "Genieten van (h)eerlijke, huisbereide klassiekers in een warme sfeer? Bij 't Blekkertje leggen chef Steve en gastvrouw Grietje je compleet in de watten. Van verfijnde visgerechten tot topvlees van Dierendonck: hier proef je pure passie en vakmanschap.\n\nExtra troef voor hondenbaasjes: Jouw trouwe viervoeter is hier meer dan welkom! Steve en Grietje hebben zelf twee honden en weten precies hoe ze jullie een ontspannen, culinaire avond kunnen bezorgen.\n\nDé smaakmaker van Koksijde voor jou én je hond!",
+    tags: ['Aanrader', 'Indoor toegelaten', 'Hondvriendelijk team', 'Verse keuken', 'Klassiek verfijnd', 'Huisdieren van de zaak'],
+    image: '/blekkertje.webp',
+    city: 'koksijde',
+    address: 'Zeelaan 103B, 8670 Koksijde',
+    website: 'https://eethuisblekkertje.be/'
+  },
+  {
+    id: 108,
+    name: "In 't Dorp",
+    type: 'Café',
+    description: "Zin in een avondje uit waar jouw viervoeter écht welkom is? Bij In 't Dorp vind je de ideale, gezellige plek voor een knabbel en een babbel. Eigenares Kate verwelkomt je samen met haar lieve therapiehond Bruno in een warme, huiselijke sfeer.\n\nHet absolute hoogtepunt is de Brunobar: een speciale bar waar jouw hond de ster van de avond is! Kom langs tussen 17u en middernacht om samen te genieten. Heb je specifieke vragen over het gedrag van je viervoeter? In 't Dorp biedt in huis ook deskundig advies aan, in samenwerking met een professionele hondenpsycholoog.\n\nEen absolute aanrader voor een ontspannen avond met jou én je hond!",
+    tags: ['Aanrader', 'Dogsbar Brunobar', 'Hondvriendelijk team', 'Waterbak aanwezig', 'Indoor toegelaten', 'Gezellige sfeer'],
+    image: '/dorp2.webp',
+    city: 'koksijde',
+    address: 'Zeelaan 59, 8670 Koksijde',
+    website: 'https://www.instagram.com/intdorp/'
   },
 ];
