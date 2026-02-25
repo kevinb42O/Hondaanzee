@@ -210,6 +210,62 @@ export const SERVICES: Service[] = [
     city: 'de-panne',
     address: 'Westhoeklaan 76, 8660 De Panne',
     website: 'https://www.dierenartsdevloo.be'
+  },
+  {
+    id: 20,
+    name: 'Bazouf',
+    type: 'Dierenspeciaalzaak',
+    description: 'Bij Bazouf, de charmante dierenwinkel van eigenaars Véronique en Robine in Koksijde, draait alles om het welzijn van jouw trouwe viervoeter. Het aanbod is zorgvuldig samengesteld met oog voor kwaliteit, duurzaamheid en originaliteit — met een uitgesproken voorkeur voor lokale, handgemaakte en ecologische producten. Naast stijlvolle accessoires en speelgoed vind je er een ruim gamma aan natuurlijke voeding, lekkernijen en kauwsnacks, want de gezondheid van je harige vriend staat er altijd voorop. Persoonlijk advies op maat van jouw hond? Daar kan je bij Bazouf altijd op rekenen.',
+    tags: ['Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team', 'Ecologisch', 'Lokale producten', 'Persoonlijk advies'],
+    image: '/bazouf.webp',
+    imagePosition: 'center top',
+    city: 'koksijde',
+    address: 'Westendestraat 3, 8670 Koksijde',
+    website: 'https://www.bazouf.be/'
+  },
+  {
+    id: 21,
+    name: 'Vets For Pets',
+    type: 'Dierenarts',
+    description: 'Vets For Pets is een moderne en toegankelijke dierenartsenpraktijk in Koksijde waar het welzijn van jouw hond centraal staat. Het enthousiaste team staat klaar voor zowel routinebezoeken als meer complexe zorgen, altijd met de nodige aandacht en vakkennis. Een vlotte planning voor jou en zo min mogelijk wachttijd voor je viervoeter — afspraken maak je eenvoudig online via de website.',
+    tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak', 'Online afspraak'],
+    image: '/vetsforpets.webp',
+    city: 'koksijde',
+    address: 'Robert Vandammestraat 40, 8670 Koksijde',
+    website: 'https://vetsforpets.be/'
+  },
+  {
+    id: 22,
+    name: 'Dierenartsencentrum Anoa',
+    type: 'Dierenarts',
+    description: 'Dierenartsencentrum Anoa combineert echte passie voor dieren met topkwaliteit diergeneeskunde. Dankzij het modernste materiaal en voortdurende bijscholing blijft het team scherp op de nieuwste inzichten en technieken — want het stopt nooit met investeren in kennis en vernieuwende uitrusting. Van een snelle routineconsultatie tot een complexere diagnose: er wordt altijd gezocht naar de juiste oplossing, in open overleg met de eigenaar. Want alleen met eerlijke communicatie kom je samen tot de beste keuze voor jouw huisdier.',
+    tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak', 'Moderne uitrusting'],
+    image: '/anoa.webp',
+    city: 'koksijde',
+    address: 'Koksijdesteenweg 64, 8670 Koksijde',
+    website: 'https://www.anoa.be/'
+  },
+  {
+    id: 23,
+    name: 'Dierenarts Debakker Olivier',
+    type: 'Dierenarts',
+    description: 'Olivier Debakker is een dierenarts met meer dan dertig jaar praktijkervaring — opgegroeid met paarden en teckels, en al van jongs af aan geroepen voor het vak. Na zijn afstuderen in Gent deed hij stages in Frankrijk en bleef hij sindsdien constant bijleren. In de hoofdpraktijk in Koksijde kunnen naast gewone consultaties ook meer geavanceerde ingrepen terecht: chirurgie, digitale radiografie, echografie en bloedonderzoeken. Een tweede praktijk bevindt zich in Oostduinkerke.',
+    tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak', 'Chirurgie', 'Echografie', 'Radiografie'],
+    image: '/olivierdebakker.webp',
+    city: 'koksijde',
+    address: 'Zeelaan 203, 8670 Koksijde',
+    website: 'https://olivierdebakker.be/'
+  },
+  {
+    id: 24,
+    name: 'Dierenartsencentrum Clos Fleuri',
+    type: 'Dierenarts',
+    description: 'Dierenartsencentrum Clos Fleuri in Koksijde werkt uitsluitend op afspraak — zo krijgt elk dier de volledige aandacht het verdient en blijft de wachtzaal rustig en aangenaam. Je kan er terecht voor preventieve geneeskunde zoals vaccinaties, gezondheidsonderzoeken, seniorscreenings en osteo-artrose consultaties, maar ook voor eerstelijns zorgen bij klachten als manken, diarree, braken, oorontstekingen, blaasontstekingen en wondes.',
+    tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak', 'Preventieve geneeskunde', 'Seniorscreening'],
+    image: '/fleuri.webp',
+    city: 'koksijde',
+    address: 'Strandlaan 202, 8670 Koksijde',
+    website: 'https://www.clos-fleuri.be/'
   }
 ];
 

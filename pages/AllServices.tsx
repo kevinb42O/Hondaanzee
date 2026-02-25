@@ -236,8 +236,11 @@ const AllServices: React.FC = () => {
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"                      width={400}
-                      height={256}                    loading="lazy"
+                    className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
+                    style={{ objectPosition: service.imagePosition || 'center' }}
+                    width={400}
+                    height={256}
+                    loading="lazy"
                     decoding="async"
                   />
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/95 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-800 shadow-sm border border-white/20">

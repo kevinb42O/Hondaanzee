@@ -113,17 +113,6 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://www.belgiumpier.be'
   },
   {
-    id: 13,
-    name: 'Brasserie Lolo',
-    type: 'Restaurant',
-    description: 'Hondvriendelijke brasserie aan de Zeedijk waar u samen geniet van een dagschotel of koffie.',
-    tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand'],
-    image: '/brasserielolodepanne.webp',
-    city: 'de-panne',
-    address: 'Zeelaan 83, 8660 De Panne',
-    website: ''
-  },
-  {
     id: 14,
     name: 'De Verloren Gernoare',
     type: 'Café',
@@ -1010,5 +999,173 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'blankenberge',
     address: 'Zeedijk 115 B/10, 8370 Blankenberge',
     website: 'https://www.booking.com/hotel/be/seascape-penthouse.nl.html'
-  }
+  },
+
+  // ── Koksijde - Oostduinkerke ──────────────────────────────────────────────
+
+  {
+    id: 92,
+    name: 'Boutiquehotel Hof ter Duinen',
+    type: 'Slapen',
+    description: 'Sfeervol luxeboutiquehotel in Oostduinkerke-Bad waar honden oprecht van harte welkom zijn. Wat dit hotel echt onderscheidt: jouw viervoeter mag je zelfs vergezellen in de ontbijtzaal — zolang hij rustig onder je stoel blijft liggen, is er absoluut geen probleem. Comfortabel verblijven met je trouwe vriend, zonder compromissen.',
+    tags: ['Honden toegelaten op kamer', 'Hond welkom bij ontbijt', 'Boutique', 'Luxe accommodatie', 'Nabij strand'],
+    image: '/hofterduinen.webp',
+    city: 'koksijde',
+    address: 'Albert I-laan 141, 8670 Koksijde',
+    website: 'https://www.hofterduinen.be'
+  },
+  {
+    id: 93,
+    name: 'Hotel Apostroff',
+    type: 'Slapen',
+    description: 'Modern en populair hotel in Koksijde waar viervoeters véél meer zijn dan louter \'getolereerd\'. Het team ontvangt honden met oprechte warmte en enthousiasme, en de ruime faciliteiten maken een verblijf voor zowel jou als je trouwe vriend bijzonder aangenaam.',
+    tags: ['Honden toegelaten op kamer', 'Hondvriendelijk team', 'Modern hotel', 'Centraal gelegen'],
+    image: '/apostroff.webp',
+    city: 'koksijde',
+    address: 'Lejeunelaan 38, 8670 Koksijde',
+    website: 'https://www.apostroff.be'
+  },
+  {
+    id: 94,
+    name: 'Hotel Lehouck',
+    type: 'Slapen',
+    description: 'Charmant, familiaal gerund hotel in Koksijde dat er écht om bekend staat extreem gastvrij te zijn voor honden en hun baasjes. Dit gaat verder dan een tolerante houding: hier wordt je viervoeter oprecht verwelkomd als een volwaardige gast.',
+    tags: ['Honden toegelaten op kamer', 'Hondvriendelijk team', 'Familiaal', 'Aanrader'],
+    image: '/lehouck.webp',
+    city: 'koksijde',
+    address: 'Pierre Sorellaan 8, 8670 Koksijde',
+    website: 'https://www.lehouck.be'
+  },
+  {
+    id: 95,
+    name: 'Casino Hotel',
+    type: 'Slapen',
+    description: 'Luxueus en prachtig gelegen hotel in het centrum van Koksijde dat absoluut geen drempel vormt voor hondeneigenaars. Ondanks de verzorgde uitstraling zijn viervoeters hier gewoon welkom, wat dit hotel tot een vaste favoriet maakt bij baasjes die kwaliteit en hondvriendelijkheid combineren.',
+    tags: ['Honden toegelaten op kamer', 'Centraal gelegen', 'Luxe accommodatie', 'Hondvriendelijk team'],
+    image: '/casinohotel.webp',
+    city: 'koksijde',
+    address: 'Maurice Blieckstraat 2-6, 8670 Koksijde',
+    website: 'https://www.casinohotel.be'
+  },
+  {
+    id: 96,
+    name: 'Hotel Domein Westhoek',
+    type: 'Slapen',
+    description: 'Rustig gelegen hotel op een uitgestrekt domein midden in het groen van de duinen in Oostduinkerke. De perfecte uitvalsbasis voor een wandelvakantie met je viervoeter: de duinen, de natuur en het strand liggen letterlijk voor je neus. Genieten van rust en ruimte, samen met je trouwe vriend.',
+    tags: ['Honden toegelaten op kamer', 'Nabij duinen', 'Wandelvriendelijk', 'Natuur', 'Ruime tuin'],
+    image: '/domeinwesthoek.webp',
+    city: 'koksijde',
+    address: 'Noordzeedreef 6-8, 8670 Koksijde',
+    website: 'https://www.domein-westhoek.be'
+  },
+  {
+    id: 97,
+    name: 'Bistronomie Eglantier',
+    type: 'Restaurant',
+    description: 'Trendy en verfijnd bistro verbonden aan Hof ter Duinen, waar gastronomisch eten gelukkig niet betekent dat je hond thuis moet achterblijven. Jouw viervoeter is gewoon welkom aan je tafel, zodat je ongestoord kunt genieten van een culinaire maaltijd.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Verfijnd dineren', 'Bistro'],
+    image: '/eglantier.webp',
+    city: 'koksijde',
+    address: 'Albert I-laan 141, 8670 Koksijde',
+    website: 'https://www.bistronomie-eglantier.be'
+  },
+  {
+    id: 98,
+    name: 'Restaurant Akoté',
+    type: 'Restaurant',
+    description: 'Hip en jong restaurant verbonden aan Hotel Apostroff, met een menu vol verse en seizoensgebonden gerechten. Niet enkel het eten scoort hier hoog — ook de oprechte gastvrije houding tegenover honden maakt dit adres tot een vaste favoriet voor viervoeters en hun baasjes.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Verse gerechten', 'Jong & hip'],
+    image: '/akote.webp',
+    city: 'koksijde',
+    address: 'Lejeunelaan 38, 8670 Koksijde',
+    website: 'https://www.a-kote.be'
+  },
+  {
+    id: 99,
+    name: 'De Spelleplekke',
+    type: 'Restaurant',
+    description: 'Waanzinnig gezellige en jonge plek in Oostduinkerke voor een smakelijke lunch, een ontspannen diner of een relaxte apero. Het menu blinkt uit in originele visgerechten en veggie opties — en je hond is hier meer dan welkom om er gezellig bij te zitten.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Vegetarisch', 'Terras', 'Visgerechten'],
+    image: '/spelleplekke.webp',
+    city: 'koksijde',
+    address: 'IJslandplein 10, 8670 Koksijde',
+    website: 'https://www.despelleplekke.be'
+  },
+  {
+    id: 100,
+    name: "'t Zoet Genot",
+    type: 'Café',
+    description: 'De absolute hotspot op de Zeedijk van Oostduinkerke voor een fantastische koffie, ambachtelijke pannenkoeken of een ijsje na het strandwandelen. Het team is hier oprecht dol op honden en je mag met je viervoeter gewoon naar binnen — zo hoort het.',
+    tags: ['Indoor toegelaten', 'Hondensnacks', 'Waterbak aanwezig', 'Nabij strand', 'Aanrader', 'Specialty Coffee'],
+    image: '/zoetgenot.webp',
+    city: 'koksijde',
+    address: 'Zeedijk 46, 8670 Koksijde',
+    website: 'https://www.zoetgenot.be'
+  },
+  {
+    id: 101,
+    name: "Tearoom 't Zand",
+    type: 'Café',
+    description: 'Vertrouwde tearoom op de Zeedijk, gekend om hun huisgemaakte garnaalkroketten en ontspannen sfeer. Het team is oprecht dierenvriendelijk: je hond hoort hier meteen bij de gezelligheid en wordt even hartelijk verwelkomd als jijzelf.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Waterbak aanwezig', 'Nabij strand', 'Garnaalkroketten'],
+    image: '/tzand.webp',
+    city: 'koksijde',
+    address: 'Zeedijk 443, 8670 Koksijde',
+    website: 'https://www.tzandodk.be'
+  },
+  {
+    id: 102,
+    name: 'De Clochard',
+    type: 'Restaurant',
+    description: 'Authentieke grillzaak met een warm en huiselijk karakter die al jaren een vaste kustwaarde is. Honden zijn hier standaard welkom aan tafel — dat hoort bij het vertrouwde, gezellige karakter van deze plek. Steak en gegrilde specialiteiten gaan hier hand in poot met oprechte hondvriendelijkheid.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Grill', 'Authentiek', 'Vaste waarde'],
+    image: '/clochard.webp',
+    city: 'koksijde',
+    address: 'Houtsaegerlaan 44, 8670 Koksijde',
+    website: 'https://www.declochard.be'
+  },
+  {
+    id: 104,
+    name: 'Cafelito',
+    type: 'Café',
+    description: 'Een enorm sfeervolle koffiebar op de Zeelaan waar jij en je hond beiden van harte welkom zijn. Terwijl jij geniet van een goed kopje koffie met een speculaasje of een glaasje advocaat, kruipt je viervoeter gezellig onder tafel — precies zoals het hoort.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Specialty Coffee', 'Gezellige sfeer'],
+    image: '/cafelito.webp',
+    city: 'koksijde',
+    address: 'Zeelaan 214, 8670 Koksijde',
+    website: 'https://www.cafelito.be'
+  },
+  {
+    id: 105,
+    name: 'Tearoom Chopin',
+    type: 'Café',
+    description: 'Een klassieker in Koksijde: een verzorgde en populaire tearoom die er bewust voor kiest honden met open armen te ontvangen. Geen spoor van aarzeling — jouw viervoeter is hier gewoon welkom, en dat merk je aan de hartelijke ontvangst van het team.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Tearoom', 'Klassiek'],
+    image: '/chopin.webp',
+    city: 'koksijde',
+    address: 'Maurice Blieckstraat 1, 8670 Koksijde',
+    website: 'https://www.chopinkoksijde.be'
+  },
+  {
+    id: 106,
+    name: "Bistro 't Fornhuis",
+    type: 'Restaurant',
+    description: 'Een enorm gezellige, lokale bistro verscholen in Oostduinkerke, ver van het toeristisch gewoel van de dijk. Hier vind je eerlijke keuken in een warme sfeer — en je hond is er meer dan welkom. De perfecte adempauze voor baasje én viervoeter.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Lokaal', 'Rustig gelegen'],
+    image: '/fornhuis.webp',
+    city: 'koksijde',
+    address: 'Polderstraat 116, 8670 Koksijde',
+    website: 'https://www.tfornhuis.be'
+  },
+  {
+    id: 107,
+    name: 'Happy Times',
+    type: 'Restaurant',
+    description: 'Een heerlijk informele plek voor huisgemaakte burgers, tapas en fish & chips, ondergebracht in een uniek en eigenzinnig decor. De sfeer is hier altijd relaxed en familiaal — en honden? Die zijn er graag geziene gasten.',
+    tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Burgers', 'Tapas', 'Informeel'],
+    image: '/happytimes.webp',
+    city: 'koksijde',
+    address: 'Zeelaan 198, 8670 Koksijde',
+    website: ''
+  },
 ];

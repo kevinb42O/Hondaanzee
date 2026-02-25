@@ -1,7 +1,7 @@
 # Aangesloten Zaken - Administratief Overzicht
 
-**Laatste update:** 13 februari 2026  
-**Totaal aantal partners:** 92
+**Laatste update:** 25 februari 2026  
+**Totaal aantal partners:** 112
 
 ---
 
@@ -11,6 +11,7 @@
 |------|--------|
 | Oostende | 29 |
 | Blankenberge | 23 |
+| Koksijde - Oostduinkerke | 20 |
 | Wenduine | 7 |
 | Zeebrugge | 1 |
 | Knokke-Heist | 7 |
@@ -19,6 +20,33 @@
 | De Haan | 4 |
 | Nieuwpoort | 4 |
 | De Panne | 5 |
+
+---
+
+## Koksijde - Oostduinkerke (20)
+
+| Naam | Type | Website | Sticker | Gedoneerd |
+|------|------|---------|---------|----------|
+| Bazouf | Dierenspeciaalzaak | https://www.bazouf.be/ | [ ] | [ ] |
+| Boutiquehotel Hof ter Duinen | Slapen | https://www.hofterduinen.be | [ ] | [ ] |
+| Bistronomie Eglantier | Restaurant | https://www.bistronomie-eglantier.be | [ ] | [ ] |
+| Casino Hotel | Slapen | https://www.casinohotel.be | [ ] | [ ] |
+| De Clochard | Restaurant | https://www.declochard.be | [ ] | [ ] |
+| De Spelleplekke | Restaurant | https://www.despelleplekke.be | [ ] | [ ] |
+| Dierenartsencentrum Anoa | Dierenarts | https://www.anoa.be/ | [ ] | [ ] |
+| Dierenartsencentrum Clos Fleuri | Dierenarts | https://www.clos-fleuri.be/ | [ ] | [ ] |
+| Dierenarts Debakker Olivier | Dierenarts | https://olivierdebakker.be/ | [ ] | [ ] |
+| Hotel Apostroff | Slapen | https://www.apostroff.be | [ ] | [ ] |
+| Hotel Domein Westhoek | Slapen | https://www.domein-westhoek.be | [ ] | [ ] |
+| Hotel Lehouck | Slapen | https://www.lehouck.be | [ ] | [ ] |
+| Restaurant Akoté | Restaurant | https://www.a-kote.be | [ ] | [ ] |
+| Tearoom 't Zand | Café | https://www.tzandodk.be | [ ] | [ ] |
+| Vets For Pets | Dierenarts | https://vetsforpets.be/ | [ ] | [ ] |
+| 't Zoet Genot | Café | https://www.zoetgenot.be | [ ] | [ ] |
+| Bistro 't Fornhuis | Restaurant | https://www.tfornhuis.be | [ ] | [ ] |
+| Cafelito | Café | https://www.cafelito.be | [ ] | [ ] |
+| Happy Times | Restaurant | — | [ ] | [ ] |
+| Tearoom Chopin | Café | https://www.chopinkoksijde.be | [ ] | [ ] |
 
 ---
 
@@ -295,4 +323,24 @@ Maison Elza;Wenduine;Café;;;
 Praatcafé De Spioenkop;Wenduine;Café;;;
 Tearoom Wielingen Bar;Wenduine;Café;https://www.wielingenbar.be/;;
 Club North by Icarus;Zeebrugge;Café;https://www.clubnorthzeebrugge.be/;;
+Bazouf;Koksijde;Dierenspeciaalzaak;https://www.bazouf.be/;;
+Boutiquehotel Hof ter Duinen;Koksijde;Slapen;https://www.hofterduinen.be;;
+Bistronomie Eglantier;Koksijde;Restaurant;https://www.bistronomie-eglantier.be;;
+Casino Hotel;Koksijde;Slapen;https://www.casinohotel.be;;
+De Clochard;Koksijde;Restaurant;https://www.declochard.be;;
+De Spelleplekke;Koksijde;Restaurant;https://www.despelleplekke.be;;
+Dierenartsencentrum Anoa;Koksijde;Dierenarts;https://www.anoa.be/;;
+Dierenartsencentrum Clos Fleuri;Koksijde;Dierenarts;https://www.clos-fleuri.be/;;
+Dierenarts Debakker Olivier;Koksijde;Dierenarts;https://olivierdebakker.be/;;
+Hotel Apostroff;Koksijde;Slapen;https://www.apostroff.be;;
+Hotel Domein Westhoek;Koksijde;Slapen;https://www.domein-westhoek.be;;
+Hotel Lehouck;Koksijde;Slapen;https://www.lehouck.be;;
+Restaurant Akoté;Koksijde;Restaurant;https://www.a-kote.be;;
+Tearoom 't Zand;Koksijde;Café;https://www.tzandodk.be;;
+Vets For Pets;Koksijde;Dierenarts;https://vetsforpets.be/;;
+'t Zoet Genot;Koksijde;Café;https://www.zoetgenot.be;;
+Bistro 't Fornhuis;Koksijde;Restaurant;https://www.tfornhuis.be;;
+Cafelito;Koksijde;Café;https://www.cafelito.be;;
+Happy Times;Koksijde;Restaurant;;;
+Tearoom Chopin;Koksijde;Café;https://www.chopinkoksijde.be;;
 ```

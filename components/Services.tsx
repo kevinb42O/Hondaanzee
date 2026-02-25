@@ -106,6 +106,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                     src={service.image}
                     alt={service.name}
                     className="w-full h-full object-cover md:transition-transform md:duration-700 md:group-hover:scale-110"
+                    style={{ objectPosition: service.imagePosition || 'center' }}
                     width={400}
                     height={256}
                     loading="lazy"
