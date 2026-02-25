@@ -103,7 +103,7 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
         >
             {/* Modal */}
             <div
-                className="relative bg-white w-full rounded-[2rem] shadow-2xl max-h-[90vh] overflow-hidden animate-scaleIn"
+                className="relative bg-white w-full rounded-[2rem] shadow-2xl max-h-[90svh] overflow-hidden animate-scaleIn"
             >
                 {/* Close Button */}
                 <button
@@ -115,7 +115,7 @@ const PlaceModal: React.FC<PlaceModalProps> = ({ place, isOpen, onClose, accentC
                 </button>
 
                 {/* Scrollable Content */}
-                <div className="overflow-y-auto max-h-[95vh] sm:max-h-[90vh]" style={{ overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}>
+                <div className="overflow-y-auto max-h-[90svh]" style={{ overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}>
                     {/* Image */}
                     {place.image && (
                         <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
