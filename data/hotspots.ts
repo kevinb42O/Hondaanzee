@@ -1190,4 +1190,15 @@ export const HOTSPOTS: Hotspot[] = [
     address: 'Zeelaan 59, 8670 Koksijde',
     website: 'https://www.instagram.com/intdorp/'
   },
+  {
+    id: 110,
+    name: 'Agora Bar Food & Drinks',
+    type: 'Café',
+    description: 'De perfecte hondvriendelijke pitstop in hartje De Panne! Strijk neer op het grote, zonnige terras op de Markt voor een heerlijk ontbijt, verse koffie of huisbereide pannenkoeken.\n\nEn je hond? Die wordt hier net zo warm onthaald. Buiten staat de waterbak al klaar, zodat jouw trouwe viervoeter na een wandeling meteen even lekker kan bijtanken. Een gezellige, laagdrempelige plek waar mens & vievoeters écht welkom zijn!',
+    tags: ['Waterbak aanwezig', 'Hondvriendelijk team', 'Groot terras', 'Ontbijt', 'Pannenkoeken', 'Koffie'],
+    image: '/agora2.webp',
+    city: 'de-panne',
+    address: 'Markt 20, 8660 De Panne',
+    website: ''
+  },
 ];
