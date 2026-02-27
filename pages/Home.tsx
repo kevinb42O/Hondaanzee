@@ -129,6 +129,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useSEO(SEO_DATA.home);
 
@@ -300,7 +301,10 @@ const Home: React.FC = () => {
   // Handle clicks outside of search to close suggestions
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const inSearchBar = searchContainerRef.current?.contains(target);
+      const inDropdown = dropdownRef.current?.contains(target);
+      if (!inSearchBar && !inDropdown) {
         setShowSuggestions(false);
         setSelectedSuggestionIndex(-1);
       }
@@ -481,6 +485,7 @@ const Home: React.FC = () => {
                   maxHeight: 'min(400px, 50vh)',
                   WebkitOverflowScrolling: 'touch' as const,
                 }}
+                ref={dropdownRef}
                 className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
               >
                 <div className="overflow-y-auto max-h-full overscroll-contain">
@@ -489,13 +494,12 @@ const Home: React.FC = () => {
                       key={city.slug}
                       id={`suggestion-${index}`}
                       onMouseDown={(e) => {
-                        // preventDefault voorkomt dat de input focus verliest
-                        // waardoor de dropdown sluit vóór onClick kan vuren
                         e.preventDefault();
                         handleSuggestionClick(city);
                       }}
                       onTouchEnd={(e) => {
                         e.preventDefault();
+                        e.stopPropagation();
                         handleSuggestionClick(city);
                       }}
                       onMouseEnter={() => setSelectedSuggestionIndex(index)}
