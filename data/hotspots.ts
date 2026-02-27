@@ -1172,7 +1172,7 @@ export const HOTSPOTS: Hotspot[] = [
     id: 109,
     name: "Eethuis 't Blekkertje",
     type: 'Restaurant',
-    description: "Genieten van (h)eerlijke, huisbereide klassiekers in een warme sfeer? Bij 't Blekkertje leggen chef Steve en gastvrouw Grietje je compleet in de watten. Van verfijnde visgerechten tot topvlees van Dierendonck: hier proef je pure passie en vakmanschap.\n\nExtra troef voor hondenbaasjes: Jouw trouwe viervoeter is hier meer dan welkom! Steve en Grietje hebben zelf twee honden en weten precies hoe ze jullie een ontspannen, culinaire avond kunnen bezorgen.\n\nDé smaakmaker van Koksijde voor jou én je hond!",
+    description: "Genieten van (h)eerlijke, huisbereide klassiekers in een warme sfeer? Bij 't Blekkertje leggen chef Steve en gastvrouw Grietje je compleet in de watten. Van verfijnde visgerechten tot topvlees van Dierendonck: hier proef je pure passie en vakmanschap.\n\nExtra troef voor hondenbaasjes: Jouw trouwe viervoeter is hier meer dan welkom! Steve en Grietje hebben zelf drie honden en weten precies hoe ze jullie een ontspannen, culinaire avond kunnen bezorgen.\n\nDé smaakmaker van Koksijde voor jou én je hond!",
     tags: ['Aanrader', 'Indoor toegelaten', 'Hondvriendelijk team', 'Verse keuken', 'Klassiek verfijnd', 'Huisdieren van de zaak'],
     image: '/blekker.webp',
     city: 'koksijde',
