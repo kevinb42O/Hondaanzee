@@ -1234,4 +1234,26 @@ export const HOTSPOTS: Hotspot[] = [
     address: 'Maurice Blieckstraat 11, 8670 Koksijde',
     website: 'https://www.kantinekoksijde.be/'
   },
+  {
+    id: 114,
+    name: 'Visrestaurant Odé',
+    type: 'Restaurant',
+    description: 'Het enige visrestaurant in Oostduinkerke, gerund door de gepassioneerde eigenaar John die ook een viswinkel uitbaat aan de overkant van de straat. Hij haalt dagelijks zelf zijn vis op in de vismijn voor een absolute versheidsgarantie.\n\nEen bijzondere troef voor hondeneigenaars: John heeft zelf een Australische herder en klanten die met hun hond komen eten worden hier dubbel en dik in de watten gelegd. Reserveren is zeker aan te raden!\n\nEen zéér grote aanrader voor wie houdt van verse vis én een warm welkom voor hun viervoeter.',
+    tags: ['Aanrader', 'Hondvriendelijk team', 'Verse vis', 'Reserveren aanbevolen', 'Huisdieren van de zaak'],
+    image: '/ode.webp',
+    city: 'koksijde',
+    address: 'Albert I Laan 82, 8670 Koksijde',
+    website: 'https://www.odeodk.com/'
+  },
+  {
+    id: 115,
+    name: 'Brasserie De Barkentijn',
+    type: 'Restaurant',
+    description: 'Bij strandrestaurant - tearoom De Barkentijn is het iedere dag genieten van het prachtige uitzicht. Ook bij stormachtig, guur weer zijn het strand en de zee een genot om naar te kijken!\n\nDe keuken is een al even groot plezier met voor elk wat wils: lekkere verzorgde snacks, een ruim aanbod aan heerlijke salades en verse visgerechten, de hele dag doorlopend. Tussen 14u30 en 17u30 kunt u ten volle genieten van de heerlijke tearoom. Absolute aanraders zijn de huisgemaakte garnaalkroketten en huisgemaakte vispannetjes.\n\nEen bijzonder pluspunt: de twee zéér vriendelijke eigenaars hebben zelfs een speciaal cozy hoekje ingericht om het je hond extra comfortabel te maken. Gezelschapsspelletjes zijn aanwezig in de zaak.',
+    tags: ['Aanrader', 'Hondvriendelijk team', 'Zeezicht', 'Huisgemaakte garnaalkroketten', 'Gezelschapsspelletjes', 'Speciale hondenhoek'],
+    image: '/barkentijn2.webp',
+    city: 'koksijde',
+    address: 'Zeedijk 461, 8670 Koksijde',
+    website: 'https://tearoom-de-barkentijn-oostduinkerke1.webnode.nl/'
+  },
 ];
