@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Waves, MapPin, Search, X, Sparkles } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
@@ -122,7 +123,12 @@ const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLocating, setIsLocating] = useState(false);
   const [locationMsg, setLocationMsg] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const navigate = useNavigate();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const searchBarRef = useRef<HTMLDivElement>(null);
 
   useSEO(SEO_DATA.home);
 
@@ -259,6 +265,121 @@ const Home: React.FC = () => {
     });
   }, [searchQuery]);
 
+  // Create suggestions list (limit to 6 for better UX)
+  const suggestions = useMemo(() => {
+    if (searchQuery.trim().length === 0) return [];
+    return filteredCities.slice(0, 6);
+  }, [filteredCities, searchQuery]);
+
+  // Calculate dropdown position based on searchbar rect
+  const updateDropdownPosition = useCallback(() => {
+    if (searchBarRef.current) {
+      const rect = searchBarRef.current.getBoundingClientRect();
+      setDropdownStyle({
+        position: 'fixed',
+        top: rect.bottom + 8,
+        left: rect.left,
+        width: rect.width,
+        zIndex: 9999,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showSuggestions) {
+      updateDropdownPosition();
+      window.addEventListener('scroll', updateDropdownPosition, { passive: true });
+      window.addEventListener('resize', updateDropdownPosition, { passive: true });
+      return () => {
+        window.removeEventListener('scroll', updateDropdownPosition);
+        window.removeEventListener('resize', updateDropdownPosition);
+      };
+    }
+  }, [showSuggestions, updateDropdownPosition]);
+
+  // Handle clicks outside of search to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside, { passive: true });
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
+  // Handle suggestion selection
+  const handleSuggestionClick = (city: City) => {
+    setSearchQuery(city.name);
+    setShowSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+    // Kort moment zodat de naam zichtbaar is in de searchbar vóór navigatie
+    setTimeout(() => navigate(`/${city.slug}`), 120);
+  };
+
+  // Handle keyboard navigation in suggestions
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions || suggestions.length === 0) {
+      if (e.key === 'Enter') {
+        scrollToResults();
+      }
+      return;
+    }
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedSuggestionIndex((prev) => {
+          const newIndex = prev < suggestions.length - 1 ? prev + 1 : prev;
+          // Scroll suggestion into view
+          setTimeout(() => {
+            document.getElementById(`suggestion-${newIndex}`)?.scrollIntoView({
+              block: 'nearest',
+              behavior: 'smooth'
+            });
+          }, 0);
+          return newIndex;
+        });
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedSuggestionIndex((prev) => {
+          const newIndex = prev > 0 ? prev - 1 : -1;
+          if (newIndex >= 0) {
+            setTimeout(() => {
+              document.getElementById(`suggestion-${newIndex}`)?.scrollIntoView({
+                block: 'nearest',
+                behavior: 'smooth'
+              });
+            }, 0);
+          }
+          return newIndex;
+        });
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
+          handleSuggestionClick(suggestions[selectedSuggestionIndex]);
+        } else if (suggestions.length === 1) {
+          handleSuggestionClick(suggestions[0]);
+        } else {
+          setShowSuggestions(false);
+          scrollToResults();
+        }
+        break;
+      case 'Escape':
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+        break;
+    }
+  };
+
   return (
     <div className="pb-12 md:pb-24 overflow-x-hidden overflow-y-visible">
       {/* Hero Section with Dynamic Background */}
@@ -289,8 +410,8 @@ const Home: React.FC = () => {
             <span className="text-white font-semibold">verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
           </p>
 
-          <div className="max-w-lg md:max-w-3xl mx-auto relative px-2 sm:px-4 md:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-            <div className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
+          <div ref={searchContainerRef} className="max-w-lg md:max-w-3xl mx-auto relative px-2 sm:px-4 md:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+            <div ref={searchBarRef} className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
               <div className="pl-3 sm:pl-4 md:pl-6 flex items-center pointer-events-none">
                 <Search size={20} className="search-icon text-slate-400 sm:w-[22px] sm:h-[22px]" />
               </div>
@@ -298,10 +419,15 @@ const Home: React.FC = () => {
                 type="text"
                 placeholder="Waar gaan jullie wandelen?"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    scrollToResults();
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(e.target.value.trim().length > 0);
+                  setSelectedSuggestionIndex(-1);
+                }}
+                onKeyDown={handleKeyDown}
+                onFocus={() => {
+                  if (searchQuery.trim().length > 0) {
+                    setShowSuggestions(true);
                   }
                 }}
                 className="search-input flex-1 px-2 sm:px-3 md:px-4 py-3 sm:py-4 md:py-5 bg-transparent text-base sm:text-lg md:text-xl text-slate-900 font-semibold placeholder:text-slate-300 focus:outline-none font-heading min-w-0"
@@ -310,10 +436,18 @@ const Home: React.FC = () => {
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck="false"
+                role="combobox"
+                aria-expanded={showSuggestions && suggestions.length > 0}
+                aria-controls="search-suggestions"
+                aria-activedescendant={selectedSuggestionIndex >= 0 ? `suggestion-${selectedSuggestionIndex}` : undefined}
               />
               {searchQuery ? (
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => {
+                    setSearchQuery('');
+                    setShowSuggestions(false);
+                    setSelectedSuggestionIndex(-1);
+                  }}
                   className="clear-btn p-2 text-slate-300 hover:text-slate-600 touch-target"
                   aria-label="Wis zoekopdracht"
                 >
@@ -337,6 +471,67 @@ const Home: React.FC = () => {
                 Zoeken
               </button>
             </div>
+
+            {/* Autocomplete Suggestions Dropdown – rendered via portal to escape overflow:hidden */}
+            {showSuggestions && suggestions.length > 0 && createPortal(
+              <div 
+                id="search-suggestions"
+                style={{
+                  ...dropdownStyle,
+                  maxHeight: 'min(400px, 50vh)',
+                  WebkitOverflowScrolling: 'touch' as const,
+                }}
+                className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
+              >
+                <div className="overflow-y-auto max-h-full overscroll-contain">
+                  {suggestions.map((city, index) => (
+                    <button
+                      key={city.slug}
+                      id={`suggestion-${index}`}
+                      onMouseDown={(e) => {
+                        // preventDefault voorkomt dat de input focus verliest
+                        // waardoor de dropdown sluit vóór onClick kan vuren
+                        e.preventDefault();
+                        handleSuggestionClick(city);
+                      }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        handleSuggestionClick(city);
+                      }}
+                      onMouseEnter={() => setSelectedSuggestionIndex(index)}
+                      className={`w-full flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-5 text-left transition-all duration-150 active:scale-[0.98] ${
+                        index === selectedSuggestionIndex 
+                          ? 'bg-gradient-to-r from-sky-50 to-cyan-50 text-sky-700' 
+                          : 'bg-white text-slate-700 hover:bg-slate-50'
+                      } ${index === suggestions.length - 1 ? '' : 'border-b border-slate-100'}`}
+                      style={{ minHeight: '60px' }}
+                    >
+                      <div className={`flex-shrink-0 p-2 rounded-xl transition-colors ${
+                        index === selectedSuggestionIndex ? 'bg-sky-100' : 'bg-slate-50'
+                      }`}>
+                        <MapPin 
+                          size={20} 
+                          className={`${
+                            index === selectedSuggestionIndex ? 'text-sky-600' : 'text-slate-500'
+                          }`} 
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="font-bold text-base sm:text-lg block">{city.name}</span>
+                        <span className="text-xs text-slate-500 line-clamp-1">{city.description}</span>
+                      </div>
+                      <ArrowRight 
+                        size={20} 
+                        className={`ml-auto flex-shrink-0 transition-transform ${
+                          index === selectedSuggestionIndex ? 'text-sky-600 translate-x-1' : 'text-slate-300'
+                        }`} 
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>,
+              document.body
+            )}
 
             {locationMsg && (
               <div className="mt-4 bg-white/95 backdrop-blur-sm text-slate-700 text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center justify-between gap-3 animate-in fade-in">
