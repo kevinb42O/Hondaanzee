@@ -162,7 +162,7 @@ export const HOTSPOTS: Hotspot[] = [
     type: 'Café',
     description: 'Een café zoals een café hoort te zijn! Bij Au Blason word je ontvangen door een zeer vriendelijke eigenaar die zelf ook een hond heeft, in een huiselijke sfeer waar honden van harte welkom zijn. Perfect voor een frisse pint of een lekkere koffie na een strandwandeling. Een authentiek adres waar je je meteen thuis voelt.',
     tags: ['Hondvriendelijk team', 'Waterbak buiten', 'Waterbak binnen', 'Huiselijke sfeer', 'Aanrader'],
-    image: '/aublason.webp',
+    image: '/aublason2.webp',
     city: 'nieuwpoort',
     address: 'Albert I laan 221, 8620 Nieuwpoort',
     website: ''
