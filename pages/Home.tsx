@@ -671,7 +671,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* FAQ Section — visible for users + crawlable for AI */}
-      <section className="bg-white py-12 sm:py-16 md:py-20" itemScope itemType="https://schema.org/FAQPage">
+      <section className="bg-white py-12 sm:py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight text-center mb-10">
             Veelgestelde Vragen
@@ -706,21 +706,13 @@ const Home: React.FC = () => {
               <details
                 key={q}
                 className="group border border-slate-200 rounded-2xl overflow-hidden bg-stone-50 hover:border-sky-200 transition-colors"
-                itemScope
-                itemProp="mainEntity"
-                itemType="https://schema.org/Question"
               >
                 <summary className="flex items-center justify-between cursor-pointer px-5 py-4 sm:px-6 sm:py-5 font-bold text-slate-900 text-base sm:text-lg select-none list-none [&::-webkit-details-marker]:hidden">
-                  <span itemProp="name">{q}</span>
+                  <span>{q}</span>
                   <span className="ml-4 text-sky-500 text-xl transition-transform group-open:rotate-45 flex-shrink-0">+</span>
                 </summary>
-                <div
-                  className="px-5 pb-4 sm:px-6 sm:pb-5 text-slate-600 leading-relaxed"
-                  itemScope
-                  itemProp="acceptedAnswer"
-                  itemType="https://schema.org/Answer"
-                >
-                  <p itemProp="text">{a}</p>
+                <div className="px-5 pb-4 sm:px-6 sm:pb-5 text-slate-600 leading-relaxed">
+                  <p>{a}</p>
                 </div>
               </details>
             ))}
