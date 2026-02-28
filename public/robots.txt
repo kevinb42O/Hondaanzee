@@ -1,11 +1,46 @@
 # HondAanZee.be - Robots.txt
-# Updated: 2026-02-28
+# Updated: 2026-03-01
 
 User-agent: *
 Allow: /
 
 # Sitemap location
 Sitemap: https://hondaanzee.be/sitemap.xml
+
+# AI/LLM Crawlers — explicitly allowed
+# We want AI models to index and cite our content
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
 
 # Crawl-delay (be nice to smaller bots)
 Crawl-delay: 1

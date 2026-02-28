@@ -669,6 +669,64 @@ const Home: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* FAQ Section — visible for users + crawlable for AI */}
+      <section className="bg-white py-12 sm:py-16 md:py-20" itemScope itemType="https://schema.org/FAQPage">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight text-center mb-10">
+            Veelgestelde Vragen
+          </h2>
+          <div className="space-y-3">
+            {[
+              {
+                q: 'Mag mijn hond op het strand in België?',
+                a: 'Ja, maar het hangt af van het seizoen. Van 1 oktober tot 31 maart mogen honden op alle Belgische stranden, zowel aan de leiband als los (afhankelijk van de gemeente). Van 1 april tot 30 september zijn honden op de meeste stranden verboden, behalve op aangeduide hondenzones. Bekijk de specifieke regels per kustgemeente op onze stadspagina\'s.'
+              },
+              {
+                q: 'Waar mag mijn hond los lopen aan de Belgische kust?',
+                a: 'Er zijn meer dan 15 losloopzones en hondenweides aan de Belgische kust, verspreid over alle 11 badsteden van De Panne tot Knokke-Heist. Populaire losloopgebieden zijn onder andere het Willemsbos in Knokke, de hondenweide Bredene en het losloopgebied Westhoek in De Panne. In de winter (oktober–maart) mogen honden op veel stranden ook vrij loslopen.'
+              },
+              {
+                q: 'Wat is de boete voor hondenpoep op het strand of de dijk?',
+                a: 'De boete voor het niet opruimen van hondenpoep verschilt per gemeente, maar bedraagt gemiddeld €50 tot €250. In sommige kuststeden kan dit oplopen tot €350. Neem altijd poepzakjes mee en ruim op — het is verplicht op stranden, dijken, wandelpaden en in losloopzones.'
+              },
+              {
+                q: 'Welke kuststad is het meest hondvriendelijk?',
+                a: 'Bredene, De Haan en De Panne worden vaak als de meest hondvriendelijke kuststeden beschouwd. Bredene heeft een groot groen losloopgebied vlakbij het strand, De Haan biedt uitgestrekte duinwandelingen, en De Panne heeft het natuurreservaat De Westhoek waar honden welkom zijn. Alle 11 badsteden hebben hondvriendelijke horeca.'
+              },
+              {
+                q: 'Zijn er hondvriendelijke restaurants en cafés aan de Belgische kust?',
+                a: 'Absoluut! Er zijn tientallen hondvriendelijke restaurants, cafés en terrassen aan de Belgische kust. Van strandtenten waar je hond een bak water krijgt tot restaurants die viervoeters verwelkomen. Bekijk ons overzicht van alle hondvriendelijke hotspots per badstad.'
+              },
+              {
+                q: 'Wat moet ik doen als ik een zeehond zie op het strand?',
+                a: 'Houd minstens 30 meter afstand en neem je hond onmiddellijk aan de leiband. Raak de zeehond niet aan en probeer het dier niet terug in het water te duwen. Bel het Sea Life Blankenberge reddingsnetwerk (050 42 43 00) of de brandweer (112) als het dier gewond of verzwakt lijkt. Zeehonden rusten regelmatig op het strand — dat is normaal gedrag.'
+              }
+            ].map(({ q, a }) => (
+              <details
+                key={q}
+                className="group border border-slate-200 rounded-2xl overflow-hidden bg-stone-50 hover:border-sky-200 transition-colors"
+                itemScope
+                itemProp="mainEntity"
+                itemType="https://schema.org/Question"
+              >
+                <summary className="flex items-center justify-between cursor-pointer px-5 py-4 sm:px-6 sm:py-5 font-bold text-slate-900 text-base sm:text-lg select-none list-none [&::-webkit-details-marker]:hidden">
+                  <span itemProp="name">{q}</span>
+                  <span className="ml-4 text-sky-500 text-xl transition-transform group-open:rotate-45 flex-shrink-0">+</span>
+                </summary>
+                <div
+                  className="px-5 pb-4 sm:px-6 sm:pb-5 text-slate-600 leading-relaxed"
+                  itemScope
+                  itemProp="acceptedAnswer"
+                  itemType="https://schema.org/Answer"
+                >
+                  <p itemProp="text">{a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

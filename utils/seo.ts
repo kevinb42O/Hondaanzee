@@ -94,7 +94,61 @@ export const SEO_DATA = {
   home: {
     title: `Honden aan Zee België ${YEAR} | Strandregels, Losloopzones & Hondvriendelijke Plekken aan de Belgische Kust`,
     description: `✓ Actuele strandregels voor honden ✓ Losloopzones en hondenweides ✓ Hondvriendelijke cafés, restaurants & hotels ✓ Alle badsteden van De Panne tot Knokke ✓ Gratis & up-to-date info ${YEAR}`,
-    keywords: `hond strand belgië, hond aan zee, hondenstrand belgië, losloopzone hond kust, hondvriendelijk strand, strand met hond belgie, wandelen hond zee, hondvriendelijk restaurant kust, strandregels honden ${YEAR}`
+    keywords: `hond strand belgië, hond aan zee, hondenstrand belgië, losloopzone hond kust, hondvriendelijk strand, strand met hond belgie, wandelen hond zee, hondvriendelijk restaurant kust, strandregels honden ${YEAR}`,
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Mag mijn hond op het strand in België?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, maar het hangt af van het seizoen. Van 1 oktober tot 31 maart mogen honden op alle Belgische stranden, zowel aan de leiband als los (afhankelijk van de gemeente). Van 1 april tot 30 september zijn honden op de meeste stranden verboden, behalve op aangeduide hondenzones. Bekijk de specifieke regels per kustgemeente op HondAanZee.be."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Waar mag mijn hond los lopen aan de Belgische kust?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Er zijn meer dan 15 losloopzones en hondenweides aan de Belgische kust, verspreid over alle 11 badsteden van De Panne tot Knokke-Heist. Populaire losloopgebieden zijn onder andere het Willemsbos in Knokke, de hondenweide Bredene en het losloopgebied Westhoek in De Panne. In de winter (oktober–maart) mogen honden op veel stranden ook vrij loslopen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat is de boete voor hondenpoep op het strand of de dijk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De boete voor het niet opruimen van hondenpoep verschilt per gemeente, maar bedraagt gemiddeld €50 tot €250. In sommige kuststeden kan dit oplopen tot €350. Neem altijd poepzakjes mee en ruim op — het is verplicht op stranden, dijken, wandelpaden en in losloopzones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welke kuststad is het meest hondvriendelijk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bredene, De Haan en De Panne worden vaak als de meest hondvriendelijke kuststeden beschouwd. Bredene heeft een groot groen losloopgebied vlakbij het strand, De Haan biedt uitgestrekte duinwandelingen, en De Panne heeft het natuurreservaat De Westhoek waar honden welkom zijn. Alle 11 badsteden hebben hondvriendelijke horeca — ontdek ze op HondAanZee.be."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Zijn er hondvriendelijke restaurants en cafés aan de Belgische kust?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absoluut! Er zijn tientallen hondvriendelijke restaurants, cafés en terrassen aan de Belgische kust. Van strandtenten waar je hond een bak water krijgt tot sterrenrestaurants die viervoeters verwelkomen. Op HondAanZee.be vind je een actueel overzicht van alle hondvriendelijke hotspots per badstad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat moet ik doen als ik een zeehond zie op het strand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Houd minstens 30 meter afstand en neem je hond onmiddellijk aan de leiband. Raak de zeehond niet aan en probeer het dier niet terug in het water te duwen. Bel het Sea Life Blankenberge reddingsnetwerk (050 42 43 00) of de brandweer (112) als het dier gewond of verzwakt lijkt. Zeehonden rusten regelmatig op het strand — dat is normaal gedrag."
+          }
+        }
+      ]
+    }
   },
 
   hotspots: {
