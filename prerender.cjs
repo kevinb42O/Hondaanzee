@@ -36,8 +36,16 @@ const ROUTES = [
   '/nieuwpoort',
   '/koksijde',
   '/de-panne',
-  // Blog posts
+  // Blog
+  '/blog',
+  '/blog/zeehonden-aan-de-belgische-kust',
+  '/blog/opruimacties-proper-strand-lopers',
+  '/blog/mooiste-bossen-belgische-kust-wandelen-met-hond',
+  '/blog/zwemplekjes-honden-belgische-kust',
   '/blog/mentale-leiband-vrijheid-met-connectie',
+  // Agenda & Community
+  '/agenda',
+  '/community',
 ];
 
 // Simple static file server for the dist folder
@@ -184,4 +192,8 @@ async function prerender() {
   console.log(`\nDone! Pre-rendered ${rendered}/${ROUTES.length} routes.`);
 }
 
-prerender().catch(console.error);
+prerender().catch((err) => {
+  console.error('\n  Pre-rendering failed (non-fatal):', err.message);
+  console.error('  Build continues without pre-rendered HTML.\n');
+  process.exit(0); // Don't fail the Vercel build
+});

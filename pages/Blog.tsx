@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, ArrowRight, Calendar, Clock, Leaf, Shield, Trees, Droplets, Brain, Star } from 'lucide-react';
-import { useSEO } from '../utils/seo.ts';
+import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { blogPosts } from '../data/blogs.ts';
 
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -21,23 +21,7 @@ const categoryStyles: Record<string, string> = {
 };
 
 const Blog: React.FC = () => {
-  useSEO({
-    title: 'Blog | HondAanZee.be — Tips, Natuur & Nieuws over Honden aan de Belgische Kust',
-    description: 'Lees onze blogs over honden aan de Belgische kust: van zeehonden op het strand tot opruimacties. Nuttige info, tips en achtergronden voor elke hondenbezitter.',
-    keywords: 'blog hondaanzee, zeehonden belgische kust hond, opruimacties strand, proper strand lopers, hond aan zee blog, natuur belgische kust',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "HondAanZee Blog",
-      "url": "https://hondaanzee.be/blog",
-      "description": "Blog over honden aan de Belgische kust: natuur, veiligheid en duurzaamheid",
-      "publisher": {
-        "@type": "Organization",
-        "name": "HondAanZee.be",
-        "url": "https://hondaanzee.be"
-      }
-    }
-  });
+  useSEO(SEO_DATA.blog);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,7 +82,10 @@ const Blog: React.FC = () => {
                       src={post.image}
                       alt={post.imageAlt || post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      width={800}
+                      height={320}
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 md:bg-gradient-to-r md:from-transparent md:to-white/30" />
                   </div>
@@ -168,7 +155,10 @@ const Blog: React.FC = () => {
                     src={post.image}
                     alt={post.imageAlt || post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    width={600}
+                    height={280}
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
                 </div>

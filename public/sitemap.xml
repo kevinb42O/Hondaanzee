@@ -6,7 +6,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://hondaanzee.be/</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,7 +14,7 @@
   <!-- Hotspots Overview -->
   <url>
     <loc>https://hondaanzee.be/hotspots</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -22,7 +22,7 @@
   <!-- Diensten -->
   <url>
     <loc>https://hondaanzee.be/diensten</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -30,7 +30,7 @@
   <!-- Losloopzones -->
   <url>
     <loc>https://hondaanzee.be/losloopzones</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -38,7 +38,7 @@
   <!-- Interactieve Kaart -->
   <url>
     <loc>https://hondaanzee.be/kaart</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -46,77 +46,77 @@
   <!-- City Pages - High Priority -->
   <url>
     <loc>https://hondaanzee.be/de-panne</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/koksijde</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/nieuwpoort</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/middelkerke</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/oostende</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/bredene</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/de-haan</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://hondaanzee.be/wenduine</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/blankenberge</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/zeebrugge</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://hondaanzee.be/knokke-heist</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -124,7 +124,7 @@
   <!-- Content Pages -->
   <url>
     <loc>https://hondaanzee.be/goed-om-te-weten</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -132,14 +132,14 @@
   <!-- Blog -->
   <url>
     <loc>https://hondaanzee.be/blog</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://hondaanzee.be/blog/zeehonden-aan-de-belgische-kust</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -150,7 +150,7 @@
 
   <url>
     <loc>https://hondaanzee.be/blog/opruimacties-proper-strand-lopers</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -161,14 +161,14 @@
 
   <url>
     <loc>https://hondaanzee.be/blog/mooiste-bossen-belgische-kust-wandelen-met-hond</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://hondaanzee.be/blog/zwemplekjes-honden-belgische-kust</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -179,7 +179,7 @@
 
   <url>
     <loc>https://hondaanzee.be/blog/mentale-leiband-vrijheid-met-connectie</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -187,21 +187,21 @@
   <!-- Community -->
   <url>
     <loc>https://hondaanzee.be/community</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://hondaanzee.be/over-ons</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hondaanzee.be/steun-ons</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -217,7 +217,7 @@
   <!-- Agenda / Evenementen -->
   <url>
     <loc>https://hondaanzee.be/agenda</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

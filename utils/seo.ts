@@ -6,6 +6,7 @@ interface SEOProps {
   description: string;
   keywords?: string;
   ogImage?: string;
+  ogType?: string;
   canonical?: string;
   structuredData?: object;
 }
@@ -15,6 +16,7 @@ export const useSEO = ({
   description,
   keywords,
   ogImage = 'https://hondaanzee.be/og-imagefinal.webp',
+  ogType = 'website',
   canonical,
   structuredData
 }: SEOProps) => {
@@ -46,8 +48,12 @@ export const useSEO = ({
     updateMeta('og:description', description, true);
     updateMeta('og:image', ogImage, true);
     updateMeta('og:url', canonical || `https://hondaanzee.be${location.pathname}`, true);
+    updateMeta('og:type', ogType, true);
+    updateMeta('og:site_name', 'HondAanZee.be', true);
+    updateMeta('og:locale', 'nl_BE', true);
 
     // Twitter Card
+    updateMeta('twitter:card', 'summary_large_image');
     updateMeta('twitter:title', title);
     updateMeta('twitter:description', description);
     updateMeta('twitter:image', ogImage);
@@ -73,9 +79,10 @@ export const useSEO = ({
       script.textContent = JSON.stringify(structuredData);
     }
 
-    // Cleanup function
+    // Cleanup: remove dynamic structured data so stale schemas don't persist
     return () => {
-      // Reset to default on unmount if needed
+      const dynamicScript = document.querySelector('script[type="application/ld+json"][data-dynamic]');
+      if (dynamicScript) dynamicScript.remove();
     };
   }, [title, description, keywords, ogImage, canonical, structuredData, location]);
 };

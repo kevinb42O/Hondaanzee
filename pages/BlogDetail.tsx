@@ -17,6 +17,7 @@ const BlogDetail: React.FC = () => {
     description: post?.excerpt || 'Dit blogartikel werd niet gevonden.',
     keywords: post ? `${post.category}, ${post.slug.split('-').join(', ')}, hondaanzee blog, belgische kust hond, hond aan zee` : '',
     ogImage: post?.ogImage ? `https://hondaanzee.be${post.ogImage}` : post?.image ? `https://hondaanzee.be${post.image}` : undefined,
+    ogType: 'article',
     canonical: post ? `https://hondaanzee.be/blog/${post.slug}` : undefined,
     structuredData: post ? [
       {
@@ -319,6 +320,9 @@ const BlogDetail: React.FC = () => {
                   src={post.image}
                   alt={post.imageAlt || post.title}
                   className="w-full h-auto object-cover"
+                  width={1200}
+                  height={630}
+                  decoding="async"
                 />
               </div>
             )}

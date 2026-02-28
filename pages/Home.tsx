@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Waves, MapPin, Search, X, Sparkles } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
@@ -120,10 +120,12 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
 };
 
 const Home: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [isLocating, setIsLocating] = useState(false);
   const [locationMsg, setLocationMsg] = useState<string | null>(null);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(!!initialSearch);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const navigate = useNavigate();
@@ -175,6 +177,8 @@ const Home: React.FC = () => {
     const prerender = document.getElementById('hero-prerender');
     if (prerender) {
       prerenderRef.current = prerender;
+      // Ensure it's visible (may have been hidden on a previous navigation)
+      prerender.style.display = '';
       // Make it clip to the hero section height instead of fixed full-screen
       prerender.style.position = 'absolute';
       prerender.style.zIndex = '0';
@@ -185,6 +189,7 @@ const Home: React.FC = () => {
       prerender.style.left = '0';
       prerender.style.right = '0';
       prerender.style.height = 'auto';
+      prerender.style.transform = '';
       // Move it inside the hero section for proper clipping
       if (heroRef.current) {
         heroRef.current.prepend(prerender);
@@ -214,6 +219,20 @@ const Home: React.FC = () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       cancelAnimationFrame(rafId.current);
+      // Move prerender hero back to body so it survives React unmount
+      // and can be found again by getElementById on re-mount
+      if (prerender?.parentNode) {
+        prerender.style.display = 'none';
+        prerender.style.position = 'fixed';
+        prerender.style.top = '0';
+        prerender.style.bottom = '0';
+        prerender.style.left = '0';
+        prerender.style.right = '0';
+        prerender.style.height = '';
+        prerender.style.willChange = '';
+        prerender.style.transform = '';
+        document.body.insertBefore(prerender, document.getElementById('root'));
+      }
     };
   }, [handleParallax]);
 

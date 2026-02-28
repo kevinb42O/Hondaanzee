@@ -97,26 +97,38 @@ const ScrollToHash = () => {
   return null;
 };
 
-function App() {
-  // Keep static hero prerender visible on homepage (it's the LCP element).
-  // On other pages, remove it after mount. It sits behind #root (z-index:0 vs 1).
+// Hide/show prerender hero based on current route
+const HeroPrerenderToggle = () => {
+  const { pathname } = useLocation();
   useEffect(() => {
     const el = document.getElementById('hero-prerender');
     if (!el) return;
-    // On non-homepage routes, remove the prerender hero after a brief delay
-    if (globalThis.location.pathname !== '/') {
+    // On non-homepage routes, hide the prerender hero (it sits behind #root)
+    // On homepage, Home.tsx takes ownership and will show/move it
+    if (pathname !== '/') {
       el.style.display = 'none';
     }
-  }, []);
+  }, [pathname]);
+  return null;
+};
+
+// Wraps ErrorBoundary with a key that resets on route change
+const LocationAwareErrorBoundary = ({ children }: { children: React.ReactNode }) => {
+  const { pathname } = useLocation();
+  return <ErrorBoundary key={pathname}>{children}</ErrorBoundary>;
+};
+
+function App() {
 
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-hidden">
         <ScrollToHash />
+        <HeroPrerenderToggle />
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">Ga naar inhoud</a>
         <Header />
         <main id="main-content" className="flex-grow">
-          <ErrorBoundary>
+          <LocationAwareErrorBoundary>
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -138,7 +150,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
-          </ErrorBoundary>
+          </LocationAwareErrorBoundary>
         </main>
         <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
           <ResponsibilityBanner />

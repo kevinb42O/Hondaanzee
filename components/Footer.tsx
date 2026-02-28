@@ -13,6 +13,12 @@ const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size =
   </svg>
 );
 
+const FacebookIcon: React.FC<{ size?: number; className?: string }> = ({ size = 18, className }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
 const Footer: React.FC = () => {
   return (
     <footer className="relative z-[1] bg-gradient-to-b from-slate-900 via-slate-950 to-black pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 safe-area-bottom">
@@ -47,17 +53,42 @@ const Footer: React.FC = () => {
               <span className="text-sm font-medium">info@hondaanzee.be</span>
             </a>
 
-            {/* Instagram */}
-            <a
-              href="https://www.instagram.com/hondaanzee/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-slate-400 hover:text-pink-400 transition-colors group"
-              aria-label="Volg @hondaanzee op Instagram"
-            >
-              <InstagramIcon size={18} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
-              <span className="text-sm font-medium">@hondaanzee</span>
-            </a>
+            {/* Social links */}
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://www.instagram.com/hondaanzee/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-pink-400 transition-colors group"
+                aria-label="Volg @hondaanzee op Instagram"
+              >
+                <InstagramIcon size={18} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
+                <span className="text-sm font-medium">@hondaanzee</span>
+              </a>
+              <a
+                href="https://www.facebook.com/hondaanzee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors group"
+                aria-label="Volg HondAanZee op Facebook"
+              >
+                <FacebookIcon size={18} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
+                <span className="text-sm font-medium">HondAanZee</span>
+              </a>
+              <a
+                href="https://wa.me/32494816714"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-green-400 transition-colors group"
+                aria-label="Stuur een bericht via WhatsApp"
+              >
+                <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:scale-110 transition-transform" aria-hidden="true">
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                  <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Zm0 0a5 5 0 0 0 5 5m0 0h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1Z" />
+                </svg>
+                <span className="text-sm font-medium">WhatsApp</span>
+              </a>
+            </div>
           </div>
 
           {/* Column 2: Navigatie */}
@@ -122,23 +153,58 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Populaire Regio's */}
+          {/* Column 3: Alle Kuststeden (kustlijn NO → ZW) */}
           <div className="flex flex-col items-center sm:items-start">
-            <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Populaire Regio's</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link to="/blankenberge" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
-                  Blankenberge
-                </Link>
-              </li>
+            <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Alle Kuststeden</h4>
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/knokke-heist" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Knokke-Heist
                 </Link>
               </li>
               <li>
+                <Link to="/zeebrugge" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Zeebrugge
+                </Link>
+              </li>
+              <li>
+                <Link to="/blankenberge" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Blankenberge
+                </Link>
+              </li>
+              <li>
+                <Link to="/wenduine" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Wenduine
+                </Link>
+              </li>
+              <li>
+                <Link to="/de-haan" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  De Haan
+                </Link>
+              </li>
+              <li>
+                <Link to="/bredene" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Bredene
+                </Link>
+              </li>
+              <li>
                 <Link to="/oostende" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Oostende
+                </Link>
+              </li>
+              <li>
+                <Link to="/middelkerke" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Middelkerke
+                </Link>
+              </li>
+              <li>
+                <Link to="/nieuwpoort" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Nieuwpoort
+                </Link>
+              </li>
+              <li>
+                <Link to="/koksijde" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Koksijde
                 </Link>
               </li>
               <li>
@@ -164,7 +230,7 @@ const Footer: React.FC = () => {
             <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
               <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-black text-white">21</span>
+                <span className="text-2xl font-black text-white">28</span>
                 <span className="text-sm font-bold text-cyan-400">feb</span>
                 <span className="text-xs font-mono text-slate-400">2026</span>
               </div>
@@ -245,7 +311,7 @@ const Footer: React.FC = () => {
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
             <div className="text-slate-500 text-xs">
-              <span className="text-slate-400">Hond</span><span className="text-cyan-400">Aan</span><span className="text-slate-400">Zee</span>.be &copy; 2026
+              <span className="text-slate-400">Hond</span><span className="text-cyan-400">Aan</span><span className="text-slate-400">Zee</span>.be &copy; {new Date().getFullYear()}
             </div>
             <div className="flex items-center gap-1.5 text-slate-500 text-xs">
               <span>website door</span>

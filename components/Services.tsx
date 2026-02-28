@@ -145,16 +145,15 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                     ))}
                   </div>
                   {service.website && (
-                    <span
-                      role="link"
-                      className="inline-block text-[10px] sm:text-xs text-emerald-600 hover:text-emerald-700 font-bold hover:underline cursor-pointer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(service.website, '_blank', 'noopener,noreferrer');
-                      }}
+                    <a
+                      href={service.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-[10px] sm:text-xs text-emerald-600 hover:text-emerald-700 font-bold hover:underline"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       Bezoek website →
-                    </span>
+                    </a>
                   )}
                 </div>
               </button>
