@@ -105,9 +105,9 @@ export const SERVICES: Service[] = [
     id: 10,
     name: 'Dogs & Co',
     type: 'Dierenspeciaalzaak',
-    description: 'Combinatie van trimsalon en winkel met kwalitatieve producten voor honden en katten.',
-    tags: ['Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team'],
-    image: '/dogsandco.webp',
+    description: 'Bij Dogs & Co vind je het beste van twee werelden onder één dak:\n\nDe Winkel: Een stijlvolle shop met topproducten voor honden en katten. Je vindt hier werkelijk álles wat je hond ooit nodig kan hebben in zijn leven: van hoogwaardige voeding tot de mooiste accessoires en het leukste speelgoed.\n\nHet Trimsalon: Vakkundige vachtverzorging met rust, respect en eindeloos geduld. Door ruim 15 jaar ervaring in de hondenwereld (van gedrag en sport tot het doceren van trimopleidingen) krijgt elke hond vol passie de perfecte behandeling.\n\nSpeciaal voor pups: Tot de leeftijd van 6 maanden is een puppygewenning in het salon helemaal gratis!\n\nDogs & Co: hét adres voor een onovertroffen winkelassortiment én vakkundig trimmen met een écht hart voor dieren.',
+    tags: ['Aanrader', 'Indoor toegelaten', 'Hondensnacks', 'Hondvriendelijk team', 'Trimsalon', 'Gratis puppygewenning', '15+ jaar ervaring'],
+    image: '/dogsandco2.webp',
     city: 'middelkerke',
     address: 'Leopoldlaan 94, 8430 Middelkerke',
     website: 'https://www.dogsandco.be'
