@@ -289,6 +289,17 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://pizzeriapianopiano.be/'
   },
   {
+    id: 123,
+    name: 'Plaza d\'Amanté',
+    type: 'Café',
+    description: 'Een pareltje op de Zeedijk van De Haan waar specialty coffee, lokale producten en een warm hart voor honden samenkomen. De super lieve eigenaars werken uitsluitend met lokale koffiebranders en Belgische theeleveranciers — hier proef je vakmanschap én passie in elk kopje. Vergeet ook zeker niet het heerlijke gebak: taarten, brownies en koekjes, allemaal vers bereid door een lokale bakker uit De Haan. Alles wat je ziet, proeft en ruikt is te koop: van ambachtelijke olijfolie en gin tonics van lokale brouwers tot unieke producten in beperkte oplage. Je gaat hier simpelweg niet buiten zonder een lach op je gezicht. Een foodbar, boutique en beleving in één — en je viervoeter is er meer dan welkom!',
+    tags: ['Aanrader', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Specialty Coffee', 'Lokale producten', 'Boutique', 'Nabij strand'],
+    image: '/amante.webp',
+    city: 'de-haan',
+    address: 'Zeedijk - De Haan 17, 8420 De Haan',
+    website: 'https://lexperiencedamante.be/nl/'
+  },
+  {
     id: 22,
     name: 'Cozy Moments',
     type: 'Café',
