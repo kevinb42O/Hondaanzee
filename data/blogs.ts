@@ -1834,9 +1834,9 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'image',
-        imageSrc: '/brunoblog.webp',
-        imageAlt: 'Bruno en Kate van In \'t Dorp in Koksijde',
-        text: 'Bruno en baasje Kate van In \'t Dorp in Koksijde — waar hondenpsychologie en gezelligheid samenkomen'
+        imageSrc: '/katebrunostrand.webp',
+        imageAlt: 'Kate en Bruno op het strand in Koksijde',
+        text: 'Kate en Bruno op het strand in Koksijde — waar hondenpsychologie en gezelligheid samenkomen'
       },
       {
         type: 'paragraph',
