@@ -1492,7 +1492,7 @@ export const blogPosts: BlogPost[] = [
     subtitle: 'De verrassende inzichten van dr. Guillaume Dervaux over hondenpsychologie, zelfcontrole en waarom jouw kalmte het grootste geschenk is voor je hond',
     excerpt: 'We trainen commando\'s, kopen speeltjes en overladen onze honden met enthousiasme. Maar wat als echte hondenliefde juist in stilte en rust begint? Dr. Guillaume Dervaux, arts en hondenpsycholoog, deelt zijn verfrissende visie over de band tussen mens en hond.',
     date: '2026-03-01',
-    readTime: '16 min',
+    readTime: '20 min',
     category: 'Gedrag & Psychologie',
     categoryColor: 'blue',
     icon: 'brain',
@@ -1677,32 +1677,104 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'In de podcast wordt uitgebreid gesproken over de 4C-methode, de aanpak die dr. Dervaux heeft ontwikkeld. Een van de vier hoekstenen van deze methode is Zelfcontrole (of self-control). En dit verdient extra aandacht, want het is een concept dat bij veel hondeneigenaars voor een doorbraak kan zorgen.'
+        text: 'In de podcast wordt uitgebreid gesproken over de 4C-methode, de aanpak die dr. Dervaux heeft ontwikkeld. Deze methode rust op vier onlosmakelijk verbonden pijlers: Change, Communication, Consistency en Control. Samen vormen ze een krachtig kompas voor de omgang met je hond — en stuk voor stuk beginnen ze bij jou als baasje.'
+      },
+      {
+        type: 'subheading',
+        text: '1. Change (Verandering)'
       },
       {
         type: 'paragraph',
-        text: 'Zelfcontrole bij honden houdt in: leren omgaan met impulsen en de rust kunnen bewaren, ook wanneer er prikkels zijn die normaal voor opwinding of stress zorgen. Dit is niet iets wat een hond van nature zomaar kan in onze drukke, overprikkelde mensenwereld. Denk aan al die indrukken waarmee een hond dagelijks wordt geconfronteerd: andere honden, voorbijgangers, fietsen, auto\'s, kinderen, katten, geuren, geluiden. Het is overweldigend.'
+        text: 'De eerste C is direct de meest confronterende: echte verandering begint niet bij je hond, maar bij jezelf. Als je hond ongewenst gedrag vertoont, is onze automatische reactie vaak om de hond te corrigeren. We trekken aan de riem of roepen luid "Nee!". De 4C-methode vraagt je op dat moment om op de rem te trappen en in de spiegel te kijken.'
       },
       {
         type: 'paragraph',
-        text: 'Door gerichte, rustige oefeningen leert een hond stap voor stap om beter te wachten, zich te focussen en niet op elke prikkel onmiddellijk te reageren. Het gaat niet om het onderdrukken van emoties of impulsen — het gaat erom dat de hond leert dat hij niet op alles hoeft te reageren. Dat er een keuze is. En dat die keuze veilig voelt.'
+        text: 'Ben je zelf gespannen? Anticipeer je op falen zodra je een andere hond in de verte ziet? Je hond voelt deze spanning via de lijn onmiddellijk en denkt: "Mijn baas maakt zich klaar voor de strijd, ik moet ons verdedigen!" Verandering vereist dat je stopt met doen wat niet werkt en de moed hebt om naar je eigen blokkades te kijken.'
+      },
+      {
+        type: 'subheading',
+        text: '2. Communication (Communicatie)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wij mensen praten onophoudelijk tegen onze honden. Voor een hond is dit vaak een grote, onbegrijpelijke brij van geluid. De 4C-methode stelt dat je moet stoppen met "praten" en moet beginnen met echt communiceren in de taal die je hond verstaat: energie en lichaamstaal.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Beeld je in: je hond rent richting de branding en je wilt hem terugroepen. Als jij met een hoge, paniekerige stem roept en druk met je armen zwaait, creeer je chaos. Duidelijke signalen zorgen daarentegen voor rust. Een ontspannen, rechtopstaande houding, een lage, rustige stem en een overtuigende energie stralen leiderschap uit.'
+      },
+      {
+        type: 'subheading',
+        text: '3. Consistency (Consistentie)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voor een hond is de wereld pas echt ontspannen wanneer deze volkomen voorspelbaar is. Consistentie houdt in dat je duidelijke en consequente regels biedt en deze altijd naleeft, ongeacht de situatie.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Mag je hond op een doordeweekse wandeling nooit tegen mensen opspringen, maar sta je het op zondagmiddag op het strand wel lachend toe omdat hij "zo lekker enthousiast is"? Deze willekeur is voor een hond ontzettend stressvol. Door honderd procent consequent te zijn, word je een betrouwbare haven, waardoor je hond de controle durft los te laten en veel relaxter naast je zal wandelen.'
+      },
+      {
+        type: 'subheading',
+        text: '4. Control (Controle)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Binnen de filosofie van dr. Dervaux gaat controle niet om dominantie of strakke riemen. Controle betekent hier verantwoordelijkheid nemen, proactief handelen en in verbinding blijven met je dier. Jij beheert de omgeving, zodat je hond dat niet hoeft te doen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Zie je in de verte een loslopende hond met veel te hoge energie op jullie afgestoven? Wacht dan niet tot je eigen hond overprikkeld raakt en begint te blaffen. Grijp veel eerder in. Verleg de aandacht, verander van richting of ga rustig tussen je hond en de prikkel in staan. Zo vertel je je hond: "Ik handel het af, jij hoeft je nergens zorgen over te maken."'
       },
       {
         type: 'quote',
         text: 'Herhaling is de moeder van het succes. Elke dag dat je er samen aan werkt, groeit je hond in rust, zelfvertrouwen en controle.'
       },
       {
-        type: 'paragraph',
-        text: 'En hier zit misschien wel de belangrijkste nuance: deze controle komt niet vanuit dominantie of dwang. Het komt vanuit vertrouwen. Dr. Dervaux beschrijft dit aan de hand van een hond die vroeger volledig overspoeld werd door prikkels. Bij elk geluid — de deurbel, een auto, een stem op straat — ontplofte deze hond van stress en opwinding.'
-      },
-      {
-        type: 'paragraph',
-        text: 'Door geduldig te werken met herhaling en duidelijke begeleiding, ontstond er langzaam maar zeker rust. Niet omdat de hond geleerd had om "braaf" te zijn, maar omdat er iets veel diepers was veranderd: de baasjes wisten exact wat ze moesten doen. Ze bleven kalm en voorspelbaar. En precies in die kalmte vond de hond zijn houvast.'
-      },
-      {
         type: 'tip',
         title: 'De kern van de 4C-methode',
         text: 'Het is bijzonder om te zien hoe een hond durft los te laten, simpelweg omdat hij voelt: "Mijn mensen hebben dit onder controle. Ik hoef me geen zorgen te maken." Dat is waar het om draait in de hondenpsychologie: niet louter het gedrag veranderen, maar een diep, onwrikbaar vertrouwen bouwen tussen hond en mens. Jouw hond hoeft de wereld niet te managen — dat doe jij.'
+      },
+      {
+        type: 'heading',
+        text: 'In de praktijk: jouw 4C-strandoefening voor morgen'
+      },
+      {
+        type: 'paragraph',
+        text: 'Theorie is mooi, maar de praktijk is waar de magie gebeurt. De volgende keer dat je met je hond naar zee gaat, daag jezelf uit om deze specifieke "Zwijgzame Zeewandeling" te doen, gebaseerd op de vier pijlers van de 4C-methode.'
+      },
+      {
+        type: 'subheading',
+        text: 'Stap 1: De Check-In (Change)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voordat je uberhaupt uit de auto stapt of de voordeur uitloopt, haal je drie keer diep adem. Scan je eigen lichaam. Zijn je schouders gespannen? Adem uit en laat ze zakken. Laat de stress van je werkdag achter je. Je stapt nu in de wereld van je hond.'
+      },
+      {
+        type: 'subheading',
+        text: 'Stap 2: De Zwijgzame Start (Communication)'
+      },
+      {
+        type: 'paragraph',
+        text: 'We gaan communiceren zonder woorden. Doe de riem om zonder iets te zeggen. Geen "Gaan we wandelen?!" of "Kom op, flink zijn vandaag!". Gebruik uitsluitend je energie en lichaamstaal. Wacht tot je hond zelf rustig is — bijvoorbeeld door even te gaan zitten — voordat je de deur opent of de riem losser laat. Jij bepaalt in stilte het kalme tempo.'
+      },
+      {
+        type: 'subheading',
+        text: 'Stap 3: De Onzichtbare Lijn (Consistency)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Bedenk vooraf een duidelijke regel voor deze wandeling en wijk daar niet van af. Bijvoorbeeld: we trekken vandaag niet aan de riem, ook niet als we de zee ruiken. Zodra de riem strak komt te staan, stop je resoluut met lopen. Zeg niets, trek niet terug, maar sta gewoon stil als een boom. Zodra de spanning van de riem af is — je hond kijkt om of doet een stapje terug — loop je direct weer door. Wees honderd procent consequent.'
+      },
+      {
+        type: 'subheading',
+        text: 'Stap 4: De Proactieve Radar (Control)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wees vandaag de radar voor je hond. Scan het strand voor je uit. Zie je een groepje krijsende meeuwen, een rennend kind of een andere hond naderen? Wacht niet tot je hond in de riem hangt. Pas je koers proactief aan, maak een lichte boog om de situatie heen, of nodig je hond met een handgebaar uit om aan jouw andere kant te komen lopen. Jij managet de ruimte, zodat je hond kan ontspannen.'
       },
       {
         type: 'heading',
@@ -1821,10 +1893,10 @@ export const blogPosts: BlogPost[] = [
         items: [
           'Tijd en Toewijding — Wees er bewust en volledig voor je hond. Echte verbinding ontstaat niet door de hoeveelheid activiteiten, maar door de kwaliteit van je aanwezigheid.',
           'Rust in Zachtheid — Begin de dag rustig. Laat uitbundige begroetingen achterwege en kies voor zachte, kalme aanwezigheid. Je hond zal je hiervoor dankbaar zijn.',
-          'Jij bent de spiegel — Werk bewust aan je eigen kalmte en energie. Jouw gemoedstoestand beïnvloedt je hond meer dan welk commando ook.',
+          'Jij bent de spiegel — Werk bewust aan je eigen kalmte en energie. Jouw gemoedstoestand beinvloedt je hond meer dan welk commando ook.',
           'Structuur biedt veiligheid — Houd vaste routines aan voor eten, wandelen en slapen, zeker in nieuwe omgevingen zoals een vakantie aan zee. Voorspelbaarheid is geruststelling.',
           'Van oog naar neus — Help je hond om prikkels te verwerken via zijn neus in plaats van enkel via zijn ogen. Dit verlaagt stress en vergroot zijn verwerkingscapaciteit.',
-          'Zelfcontrole opbouwen — Train niet harder, maar slimmer. Leer je hond stap voor stap dat hij niet op elke prikkel hoeft te reageren, vanuit vertrouwen en herhaling.',
+          'De 4C-Methode — Change (durf bij jezelf te beginnen), Communication (communiceer via energie en lichaamstaal), Consistency (wees honderd procent consequent) en Control (neem proactief de regie zodat je hond kan ontspannen).',
           'Kalmte is geluk — Verwar opwinding niet met blijdschap. Een rustige, ontspannen hond is een gelukkige hond.',
           'Voorspelbaar leiderschap — Wees de stabiele factor die jouw hond nodig heeft. Niet door autoriteit, maar door betrouwbaarheid en kalmte.'
         ]
