@@ -1710,7 +1710,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De titel van de podcast — "hondenpsychologie-mensenpsychologie" — is niet toevallig gekozen. Dr. Dervaux legt doorheen het hele gesprek een rode draad bloot die velen zal herkennen: het gedrag van onze hond is onlosmakelijk verbonden met ons eigen gedrag.'
+        text: 'De titel van de podcast — "hondenpsychologie-mensenpsychologie" — is niet toevallig gekozen. Dr. Dervaux legt doorheen het hele gesprek een rode draad bloot die velen zullen herkennen: het gedrag van onze hond is onlosmakelijk verbonden met ons eigen gedrag.'
       },
       {
         type: 'paragraph',
