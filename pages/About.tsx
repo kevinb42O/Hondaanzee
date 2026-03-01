@@ -234,7 +234,7 @@ const About: React.FC = () => {
                                 className="flex items-center gap-3 bg-white text-purple-600 hover:bg-purple-50 px-8 py-4 rounded-2xl transition-all group w-full sm:w-auto justify-center shadow-xl font-black text-lg"
                             >
                                 <Camera size={24} className="group-hover:scale-110 transition-transform" />
-                                <span>Volg @hondaanzee</span>
+                                <span>Instagram</span>
                             </a>
                             <a
                                 href="https://www.facebook.com/hondaanzee"
