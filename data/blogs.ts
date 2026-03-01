@@ -1700,6 +1700,12 @@ export const blogPosts: BlogPost[] = [
         text: 'Wij mensen praten onophoudelijk tegen onze honden. Voor een hond is dit vaak een grote, onbegrijpelijke brij van geluid. De 4C-methode stelt dat je moet stoppen met "praten" en moet beginnen met echt communiceren in de taal die je hond verstaat: energie en lichaamstaal.'
       },
       {
+        type: 'image',
+        imageSrc: '/bodylanguage.webp',
+        imageAlt: 'Lichaamstaal van honden — leer de signalen van je viervoeter lezen',
+        text: 'Lichaamstaal van honden: leer de signalen van je viervoeter herkennen en begrijpen'
+      },
+      {
         type: 'paragraph',
         text: 'Beeld je in: je hond rent richting de branding en je wilt hem terugroepen. Als jij met een hoge, paniekerige stem roept en druk met je armen zwaait, creeer je chaos. Duidelijke signalen zorgen daarentegen voor rust. Een ontspannen, rechtopstaande houding, een lage, rustige stem en een overtuigende energie stralen leiderschap uit.'
       },
