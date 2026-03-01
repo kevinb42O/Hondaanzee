@@ -25,7 +25,7 @@ const TOPPER_VAN_DE_WEEK = {
   dogName: 'Jason',
   ownerName: 'Katherine',
   city: 'Zeebrugge',
-  caption: 'Reddingsvest: aan. Anker: in het water. Dek: schoongeveegd. Kapitein Jason is klaar voor vertrek! HondAanZee? Nope — liever hond ÓP zee. ⚓😎',
+  caption: 'Reddingsvest: aan. Anker: opgehaald! Dek: schoongeveegd. Kapitein Jason is klaar voor vertrek! HondAanZee? Nope — liever hond ÓP zee. ⚓😎',
 };
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
