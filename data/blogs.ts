@@ -1497,7 +1497,7 @@ export const blogPosts: BlogPost[] = [
     categoryColor: 'blue',
     icon: 'brain',
     image: '/brunosamlulu.webp',
-    imageAlt: 'Bruno, Sam en Lulu — de viervoeters achter de 4C-methode voor hondenpsychologie',
+    imageAlt: 'Bruno, Sam en Lulu — de viervoeters achter de hondenpsychologie van Guillaume Dervaux',
     ogImage: '/OG_brunosamlulu.webp',
     featured: true,
     content: [
@@ -1519,7 +1519,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Om de diepgang van de 4C-methode te begrijpen, moeten we terug naar waar het allemaal begon: bij een hond genaamd Sam. Sam was een hond met een bijzonder zware rugzak. Op de prille leeftijd van amper twee jaar was hij al maar liefst twaalf keer teruggestuurd naar het asiel. Twaalf keer had iemand besloten dat het "niet ging werken". Twaalf keer voelde Sam de grond onder zijn poten wegzakken.'
+        text: 'Om deze verfrissende kijk op hondengedrag te begrijpen, moeten we terug naar waar het allemaal begon: bij een hond genaamd Sam. Sam was een hond met een bijzonder zware rugzak. Op de prille leeftijd van amper twee jaar was hij al maar liefst twaalf keer teruggestuurd naar het asiel. Twaalf keer had iemand besloten dat het "niet ging werken". Twaalf keer voelde Sam de grond onder zijn poten wegzakken.'
       },
       {
         type: 'paragraph',
@@ -1527,7 +1527,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Die zoektocht naar begrip in plaats van controle werd het fundament van de 4C-methode. Het verhaal van Sam laat iets belangrijks zien: achter elk "probleemgedrag" zit een hond die iets probeert te vertellen. De kunst is om te leren luisteren, niet om harder te gaan praten.'
+        text: 'Die zoektocht naar begrip in plaats van controle werd het fundament van Guillaumes latere aanpak als hondenpsycholoog. Het verhaal van Sam laat iets belangrijks zien: achter elk "probleemgedrag" zit een hond die iets probeert te vertellen. De kunst is om te leren luisteren, niet om harder te gaan praten.'
       },
       {
         type: 'quote',
@@ -1539,7 +1539,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Voordat we in de psychologie en de methodes duiken, komt in de podcast een eerlijke, fundamentele vraag aan bod: hoeveel tijd geef je werkelijk aan je hond? En dan gaat het niet alleen over de dagelijkse wandeling of het bakje hondenvoer vullen. Het gaat over echte, bewuste aanwezigheid.'
+        text: 'Voordat we in de psychologie en de methodes duiken, stelt Guillaume een eerlijke, fundamentele vraag: hoeveel tijd geef je werkelijk aan je hond? En dan gaat het niet alleen over de dagelijkse wandeling of het bakje hondenvoer vullen. Het gaat over echte, bewuste aanwezigheid.'
       },
       {
         type: 'paragraph',
@@ -1564,7 +1564,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'In de podcast wordt dit principe op een mooie manier omgekeerd. Veel van ons herkennen het: ochtenden die vol opwinding zitten. Maar gaandeweg leer je dat ware liefde juist in zachtheid zit. Honden — hoe blij ze ook lijken met onze enthousiaste begroeting — hebben er eigenlijk helemaal geen behoefte aan om uitbundig gewekt te worden. Ze willen in alle rust ontwaken, net zoals ze dat in een roedel zouden doen.'
+        text: 'Guillaume keert dit principe op een mooie manier om. Hij deelt openhartig dat ochtenden vroeger ook bij hem vol opwinding zaten. Maar gaandeweg leerde hij dat ware liefde juist in zachtheid zit. Honden — hoe blij ze ook lijken met onze enthousiaste begroeting — hebben er eigenlijk helemaal geen behoefte aan om uitbundig gewekt te worden. Ze willen in alle rust ontwaken, net zoals ze dat in een roedel zouden doen.'
       },
       {
         type: 'paragraph',
@@ -1581,7 +1581,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Hier komen we bij de kern van de 4C-filosofie, en meteen ook de titel van dit artikel. Honden zijn ongelooflijke spiegels van onze eigen emoties. Als jij gespannen aan de leiband loopt, voelt je hond die spanning letterlijk — via de riem, via je lichaamshouding, via je ademhaling. En die spanning? Die neemt hij over.'
+        text: 'Hier komen we bij de kern van deze filosofie, en meteen ook de titel van dit artikel. Honden zijn ongelooflijke spiegels van onze eigen emoties. Als jij gespannen aan de leiband loopt, voelt je hond die spanning letterlijk — via de riem, via je lichaamshouding, via je ademhaling. En die spanning? Die neemt hij over.'
       },
       {
         type: 'paragraph',
@@ -1635,7 +1635,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Een veelvoorkomend misverstand dat in de podcast aan bod komt, is het verschil tussen opwinding en echt geluk. Als hondeneigenaars interpreteren we een wild kwispelende hond, uitgelaten springen en hoge energie vaak als "mijn hond is blij". Maar is dat werkelijk altijd zo?'
+        text: 'Een veelvoorkomend misverstand dat Guillaume in het gesprek aanhaalt, is het verschil tussen opwinding en echt geluk. Als hondeneigenaars interpreteren we een wild kwispelende hond, uitgelaten springen en hoge energie vaak als "mijn hond is blij". Maar is dat werkelijk altijd zo?'
       },
       {
         type: 'paragraph',
@@ -1669,7 +1669,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'callout',
         title: 'Hoe werkt dit in de praktijk?',
-        text: 'In de podcast wordt het succesvolle gebruik beschreven van een kalmerende kap tijdens trainingssessies. Door tijdelijk de visuele trigger weg te nemen, wordt de hond gedwongen om zijn neus in te schakelen. Dit is geen straf — het is een hulpmiddel dat de hond de kans geeft om tot rust te komen. Vanuit die kalmte kun je een hond stap voor stap begeleiden naar gewenst gedrag. Het resultaat is vaak verbluffend: honden die volledig in de stress schoten, worden veel rustiger en reageren genuanceerder op hun omgeving.'
+        text: 'Guillaume beschrijft het succesvolle gebruik van een kalmerende kap tijdens trainingssessies. Door tijdelijk de visuele trigger weg te nemen, wordt de hond gedwongen om zijn neus in te schakelen. Dit is geen straf — het is een hulpmiddel dat de hond de kans geeft om tot rust te komen. Vanuit die kalmte kun je een hond stap voor stap begeleiden naar gewenst gedrag. Het resultaat is vaak verbluffend: honden die volledig in de stress schoten, worden veel rustiger en reageren genuanceerder op hun omgeving.'
       },
       {
         type: 'heading',
@@ -1727,7 +1727,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Binnen de 4C-methode gaat controle niet om dominantie of strakke riemen. Controle betekent hier verantwoordelijkheid nemen, proactief handelen en in verbinding blijven met je dier. Jij beheert de omgeving, zodat je hond dat niet hoeft te doen.'
+        text: 'Binnen deze visie gaat controle niet om dominantie of strakke riemen. Controle betekent hier verantwoordelijkheid nemen, proactief handelen en in verbinding blijven met je dier. Jij beheert de omgeving, zodat je hond dat niet hoeft te doen.'
       },
       {
         type: 'paragraph',
@@ -1748,7 +1748,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Theorie is mooi, maar de praktijk is waar de magie gebeurt. De volgende keer dat je met je hond naar zee gaat, daag jezelf uit om deze specifieke "Zwijgzame Zeewandeling" te doen, gebaseerd op de vier pijlers van de 4C-methode.'
+        text: 'Theorie is mooi, maar de praktijk is waar de magie gebeurt. De volgende keer dat je met je hond naar zee gaat, daag jezelf uit om deze specifieke "Zwijgzame Zeewandeling" te doen, gebaseerd op de vier pijlers.'
       },
       {
         type: 'subheading',
@@ -1812,11 +1812,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Met de inzichten uit de 4C-methode in het achterhoofd kun je deze situaties veel bewuster benaderen. Kies bewust voor rustigere momenten om naar het strand te gaan — vroeg in de ochtend of laat in de namiddag, wanneer het strand minder druk is. Houd je eigen ademhaling en energie in de gaten wanneer je een andere hond ziet naderen. En geef je hond de ruimte om via zijn neus de omgeving te verkennen in plaats van alleen visueel te reageren op alles om hem heen.'
+        text: 'Met deze inzichten in het achterhoofd kun je zulke situaties veel bewuster benaderen. Kies bewust voor rustigere momenten om naar het strand te gaan — vroeg in de ochtend of laat in de namiddag, wanneer het strand minder druk is. Houd je eigen ademhaling en energie in de gaten wanneer je een andere hond ziet naderen. En geef je hond de ruimte om via zijn neus de omgeving te verkennen in plaats van alleen visueel te reageren op alles om hem heen.'
       },
       {
         type: 'paragraph',
-        text: 'De duinwandelingen die de kust te bieden heeft — denk aan de prachtige paden rond De Haan, Koksijde of De Panne — zijn ideaal om in een rustigere setting te werken aan de band met je hond. Minder prikkels, meer natuur, meer gelegenheid om samen tot rust te komen. Een wandeling door de duinen kan een prachtige oefening zijn in de principes van de 4C-methode.'
+        text: 'De duinwandelingen die de kust te bieden heeft — denk aan de prachtige paden rond De Haan, Koksijde of De Panne — zijn ideaal om in een rustigere setting te werken aan de band met je hond. Minder prikkels, meer natuur, meer gelegenheid om samen tot rust te komen. Een wandeling door de duinen kan een prachtige oefening zijn in deze principes.'
       },
       {
         type: 'tip',
@@ -1829,7 +1829,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De 4C-methode is niet enkel theorie — ze komt daadwerkelijk tot leven aan de Belgische kust. Kate, eigenares van In \'t Dorp in Koksijde, past de methode samen met haar hond Bruno dagelijks toe. Dit gezellige etablissement is een van de populairste hotspots op HondAanZee en staat bekend om de unieke Brunobar, waar jouw hond de ster van de avond is.',
+        text: 'Deze aanpak is niet enkel theorie — ze komt daadwerkelijk tot leven aan de Belgische kust. Kate, eigenares van In \'t Dorp in Koksijde, past de filosofie samen met haar hond Bruno dagelijks toe. Dit gezellige etablissement is een van de populairste hotspots op HondAanZee en staat bekend om de unieke Brunobar, waar jouw hond de ster van de avond is.',
         links: [{ text: 'In \'t Dorp in Koksijde', url: 'https://www.hondaanzee.be/hotspots' }]
       },
       {
@@ -1840,11 +1840,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Bij In \'t Dorp kun je niet enkel terecht voor een knabbel & een babbel, maar ook voor deskundig advies over het gedrag van je viervoeter, dankzij de 4C-methode die er in de praktijk wordt toegepast.'
+        text: 'Bij In \'t Dorp kun je niet enkel terecht voor een knabbel & een babbel, maar ook voor deskundig advies over het gedrag van je viervoeter, dankzij de samenwerking met Guillaume.'
       },
       {
         type: 'paragraph',
-        text: 'Het mooie hieraan is dat het de drempel verlaagt om met hondenpsychologie in aanraking te komen. Veel hondeneigenaars denken dat je alleen naar een hondenpsycholoog stapt wanneer er "echte problemen" zijn. Maar de inzichten uit de 4C-methode zijn waardevol voor iedereen die een hond heeft — van de ervaren hondenliefhebber tot de kersverse puppy-eigenaar die voor het eerst met zijn viervoeter naar de kust komt.'
+        text: 'Het mooie hieraan is dat het de drempel verlaagt om met hondenpsychologie in aanraking te komen. Veel hondeneigenaars denken dat je alleen naar een hondenpsycholoog stapt wanneer er "echte problemen" zijn. Maar deze inzichten zijn waardevol voor iedereen die een hond heeft — van de ervaren hondenliefhebber tot de kersverse puppy-eigenaar die voor het eerst met zijn viervoeter naar de kust komt.'
       },
       {
         type: 'social',
@@ -1884,7 +1884,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Een veelgehoord advies bij een "drukke" hond: meer uitlaten, meer rennen, meer spelen. De 4C-methode nuanceert dit. Een hond die al overprikkeld is, heeft vaak helemaal niet meer beweging nodig — dat maakt de overprikkeling juist erger. Wat zo\'n hond nodig heeft, is meer rust, meer structuur en meer voorspelbaarheid. Soms is een korte, rustige wandeling veel waardevoller dan een uur lang balletjes gooien.'
+        text: 'Een veelgehoord advies bij een "drukke" hond: meer uitlaten, meer rennen, meer spelen. Guillaume nuanceert dit. Een hond die al overprikkeld is, heeft vaak helemaal niet meer beweging nodig — dat maakt de overprikkeling juist erger. Wat zo\'n hond nodig heeft, is meer rust, meer structuur en meer voorspelbaarheid. Soms is een korte, rustige wandeling veel waardevoller dan een uur lang balletjes gooien.'
       },
       {
         type: 'heading',
@@ -1892,7 +1892,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Als we de waardevolle inzichten uit de 4C-methode op een rij zetten, krijgen we een prachtig kompas voor onze dagelijkse omgang met onze honden — en zeker voor wie graag met zijn viervoeter naar de Belgische kust trekt:'
+        text: 'Als we alle inzichten op een rij zetten, krijgen we een prachtig kompas voor onze dagelijkse omgang met onze honden — en zeker voor wie graag met zijn viervoeter naar de Belgische kust trekt:'
       },
       {
         type: 'list',
@@ -1918,7 +1918,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'callout',
         title: 'Wil je dieper in de materie duiken?',
-        text: 'Beluister het volledige "Interview over hondenpsychologie-mensenpsychologie" op Spotify. De 4C-methode komt hierin nog veel uitgebreider aan bod — van het werken met angst tot de rol die jij als eigenaar speelt in het gedrag van je hond. Het is een boeiend gesprek dat je kijk op hondengedrag voorgoed kan veranderen.'
+        text: 'Beluister het volledige "Interview over hondenpsychologie-mensenpsychologie" op Spotify. Guillaume gaat hierin nog veel dieper in op de 4C-methode, het werken met angst en de rol die jij als eigenaar speelt in het gedrag van je hond. Het is een boeiend gesprek dat je kijk op hondengedrag voorgoed kan veranderen.'
       },
       {
         type: 'spotify',
@@ -1927,7 +1927,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'social',
-        title: 'Volg de 4C-methode',
+        title: 'Volg Guillaume Dervaux',
         text: 'Benieuwd naar meer inzichten over hondenpsychologie en de 4C-methode? Volg dr. Guillaume Dervaux op social media voor regelmatige tips, casussen en inspiratie.',
         socialLinks: [
           { platform: 'instagram', url: 'https://www.instagram.com/4c_method_by_pawcontrol/', label: 'Volg op Instagram' },
