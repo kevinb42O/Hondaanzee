@@ -21,11 +21,11 @@ const MONTHLY_THEMES = [
 
 // ─── TOPPER VAN DE WEEK ───────────────────────────────────────────────
 const TOPPER_VAN_DE_WEEK = {
-  image: '/gucci_topper.webp',
-  dogName: 'Gucci',
-  ownerName: 'Frank & Ann',
-  city: 'Blankenberge',
-  caption: 'Gucci geniet met volle teugen van het strand in Blankenberge! 🐾',
+  image: '/jason_topper.webp',
+  dogName: 'Jason',
+  ownerName: 'Katherine',
+  city: 'Zeebrugge',
+  caption: 'Reddingsvest: aan. Anker: in het water. Dek: schoongeveegd. Kapitein Jason is klaar voor vertrek! HondAanZee? Nope — liever hond ÓP zee. ⚓😎',
 };
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
@@ -134,9 +134,9 @@ const Community: React.FC = () => {
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: 'url(/gucci_topper.webp)',
+            backgroundImage: 'url(/jason_topper.webp)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'top',
             backgroundAttachment: 'fixed',
           }}
         >
@@ -318,11 +318,6 @@ const Community: React.FC = () => {
               </div>
             </div>
 
-            {/* Floating Crown */}
-            <div className="absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 animate-bounce">
-              <div className="text-6xl drop-shadow-[0_0_15px_rgba(251,191,36,0.8)] rotate-[15deg]">👑</div>
-            </div>
-
             {/* Bottom Content */}
             <div className="relative z-20 p-6 sm:p-8 w-full">
               {/* Huge Name */}
@@ -345,7 +340,7 @@ const Community: React.FC = () => {
                 
                 <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/30">
                   <Sparkles size={14} className="text-amber-300" />
-                  <span className="text-white text-sm font-bold">Zandhapper Level: <span className="text-amber-300">Expert</span></span>
+                  <span className="text-white text-sm font-bold">Matroos Level: <span className="text-amber-300">Kapitein</span></span>
                 </div>
               </div>
             </div>
@@ -385,18 +380,6 @@ const Community: React.FC = () => {
               </div>
             </div>
 
-            {/* Share / Download Button */}
-            <div className="mt-8 w-full">
-              <button 
-                onClick={handleShare}
-                className="w-full group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-[0_0_40px_rgba(14,165,233,0.4)] hover:shadow-[0_0_60px_rgba(14,165,233,0.6)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                <Share2 size={22} className="relative z-10" />
-                <span className="relative z-10">Deel Overwinning!</span>
-              </button>
-              <p className="text-slate-400 text-sm mt-3 font-medium text-center">Perfect formaat voor je Instagram Story 📸</p>
-            </div>
           </div>
         </div>
 
@@ -416,6 +399,19 @@ const Community: React.FC = () => {
             <span>Ik wil Topper worden!</span>
             <Send size={18} className="opacity-70 group-hover:translate-x-1 transition-transform" />
           </a>
+
+          {/* Share / Download Button */}
+          <div className="mt-8">
+            <button 
+              onClick={handleShare}
+              className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-black text-lg px-8 py-4 rounded-full shadow-[0_0_40px_rgba(14,165,233,0.4)] hover:shadow-[0_0_60px_rgba(14,165,233,0.6)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+              <Share2 size={22} className="relative z-10" />
+              <span className="relative z-10">Deel Overwinning!</span>
+            </button>
+            <p className="text-slate-400 text-sm mt-3 font-medium text-center">Perfect formaat voor je Instagram Story 📸</p>
+          </div>
         </div>
       </section>
 
