@@ -1707,7 +1707,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Beeld je in: je hond rent richting de branding en je wilt hem terugroepen. Als jij met een hoge, paniekerige stem roept en druk met je armen zwaait, creeer je chaos. Duidelijke signalen zorgen daarentegen voor rust. Een ontspannen, rechtopstaande houding, een lage, rustige stem en een overtuigende energie stralen leiderschap uit.'
+        text: 'Beeld je in: je hond rent richting de branding en je wilt hem terugroepen. Als jij met een hoge, paniekerige stem roept en druk met je armen zwaait, creëer je chaos. Duidelijke signalen zorgen daarentegen voor rust. Een ontspannen, rechtopstaande houding, een lage, rustige stem en een overtuigende energie stralen leiderschap uit.'
       },
       {
         type: 'subheading',
@@ -1756,7 +1756,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Voordat je uberhaupt uit de auto stapt of de voordeur uitloopt, haal je drie keer diep adem. Scan je eigen lichaam. Zijn je schouders gespannen? Adem uit en laat ze zakken. Laat de stress van je werkdag achter je. Je stapt nu in de wereld van je hond.'
+        text: 'Voordat je überhaupt uit de auto stapt of de voordeur uitloopt, haal je drie keer diep adem. Scan je eigen lichaam. Zijn je schouders gespannen? Adem uit en laat ze zakken. Laat de stress van je werkdag achter je. Je stapt nu in de wereld van je hond.'
       },
       {
         type: 'subheading',
@@ -1899,7 +1899,7 @@ export const blogPosts: BlogPost[] = [
         items: [
           'Tijd en Toewijding — Wees er bewust en volledig voor je hond. Echte verbinding ontstaat niet door de hoeveelheid activiteiten, maar door de kwaliteit van je aanwezigheid.',
           'Rust in Zachtheid — Begin de dag rustig. Laat uitbundige begroetingen achterwege en kies voor zachte, kalme aanwezigheid. Je hond zal je hiervoor dankbaar zijn.',
-          'Jij bent de spiegel — Werk bewust aan je eigen kalmte en energie. Jouw gemoedstoestand beinvloedt je hond meer dan welk commando ook.',
+          'Jij bent de spiegel — Werk bewust aan je eigen kalmte en energie. Jouw gemoedstoestand beïnvloedt je hond meer dan welk commando ook.',
           'Structuur biedt veiligheid — Houd vaste routines aan voor eten, wandelen en slapen, zeker in nieuwe omgevingen zoals een vakantie aan zee. Voorspelbaarheid is geruststelling.',
           'Van oog naar neus — Help je hond om prikkels te verwerken via zijn neus in plaats van enkel via zijn ogen. Dit verlaagt stress en vergroot zijn verwerkingscapaciteit.',
           'De 4C-Methode — Change (durf bij jezelf te beginnen), Communication (communiceer via energie en lichaamstaal), Consistency (wees honderd procent consequent) en Control (neem proactief de regie zodat je hond kan ontspannen).',
