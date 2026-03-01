@@ -1503,7 +1503,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: 'paragraph',
-        text: 'Het is de droom van elke hondeneigenaar: een ontspannen wandeling langs de vloedlijn, de wind in de haren, en een hond die rustig naast je geniet van de zoute zeelucht. De Belgische kust biedt daarvoor het perfecte decor — kilometerslange stranden, uitgestrekte duingebieden en frisse luchten die zowel mens als hond deugd doen. Toch is de realiteit voor veel baasjes soms anders dan gehoopt.'
+        text: 'Het is de droom van elke hondeneigenaar: een ontspannen wandeling langs de vloedlijn, de wind in de haren, en een hond die rustig naast je geniet van de zoute zeelucht. De Belgische kust biedt daarvoor het perfecte decor — kilometerslange stranden, uitgestrekte duingebieden en frisse lucht die zowel mens als hond deugd doen. Toch is de realiteit voor veel baasjes soms anders dan gehoopt.'
       },
       {
         type: 'paragraph',
