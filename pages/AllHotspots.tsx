@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Coffee, Utensils, Bed, Star, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Coffee, Utensils, Bed, ShoppingBag, Star, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
@@ -40,6 +40,7 @@ const AllHotspots: React.FC = () => {
       case 'Café': return <Coffee size={14} />;
       case 'Restaurant': return <Utensils size={14} />;
       case 'Slapen': return <Bed size={14} />;
+      case 'Shoppen': return <ShoppingBag size={14} />;
       default: return <Star size={14} />;
     }
   };

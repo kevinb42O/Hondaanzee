@@ -1344,4 +1344,15 @@ export const HOTSPOTS: Hotspot[] = [
     address: 'Zeedijk 461, 8670 Koksijde',
     website: 'https://tearoom-de-barkentijn-oostduinkerke1.webnode.nl/'
   },
+  {
+    id: 116,
+    name: 'Skateshop Daily Grind',
+    type: 'Shoppen',
+    description: 'Bij Daily Grind scoor je niet alleen een nieuw deck of de coolste kledij, maar wordt je hond ook als een ware VIP behandeld. Eigenaars Ira en Dré hebben een gigantisch hart voor dieren en entertainen je viervoeter maar al te graag terwijl jij je keuzes maakt. Neem zeker even een kijkje in de etalage, want je vindt hier zelfs unieke hondenaccessoires van authentieke skatemerken — ideaal voor op reis of op het strand. Een verborgen pareltje in Blankenberge. Groetjes van Jax als je passeert!',
+    tags: ['Aanrader', 'Hondvriendelijk team', 'Skateshop', 'Unieke hondenaccessoires', 'Indoor toegelaten'],
+    image: '/dailygrind2.webp',
+    city: 'blankenberge',
+    address: 'Langestraat 1, 8370 Blankenberge',
+    website: 'https://daily-grind-skateshop.webshopapp.com/'
+  },
 ];

@@ -152,9 +152,9 @@ export const SEO_DATA = {
   },
 
   hotspots: {
-    title: 'Hondvriendelijke Hotspots Belgische Kust | Cafés, Restaurants & Hotels waar Honden Welkom Zijn',
-    description: 'Ontdek de beste hondvriendelijke cafés, restaurants en hotels aan de Belgische kust. Van Oostende tot Knokke - waar je hond écht welkom is. Filter op stad en type.',
-    keywords: 'hondvriendelijk restaurant belgië kust, hondvriendelijk café aan zee, hotel honden toegelaten kust, hondvriendelijk terras zee, hond welkom restaurant, hond toegestaan café, hondvriendelijke horeca kust',
+    title: 'Hondvriendelijke Hotspots Belgische Kust | Cafés, Restaurants, Hotels & Winkels waar Honden Welkom Zijn',
+    description: 'Ontdek de beste hondvriendelijke cafés, restaurants, hotels en winkels aan de Belgische kust. Van Oostende tot Knokke - waar je hond écht welkom is. Filter op stad en type.',
+    keywords: 'hondvriendelijk restaurant belgië kust, hondvriendelijk café aan zee, hotel honden toegelaten kust, hondvriendelijk terras zee, hond welkom restaurant, hond toegestaan café, hondvriendelijke horeca kust, hondvriendelijke winkel kust, skateshop hondvriendelijk blankenberge, winkelen met hond aan zee, hondenaccesoires kust, skateshop daily grind blankenberge',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -491,6 +491,33 @@ export const SEO_DATA = {
   }
 };
 
+// City-specific LocalBusiness structured data for notable hotspots
+const CITY_LOCAL_BUSINESSES: Record<string, object[]> = {
+  blankenberge: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Skateshop Daily Grind",
+      "description": "Hondvriendelijke skateshop in Blankenberge met unieke hondenaccessoires van authentieke skatemerken. Honden zijn van harte welkom.",
+      "url": "https://daily-grind-skateshop.webshopapp.com/",
+      "image": "https://hondaanzee.be/dailygrind2.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Langestraat 1",
+        "addressLocality": "Blankenberge",
+        "postalCode": "8370",
+        "addressCountry": "BE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "addressCountry": "BE"
+      },
+      "keywords": "skateshop, hondvriendelijk, hondenaccessoires, skatemerk, leiband, drinkbak hond, Blankenberge",
+      "sameAs": ["https://daily-grind-skateshop.webshopapp.com/"]
+    }
+  ]
+};
+
 // Generate city-specific SEO data
 export const getCitySEO = (cityName: string, citySlug: string) => {
   const searchTerms = [
@@ -504,10 +531,17 @@ export const getCitySEO = (cityName: string, citySlug: string) => {
     `hondvriendelijk ${cityName.toLowerCase()}`
   ];
 
+  // Add city-specific extra keywords
+  const cityExtraKeywords: Record<string, string> = {
+    blankenberge: ', skateshop blankenberge hond, daily grind blankenberge, hondvriendelijke winkel blankenberge, winkelen met hond blankenberge, hondenaccessoires blankenberge'
+  };
+
+  const cityLocalBusinesses = CITY_LOCAL_BUSINESSES[citySlug] || [];
+
   return {
     title: `Hond Strand ${cityName} ${YEAR} | Strandregels, Losloopzones & Hondvriendelijke Plekken ${cityName}`,
     description: `✓ Actuele strandregels voor honden in ${cityName} ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in ${cityName}`,
-    keywords: searchTerms.join(', '),
+    keywords: searchTerms.join(', ') + (cityExtraKeywords[citySlug] || ''),
     canonical: `https://hondaanzee.be/${citySlug}`,
     structuredData: [
       {
@@ -538,7 +572,8 @@ export const getCitySEO = (cityName: string, citySlug: string) => {
           "value": true
         }
       ]
-    }
+    },
+      ...cityLocalBusinesses
     ]
   };
 };
