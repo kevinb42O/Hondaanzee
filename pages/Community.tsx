@@ -35,15 +35,6 @@ const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' 
 );
 
 const Confetti = () => {
-  const [show, setShow] = useState(true);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!show) return null;
-
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
       {[...Array(50)].map((_, i) => {
@@ -59,7 +50,7 @@ const Confetti = () => {
             className={`absolute top-[-10%] w-3 h-3 rounded-sm ${color} opacity-80`}
             style={{
               left: `${left}%`,
-              animation: `fall ${animationDuration}s linear ${animationDelay}s forwards`,
+              animation: `fall ${animationDuration}s linear ${animationDelay}s infinite`,
               transform: `rotate(${Math.random() * 360}deg)`
             }}
           />
@@ -67,8 +58,13 @@ const Confetti = () => {
       })}
       <style>{`
         @keyframes fall {
+          from {
+            transform: translateY(-10%) rotate(0deg);
+            opacity: 0.8;
+          }
           to {
             transform: translateY(120vh) rotate(720deg);
+            opacity: 0;
           }
         }
       `}</style>
