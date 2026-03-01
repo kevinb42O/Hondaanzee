@@ -16,13 +16,16 @@ export interface BlogPost {
 }
 
 export interface BlogSection {
-  type: 'paragraph' | 'heading' | 'subheading' | 'list' | 'tip' | 'warning' | 'quote' | 'callout' | 'youtube' | 'cta' | 'cta-callout';
+  type: 'paragraph' | 'heading' | 'subheading' | 'list' | 'tip' | 'warning' | 'quote' | 'callout' | 'youtube' | 'spotify' | 'social' | 'image' | 'cta' | 'cta-callout';
   text?: string;
   items?: string[];
   title?: string;
   url?: string;
   ctaText?: string;
   links?: { text: string; url: string }[];
+  socialLinks?: { platform: string; url: string; label: string }[];
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -1480,6 +1483,378 @@ export const blogPosts: BlogPost[] = [
         type: 'youtube',
         title: 'Bekijk de volledige podcast: Olly & Molly met Marc Serneels',
         url: 'https://www.youtube.com/watch?v=xthJFBVNVRk'
+      }
+    ]
+  },
+  {
+    slug: 'spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux',
+    title: 'De Spiegel aan de Leiband: Waarom Echte Hondenliefde Begint in de Rust',
+    subtitle: 'De verrassende inzichten van dr. Guillaume Dervaux over hondenpsychologie, zelfcontrole en waarom jouw kalmte het grootste geschenk is voor je hond',
+    excerpt: 'We trainen commando\'s, kopen speeltjes en overladen onze honden met enthousiasme. Maar wat als echte hondenliefde juist in stilte en rust begint? Dr. Guillaume Dervaux, arts en hondenpsycholoog, deelt zijn verfrissende visie over de band tussen mens en hond.',
+    date: '2026-03-01',
+    readTime: '16 min',
+    category: 'Gedrag & Psychologie',
+    categoryColor: 'blue',
+    icon: 'brain',
+    image: '/brunosamlulu.webp',
+    imageAlt: 'Bruno, Sam en Lulu — de viervoeters achter de inzichten van dr. Guillaume Dervaux',
+    ogImage: '/OG_brunosamlulu.webp',
+    featured: true,
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Het is de droom van elke hondeneigenaar: een ontspannen wandeling langs de vloedlijn, de wind in de haren, en een hond die rustig naast je geniet van de zoute zeelucht. De Belgische kust biedt daarvoor het perfecte decor — kilometerslange stranden, uitgestrekte duingebieden en frisse luchten die zowel mens als hond deugd doen. Toch is de realiteit voor veel baasjes soms anders dan gehoopt.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een hond die aan de riem trekt bij het zien van een ander baasje met viervoeter. Verontwaardigde blikken wanneer je trouwe metgezel begint te blaffen op het strand. Of simpelweg het gevoel dat je wandeling meer een overlevingstocht is dan een ontspanningsmoment. Het is herkenbaar, en je staat er zeker niet alleen in. Vaak grijpen we dan naar extra training of strengere commando\'s, in de hoop dat het beter wordt.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Maar wat als we het probleem vanuit een heel andere hoek kunnen bekijken? Op Spotify is een razend interessante podcast te beluisteren genaamd Interview over hondenpsychologie-mensenpsychologie. Hierin deelt dr. Guillaume Dervaux, arts en hondenpsycholoog, zijn verfrissende en openhartige blik op de relatie tussen mens en hond. Aan de hand van zijn inzichten duiken we in dit uitgebreide artikel in zijn filosofie. En een eerlijke waarschuwing vooraf: het gaat minstens evenveel over onszelf als over onze viervoeters.'
+      },
+      {
+        type: 'heading',
+        text: 'Het begon allemaal met Sam — een hond die niemand wilde hebben'
+      },
+      {
+        type: 'paragraph',
+        text: 'Om de diepgang van de aanpak van dr. Dervaux te begrijpen, moeten we terug naar waar het voor hem allemaal begon: bij een hond genaamd Sam. Sam was een hond met een bijzonder zware rugzak. Op de prille leeftijd van amper twee jaar was hij al maar liefst twaalf keer teruggestuurd naar het asiel. Twaalf keer had iemand besloten dat het "niet ging werken". Twaalf keer voelde Sam de grond onder zijn poten wegzakken.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voor veel mensen zou zo\'n achtergrond een reden zijn om voorzichtig af te haken. Een hopeloos geval, zouden sommigen zeggen. Maar voor Guillaume was het juist de vonk die iets in hem deed ontbranden. Hij wilde niet simpelweg Sam "opvoeden" of "africhten" — hij wilde echt begrijpen wat er in het hoofd van deze hond omging. Welke angsten droeg Sam met zich mee? Welke onzekerheden lagen verborgen achter zijn gedrag?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Die zoektocht naar begrip in plaats van controle werd het fundament van alles wat dr. Dervaux vandaag doet als hondenpsycholoog. Het verhaal van Sam laat iets belangrijks zien: achter elk "probleemgedrag" zit een hond die iets probeert te vertellen. De kunst is om te leren luisteren, niet om harder te gaan praten.'
+      },
+      {
+        type: 'quote',
+        text: 'Door een juiste begeleiding van zowel hond als baasje, kan elke viervoeter een trouwe vriend worden. Het begint met begrijpen, niet met corrigeren.'
+      },
+      {
+        type: 'heading',
+        text: 'Tijd en toewijding: het mooiste geschenk dat je kunt geven'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voordat we in de psychologie en de methodes duiken, stelt dr. Dervaux een eerlijke, fundamentele vraag: hoeveel tijd geef je werkelijk aan je hond? En dan gaat het niet alleen over de dagelijkse wandeling of het kopje brokken vullen. Het gaat over echte, bewuste aanwezigheid.'
+      },
+      {
+        type: 'paragraph',
+        text: 'In onze gehaaste maatschappij — en dat geldt evengoed voor de drukte van een weekendje weg aan zee — nemen we soms onbewust minder tijd dan onze hond nodig heeft. We willen dat gezellige plaatje van een hond naast de bank, maar vergeten hoeveel toewijding, geduld en aandacht dat werkelijk met zich meebrengt. Niet vanuit verwijt, maar eerder als herinnering: een hond brengt enorm veel vreugde, maar vraagt daar ook iets waardevols voor terug. Jouw tijd.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Guillaume benadrukt dat wie bewust die keuze maakt om er volledig voor zijn hond te zijn, daar ongelooflijk veel voor terugkrijgt. Een band die dieper gaat dan commando\'s. Een wederzijds vertrouwen dat niet te koop is. En een hond die voelt dat hij er echt toe doet.'
+      },
+      {
+        type: 'callout',
+        title: 'Guillaume over tijd en prioriteit',
+        text: 'Een hond hebben is een prachtig privilege. We vragen aan hen om onvoorwaardelijk van ons te houden, en dat doen ze — elke dag opnieuw. Het minste wat we terug kunnen doen, is hen onze onverdeelde tijd en aandacht schenken. Daarin begint de echte verbinding.'
+      },
+      {
+        type: 'heading',
+        text: 'De kracht van stilte: ware liefde zit in zachtheid'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dit is misschien wel een van de meest verrassende inzichten uit de podcast. Als hondeneigenaars zijn we er vaak van overtuigd dat we onze honden overladen met liefde door uitbundig te zijn. We springen \'s ochtends uit bed en begroeten ze met een vrolijk "Goedemorgen schat!" in onze hoogste stem. We maken er meteen een feestje van. Want we houden zoveel van hen, toch?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dr. Dervaux keert dit principe op een mooie manier om. Hij deelt openhartig dat zijn eigen ochtenden vroeger ook vol opwinding zaten. Maar dat hij gaandeweg heeft geleerd dat ware liefde juist in zachtheid zit. Honden — hoe blij ze ook lijken met onze enthousiaste begroeting — hebben er eigenlijk helemaal geen behoefte aan om uitbundig gewekt te worden. Ze willen in alle rust ontwaken, net zoals ze dat in een roedel zouden doen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Hoe fijn wij het als mensen ook vinden om dat enthousiasme te tonen — en het komt absoluut voort uit liefde — voor de hond kan het juist overprikkeling veroorzaken. Die opwinding meteen bij het opstaan zet de toon voor de rest van de dag. Begin je met chaos, dan draagt je hond die energie de hele dag met zich mee.'
+      },
+      {
+        type: 'tip',
+        title: 'Probeer dit eens',
+        text: 'Laat je hond morgenochtend eens in stilte wakker worden. Geen uitbundige begroeting, geen vrolijke stem — gewoon zachte aanwezigheid. Ga rustig naast hem zitten, leg eventueel een hand op zijn zij, en laat de dag langzaam beginnen. Observeer het verschil in zijn of haar energie gedurende de rest van de ochtend. Het is een kleine aanpassing met een groot effect.'
+      },
+      {
+        type: 'heading',
+        text: 'De spiegel aan de leiband: waarom jouw energie alles bepaalt'
+      },
+      {
+        type: 'paragraph',
+        text: 'Hier komen we bij de kern van Guillaumes filosofie, en meteen ook de titel van dit artikel. Honden zijn ongelooflijke spiegels van onze eigen emoties. Als jij gespannen aan de leiband loopt, voelt je hond die spanning letterlijk — via de riem, via je lichaamshouding, via je ademhaling. En die spanning? Die neemt hij over.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dr. Dervaux beschrijft hoe veel gedragsproblemen bij honden eigenlijk een reflectie zijn van wat er bij het baasje leeft. Een onrustige eigenaar krijgt een onrustige hond. Een gespannen baasje dat de riem extra strak houdt wanneer een andere hond nadert, communiceert spanning — en de hond reageert daarop. Niet uit ongehoorzaamheid, maar simpelweg omdat hij de energie van zijn mens oppikt.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dit besef kan in eerste instantie confronterend voelen, maar het is eigenlijk enorm bevrijdend. Want als ons eigen gedrag en onze eigen energie zo\'n grote rol spelen, dan hebben we ook zelf de sleutel in handen om dingen te veranderen. Niet door meer te roepen of meer te trainen, maar door bewust aan onze eigen kalmte te werken.'
+      },
+      {
+        type: 'quote',
+        text: 'Je hond is je spiegel. Wil je een kalme hond? Begin bij jezelf. Adem rustig, loop ontspannen, en geef vertrouwen.'
+      },
+      {
+        type: 'heading',
+        text: 'Structuur biedt veiligheid — ook op vakantie aan de Belgische kust'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voor ons is een weekendje weg naar de kust of een lange zomervakantie aan zee de ultieme manier om te ontspannen. We kijken er weken naar uit: de zeebries, het strand, de gezellige terrasjes. En we verwachten — heel begrijpelijk — dat onze hond dit net zo fijn vindt als wij. Maar vanuit het perspectief van de hondenpsychologie zit het een beetje anders.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Honden begrijpen het concept "op vakantie gaan" simpelweg niet. Wat ze wel begrijpen, is dat alles opeens anders is. Een nieuw vakantiehuisje of appartement aan zee brengt voor hen een lawine aan nieuwe indrukken:'
+      },
+      {
+        type: 'list',
+        items: [
+          'Andere geuren die onderzocht en verwerkt moeten worden — een heel huis vol onbekende informatie',
+          'Onbekende geluiden die hen alert en waakzaam maken — van het geluid van de zee tot de buren naast jullie',
+          'Een compleet veranderde routine die de vaste structuur doorbreekt — andere eettijden, ander slaapritme, andere wandelroutes',
+          'Nieuwe prikkels op het strand — andere honden, kinderen, zeemeeuwen, fietsen, wandelaars'
+        ]
+      },
+      {
+        type: 'paragraph',
+        text: 'Waar wij vol verwachting uitkijken naar die vakantie, probeert onze hond zich simpelweg een weg te banen door een omgeving die plots enorm onvoorspelbaar aanvoelt. Dat kan verwarrend en zelfs stressvol zijn, ook voor honden die thuis normaal heel rustig zijn. En dat is volkomen normaal — het zegt niets over jouw hond of over jouw opvoeding.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dr. Dervaux benadrukt hierin het belang van geduld. Geef je hond de tijd om op zijn eigen tempo te wennen. Forceer niets. Laat hem het vakantieverblijf in alle rust verkennen. En bovenal: behoud zoveel mogelijk de vertrouwde structuren van thuis.'
+      },
+      {
+        type: 'tip',
+        title: 'Vakantietip voor hond aan zee',
+        text: 'Behoud vaste, herkenbare structuren, ook wanneer de omgeving nieuw is: hanteer vaste eettijden, houd een herkenbaar wandelritme aan en neem een eigen deken of mand mee als herkenbare slaapplek. Dit principe noemen we ook wel "place work": een vaste, vertrouwde plek waar je hond altijd tot rust kan komen, ongeacht de locatie. Door die herkenbaarheid help je je hond zich veilig en geborgen te voelen — of je nu thuis bent of aan de Belgische kust.'
+      },
+      {
+        type: 'heading',
+        text: 'Het verschil tussen opwinding en geluk bij honden'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een veelvoorkomend misverstand dat Guillaume in de podcast bespreekt, is het verschil tussen opwinding en echt geluk. Als hondeneigenaars interpreteren we een wild kwispelende hond, uitgelaten springen en hoge energie vaak als "mijn hond is blij". Maar is dat werkelijk altijd zo?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dr. Dervaux legt uit dat hoge opwinding niet hetzelfde is als geluk. Een hond die ontploft van energie bij het zien van de leiband, die rondjes rent en piept bij de voordeur, bevindt zich in een staat van overprikkeling. Dat voelt voor de hond niet als "jippie, we gaan wandelen" — het voelt als een tsunami van impulsen waar hij geen controle over heeft.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een werkelijk gelukkige hond is juist kalm, ontspannen en in balans. Hij kan rustig wachten tot de leiband om gaat. Hij wandelt naast je zonder voortdurend vooruit te trekken. Hij kan een andere hond zien passeren zonder in rep en roer te geraken. Dat is geen saaie hond — dat is een hond die zich veilig voelt en vertrouwt op de structuur die zijn baasje biedt.'
+      },
+      {
+        type: 'callout',
+        title: 'Goed om te weten',
+        text: 'Een kalme hond is een gelukkige hond. Opwinding en enthousiasme worden vaak verward met geluk, maar echte tevredenheid bij honden uit zich juist in rust en ontspannenheid. Door rust te belonen in plaats van opwinding, help je jouw hond naar meer balans.'
+      },
+      {
+        type: 'heading',
+        text: 'Omgaan met prikkels tijdens het wandelen: van oog naar neus'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wat doe je als je hond extreem reageert op prikkels tijdens het wandelen? Het is een situatie die veel kustbezoekers met hun hond herkennen: je loopt over de strandpromenade of door de duinen en plots ziet je hond een andere viervoeter. Van het ene op het andere moment schiet je hond in een hoge staat van alertheid. Trekken, blaffen, uitvallen — de ontspannen wandeling is in een fractie van een seconde voorbij.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dr. Dervaux legt uit dat zulk gedrag vaak volledig visueel gestuurd wordt. De hond reageert puur op wat hij ziet, terwijl zijn neus — nota bene zijn allersterkste zintuig — nauwelijks meer wordt ingeschakeld. Het is alsof de hond in een soort "tunnelvisie" terechtkomt: alles draait om die ene visuele prikkel en er is geen ruimte meer voor nuance of kalmte.'
+      },
+      {
+        type: 'paragraph',
+        text: 'De sleutel tot verandering, zo legt Guillaume uit, ligt in het terugbrengen van de hond naar zijn neus. Wanneer een hond leert om prikkels weer via geur te verwerken in plaats van enkel via zicht, gebeurt er iets bijzonders: de spanning zakt, de ademhaling wordt rustiger en de focus verandert compleet. De hond schakelt als het ware over van een alarmstand naar een ontdekkingsmodus.'
+      },
+      {
+        type: 'callout',
+        title: 'Hoe werkt dit in de praktijk?',
+        text: 'Dr. Dervaux beschrijft het succesvolle gebruik van een kalmerende kap tijdens trainingssessies. Door tijdelijk de visuele trigger weg te nemen, wordt de hond gedwongen om zijn neus in te schakelen. Dit is geen straf — het is een hulpmiddel dat de hond de kans geeft om tot rust te komen. Vanuit die kalmte kun je een hond stap voor stap begeleiden naar gewenst gedrag. Het resultaat is vaak verbluffend: honden die volledig in de stress schoten, worden veel rustiger en reageren genuanceerder op hun omgeving.'
+      },
+      {
+        type: 'heading',
+        text: 'De 4C-Methode: de vier pijlers van zelfcontrole en vertrouwen'
+      },
+      {
+        type: 'paragraph',
+        text: 'In de podcast wordt uitgebreid gesproken over de 4C-methode, de aanpak die dr. Dervaux heeft ontwikkeld. Een van de vier hoekstenen van deze methode is Zelfcontrole (of self-control). En dit verdient extra aandacht, want het is een concept dat bij veel hondeneigenaars voor een doorbraak kan zorgen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Zelfcontrole bij honden houdt in: leren omgaan met impulsen en de rust kunnen bewaren, ook wanneer er prikkels zijn die normaal voor opwinding of stress zorgen. Dit is niet iets wat een hond van nature zomaar kan in onze drukke, overprikkelde mensenwereld. Denk aan al die indrukken waarmee een hond dagelijks wordt geconfronteerd: andere honden, voorbijgangers, fietsen, auto\'s, kinderen, katten, geuren, geluiden. Het is overweldigend.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Door gerichte, rustige oefeningen leert een hond stap voor stap om beter te wachten, zich te focussen en niet op elke prikkel onmiddellijk te reageren. Het gaat niet om het onderdrukken van emoties of impulsen — het gaat erom dat de hond leert dat hij niet op alles hoeft te reageren. Dat er een keuze is. En dat die keuze veilig voelt.'
+      },
+      {
+        type: 'quote',
+        text: 'Herhaling is de moeder van het succes. Elke dag dat je er samen aan werkt, groeit je hond in rust, zelfvertrouwen en controle.'
+      },
+      {
+        type: 'paragraph',
+        text: 'En hier zit misschien wel de belangrijkste nuance: deze controle komt niet vanuit dominantie of dwang. Het komt vanuit vertrouwen. Dr. Dervaux beschrijft dit aan de hand van een hond die vroeger volledig overspoeld werd door prikkels. Bij elk geluid — de deurbel, een auto, een stem op straat — ontplofte deze hond van stress en opwinding.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Door geduldig te werken met herhaling en duidelijke begeleiding, ontstond er langzaam maar zeker rust. Niet omdat de hond geleerd had om "braaf" te zijn, maar omdat er iets veel diepers was veranderd: de baasjes wisten exact wat ze moesten doen. Ze bleven kalm en voorspelbaar. En precies in die kalmte vond de hond zijn houvast.'
+      },
+      {
+        type: 'tip',
+        title: 'De kern van de 4C-methode',
+        text: 'Het is bijzonder om te zien hoe een hond durft los te laten, simpelweg omdat hij voelt: "Mijn mensen hebben dit onder controle. Ik hoef me geen zorgen te maken." Dat is waar het om draait in de hondenpsychologie: niet louter het gedrag veranderen, maar een diep, onwrikbaar vertrouwen bouwen tussen hond en mens. Jouw hond hoeft de wereld niet te managen — dat doe jij.'
+      },
+      {
+        type: 'heading',
+        text: 'De rol van het baasje: waarom hondenpsychologie ook mensenpsychologie is'
+      },
+      {
+        type: 'paragraph',
+        text: 'De titel van de podcast — "hondenpsychologie-mensenpsychologie" — is niet toevallig gekozen. Dr. Dervaux legt doorheen het hele gesprek een rode draad bloot die velen zal herkennen: het gedrag van onze hond is onlosmakelijk verbonden met ons eigen gedrag.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Als we gestrest thuiskomen van het werk en vervolgens gefrustreerd aan de wandeling beginnen, voelt onze hond dat haarfijn aan. Als we onzeker zijn over hoe we moeten reageren wanneer onze hond een andere hond tegenkomt, pikt onze hond die onzekerheid direct op. Honden lezen ons beter dan we onszelf kennen. Ze reageren niet op onze woorden — ze reageren op onze energie, onze ademhaling, onze lichaamstaal.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Volgens dr. Dervaux is dit precies waarom zoveel hondentrainingen op de lange termijn niet het gewenste resultaat geven. We focussen op de hond — op zijn gedrag, zijn commando\'s, zijn gehoorzaamheid — terwijl de werkelijke verandering bij onszelf moet beginnen. Het is een uitnodiging om eerlijk naar jezelf te kijken. Niet als verwijt, maar als sleutel tot een betere relatie met je viervoeter.'
+      },
+      {
+        type: 'paragraph',
+        text: 'En het mooie is: zodra je hier bewust van wordt, verandert er iets. Je gaat anders wandelen. Je ademt rustiger. Je reageert kalmer wanneer je hond een prikkel opvangt. En je hond? Die voelt dat onmiddellijk. De rimpeling van jouw kalmte verspreidt zich via de leiband, via je houding, via de stilte die je uitstraalt.'
+      },
+      {
+        type: 'heading',
+        text: 'Wandelen met je hond aan de Belgische kust: de inzichten in de praktijk'
+      },
+      {
+        type: 'paragraph',
+        text: 'De Belgische kust is een fantastische omgeving om met je hond te wandelen, maar brengt ook specifieke uitdagingen met zich mee. Drukke stranddagen in de zomer, loslopende honden in de losloopzones, kinderen die willen aaien, andere baasjes met hun viervoeters — het is een cocktail aan prikkels die voor gevoelige honden overweldigend kan zijn.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Met de inzichten van dr. Dervaux in het achterhoofd kun je deze situaties veel bewuster benaderen. Kies bewust voor rustigere momenten om naar het strand te gaan — vroeg in de ochtend of laat in de namiddag, wanneer het strand minder druk is. Houd je eigen ademhaling en energie in de gaten wanneer je een andere hond ziet naderen. En geef je hond de ruimte om via zijn neus de omgeving te verkennen in plaats van alleen visueel te reageren op alles om hem heen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'De duinwandelingen die de kust te bieden heeft — denk aan de prachtige paden rond De Haan, Koksijde of De Panne — zijn ideaal om in een rustigere setting te werken aan de band met je hond. Minder prikkels, meer natuur, meer gelegenheid om samen tot rust te komen. Een wandeling door de duinen kan een prachtige oefening zijn in de principes die Guillaume beschrijft.'
+      },
+      {
+        type: 'tip',
+        title: 'Strandwandelingtip',
+        text: 'Maak van je strandwandeling een bewust moment van verbinding. Laat je telefoon in je zak, observeer je hond, en probeer zijn tempo te volgen in plaats van andersom. Let op hoe hij snuffelt, hoe hij reageert op de golven, hoe hij de omgeving in zich opneemt. Door echt aanwezig te zijn, geef je je hond precies wat hij nodig heeft: een kalme, betrouwbare metgezel.'
+      },
+      {
+        type: 'heading',
+        text: 'Kate en Bruno: de 4C-methode in de praktijk aan de kust'
+      },
+      {
+        type: 'paragraph',
+        text: 'De filosofie van dr. Dervaux is niet enkel theorie — ze komt daadwerkelijk tot leven aan de Belgische kust. Guillaume werkt namelijk samen met Bruno, de hond van Kate, eigenares van In \'t Dorp in Koksijde. Dit gezellige etablissement is een van de populairste hotspots op HondAanZee en staat bekend om de unieke Brunobar, waar jouw hond de ster van de avond is.',
+        links: [{ text: 'In \'t Dorp in Koksijde', url: 'https://www.hondaanzee.be/hotspots' }]
+      },
+      {
+        type: 'image',
+        imageSrc: '/brunoblog.webp',
+        imageAlt: 'Bruno en Kate van In \'t Dorp in Koksijde',
+        text: 'Bruno en baasje Kate van In \'t Dorp in Koksijde — waar hondenpsychologie en gezelligheid samenkomen'
+      },
+      {
+        type: 'paragraph',
+        text: 'Bij In \'t Dorp kun je niet enkel terecht voor een knabbel & een babbel, maar ook voor deskundig advies over het gedrag van je viervoeter, dankzij de samenwerking met Guillaume en zijn 4C-methode.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Het mooie aan deze samenwerking is dat ze de drempel verlaagt om met hondenpsychologie in aanraking te komen. Veel hondeneigenaars denken dat je alleen naar een hondenpsycholoog stapt wanneer er "echte problemen" zijn. Maar de inzichten van Guillaume zijn waardevol voor iedereen die een hond heeft — van de ervaren hondenliefhebber tot de kersverse puppy-eigenaar die voor het eerst met zijn viervoeter naar de kust komt.'
+      },
+      {
+        type: 'social',
+        title: 'Volg Bruno op Instagram',
+        text: 'Benieuwd naar de avonturen van Bruno en Kate aan de Belgische kust? Volg ze op Instagram voor leuke updates, foto\'s en verhalen.',
+        socialLinks: [
+          { platform: 'instagram', url: 'https://www.instagram.com/bruno.andk8/', label: 'Volg Bruno op Instagram' }
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Veelgemaakte misverstanden over hondengedrag'
+      },
+      {
+        type: 'paragraph',
+        text: 'Doorheen de podcast haalt dr. Dervaux verschillende veelvoorkomende misverstanden aan die de moeite waard zijn om even bij stil te staan. Niet als beschuldiging — want we maken het allemaal wel eens — maar als eye-opener die je relatie met je hond direct kan verbeteren.'
+      },
+      {
+        type: 'subheading',
+        text: '"Mijn hond luistert niet naar mij"'
+      },
+      {
+        type: 'paragraph',
+        text: 'Vaak zegt dit meer over de manier waarop we communiceren dan over de bereidheid van de hond om te luisteren. Honden reageren in de eerste plaats op energie en lichaamstaal, pas daarna op woorden. Als je gefrustreerd "hier!" roept terwijl je lichaam spanning uitstraalt, ontvangt je hond die spanning — niet het commando.'
+      },
+      {
+        type: 'subheading',
+        text: '"Hij doet het expres om mij te pesten"'
+      },
+      {
+        type: 'paragraph',
+        text: 'Honden leven volledig in het hier en nu. Ze maken geen plannen om ons te treiteren of te testen. Wat wij ervaren als "opzettelijk stout gedrag" is vrijwel altijd een uiting van stress, onzekerheid, overprikkeling of een onvervulde behoefte. Door het gedrag te interpreteren als communicatie in plaats van als provocatie, opent zich een heel andere manier van omgaan met je hond.'
+      },
+      {
+        type: 'subheading',
+        text: '"Meer bewegen lost het op"'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een veelgehoord advies bij een "drukke" hond: meer uitlaten, meer rennen, meer spelen. Dr. Dervaux nuanceert dit. Een hond die al overprikkeld is, heeft vaak helemaal niet meer beweging nodig — dat maakt de overprikkeling juist erger. Wat zo\'n hond nodig heeft, is meer rust, meer structuur en meer voorspelbaarheid. Soms is een korte, rustige wandeling veel waardevoller dan een uur lang balletjes gooien.'
+      },
+      {
+        type: 'heading',
+        text: 'Jouw kompas voor de volgende strandwandeling'
+      },
+      {
+        type: 'paragraph',
+        text: 'Als we de waardevolle inzichten van dr. Dervaux op een rij zetten, krijgen we een prachtig kompas voor onze dagelijkse omgang met onze honden — en zeker voor wie graag met zijn viervoeter naar de Belgische kust trekt:'
+      },
+      {
+        type: 'list',
+        items: [
+          'Tijd en Toewijding — Wees er bewust en volledig voor je hond. Echte verbinding ontstaat niet door de hoeveelheid activiteiten, maar door de kwaliteit van je aanwezigheid.',
+          'Rust in Zachtheid — Begin de dag rustig. Laat uitbundige begroetingen achterwege en kies voor zachte, kalme aanwezigheid. Je hond zal je hiervoor dankbaar zijn.',
+          'Jij bent de spiegel — Werk bewust aan je eigen kalmte en energie. Jouw gemoedstoestand beïnvloedt je hond meer dan welk commando ook.',
+          'Structuur biedt veiligheid — Houd vaste routines aan voor eten, wandelen en slapen, zeker in nieuwe omgevingen zoals een vakantie aan zee. Voorspelbaarheid is geruststelling.',
+          'Van oog naar neus — Help je hond om prikkels te verwerken via zijn neus in plaats van enkel via zijn ogen. Dit verlaagt stress en vergroot zijn verwerkingscapaciteit.',
+          'Zelfcontrole opbouwen — Train niet harder, maar slimmer. Leer je hond stap voor stap dat hij niet op elke prikkel hoeft te reageren, vanuit vertrouwen en herhaling.',
+          'Kalmte is geluk — Verwar opwinding niet met blijdschap. Een rustige, ontspannen hond is een gelukkige hond.',
+          'Voorspelbaar leiderschap — Wees de stabiele factor die jouw hond nodig heeft. Niet door autoriteit, maar door betrouwbaarheid en kalmte.'
+        ]
+      },
+      {
+        type: 'paragraph',
+        text: 'De volgende keer dat je met de riem in je hand staat en de zeelucht opsnuift aan de Belgische kust, denk dan even aan de filosofie van dr. Dervaux. Neem een moment. Adem diep in. Voel de grond onder je voeten. Word je bewust van je eigen energie. En wandel dan samen met je hond het strand op — niet als trainer en leerling, maar als twee wezens die samen genieten van het moment.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Want dat is uiteindelijk waar het om gaat: de band tussen jou en je hond. Geen perfectie, geen foutloze gehoorzaamheid, maar een oprechte verbinding gebouwd op vertrouwen, geduld en wederzijds respect. En daar is de rust van het strand, het geluid van de golven en de eindeloze horizon de perfecte setting voor.'
+      },
+      {
+        type: 'callout',
+        title: 'Wil je dieper in de materie duiken?',
+        text: 'Beluister het volledige "Interview over hondenpsychologie-mensenpsychologie" op Spotify. Dr. Guillaume Dervaux gaat hierin nog veel dieper in op de 4C-methode, het werken met angst en de rol die jij als eigenaar speelt in het gedrag van je hond. Het is een boeiend gesprek dat je kijk op hondengedrag voorgoed kan veranderen.'
+      },
+      {
+        type: 'spotify',
+        title: 'Beluister de volledige podcast: Interview over hondenpsychologie-mensenpsychologie',
+        url: 'https://open.spotify.com/episode/1iBdMf9kVzBec9bFfuWWQn?si=LuvZR_XgRSOtiBA1C4JJCQ'
+      },
+      {
+        type: 'social',
+        title: 'Volg dr. Guillaume Dervaux',
+        text: 'Benieuwd naar meer inzichten over hondenpsychologie en de 4C-methode? Volg Guillaume op social media voor regelmatige tips, casussen en inspiratie.',
+        socialLinks: [
+          { platform: 'instagram', url: 'https://www.instagram.com/4c_method_by_pawcontrol/', label: 'Volg op Instagram' },
+          { platform: 'facebook', url: 'https://www.facebook.com/guillaumedervaux74?locale=nl_NL', label: 'Volg op Facebook' }
+        ]
       }
     ]
   }

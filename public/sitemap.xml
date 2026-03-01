@@ -184,6 +184,17 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://hondaanzee.be/blog/spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://hondaanzee.be/brunosamlulu.webp</image:loc>
+      <image:title>Dr. Guillaume Dervaux — hondenpsychologie en de spiegel aan de leiband</image:title>
+    </image:image>
+  </url>
+
   <!-- Community -->
   <url>
     <loc>https://hondaanzee.be/community</loc>
