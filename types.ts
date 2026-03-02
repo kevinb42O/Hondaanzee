@@ -9,7 +9,7 @@ export interface Hotspot {
   imagePosition?: string; // e.g. 'center top' or '50% 25%'
   city: string; // city slug
   address: string;
-  website: string;
+  website?: string;
 }
 
 export interface Service {
