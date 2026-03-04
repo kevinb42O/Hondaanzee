@@ -1033,7 +1033,7 @@ export const HOTSPOTS: Hotspot[] = [
     website: ''
   },
   {
-    id: 90,
+    id: 128,
     name: 'IJssalon/Tearoom Zeebries',
     type: 'Brasserie',
     description: 'Pure passie en vakmanschap in elke hap en elke slok! Al 40 jaar draait deze gedreven eigenaar zelf het allerlekkerste ambachtelijke ijs van de kust, bereid met warme zorg en ingrediënten van topkwaliteit. Naast het hemelse ijs geniet je hier van overheerlijke koffie en heerlijke broodjes, elk met oog voor detail en smaak. De perfecte beloning na een lange strandwandeling met je viervoeter! Een verborgen juweeltje van de Belgische kust waar traditie, kwaliteit en échte gastvrijheid samensmelten. Wie hier één keer geproefd heeft, komt zeker terug. Mis deze ontdekking niet!',
@@ -1345,7 +1345,7 @@ export const HOTSPOTS: Hotspot[] = [
     website: 'https://tearoom-de-barkentijn-oostduinkerke1.webnode.nl/'
   },
   {
-    id: 116,
+    id: 129,
     name: 'Skateshop Daily Grind',
     type: 'Shoppen',
     description: 'Bij Daily Grind scoor je niet alleen een nieuw deck of de coolste kledij, maar wordt je hond ook als een ware VIP behandeld. Eigenaars Ira en Dré hebben een gigantisch hart voor dieren en entertainen je viervoeter maar al te graag terwijl jij je keuzes maakt. Neem zeker even een kijkje in de etalage, want je vindt hier zelfs unieke hondenaccessoires van authentieke skatemerken — ideaal voor op reis of op het strand. Een verborgen pareltje in Blankenberge. Groetjes van Jax als je passeert!',
