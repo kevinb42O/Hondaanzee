@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Coffee, Utensils, Bed, ShoppingBag, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Star, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { City, Hotspot } from '../types.ts';
 import PlaceModal from './PlaceModal.tsx';
@@ -33,8 +33,10 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'Café': return <Coffee size={14} />;
+      case 'Café': return <Beer size={14} />;
+      case 'Koffiebar': return <Coffee size={14} />;
       case 'Restaurant': return <Utensils size={14} />;
+      case 'Brasserie': return <Wine size={14} />;
       case 'Slapen': return <Bed size={14} />;
       case 'Shoppen': return <ShoppingBag size={14} />;
       default: return <Star size={14} />;

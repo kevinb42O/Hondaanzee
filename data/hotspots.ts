@@ -4,7 +4,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 1,
     name: 'Lakaiann Blankenberge',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars. Geniet van een heerlijke specialty coffee terwijl je rondneust tussen prachtige kristallen, handgemaakte juwelen en andere unieke schatten. De ideale stop na een strandwandeling voor wie houdt van goede vibes, lekkere koffie en… pure verwennerij voor je hond!',
     tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee', 'Aanrader'],
     image: '/lakaiannfinal.webp',
@@ -49,7 +49,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 121,
     name: 'Madam Caravan',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Een kleinere koffiebar met een gigantisch groot hart voor honden! De eigenares heeft zelf ook een trouwe viervoeter en serveert de lekkerste koffie van Middelkerke. Dit charmante pandje werd volledig verbouwd en bekroond met een M-award als "De mooiste winkel van 2024". Het dient als werk atelier waar heerlijke ontbijt boxen worden klaargemaakte voor thuislevering. Geniet binnen aan de gezellige bar of buiten op het terras van overheerlijke koffie, verse croissants, home made energie koekjes en warme croissants met smakelijke toppings. Ook verkrijgbaar: verse confituur, granola, home made choco, losse thee en meer.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Specialty Coffee', 'Gezellig', 'Terras', 'Ontbijt boxen', 'Home made producten'],
     image: '/caravan.webp',
@@ -126,7 +126,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 10,
     name: 'Brasserie Rubens',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Een vaste waarde in Knokke waar u en uw hond kunnen genieten van klassieke brasseriegerechten.',
     tags: ['Terras', 'Ruime plaatsen', 'Hondvriendelijk team'],
     image: '/brasserierubensknokke.webp',
@@ -137,7 +137,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 12,
     name: 'Belgium Pier Brasserie',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Unieke locatie 350 meter in zee waar honden aangelijnd welkom zijn in de brasserie.',
     tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Unieke locatie'],
     image: '/belgianpierbrasserieblankenberge.webp',
@@ -159,7 +159,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 15,
     name: 'Brasserie Carrousel',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Populaire brasserie waar honden overal welkom zijn! Voor het ontbijt hebben ze zelfs een extra ruimte waar je rustig kunt genieten van je ontbijt met je viervoeter aan je zijde. Als dat geen luxe is! Een prachtig voorbeeld van hoe gastvrijheid en comfort voor je hond hand in hand kunnen gaan.',
     tags: ['Waterbak aanwezig', 'Hondensnacks', 'Ruime plaatsen', 'Terras', 'Ontbijt met hond'],
     image: '/brasseriecarrouselnieuwpoort.webp',
@@ -170,7 +170,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 16,
     name: 'Brasserie Het Kompas',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Gezellig tafelen op de Zeedijk, maximaal één hond per tafel toegelaten.',
     tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig'],
     image: '/brasseriehetkompasnieuwpoort.webp',
@@ -291,7 +291,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 123,
     name: 'Plaza d\'Amanté',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Een pareltje op de Zeedijk van De Haan waar specialty coffee, lokale producten en een warm hart voor honden samenkomen. De super lieve eigenaars werken uitsluitend met lokale koffiebranders en Belgische theeleveranciers — hier proef je vakmanschap én passie in elk kopje. Vergeet ook zeker niet het heerlijke gebak: taarten, brownies en koekjes, allemaal vers bereid door een lokale bakker uit De Haan. Alles wat je ziet, proeft en ruikt is te koop: van ambachtelijke olijfolie en gin tonics van lokale brouwers tot unieke producten in beperkte oplage. Je gaat hier simpelweg niet buiten zonder een lach op je gezicht. Een foodbar, boutique en beleving in één — en je viervoeter is er meer dan welkom!',
     tags: ['Aanrader', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Specialty Coffee', 'Lokale producten', 'Boutique', 'Nabij strand'],
     image: '/amante.webp',
@@ -325,7 +325,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 24,
     name: 'Coffee & Wine De Golf',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Stijlvolle zaak waar je overdag kunt genieten van een heerlijke koffie en \'s avonds van een goed glas wijn. Honden zijn hier hartelijk welkom en worden in de watten gelegd tijdens je bezoek! Perfect om te relaxen in de gezellige sfeer terwijl je viervoeter geniet van alle aandacht. Let op: naast de deur hebben ze een hotel, maar daar kunnen honden helaas niet overnachten. In het café zelf zijn ze echter meer dan welkom om mee te genieten van het moment.',
     tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Specialty Coffee', 'Wijnbar', 'Gezellig'],
     image: '/coffeewinedegolf.webp',
@@ -336,7 +336,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 25,
     name: 'Brasserie Shop \'n Lunch P&P',
-    type: 'Café',
+    type: 'Brasserie',
     description: 'Gezellige zaak waar je kunt genieten van een heerlijk ontbijt, verse koffie en smakelijke broodjes.Daarnaast worden ook diverse middagsnacks en pannekoeken,gebak en ijscoupes geserveerd om jouw middagpauze compleet te maken.Je hond is hier van harte welkom om mee te genieten van de relaxte sfeer.',
     tags: ['Ontbijt', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Specialty Coffee', 'Winkel', 'Ijscoupes', 'Brasserie', 'Aanrader'],
     image: '/shopnlunch.webp',
@@ -481,7 +481,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 38,
     name: 'Taverne De Klokke',
-    type: 'Café',
+    type: 'Brasserie',
     description: 'Authentieke bruine kroeg/brasserie waar je hond welkom is. Geniet van een gezellige sfeer en klassieke gerechten.',
     tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Authentiek'],
     image: '/tavernedeklokke.webp',
@@ -503,7 +503,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 40,
     name: 'Brasserie David',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Gezellige zaak met klassieke gerechten en verse vis. Je viervoeter is hier van harte welkom.',
     tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Verse vis', 'Klassieke gerechten'],
     image: '/brasseriedavid.webp',
@@ -525,7 +525,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 42,
     name: 'Bottarga',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Trendy brasserie op de zeedijk met zeezicht. Geniet van een heerlijke maaltijd terwijl je uitkijkt over zee met je hond naast je.',
     tags: ['Terras', 'Nabij strand', 'Zeezicht', 'Trendy'],
     image: '/bottarga.webp',
@@ -558,7 +558,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 45,
     name: 'Lloyd Coffee Eatery',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Koffiebar met ontbijt, bagels en zoetigheden. Je hond is welkom om mee te genieten van de gezellige sfeer.',
     tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Ontbijt', 'Specialty Coffee', 'Bagels'],
     image: '/lloydcoffeeeatery.webp',
@@ -725,7 +725,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 53,
     name: 'My Home My Coffee',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Gezellige koffiebar met een huiselijke sfeer waar je kunt genieten van specialty coffee en verse lekkernijen. Je hond is hier welkom om mee te genieten van de relaxte ambiance.',
     tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Specialty Coffee', 'Hondvriendelijk team', 'Gezellig'],
     image: '/myhomemycoffee.webp',
@@ -769,7 +769,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 56,
     name: 'Brasserie Eloïse',
-    type: 'Café',
+    type: 'Brasserie',
     description: 'Charmante brasserie in het hart van Wenduine waar kleine honden van harte welkom zijn! Geniet van een gezellige sfeer en heerlijke gerechten terwijl je kleine viervoeter comfortabel naast je kan zitten. Perfect voor een ontspannen moment met je trouwe metgezel.',
     tags: ['Kleine honden welkom', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Terras'],
     image: '/eloise.webp',
@@ -858,7 +858,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 63,
     name: 'Maison Elza',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Hippe nieuwe koffiebar in het hart van Wenduine waar je kunt genieten van heerlijke specialty coffee en huisgemaakte lekkernijen. Een modern en gezellig plekje waar koffieliefhebbers helemaal tot hun recht komen. Je trouwe viervoeter is hier meer dan welkom om mee te relaxen.',
     tags: ['Specialty Coffee', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Gezellig', 'Centrum'],
     image: '/maisonelza.webp',
@@ -925,7 +925,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 72,
     name: 'Brasserie Bon Appetit',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Genieten met zicht op zee en je trouwe viervoeter aan je zijde? Bij Brasserie Bon Appetit op de Zeedijk van Blankenberge ben je aan het juiste adres! De sympathieke eigenaars verwelkomen je met een brede glimlach en serveren heerlijke gerechten en verfrissende cocktails terwijl je uitkijkt over de golven. Water staat altijd klaar voor dorstige viervoeters, en wie wil kan zelfs een snoepje krijgen voor de trouwe vriend onder de tafel. De warme sfeer, het prachtige zeezicht en de oprechte gastvrijheid maken dit de perfecte tussenstop voor een verwenmoment aan de kust — voor baasje én hond!',
     tags: ['Zicht op zee', 'Waterbak aanwezig', 'Hondensnacks', 'Cocktails', 'Hondvriendelijk team', 'Terras'],
     image: '/bonappetit.webp',
@@ -1013,7 +1013,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 90,
     name: 'New Poseidon',
-    type: 'Café',
+    type: 'Brasserie',
     description: 'Op een boogscheut van de zee ligt Brasserie New Poseidon, gerund door zaakvoerders Jeroen en Tessa. Dit sfeervolle café & brasserie combineert een warme cafésfeer met een keuken die focust op dagverse producten en toegankelijke smaken. Een plek waar locals en bezoekers zich thuis voelen – voor een koffie, een dagschotel, gezellige babbel of een leuke feestje. En als je geluk hebt, maak je kennis met Yoekie, hun eigen viervoeter die regelmatig gasten verwelkomt en zorgt voor extra gezelligheid. Ontspannen genieten van een heerlijk drankje, een snack, een verrukkelijk ijsje of verse pannenkoek!',
     tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Dagverse producten', 'Huishond aanwezig', 'Aanrader'],
     image: '/newposeidon.webp',
@@ -1035,7 +1035,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 90,
     name: 'IJssalon/Tearoom Zeebries',
-    type: 'Café',
+    type: 'Brasserie',
     description: 'Pure passie en vakmanschap in elke hap en elke slok! Al 40 jaar draait deze gedreven eigenaar zelf het allerlekkerste ambachtelijke ijs van de kust, bereid met warme zorg en ingrediënten van topkwaliteit. Naast het hemelse ijs geniet je hier van overheerlijke koffie en heerlijke broodjes, elk met oog voor detail en smaak. De perfecte beloning na een lange strandwandeling met je viervoeter! Een verborgen juweeltje van de Belgische kust waar traditie, kwaliteit en échte gastvrijheid samensmelten. Wie hier één keer geproefd heeft, komt zeker terug. Mis deze ontdekking niet!',
     tags: ['Ambachtelijk ijs', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Terras', 'Artisanale bereiding', 'Aanrader'],
     image: '/zeebriesfinal.webp',
@@ -1046,7 +1046,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 11,
     name: 'Brasserie Montmartre',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Ruime brasserie op de Zeedijk waar gezinnen met honden graag gezien zijn.',
     tags: ['Terras', 'Ruime plaatsen', 'Nabij strand', 'Indoor toegelaten'],
     image: '/brasseriemontmatreblankenberge.webp',
@@ -1182,7 +1182,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 100,
     name: "'t Zoet Genot",
-    type: 'Café',
+    type: 'Brasserie',
     description: 'De absolute hotspot op de Zeedijk van Oostduinkerke voor een fantastische koffie, ambachtelijke pannenkoeken of een ijsje na het strandwandelen. Het team is hier oprecht dol op honden en je mag met je viervoeter gewoon naar binnen — zo hoort het.',
     tags: ['Indoor toegelaten', 'Hondensnacks', 'Waterbak aanwezig', 'Nabij strand', 'Specialty Coffee'],
     image: '/zoetgenot.webp',
@@ -1215,7 +1215,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 104,
     name: 'Koffiebar Cafelito',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Een enorm sfeervolle koffiebar op de Zeelaan waar jij en je hond beiden van harte welkom zijn. Terwijl jij geniet van een goed kopje koffie met een speculaasje of een glaasje advocaat, kruipt je viervoeter gezellig onder tafel — precies zoals het hoort.',
     tags: ['Aanrader', 'Indoor toegelaten', 'Hondvriendelijk team', 'Specialty Coffee', 'Gezellige sfeer'],
     image: '/cafelito.webp',
@@ -1281,7 +1281,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 108,
     name: "In 't Dorp",
-    type: 'Café',
+    type: 'Brasserie',
     description: "Zin in een avondje uit waar jouw viervoeter écht welkom is? Bij In 't Dorp vind je de ideale, gezellige plek voor een knabbel en een babbel. Eigenares Kate verwelkomt je samen met haar lieve therapiehond Bruno in een warme, huiselijke sfeer. Het absolute hoogtepunt is de Brunobar: een speciale bar waar jouw hond de ster van de avond is! Kom langs tussen 17u en middernacht om samen te genieten. Heb je specifieke vragen over het gedrag van je viervoeter? In 't Dorp biedt in huis ook deskundig advies aan, in samenwerking met een professionele hondenpsycholoog. Een absolute aanrader voor een ontspannen avond met jou én je hond!",
     tags: ['Aanrader', 'Dogsbar Brunobar', 'Hondvriendelijk team', 'Waterbak aanwezig', 'Indoor toegelaten', 'Gezellige sfeer'],
     image: '/dorp2.webp',
@@ -1292,7 +1292,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 110,
     name: 'Agora Bar Food & Drinks',
-    type: 'Café',
+    type: 'Brasserie',
     description: 'De perfecte hondvriendelijke pitstop in hartje De Panne! Strijk neer op het grote, zonnige terras op de Markt voor een heerlijk ontbijt, verse koffie of huisbereide pannenkoeken.\n\nEn je hond? Die wordt hier net zo warm onthaald. Buiten staat de waterbak al klaar, zodat jouw trouwe viervoeter na een wandeling meteen even lekker kan bijtanken. Een gezellige, laagdrempelige plek waar mens & vievoeters écht welkom zijn!',
     tags: ['Waterbak aanwezig', 'Hondvriendelijk team', 'Groot terras', 'Ontbijt', 'Pannenkoeken', 'Koffie'],
     image: '/agora2.webp',
@@ -1303,7 +1303,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 112,
     name: "d'Appeti(jt)",
-    type: 'Café',
+    type: 'Brasserie',
     description: "Een heerlijk koffie- en eethuis met een enorm groot hart voor honden! De gastvrije uitbaters hebben zelf een superleuke Cocker, Mila genaamd, die meteen de toon zet: dit is een plek waar viervoeters zich écht thuis voelen.\n\nDe sfeer is warm, huiselijk en oprecht — je komt hier simpelweg niet buiten zonder een glimlach op je gezicht. En terwijl jij geniet van enorm lekkere koffie en verse hapjes, wordt je hond verwend met een waterbak én lekkere hondenkoekjes.\n\nEen absolute aanrader voor wie houdt van goede vibes, topkoffie en warme menselijkheid!",
     tags: ['Aanrader', 'Waterbak aanwezig', 'Hondenkoekjes', 'Hondvriendelijk team', 'Specialty Coffee', 'Huiselijke sfeer', 'Huisdieren van de zaak'],
     image: '/appetit.webp',
@@ -1314,7 +1314,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 113,
     name: 'Koffiebar Kantine',
-    type: 'Café',
+    type: 'Koffiebar',
     description: 'Een gezellige koffiebar waar je in een ontspannen sfeer kunt genieten van heerlijke koffie en verse versnaperingen. Het is de perfecte plek om even bij te komen na een verfrissende strand- of duinwandeling met je viervoeter. Honden zijn hier van harte welkom en kunnen rustig onder tafel liggen terwijl jij geniet van je welverdiende kopje koffie.',
     tags: ['Indoor toegelaten', 'Hondvriendelijk team', 'Specialty Coffee', 'Versnaperingen'],
     image: '/kantine.webp',
@@ -1336,7 +1336,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 115,
     name: 'Brasserie De Barkentijn',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Bij strandrestaurant - tearoom De Barkentijn is het iedere dag genieten van het prachtige uitzicht. Ook bij stormachtig, guur weer zijn het strand en de zee een genot om naar te kijken!\n\nDe keuken is een al even groot plezier met voor elk wat wils: lekkere verzorgde snacks, een ruim aanbod aan heerlijke salades en verse visgerechten, de hele dag doorlopend. Tussen 14u30 en 17u30 kunt u ten volle genieten van de heerlijke tearoom. Absolute aanraders zijn de huisgemaakte garnaalkroketten en huisgemaakte vispannetjes.\n\nEen bijzonder pluspunt: de twee zéér vriendelijke eigenaars hebben zelfs een speciaal cozy hoekje ingericht om het je hond extra comfortabel te maken. Gezelschapsspelletjes zijn aanwezig in de zaak.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Zeezicht', 'Huisgemaakte garnaalkroketten', 'Gezelschapsspelletjes', 'Speciale hondenhoek'],
     image: '/barkentijn2.webp',
@@ -1368,7 +1368,7 @@ export const HOTSPOTS: Hotspot[] = [
   {
     id: 125,
     name: 'Brasserie Cappuccino',
-    type: 'Restaurant',
+    type: 'Brasserie',
     description: 'Een trendy brasserie met een prachtig zeezicht op de Zeedijk van Blankenberge! Brasserie Cappuccino zet in op een Frans-Belgische en internationale keuken waarbij alles huisbereid wordt met eerlijke producten en dagverse ingrediënten — zodat je telkens geniet van pure smaken en kwaliteit.\n\nDe kaart biedt zowel verfijnde klassiekers als verrassende creaties: van een sappige gegrilde kalfsteak en heerlijke slibtongetjes tot een royaal zeebordje of een frisse salade scampi. En zeker niet te missen: de chocolade lava cake als afsluiter! Vegetariërs zijn ook meer dan welkom, met tal van plantaardige en groenterijke gerechten die met evenveel passie worden bereid.\n\nJe hond is van harte welkom en kan genieten van de frisse zeelucht op het terras. Gezellig tafelen met zicht op zee — niet te kloppen!',
     tags: ['Hondvriendelijk team', 'Zeezicht', 'Terras', 'Huisbereid', 'Vegetarische opties', 'Frans-Belgische keuken'],
     image: '/cappuccino2.webp',
@@ -1386,5 +1386,16 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'blankenberge',
     address: 'Vissersstraat 44, 8370 Blankenberge',
     website: 'https://www.twoforyou.be/',
+  },
+  {
+    id: 127,
+    name: 'Brasserie La Potinière',
+    type: 'Brasserie',
+    description: 'Sfeervolle brasserie met uitzicht over het prachtige parkdomein van De Haan — dé plek om te ontspannen met je viervoeter na een wandeling! Nestel je in de loungezetels of schuif aan bij de bar voor een aperitief, een smakelijke lunch of een gezellige afternoon tea. Op de kaart staan heerlijke gerechten, pannenkoeken en wafels, aangevuld met een indrukwekkende selectie speciaalbieren. Het ruime terras is ideaal om samen met je hond te genieten van het uitzicht op het park, waar ook minigolf, petanquebanen en speeltuinen te vinden zijn. Op amper 5 minuten wandelen bereik je het strand — perfect voor een uitwaaimoment voor én na het tafelen. Een hondvriendelijke brasserie op een toplocatie!',
+    tags: ['Aanrader', 'Terras', 'Hondvriendelijk team', 'Speciaalbieren', 'Nabij strand', 'Parkzicht'],
+    image: '/poti.webp',
+    city: 'de-haan',
+    address: 'Leopoldlaan 13, 8420 De Haan',
+    website: 'https://www.brasserielapotiniere.be/nl/home',
   },
 ];

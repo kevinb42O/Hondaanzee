@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Coffee, Utensils, Bed, ShoppingBag, Star, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, Star, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
@@ -37,8 +37,10 @@ const AllHotspots: React.FC = () => {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'Café': return <Coffee size={14} />;
+      case 'Café': return <Beer size={14} />;
+      case 'Koffiebar': return <Coffee size={14} />;
       case 'Restaurant': return <Utensils size={14} />;
+      case 'Brasserie': return <Wine size={14} />;
       case 'Slapen': return <Bed size={14} />;
       case 'Shoppen': return <ShoppingBag size={14} />;
       default: return <Star size={14} />;
@@ -123,7 +125,7 @@ const AllHotspots: React.FC = () => {
               Alle Hondvriendelijke <span className="text-sky-400">Hotspots</span>
             </h1>
             <p className="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-              Ontdek alle hondvriendelijke plekjes aan de Belgische kust. Filter op stad of type om jouw perfecte spot te vinden.
+              Wij maken het verschil tussen plekken waar honden <em>getolereerd</em> worden en plekken waar ze écht welkom zijn — met een waterbak, een vriendelijk onthaal en de ruimte om zichzelf te zijn.
             </p>
           </div>
         </div>
