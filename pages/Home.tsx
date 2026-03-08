@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, Search, X, Sparkles } from 'lucide-react';
+import { ArrowRight, Waves, MapPin, Search, X, ChevronDown } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
 
@@ -128,12 +128,18 @@ const Home: React.FC = () => {
   const [showSuggestions, setShowSuggestions] = useState(!!initialSearch);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const navigate = useNavigate();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useSEO(SEO_DATA.home);
+
+  // Ensure the page always starts at the top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Parallax effect for hero background
   // Reuses the prerender hero from index.html (#hero-prerender) instead of
@@ -404,20 +410,15 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="pb-12 md:pb-24 overflow-x-hidden overflow-y-visible">
+    <div className="pb-12 md:pb-24 overflow-x-hidden overflow-y-visible bg-white">
       {/* Hero Section with Dynamic Background */}
-      <div ref={heroRef} className="relative -mt-[72px] sm:-mt-[80px] md:-mt-[96px] pt-[72px] sm:pt-[80px] md:pt-[96px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
+      <div ref={heroRef} className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
         {/* Prerender hero from index.html is moved here by useEffect for parallax.
             The gradient overlays are rendered below to ensure contrast. */}
         <div className="absolute inset-0 z-[1] bg-slate-900/60"></div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
 
         <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2">
-          <div className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-900 px-4 sm:px-6 py-2.5 sm:py-3 text-[8px] sm:text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.1em] sm:tracking-[0.2em] mb-6 sm:mb-8 mt-4 sm:mt-6 md:mt-8 animate-in fade-in slide-in-from-bottom-4 shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-300" style={{ boxShadow: '0 10px 30px -5px rgba(0,0,0,0.4), 0 4px 10px -2px rgba(0,0,0,0.3)', maxWidth: 'calc(100% - 2rem)' }}>
-            <Sparkles size={12} className="text-sky-500 sm:w-[14px] sm:h-[14px]" strokeWidth={3} />
-            <span className="bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">De meest complete kustgids van België</span>
-          </div>
-
           <h1 className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 drop-shadow-2xl font-heading" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}>
             Met je hond naar zee? <br className="hidden sm:block" />
             <span className="text-sky-300 relative inline-block max-w-full">
@@ -671,51 +672,86 @@ const Home: React.FC = () => {
       </div>
 
       {/* FAQ Section — visible for users + crawlable for AI */}
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-gradient-to-b from-white via-sky-50/30 to-white py-12 sm:py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight text-center mb-2">
             Veelgestelde Vragen
           </h2>
+          <p className="text-slate-500 text-center text-sm sm:text-base mb-10">Concrete antwoorden — gebaseerd op de regels per kustgemeente</p>
           <div className="space-y-3">
             {[
               {
-                q: 'Mag mijn hond op het strand in België?',
-                a: 'Ja, maar het hangt af van het seizoen. Van 1 oktober tot 31 maart mogen honden op alle Belgische stranden, zowel aan de leiband als los (afhankelijk van de gemeente). Van 1 april tot 30 september zijn honden op de meeste stranden verboden, behalve op aangeduide hondenzones. Bekijk de specifieke regels per kustgemeente op onze stadspagina\'s.'
+                q: 'Wanneer mogen honden op het strand? Wat zijn de exacte data?',
+                a: 'De winterregeling (honden wél toegelaten op het strand) loopt in de meeste kustgemeenten van 1 of 16 oktober tot 14 of 31 maart. In de zomer zijn honden verboden op bewaakte stranden, meestal van 10:00 tot 20:00. Maar: er zijn uitzonderingen. Blankenberge heeft Zone West waar honden het héle jaar welkom zijn, ook in de zomer. De Haan staat honden toe op de onbewaakte stranden, 365 dagen per jaar. Knokke-Heist heeft een 24/7 losloopzone aan het Zwin. Bekijk op onze stadspagina\'s de exacte regels voor jouw bestemming — ze verschillen écht per gemeente.'
               },
               {
-                q: 'Waar mag mijn hond los lopen aan de Belgische kust?',
-                a: 'Er zijn meer dan 15 losloopzones en hondenweides aan de Belgische kust, verspreid over alle 11 badsteden van De Panne tot Knokke-Heist. Populaire losloopgebieden zijn onder andere het Willemsbos in Knokke, de hondenweide Bredene en het losloopgebied Westhoek in De Panne. In de winter (oktober–maart) mogen honden op veel stranden ook vrij loslopen.'
+                q: 'Hoeveel losloopzones zijn er aan de kust en waar vind ik ze?',
+                a: 'We hebben 28 losloopzones en hondenweides in kaart gebracht, verspreid over de hele kustlijn. Oostende springt eruit met 8 zones, waaronder het Schorrepark (5 sterren — met vijvers, bunkers en heuvels) en het Hondenbos van 3,5 hectare. De Haan en Wenduine hebben samen 5 zones, waarvan de Duinbossen-zone van 1,2 hectare de meest geliefde is. Elke zone op onze website bevat GPS-coördinaten, een beoordeling, parkeertips en of het terrein omheind is.'
               },
               {
-                q: 'Wat is de boete voor hondenpoep op het strand of de dijk?',
-                a: 'De boete voor het niet opruimen van hondenpoep verschilt per gemeente, maar bedraagt gemiddeld €50 tot €250. In sommige kuststeden kan dit oplopen tot €350. Neem altijd poepzakjes mee en ruim op — het is verplicht op stranden, dijken, wandelpaden en in losloopzones.'
+                q: 'Waar vind ik een dierenarts aan de kust — ook in het weekend of bij nood?',
+                a: 'We lijsten 14 dierenartspraktijken aan de volledige Belgische kust, van Knokke tot De Panne. Voor spoedgevallen buiten de openingsuren: AniCura in Oudenburg is elke dag open van 7:30 tot 21:00 en behandelt spoedgevallen. Tijdens kantooruren kun je bij o.a. Dierenarts Frederik Galle (Oostende), De Praktijk 227 (Blankenberge) of Dierenarts Elise Buyse (Nieuwpoort) terecht. Het volledige overzicht met telefoonnummers en specialisaties vind je op onze dienstenpagina.'
               },
               {
-                q: 'Welke kuststad is het meest hondvriendelijk?',
-                a: 'Bredene, De Haan en De Panne worden vaak als de meest hondvriendelijke kuststeden beschouwd. Bredene heeft een groot groen losloopgebied vlakbij het strand, De Haan biedt uitgestrekte duinwandelingen, en De Panne heeft het natuurreservaat De Westhoek waar honden welkom zijn. Alle 11 badsteden hebben hondvriendelijke horeca.'
+                q: 'Welke hondvriendelijke restaurants en cafés moet ik kennen?',
+                a: 'We hebben 50+ hondvriendelijke horecazaken gecheckt langs de kust. Een paar opvallende: Siesta Bar in Knokke heeft een speciaal hondenmenu inclusief "hondenbier". Lakaiann in Blankenberge is een unieke koffiebar met kristalwinkel waar je hond een waterbak en snacks krijgt. De Frietboetiek in Middelkerke legt een dekentje op de bank voor je hond. En Madam Caravan in Middelkerke won een award in 2024 en serveert alles homemade, ook op het terras met je viervoeter erbij. Bekijk alle hotspots per badstad.'
               },
               {
-                q: 'Zijn er hondvriendelijke restaurants en cafés aan de Belgische kust?',
-                a: 'Absoluut! Er zijn tientallen hondvriendelijke restaurants, cafés en terrassen aan de Belgische kust. Van strandtenten waar je hond een bak water krijgt tot restaurants die viervoeters verwelkomen. Bekijk ons overzicht van alle hondvriendelijke hotspots per badstad.'
+                q: 'Zijn er hondenevenementen aan de Belgische kust?',
+                a: 'Ja, jaarlijks worden er meerdere grote hondenfestivals georganiseerd. Het Kwispelfestival in De Panne (17 mei 2026) is gratis en biedt kustwandelingen, workshops en professionele hondenfotografie. Het Groot Oostends Hondenfestival (23-24 mei 2026) vindt plaats op een terrein van 12.000 m² met losloopzone, demonstraties en gratis parking. En de Grote Hondenwandeling Bredene (24 mei 2026) gaat door de duinen en over het strand, voor €5 deelname. Alle details vind je op onze agendapagina.'
               },
               {
-                q: 'Wat moet ik doen als ik een zeehond zie op het strand?',
-                a: 'Houd minstens 30 meter afstand en neem je hond onmiddellijk aan de leiband. Raak de zeehond niet aan en probeer het dier niet terug in het water te duwen. Bel het Sea Life Blankenberge reddingsnetwerk (050 42 43 00) of de brandweer (112) als het dier gewond of verzwakt lijkt. Zeehonden rusten regelmatig op het strand — dat is normaal gedrag.'
+                q: 'Wat is het verschil tussen de zomer- en winterregeling per gemeente?',
+                a: 'Het verschil is groot. In de winter (grofweg oktober–maart) mogen honden in bijna alle kustgemeenten vrij op het strand, vaak zelfs los. In de zomer (april–september) gelden er strikte tijdsvensters: op bewaakte stranden zijn honden doorgaans verboden tussen 10:00 en 20:00. Buiten die uren mag het in sommige gemeentes wél, maar aan de leiband. Belangrijk: elke gemeente hanteert andere data. Bredene laat ze los in de winter op strand én duinen. Knokke-Heist is juist het strengst met boetes tot €350. Wij tonen de exacte regels per stad zodat je niet voor verrassingen staat.'
+              },
+              {
+                q: 'Kan ik mijn hondvriendelijke zaak aanmelden op hondaanzee.be?',
+                a: 'Ja! We werken voortdurend aan het uitbreiden van ons netwerk. Als je een hondvriendelijk restaurant, café, hotel, winkel of dienst hebt aan de Belgische kust, neem dan contact met ons op via de Steun-pagina. We checken elke aanmelding persoonlijk voordat die op de website verschijnt. Momenteel zijn er al 50+ horeca-zaken en 24 dienstverleners (dierenartsen, trimsalons, dierenwinkels) opgenomen.'
               }
-            ].map(({ q, a }) => (
-              <details
-                key={q}
-                className="group border border-slate-200 rounded-2xl overflow-hidden bg-stone-50 hover:border-sky-200 transition-colors"
-              >
-                <summary className="flex items-center justify-between cursor-pointer px-5 py-4 sm:px-6 sm:py-5 font-bold text-slate-900 text-base sm:text-lg select-none list-none [&::-webkit-details-marker]:hidden">
-                  <span>{q}</span>
-                  <span className="ml-4 text-sky-500 text-xl transition-transform group-open:rotate-45 flex-shrink-0">+</span>
-                </summary>
-                <div className="px-5 pb-4 sm:px-6 sm:pb-5 text-slate-600 leading-relaxed">
-                  <p>{a}</p>
+            ].map(({ q, a }, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div key={q} className="relative">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className={`w-full flex items-center justify-between text-left gap-4 px-5 py-4 sm:px-7 sm:py-5 rounded-2xl border transition-all duration-300 backdrop-blur-md shadow-sm ${
+                      isOpen
+                        ? 'bg-white/80 border-sky-200 shadow-sky-100/60 shadow-lg ring-1 ring-sky-100'
+                        : 'bg-white/60 border-white/80 hover:bg-white/90 hover:border-sky-100 hover:shadow-md'
+                    }`}
+                    style={{
+                      backdropFilter: 'blur(12px)',
+                      WebkitBackdropFilter: 'blur(12px)',
+                      background: isOpen
+                        ? 'linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(240,249,255,0.88) 100%)'
+                        : 'linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(248,250,252,0.65) 100%)',
+                    }}
+                  >
+                    <span className={`font-bold text-base sm:text-lg transition-colors duration-200 ${isOpen ? 'text-sky-700' : 'text-slate-800'}`}>{q}</span>
+                    <span className={`shrink-0 flex items-center justify-center w-7 h-7 rounded-full border transition-all duration-300 ${
+                      isOpen
+                        ? 'bg-sky-500 border-sky-400 shadow-md shadow-sky-200'
+                        : 'bg-white/80 border-slate-200'
+                    }`}>
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : 'text-slate-400'}`}
+                      />
+                    </span>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}
+                  >
+                    <div className="mx-1 mb-1 rounded-b-2xl border border-t-0 border-sky-100 bg-white/70 backdrop-blur-md px-5 pb-5 pt-4 sm:px-7"
+                      style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+                    >
+                      <p className="text-slate-600 leading-relaxed text-[15px]">{a}</p>
+                    </div>
+                  </div>
                 </div>
-              </details>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
