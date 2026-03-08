@@ -79,7 +79,7 @@ const Header: React.FC = () => {
                 return (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`lg:hidden p-2 rounded-xl active:scale-90 transition-all relative z-[120] touch-target flex-shrink-0 ${mobileToggleClass}`}
+                className={`lg:hidden w-9 h-9 rounded-xl active:scale-90 transition-all relative z-[120] touch-target flex-shrink-0 flex items-center justify-center ${mobileToggleClass}`}
                 aria-label={isMenuOpen ? "Sluit menu" : "Open menu"}
                 aria-expanded={isMenuOpen}
               >
