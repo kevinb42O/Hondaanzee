@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { Bone, ChevronDown } from 'lucide-react';
 
@@ -87,11 +88,65 @@ const DropdownMenu: React.FC<{
 }> = ({ item, currentPath, currentHash, isOpen, isScrolled, isHome, onEnter, onLeave, onClose }) => {
     const active = isDropdownActive(item, currentPath, currentHash);
     const useLightEffect = ['/', '/hotspots', '/diensten', '/losloopzones', '/agenda', '/community'].includes(currentPath);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [panelCoords, setPanelCoords] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+
+    // Measure button position whenever the dropdown opens so the portal panel aligns correctly
+    useEffect(() => {
+        if (isOpen && buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect();
+            setPanelCoords({ top: rect.bottom + 8, left: rect.left + rect.width / 2 });
+        }
+    }, [isOpen]);
 
     let btnClass = 'text-slate-600 hover:text-slate-900 hover:bg-white/30';
     if (active || isOpen) { btnClass = 'text-sky-700 bg-white/50'; }
     else if (!isScrolled && !useLightEffect) { btnClass = 'text-slate-900 hover:text-black hover:bg-white/20'; }
     else if (!isScrolled) { btnClass = 'text-white/60 hover:text-white hover:bg-white/20'; }
+
+    // Portal panel — rendered at document.body to escape the header's backdrop-filter
+    // stacking context, so backdrop-blur actually sees the real page content behind it.
+    //
+    // KEY: -translate-x-1/2 is a Tailwind class (not inline style). Mixing
+    // `style={{ transform: '...' }}` with Tailwind translate classes causes the
+    // inline style to win and completely overrides the Tailwind animation. By using
+    // only Tailwind transforms, CSS variables compose correctly and everything works.
+    const panel = createPortal(
+        <div
+            // pt-1.5 bridges the small gap so the mouse can move from button to panel
+            // without triggering the close timer.
+            style={{ position: 'fixed', top: panelCoords.top, left: panelCoords.left, zIndex: 200 }}
+            className={`-translate-x-1/2 w-max pt-1.5 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+            onMouseEnter={() => onEnter(item.label)}
+            onMouseLeave={onLeave}
+        >
+            {/* bg-white/30 + backdrop-blur-xl = true frosted glass.
+                Lower opacity (30%) lets the blurred scene clearly show through.
+                The outer wrapper is transparent so the blur reads real page pixels. */}
+            <div className={`transition-all duration-200 ease-out bg-white/30 backdrop-blur-xl backdrop-saturate-150 rounded-2xl border border-white/60 shadow-2xl shadow-black/[0.22] ring-1 ring-inset ring-white/40 py-1.5 min-w-[170px] ${
+                isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1.5 pointer-events-none'
+            }`}>
+                {item.children.map((child) => {
+                    const childActive = isLinkActive(child, currentPath, currentHash);
+                    return (
+                        <Link
+                            key={child.to}
+                            to={child.to}
+                            onClick={onClose}
+                            className={`block px-4 py-2.5 text-[13px] font-medium transition-colors first:rounded-t-lg last:rounded-b-lg ${
+                                childActive
+                                    ? 'text-sky-700 bg-white/40 font-semibold'
+                                    : 'text-slate-800 hover:text-slate-900 hover:bg-white/30'
+                            }`}
+                        >
+                            {child.label}
+                        </Link>
+                    );
+                })}
+            </div>
+        </div>,
+        document.body
+    );
 
     return (
         <div
@@ -100,6 +155,7 @@ const DropdownMenu: React.FC<{
             onMouseLeave={onLeave}
         >
             <button
+                ref={buttonRef}
                 className={`flex items-center gap-1 px-3 py-1.5 text-[13px] font-semibold rounded-full transition-all duration-200 cursor-pointer ${btnClass}`}
                 onClick={() => isOpen ? onClose() : onEnter(item.label)}
                 aria-expanded={isOpen}
@@ -111,37 +167,7 @@ const DropdownMenu: React.FC<{
                     className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
                 />
             </button>
-
-            {/* Panel starts flush at button bottom — pt-2 creates visual gap inside the hover zone */}
-            <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 w-max transition-all duration-200 ${
-                    isOpen
-                        ? 'opacity-100 translate-y-0 visible'
-                        : 'opacity-0 -translate-y-1 invisible pointer-events-none'
-                }`}
-            >
-                <div className="pt-2">
-                    <div className="bg-white/75 backdrop-blur-2xl rounded-2xl border border-white/40 shadow-xl shadow-black/[0.08] py-1.5 min-w-[170px]">
-                        {item.children.map((child) => {
-                            const childActive = isLinkActive(child, currentPath, currentHash);
-                            return (
-                                <Link
-                                    key={child.to}
-                                    to={child.to}
-                                    onClick={onClose}
-                                    className={`block px-4 py-2.5 text-[13px] transition-colors first:rounded-t-lg last:rounded-b-lg ${
-                                        childActive
-                                            ? 'text-sky-700 bg-sky-50/80 font-bold'
-                                            : 'text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-50/80'
-                                    }`}
-                                >
-                                    {child.label}
-                                </Link>
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
+            {panel}
         </div>
     );
 };
