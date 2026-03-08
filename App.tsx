@@ -27,6 +27,7 @@ const Blog = React.lazy(() => import('./pages/Blog.tsx'));
 const BlogDetail = React.lazy(() => import('./pages/BlogDetail.tsx'));
 const Community = React.lazy(() => import('./pages/Community.tsx'));
 const Agenda = React.lazy(() => import('./pages/Agenda.tsx'));
+const Updates = React.lazy(() => import('./pages/Updates.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -88,9 +89,9 @@ const ScrollToHash = () => {
         }
       }, 100);
       return () => clearTimeout(timeout);
-    } else if (pathname === '/') {
-      // If navigating to home without a hash, scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Reset scroll to top on every route change without a hash
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, [hash, pathname]);
 
@@ -146,6 +147,7 @@ function App() {
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/agenda" element={<Agenda />} />
                 <Route path="/community" element={<Community />} />
+                <Route path="/updates" element={<Updates />} />
                 <Route path="/:slug" element={<CityPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -150,6 +150,14 @@ const Footer: React.FC = () => {
                   Meld je zaak aan
                 </a>
               </li>
+              <li>
+                <Link to="/updates" className="text-cyan-400 hover:text-cyan-300 hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-1.5">
+                  <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-400" />
+                  </span>{' '}Wat is er nieuw?
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -230,8 +238,8 @@ const Footer: React.FC = () => {
             <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
               <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-black text-white">28</span>
-                <span className="text-sm font-bold text-cyan-400">feb</span>
+                <span className="text-2xl font-black text-white">8</span>
+                <span className="text-sm font-bold text-cyan-400">mrt</span>
                 <span className="text-xs font-mono text-slate-400">2026</span>
               </div>
             </div>
@@ -308,6 +316,16 @@ const Footer: React.FC = () => {
               <span className="text-slate-600">•</span>
               <Link to="/cookies" className="hover:text-white transition-colors">Cookiebeleid</Link>
             </div>
+<Link
+              to="/updates"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-cyan-400 transition-colors group"
+              aria-label="Bekijk alle updates en nieuwigheden"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
+              </span>{' '}Wat is er nieuw?
+            </Link>
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
             <div className="text-slate-500 text-xs">
