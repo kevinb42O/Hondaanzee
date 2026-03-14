@@ -238,6 +238,22 @@ export const CITIES: City[] = [
       }
     ],
     rules: {
+      overrides: [
+        {
+          start: '03-16',
+          end: '06-30',
+          status: 'DEELS',
+          label: 'Opgelet: Tussenseizoen',
+          rule: '⚠️ TUSSENSEIZOEN (16 maart - 30 juni): Overal op strand en in duinen toegelaten aan leiband. Bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
+        },
+        {
+          start: '09-01',
+          end: '10-14',
+          status: 'DEELS',
+          label: 'Opgelet: Tussenseizoen',
+          rule: '⚠️ TUSSENSEIZOEN (1 september - 14 oktober): Overal op strand en in duinen toegelaten aan leiband. Bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
+        }
+      ],
       summer: {
         start: '07-01',
         end: '08-31',

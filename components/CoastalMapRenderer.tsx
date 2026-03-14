@@ -5,6 +5,7 @@ import L from 'leaflet';
 import { CITIES } from '../cityData.ts';
 import { COASTAL_PATHS } from '../pages/CoastalPathsData.ts';
 import type { City } from '../types.ts';
+import { getCityMapStatus } from '../utils/rules.ts';
 
 const STATUS_GRADIENTS: Record<string, string> = {
     JA: 'url(#grad-vrij)',
@@ -14,16 +15,7 @@ const STATUS_GRADIENTS: Record<string, string> = {
     VERBODEN: 'url(#grad-verboden)',
 };
 
-const getCurrentStatus = (city: City): string => {
-    const today = new Date();
-    const dateString = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    const { summer, winter } = city.rules;
-
-    if (summer?.start && summer?.end && dateString >= summer.start && dateString <= summer.end) {
-        return summer.status;
-    }
-    return winter.status;
-};
+const getCurrentStatus = (city: City): string => getCityMapStatus(city);
 
 const getFillUrl = (city: City): string => {
     return STATUS_GRADIENTS[getCurrentStatus(city)] ?? 'url(#grad-default)';

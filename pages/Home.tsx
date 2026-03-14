@@ -2,11 +2,12 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, Search, X, ChevronDown } from 'lucide-react';
+import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
 
 import { findNearestCity } from '../utils/geo.ts';
+import { evaluateCityRuleStatus } from '../utils/rules.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 
 // Kustlijn volgorde NO → ZW
@@ -57,6 +58,24 @@ const getResponsiveSrcSet = (image: string): string | undefined => {
   return `${base}-640w.webp 640w, ${image} 960w`;
 };
 
+const STATUS_BADGE_CONFIG = {
+  JA: {
+    label: 'Toegelaten',
+    icon: CheckCircle2,
+    containerClass: 'bg-emerald-500/90 text-white ring-emerald-200/80'
+  },
+  DEELS: {
+    label: 'Beperkt',
+    icon: AlertCircle,
+    containerClass: 'bg-amber-500/90 text-white ring-amber-200/80'
+  },
+  NEE: {
+    label: 'Verboden',
+    icon: X,
+    containerClass: 'bg-rose-600/90 text-white ring-rose-200/80'
+  }
+} as const;
+
 const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city, index, total }) => {
   const span = getGridSpan(index, total);
   const isFeatured = span >= 4;
@@ -92,6 +111,21 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
         decoding="async"
         sizes={isFeatured ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 66vw' : isMedium ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
       />
+      {(() => {
+        const status = evaluateCityRuleStatus(city).status;
+        const badge = STATUS_BADGE_CONFIG[status];
+        const StatusIcon = badge.icon;
+
+        return (
+          <div
+            className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-2 backdrop-blur-md transition-transform duration-300 md:group-hover:scale-105 ${badge.containerClass}`}
+            aria-label={`${city.name}: ${badge.label}`}
+            title={`${city.name}: ${badge.label}`}
+          >
+            <StatusIcon size={16} strokeWidth={3} className="sm:w-[18px] sm:h-[18px] drop-shadow-sm" />
+          </div>
+        );
+      })()}
       <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white ${
         isFeatured || isMedium
           ? 'bg-gradient-to-t from-black/90 via-black/25 to-transparent'

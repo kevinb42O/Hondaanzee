@@ -27,6 +27,14 @@ export interface Service {
 
 export type StatusValue = 'JA' | 'DEELS' | 'NEE';
 
+export interface RulePeriodOverride {
+  start: string; // MM-DD
+  end: string;   // MM-DD
+  status: StatusValue;
+  rule: string;
+  label?: string;
+}
+
 export interface OffLeashArea {
   name: string;
   slug: string; // Unique identifier for reviews
@@ -46,6 +54,7 @@ export interface OffLeashArea {
 }
 
 export interface CityRule {
+  overrides?: RulePeriodOverride[];
   summer?: {
     start: string; // MM-DD
     end: string;   // MM-DD

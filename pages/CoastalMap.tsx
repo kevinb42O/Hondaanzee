@@ -113,7 +113,7 @@ const CoastalMap: React.FC = () => {
                             <ul className="text-[10px] md:text-xs text-sky-800 space-y-0.5 md:space-y-1">
                                 <li>• <strong>Klik</strong> op een gemeente voor details</li>
                                 <li>• <strong>Zoom</strong> met scroll of knoppen</li>
-                                <li>• <strong>Kleuren</strong> tonen huidige hondenregels</li>
+                                <li>• <strong>Kleuren</strong> tonen huidige toegangssituatie</li>
                             </ul>
                         </div>
                     )}
@@ -122,11 +122,11 @@ const CoastalMap: React.FC = () => {
                     <div className="p-1.5 md:p-3 flex items-center justify-between gap-1 md:gap-4">
                         <div className="flex-1 flex flex-col items-center gap-1 py-1.5 md:py-2 rounded-xl bg-emerald-50/50">
                             <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-b from-emerald-400 to-emerald-600 border-2 border-white shadow-sm ring-1 ring-emerald-200"></div>
-                            <span className="text-[9px] md:text-xs font-black uppercase text-emerald-700 tracking-wider">Vrij</span>
+                            <span className="text-[9px] md:text-xs font-black uppercase text-emerald-700 tracking-wider">Toegelaten</span>
                         </div>
                         <div className="flex-1 flex flex-col items-center gap-1 py-1.5 md:py-2 rounded-xl bg-orange-50/50">
                             <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 border-2 border-white shadow-sm ring-1 ring-orange-200"></div>
-                            <span className="text-[9px] md:text-xs font-black uppercase text-orange-700 tracking-wider">Deels</span>
+                            <span className="text-[9px] md:text-xs font-black uppercase text-orange-700 tracking-wider">Beperkt</span>
                         </div>
                         <div className="flex-1 flex flex-col items-center gap-1 py-1.5 md:py-2 rounded-xl bg-rose-50/50">
                             <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-b from-rose-500 to-rose-700 border-2 border-white shadow-sm ring-1 ring-rose-200"></div>

@@ -2,6 +2,7 @@
 import React, { useMemo } from 'react';
 import { Calendar, Info, MapPin, CheckCircle2, AlertCircle, XCircle, Clock } from 'lucide-react';
 import { City } from '../types';
+import { evaluateCityRuleStatus } from '../utils/rules.ts';
 
 interface StatusCheckProps {
   city: City;
@@ -11,31 +12,7 @@ const LAST_VERIFIED_DATE = new Date('2026-03-14T00:00:00');
 
 const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
   const statusInfo = useMemo(() => {
-    const now = new Date();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const currentTimeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-    const currentDateStr = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
-    const rules = city.rules;
-    const summer = rules.summer;
-
-    let activeRule = rules.winter.rule;
-    let activeStatus = rules.winter.status;
-    let label = 'Vrije toegang: Winterregeling';
-
-    if (summer && currentDateStr >= summer.start && currentDateStr <= summer.end) {
-      activeRule = summer.rule;
-      activeStatus = summer.status;
-      label = 'Opgelet: Zomerregeling';
-
-      if (summer.startTime && summer.endTime) {
-        if (currentTimeStr >= summer.startTime && currentTimeStr <= summer.endTime) {
-          // Keep city-level status from data; only update label with time window context.
-          label = `Zomerregeling (${summer.startTime}-${summer.endTime})`;
-        }
-      }
-    }
+    const evaluatedStatus = evaluateCityRuleStatus(city);
 
     const config = {
       JA: { color: 'text-emerald-600 bg-emerald-50 border-emerald-200', icon: <CheckCircle2 className="w-10 h-10 md:w-12 md:h-12" /> },
@@ -44,10 +21,10 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
     };
 
     return {
-      status: activeStatus,
-      ...config[activeStatus],
-      rule: activeRule,
-      label
+      status: evaluatedStatus.status,
+      ...config[evaluatedStatus.status],
+      rule: evaluatedStatus.rule,
+      label: evaluatedStatus.label
     };
   }, [city]);
 
@@ -86,12 +63,6 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
           )}
         </div>
       </div>
-
-      {city.rules.special && (
-        <p className="text-xs sm:text-sm md:text-base font-medium text-slate-600 text-center mt-3 sm:mt-4 md:mt-6 px-4">
-          {city.rules.special}
-        </p>
-      )}
 
       <div className="mt-4 sm:mt-6 md:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div className="bg-white p-4 sm:p-5 md:p-6 rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-3xl border border-slate-200 flex items-center sm:items-start gap-3 sm:gap-4 shadow-sm active:bg-slate-50 transition-colors">
