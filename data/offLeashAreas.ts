@@ -57,7 +57,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 3.036,
     city: 'de-haan',
     description: 'Gelegen bij Sport- en Recreatiecentrum Haneveld.',
-    image: '/placeholder.webp',
+    image: '/losloopweide_sport.webp',
     rating: 4
   },
   {
