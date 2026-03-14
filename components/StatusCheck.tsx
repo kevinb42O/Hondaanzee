@@ -7,6 +7,8 @@ interface StatusCheckProps {
   city: City;
 }
 
+const LAST_VERIFIED_DATE = new Date('2026-03-14T00:00:00');
+
 const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
   const statusInfo = useMemo(() => {
     const now = new Date();
@@ -29,8 +31,8 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
 
       if (summer.startTime && summer.endTime) {
         if (currentTimeStr >= summer.startTime && currentTimeStr <= summer.endTime) {
-          activeStatus = 'NEE';
-          label = `Beperkt tussen ${summer.startTime} en ${summer.endTime}`;
+          // Keep city-level status from data; only update label with time window context.
+          label = `Zomerregeling (${summer.startTime}-${summer.endTime})`;
         }
       }
     }
@@ -58,6 +60,9 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black text-slate-900 leading-[1.15] mb-3 sm:mb-4 px-2">
           Mag mijn hond <span className="text-sky-600">nu</span> op het strand in{' '}<span className="text-sky-600 relative inline-block whitespace-nowrap">{city.name}<svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" /></svg>?</span>
         </h1>
+        <p className="text-xs sm:text-sm text-slate-500 font-medium px-2">
+          Laatst geverifieerd: {new Intl.DateTimeFormat('nl-BE', { dateStyle: 'long' }).format(LAST_VERIFIED_DATE)} | Vandaag: {new Intl.DateTimeFormat('nl-BE', { dateStyle: 'long' }).format(new Date())}
+        </p>
       </div>
 
       <div className={`p-5 sm:p-6 md:p-10 lg:p-14 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-2 shadow-xl shadow-slate-200/50 transition-all duration-300 ${statusInfo.color}`}>

@@ -63,7 +63,7 @@ export const CITIES: City[] = [
         end: '10-15',
         startTime: '10:00',
         endTime: '20:00',
-        rule: '✅ GROENE ZONE (altijd toegelaten): Vanaf einde Zeedijk bij Surfclub Icarus richting Blankenberge - vrij loslopen het hele jaar! 🚫 RODE ZONE (hoofdstrand): Vanaf Surfclub Icarus tot aan de St. George\'s Day-wandeling (pier) - verboden 10u-20u, vóór 10u en na 20u aan leiband.',
+        rule: '✅ GROENE ZONE (altijd toegelaten): Vanaf einde Zeedijk bij Surfclub Icarus richting Blankenberge - vrij loslopen het hele jaar! 🚫 RODE ZONE (hoofdstrand): Vanaf Surfclub Icarus tot aan de St. George\'s Day-wandeling (pier) - verboden 10u-20u (15 maart - 15 okt). Buiten die uren en buiten deze periode: overal op het strand vrij loslopen.',
         status: 'DEELS'
       },
       winter: {
@@ -243,7 +243,7 @@ export const CITIES: City[] = [
         end: '08-31',
         startTime: '10:30',
         endTime: '18:30',
-        rule: '🚫 JULI & AUGUSTUS: Verboden 10u30-18u30 op strand én in duinen. Vóór 10u30 en na 18u30 aan leiband toegelaten. ⚠️ TUSSENSEIZOEN (16 maart - 30 juni & 1 sept - 14 okt): Overal aan leiband toegelaten.',
+        rule: '🚫 JULI & AUGUSTUS: Verboden 10u30-18u30 op strand én in duinen (behalve verharde paden). ✅ UITZONDERING OVERDAG (10u30-18u30): Strandzone voorbij concessie Twins tot de grens met Oostende + een gedeelte aan strandpost 6 (altijd aan leiband). 🌅 Buiten deze uren: overal aan leiband toegelaten.',
         status: 'DEELS'
       },
       winter: {
@@ -471,11 +471,11 @@ export const CITIES: City[] = [
     ],
     rules: {
       summer: {
-        start: '06-01',
+        start: '06-15',
         end: '09-15',
         startTime: '10:30',
         endTime: '18:30',
-        rule: '🚫 BEWAAKTE ZWEMZONES: Verboden 10u30-18u30. ✅ DRIE HONDENZONES (24/7, aan leiband max 10m): 1️⃣ SINT-IDESBALD: Van grens De Panne tot ter hoogte van Pieterlaan (±350m). 2️⃣ KOKSIJDE-BAD: Tussen Elisabethplein en Sint-André/G. Scottlaan (±1,2km). 3️⃣ OOSTDUINKERKE: Tussen Felix Timmermanslaan en Paardevissersweg/Groenendijk (±1,6km). Herkenbaar aan wit-blauwe borden.',
+        rule: 'Van 15 juni t/m 15 september: tussen 10u30-18u30 zijn honden enkel toegelaten in 3 hondenzones (altijd aan leiband, max 10m). Voor 10u30 en na 18u30: overal op het strand toegelaten aan leiband. 🐾 ZONES: 1️⃣ Sint-Idesbald (grens De Panne tot Pieterlaan, ±350m) 2️⃣ Koksijde-Bad (Elisabethplein tot Sint-André/G. Scottlaan, ±1,2km) 3️⃣ Oostduinkerke (Felix Timmermanslaan tot Paardevissersweg/Groenendijk, ±1,6km).',
         status: 'DEELS'
       },
       winter: {
@@ -516,15 +516,15 @@ export const CITIES: City[] = [
     ],
     rules: {
       summer: {
-        start: '05-15',
-        end: '09-30',
-        startTime: '07:00',
-        endTime: '19:00',
-        rule: '4 STRANDZONES (zomer = 15 mei - 30 sept): 1️⃣ ZONE 1 (Canadezenplein → Koksijde): Aan leiband. 2️⃣ ZONE 2 (Canadezenplein → De Rampe/centrum): 🚫 VERBODEN. 3️⃣ ZONE 3 (De Rampe → Zeilwagencentrum): Aan leiband. 4️⃣ ZONE 4 (Zeilwagencentrum → Franse grens): ✅ Vrij loslopen 19u-7u, overdag aan leiband.',
+        start: '06-15',
+        end: '09-15',
+        startTime: '10:30',
+        endTime: '18:30',
+        rule: '4 STRANDZONES (zomer = 15 juni - 15 sept): 1️⃣ ZONE 1 (Canadezenplein → Koksijde): aan leiband. 2️⃣ ZONE 2 (Canadezenplein → De Rampe + Planché): 🚫 honden verboden. 3️⃣ ZONE 3 (De Rampe → Zeilwagencentrum): aan leiband. 4️⃣ ZONE 4 (Zeilwagencentrum → Franse grens tot slufter): ✅ loslopen 18u30-10u30, overdag (10u30-18u30) aan leiband.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 1 okt t/m 14 mei (winter): Zones 1, 2, 3 aan leiband. Zone 4 (richting Frankrijk): 24/7 vrij loslopen!',
+        rule: 'Van 16 sept t/m 14 juni: Zone 1 en 3 altijd aan leiband, Zone 2 aan leiband, Zone 4 (richting Frankrijk) 24/7 vrij loslopen. Op de betonnen duinvoetversterking blijft leiband verplicht.',
         status: 'JA'
       },
       special: 'Zone 4 (vanaf Zeilwagencentrum richting Frankrijk) is dé losloopzone! Op de betonnen duinvoetversterking moet je hond altijd aangelijnd zijn.'
