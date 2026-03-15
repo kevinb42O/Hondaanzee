@@ -38,6 +38,21 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '1.9',
+    date: '14 maart 2026',
+    title: 'Regelverificatie + kaartstatus nu volledig synchroon',
+    subtitle: 'Betere betrouwbaarheid op kritieke strandwissels',
+    entries: [
+      { text: 'Alle 11 kustgemeenten opnieuw geverifieerd op basis van officiële bronnen voor de seizoenswissel in maart', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Kustkaart en stadspagina gebruiken nu dezelfde statuslogica, zodat kleurstatus en detailregel overal overeenkomen', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Nieuwe hotspots in Blankenberge: ABC Hotel (eco-hotel, hond welkom bij ontbijt) en Au Pengouin (reuzenwafels & pannenkoeken)', tag: { label: 'Nieuwe zaken', color: 'cyan' } },
+      { text: 'Belgium Pier Brasserie (Blankenberge) voorzien van een sterk verrijkte beschrijving en de Aanrader-badge', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Homepage-kaarten kregen directe statusbadges per stad voor snellere leesbaarheid', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Dubbele weergave van speciale regeltekst op stadspagina verwijderd', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Sitemap, robots en prerendering bijgewerkt voor betere indexatie van nieuwe en actuele pagina\'s', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
+  {
     version: '1.8',
     date: '8 maart 2026',
     title: 'iOS-stijl navigatie & deze updatepagina',
