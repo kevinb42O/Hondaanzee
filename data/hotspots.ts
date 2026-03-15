@@ -138,8 +138,8 @@ export const HOTSPOTS: Hotspot[] = [
     id: 12,
     name: 'Belgium Pier Brasserie',
     type: 'Brasserie',
-    description: 'Unieke locatie 350 meter in zee waar honden aangelijnd welkom zijn in de brasserie.',
-    tags: ['Terras', 'Nabij strand', 'Waterbak aanwezig', 'Unieke locatie'],
+    description: 'Tafelen op 365 meter in de Noordzee — dat doe je alleen hier! Belgium Pier Brasserie biedt een ongeëvenaarde locatie met panoramisch uitzicht over de golven. De uitgebreide menukaart bestaat uit dagverse ingrediënten: van heerlijke visgerechten en bouillabaisse tot tapas, garnaalkroketten en sappige steaks. Na je maaltijd geniet je op het zonneterras van een dessert met zeezicht. De bediening is vriendelijk, de prijs-kwaliteitverhouding uitstekend en er zijn ook vegetarische, glutenvrije en lactosevrije opties beschikbaar. Je hond mag aangelijnd mee genieten van deze unieke beleving — een ervaring die je nergens anders aan de kust vindt!',
+    tags: ['Aanrader', 'Terras', 'Nabij strand', 'Waterbak aanwezig', 'Unieke locatie', 'Visgerechten', 'Zeezicht'],
     image: '/belgianpierbrasserieblankenberge.webp',
     city: 'blankenberge',
     address: 'Zeedijk 261, 8370 Blankenberge',
@@ -1397,5 +1397,27 @@ export const HOTSPOTS: Hotspot[] = [
     city: 'de-haan',
     address: 'Leopoldlaan 13, 8420 De Haan',
     website: 'https://www.brasserielapotiniere.be/nl/home',
+  },
+  {
+    id: 130,
+    name: 'ABC Hotel',
+    type: 'Slapen',
+    description: 'Kies je voor ABC Hotel, dan kies je voor onberispelijke viersterrenservice tot in de kleinste details. Badjassen, slippers en oordopjes in elke kamer, persoonlijk advies op maat, een inrichting met oog voor detail en design… Het zijn maar enkele voorbeelden van hoe dit eco-hotel het verschil maakt. Gastvrouw Liliane reisde de wereld rond en zet nu haar kennis en ervaring in om jou een onvergetelijk verblijf in Blankenberge te bezorgen. Je viervoeter is hier meer dan welkom: honden mogen mee op de kamer én aan het ontbijt, waar een rustig plaatsje voor hen wordt voorzien. Na het ontbijt kun je heerlijk afkoelen in het verwarmde buitenzwembad. Bonus: Liliane\'s man is dierenarts in Blankenberge, dus je hond zit hier letterlijk op de juiste plek!',
+    tags: ['Aanrader', 'Honden toegelaten op kamer', 'Hond welkom bij ontbijt', '4-sterren', 'Eco-hotel', 'Verwarmd buitenzwembad', 'Persoonlijke service', 'Design interieur'],
+    image: '/abchotel.webp',
+    city: 'blankenberge',
+    address: 'Marie-Josélaan 25, 8370 Blankenberge',
+    website: 'https://www.abchotel.be/nl/'
+  },
+  {
+    id: 131,
+    name: 'Au Pengouin',
+    type: 'Brasserie',
+    description: 'Een absolute klassieker in het centrum van Blankenberge, vlakbij de zeedijk! Au Pengouin staat bekend om hun legendarische reuzenwafels — krokant vanbuiten, luchtig vanbinnen en dubbel zo groot als je gewend bent. Daarnaast serveren ze verse pannenkoeken (geen voorgebakken gedoe!), heerlijke croque\'s, spaghetti en nog zoveel meer. De porties zijn hier niet zuinig: je bord puilt uit en je krijgt altijd waar voor je geld. De vlotte en vriendelijke bediening maakt het plaatje helemaal compleet. En het allerbeste? Je viervoeter is hier meer dan welkom, groot of klein! Er wordt een rustig plekje voorzien en vers water staat altijd klaar. Een warm, verzorgd interieur waar je met volle teugen geniet — samen met je trouwe metgezel. Hier kom je gegarandeerd terug!',
+    tags: ['Aanrader', 'Hondvriendelijk team', 'Waterbak aanwezig', 'Reuzenwafels', 'Verse pannenkoeken', 'Grote porties', 'Centrum', 'Gezellig'],
+    image: '/pengouin.webp',
+    city: 'blankenberge',
+    address: 'Kerkstraat 33, 8370 Blankenberge',
+    website: 'https://www.facebook.com/Aupingouin/'
   },
 ];
