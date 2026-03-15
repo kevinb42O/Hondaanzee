@@ -727,7 +727,7 @@ export const HOTSPOTS: Hotspot[] = [
     name: 'My Home My Coffee',
     type: 'Koffiebar',
     description: 'Gezellige koffiebar met een huiselijke sfeer waar je kunt genieten van specialty coffee en verse lekkernijen. Je hond is hier welkom om mee te genieten van de relaxte ambiance.',
-    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Specialty Coffee', 'Hondvriendelijk team', 'Gezellig'],
+    tags: ['Aanrader', 'Indoor toegelaten', 'Waterbak aanwezig', 'Specialty Coffee', 'Hondvriendelijk team', 'Gezellig'],
     image: '/myhomemycoffee.webp',
     city: 'blankenberge',
     address: 'Vredelaan 60, 8370 Blankenberge',
