@@ -238,7 +238,7 @@ const Footer: React.FC = () => {
             <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
               <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-black text-white">8</span>
+                <span className="text-2xl font-black text-white">15</span>
                 <span className="text-sm font-bold text-cyan-400">mrt</span>
                 <span className="text-xs font-mono text-slate-400">2026</span>
               </div>
