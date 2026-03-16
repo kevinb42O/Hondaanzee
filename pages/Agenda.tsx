@@ -167,8 +167,9 @@ const Agenda: React.FC = () => {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-16">
+      {/* Content Area with Standard White Background to match Wave */}
+      <div className="bg-white min-h-[40vh] py-8 sm:py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Season Filter */}
         <div className="bg-white border-2 border-slate-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 shadow-sm">
           <div className="flex items-center gap-3 mb-4 sm:mb-6">
@@ -326,8 +327,8 @@ const Agenda: React.FC = () => {
           </div>
         )}
 
-        {/* CTA Section */}
-        <div className="mt-16 sm:mt-20 bg-gradient-to-br from-sky-50 to-blue-50 border-2 border-sky-100 rounded-3xl p-8 sm:p-12 text-center">
+        {/* CTA Section - Gradient matches standard page color at bottom */}
+        <div className="mt-16 sm:mt-20 bg-gradient-to-br from-sky-50 to-white border-2 border-sky-100 rounded-3xl p-8 sm:p-12 text-center shadow-sm">
           <div className="text-4xl mb-4">🐾</div>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-4">
             Iets te doen voor honden aan de kust?
@@ -355,6 +356,7 @@ const Agenda: React.FC = () => {
           </div>
         </div>
       </div>
+    </div>
 
       {/* Event Detail Modal — portalled to body to escape all stacking contexts */}
       {selectedEvent && createPortal(
