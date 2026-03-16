@@ -21,7 +21,7 @@ const ResponsibilityBanner: React.FC = () => {
           >
             <path
               d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
-              className={`fill-current ${isMapPage ? 'text-slate-950' : 'text-stone-50'}`}
+              className={`fill-current ${isMapPage ? 'text-slate-950' : location.pathname === '/' ? 'text-stone-50' : 'text-white'}`}
             />
           </svg>
           <svg
@@ -33,7 +33,7 @@ const ResponsibilityBanner: React.FC = () => {
           >
             <path
               d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
-              className={`fill-current ${isMapPage ? 'text-slate-950' : 'text-stone-50'}`}
+              className={`fill-current ${isMapPage ? 'text-slate-950' : location.pathname === '/' ? 'text-stone-50' : 'text-white'}`}
             />
           </svg>
         </div>
