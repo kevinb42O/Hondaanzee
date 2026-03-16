@@ -118,14 +118,14 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   },
   // Oostende
   {
-    name: 'Maria Hendrikapark (Grootste)',
+    name: 'Maria Hendrikapark',
     slug: 'oostende-maria-hendrikapark',
     address: 'Iependreef / Cederdreef, 8400 Oostende',
     lat: 51.2089,
     lng: 2.9148,
     city: 'oostende',
     description: 'Grootste en populairste hondenloopweide van Oostende. De weide ligt achter het Dierenasiel "Het Blauwe Kruis". Niet zichtbaar vanaf de hoofdweg.',
-    image: '/placeholder.webp',
+    image: '/hendrikapark.webp',
     rating: 4
   },
   {
@@ -135,7 +135,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lat: 51.2056,
     lng: 2.8645,
     city: 'oostende',
-    description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
+    description: 'Ruime losloopzone nabij de luchthaven en Nieuwpoortsesteenweg. Gelegen aan de rand van het Provinciedomein Raversijde, met veel open ruimte om te rennen en te spelen.',
     image: '/raversijde.webp',
     rating: 4
   },
@@ -180,20 +180,10 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 2.9425,
     city: 'oostende',
     description: 'Groot hondenbos (ca. 3,5 hectare) in natuurzone nabij de brug van de A10. Je moet de Karperstraat inrijden (doodlopend) om de toegang te vinden.',
-    image: '/placeholder.webp',
+    image: '/hondenbos.webp',
     rating: 4
   },
-  {
-    name: 'Losloopzone Slachthuiskaai',
-    slug: 'oostende-slachthuiskaai',
-    address: 'Slachthuiskaai, Oostende',
-    lat: 51.2168,
-    lng: 2.9385,
-    city: 'oostende',
-    description: 'Rustige zone gelegen aan de rand van de woonwijk.',
-    image: '/placeholder.webp',
-    rating: 4
-  },
+
   {
     name: 'Losloopzone Brigade Pironlaan',
     slug: 'oostende-brigade-pironlaan',
@@ -213,7 +203,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 2.8625,
     city: 'oostende',
     description: 'Specifieke speelweide binnen het provinciedomein (ingang via Westlaan). In de rest van het park moeten honden aan de leiband.',
-    image: '/placeholder.webp',
+    image: '/provinciedomein.webp',
     rating: 5
   },
   {

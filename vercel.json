@@ -1,5 +1,18 @@
 {
   "buildCommand": "npm run build",
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.hondaanzee.be"
+                }
+            ],
+            "destination": "https://hondaanzee.be/:path*",
+            "permanent": true
+        }
+    ],
     "headers": [
         {
             "source": "/assets/:path*",

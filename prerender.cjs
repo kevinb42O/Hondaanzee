@@ -46,6 +46,7 @@ const ROUTES = [
   // Agenda & Community
   '/agenda',
   '/community',
+  '/updates',
 ];
 
 // Simple static file server for the dist folder

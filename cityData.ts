@@ -280,13 +280,14 @@ export const CITIES: City[] = [
     mapY: 171.5,
     offLeashAreas: [
       {
-        name: 'Maria Hendrikapark (Grootste)',
+        name: 'Maria Hendrikapark',
         slug: 'oostende-maria-hendrikapark',
         address: 'Iependreef / Cederdreef, Oostende',
         lat: 51.2089,
         lng: 2.9148,
         description: 'Grootste hondenweide, achter het Blauwe Kruis dierenasiel.',
-        city: 'oostende'
+        city: 'oostende',
+        image: '/hendrikapark.webp'
       },
       {
         name: 'Losloopzone Raversijde',
@@ -294,7 +295,7 @@ export const CITIES: City[] = [
         address: 'Westlaan 1, Raversijde',
         lat: 51.2056,
         lng: 2.8645,
-        description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
+        description: 'Ruime losloopzone nabij de luchthaven en Nieuwpoortsesteenweg. Gelegen aan de rand van het Provinciedomein Raversijde, met veel open ruimte om te rennen en te spelen.',
         city: 'oostende',
         image: '/raversijde.webp'
       },
@@ -307,15 +308,7 @@ export const CITIES: City[] = [
         description: 'Achter de tennisclub.',
         city: 'oostende'
       },
-      {
-        name: 'Losloopzone Slachthuiskaai',
-        slug: 'oostende-slachthuiskaai',
-        address: 'Slachthuiskaai, Oostende',
-        lat: 51.2245,
-        lng: 2.9198,
-        description: 'Nabij de kruising met Lijndraaiersstraat.',
-        city: 'oostende'
-      },
+
       {
         name: 'Losloopzone Ankerstraat',
         slug: 'oostende-ankerstraat',
@@ -333,7 +326,8 @@ export const CITIES: City[] = [
         lat: 51.2125,
         lng: 2.9425,
         description: 'Bosstrook tussen Karperstraat en de A10 (nabij "Groene 62").',
-        city: 'oostende'
+        city: 'oostende',
+        image: '/hondenbos.webp'
       },
       {
         name: 'Losloopzone Schietbaanstraat',
