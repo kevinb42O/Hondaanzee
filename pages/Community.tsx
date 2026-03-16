@@ -298,10 +298,6 @@ const Community: React.FC = () => {
               alt={`${topper.dogName} — Topper van de Week`}
               className="absolute inset-0 w-full h-full object-cover"
             />
-            
-            {/* Gradient Overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-transparent h-32" />
 
             {/* Top Bar: Logo & Watermark */}
             <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-start z-20">
