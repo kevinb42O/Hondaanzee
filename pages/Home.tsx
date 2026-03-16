@@ -706,7 +706,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* FAQ Section — visible for users + crawlable for AI */}
-      <section className="bg-gradient-to-b from-white via-sky-50/30 to-white py-12 sm:py-16 md:py-20">
+      <section className="bg-gradient-to-b from-stone-50 via-sky-50/30 to-white py-12 sm:py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight text-center mb-2">
             Veelgestelde Vragen
