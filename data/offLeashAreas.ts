@@ -202,7 +202,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 2.9215,
     city: 'oostende',
     description: 'Praktische zone in de groene strook voor buurtbewoners. Recent vernieuwd met speeltoestellen (april 2023).',
-    image: '/placeholder.webp',
+    image: '/pironlaan.webp',
     rating: 4
   },
   {

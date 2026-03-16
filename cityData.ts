@@ -350,7 +350,8 @@ export const CITIES: City[] = [
         lat: 51.2098,
         lng: 2.9215,
         description: 'Zone in de Brigade Pironlaan.',
-        city: 'oostende'
+        city: 'oostende',
+        image: '/pironlaan.webp'
       }
     ],
     rules: {
