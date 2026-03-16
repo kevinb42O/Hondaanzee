@@ -169,7 +169,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 2.9285,
     city: 'oostende',
     description: 'Smalle, langgerekte strook gras die parallel loopt aan de tramsporen. Ziet eruit als een berm, maar is omheind voor honden.',
-    image: '/placeholder.webp',
+    image: '/ankerstraat.webp',
     rating: 4
   },
   {
