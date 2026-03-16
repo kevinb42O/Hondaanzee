@@ -322,7 +322,8 @@ export const CITIES: City[] = [
         lat: 51.2312,
         lng: 2.9285,
         description: 'Nabij tramhalte "Weg naar Vismijn".',
-        city: 'oostende'
+        city: 'oostende',
+        image: '/ankerstraat.webp'
       },
       {
         name: 'Hondenbos',
