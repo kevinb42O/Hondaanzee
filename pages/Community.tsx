@@ -309,9 +309,6 @@ const Community: React.FC = () => {
                 <Trophy size={14} className="text-amber-300 fill-amber-300" />
                 <span className="text-white text-xs font-bold tracking-wider uppercase shadow-sm">Topper van de Week</span>
               </div>
-              <div className="text-right">
-                <p className="text-white/90 font-black text-sm tracking-widest drop-shadow-md">HONDAANZEE.BE</p>
-              </div>
             </div>
 
             {/* Bottom Content */}
