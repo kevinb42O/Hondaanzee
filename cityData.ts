@@ -295,7 +295,8 @@ export const CITIES: City[] = [
         lat: 51.2056,
         lng: 2.8645,
         description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
-        city: 'oostende'
+        city: 'oostende',
+        image: '/raversijde.webp'
       },
       {
         name: 'Losloopzone Leffingestraat',

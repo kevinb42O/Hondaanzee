@@ -136,7 +136,7 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
     lng: 2.8645,
     city: 'oostende',
     description: 'Nabij de luchthaven en Nieuwpoortsesteenweg.',
-    image: '/losloopzoneraversijde.webp',
+    image: '/raversijde.webp',
     rating: 4
   },
   {
