@@ -132,7 +132,7 @@ const Community: React.FC = () => {
           style={{
             backgroundImage: `url(${topper.image})`,
             backgroundSize: 'cover',
-            backgroundPosition: '15% center',
+            backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
           }}
         >
@@ -297,7 +297,6 @@ const Community: React.FC = () => {
               src={topper.image}
               alt={`${topper.dogName} — Topper van de Week`}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: '14% center' }}
             />
             
             {/* Gradient Overlay for text readability */}

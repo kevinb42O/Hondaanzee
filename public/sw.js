@@ -1,14 +1,17 @@
-// HondAanZee Service Worker — Network-First strategy
-// Ensures users ALWAYS get the latest version of the site
-const CACHE_VERSION = 'v1';
+// HondAanZee Service Worker — Network-First with proper navigation handling
+// v2: fixes white screen on PWA by properly handling navigate requests + pre-caching shell
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `hondaanzee-${CACHE_VERSION}`;
 
-// Install: activate immediately, don't wait
+// Install: pre-cache the app shell so offline fallback always works, then activate immediately
 self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.add('/'))
+  );
   self.skipWaiting();
 });
 
-// Activate: claim all clients immediately + clean old caches
+// Activate: claim all clients immediately + purge ALL old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((names) =>
@@ -21,19 +24,38 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: network-first for HTML, cache-first for hashed assets
+// Fetch handler
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Only handle GET requests
+  // Only handle GET requests from our own origin
   if (request.method !== 'GET') return;
-
-  // Skip cross-origin requests
   if (!request.url.startsWith(self.location.origin)) return;
 
   const url = new URL(request.url);
 
-  // Hashed assets in /assets/ are safe to cache-first (filename changes on rebuild)
+  // ── Navigation requests (HTML pages): ALWAYS network-first ──
+  // This is the critical fix: navigate requests get special treatment
+  // so the SPA shell is always fresh, with a guaranteed cached fallback
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put('/', clone));
+          }
+          return response;
+        })
+        .catch(() =>
+          // Offline: always return the cached app shell (pre-cached on install)
+          caches.match('/')
+        )
+    );
+    return;
+  }
+
+  // ── Hashed assets in /assets/: cache-first (filename changes on rebuild) ──
   if (url.pathname.startsWith('/assets/')) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) =>
@@ -49,20 +71,16 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Everything else: NETWORK-FIRST (always try to get fresh content)
+  // ── Everything else (images, fonts, etc.): network-first ──
   event.respondWith(
     fetch(request)
       .then((response) => {
-        // Cache a copy for offline fallback
         if (response.ok) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
         }
         return response;
       })
-      .catch(() =>
-        // Network failed — try cache as fallback
-        caches.match(request).then((cached) => cached || caches.match('/'))
-      )
+      .catch(() => caches.match(request))
   );
 });
