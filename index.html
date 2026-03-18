@@ -152,28 +152,16 @@
     <div id="root" style="position:relative;z-index:1;background:transparent"></div>
     <script type="module" src="/index.tsx"></script>
     <script>
-    // Register service worker for reliable updates & offline fallback
+    // Clean up any previously installed service worker + caches
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(reg) {
-          // Check for updates every 60 seconds
-          setInterval(function() { reg.update(); }, 60000);
-          // When a new SW is found, activate it immediately
-          reg.addEventListener('updatefound', function() {
-            var newWorker = reg.installing;
-            if (newWorker) {
-              newWorker.addEventListener('statechange', function() {
-                if (newWorker.state === 'activated') {
-                  // New version activated — reload for fresh content
-                  if (navigator.serviceWorker.controller) {
-                    window.location.reload();
-                  }
-                }
-              });
-            }
-          });
-        });
+      navigator.serviceWorker.getRegistrations().then(function(regs) {
+        regs.forEach(function(r) { r.unregister(); });
       });
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          names.forEach(function(n) { caches.delete(n); });
+        });
+      }
     }
     </script>
 </body>
