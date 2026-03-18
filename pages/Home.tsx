@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -209,7 +209,7 @@ const Home: React.FC = () => {
     bgEl.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Check for reduced motion preference
     const prefersReduced = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
@@ -219,6 +219,8 @@ const Home: React.FC = () => {
       prerenderRef.current = prerender;
       // Ensure it's visible (may have been hidden on a previous navigation)
       prerender.style.display = '';
+      // Clear inset shorthand so individual properties take effect on all browsers
+      prerender.style.inset = '';
       // Make it clip to the hero section height instead of fixed full-screen
       prerender.style.position = 'absolute';
       prerender.style.zIndex = '0';
@@ -264,10 +266,11 @@ const Home: React.FC = () => {
       if (prerender?.parentNode) {
         prerender.style.display = 'none';
         prerender.style.position = 'fixed';
-        prerender.style.top = '0';
-        prerender.style.bottom = '0';
-        prerender.style.left = '0';
-        prerender.style.right = '0';
+        prerender.style.inset = '0';
+        prerender.style.top = '';
+        prerender.style.bottom = '';
+        prerender.style.left = '';
+        prerender.style.right = '';
         prerender.style.height = '';
         prerender.style.willChange = '';
         prerender.style.transform = '';
@@ -444,7 +447,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="overflow-x-hidden overflow-y-visible bg-white">
+    <div>
       {/* Hero Section with Dynamic Background */}
       <div ref={heroRef} className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
         {/* Prerender hero from index.html is moved here by useEffect for parallax.
