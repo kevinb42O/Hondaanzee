@@ -93,12 +93,14 @@ const Header: React.FC = () => {
       </header>
 
       {/* Mobile Menu Drawer */}
-      <MobileMenu
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        currentPath={location.pathname}
-        currentHash={location.hash}
-      />
+      {isMenuOpen && (
+        <MobileMenu
+          isOpen={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
+          currentPath={location.pathname}
+          currentHash={location.hash}
+        />
+      )}
     </>
   );
 };

@@ -12,8 +12,8 @@ export const FloatingSupport: React.FC = () => {
     // Check if user prefers reduced motion
     const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Don't show on /steun-ons and /over-ons pages
-    if (location.pathname === '/steun-ons' || location.pathname === '/over-ons') {
+    // Don't show on homepage, /steun-ons and /over-ons pages
+    if (location.pathname === '/' || location.pathname === '/steun-ons' || location.pathname === '/over-ons') {
         return null;
     }
 
