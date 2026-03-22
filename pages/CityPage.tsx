@@ -33,11 +33,24 @@ const CityPage: React.FC = () => {
   if (!city) return null;
 
   return (
-    <div className="animate-in fade-in">
+    <div className="animate-in fade-in relative isolate">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <img
+          src={city.image}
+          alt=""
+          className="h-full w-full object-cover object-center scale-105"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-slate-950/72" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/78 via-slate-900/52 to-slate-50/96" />
+        <div className="absolute inset-x-0 top-0 h-[52vh] bg-gradient-to-b from-slate-900/38 to-transparent" />
+      </div>
+
       <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-sky-600 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
+          className="inline-flex items-center gap-2 text-white/85 font-bold hover:text-sky-200 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2 drop-shadow-md"
         >
           <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
           <span className="text-sm sm:text-base">Terug naar overzicht</span>
