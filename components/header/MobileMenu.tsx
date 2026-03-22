@@ -42,8 +42,9 @@ interface MobileMenuProps {
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath, currentHash }) => {
     return (
         <div
-            className={`fixed inset-0 top-0 lg:hidden bg-white z-[110] transition-all duration-300 ease-out ${isOpen ? 'translate-x-0 opacity-100 pointer-events-auto visible' : 'translate-x-full opacity-0 pointer-events-none invisible'
+            className={`mobile-menu-overlay fixed inset-0 top-0 lg:hidden bg-white z-[110] transition-all duration-300 ease-out ${isOpen ? 'translate-x-0 opacity-100 pointer-events-auto visible' : 'translate-x-full opacity-0 pointer-events-none invisible'
                 }`}
+            style={{ display: isOpen ? 'block' : 'none' }}
             aria-hidden={!isOpen}
             inert={!isOpen}
         >
