@@ -232,14 +232,23 @@ const ResponsibilityBanner: React.FC = () => {
         </svg>
       </div>
 
-      {/* Parallax Background Image - Fixed only on larger screens */}
-      <div
-        className="absolute inset-0 bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: 'url(/blankenberge.webp)' }}
-      />
+      {/* Parallax Background Image - keep only on non-city pages */}
+      {!isCityPage && (
+        <div
+          className="absolute inset-0 bg-cover bg-center md:bg-fixed"
+          style={{ backgroundImage: 'url(/blankenberge.webp)' }}
+        />
+      )}
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/80 to-slate-900" />
+      {!isCityPage && (
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/80 to-slate-900" />
+      )}
+
+      {/* On city pages, keep the wave strip transparent so the page background shows through */}
+      {isCityPage && (
+        <div className="absolute inset-x-0 bottom-0 top-[70px] sm:top-[90px] md:top-[130px] bg-gradient-to-b from-slate-900/62 via-slate-900/78 to-slate-950/92" />
+      )}
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-20">
