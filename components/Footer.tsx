@@ -22,6 +22,36 @@ const FacebookIcon: React.FC<{ size?: number; className?: string }> = ({ size = 
 const Footer: React.FC = () => {
   return (
     <footer className="relative z-[1] bg-gradient-to-b from-slate-900 via-slate-950 to-black pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 safe-area-bottom">
+      {/* Animated wave divider moved from responsibility section */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none rotate-180">
+        <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
+          <svg
+            className="block h-[60px] sm:h-[80px] md:h-[120px]"
+            style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+              className="fill-current text-slate-900"
+            />
+          </svg>
+          <svg
+            className="block h-[60px] sm:h-[80px] md:h-[120px]"
+            style={{ minWidth: '100vw', flex: '0 0 100vw' }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
+              className="fill-current text-slate-900"
+            />
+          </svg>
+        </div>
+      </div>
+
       {/* Ocean depth gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-blue-950/20 pointer-events-none"></div>
 
