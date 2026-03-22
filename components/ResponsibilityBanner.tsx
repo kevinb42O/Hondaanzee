@@ -2,10 +2,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Trash2, Heart, ShieldAlert, Users, Sparkles, Fish } from 'lucide-react';
+import { CITIES } from '../cityData.ts';
 
 const ResponsibilityBanner: React.FC = () => {
   const location = useLocation();
   const isMapPage = location.pathname === '/kaart';
+  const isCityPage = CITIES.some((city) => `/${city.slug}` === location.pathname);
 
   return (
     <section className="relative py-20 sm:py-28 md:py-36 overflow-hidden">
@@ -20,8 +22,12 @@ const ResponsibilityBanner: React.FC = () => {
             preserveAspectRatio="none"
           >
             <path
-              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
-              className={`fill-current ${isMapPage ? 'text-slate-950' : location.pathname === '/' ? 'text-stone-50' : 'text-white'}`}
+              d={isCityPage
+                ? 'M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60'
+                : 'M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z'}
+              className={isCityPage ? 'fill-none stroke-white/40' : `fill-current ${isMapPage ? 'text-slate-950' : location.pathname === '/' ? 'text-stone-50' : 'text-white'}`}
+              strokeWidth={isCityPage ? 4 : undefined}
+              strokeLinecap={isCityPage ? 'round' : undefined}
             />
           </svg>
           <svg
@@ -32,8 +38,12 @@ const ResponsibilityBanner: React.FC = () => {
             preserveAspectRatio="none"
           >
             <path
-              d="M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z"
-              className={`fill-current ${isMapPage ? 'text-slate-950' : location.pathname === '/' ? 'text-stone-50' : 'text-white'}`}
+              d={isCityPage
+                ? 'M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60'
+                : 'M0,60 C150,30 300,90 450,60 C600,30 750,90 900,60 C1050,30 1150,60 1200,60 L1200,120 L0,120 Z'}
+              className={isCityPage ? 'fill-none stroke-white/40' : `fill-current ${isMapPage ? 'text-slate-950' : location.pathname === '/' ? 'text-stone-50' : 'text-white'}`}
+              strokeWidth={isCityPage ? 4 : undefined}
+              strokeLinecap={isCityPage ? 'round' : undefined}
             />
           </svg>
         </div>
