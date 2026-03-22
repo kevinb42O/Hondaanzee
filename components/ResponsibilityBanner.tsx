@@ -31,22 +31,23 @@ const ResponsibilityBanner: React.FC = () => {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-20">
-        {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest mb-6 shadow-xl">
-            <Sparkles size={12} className="text-amber-300" strokeWidth={2.5} />
-            Samen houden we de kust fijn
+        <div className="bg-slate-800/35 backdrop-blur-xl border border-white/15 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-6 sm:p-8 md:p-10 shadow-2xl shadow-black/30">
+          {/* Header */}
+          <div className="text-center mb-12 sm:mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest mb-6 shadow-xl">
+              <Sparkles size={12} className="text-amber-300" strokeWidth={2.5} />
+              Samen houden we de kust fijn
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
+              Code van de <span className="text-amber-400">Goede Kustvriend</span>
+            </h2>
+            <p className="mt-4 sm:mt-6 text-gray-200 font-normal max-w-2xl mx-auto leading-relaxed text-base sm:text-lg px-2" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.4)' }}>
+              Een dagje zee is voor iedereen plezierig als we rekening houden met elkaar en de natuur. Volg deze zes gouden regels.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
-            Code van de <span className="text-amber-400">Goede Kustvriend</span>
-          </h2>
-          <p className="mt-4 sm:mt-6 text-gray-200 font-normal max-w-2xl mx-auto leading-relaxed text-base sm:text-lg px-2" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.4)' }}>
-            Een dagje zee is voor iedereen plezierig als we rekening houden met elkaar en de natuur. Volg deze zes gouden regels.
-          </p>
-        </div>
 
-        {/* Glassmorphism Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {/* Glassmorphism Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Rule 1: Cleanliness */}
           <div className="group bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/20">
             <div className="mb-6">
@@ -135,6 +136,7 @@ const ResponsibilityBanner: React.FC = () => {
             <p className="text-white text-sm sm:text-base leading-relaxed transition-colors duration-300">
               Zie je zwerfvuil? Raap het op en neem het mee in een poepzakje naar de eerstvolgende vuilbak. Samen houden we de kust schoon.
             </p>
+          </div>
           </div>
         </div>
       </div>

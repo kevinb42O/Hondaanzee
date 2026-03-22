@@ -47,10 +47,10 @@ const CityPage: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-[52vh] bg-gradient-to-b from-slate-900/38 to-transparent" />
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
+      <div className="max-w-3xl mx-auto px-4 pt-24 sm:pt-28 md:pt-32">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-white/85 font-bold hover:text-sky-200 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2 drop-shadow-md"
+          className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/92 backdrop-blur-md border border-white text-slate-900 font-extrabold shadow-lg shadow-slate-900/20 hover:bg-white transition-colors active:opacity-90 touch-target"
         >
           <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
           <span className="text-sm sm:text-base">Terug naar overzicht</span>
