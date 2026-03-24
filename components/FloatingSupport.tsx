@@ -5,12 +5,13 @@ import { Bone, X } from 'lucide-react';
 export const FloatingSupport: React.FC = () => {
     const location = useLocation();
     const [isMinimized, setIsMinimized] = useState(() => {
-        // Load minimized state from localStorage
-        return localStorage.getItem('floatingSupportMinimized') === 'true';
+        try {
+            return localStorage.getItem('floatingSupportMinimized') === 'true';
+        } catch { return false; }
     });
     
     // Check if user prefers reduced motion
-    const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = (() => { try { return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false; } catch { return false; } })();
 
     // Don't show on homepage, /steun-ons and /over-ons pages
     if (location.pathname === '/' || location.pathname === '/steun-ons' || location.pathname === '/over-ons') {
@@ -20,12 +21,12 @@ export const FloatingSupport: React.FC = () => {
     // Save minimized state to localStorage
     const handleMinimize = () => {
         setIsMinimized(true);
-        localStorage.setItem('floatingSupportMinimized', 'true');
+        try { localStorage.setItem('floatingSupportMinimized', 'true'); } catch { /* blocked in in-app browsers */ }
     };
 
     const handleMaximize = () => {
         setIsMinimized(false);
-        localStorage.setItem('floatingSupportMinimized', 'false');
+        try { localStorage.setItem('floatingSupportMinimized', 'false'); } catch { /* blocked in in-app browsers */ }
     };
 
     if (isMinimized) {

@@ -160,7 +160,7 @@ function App() {
         <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
           <Footer />
         </Suspense>
-        <FloatingSupport />
+        <ErrorBoundary><FloatingSupport /></ErrorBoundary>
         <Analytics />
       </div>
     </BrowserRouter>

@@ -15,10 +15,11 @@ const CoastalMap: React.FC = () => {
     const [hoveredCity, setHoveredCity] = useState<string | null>(null);
     const [userCity, setUserCity] = useState<string | null>(null);
     const [showInstructions, setShowInstructions] = useState<boolean>(() => {
-        // Check if user has dismissed instructions before
-        if (globalThis.window !== undefined) {
-            return !localStorage.getItem('mapInstructionsDismissed');
-        }
+        try {
+            if (globalThis.window !== undefined) {
+                return !localStorage.getItem('mapInstructionsDismissed');
+            }
+        } catch { /* localStorage blocked in in-app browsers */ }
         return true;
     });
 
@@ -102,7 +103,7 @@ const CoastalMap: React.FC = () => {
                             <button
                                 onClick={() => {
                                     setShowInstructions(false);
-                                    localStorage.setItem('mapInstructionsDismissed', 'true');
+                                    try { localStorage.setItem('mapInstructionsDismissed', 'true'); } catch { /* blocked */ }
                                 }}
                                 className="absolute top-2 right-2 w-5 h-5 flex items-center justify-center rounded-full bg-sky-200/50 hover:bg-sky-300/70 transition-colors text-sky-700 text-xs font-bold"
                                 aria-label="Instructies sluiten"
