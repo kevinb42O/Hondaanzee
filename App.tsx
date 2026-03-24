@@ -91,7 +91,7 @@ const ScrollToHash = () => {
       return () => clearTimeout(timeout);
     } else {
       // Reset scroll to top on every route change without a hash
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }, [hash, pathname]);
 

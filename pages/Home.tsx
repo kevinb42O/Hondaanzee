@@ -211,7 +211,9 @@ const Home: React.FC = () => {
 
   useLayoutEffect(() => {
     // Check for reduced motion preference
-    const prefersReduced = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduced = (() => {
+      try { return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false; } catch { return false; }
+    })();
     
     // Grab the prerender hero from index.html for parallax
     const prerender = document.getElementById('hero-prerender');
