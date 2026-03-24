@@ -8,20 +8,34 @@ import Services from '../components/Services.tsx';
 import OffLeashAreas from '../components/OffLeashAreas.tsx';
 import BusinessCTA from '../components/BusinessCTA.tsx';
 import LocalHero from '../components/LocalHero.tsx';
+import CityFAQ from '../components/CityFAQ.tsx';
 import { CITIES } from '../cityData.ts';
 import { useSEO, getCitySEO } from '../utils/seo.ts';
 import { WeatherWidget } from '../components/WeatherWidget.tsx';
+import { buildCityFAQSchema } from '../utils/cityFaq.ts';
 
 const CityPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const city = CITIES.find(c => c.slug === slug);
 
+  const citySEO = city ? getCitySEO(city.name, city.slug) : null;
+
   // Apply SEO metadata
-  useSEO(city ? getCitySEO(city.name, city.slug) : {
-    title: 'Stad niet gevonden | HondAanZee.be',
-    description: 'Deze stad werd niet gevonden in onze database'
-  });
+  useSEO(
+    city && citySEO
+      ? {
+          ...citySEO,
+          structuredData: [
+            ...(Array.isArray(citySEO.structuredData) ? citySEO.structuredData : [citySEO.structuredData]),
+            buildCityFAQSchema(city)
+          ]
+        }
+      : {
+          title: 'Stad niet gevonden | HondAanZee.be',
+          description: 'Deze stad werd niet gevonden in onze database'
+        }
+  );
 
   useEffect(() => {
     if (!city) {
@@ -67,6 +81,8 @@ const CityPage: React.FC = () => {
       <Hotspots city={city} />
 
       <Services city={city} />
+
+      <CityFAQ city={city} />
 
       {/* Local Hero: random aanrader shout-out for this city */}
       <section className="py-10 sm:py-12 md:py-16 bg-white">

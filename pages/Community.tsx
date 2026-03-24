@@ -21,11 +21,11 @@ const MONTHLY_THEMES = [
 
 // ─── TOPPER VAN DE WEEK ───────────────────────────────────────────────
 const TOPPER_VAN_DE_WEEK = {
-  image: '/tilaxia_topper.webp',
-  dogName: 'Tila & Xia',
-  ownerName: 'Kathleen Vermote',
-  city: 'Moeder & dochter',
-  caption: 'Focus: 100%. Watertemperatuur: ijskoud. Conclusie: we wachten nog even. Tila en Xia voeren de perfecte synchrone twijfel uit aan de vloedlijn. Eerste plons? Misschien morgen! 🥶🐾',
+  image: '/bries_en_vuitton.jpg',
+  dogName: 'Bries & Vuitton',
+  ownerName: 'Michele Vonck',
+  city: 'Blankenberge',
+  caption: 'Bries en Vuitton uit Blankenberge zijn onze Topper(s) van de Week. Op de strandtrap, vrij en zichtbaar in hun element, tonen ze precies waar Hond aan Zee voor staat: genieten van de kust met respect, vertrouwen en plezier. Met dank aan bazinnetje Michele voor deze prachtige inzending.',
 };
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
@@ -329,7 +329,7 @@ const Community: React.FC = () => {
                 
                 <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/30">
                   <Sparkles size={14} className="text-amber-300" />
-                  <span className="text-white text-sm font-bold">Kustvibe: <span className="text-amber-300">Synchroon Twijfelen</span></span>
+                  <span className="text-white text-sm font-bold">Kustvibe: <span className="text-amber-300">Strandtrap Champions</span></span>
                 </div>
               </div>
             </div>
