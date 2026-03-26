@@ -104,11 +104,8 @@ const HeroPrerenderToggle = () => {
   useEffect(() => {
     const el = document.getElementById('hero-prerender');
     if (!el) return;
-    // On non-homepage routes, hide the prerender hero (it sits behind #root)
-    // On homepage, Home.tsx takes ownership and will show/move it
-    if (pathname !== '/') {
-      el.style.display = 'none';
-    }
+    // Keep global visibility in sync with route so Home can safely take ownership.
+    el.style.display = pathname === '/' ? '' : 'none';
   }, [pathname]);
   return null;
 };

@@ -53,9 +53,16 @@ const ROUTES = [
 function startServer() {
   return new Promise((resolve) => {
     const server = createServer((req, res) => {
-      let filePath = path.join(DIST_DIR, req.url === '/' ? 'index.html' : req.url);
-      
-      // SPA fallback: if file doesn't exist, serve index.html
+      const requestPath = (req.url || '/').split('?')[0].split('#')[0];
+      const relativePath = requestPath === '/' ? 'index.html' : requestPath.replace(/^\/+/, '');
+      let filePath = path.join(DIST_DIR, relativePath);
+
+      // If the request maps to a directory, try that directory's index.html.
+      if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+        filePath = path.join(filePath, 'index.html');
+      }
+
+      // SPA fallback: if file doesn't exist, serve the app index.html.
       if (!fs.existsSync(filePath)) {
         filePath = path.join(DIST_DIR, 'index.html');
       }
