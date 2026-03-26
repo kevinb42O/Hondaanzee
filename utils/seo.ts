@@ -263,8 +263,13 @@ export const SEO_DATA = {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "EUR",
+                "validFrom": "2026-01-01T00:00:00+01:00",
                 "availability": "https://schema.org/InStock",
                 "url": "https://hondaanzee.be/agenda"
+              },
+              "performer": {
+                "@type": "Organization",
+                "name": "Visit De Panne"
               },
               "organizer": {
                 "@type": "Organization",
@@ -302,8 +307,13 @@ export const SEO_DATA = {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "EUR",
+                "validFrom": "2026-01-01T00:00:00+01:00",
                 "availability": "https://schema.org/InStock",
                 "url": "https://hondaanzee.be/agenda"
+              },
+              "performer": {
+                "@type": "Organization",
+                "name": "Pooches.be & vzw Hondenfestival"
               },
               "organizer": {
                 "@type": "Organization",
@@ -341,8 +351,13 @@ export const SEO_DATA = {
                 "@type": "Offer",
                 "price": "5",
                 "priceCurrency": "EUR",
+                "validFrom": "2026-01-01T00:00:00+01:00",
                 "availability": "https://schema.org/InStock",
                 "url": "https://hondaanzee.be/agenda"
+              },
+              "performer": {
+                "@type": "Organization",
+                "name": "SOS Reptiel - Reptile Rescue Center Belgium"
               },
               "organizer": {
                 "@type": "Organization",
