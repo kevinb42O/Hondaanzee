@@ -1,6 +1,6 @@
 
 import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useInRouterContext, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
@@ -119,50 +119,61 @@ const LocationAwareErrorBoundary = ({ children }: { children: React.ReactNode })
   return <ErrorBoundary key={pathname}>{children}</ErrorBoundary>;
 };
 
+const AppContent = () => {
+  return (
+    <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-hidden">
+      <ScrollToHash />
+      <HeroPrerenderToggle />
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">Ga naar inhoud</a>
+      <Header />
+      <main id="main-content" className="flex-grow">
+        <LocationAwareErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/hotspots" element={<AllHotspots />} />
+              <Route path="/diensten" element={<AllServices />} />
+              <Route path="/losloopzones" element={<AllOffLeashAreas />} />
+              <Route path="/kaart" element={<CoastalMap />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/algemene-voorwaarden" element={<Terms />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path="/over-ons" element={<About />} />
+              <Route path="/goed-om-te-weten" element={<GoedOmTeWeten />} />
+              <Route path="/steun-ons" element={<Support />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/agenda" element={<Agenda />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/updates" element={<Updates />} />
+              <Route path="/:slug" element={<CityPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </LocationAwareErrorBoundary>
+      </main>
+      <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
+        <ResponsibilityBanner />
+      </Suspense>
+      <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
+        <Footer />
+      </Suspense>
+      <ErrorBoundary><FloatingSupport /></ErrorBoundary>
+      <Analytics />
+    </div>
+  );
+};
+
 function App() {
+  const isInRouterContext = useInRouterContext();
+
+  if (isInRouterContext) {
+    return <AppContent />;
+  }
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900 overflow-x-hidden">
-        <ScrollToHash />
-        <HeroPrerenderToggle />
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">Ga naar inhoud</a>
-        <Header />
-        <main id="main-content" className="flex-grow">
-          <LocationAwareErrorBoundary>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/hotspots" element={<AllHotspots />} />
-                <Route path="/diensten" element={<AllServices />} />
-                <Route path="/losloopzones" element={<AllOffLeashAreas />} />
-                <Route path="/kaart" element={<CoastalMap />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/algemene-voorwaarden" element={<Terms />} />
-                <Route path="/cookies" element={<Cookies />} />
-                <Route path="/over-ons" element={<About />} />
-                <Route path="/goed-om-te-weten" element={<GoedOmTeWeten />} />
-                <Route path="/steun-ons" element={<Support />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogDetail />} />
-                <Route path="/agenda" element={<Agenda />} />
-                <Route path="/community" element={<Community />} />
-                <Route path="/updates" element={<Updates />} />
-                <Route path="/:slug" element={<CityPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </LocationAwareErrorBoundary>
-        </main>
-        <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
-          <ResponsibilityBanner />
-        </Suspense>
-        <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
-          <Footer />
-        </Suspense>
-        <ErrorBoundary><FloatingSupport /></ErrorBoundary>
-        <Analytics />
-      </div>
+      <AppContent />
     </BrowserRouter>
   );
 }
