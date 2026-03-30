@@ -163,6 +163,7 @@ const Home: React.FC = () => {
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [hasPrerenderHero, setHasPrerenderHero] = useState(false);
   const navigate = useNavigate();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
@@ -218,6 +219,7 @@ const Home: React.FC = () => {
     // Grab the prerender hero from index.html for parallax
     const prerender = document.getElementById('hero-prerender');
     if (prerender) {
+      setHasPrerenderHero(true);
       prerenderRef.current = prerender;
       // Ensure it's visible (may have been hidden on a previous navigation)
       prerender.style.display = '';
@@ -238,6 +240,8 @@ const Home: React.FC = () => {
       if (heroRef.current) {
         heroRef.current.prepend(prerender);
       }
+    } else {
+      setHasPrerenderHero(false);
     }
     
     if (prefersReduced || !prerender) return;
@@ -454,6 +458,23 @@ const Home: React.FC = () => {
       <div ref={heroRef} className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
         {/* Prerender hero from index.html is moved here by useEffect for parallax.
             The gradient overlays are rendered below to ensure contrast. */}
+        {!hasPrerenderHero && (
+          <div className="absolute inset-0 z-0 bg-slate-900">
+            <img
+              src="/lexi.webp"
+              srcSet="/lexi-mobile.webp 800w, /lexi.webp 1920w"
+              sizes="100vw"
+              alt="Hond aan het strand"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: 'center 30%' }}
+              width={1920}
+              height={1080}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </div>
+        )}
         <div className="absolute inset-0 z-[1] bg-slate-900/60"></div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
 
