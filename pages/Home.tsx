@@ -824,7 +824,7 @@ const Home: React.FC = () => {
               <Waves size={24} className="text-sky-500" />
               Onze Badsteden
             </h2>
-            <div className="hidden sm:block text-sm font-bold text-slate-400 uppercase tracking-widest">
+            <div className="hidden sm:block text-sm font-bold text-slate-500 uppercase tracking-widest">
               Totaal: {filteredCities.length} resultaten
             </div>
           </div>
