@@ -248,8 +248,8 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
   return (
     <section className="py-10 sm:py-12 md:py-24 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-stretch">
-          <div className="flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
+          <div>
             <div className="mb-6 sm:mb-8 md:mb-10">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Losloopweides</h2>
               <p className="text-slate-600 font-medium leading-relaxed max-w-2xl text-xs sm:text-sm md:text-base">
@@ -358,7 +358,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
             )}
           </div>
 
-          <div className="aspect-[4/3] lg:aspect-auto min-h-[280px] sm:min-h-[350px] md:min-h-[400px] relative group">
+          <div className="lg:sticky lg:top-28 h-[280px] sm:h-[350px] md:h-[400px] lg:h-[480px] relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-emerald-50 rounded-[1.5rem] sm:rounded-[2rem]" />
             <div className="absolute -inset-1 bg-gradient-to-br from-sky-400/20 via-emerald-400/20 to-cyan-400/20 rounded-[1.75rem] sm:rounded-[2.25rem] blur-sm opacity-60 md:group-hover:opacity-100 transition-opacity duration-500" />
             <div ref={mapRef} className="absolute inset-0 border-2 sm:border-4 border-white/80 shadow-xl sm:shadow-2xl shadow-sky-500/10 ring-1 ring-slate-200/50 rounded-[1.5rem] sm:rounded-[2rem]" style={{ touchAction: 'pan-x pan-y' }} />

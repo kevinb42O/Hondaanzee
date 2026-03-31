@@ -17,12 +17,12 @@ const COASTLINE_ORDER = [
 ];
 
 // Grid layout (6-col): elke rij telt op tot 6
-// Rij 1: [3][3]     — Knokke + Zeebrugge gelijk
-// Rij 2: [4][2]     — Blankenberge groot
-// Rij 3: [2][4]     — Bredene groot (zigzag)
-// Rij 4: [2][2][2]  — 3 gelijk (rustpunt)
-// Rij 5: [4][2]     — Koksijde groot
-const FULL_LAYOUT = [3, 3, 4, 2, 2, 4, 2, 2, 2, 4, 2];
+// Rij 1: [flex]      — Knokke + Zeebrugge (apart, met hover-swap)
+// Rij 2: [4][2]      — Blankenberge groot
+// Rij 3: [2][4]      — Bredene groot (zigzag)
+// Rij 4: [4][2]      — Oostende groot (featured)
+// Rij 5: [2][2][2]   — 3 gelijk (rustpunt)
+const FULL_LAYOUT = [4, 2, 2, 4, 4, 2, 2, 2, 2];
 
 // Fallback: repeating pattern for filtered results
 const FALLBACK_PATTERN = [2, 2, 2];
@@ -45,7 +45,7 @@ const getGridClass = (index: number, total: number): string => {
 };
 
 // Steden die dezelfde hoogte krijgen als de grote kaarten
-const TALL_CARDS = new Set(['wenduine', 'de-haan', 'de-panne']);
+const TALL_CARDS = new Set(['wenduine', 'de-haan', 'de-panne', 'oostende', 'middelkerke', 'nieuwpoort', 'koksijde']);
 
 // Images with pre-generated 640w responsive variants
 const RESPONSIVE_IMAGES = new Set([
@@ -139,7 +139,7 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
           isFeatured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'
         }`}>
           {city.name}
-          <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:scale-110 shadow-xl flex-shrink-0">
+          <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:animate-arrow-salvo shadow-xl flex-shrink-0">
             <ArrowRight size={isFeatured ? 22 : 18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
           </div>
         </h3>
@@ -150,6 +150,109 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
         </p>
       </div>
     </Link>
+  );
+};
+
+// Rij-component met dynamische hover-swap animatie
+// Op desktop hover: hovered kaart groeit vloeiend, andere krimpt
+const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems: boolean, rowIndex: number }> = ({ cities, defaultFlexes, isThreeItems, rowIndex }) => {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  // Zorg dat ze op mobiel stacken (flex-col), en op tablet/desktop naast elkaar (flex-row)
+  // Voor 3 items gebruiken we lg:flex-row zodat ze niet te smal worden op tablet
+  return (
+    <div className={`flex flex-col ${isThreeItems ? 'lg:flex-row' : 'sm:flex-row'} gap-3 sm:gap-4 lg:gap-5 mb-3 sm:mb-4 lg:mb-5`}>
+      {cities.map((city, i) => {
+        const defaultFlex = defaultFlexes[i];
+        let activeFlex;
+        if (hoveredIdx === null) {
+          activeFlex = defaultFlex;
+        } else {
+          // Minder extreme verhoudingen voor de 3-items rij om overflow van lange gemeentenamen te voorkomen
+          if (isThreeItems) {
+            activeFlex = hoveredIdx === i ? 3 : 2;
+          } else {
+            activeFlex = hoveredIdx === i ? 4 : 2;
+          }
+        }
+        // Vanaf flex-waarde 3 tonen we de 'featured' text states (scale, opacity)
+        const isFeatured = activeFlex >= 3;
+
+        const srcSet = getResponsiveSrcSet(city.image);
+        const status = evaluateCityRuleStatus(city).status;
+        const badge = STATUS_BADGE_CONFIG[status];
+        const StatusIcon = badge.icon;
+
+        return (
+          <Link
+            key={city.slug}
+            to={`/${city.slug}`}
+            className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] h-[280px] sm:h-[300px] lg:h-[380px] w-full sm:w-auto ${
+              isFeatured
+                ? 'shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5'
+                : 'shadow-md hover:shadow-xl'
+            }`}
+            style={{
+              flex: `${activeFlex} 1 0%`,
+              contain: 'paint layout', // Isoleert de layout-berekeningen voor meer performantie
+              willChange: 'flex, transform', // Hint voor de rendering engine
+              transition: 'flex 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease-out',
+              animationDelay: `${(rowIndex * cities.length + i) * 0.04}s`
+            }}
+            onMouseEnter={() => setHoveredIdx(i)}
+            onMouseLeave={() => setHoveredIdx(null)}
+          >
+            <img
+              src={city.image}
+              srcSet={srcSet}
+              alt={city.name}
+              className="absolute inset-0 w-full h-full object-cover transform-gpu transition-transform duration-700 ease-out md:group-hover:scale-105"
+              width={800}
+              height={380}
+              loading={rowIndex === 0 && i < 2 ? "eager" : "lazy"}
+              decoding="async"
+              sizes="(max-width: 640px) 100vw, 50vw"
+            />
+            <div
+              className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-2 backdrop-blur-md transform-gpu transition-transform duration-300 md:group-hover:scale-105 ${badge.containerClass}`}
+              aria-label={`${city.name}: ${badge.label}`}
+              title={`${city.name}: ${badge.label}`}
+            >
+              <StatusIcon size={16} strokeWidth={3} className="sm:w-[18px] sm:h-[18px] drop-shadow-sm" />
+            </div>
+            {/* Statische gradient ipv animerende classes bespaart repaints */}
+            <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white bg-gradient-to-t from-black/90 via-black/40 to-transparent`}>
+              <div className="flex items-center gap-2 text-sky-300 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3 drop-shadow-lg">
+                <MapPin size={14} className="sm:w-4 sm:h-4" />
+                <span>Ontdek {city.name}</span>
+              </div>
+              
+              {/* Container die niét schaalt, voorkomt dat de knop rechts buiten beeld gaat */}
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                {/* Animatie via hardware-versnelde scale gekoppeld enkel aan tekst */}
+                <h3 className={`font-black tracking-tighter drop-shadow-lg text-2xl sm:text-3xl lg:text-4xl origin-bottom-left transform-gpu transition-all duration-500 ease-out will-change-transform ${
+                  isFeatured ? 'scale-100 sm:scale-105' : 'scale-90 sm:scale-95'
+                }`}>
+                  {city.name}
+                </h3>
+                
+                {/* Animatie van de volledige houder, niet enkel de pijl */}
+                <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full transform-gpu transition-all duration-300 md:group-hover:bg-sky-600 md:group-hover:animate-arrow-salvo shadow-xl flex-shrink-0">
+                  <ArrowRight size={18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+                </div>
+              </div>
+              
+              {/* Animatie via transform/opacity ipv line-clamp height reflows */}
+              <p className={`text-slate-100 font-medium leading-relaxed drop-shadow-md text-xs sm:text-sm line-clamp-2 transform-gpu transition-all duration-500 ease-out ${
+                isFeatured ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-90'
+              }`}>
+                {city.description}
+              </p>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
   );
 };
 
@@ -333,6 +436,31 @@ const Home: React.FC = () => {
       return (idxA === -1 ? 999 : idxA) - (idxB === -1 ? 999 : idxB);
     });
   }, [searchQuery]);
+
+  // Toon speciale layouts alleen als alle steden zichtbaar zijn (geen filter)
+  const isFullView = searchQuery.trim() === '' && filteredCities.length === COASTLINE_ORDER.length;
+
+  const fullViewRows = useMemo(() => {
+    if (!isFullView) return [];
+    const ROW_CONFIGS = [
+      { count: 2, flexes: [2, 4] },
+      { count: 2, flexes: [4, 2] },
+      { count: 2, flexes: [2, 4] },
+      { count: 2, flexes: [4, 2] },
+      { count: 3, flexes: [2, 2, 2] }
+    ];
+    const rows = [];
+    let idx = 0;
+    for (const config of ROW_CONFIGS) {
+      if (idx >= filteredCities.length) break;
+      rows.push({
+        cities: filteredCities.slice(idx, idx + config.count),
+        flexes: config.flexes
+      });
+      idx += config.count;
+    }
+    return rows;
+  }, [filteredCities, isFullView]);
 
   // Create suggestions list (limit to 6 for better UX)
   const suggestions = useMemo(() => {
@@ -702,15 +830,25 @@ const Home: React.FC = () => {
           </div>
 
           {filteredCities.length > 0 ? (
-            <div className={
-              filteredCities.length >= 5
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
-                : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
-            }>
-              {filteredCities.map((city, index) => (
-                <CityCard key={city.slug} city={city} index={index} total={filteredCities.length} />
-              ))}
-            </div>
+            <>
+              {isFullView ? (
+                <div className="flex flex-col">
+                  {fullViewRows.map((row, index) => (
+                    <HoverRow key={index} cities={row.cities} defaultFlexes={row.flexes} isThreeItems={row.flexes.length === 3} rowIndex={index} />
+                  ))}
+                </div>
+              ) : (
+                <div className={
+                  filteredCities.length >= 5
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
+                    : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
+                }>
+                  {filteredCities.map((city, index) => (
+                    <CityCard key={city.slug} city={city} index={index} total={filteredCities.length} />
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-20 md:py-32 px-6 bg-white rounded-[4rem] border-2 border-dashed border-slate-100 animate-in fade-in shadow-inner">
               <div className="bg-slate-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-10 text-slate-200">
