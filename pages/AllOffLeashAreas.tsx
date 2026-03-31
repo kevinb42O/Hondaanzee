@@ -1,16 +1,22 @@
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, X, Star, MapPin, Navigation, MessageSquare } from 'lucide-react';
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
-import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import { getOffLeashAreaSEO, useSEO, SEO_DATA } from '../utils/seo.ts';
 import ImagePlaceholder from '../components/ImagePlaceholder.tsx';
 import ImageModal from '../components/ImageModal.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ReviewSection from '../components/ReviewSection';
 import { supabase } from '../utils/supabaseClient';
+import {
+  findOffLeashAreaBySlug,
+  getOffLeashAreaPath,
+  getOffLeashAreasPath,
+  resolveOffLeashAreaSelection,
+} from '../utils/offLeashRoutes.ts';
 
 // Fix Leaflet's default icon path issues
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -34,15 +40,14 @@ type OffLeashArea = typeof OFF_LEASH_AREAS[number];
 const addAreaMarker = (
   area: OffLeashArea,
   map: L.Map,
-  onSelect: (index: number) => void,
+  onSelect: (slug: string) => void,
   markers: L.Marker[],
   bounds: L.LatLngBounds
 ) => {
-  const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
   const marker = L.marker([area.lat, area.lng]).addTo(map);
 
   marker.on('click', () => {
-    onSelect(globalIndex);
+    onSelect(area.slug);
     map.setView([area.lat, area.lng], 14, { animate: true });
   });
 
@@ -60,9 +65,10 @@ const addAreaMarker = (
 };
 
 const AllOffLeashAreas: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
+  const { slug } = useParams<{ slug?: string }>();
   const [selectedCity, setSelectedCity] = useState<string>('all');
-  const [selectedArea, setSelectedArea] = useState<number | null>(null);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
@@ -70,8 +76,35 @@ const AllOffLeashAreas: React.FC = () => {
   const areaDetailRef = useRef<HTMLDivElement>(null);
   const [reviewCounts, setReviewCounts] = useState<Record<string, number>>({});
 
+  const legacyAreaParam = useMemo(() => new URLSearchParams(location.search).get('area'), [location.search]);
+  const selection = useMemo(
+    () => resolveOffLeashAreaSelection(OFF_LEASH_AREAS, slug, legacyAreaParam),
+    [slug, legacyAreaParam],
+  );
+  const displayedArea = useMemo(
+    () => findOffLeashAreaBySlug(OFF_LEASH_AREAS, selection.selectedSlug),
+    [selection.selectedSlug],
+  );
+  const displayedCity = useMemo(
+    () => (displayedArea ? CITIES.find((city) => city.slug === displayedArea.city) || null : null),
+    [displayedArea],
+  );
 
-  useSEO(SEO_DATA.losloopzones);
+  useSEO(displayedArea && displayedCity ? getOffLeashAreaSEO(displayedArea, displayedCity.name) : SEO_DATA.losloopzones);
+
+  const showOverview = useCallback((nextCity?: string) => {
+    if (typeof nextCity === 'string') {
+      setSelectedCity(nextCity);
+    }
+
+    if (location.pathname !== getOffLeashAreasPath() || location.search) {
+      navigate(getOffLeashAreasPath());
+    }
+  }, [location.pathname, location.search, navigate]);
+
+  const openAreaDetail = useCallback((areaSlug: string) => {
+    navigate(getOffLeashAreaPath(areaSlug));
+  }, [navigate]);
 
   // Fetch review counts for all areas
   useEffect(() => {
@@ -90,30 +123,29 @@ const AllOffLeashAreas: React.FC = () => {
     fetchReviewCounts();
   }, []);
 
-  // Handle URL parameter for direct area selection
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const areaParam = params.get('area');
-    if (areaParam) {
-      const areaIndex = Number.parseInt(areaParam, 10);
-      if (!Number.isNaN(areaIndex) && areaIndex >= 0 && areaIndex < OFF_LEASH_AREAS.length) {
-        setSelectedArea(areaIndex);
-        const area = OFF_LEASH_AREAS[areaIndex];
-        if (area) {
-          setSelectedCity(area.city);
-        }
-      }
+    if (!selection.canonicalPath) return;
+
+    const currentPath = `${location.pathname}${location.search}`;
+    if (currentPath !== selection.canonicalPath) {
+      navigate(selection.canonicalPath, { replace: true });
     }
-  }, [location.search]);
+  }, [location.pathname, location.search, navigate, selection.canonicalPath]);
+
+  useEffect(() => {
+    if (displayedArea) {
+      setSelectedCity(displayedArea.city);
+    }
+  }, [displayedArea]);
 
   // Scroll to area detail when selected
   useEffect(() => {
-    if (selectedArea !== null && areaDetailRef.current) {
+    if (displayedArea && areaDetailRef.current) {
       setTimeout(() => {
         areaDetailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 300);
     }
-  }, [selectedArea]);
+  }, [displayedArea]);
 
   const filteredAreas = useMemo(() => {
     let areas = [...OFF_LEASH_AREAS];
@@ -124,13 +156,6 @@ const AllOffLeashAreas: React.FC = () => {
 
     return areas;
   }, [selectedCity]);
-
-  const displayedArea = useMemo(() => {
-    if (selectedArea !== null) {
-      return OFF_LEASH_AREAS.find((_, index) => index === selectedArea) || null;
-    }
-    return null;
-  }, [selectedArea]);
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -165,13 +190,13 @@ const AllOffLeashAreas: React.FC = () => {
       const bounds = L.latLngBounds([]);
 
       // Map logic: If an area is selected, ONLY show that pin. Otherwise show all filtered areas.
-      const mapAreas = (selectedArea !== null && displayedArea) ? [displayedArea] : filteredAreas;
+      const mapAreas = displayedArea ? [displayedArea] : filteredAreas;
 
-      mapAreas.forEach((area) => addAreaMarker(area, map, setSelectedArea, markersRef.current, bounds));
+      mapAreas.forEach((area) => addAreaMarker(area, map, openAreaDetail, markersRef.current, bounds));
 
       // Fit map to show all markers
       if (mapAreas.length > 0) {
-        if (selectedArea !== null && displayedArea) {
+        if (displayedArea) {
           map.setView([displayedArea.lat, displayedArea.lng], 14);
         } else {
           map.fitBounds(bounds, { padding: [50, 50] });
@@ -187,7 +212,7 @@ const AllOffLeashAreas: React.FC = () => {
         leafletInstance.current = null;
       }
     };
-  }, [filteredAreas, selectedArea, displayedArea]);
+  }, [displayedArea, filteredAreas, openAreaDetail]);
 
   const renderStars = (rating?: number) => {
     if (!rating) return null;
@@ -287,8 +312,7 @@ const AllOffLeashAreas: React.FC = () => {
               {selectedCity !== 'all' && (
                 <button
                   onClick={() => {
-                    setSelectedCity('all');
-                    setSelectedArea(null);
+                    showOverview('all');
                   }}
                   className="text-sm font-bold text-sky-600 hover:text-sky-700 hover:bg-sky-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
                 >
@@ -305,8 +329,7 @@ const AllOffLeashAreas: React.FC = () => {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => {
-                    setSelectedCity('all');
-                    setSelectedArea(null);
+                    showOverview('all');
                   }}
                   className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
                     ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
@@ -323,7 +346,9 @@ const AllOffLeashAreas: React.FC = () => {
                       key={city.slug}
                       onClick={() => {
                         setSelectedCity(city.slug);
-                        setSelectedArea(null);
+                        if (displayedArea) {
+                          navigate(getOffLeashAreasPath());
+                        }
                       }}
                       className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
                         ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
@@ -345,10 +370,10 @@ const AllOffLeashAreas: React.FC = () => {
                 ref={mapRef}
                 className="w-full h-[500px] md:h-[600px]"
               />
-              {selectedArea !== null && displayedArea && (
+              {displayedArea && (
                 <div className="p-4 bg-sky-50 border-t border-sky-200">
                   <button
-                    onClick={() => setSelectedArea(null)}
+                    onClick={() => showOverview()}
                     className="text-sm text-sky-600 hover:text-sky-700 font-bold flex items-center gap-1"
                   >
                     <X size={16} />
@@ -365,7 +390,7 @@ const AllOffLeashAreas: React.FC = () => {
               // Single Area Detail View
               <div className="max-w-4xl mx-auto">
                 <button
-                  onClick={() => setSelectedArea(null)}
+                  onClick={() => showOverview()}
                   className="mb-4 text-sky-600 hover:text-sky-700 font-bold flex items-center gap-2"
                 >
                   <X size={20} />
@@ -457,12 +482,11 @@ const AllOffLeashAreas: React.FC = () => {
                 ) : (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredAreas.map((area) => {
-                      const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
                       const cityData = CITIES.find(c => c.slug === area.city);
                       return (
                         <button
-                          key={`${area.city}-${area.name}`}
-                          onClick={() => setSelectedArea(globalIndex)}
+                          key={area.slug}
+                          onClick={() => openAreaDetail(area.slug)}
                           className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group w-full text-left"
                         >
                           <div className="relative h-56 bg-slate-200 overflow-hidden">

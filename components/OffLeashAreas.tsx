@@ -6,6 +6,7 @@ import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import { getDistanceFromLatLonInKm } from '../utils/geo.ts';
+import { getOffLeashAreaPath } from '../utils/offLeashRoutes.ts';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { supabase } from '../utils/supabaseClient';
@@ -262,12 +263,11 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                 <div className="space-y-4">
                   {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
                     const isOpen = isAreaOpen(area);
-                    const globalIndex = OFF_LEASH_AREAS.findIndex(a => a.name === area.name && a.city === area.city);
                     return (
                       <button
-                        key={area.name}
+                        key={area.slug}
                         onClick={() => {
-                          navigate(`/losloopzones?area=${globalIndex}`);
+                          navigate(getOffLeashAreaPath(area.slug));
                         }}
                         className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer w-full text-left ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
                       >
