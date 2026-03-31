@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import type { City, Hotspot, Service } from '../types.ts';
+import type { PlaceKind } from './placeRoutes.ts';
 
 interface SEOProps {
   title: string;
@@ -8,7 +10,7 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   canonical?: string;
-  structuredData?: object;
+  structuredData?: object | object[];
 }
 
 export const useSEO = ({
@@ -85,6 +87,106 @@ export const useSEO = ({
       if (dynamicScript) dynamicScript.remove();
     };
   }, [title, description, keywords, ogImage, canonical, structuredData, location]);
+};
+
+type Place = Hotspot | Service;
+
+const PLACE_SCHEMA_TYPES = {
+  hotspot: {
+    'Café': 'CafeOrCoffeeShop',
+    'Koffiebar': 'CafeOrCoffeeShop',
+    'Restaurant': 'Restaurant',
+    'Brasserie': 'Restaurant',
+    'Slapen': 'LodgingBusiness',
+    'Shoppen': 'Store',
+  },
+  service: {
+    'Dierenarts': 'VeterinaryCare',
+    'Dierenspeciaalzaak': 'Store',
+  },
+} as const;
+
+const getPlaceCollectionLabel = (kind: PlaceKind) =>
+  kind === 'hotspot' ? 'Hotspots' : 'Diensten';
+
+const getPlaceSchemaType = (place: Place, kind: PlaceKind): string =>
+  PLACE_SCHEMA_TYPES[kind][place.type as never] || 'LocalBusiness';
+
+const buildPlaceKeywords = (place: Place, city: City, kind: PlaceKind) => {
+  const baseTerms = [
+    place.name,
+    `${place.type} ${city.name}`,
+    `${kind === 'hotspot' ? 'hondvriendelijke hotspot' : 'praktische dienst'} ${city.name}`,
+    `${place.type.toLowerCase()} belgische kust`,
+    `${city.name} hond`,
+  ];
+
+  return [
+    ...baseTerms,
+    ...place.tags.slice(0, 4).map((tag) => `${tag} ${city.name}`),
+  ].join(', ');
+};
+
+const buildPlaceSummary = (place: Place, city: City, kind: PlaceKind) => {
+  if (place.summary) {
+    return place.summary;
+  }
+
+  const tagSummary = place.tags.filter((tag) => tag !== 'Aanrader').slice(0, 3).join(', ').toLowerCase();
+  const base = `${place.name} is een ${kind === 'hotspot' ? 'hondvriendelijke' : 'praktische'} ${place.type.toLowerCase()} in ${city.name}`;
+  return tagSummary ? `${base} met ${tagSummary}.` : `${base}.`;
+};
+
+export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps => {
+  const collectionLabel = getPlaceCollectionLabel(kind);
+  const canonical = `https://hondaanzee.be/${place.city}/${kind === 'hotspot' ? 'hotspots' : 'diensten'}/${place.slug}`;
+  const image = place.images?.[0] || place.image;
+  const schemaType = getPlaceSchemaType(place, kind);
+  const summary = buildPlaceSummary(place, city, kind);
+  const description = `${summary} ${place.description.replace(/\s+/g, ' ').trim()}`.slice(0, 158).trimEnd() + (summary.length + place.description.length > 158 ? '...' : '');
+
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hondaanzee.be/' },
+        { '@type': 'ListItem', position: 2, name: city.name, item: `https://hondaanzee.be/${city.slug}` },
+        { '@type': 'ListItem', position: 3, name: collectionLabel, item: `https://hondaanzee.be/${kind === 'hotspot' ? 'hotspots' : 'diensten'}` },
+        { '@type': 'ListItem', position: 4, name: place.name, item: canonical },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': schemaType,
+      name: place.name,
+      description,
+      url: canonical,
+      image: [`https://hondaanzee.be${image}`],
+      telephone: place.phone,
+      sameAs: place.sameAs,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: place.address,
+        addressLocality: city.name,
+        addressCountry: 'BE',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: city.name,
+      },
+      ...(place.website ? { sameAs: [...(place.sameAs || []), place.website] } : {}),
+    },
+  ];
+
+  return {
+    title: `${place.name} in ${city.name} | ${place.type} | HondAanZee.be`,
+    description,
+    keywords: buildPlaceKeywords(place, city, kind),
+    canonical,
+    ogImage: `https://hondaanzee.be${image}`,
+    structuredData,
+  };
 };
 
 const YEAR = new Date().getFullYear();

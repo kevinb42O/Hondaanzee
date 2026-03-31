@@ -1,10 +1,10 @@
 
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Stethoscope, ShoppingBag, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { SERVICES } from '../constants.ts';
 import { City, Service } from '../types.ts';
-import PlaceModal from './PlaceModal.tsx';
+import { getServiceDetailPath } from '../utils/placeRoutes.ts';
 
 interface ServicesProps {
   city: City;
@@ -13,21 +13,10 @@ interface ServicesProps {
 const INITIAL_SHOW = 6;
 
 const Services: React.FC<ServicesProps> = ({ city }) => {
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<string>('Alles');
   const [showAll, setShowAll] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
-
-  const handleServiceClick = (service: Service) => {
-    setSelectedService(service);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedService(null), 300); // Clear after animation
-  };
+  const location = useLocation();
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -40,6 +29,14 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
   const allCityServices = SERVICES.filter(service => service.city === city.slug);
   const uniqueTypes = Array.from(new Set(allCityServices.map(s => s.type)));
   const filterOptions = ['Alles', ...uniqueTypes];
+  const topPicks = [...allCityServices]
+    .sort((a, b) => {
+      const aRecommended = a.tags.includes('Aanrader') ? 1 : 0;
+      const bRecommended = b.tags.includes('Aanrader') ? 1 : 0;
+      if (bRecommended !== aRecommended) return bRecommended - aRecommended;
+      return a.name.localeCompare(b.name, 'nl');
+    })
+    .slice(0, 3);
 
   const cityServices = allCityServices
     .filter(service => {
@@ -61,6 +58,19 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
           <div className="max-w-xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Praktische Diensten in {city.name}</h2>
             <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Dierenartsen en winkels waar jij en je hond met een gerust hart terecht kunt.</p>
+            {topPicks.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {topPicks.map((service) => (
+                  <Link
+                    key={service.slug}
+                    to={getServiceDetailPath(service)}
+                    className="text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] text-emerald-700 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full hover:bg-emerald-100 transition-colors"
+                  >
+                    {service.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
           {allCityServices.length > 3 && (
             <Link
@@ -96,10 +106,10 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           {(showAll ? cityServices : cityServices.slice(0, INITIAL_SHOW)).map((service) => (
             <div key={service.id} className="flex">
-              <button
-                type="button"
+              <Link
+                to={getServiceDetailPath(service)}
+                state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col w-full"
-                onClick={() => handleServiceClick(service)}
               >
                 <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-emerald-100">
                   <img
@@ -144,19 +154,8 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                       </span>
                     ))}
                   </div>
-                  {service.website && (
-                    <a
-                      href={service.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-[10px] sm:text-xs text-emerald-600 hover:text-emerald-700 font-bold hover:underline"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Bezoek website →
-                    </a>
-                  )}
                 </div>
-              </button>
+              </Link>
             </div>
           ))}
         </div>
@@ -200,13 +199,6 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
         )}
       </div>
 
-      {/* Modal */}
-      <PlaceModal
-        place={selectedService}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        accentColor="emerald"
-      />
     </section>
   );
 };

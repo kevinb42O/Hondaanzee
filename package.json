@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node prerender.cjs",
-    "build:no-prerender": "vite build",
+    "build": "node scripts/generate-sitemap.cjs && vite build && node prerender.cjs",
+    "build:no-prerender": "node scripts/generate-sitemap.cjs && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

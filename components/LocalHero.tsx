@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ExternalLink, Sparkles } from 'lucide-react';
 import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { Hotspot, Service } from '../types.ts';
-import PlaceModal from './PlaceModal.tsx';
+import { getPlaceDetailPath } from '../utils/placeRoutes.ts';
 
 interface LocalHeroProps {
   citySlug: string;
@@ -12,8 +13,7 @@ interface LocalHeroProps {
 type Place = (Hotspot | Service) & { _source: 'hotspot' | 'service' };
 
 const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPlace, setSelectedPlace] = useState<Hotspot | Service | null>(null);
+  const location = useLocation();
 
   // Combine hotspots + services for this city, tag with source
   const allPlaces: Place[] = useMemo(() => {
@@ -35,22 +35,12 @@ const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
   const isAanrader = hero.tags.includes('Aanrader');
   const accentColor = hero._source === 'hotspot' ? 'sky' : 'emerald';
 
-  const handleClick = () => {
-    setSelectedPlace(hero);
-    setIsModalOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedPlace(null), 300);
-  };
-
   return (
     <>
       <div className="mt-6 sm:mt-8">
-        <button
-          type="button"
-          onClick={handleClick}
+        <Link
+          to={getPlaceDetailPath(hero, hero._source)}
+          state={{ from: `${location.pathname}${location.search}${location.hash}` }}
           className="w-full text-left group cursor-pointer"
         >
           <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-amber-200/60 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 shadow-lg shadow-amber-100/40 hover:shadow-xl hover:shadow-amber-200/50 transition-all duration-300">
@@ -123,16 +113,8 @@ const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
               </div>
             </div>
           </div>
-        </button>
+        </Link>
       </div>
-
-      {/* Modal */}
-      <PlaceModal
-        place={selectedPlace}
-        isOpen={isModalOpen}
-        onClose={handleClose}
-        accentColor={accentColor}
-      />
     </>
   );
 };

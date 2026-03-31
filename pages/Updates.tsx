@@ -38,6 +38,84 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '2.0',
+    date: '31 maart 2026',
+    title: 'Hotspots & diensten kregen hun eigen detailpagina’s',
+    subtitle: 'De grote update van vandaag: beter zoeken, beter lezen, beter volgen',
+    entries: [
+      { text: 'Hotspots en diensten openen niet langer in modals, maar op volwaardige detailpagina’s per zaak, dierenarts of dierenwinkel', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Elke plaats heeft nu een eigen, deelbare URL zodat we eindelijk per zaak kunnen zien waar bezoekers op klikken en welke pagina’s het meeste bekeken worden', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Nieuwe detailpagina-opbouw: compactere hero, echte fotosectie, duidelijke praktische info, terugnavigatie en een veel rustiger leesritme dan vroeger', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: '“Wat je hier mag verwachten” werd volledig herwerkt tot een snelle overzichtssectie die meteen de belangrijkste info toont zonder dat je door lange tekstblokken moet', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Adresblokken op detailpagina’s zijn nu rechtstreeks klikbaar naar Google Maps', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Praktische info en “Verder kijken” blijven op desktop zichtbaar terwijl je scrolt, zodat je minder moet terugzoeken', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Headertekst schakelt nu slim naar een leesbare hero-variant op donkere beeldblokken en keert daarna terug naar de gewone stijl', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'De nieuwe zaakpagina’s kregen betere SEO: unieke titels, beschrijvingen, breadcrumbs en gestructureerde gegevens per hotspot of dienst', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Sitemap en prerender-routes worden nu automatisch opgebouwd op basis van alle hotspots en diensten, zodat nieuwe detailpagina’s niet meer manueel moeten worden toegevoegd', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Hotspots-overzicht heeft nu een naamzoeker met suggesties tijdens het typen, zodat je snel een specifieke zaak terugvindt wanneer de gids verder groeit', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Filters op hotspots en diensten worden bewaard in de URL, zodat je zoek- en filterkeuzes netjes blijven bestaan bij terugnavigatie of delen van links', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: '“Waarom dit een aanrader is” leest nu veel menselijker: geen geforceerde labelzinnen meer, maar natuurlijke aanbevelingstekst in echt Vlaams-Nederlands', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Sterke adressen in Oostende en Blankenberge kregen uitgebreidere, nauwkeurigere beschrijvingen en verfijnde Aanrader-copy op basis van actuele publieke info', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'De site is technisch al voorbereid op meerdere foto’s per zaak, zodat Aanraders later een rijkere galerij kunnen krijgen zonder nieuwe ombouw', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Privacy- en cookiepagina’s werden aangepast zodat de tekst eindelijk klopt met het huidige gebruik van analytics op de site', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
+  {
+    version: '1.11',
+    date: '31 maart 2026',
+    title: 'Homepage sneller, stabieler en scherper op mobiel',
+    subtitle: 'Gebaseerd op de GitHub-updates van 31 maart',
+    entries: [
+      { text: 'Homepage-kaarten kregen een verfijnde herindeling, soepelere interacties en een strakkere hover-animatie', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Mobiele instorting van de responsive stedenlayout opgelost — kaartblokken blijven nu stabiel staan op kleine schermen', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Contrast van de resultaatstotalen verbeterd voor leesbaarheid en toegankelijkheid', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Homepage-LCP verder geoptimaliseerd door render-blocking CSS te verminderen', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
+  {
+    version: '1.10',
+    date: '24–30 maart 2026',
+    title: 'Routering, FAQ en witte-schermfixes',
+    subtitle: 'Belangrijke technische correcties uit GitHub voor betrouwbaarder laden',
+    entries: [
+      { text: 'Nieuwe FAQ-sectie toegevoegd op de homepage, met natuurlijkere uitleg én gestructureerde data voor zoekmachines', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Homepage-routing verder gehard voor mobiel en directe paginaladingen', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Wit scherm op Android in-app browsers en op de homepage aangepakt door routering en hydration veiliger te maken', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Runtime-crash door nested router conflict opgelost', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Community-prerender conflict weggewerkt en zichtbaarheid van de homepage-hero hersteld', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Agenda-events kregen betere SEO-markup met performer- en validFrom-info', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Fallback van de homepage-hero werkt nu ook correct wanneer de prerender-versie tijdelijk niet beschikbaar is', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
+  {
+    version: '1.9.5',
+    date: '22 maart 2026',
+    title: 'Stadspagina’s visueel herwerkt',
+    subtitle: 'Minder onrust, betere leesbaarheid en een nettere mobiele ervaring',
+    entries: [
+      { text: 'Verborgen menu-overlays die inhoud konden afdekken op mobiel en in webviews zijn weggewerkt', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Zwevende homepage-CTA verwijderd om mobiel rustiger en robuuster te maken', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Stadspagina’s gebruiken nu de stadsafbeelding veel slimmer in de hero, zonder verschuiving van de layout', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Wave-overgangen en footerafwerking herschikt zodat secties vloeiender op elkaar aansluiten', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Leesbaarheid van back button, statuskleuren en banner/footer verder verfijnd', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
+  {
+    version: '1.9.4',
+    date: '16–18 maart 2026',
+    title: 'PWA-reset, community-update & Blankenberge-aanvulling',
+    subtitle: 'GitHub-updates die inhoud én updatebetrouwbaarheid tegelijk vooruit duwden',
+    entries: [
+      { text: 'ABC Hotel en Au Pengouin toegevoegd in Blankenberge, met ook een upgrade voor Belgium Pier Brasserie', tag: { label: 'Nieuwe zaken', color: 'cyan' } },
+      { text: 'My Home My Coffee kreeg extra inhoudelijke verfijning en een Aanrader-badge', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Community-topper vernieuwd naar Tila & Xia, met betere beeldpresentatie en zonder storende watermarktekst', tag: { label: 'Community', color: 'violet' } },
+      { text: 'Meerdere losloopzonebeelden en crops vernieuwd, onder meer voor Ankerstraat, Raversijde, Brigade Pironlaan, Provinciedomein en Maria Hendrikapark', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Agenda-styling, wave-uitlijning en homepage FAQ-achtergrond visueel bijgeschaafd', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'PWA-cache en service worker kregen een stevige reset om hardnekkige updateproblemen en witte schermen weg te werken', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'No-cache headers en homepage direct load verder gecorrigeerd zodat nieuwe versies betrouwbaarder doorkomen', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
+  {
     version: '1.9',
     date: '14 maart 2026',
     title: 'Regelverificatie + kaartstatus nu volledig synchroon',
@@ -250,42 +328,94 @@ const Updates: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-50 to-slate-50">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+      <div data-header-hero="light" className="relative overflow-hidden pb-24 pt-24 text-white sm:pb-32 sm:pt-28 md:pb-40 md:pt-32">
+        <div className="absolute inset-0">
+          <img
+            src="/lexi.webp"
+            alt="Hond op het strand aan zee"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: 'center 30%' }}
+          />
+          <div className="absolute inset-0 bg-slate-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-950/20 to-slate-950/55" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.18),transparent_28%),radial-gradient(circle_at_left_center,rgba(255,255,255,0.08),transparent_22%)]" />
+        </div>
+
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
+              <Sparkles size={14} />
+              Laatste grote update: vandaag
+            </div>
+            <h1 className="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
+              Wat is er{' '}
+              <span className="relative inline-block text-sky-300">
+                nieuw?
+                <svg className="absolute -bottom-1 left-0 h-3 w-full text-sky-300/35 sm:-bottom-2 sm:h-4" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
+                </svg>
+              </span>
+            </h1>
+            <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-slate-100 sm:text-lg md:text-xl">
+              Elke verbetering, elke nieuwe zaak en elk nieuw idee: hier houden we bij wat er groeit op HondAanZee.be. Geen codepraat, wel wat jij als bezoeker echt merkt.
+            </p>
+          </div>
+        </div>
+
+        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0]">
+          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[110px]"
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                className="fill-current text-slate-50"
+              />
+            </svg>
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[110px]"
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                className="fill-current text-slate-50"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto -mt-20 max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="mb-16 rounded-[2rem] border border-slate-200 bg-white/96 p-6 text-center shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:p-8">
           <div className="inline-flex items-center justify-center p-4 bg-cyan-100 text-cyan-600 rounded-2xl mb-6 shadow-sm">
             <Sparkles size={40} strokeWidth={2} />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-slate-900 mb-5 tracking-tight leading-tight">
-            Wat is er{' '}
-            <span className="text-sky-600 relative inline-block">
-              nieuw?
-              <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-3 sm:h-4 text-sky-600/30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
-              </svg>
-            </span>
-          </h1>
-          <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
-            Elke verbetering, elke nieuwe zaak en elk nieuw idee — hier houden we bij wat er groeit op HondAanZee.be. Geen code, gewoon wat jij als bezoeker merkt.
-          </p>
 
           {/* Snapshot stats */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
               <span className="text-3xl font-black text-cyan-600">{releases.length}</span>
               <span className="text-xs text-slate-500 mt-1 font-medium">releases</span>
             </div>
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
-              <span className="text-3xl font-black text-sky-600">6</span>
-              <span className="text-xs text-slate-500 mt-1 font-medium">weken live</span>
+            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
+              <span className="text-3xl font-black text-sky-600">10+</span>
+              <span className="text-xs text-slate-500 mt-1 font-medium">dagen verbeterd</span>
             </div>
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
+            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
               <span className="text-3xl font-black text-emerald-600">120+</span>
               <span className="text-xs text-slate-500 mt-1 font-medium">aangesloten zaken</span>
             </div>
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
+            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
               <span className="text-3xl font-black text-amber-500">11</span>
               <span className="text-xs text-slate-500 mt-1 font-medium">badsteden</span>
             </div>

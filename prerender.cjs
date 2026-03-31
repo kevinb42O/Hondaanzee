@@ -7,51 +7,17 @@ const puppeteer = require('puppeteer');
 const fs = require('node:fs');
 const path = require('node:path');
 const { createServer } = require('node:http');
+const { getAllRoutes } = require('./scripts/place-data.cjs');
 
 const DIST_DIR = path.join(__dirname, 'dist');
 const PORT = 4173;
 
 // All routes to pre-render
-const ROUTES = [
-  '/',
-  '/hotspots',
-  '/diensten',
-  '/losloopzones',
-  '/kaart',
-  '/over-ons',
-  '/goed-om-te-weten',
-  '/steun-ons',
-  '/privacy',
-  '/algemene-voorwaarden',
-  '/cookies',
-  // City pages
-  '/blankenberge',
-  '/zeebrugge',
-  '/knokke-heist',
-  '/de-haan',
-  '/wenduine',
-  '/bredene',
-  '/oostende',
-  '/middelkerke',
-  '/nieuwpoort',
-  '/koksijde',
-  '/de-panne',
-  // Blog
-  '/blog',
-  '/blog/zeehonden-aan-de-belgische-kust',
-  '/blog/opruimacties-proper-strand-lopers',
-  '/blog/mooiste-bossen-belgische-kust-wandelen-met-hond',
-  '/blog/zwemplekjes-honden-belgische-kust',
-  '/blog/mentale-leiband-vrijheid-met-connectie',
-  // Agenda & Community
-  '/agenda',
-  '/community',
-  '/updates',
-];
+const ROUTES = [...new Set(getAllRoutes())];
 
 // Simple static file server for the dist folder
 function startServer() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const server = createServer((req, res) => {
       const requestPath = (req.url || '/').split('?')[0].split('#')[0];
       const relativePath = requestPath === '/' ? 'index.html' : requestPath.replace(/^\/+/, '');
@@ -87,8 +53,10 @@ function startServer() {
         res.end('Not found');
       }
     });
-    
-    server.listen(PORT, () => {
+
+    server.once('error', reject);
+    server.listen(PORT, '127.0.0.1', () => {
+      server.off('error', reject);
       console.log(`  Static server on http://localhost:${PORT}`);
       resolve(server);
     });

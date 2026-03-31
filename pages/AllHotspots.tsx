@@ -1,32 +1,25 @@
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, Star, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, Star, MapPin, Filter, X, ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
-import PlaceModal from '../components/PlaceModal.tsx';
-import { Hotspot } from '../types.ts';
+import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
 
 const INITIAL_SHOW = 12;
+const SEARCH_SUGGESTION_LIMIT = 6;
 
 const AllHotspots: React.FC = () => {
-  const [selectedCity, setSelectedCity] = useState<string>('all');
-  const [selectedType, setSelectedType] = useState<string>('all');
-  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const gridRef = useRef<HTMLDivElement>(null);
-
-  const handleHotspotClick = (hotspot: Hotspot) => {
-    setSelectedHotspot(hotspot);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedHotspot(null), 300); // Clear after animation
-  };
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Apply SEO metadata
   useSEO(SEO_DATA.hotspots);
@@ -47,40 +40,173 @@ const AllHotspots: React.FC = () => {
     }
   };
 
-  // Reset show-all when filters change
-  useEffect(() => {
-    setShowAll(false);
-  }, [selectedCity, selectedType]);
-
-  const filteredHotspots = useMemo(() => {
-    return HOTSPOTS
-      .filter(spot => {
-        const cityMatch = selectedCity === 'all' || spot.city === selectedCity;
-        const typeMatch = selectedType === 'all' || spot.type === selectedType;
-        return cityMatch && typeMatch;
-      })
-      .sort((a, b) => {
-        const aIsAanrader = a.tags.includes('Aanrader') ? 1 : 0;
-        const bIsAanrader = b.tags.includes('Aanrader') ? 1 : 0;
-        return bIsAanrader - aIsAanrader;
-      });
-  }, [selectedCity, selectedType]);
-
   const types = ['all', ...Array.from(new Set(HOTSPOTS.map(spot => spot.type)))];
   const citiesWithHotspots = useMemo(() => {
     const citySet = new Set(HOTSPOTS.map(spot => spot.city));
     return CITIES.filter(city => citySet.has(city.slug));
   }, []);
 
+  const validCitySet = useMemo(() => new Set(['all', ...citiesWithHotspots.map((city) => city.slug)]), [citiesWithHotspots]);
+  const validTypeSet = useMemo(() => new Set(types), [types]);
+
+  const selectedCity = validCitySet.has(searchParams.get('city') || 'all')
+    ? searchParams.get('city') || 'all'
+    : 'all';
+  const selectedType = validTypeSet.has(searchParams.get('type') || 'all')
+    ? searchParams.get('type') || 'all'
+    : 'all';
+  const selectedQuery = searchParams.get('q') || '';
+
+  useEffect(() => {
+    setSearchQuery(selectedQuery);
+  }, [selectedQuery]);
+
+  const buildFilterSearch = (city: string, type: string, query: string = selectedQuery) => {
+    const next = new URLSearchParams();
+    if (city !== 'all') next.set('city', city);
+    if (type !== 'all') next.set('type', type);
+    if (query.trim()) next.set('q', query.trim());
+    const nextQuery = next.toString();
+    return nextQuery ? `?${nextQuery}` : '';
+  };
+
+  const updateSearchParams = (city: string, type: string, query: string) => {
+    const next = new URLSearchParams();
+    if (city !== 'all') next.set('city', city);
+    if (type !== 'all') next.set('type', type);
+    if (query.trim()) next.set('q', query.trim());
+    setSearchParams(next, { replace: false });
+  };
+
+  // Reset show-all when filters change
+  useEffect(() => {
+    setShowAll(false);
+  }, [selectedCity, selectedType, selectedQuery]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+      if (!searchContainerRef.current?.contains(target)) {
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside, { passive: true });
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
+  const baseFilteredHotspots = useMemo(() => {
+    return HOTSPOTS.filter((spot) => {
+      const cityMatch = selectedCity === 'all' || spot.city === selectedCity;
+      const typeMatch = selectedType === 'all' || spot.type === selectedType;
+      return cityMatch && typeMatch;
+    });
+  }, [selectedCity, selectedType]);
+
+  const normalizedSearch = selectedQuery.trim().toLowerCase();
+
+  const suggestions = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return [];
+
+    return [...baseFilteredHotspots]
+      .filter((spot) => spot.name.toLowerCase().includes(query))
+      .sort((a, b) => {
+        const aName = a.name.toLowerCase();
+        const bName = b.name.toLowerCase();
+        const aExact = aName === query ? 1 : 0;
+        const bExact = bName === query ? 1 : 0;
+        if (bExact !== aExact) return bExact - aExact;
+        const aStarts = aName.startsWith(query) ? 1 : 0;
+        const bStarts = bName.startsWith(query) ? 1 : 0;
+        if (bStarts !== aStarts) return bStarts - aStarts;
+        const aRecommended = a.tags.includes('Aanrader') ? 1 : 0;
+        const bRecommended = b.tags.includes('Aanrader') ? 1 : 0;
+        if (bRecommended !== aRecommended) return bRecommended - aRecommended;
+        return a.name.localeCompare(b.name, 'nl');
+      })
+      .slice(0, SEARCH_SUGGESTION_LIMIT);
+  }, [baseFilteredHotspots, searchQuery]);
+
+  const handleSuggestionClick = (spot: typeof HOTSPOTS[number]) => {
+    setSearchQuery(spot.name);
+    setShowSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+    navigate(getHotspotDetailPath(spot), {
+      state: {
+        from: `${location.pathname}${buildFilterSearch(selectedCity, selectedType, spot.name)}`,
+      },
+    });
+  };
+
+  const submitSearch = (query: string) => {
+    updateSearchParams(selectedCity, selectedType, query);
+    setShowSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+  };
+
+  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions || suggestions.length === 0) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        submitSearch(searchQuery);
+      }
+      if (event.key === 'Escape') {
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+      }
+      return;
+    }
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        setSelectedSuggestionIndex((prev) => (prev < suggestions.length - 1 ? prev + 1 : prev));
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        setSelectedSuggestionIndex((prev) => (prev > 0 ? prev - 1 : -1));
+        break;
+      case 'Enter':
+        event.preventDefault();
+        if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
+          handleSuggestionClick(suggestions[selectedSuggestionIndex]);
+          submitSearch(suggestions[selectedSuggestionIndex].name);
+        } else {
+          submitSearch(searchQuery);
+        }
+        break;
+      case 'Escape':
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+        break;
+    }
+  };
+
+  const filteredHotspots = useMemo(() => {
+    return baseFilteredHotspots
+      .filter((spot) => !normalizedSearch || spot.name.toLowerCase().includes(normalizedSearch))
+      .sort((a, b) => {
+        const aIsAanrader = a.tags.includes('Aanrader') ? 1 : 0;
+        const bIsAanrader = b.tags.includes('Aanrader') ? 1 : 0;
+        return bIsAanrader - aIsAanrader;
+      });
+  }, [baseFilteredHotspots, normalizedSearch]);
+
   const getCityName = (slug: string) => {
     return CITIES.find(city => city.slug === slug)?.name || slug;
   };
 
-  const hasFilters = selectedCity !== 'all' || selectedType !== 'all';
+  const hasFilters = selectedCity !== 'all' || selectedType !== 'all' || normalizedSearch.length > 0;
 
   return (
     <div className="animate-in fade-in overflow-x-hidden">
-      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+      <div data-header-hero="light" className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
         {/* Background Image */}
         <div
           className="absolute inset-0 z-0"
@@ -170,15 +296,103 @@ const AllHotspots: React.FC = () => {
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Filters</h2>
             {hasFilters && (
-              <button
-                onClick={() => {
-                  setSelectedCity('all');
-                  setSelectedType('all');
-                }}
+              <Link
+                to="/hotspots"
                 className="ml-auto text-sm font-bold text-slate-500 hover:text-sky-600 transition-colors flex items-center gap-2"
               >
                 <X size={16} /> Wis filters
-              </button>
+              </Link>
+            )}
+          </div>
+
+          <div ref={searchContainerRef} className="relative mb-6 sm:mb-8">
+            <label htmlFor="hotspot-search" className="mb-3 block text-sm font-bold text-slate-700">
+              Zoek op naam
+            </label>
+            <div className="flex items-center rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 shadow-sm transition focus-within:border-sky-300 focus-within:bg-white">
+              <Search size={18} className="shrink-0 text-slate-400" />
+              <input
+                id="hotspot-search"
+                type="text"
+                value={searchQuery}
+                onChange={(event) => {
+                  const nextValue = event.target.value;
+                  setSearchQuery(nextValue);
+                  setShowSuggestions(nextValue.trim().length > 0);
+                  setSelectedSuggestionIndex(-1);
+                }}
+                onFocus={() => {
+                  if (searchQuery.trim()) {
+                    setShowSuggestions(true);
+                  }
+                }}
+                onKeyDown={handleSearchKeyDown}
+                placeholder="Bijvoorbeeld Gastrobar Sam"
+                autoComplete="off"
+                spellCheck="false"
+                className="min-w-0 flex-1 bg-transparent px-3 text-base font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                role="combobox"
+                aria-expanded={showSuggestions && suggestions.length > 0}
+                aria-controls="hotspot-search-suggestions"
+                aria-activedescendant={selectedSuggestionIndex >= 0 ? `hotspot-suggestion-${selectedSuggestionIndex}` : undefined}
+              />
+              {searchQuery ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setShowSuggestions(false);
+                    setSelectedSuggestionIndex(-1);
+                    updateSearchParams(selectedCity, selectedType, '');
+                  }}
+                  className="rounded-full p-1 text-slate-400 transition hover:text-slate-700"
+                  aria-label="Wis zoekopdracht"
+                >
+                  <X size={18} />
+                </button>
+              ) : null}
+            </div>
+
+            {showSuggestions && suggestions.length > 0 && (
+              <div
+                id="hotspot-search-suggestions"
+                className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
+              >
+                {suggestions.map((spot, index) => (
+                  <button
+                    key={spot.id}
+                    id={`hotspot-suggestion-${index}`}
+                    type="button"
+                    onMouseDown={(event) => {
+                      event.preventDefault();
+                      handleSuggestionClick(spot);
+                    }}
+                    onMouseEnter={() => setSelectedSuggestionIndex(index)}
+                    className={`flex w-full items-center gap-3 px-4 py-3 text-left transition ${
+                      index === selectedSuggestionIndex
+                        ? 'bg-sky-50 text-sky-700'
+                        : 'bg-white text-slate-700 hover:bg-slate-50'
+                    } ${index === suggestions.length - 1 ? '' : 'border-b border-slate-100'}`}
+                  >
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
+                      index === selectedSuggestionIndex ? 'bg-sky-100 text-sky-600' : 'bg-slate-100 text-slate-500'
+                    }`}>
+                      {getIcon(spot.type)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-bold sm:text-base">{spot.name}</p>
+                      <p className="truncate text-xs font-medium text-slate-500 sm:text-sm">
+                        {getCityName(spot.city)} • {spot.type}
+                      </p>
+                    </div>
+                    {spot.tags.includes('Aanrader') && (
+                      <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-amber-700 ring-1 ring-amber-200">
+                        Aanrader
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
@@ -190,26 +404,26 @@ const AllHotspots: React.FC = () => {
                 Gemeente
               </legend>
               <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setSelectedCity('all')}
+                <Link
+                  to={`/hotspots${buildFilterSearch('all', selectedType)}`}
                   className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
                     ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                 >
                   Alle
-                </button>
+                </Link>
                 {citiesWithHotspots.map(city => (
-                  <button
+                  <Link
                     key={city.slug}
-                    onClick={() => setSelectedCity(city.slug)}
+                    to={`/hotspots${buildFilterSearch(city.slug, selectedType)}`}
                     className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
                       ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                       }`}
                   >
                     {city.name}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </fieldset>
@@ -221,9 +435,9 @@ const AllHotspots: React.FC = () => {
               </legend>
               <div className="flex flex-wrap gap-2">
                 {types.map(type => (
-                  <button
+                  <Link
                     key={type}
-                    onClick={() => setSelectedType(type)}
+                    to={`/hotspots${buildFilterSearch(selectedCity, type)}`}
                     className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${selectedType === type
                       ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -231,7 +445,7 @@ const AllHotspots: React.FC = () => {
                   >
                     {type !== 'all' && <span className="opacity-70">{getIcon(type)}</span>}
                     {type === 'all' ? 'Alle' : type}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </fieldset>
@@ -250,11 +464,11 @@ const AllHotspots: React.FC = () => {
           <>
           <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
             {(showAll ? filteredHotspots : filteredHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
-              <button
+              <Link
                 key={spot.id}
-                type="button"
+                to={getHotspotDetailPath(spot)}
+                state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col"
-                onClick={() => handleHotspotClick(spot)}
               >
                 <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                   <img
@@ -269,15 +483,9 @@ const AllHotspots: React.FC = () => {
                   <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/95 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-800 shadow-sm border border-white/20">
                     <span className="text-sky-600">{getIcon(spot.type)}</span> {spot.type}
                   </div>
-                  <a
-                    href={`/${spot.city}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer no-underline"
-                  >
+                  <span className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider">
                     <MapPin size={10} /> {getCityName(spot.city)}
-                  </a>
+                  </span>
                   {spot.tags.includes('Aanrader') && (
                     <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex items-center gap-1.5 bg-slate-900/80 backdrop-blur-sm px-2.5 py-1.5 rounded-full" style={{ filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))' }}>
                       <svg width="16" height="16" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -309,7 +517,9 @@ const AllHotspots: React.FC = () => {
                       {tag}
                     </span>
                   ))}
-                </div>                </div>              </button>
+                </div>
+                </div>
+              </Link>
             ))}
           </div>
 
@@ -361,28 +571,18 @@ const AllHotspots: React.FC = () => {
                   : 'Er zijn geen hotspots die aan deze filters voldoen. Probeer andere filters te selecteren.'}
               </p>
               {hasFilters && (
-                <button
-                  onClick={() => {
-                    setSelectedCity('all');
-                    setSelectedType('all');
-                  }}
+                <Link
+                  to="/hotspots"
                   className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-sky-700 transition-colors"
                 >
                   <X size={16} /> Wis alle filters
-                </button>
+                </Link>
               )}
             </div>
           </div>
         )}
       </div>
 
-      {/* Modal */}
-      <PlaceModal
-        place={selectedHotspot}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        accentColor="sky"
-      />
     </div>
   );
 };

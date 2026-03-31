@@ -206,7 +206,7 @@ const AllOffLeashAreas: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-hidden">
-      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+      <div data-header-hero="light" className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
         {/* Background Image */}
         <div
           className="absolute inset-0 z-0"

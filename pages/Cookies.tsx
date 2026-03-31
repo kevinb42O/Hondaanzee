@@ -53,11 +53,10 @@ const Cookies: React.FC = () => {
             <div className="bg-sky-50 border-2 border-sky-200 rounded-2xl p-6 mb-6">
               <p className="text-sky-900 font-bold text-lg mb-3">✨ Goed nieuws!</p>
               <p className="text-sky-800 leading-relaxed mb-3">
-                HondAanZee.be gebruikt momenteel <strong>GEEN cookies of tracking tools</strong>.
+                HondAanZee.be gebruikt <strong>geen marketing cookies of advertentietrackers</strong>.
               </p>
               <p className="text-sky-800 leading-relaxed">
-                We plaatsen geen marketing cookies, analytics cookies of tracking pixels van derden. 
-                Je privacy is veilig bij ons!
+                We gebruiken wel Vercel Analytics om anonieme paginastatistieken te bekijken, zodat we kunnen zien welke pagina&apos;s het meest bezocht worden.
               </p>
             </div>
 
@@ -66,6 +65,9 @@ const Cookies: React.FC = () => {
               <li>
                 <strong>LocalStorage / SessionStorage:</strong> Je browser kan tijdelijk informatie opslaan zoals je filterinstellingen (bijv. welke stad je hebt geselecteerd). 
                 Dit blijft lokaal op je apparaat en wordt <strong>niet</strong> naar onze servers gestuurd of gedeeld met derden.
+              </li>
+              <li>
+                <strong>Vercel Analytics:</strong> anonieme paginastatistieken om te begrijpen welke steden, hotspots en diensten het meest bekeken worden.
               </li>
             </ul>
           </section>
@@ -81,7 +83,7 @@ const Cookies: React.FC = () => {
               <li><strong>Functionaliteit:</strong> Om bepaalde features beter te laten werken</li>
             </ul>
             <p className="text-slate-600 leading-relaxed">
-              <strong>Mochten we cookies gaan gebruiken, dan vragen we eerst expliciet je toestemming via een cookie banner.</strong> 
+              <strong>Mochten we extra niet-noodzakelijke cookies gaan gebruiken, dan vragen we eerst expliciet je toestemming via een cookie banner.</strong> 
               Dit cookiebeleid zal dan worden bijgewerkt met meer details.
             </p>
           </section>

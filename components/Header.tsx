@@ -8,6 +8,7 @@ import { MobileMenu } from './header/MobileMenu.tsx';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverHero, setIsOverHero] = useState(false);
   const location = useLocation();
 
   // Close menu on route change
@@ -30,6 +31,39 @@ const Header: React.FC = () => {
     globalThis.addEventListener('scroll', handleScroll, { passive: true });
     return () => globalThis.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updateHeroState = () => {
+      const hero = document.querySelector<HTMLElement>('[data-header-hero="light"]');
+      if (!hero) {
+        setIsOverHero(false);
+        ticking = false;
+        return;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const headerProbeY = 96;
+      setIsOverHero(rect.top <= headerProbeY && rect.bottom > headerProbeY);
+      ticking = false;
+    };
+
+    const requestUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      globalThis.requestAnimationFrame(updateHeroState);
+    };
+
+    requestUpdate();
+    globalThis.addEventListener('scroll', requestUpdate, { passive: true });
+    globalThis.addEventListener('resize', requestUpdate);
+
+    return () => {
+      globalThis.removeEventListener('scroll', requestUpdate);
+      globalThis.removeEventListener('resize', requestUpdate);
+    };
+  }, [location.pathname, location.search, location.hash]);
 
   // Prevent scroll when menu is open
   useEffect(() => {
@@ -62,20 +96,19 @@ const Header: React.FC = () => {
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="inline-flex items-center text-sm sm:text-base lg:text-lg font-black tracking-tighter leading-none">
-                    <span className={isScrolled || !['/', '/hotspots', '/diensten', '/losloopzones', '/agenda', '/community'].includes(location.pathname) ? 'text-slate-800' : 'text-white'}>Hond</span><span className="text-sky-500">Aan</span><span className={isScrolled || !['/', '/hotspots', '/diensten', '/losloopzones', '/agenda', '/community'].includes(location.pathname) ? 'text-slate-800' : 'text-white'}>Zee</span>
+                    <span className={isOverHero && !isScrolled ? 'text-white' : 'text-slate-800'}>Hond</span><span className="text-sky-500">Aan</span><span className={isOverHero && !isScrolled ? 'text-white' : 'text-slate-800'}>Zee</span>
                   </span>
                 </div>
               </Link>
 
               {/* Desktop Navigation */}
-              <DesktopNav currentPath={location.pathname} currentHash={location.hash} isScrolled={isScrolled} />
+              <DesktopNav currentPath={location.pathname} currentHash={location.hash} isScrolled={isScrolled} useLightText={isOverHero && !isScrolled} />
 
               {/* Mobile Menu Toggle */}
               {(() => {
-                const useLightEffect = ['/', '/hotspots', '/diensten', '/losloopzones', '/agenda', '/community'].includes(location.pathname);
                 let mobileToggleClass = 'text-slate-700 hover:text-slate-900 bg-white/40 hover:bg-white/60';
-                if (!isScrolled && !useLightEffect) { mobileToggleClass = 'text-slate-900 hover:text-black bg-white/20 hover:bg-white/35'; }
-                else if (!isScrolled) { mobileToggleClass = 'text-white/60 hover:text-white bg-white/20 hover:bg-white/35'; }
+                if (isOverHero && !isScrolled) { mobileToggleClass = 'text-white/70 hover:text-white bg-white/20 hover:bg-white/35'; }
+                else if (!isScrolled) { mobileToggleClass = 'text-slate-900 hover:text-black bg-white/20 hover:bg-white/35'; }
                 return (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}

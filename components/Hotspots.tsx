@@ -1,10 +1,10 @@
 
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Star, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { City, Hotspot } from '../types.ts';
-import PlaceModal from './PlaceModal.tsx';
+import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
 
 const HOTSPOT_WHATSAPP_MESSAGE = `Dag! 👋\n\nIk ben een hondvriendelijke ondernemer en ik zou graag mijn zaak op hondaanzee.be laten tonen bij de hotspots.\n\nKun je me meer info geven over de mogelijkheden?\n\nBedankt!`;
 
@@ -15,21 +15,10 @@ interface HotspotsProps {
 const INITIAL_SHOW = 6;
 
 const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
-  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<string>('Alles');
   const [showAll, setShowAll] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
-
-  const handleHotspotClick = (hotspot: Hotspot) => {
-    setSelectedHotspot(hotspot);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedHotspot(null), 300); // Clear after animation
-  };
+  const location = useLocation();
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -47,6 +36,14 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
   const allCityHotspots = HOTSPOTS.filter(spot => spot.city === city.slug);
   const uniqueTypes = Array.from(new Set(allCityHotspots.map(spot => spot.type)));
   const filterOptions = ['Alles', ...uniqueTypes];
+  const topPicks = [...allCityHotspots]
+    .sort((a, b) => {
+      const aRecommended = a.tags.includes('Aanrader') ? 1 : 0;
+      const bRecommended = b.tags.includes('Aanrader') ? 1 : 0;
+      if (bRecommended !== aRecommended) return bRecommended - aRecommended;
+      return a.name.localeCompare(b.name, 'nl');
+    })
+    .slice(0, 3);
 
   const cityHotspots = HOTSPOTS
     .filter(spot => {
@@ -67,6 +64,19 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
           <div className="max-w-xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Hondvriendelijke Hotspots in {city.name}</h2>
             <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Geen gedoe aan de deur. Hier zijn jij en je kwispelende vriend meer dan welkom voor koffie, lunch of een verblijf.</p>
+            {topPicks.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {topPicks.map((spot) => (
+                  <Link
+                    key={spot.slug}
+                    to={getHotspotDetailPath(spot)}
+                    className="text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] text-sky-700 bg-sky-50 border border-sky-100 px-3 py-1.5 rounded-full hover:bg-sky-100 transition-colors"
+                  >
+                    {spot.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
           <Link
             to="/hotspots"
@@ -100,10 +110,10 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
           <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
             {(showAll ? cityHotspots : cityHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
               <div key={spot.id} className="flex">
-                <button
-                  type="button"
+                <Link
+                  to={getHotspotDetailPath(spot)}
+                  state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                   className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col w-full"
-                  onClick={() => handleHotspotClick(spot)}
                 >
                   <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                     <img
@@ -152,7 +162,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                       ))}
                     </div>
                   </div>
-                </button>
+                </Link>
               </div>
             ))}
           </div>
@@ -222,13 +232,6 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
         )}
       </div>
 
-      {/* Modal */}
-      <PlaceModal
-        place={selectedHotspot}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        accentColor="sky"
-      />
     </section>
   );
 };

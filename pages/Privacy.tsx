@@ -76,11 +76,10 @@ const Privacy: React.FC = () => {
           <section className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">4. Cookies en tracking</h2>
             <p className="text-slate-600 leading-relaxed mb-4">
-              Onze website gebruikt momenteel <strong>geen cookies of externe tracking tools</strong> (zoals Google Analytics). 
-              Mochten we in de toekomst cookies willen gebruiken, zullen we je hier expliciet om toestemming vragen via een cookie banner.
+              Onze website gebruikt geen marketing cookies of advertentietrackers. We gebruiken wel <strong>Vercel Analytics</strong> om anonieme paginastatistieken te bekijken, zodat we kunnen zien welke pagina&apos;s het meest bezocht worden.
             </p>
             <p className="text-slate-600 leading-relaxed">
-              Je browser kan basis "session storage" gebruiken voor het lokaal opslaan van filterinstellingen, maar dit wordt niet gedeeld met ons of derden.
+              Je browser kan basis "session storage" gebruiken voor het lokaal opslaan van filterinstellingen, maar dit wordt niet gedeeld met ons of derden. Mochten we in de toekomst bijkomende niet-noodzakelijke cookies willen gebruiken, dan vragen we daar eerst expliciet toestemming voor.
             </p>
           </section>
 

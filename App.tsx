@@ -25,6 +25,7 @@ const About = React.lazy(() => import('./pages/About.tsx'));
 const GoedOmTeWeten = React.lazy(() => import('./pages/GoedOmTeWeten.tsx'));
 const Blog = React.lazy(() => import('./pages/Blog.tsx'));
 const BlogDetail = React.lazy(() => import('./pages/BlogDetail.tsx'));
+const PlaceDetail = React.lazy(() => import('./pages/PlaceDetail.tsx'));
 const Community = React.lazy(() => import('./pages/Community.tsx'));
 const Agenda = React.lazy(() => import('./pages/Agenda.tsx'));
 const Updates = React.lazy(() => import('./pages/Updates.tsx'));
@@ -130,6 +131,8 @@ const AppContent = () => {
               <Route path="/" element={<Home />} />
               <Route path="/hotspots" element={<AllHotspots />} />
               <Route path="/diensten" element={<AllServices />} />
+              <Route path="/:city/hotspots/:slug" element={<PlaceDetail kind="hotspot" />} />
+              <Route path="/:city/diensten/:slug" element={<PlaceDetail kind="service" />} />
               <Route path="/losloopzones" element={<AllOffLeashAreas />} />
               <Route path="/kaart" element={<CoastalMap />} />
               <Route path="/privacy" element={<Privacy />} />

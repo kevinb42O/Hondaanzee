@@ -1,6 +1,14 @@
-import { Service } from '../types';
+import type { Service } from '../types';
 
-export const SERVICES: Service[] = [
+const createServiceSlug = (name: string): string =>
+  name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   {
     id: 1,
     name: 'Dierenarts Frederik Galle',
@@ -269,3 +277,7 @@ export const SERVICES: Service[] = [
   }
 ];
 
+export const SERVICES: Service[] = SERVICE_ENTRIES.map((service) => ({
+  ...service,
+  slug: createServiceSlug(service.name),
+}));

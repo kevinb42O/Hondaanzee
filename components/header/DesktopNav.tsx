@@ -8,6 +8,7 @@ interface DesktopNavProps {
     currentPath: string;
     currentHash: string;
     isScrolled: boolean;
+    useLightText: boolean;
 }
 
 interface NavLink {
@@ -81,13 +82,12 @@ const DropdownMenu: React.FC<{
     currentHash: string;
     isOpen: boolean;
     isScrolled: boolean;
-    isHome: boolean;
+    useLightText: boolean;
     onEnter: (label: string) => void;
     onLeave: () => void;
     onClose: () => void;
-}> = ({ item, currentPath, currentHash, isOpen, isScrolled, isHome, onEnter, onLeave, onClose }) => {
+}> = ({ item, currentPath, currentHash, isOpen, isScrolled, useLightText, onEnter, onLeave, onClose }) => {
     const active = isDropdownActive(item, currentPath, currentHash);
-    const useLightEffect = ['/', '/hotspots', '/diensten', '/losloopzones', '/agenda', '/community'].includes(currentPath);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [panelCoords, setPanelCoords] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
 
@@ -100,9 +100,9 @@ const DropdownMenu: React.FC<{
     }, [isOpen]);
 
     let btnClass = 'text-slate-600 hover:text-slate-900 hover:bg-white/30';
-    if (active || isOpen) { btnClass = 'text-sky-700 bg-white/50'; }
-    else if (!isScrolled && !useLightEffect) { btnClass = 'text-slate-900 hover:text-black hover:bg-white/20'; }
-    else if (!isScrolled) { btnClass = 'text-white/60 hover:text-white hover:bg-white/20'; }
+    if (active || isOpen) { btnClass = useLightText && !isScrolled ? 'text-white bg-white/20' : 'text-sky-700 bg-white/50'; }
+    else if (useLightText && !isScrolled) { btnClass = 'text-white/70 hover:text-white hover:bg-white/20'; }
+    else if (!isScrolled) { btnClass = 'text-slate-900 hover:text-black hover:bg-white/20'; }
 
     // Portal panel — rendered at document.body to escape the header's backdrop-filter
     // stacking context, so backdrop-blur actually sees the real page content behind it.
@@ -172,7 +172,7 @@ const DropdownMenu: React.FC<{
     );
 };
 
-export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash, isScrolled }) => {
+export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash, isScrolled, useLightText }) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     // ONE shared timer for all dropdowns — prevents cross-dropdown cancel bugs
     const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -211,18 +211,15 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash
         return () => { clearCloseTimer(); };
     }, [clearCloseTimer]);
 
-    const isHome = currentPath === '/';
-
     return (
         <nav className="hidden lg:flex items-center gap-0.5" aria-label="Hoofdnavigatie">
             {NAV_ENTRIES.map((entry) => {
                 if (entry.type === 'link') {
                     const active = isLinkActive(entry.item, currentPath, currentHash);
-                    const useLightEffect = ['/', '/hotspots', '/diensten', '/losloopzones', '/agenda', '/community'].includes(currentPath);
                     let linkClass = 'text-slate-600 hover:text-slate-900 hover:bg-white/30';
-                    if (active) { linkClass = 'text-sky-700 bg-white/50'; }
-                    else if (!isScrolled && !useLightEffect) { linkClass = 'text-slate-900 hover:text-black hover:bg-white/20'; }
-                    else if (!isScrolled) { linkClass = 'text-white/60 hover:text-white hover:bg-white/20'; }
+                    if (active) { linkClass = useLightText && !isScrolled ? 'text-white bg-white/20' : 'text-sky-700 bg-white/50'; }
+                    else if (useLightText && !isScrolled) { linkClass = 'text-white/70 hover:text-white hover:bg-white/20'; }
+                    else if (!isScrolled) { linkClass = 'text-slate-900 hover:text-black hover:bg-white/20'; }
                     return (
                         <Link
                             key={entry.item.to}
@@ -242,7 +239,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash
                         currentHash={currentHash}
                         isOpen={openDropdown === entry.item.label}
                         isScrolled={isScrolled}
-                        isHome={isHome}
+                        useLightText={useLightText}
                         onEnter={handleDropdownEnter}
                         onLeave={handleDropdownLeave}
                         onClose={handleClose}

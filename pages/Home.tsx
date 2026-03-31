@@ -583,7 +583,7 @@ const Home: React.FC = () => {
   return (
     <div>
       {/* Hero Section with Dynamic Background */}
-      <div ref={heroRef} className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
+      <div ref={heroRef} data-header-hero="light" className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
         {/* Prerender hero from index.html is moved here by useEffect for parallax.
             The gradient overlays are rendered below to ensure contrast. */}
         {!hasPrerenderHero && (

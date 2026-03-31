@@ -1,28 +1,42 @@
 
 export interface Hotspot {
   id: number;
+  slug: string;
   name: string;
+  summary?: string;
+  recommendationNote?: string;
   type: 'Café' | 'Koffiebar' | 'Slapen' | 'Restaurant' | 'Brasserie' | 'Shoppen';
   description: string;
   tags: string[];
   image: string;
+  images?: string[];
   imagePosition?: string; // e.g. 'center top' or '50% 25%'
   city: string; // city slug
   address: string;
+  phone?: string;
   website?: string;
+  websiteLabel?: string;
+  sameAs?: string[];
 }
 
 export interface Service {
   id: number;
+  slug: string;
   name: string;
+  summary?: string;
+  recommendationNote?: string;
   type: 'Dierenarts' | 'Dierenspeciaalzaak';
   description: string;
   tags: string[];
   image: string;
+  images?: string[];
   imagePosition?: string; // e.g. 'center top' or '50% 25%'
   city: string; // city slug
   address: string;
+  phone?: string;
   website: string;
+  websiteLabel?: string;
+  sameAs?: string[];
 }
 
 export type StatusValue = 'JA' | 'DEELS' | 'NEE';

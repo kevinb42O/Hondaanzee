@@ -1,16 +1,26 @@
-import { Hotspot } from '../types';
+import type { Hotspot } from '../types';
 
-export const HOTSPOTS: Hotspot[] = [
+const createHotspotSlug = (name: string): string =>
+  name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   {
     id: 1,
     name: 'Lakaiann Blankenberge',
     type: 'Koffiebar',
+    recommendationNote: 'Lakaiann is een aanrader omdat het geen gewone koffiestop is. Je springt binnen voor een goede koffie, maar de combinatie van rustige sfeer, originele winkel en vanzelfsprekende gastvrijheid maakt dit tot zo’n plek waar je met hond graag wat langer blijft hangen.',
     description: 'Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars. Geniet van een heerlijke specialty coffee terwijl je rondneust tussen prachtige kristallen, handgemaakte juwelen en andere unieke schatten. De ideale stop na een strandwandeling voor wie houdt van goede vibes, lekkere koffie en… pure verwennerij voor je hond!',
     tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee', 'Aanrader'],
     image: '/lakaiannfinal.webp',
     city: 'blankenberge',
     address: 'Zeedijk 205/01, 8370 Blankenberge',
-    website: 'https://lakaiann.com/'
+    website: 'https://lakaiann.com/',
+    websiteLabel: 'Bekijk Lakaiann'
   },
   {
     id: 2,
@@ -94,12 +104,15 @@ export const HOTSPOTS: Hotspot[] = [
     id: 6,
     name: 'Gastrobar Sam',
     type: 'Restaurant',
-    description: 'Gezellige gastrobar met open keuken waar uw viervoeter gewoon mee naar binnen mag.',
-    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team'],
+    summary: 'Stijlvolle gastrobar in Oostende met open keuken, sterke vis- en vleesgerechten en een opvallend vlotte ontvangst voor honden, zowel binnen als op het terras.',
+    description: 'Gastrobar Sam combineert de gezelligheid van het vroegere Jan\'s Café met een frisse, hedendaagse sfeer en de beleving van een open keuken. Je eet hier gastronomisch zonder stijve bedoening: biologisch rundvlees, nachtvers gevangen vis, producten uit de korte keten, huisgemaakte Oostendse garnaalkroketten en sharing dishes zijn hier geen bijzaak maar mee het handelsmerk van de zaak. Voor hondenbaasjes zit de meerwaarde in de vanzelfsprekende ontvangst: je hond is welkom binnen én op het terras, er staat water klaar en je voelt meteen dat samen tafelen hier niet als lastig wordt bekeken. Vlak bij de zeedijk is dit een sterk adres voor wie in Oostende rustig en goed wil eten met zijn hond gewoon mee aan tafel.',
+    tags: ['Aanrader', 'Indoor toegelaten', 'Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Visgerechten', 'Sharing'],
     image: '/gastrobarsamoostende.webp',
     city: 'oostende',
     address: 'Van Iseghemlaan 60, 8400 Oostende',
-    website: 'https://www.gastrobarsam.be'
+    phone: '+32 473 55 59 38',
+    website: 'https://www.gastrobarsam.be',
+    websiteLabel: 'Reserveer tafel'
   },
   {
     id: 7,
@@ -138,12 +151,16 @@ export const HOTSPOTS: Hotspot[] = [
     id: 12,
     name: 'Belgium Pier Brasserie',
     type: 'Brasserie',
-    description: 'Tafelen op 365 meter in de Noordzee — dat doe je alleen hier! Belgium Pier Brasserie biedt een ongeëvenaarde locatie met panoramisch uitzicht over de golven. De uitgebreide menukaart bestaat uit dagverse ingrediënten: van heerlijke visgerechten en bouillabaisse tot tapas, garnaalkroketten en sappige steaks. Na je maaltijd geniet je op het zonneterras van een dessert met zeezicht. De bediening is vriendelijk, de prijs-kwaliteitverhouding uitstekend en er zijn ook vegetarische, glutenvrije en lactosevrije opties beschikbaar. Je hond mag aangelijnd mee genieten van deze unieke beleving — een ervaring die je nergens anders aan de kust vindt!',
+    summary: 'Brasserie op de iconische pier van Blankenberge waar je letterlijk boven zee eet en de locatie al de helft van de ervaring uitmaakt.',
+    recommendationNote: 'Belgium Pier Brasserie is een aanrader omdat de setting hier echt het verschil maakt. Als je met hond eens iets anders zoekt dan het klassieke terras op de dijk, dan is tafelen op de pier gewoon een veel specialere tussenstop.',
+    description: 'Belgium Pier Brasserie zet vooral in op één groot voordeel dat je nergens kunt kopiëren: je zit hier 365 meter op zee. De eigen site spreekt over lichte lunches, zoete tussenstops en diners met dagverse ingrediënten, met onder meer bouillabaisse, vegetarische opties, klassiekers en tapas op de kaart. Net daardoor werkt deze plek zowel voor een korte pauze als voor een volwaardige maaltijd. Voor hondenbaasjes is vooral die combinatie van uitzicht, ruimte en uitzonderlijke ligging interessant: je maakt van een gewone stop in Blankenberge meteen iets dat veel meer als een uitje aanvoelt.',
     tags: ['Aanrader', 'Terras', 'Nabij strand', 'Waterbak aanwezig', 'Unieke locatie', 'Visgerechten', 'Zeezicht'],
     image: '/belgianpierbrasserieblankenberge.webp',
     city: 'blankenberge',
     address: 'Zeedijk 261, 8370 Blankenberge',
-    website: 'https://www.belgiumpier.be'
+    phone: '+32 50 43 37 50',
+    website: 'https://www.belgiumpier.be',
+    websiteLabel: 'Reserveer bij Belgium Pier'
   },
   {
     id: 14,
@@ -303,13 +320,16 @@ export const HOTSPOTS: Hotspot[] = [
     id: 22,
     name: 'Cozy Moments',
     type: 'Café',
-    description: 'Gezellig café op de Grote Markt waar honden hartelijk welkom zijn voor een drankje en versnapering. Perfect om even uit te rusten na een wandeling door het centrum, terwijl je viervoeter geniet van de aandacht en een waterbakje.',
+    summary: 'Gezellige koffie- en cocktailbar op de Grote Markt waar je makkelijk even neerstrijkt met hond midden in het centrum van Blankenberge.',
+    recommendationNote: 'Cozy Moments is een aanrader als je in het centrum een plek zoekt die gewoon vlot werkt. Je zit centraal, de sfeer is los en je hond voelt hier niet aan als een extra waar eerst over moet worden nagedacht.',
+    description: 'Cozy Moments profileert zich online als koffiebar, cocktailadres en gezellig café in één. Net dat maakt het een handige stop op de Grote Markt: je kan hier even binnenspringen voor koffie, iets fris of een kleine pauze zonder dat het meteen zwaar of formeel wordt. Door de ligging midden in het centrum is het een logische halte tijdens een wandeling door Blankenberge, en voor wie met hond onderweg is, zit de meerwaarde vooral in dat toegankelijke karakter. Geen ingewikkelde setting, wel een plek waar je spontaan even kan gaan zitten en weer verder trekken wanneer het past.',
     tags: ['Terras', 'Waterbak aanwezig', 'Hondensnacks', 'Hondvriendelijk team', 'Centrum', 'Aanrader'],
     image: '/sixtines.webp',
     imagePosition: 'center 25%',
     city: 'blankenberge',
     address: 'Grote Markt 2/0002, 8370 Blankenberge',
-    website: 'https://www.cozy-moments.be'
+    website: 'https://www.cozy-moments.be',
+    websiteLabel: 'Bekijk Cozy Moments'
   },
   {
     id: 23,
@@ -559,45 +579,58 @@ export const HOTSPOTS: Hotspot[] = [
     id: 45,
     name: 'Lloyd Coffee Eatery',
     type: 'Koffiebar',
-    description: 'Koffiebar met ontbijt, bagels en zoetigheden. Je hond is welkom om mee te genieten van de gezellige sfeer.',
-    tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Ontbijt', 'Specialty Coffee', 'Bagels'],
+    summary: 'Moderne coffee eatery in het centrum van Oostende voor specialty coffee, huisgemaakte brunchgerechten en een ontspannen stop waar huisdieren expliciet welkom zijn.',
+    description: 'Lloyd Coffee Eatery is meer dan een klassieke koffiebar: het is een ruime, moderne brunchplek waar specialty coffee centraal staat en waar je terechtkunt voor toasts, buns, pancakes, verse sapjes en milkshakes. De zaak profileert zich duidelijk als een warme plek voor gezinnen, vrienden en ook huisdieren, met in Oostende zelfs een aparte kids corner. Voor hondenbaasjes maakt dat een verschil: dit voelt niet als een snelle koffie waar je hond net wordt geduld, maar als een plek waar je rustig kan neerzitten voor ontbijt of lunch zonder dat samen binnenkomen geforceerd aanvoelt.',
+    tags: ['Aanrader', 'Indoor toegelaten', 'Waterbak aanwezig', 'Ontbijt', 'Brunch', 'Specialty Coffee', 'Bagels'],
     image: '/lloydcoffeeeatery.webp',
     city: 'oostende',
     address: 'Kapellestraat 1, 8400 Oostende',
-    website: 'https://www.lloydcoffee.com'
+    website: 'https://www.lloydcoffee.com',
+    websiteLabel: 'Bekijk Lloyd Oostende'
   },
   {
     id: 81,
     name: 'Manuscript',
     type: 'Café',
-    description: 'Authentiek bruin café met karakter in het hart van de uitgaansbuurt, opgericht in 1991. Deze legendarische muziekkroeg is een topper voor bier- en muziekliefhebbers én je viervoeter is hier hartelijk welkom! Kies uit maar liefst 71 verschillende Belgische bieren, waaronder het huisbier PoppoLou (6% blond). De sfeervolle kroeg draait op rock, blues en jazz, met maandelijks live concerten van nationale en internationale artiesten. Op het gezellige outdoor terras kun je samen met je hond genieten van de ongelofelijke ambiance waar het enthousiaste team van Glenn en Vanessa dagelijks voor zorgt. Open vanaf 11u.',
+    summary: 'Authentiek bruin café in de Langestraat met een indrukwekkende bierkaart, een vaste liefde voor rock, blues en jazz, en een sfeer die veel warmer aanvoelt dan de buurt errond soms doet vermoeden.',
+    recommendationNote: 'Manuscript is zo’n café waar je niet moet uitleggen waarom je hond mee is. Je komt er binnen voor een goed glas, blijft hangen voor de sfeer en voelt meteen dat dit een plek met eigen karakter is, geen gladde toeristenstop.',
+    description: 'Manuscript bestaat sinds 1991 en is uitgegroeid tot een vaste waarde voor wie in Oostende houdt van een echt bruin café met een muzikale ziel. In de Langestraat vind je hier geen dertien-in-een-dozijn kroeg, maar een zaak met karakter, een warme sfeer en een bierkaart die zowat alle Belgische bierstijlen raakt. Het huisbier PoppoLou en de focus op rock, blues en jazz geven de plek een duidelijke eigen smoel, terwijl Glenn, Vanessa en hun crew zorgen voor een ontvangst die los en hartelijk blijft. Wie met hond op stap is en liever neerzit op een plek die echt leeft, zit hier goed: binnen is het gezellig druk, buiten op het terras kan je wat langer blijven plakken zonder dat het geforceerd aanvoelt.',
     tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Belgische bieren', 'Live muziek', 'Authentiek'],
     image: '/manuscript.jpg',
     city: 'oostende',
     address: 'Langestraat 23, 8400 Oostende',
-    website: 'https://www.manuscriptoostende.be'
+    phone: '+32 59 54 28 17',
+    website: 'https://www.manuscriptoostende.be',
+    websiteLabel: 'Bekijk Manuscript'
   },
   {
     id: 82,
     name: 'Restaurant De Golf',
     type: 'Restaurant',
-    description: 'Hondenvriendelijk restaurant aan de zeedijk van Mariakerke waar je viervoeter écht koning is! Dit gezellige restaurant gaat nét dat stapje verder: naast een warme welkom en waterbak kun je hier zelfs speciale hondenmaaltijden en hondenijsjes bestellen voor je trouwe metgezel. Geniet van een heerlijke maaltijd met zeezicht terwijl je hond wordt verwend met zijn eigen culinaire traktatie. De perfecte plek voor hondenliefhebbers die hun viervoeter graag meenemen op restaurant!',
-    tags: ['Terras', 'Waterbak aanwezig', 'Hondenmaaltijden', 'Hondenijsjes', 'Nabij strand', 'Hondvriendelijk team', 'Zeezicht'],
+    summary: 'Restaurant op de zeedijk van Mariakerke met zeezicht, doorlopende keuken en uitzonderlijk veel aandacht voor honden, inclusief hondenmaaltijden en hondenijsjes.',
+    recommendationNote: 'De Golf is een aanrader omdat je hier voelt dat honden niet gewoon worden toegestaan, maar echt mee in het verhaal zitten. Voor een lange lunch of een rustige stop aan zee is dat in Oostende nog altijd uitzonderlijk waardevol.',
+    description: 'Restaurant De Golf ligt pal aan de zeedijk van Mariakerke en combineert Belgisch tafelen met een ontspannen kustsfeer, zeezicht en een verwarmd terras. De keuken is doorlopend open en de zaak profileert zich expliciet als hondvriendelijk, wat je hier ook echt voelt: honden zijn welkom, er is aandacht voor hun comfort en je kan er zelfs hondenmaaltijden en hondenijsjes krijgen. Daardoor is dit niet zomaar een restaurant waar een hond mee mag, maar een adres waar je uitstap met hond bewust mee in de ervaring wordt opgenomen. Zeker als je na een wandeling aan zee rustig wil blijven zitten, is dit in Oostende een bijzonder sterke keuze.',
+    tags: ['Aanrader', 'Terras', 'Waterbak aanwezig', 'Hondenmaaltijden', 'Hondenijsjes', 'Nabij strand', 'Hondvriendelijk team', 'Zeezicht', 'Doorlopende keuken', 'Verwarmd terras'],
     image: '/degolf.webp',
     city: 'oostende',
     address: 'Zeedijk 146, 8400 Oostende',
-    website: 'https://degolfzeedijkoostende.eatbu.com/?lang=nl'
+    phone: '+32 59 50 00 19',
+    website: 'https://degolfzeedijkoostende.eatbu.com/?lang=nl',
+    websiteLabel: 'Reserveer bij De Golf'
   },
   {
     id: 83,
     name: 'Restaurant Le Touquet',
     type: 'Restaurant',
-    description: 'Authentiek restaurant op de Albert I-promenade met traditionele keuken en verse lokale producten. Je hond is hier van harte welkom en er staat een drinkbak voor hem klaar! Geniet van heerlijke gerechten op het terras met zeezicht, terwijl je viervoeter rustig naast je ligt. Het restaurant biedt vegetarische, lactosevrije en glutenvrije opties. Perfect voor families en hondenliefhebbers die willen genieten van een gezellige sfeer aan zee.',
-    tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Traditionele keuken', 'Vegetarisch', 'Glutenvrij', 'Familie-vriendelijk'],
+    summary: 'Traditioneel restaurant op de Albert I-promenade met lokale producten, verwarmd terras en een opvallend makkelijke ontvangst voor honden.',
+    description: 'Le Touquet is een klassieke promenadezaak waar traditionele keuken, lokale producten en een toegankelijke sfeer centraal staan. Het restaurant beschikt over een verwarmd terras, gratis wifi, een kinderkorner en online reservatiemogelijkheid, maar voor hondenbaasjes is vooral belangrijk dat huisdieren hier expliciet welkom zijn. Daardoor is dit een handig adres voor wie aan de dijk wil eten zonder gedoe aan de deur. De combinatie van zee-locatie, degelijke keuken en een zaak waar je hond gewoon mee binnen mag, maakt Le Touquet tot een betrouwbare optie voor een langere lunch of een ontspannen diner in Oostende.',
+    tags: ['Terras', 'Indoor toegelaten', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Traditionele keuken', 'Vegetarisch', 'Glutenvrij', 'Familie-vriendelijk', 'Verwarmd terras'],
     image: '/letouqet.webp',
     city: 'oostende',
     address: 'Albert I-promenade 51, 8400 Oostende',
-    website: 'https://letouquetoostende.metro.rest/?lang=nl'
+    phone: '+32 484 11 95 43',
+    website: 'https://letouquetoostende.metro.rest/?lang=nl',
+    websiteLabel: 'Reserveer bij Le Touquet'
   },
   {
     id: 84,
@@ -614,23 +647,30 @@ export const HOTSPOTS: Hotspot[] = [
     id: 85,
     name: 'La Vie',
     type: 'Restaurant',
-    description: 'Gezellig tapasrestaurant centraal gelegen vlak aan de zeedijk van Oostende. Geniet van vers bereide tapas, verrassende cocktails en goede wijnen in een warme, gedeelde sfeer – perfect voor een avondje uit met vrienden of familie! Honden zijn hier hartelijk welkom, groot of klein, en er staat een waterbak klaar. Betaalbare gastronomie zonder rekeningstress. Wil je reserveren? Check hun prachtige website voor meer info!',
+    summary: 'Hedendaagse tapasbar vlak bij de zeedijk waar sharing, cocktails en een losse avondsfeer centraal staan, zonder dat het zwaar of pretentieus wordt.',
+    recommendationNote: 'La Vie werkt vooral goed als je geen klassiek restaurantmoment zoekt, maar een plek waar je wat kan delen, iets kan drinken en de avond vanzelf wat langer laat worden. Dat lossere tempo past vaak beter bij op stap zijn met hond dan een stijve serviceformule.',
+    description: 'La Vie zet voluit in op sharing, cocktails en een eigentijdse avondsfeer vlak bij de zeedijk van Oostende. De kaart draait rond tapas om te delen, aangevuld met burgers, pasta’s, salades en een paar toegankelijke klassiekers, waardoor de zaak breder inzetbaar is dan een pure tapasbar. Volgens Toerisme Oostende is La Vie verrassend en eigentijds, en dat klopt ook met wat de eigen communicatie uitstraalt: geen formeel restaurant, maar een plek voor apero, delen en gezellig lang blijven zitten. Voor hondenbaasjes is dat vaak net het verschil, omdat het tempo losser ligt en een stop hier minder strak aanvoelt dan in een traditioneel dineradres.',
     tags: ['Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Tapas', 'Sharing', 'Cocktails', 'Betaalbaar', 'Centrum'],
     image: '/lavie.webp',
     city: 'oostende',
     address: 'Kadzandstraat 14, 8400 Oostende',
-    website: 'https://tapas-lavie.be/'
+    phone: '+32 479 83 63 51',
+    website: 'https://tapas-lavie.be/',
+    websiteLabel: 'Reserveer bij La Vie'
   },
   {
     id: 88,
     name: 'Gastro Na\'Jo',
     type: 'Restaurant',
-    description: 'Verborgen parel in Stene waar passie en creativiteit samenkomen. De chef kookt met eigen zin en laat zich leiden door zijn gevoel - geen vaste kaart, maar een wisselend menu dat regelmatig verrassende wendingen neemt. Klassieke gerechten krijgen hier een hedendaagse twist met invloeden van over de hele wereld. Het warme, huiselijke interieur en groene terras nodigen uit tot een rustgevende culinaire ervaring. Je viervoeter is welkom! Reserveren gewenst.',
-    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Creatieve keuken', 'Wisselend menu', 'Reserveren nodig', 'Huiselijk', 'Verborgen parel'],
+    summary: 'Kleinschalige gastrozaak in Stene met een beperkte kwaliteitskaart, snel wisselende suggesties en een rustige, hondvriendelijke sfeer.',
+    description: 'Gastro Na\'Jo kiest bewust voor een kleine kaart met kwaliteitsproducten en snel wisselende suggesties waar de chef zich volledig in kan uitleven. De keuken is verfijnd zonder afstandelijk te worden, en de wijnselectie wordt zorgvuldig opgebouwd om mooi aan te sluiten bij het eten. Volgens Toerisme Oostende is de zaak ook hondvriendelijk, en precies die combinatie maakt Na\'Jo interessant: geen drukke toeristische passage, maar een rustiger adres waar je goed eet en waar een hond mee aan tafel geen vreemd element is. Voor baasjes die liever uitwijken naar een verzorgde plek buiten de klassieke dijkdrukte, is dit een sterk Oostends alternatief.',
+    tags: ['Aanrader', 'Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Creatieve keuken', 'Wisselend menu', 'Reserveren nodig', 'Huiselijk', 'Verborgen parel'],
     image: '/najov2.jpeg',
     city: 'oostende',
     address: 'Steensedijk 60, 8400 Oostende',
-    website: 'https://www.najo.be/'
+    phone: '+32 496 17 69 64',
+    website: 'https://www.najo.be/',
+    websiteLabel: 'Reserveer bij Na\'Jo'
   },
   {
     id: 71,
@@ -648,23 +688,30 @@ export const HOTSPOTS: Hotspot[] = [
     id: 46,
     name: 'Grand Café',
     type: 'Restaurant',
-    description: 'Een echte trekpleister op de zeedijk van Blankenberge! Of je nu uitgebreid wilt dineren of op zoek bent naar een snelle lunch, in de gevarieerde menukaart en seizoensgebonden dagschotels vind je altijd je gading. De uitgebreide wijnkaart met selecties uit verschillende landen en wijnstreken biedt bij elk gerecht een passende wijn. Uniek voor Blankenberge is hun speciale gerecht voor de hondjes: Het Calle\'boutje\' met kip, zoete aardappel en een boutje gemaakt van pindakaas! Pure verwennerij voor je viervoeter. Het topteam staat elke dag paraat om je de best mogelijke ervaring te geven met een sterke prijs-kwaliteit verhouding. Let op: reserveren is niet mogelijk, dus kom gewoon langs met je viervoeter!',
+    summary: 'Grote zaak op de zeedijk met klassieke brasseriesfeer, brede kaart en extra aandacht voor honden, tot en met een eigen gerechtje.',
+    recommendationNote: 'Grand Café is een aanrader omdat het groot en toegankelijk blijft zonder onpersoonlijk te worden. Zeker met hond is dat sterk: je weet dat je hier vlot terechtkunt en dat er ook echt aan je viervoeter gedacht is.',
+    description: 'Grand Café zet zichzelf neer als een vaste waarde op de zeedijk van Blankenberge, met een gevarieerde kaart, seizoensgebonden dagschotels en een ruime wijnselectie. Dat maakt het vooral een handige plek voor wie zonder veel gedoe wil kunnen aanschuiven voor lunch, diner of gewoon iets tussendoor. Wat deze zaak voor hondenbaasjes opvallender maakt, is dat de hondvriendelijkheid verder gaat dan alleen gedogen: er wordt ook expliciet uitgepakt met een apart hondengerecht. Daardoor voelt deze plek minder als een klassieke kustbrasserie waar je hond erbij mag, en meer als een zaak waar die aanwezigheid echt mee in rekening is genomen.',
     tags: ['Aanrader', 'Terras', 'Waterbak aanwezig', 'Nabij strand', 'Hondvriendelijk team', 'Klassieke sfeer', 'Hondenmenu'],
     image: '/grandcafe.webp',
     city: 'blankenberge',
     address: 'Zeedijk 145, 8370 Blankenberge',
-    website: 'https://legrandcafe-blankenberge.be/'
+    website: 'https://legrandcafe-blankenberge.be/',
+    websiteLabel: 'Bekijk Le Grand Café'
   },
   {
     id: 47,
     name: "Fondue & Co 't Keteltje",
     type: 'Restaurant',
-    description: "'t Keteltje is een plek die voor iedereen toegankelijk is. Dit restaurant legt de nadruk op een eerlijke keuken, een gezellige sfeer en persoonlijk contact, met als absolute specialiteit heerlijke kaasfondue. Ze zijn zeer betaalbaar en bovendien vlakbij het strand gelegen. In deze warme, huiselijke omgeving is je hond van harte welkom om mee te genieten van een ontspannen avond.",
+    summary: 'Huiselijk restaurant vlak bij het strand waar eerlijke keuken, persoonlijke service en fondue centraal staan.',
+    recommendationNote: '’t Keteltje is een aanrader omdat het warm en ongeforceerd aanvoelt. Als je met hond op stap bent en je wil ’s avonds gewoon ergens rustig en gezellig zitten, dan zit je hier meteen goed.',
+    description: "Fondue & Co 't Keteltje wordt in Blankenberge omschreven als een familiezaak waar eerlijke keuken, persoonlijke service en een gezellige sfeer centraal staan. De ligging vlak bij het strand maakt het een logische avondstop na een dag aan zee, en de naam verraadt al meteen waar de specialiteit ligt. Wat vooral blijft hangen, is dat dit geen zaak is die op uiterlijk vertoon draait, maar op huiselijkheid en contact. Voor een etentje met hond werkt dat vaak beter dan een te druk of te strak concept: je wil vooral ergens zitten waar het vanzelf gaat, en precies dat gevoel heeft 't Keteltje.",
     tags: ['Aanrader', 'Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Fondue specialiteit', 'Gezellig', 'Nabij strand'],
     image: '/fonduetketeltje.webp',
     city: 'blankenberge',
     address: 'Weststraat 5, 8370 Blankenberge',
-    website: 'https://mymenuweb.com/bel/restaurants/2054296/?utm_source=google_profile&utm_medium=google_profile&utm_campaign=admin'
+    phone: '+32 50 36 23 78',
+    website: 'https://mymenuweb.com/bel/restaurants/2054296/?utm_source=google_profile&utm_medium=google_profile&utm_campaign=admin',
+    websiteLabel: 'Bekijk menu'
   },
   {
     id: 48,
@@ -681,12 +728,16 @@ export const HOTSPOTS: Hotspot[] = [
     id: 49,
     name: 'De Sleutel & La Clef',
     type: 'Restaurant',
-    description: 'Charmant restaurant op de Zeedijk met een uitgebreide kaart en prachtig uitzicht op zee. Een perfecte plek om te genieten van verse gerechten terwijl je viervoeter rustig naast je ligt. Bij reservatie graag vermelden dat je met hond komt.',
+    summary: 'Klassiek restaurant op de zeedijk met uitzicht op zee, een brede kaart en een lange familiegeschiedenis in Blankenberge.',
+    recommendationNote: 'De Sleutel & La Clef is een aanrader voor wie graag comfortabel op de dijk zit zonder dat het te vluchtig aanvoelt. De zaak heeft iets betrouwbaars, en net dat is veel waard als je met hond ontspannen wil tafelen.',
+    description: 'De Sleutel & La Clef verwijst op de eigen site naar een familieverhaal dat teruggaat tot 1966 en intussen drie generaties overspant. Die klassieke lijn voel je ook in de aanpak: een ruime kaart, kwaliteitsproducten, suggesties en een uitgesproken focus op verzorgd tafelen aan zee. Met het zicht op de dijk en de Noordzee zit je hier op een plek die veel mensen kiezen voor een langere lunch of diner in plaats van een snelle stop. Voor hondenbaasjes maakt net die rustige, gevestigde sfeer het aantrekkelijk: je komt hier niet voor vluchtigheid, maar voor een degelijk adres waar je op voorhand ongeveer weet wat je mag verwachten.',
     tags: ['Aanrader', 'Terras', 'Nabij strand', 'Waterbak aanwezig', 'Zeezicht', 'Hondvriendelijk team', 'Vleesgerechten'],
     image: '/desleutel.webp',
     city: 'blankenberge',
     address: 'Zeedijk 182, 8370 Blankenberge',
-    website: 'https://restaurantdesleutel.be/'
+    phone: '+32 50 41 21 05',
+    website: 'https://restaurantdesleutel.be/',
+    websiteLabel: 'Bekijk De Sleutel'
   },
   {
     id: 50,
@@ -726,7 +777,9 @@ export const HOTSPOTS: Hotspot[] = [
     id: 53,
     name: 'My Home My Coffee',
     type: 'Koffiebar',
-    description: 'Gezellige koffiebar met een huiselijke sfeer waar je kunt genieten van specialty coffee en lekkere verse hapjes. Je hond is hier niet alleen welkom om mee te genieten van de relaxte ambiance, maar wordt ook extra in de watten gelegd. Lex de Golden Retriever (de huishond) geeft jouw viervoeter namelijk met veel plezier een uitgebreide rondleiding in de tuin, terwijl jij in alle rust van je kopje koffie geniet!',
+    summary: 'Kleine koffiebar met woonkamergevoel waar specialty coffee, rust en een heel persoonlijke ontvangst belangrijker zijn dan snelheid of drukte.',
+    recommendationNote: 'My Home My Coffee is een aanrader omdat je hier niet het gevoel hebt dat je snel weer moet doorstappen. Voor baasjes met hond is dat ideaal: je zit rustig, de sfeer is los en de zaak voelt veel persoonlijker aan dan een doorsnee koffiebar.',
+    description: 'My Home My Coffee is geen koffiezaak die draait op passage alleen. In interviews en lokale gidsen wordt de plek omschreven als een huiselijke koffiebar waar specialty coffee, verse gebakjes en een warm ontvangst centraal staan, bewust wat weg van de grootste drukte in het centrum. Het concept leunt sterk op dat woonkamergevoel, met een losse sfeer waarin je eerder even blijft zitten dan snel weer vertrekt. Voor wie met hond op stap is, zit daar juist de meerwaarde: je hoeft niet te mikken op een vluchtige koffiestop, maar vindt een plek waar rust en persoonlijk contact mee deel van de ervaring zijn.',
     tags: ['Aanrader', 'Indoor toegelaten', 'Waterbak aanwezig', 'Specialty Coffee', 'Hondvriendelijk team', 'Gezellig'],
     image: '/myhomemycoffee.webp',
     city: 'blankenberge',
@@ -737,12 +790,15 @@ export const HOTSPOTS: Hotspot[] = [
     id: 54,
     name: "B&B Chez Ba'Nus",
     type: 'Slapen',
-    description: 'Unieke bed & breakfast met stijlvol ingerichte themakamers: de Manhattan Room, Shanghai Room, Waikiki Family Suite en London Suite. Geniet van een luxueus ontbijt met streekproducten, huisbereide confituren en eigen gebak. Relax op het gezellige terras terwijl je viervoeter even gebruik kan maken van het hondentoilet in de tuin. Honden zijn welkom in de hele B&B – jullie trouwe metgezel is hier echt thuis!',
+    summary: 'Persoonlijke B&B op wandelafstand van zee met themakamers, verzorgd ontbijt en een ontvangst waar honden echt mee zijn ingedacht.',
+    recommendationNote: 'Chez Ba’Nus is een aanrader omdat je hier voelt dat een verblijf met hond vooraf echt is meegedacht. Van ontbijt tot tuin en praktische details: het is zo’n adres waar je sneller tot rust komt omdat minder wringt.',
+    description: "Chez Ba'Nus profileert zich als een kleinschalige B&B op ongeveer 150 meter van het strand, met themakamers, een uitgebreid ontbijt met streekproducten, huisbereide confituren en eigen gebak. Op de eigen site wordt bovendien expliciet vermeld dat honden welkom zijn in de hele B&B, niet alleen op de kamer. Dat maakt het verschil met veel accommodaties waar huisdieren wel mogen logeren, maar verder weinig ruimte krijgen in de ervaring. Hier merk je dat het verblijf voor hond en baasje samen is gedacht, met onder meer een terras en praktische voorzieningen in de tuin.",
     tags: ['Honden toegelaten op kamer', 'B&B', 'Nabij strand', 'Persoonlijke service', 'Aanrader', 'Hondentoilet', 'Terras'],
     image: '/chezbanusV3.webp',
     city: 'blankenberge',
     address: 'Rogierlaan, 8370 Blankenberge',
-    website: 'https://www.chezbanus.be/'
+    website: 'https://www.chezbanus.be/',
+    websiteLabel: 'Bekijk kamers'
   },
   {
     id: 55,
@@ -836,12 +892,16 @@ export const HOTSPOTS: Hotspot[] = [
     id: 61,
     name: "Restaurant 't Pomptje",
     type: 'Restaurant',
-    description: 'Midden in het pittoreske Stene-dorp vind je dit gezellige restaurant waar de lekkerste gegrilde gerechten en gemarineerde ribbetjes in een rustiek kader worden geserveerd. Patron Miguel danst tussen de tafeltjes door en maakt van elk bezoek een echte belevenis met zijn leuke kwinkslag. Je viervoeter is hier van harte welkom om mee te genieten van de warme, huiselijke sfeer.',
+    summary: 'Rustiek restaurant in Stene dat bekendstaat om gemarineerde ribbetjes, gegrilde gerechten en een uitgesproken persoonlijke sfeer aan tafel.',
+    recommendationNote: 'Restaurant \'t Pomptje is een aanrader omdat het tegelijk huiselijk en levendig aanvoelt. Je zit er niet in een brave standaardzaak: de sfeer is losser, de ontvangst persoonlijker en dat maakt het net zo fijn om er met hond binnen te stappen.',
+    description: 'Restaurant \'t Pomptje ligt in het pittoreske Stene en draait al jaren rond een eenvoudige formule die goed werkt: stevige gegrilde gerechten, gemarineerde ribbetjes en een rustiek kader waar het warm blijft zonder gemaakt gezellig te willen zijn. Patron Miguel staat zelf aan het fornuis en geeft de zaak die typische persoonlijke toets waar veel mensen voor terugkomen. Voor hondenbaasjes zit de charme vooral in dat losse, huiselijke karakter: dit voelt niet als een plek waar je eerst moet aftoetsen of je hond wel mee kan, maar als een zaak waar samen binnenkomen heel natuurlijk verloopt.',
     tags: ['Indoor toegelaten', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Grill specialiteiten', 'Gezellig', 'Aanrader'],
     image: '/tpomptje.webp',
     city: 'oostende',
     address: 'Zilverlaan 2, 8400 Oostende (Stene)',
-    website: 'https://www.tpomptje.be/'
+    phone: '+32 59 51 19 46',
+    website: 'https://www.tpomptje.be/',
+    websiteLabel: 'Bekijk \'t Pomptje'
   },
   // Wenduine Hotspots
   {
@@ -1014,23 +1074,31 @@ export const HOTSPOTS: Hotspot[] = [
     id: 90,
     name: 'New Poseidon',
     type: 'Brasserie',
-    description: 'Op een boogscheut van de zee ligt Brasserie New Poseidon, gerund door zaakvoerders Jeroen en Tessa. Dit sfeervolle café & brasserie combineert een warme cafésfeer met een keuken die focust op dagverse producten en toegankelijke smaken. Een plek waar locals en bezoekers zich thuis voelen – voor een koffie, een dagschotel, gezellige babbel of een leuke feestje. En als je geluk hebt, maak je kennis met Yoekie, hun eigen viervoeter die regelmatig gasten verwelkomt en zorgt voor extra gezelligheid. Ontspannen genieten van een heerlijk drankje, een snack, een verrukkelijk ijsje of verse pannenkoek!',
+    summary: 'Toegankelijke brasserie vlak bij zee waar dagverse producten, een losse sfeer en een warme ontvangst mooi samenkomen.',
+    recommendationNote: 'New Poseidon is een aanrader omdat het tegelijk laagdrempelig en oprecht aanvoelt. Je komt hier niet in een stijve brasserie terecht, maar op een plek waar hond, baasje en gewone kustgoesting vanzelf samengaan.',
+    description: 'New Poseidon wordt uitgebaat door Jeroen en Tessa en zet volgens de eigen site in op dagverse producten, toegankelijke keuken en een losse brasseriesfeer dicht bij zee. Het is een van die adressen waar je niet alleen terechtkunt voor een maaltijd, maar ook voor koffie, iets kleins of gewoon een korte stop onderweg. Daardoor werkt het goed voor wie met hond in Blankenberge rondwandelt en geen zin heeft in een te formele setting. De zaak voelt eerder als een plek waar locals en bezoekers door elkaar lopen dan als een uitgepuurd toeristisch concept, en net dat maakt ze aantrekkelijk.',
     tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Nabij strand', 'Dagverse producten', 'Huishond aanwezig', 'Aanrader'],
     image: '/newposeidon.webp',
     city: 'blankenberge',
     address: 'A. Ruzettelaan 157, 8370 Blankenberge',
-    website: 'https://newposeidon.be/nl/'
+    phone: '+32 50 66 28 86',
+    website: 'https://newposeidon.be/nl/',
+    websiteLabel: 'Bekijk New Poseidon'
   },
   {
     id: 89,
     name: 'De Zeegeuzen',
     type: 'Café',
-    description: 'Legendarisch visserscafé tussen de zeedijk en het stadscentrum waar geschiedenis voelbaar is. Hier komen mariniers, vissers, kunstenaars en schrijvers al sinds jaar en dag samen voor een goeie babbel en het befaamde biertje "De Zeegeuze". Dit authentieke praatcafé biedt een platform voor live muziek, jamsessies, comedy en quizavonden. Een échte cultpub waar verhalen worden verteld, muziek wordt gemaakt en gedichten worden geschreven. Ver genoeg van het bruisende nachtleven om comfortabel te zijn, dichtbij genoeg om altijd gezellig te blijven. Je viervoeter is hier vanzelfsprekend welkom!',
-    tags: ['Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Live muziek', 'Authentiek', 'Cultcafé'],
+    summary: 'Traditioneel café vlak bij de visserskaai met een nautische toets, een stevige bierkaart en genoeg eigenheid om meer te zijn dan zomaar een bruin café.',
+    recommendationNote: 'De Zeegeuzen voelt aan als een café waar je je snel op je gemak voelt. Voor een hondvriendelijke stop in Oostende is dat veel waard: geen opgekuiste façade, wel een plek met stamgasten, karakter en genoeg schwung om te blijven hangen.',
+    description: 'De Zeegeuzen is een traditioneel café tussen de visserskaai en het centrum van Oostende, met de charme van een bruin café en een duidelijke nautische knipoog. Volgens Toerisme Oostende is het een geliefde plek voor locals en bezoekers, met een uitgebreide bierkaart, creatieve cocktails, kaartspel, darts, pubquizzen en jamsessies. Dat maakt het niet alleen gezellig, maar ook een plek met een eigen ritme en een vaste kern van stamgasten. Omdat de zaak door Toerisme Oostende expliciet als hondvriendelijk wordt vermeld, is dit een van die adressen waar de combinatie van karakter en gemak echt goed uitkomt voor wie met hond een café zoekt dat nog authentiek aanvoelt.',
+    tags: ['Aanrader', 'Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Live muziek', 'Authentiek', 'Cultcafé'],
     image: '/zeegeuzen2.webp',
     city: 'oostende',
     address: 'Kapucijnenstraat 38, 8400 Oostende',
-    website: ''
+    phone: '+32 473 13 02 61',
+    website: '',
+    websiteLabel: 'Bel De Zeegeuzen'
   },
   {
     id: 128,
@@ -1081,12 +1149,15 @@ export const HOTSPOTS: Hotspot[] = [
     id: 91,
     name: 'Seascape Penthouse',
     type: 'Slapen',
-    description: 'Wakker worden met de Noordzee aan je voeten? In dit stijlvolle penthouse op de bovenste verdieping geniet je van een adembenemend panoramisch zeezicht. Schuif de deuren open naar je privé dakterras en sluit de dag af met de meest fotogenieke zonsondergangen. Binnen baadt de open leefruimte in het licht en is de keuken van alle gemakken voorzien. Na een lange strandwandeling is het heerlijk thuiskomen en plof je neer in uiterst comfortabele bedden. Honden meer dan welkom! Dit penthouse is de perfecte uitvalsbasis om samen met je trouwe viervoeter de Blankenbergse zeedijk, het uitgestrekte strand en de gezellige stad te verkennen. Praktisch: Je fietsen berg je veilig op in onze fietsenstalling en optioneel bieden we een handige verhuurservice voor fris bad- en bedlinnen.',
+    summary: 'Stijlvol penthouse op de zeedijk met panoramisch zeezicht en een privé dakterras voor wie van een verblijf zelf al een bestemming wil maken.',
+    recommendationNote: 'Seascape Penthouse is een aanrader omdat het verblijf zelf al een groot deel van de uitstap wordt. Met hond is dat extra fijn: je hoeft niet altijd ergens naartoe om van de kust te genieten, want het zicht en het terras doen al veel werk.',
+    description: 'Seascape Penthouse wordt op boekingsplatformen omschreven als een ruim verblijf aan het strand met panoramisch zeezicht, twee slaapkamers, een volledig uitgeruste keuken en meerdere terrassen, waaronder een privé dakterras. Die combinatie maakt het vooral interessant voor wie niet alleen een slaapplek zoekt, maar echt graag tijd doorbrengt in de accommodatie zelf. Voor hondenbaasjes is dat een groot voordeel: na een wandeling over de dijk of het strand keer je terug naar een verblijf waar je nog altijd volop dat kustgevoel hebt, zonder in te boeten op ruimte of comfort.',
     tags: ['Aanrader', 'Honden welkom', 'Panoramisch zeezicht', 'Privé dakterras', 'Nabij strand', 'Volledig uitgerust'],
     image: '/seascapeV4.webp',
     city: 'blankenberge',
     address: 'Zeedijk 115 B/10, 8370 Blankenberge',
-    website: 'https://www.booking.com/hotel/be/seascape-penthouse.nl.html'
+    website: 'https://www.booking.com/hotel/be/seascape-penthouse.nl.html',
+    websiteLabel: 'Bekijk verblijf'
   },
 
   // ── Koksijde - Oostduinkerke ──────────────────────────────────────────────
@@ -1348,18 +1419,24 @@ export const HOTSPOTS: Hotspot[] = [
     id: 129,
     name: 'Skateshop Daily Grind',
     type: 'Shoppen',
-    description: 'Bij Daily Grind scoor je niet alleen een nieuw deck of de coolste kledij, maar wordt je hond ook als een ware VIP behandeld. Eigenaars Ira en Dré hebben een gigantisch hart voor dieren en entertainen je viervoeter maar al te graag terwijl jij je keuzes maakt. Neem zeker even een kijkje in de etalage, want je vindt hier zelfs unieke hondenaccessoires van authentieke skatemerken — ideaal voor op reis of op het strand. Een verborgen pareltje in Blankenberge. Groetjes van Jax als je passeert!',
+    summary: 'Skateshop met een eigen stijl, sterke selectie boards en streetwear, en een opvallend warme ontvangst voor honden.',
+    recommendationNote: 'Daily Grind is een aanrader omdat het net iets helemaal anders is dan de klassieke hondvriendelijke stop. Je stapt een nichewinkel binnen met karakter, maar zonder afstandelijke sfeer, en dat maakt het net zo leuk met hond erbij.',
+    description: 'Daily Grind is een onafhankelijke skatewinkel in Blankenberge met boards, onderdelen, kleding en accessoires van bekende skatemerken. Lokale gidsen beschrijven de zaak als een shop met een duidelijke eigen stijl en een selectie die verder gaat dan een toeristisch impulsaankoopje. Daardoor is het een leuke afwisseling tussen alle klassieke eet- en drinkstops aan zee. Voor wie met hond op stap is, zit de charme precies in dat onverwachte: je wandelt geen standaard winkel binnen, maar een plek met een subcultuur, karakter en tegelijk genoeg warmte om er ontspannen binnen te springen.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Skateshop', 'Unieke hondenaccessoires', 'Indoor toegelaten'],
     image: '/dailygrind.webp',
     city: 'blankenberge',
     address: 'Langestraat 1, 8370 Blankenberge',
-    website: 'https://daily-grind-skateshop.webshopapp.com/'
+    phone: '+32 50 95 04 42',
+    website: 'https://daily-grind-skateshop.webshopapp.com/',
+    websiteLabel: 'Bekijk skateshop'
   },
   {
     id: 124,
     name: 'Restaurant Koekie\'s',
     type: 'Restaurant',
-    description: 'Restaurant Koekie\'s in hartje Blankenberge (vlak bij de haven en het strand) is een sfeervolle plek waar honden écht in de watten worden gelegd. Je trouwe viervoeter is hier overal meer dan welkom, of je nu buiten op het terras zit of binnen in het warme, stijlvolle interieur.\n\nEigenaars Shirley en Kevin zorgen altijd voor een enorm gastvrije ontvangst. Hun absolute specialiteit? De ribbetjes! Botermals, vol smaak en simpelweg onweerstaanbaar. Ook de huisgemaakte, dagverse garnaalkroketten zijn een topkeuze. Maak je maaltijd compleet met verse frietjes en hun verrukkelijke tiramisu.\n\nEen toprestaurantje op een toplocatie voor jou én je hond!',
+    summary: 'Sfeervol restaurant vlak bij haven en strand waar je terechtkunt voor sterke klassiekers zoals ribbetjes en huisgemaakte garnaalkroketten.',
+    recommendationNote: 'Koekie’s is een aanrader omdat de combinatie van ontvangst, keuken en ligging hier gewoon heel goed zit. Het is zo’n zaak waar je graag op terugvalt als je in Blankenberge zonder omwegen goed wil eten met je hond erbij.',
+    description: 'Restaurant Koekie’s ligt op een handige plek in Blankenberge, dicht bij zowel de haven als het strand. De zaak wordt lokaal vooral gelinkt aan haar ribbetjes en huisgemaakte garnaalkroketten, twee klassiekers die goed passen bij het soort toegankelijke restaurant dat je hier mag verwachten. Dat maakt Koekie’s geen ingewikkeld concept, maar wel een adres waar je gemakkelijk voor kiest als je na een wandeling of uitstap met hond gewoon degelijk en smaakvol wil eten. Door die combinatie van ligging, herkenbare keuken en warme sfeer is dit het soort plek waar veel mensen graag op terugvallen.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Buiten dineren', 'Huisgemaakte garnaalkroketten', 'Ribbetjes specialiteit', 'Nabij strand', 'Nabij haven'],
     image: '/koekies.webp',
     city: 'blankenberge',
@@ -1380,12 +1457,16 @@ export const HOTSPOTS: Hotspot[] = [
     id: 126,
     name: 'Two For You - Crystals and Gifts',
     type: 'Shoppen',
-    description: 'Een warme en magische plek in het hart van Blankenberge! Bij Two For You vind je een prachtige collectie edelstenen, mineralen en spirituele artikelen — zorgvuldig samengesteld om je te helpen bij je innerlijke rust en spirituele reis. Eigenares Nathalie heeft een gigantisch groot hart voor dieren en verwelkomt jou en je hond met open armen.\n\nNaast edelstenen vind je er ook geurkaarsen, etherische oliën en een uitgebreid assortiment wierook. Wil je meer verdieping? Dan kan je bij Nathalie ook een kaartleging boeken voor inzichten en richting. Een ideale en sfeervolle halte tijdens een daguitstap naar Blankenberge!',
+    summary: 'Sfeervolle winkel in Blankenberge met edelstenen, mineralen en spirituele cadeaus, gedragen door een heel persoonlijke ontvangst.',
+    recommendationNote: 'Two For You is een aanrader omdat het een echte tussenstop met sfeer is. Je bent hier niet gewoon snel iets aan het kopen: je komt in een winkel terecht waar rust, aandacht en een warm welkom duidelijk deel van de ervaring zijn.',
+    description: 'Two For You brengt edelstenen, mineralen, wierook, etherische oliën en spirituele geschenken samen in een winkel die veel persoonlijker aanvoelt dan een doorsnee cadeauzaak. De eigen site koppelt daar ook extra beleving aan, zoals kaartleggingen en advies op maat. Daardoor wordt het meer dan een plek waar je snel iets koopt: het is een rustige tussenstop met een uitgesproken sfeer. Voor wie met hond door Blankenberge wandelt en graag ook eens iets anders meepikt dan horeca of klassieke winkels, is dit net zo’n zaak die karakter toevoegt aan de uitstap.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Waterbak aanwezig', 'Edelstenen & mineralen', 'Indoor toegelaten'],
     image: '/twoforyou.webp',
     city: 'blankenberge',
     address: 'Vissersstraat 44, 8370 Blankenberge',
+    phone: '+32 496 84 71 76',
     website: 'https://www.twoforyou.be/',
+    websiteLabel: 'Bekijk winkel',
   },
   {
     id: 127,
@@ -1402,22 +1483,34 @@ export const HOTSPOTS: Hotspot[] = [
     id: 130,
     name: 'ABC Hotel',
     type: 'Slapen',
-    description: 'Kies je voor ABC Hotel, dan kies je voor onberispelijke viersterrenservice tot in de kleinste details. Badjassen, slippers en oordopjes in elke kamer, persoonlijk advies op maat, een inrichting met oog voor detail en design… Het zijn maar enkele voorbeelden van hoe dit eco-hotel het verschil maakt. Gastvrouw Liliane reisde de wereld rond en zet nu haar kennis en ervaring in om jou een onvergetelijk verblijf in Blankenberge te bezorgen. Je viervoeter is hier meer dan welkom: honden mogen mee op de kamer én aan het ontbijt, waar een rustig plaatsje voor hen wordt voorzien. Na het ontbijt kun je heerlijk afkoelen in het verwarmde buitenzwembad. Bonus: Liliane\'s man is dierenarts in Blankenberge, dus je hond zit hier letterlijk op de juiste plek!',
+    summary: 'Kleinschalig viersterren eco-hotel in Blankenberge waar design, persoonlijke service en een hondvriendelijk verblijf mooi samenkomen.',
+    recommendationNote: 'ABC Hotel is een aanrader omdat het comfort hier niet stopt bij de kamer. Het hele verblijf voelt verzorgd en persoonlijk aan, en net daardoor is het ook met hond een veel ontspannender adres dan veel grotere kusthotels.',
+    description: 'ABC Hotel profileert zich als een kleinschalig viersterren eco-hotel waar design, persoonlijke service en comfort tot in de details belangrijk zijn. Op de eigen site en in toeristische vermeldingen komen telkens dezelfde sterktes terug: rustig logeren, een verzorgd ontbijt, verwarmd buitenzwembad en een gastvrouw die sterk inzet op maatwerk voor haar gasten. Daardoor voelt dit adres minder als een standaard hotelketen en meer als een verblijf met een eigen toon. Voor wie met hond reist, zit daar veel waarde in: je zoekt niet alleen een plek waar huisdieren mogen slapen, maar een hotel waar de sfeer zelf al rustiger en persoonlijker is.',
     tags: ['Aanrader', 'Honden toegelaten op kamer', 'Hond welkom bij ontbijt', '4-sterren', 'Eco-hotel', 'Verwarmd buitenzwembad', 'Persoonlijke service', 'Design interieur'],
     image: '/abchotel.webp',
     city: 'blankenberge',
     address: 'Marie-Josélaan 25, 8370 Blankenberge',
-    website: 'https://www.abchotel.be/nl/'
+    phone: '+32 50 96 02 50',
+    website: 'https://www.abchotel.be/nl/',
+    websiteLabel: 'Boek bij ABC Hotel'
   },
   {
     id: 131,
     name: 'Au Pengouin',
     type: 'Brasserie',
-    description: 'Een absolute klassieker in het centrum van Blankenberge, vlakbij de zeedijk! Au Pengouin staat bekend om hun legendarische reuzenwafels — krokant vanbuiten, luchtig vanbinnen en dubbel zo groot als je gewend bent. Daarnaast serveren ze verse pannenkoeken (geen voorgebakken gedoe!), heerlijke croque\'s, spaghetti en nog zoveel meer. De porties zijn hier niet zuinig: je bord puilt uit en je krijgt altijd waar voor je geld. De vlotte en vriendelijke bediening maakt het plaatje helemaal compleet. En het allerbeste? Je viervoeter is hier meer dan welkom, groot of klein! Er wordt een rustig plekje voorzien en vers water staat altijd klaar. Een warm, verzorgd interieur waar je met volle teugen geniet — samen met je trouwe metgezel. Hier kom je gegarandeerd terug!',
+    summary: 'Klassieke zaak in het centrum van Blankenberge die vooral bekendstaat om royale wafels, verse pannenkoeken en een vlotte bediening.',
+    recommendationNote: 'Au Pengouin is een aanrader omdat het nog zo’n echte klassieker is waar je zonder veel nadenken binnenstapt. Groot of klein, met of zonder hond: de bediening houdt het vlot en gemoedelijk, en dat maakt dit soort plek nog altijd goud waard.',
+    description: 'Au Pengouin is een gevestigde naam in het centrum van Blankenberge, dicht bij de zeedijk. De zaak staat lokaal vooral bekend om haar grote wafels, verse pannenkoeken en royale porties, aangevuld met klassieke tearoomgerechten zoals croques en spaghetti. Daardoor is dit geen plek voor verfijnde franjes, maar wel een adres waar veel mensen juist voor terugkomen omdat het duidelijk en genereus blijft. Voor hondenbaasjes werkt zo’n klassieke, toegankelijke zaak vaak beter dan een hipper concept: je wil vlot kunnen binnenstappen, rustig zitten en weer verder kunnen, en precies daarin zit hier de sterkte.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Waterbak aanwezig', 'Reuzenwafels', 'Verse pannenkoeken', 'Grote porties', 'Centrum', 'Gezellig'],
     image: '/pengouin.webp',
     city: 'blankenberge',
     address: 'Kerkstraat 33, 8370 Blankenberge',
-    website: 'https://www.facebook.com/Aupingouin/'
+    website: 'https://www.facebook.com/Aupingouin/',
+    websiteLabel: 'Bekijk Facebook-pagina'
   },
 ];
+
+export const HOTSPOTS: Hotspot[] = HOTSPOT_ENTRIES.map((spot) => ({
+  ...spot,
+  slug: createHotspotSlug(spot.name),
+}));

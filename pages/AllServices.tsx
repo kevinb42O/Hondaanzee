@@ -1,28 +1,15 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Stethoscope, ShoppingBag, MapPin, Filter, X } from 'lucide-react';
 import { SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
-import PlaceModal from '../components/PlaceModal.tsx';
-import { Service } from '../types.ts';
+import { getServiceDetailPath } from '../utils/placeRoutes.ts';
 
 const AllServices: React.FC = () => {
-  const [selectedCity, setSelectedCity] = useState<string>('all');
-  const [selectedType, setSelectedType] = useState<string>('all');
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleServiceClick = (service: Service) => {
-    setSelectedService(service);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedService(null), 300); // Clear after animation
-  };
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   // Apply SEO metadata
   useSEO(SEO_DATA.diensten);
@@ -39,6 +26,30 @@ const AllServices: React.FC = () => {
     }
   };
 
+  const types = ['all', ...Array.from(new Set(SERVICES.map(service => service.type)))];
+  const citiesWithServices = useMemo(() => {
+    const citySet = new Set(SERVICES.map(service => service.city));
+    return CITIES.filter(city => citySet.has(city.slug));
+  }, []);
+
+  const validCitySet = useMemo(() => new Set(['all', ...citiesWithServices.map((city) => city.slug)]), [citiesWithServices]);
+  const validTypeSet = useMemo(() => new Set(types), [types]);
+
+  const selectedCity = validCitySet.has(searchParams.get('city') || 'all')
+    ? searchParams.get('city') || 'all'
+    : 'all';
+  const selectedType = validTypeSet.has(searchParams.get('type') || 'all')
+    ? searchParams.get('type') || 'all'
+    : 'all';
+
+  const buildFilterSearch = (city: string, type: string) => {
+    const next = new URLSearchParams();
+    if (city !== 'all') next.set('city', city);
+    if (type !== 'all') next.set('type', type);
+    const query = next.toString();
+    return query ? `?${query}` : '';
+  };
+
   const filteredServices = useMemo(() => {
     return SERVICES.filter(service => {
       const cityMatch = selectedCity === 'all' || service.city === selectedCity;
@@ -51,12 +62,6 @@ const AllServices: React.FC = () => {
     });
   }, [selectedCity, selectedType]);
 
-  const types = ['all', ...Array.from(new Set(SERVICES.map(service => service.type)))];
-  const citiesWithServices = useMemo(() => {
-    const citySet = new Set(SERVICES.map(service => service.city));
-    return CITIES.filter(city => citySet.has(city.slug));
-  }, []);
-
   const getCityName = (slug: string) => {
     return CITIES.find(city => city.slug === slug)?.name || slug;
   };
@@ -65,7 +70,7 @@ const AllServices: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-hidden">
-      <div className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
+      <div data-header-hero="light" className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
         {/* Background Image */}
         <div
           className="absolute inset-0 z-0"
@@ -147,15 +152,12 @@ const AllServices: React.FC = () => {
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Filters</h2>
             {hasFilters && (
-              <button
-                onClick={() => {
-                  setSelectedCity('all');
-                  setSelectedType('all');
-                }}
+              <Link
+                to="/diensten"
                 className="ml-auto text-sm font-bold text-slate-500 hover:text-sky-600 transition-colors flex items-center gap-2"
               >
                 <X size={16} /> Wis filters
-              </button>
+              </Link>
             )}
           </div>
 
@@ -167,26 +169,26 @@ const AllServices: React.FC = () => {
                 Gemeente
               </legend>
               <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setSelectedCity('all')}
+                <Link
+                  to={`/diensten${buildFilterSearch('all', selectedType)}`}
                   className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
                     ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                 >
                   Alle
-                </button>
+                </Link>
                 {citiesWithServices.map(city => (
-                  <button
+                  <Link
                     key={city.slug}
-                    onClick={() => setSelectedCity(city.slug)}
+                    to={`/diensten${buildFilterSearch(city.slug, selectedType)}`}
                     className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
                       ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                       }`}
                   >
                     {city.name}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </fieldset>
@@ -198,9 +200,9 @@ const AllServices: React.FC = () => {
               </legend>
               <div className="flex flex-wrap gap-2">
                 {types.map(type => (
-                  <button
+                  <Link
                     key={type}
-                    onClick={() => setSelectedType(type)}
+                    to={`/diensten${buildFilterSearch(selectedCity, type)}`}
                     className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${selectedType === type
                       ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -208,7 +210,7 @@ const AllServices: React.FC = () => {
                   >
                     {type !== 'all' && <span className="opacity-70">{getIcon(type)}</span>}
                     {type === 'all' ? 'Alle' : type}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </fieldset>
@@ -226,11 +228,11 @@ const AllServices: React.FC = () => {
         {filteredServices.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {filteredServices.map((service) => (
-              <button
+              <Link
                 key={service.id}
-                type="button"
+                to={getServiceDetailPath(service)}
+                state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col h-full"
-                onClick={() => handleServiceClick(service)}
               >
                 <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                   <img
@@ -261,15 +263,9 @@ const AllServices: React.FC = () => {
                       <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.15em] text-amber-300">Aanrader</span>
                     </div>
                   )}
-                  <a
-                    href={`/${service.city}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                    className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider hover:bg-sky-600 transition-colors cursor-pointer no-underline"
-                  >
+                  <span className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-slate-900/90 backdrop-blur text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider">
                     <MapPin size={10} /> {getCityName(service.city)}
-                  </a>
+                  </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2 md:group-hover:text-sky-600 md:transition-colors">{service.name}</h3>
                 <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed font-medium">{service.description}</p>
@@ -283,20 +279,7 @@ const AllServices: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                {service.website && (
-                  <a
-                    href={service.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-[10px] sm:text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                  >
-                    Bezoek website →
-                  </a>
-                )}
-              </button>
+              </Link>
             ))}
           </div>
         ) : (
@@ -310,28 +293,18 @@ const AllServices: React.FC = () => {
                 Er zijn geen diensten die aan deze filters voldoen. Probeer andere filters te selecteren.
               </p>
               {hasFilters && (
-                <button
-                  onClick={() => {
-                    setSelectedCity('all');
-                    setSelectedType('all');
-                  }}
+                <Link
+                  to="/diensten"
                   className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-sky-700 transition-colors"
                 >
                   <X size={16} /> Wis alle filters
-                </button>
+                </Link>
               )}
             </div>
           </div>
         )}
       </div>
 
-      {/* Modal */}
-      <PlaceModal
-        place={selectedService}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        accentColor="emerald"
-      />
     </div>
   );
 };
