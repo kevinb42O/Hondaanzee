@@ -14,6 +14,7 @@ export const REPORT_SELECT_COLUMNS = `
   status,
   is_hidden,
   report_count,
+  confirm_count,
   city_intervention_status,
   city_intervention_note,
   resolved_at
@@ -25,6 +26,7 @@ const cityNameMap = new Map(CITIES.map((city) => [city.slug, city.name]));
 
 export const hydrateReport = (row: ReportRow): ReportItem => ({
   ...row,
+  confirm_count: Number(row.confirm_count || 0),
   city_name: cityNameMap.get(row.city_slug) || row.city_slug,
 });
 
@@ -92,6 +94,25 @@ export const flagReport = async (publicId: string): Promise<{ report_count: numb
   return {
     report_count: Number(data?.report_count || 0),
     is_hidden: Boolean(data?.is_hidden),
+  };
+};
+
+export const confirmReport = async (
+  publicId: string,
+): Promise<{ confirm_count: number; already_confirmed: boolean }> => {
+  const { data, error } = await supabase.functions.invoke('confirm-report', {
+    body: {
+      public_id: publicId,
+    },
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return {
+    confirm_count: Number(data?.confirm_count || 0),
+    already_confirmed: Boolean(data?.already_confirmed),
   };
 };
 

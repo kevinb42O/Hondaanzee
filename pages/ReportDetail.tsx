@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AlertTriangle, ArrowLeft, Copy, Flag, Loader2, Share2 } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, Copy, Flag, Loader2, Share2, ThumbsUp } from 'lucide-react';
 import type { ReportItem } from '../types.ts';
-import { fetchVisibleReportByPublicId, flagReport } from '../utils/reportData.ts';
+import { confirmReport, fetchVisibleReportByPublicId, flagReport } from '../utils/reportData.ts';
 import {
   formatObservedAbsolute,
   formatObservedDistance,
@@ -23,6 +23,7 @@ const ReportDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [flagging, setFlagging] = useState(false);
+  const [confirming, setConfirming] = useState(false);
 
   useSEO(report ? getReportSEO(report) : {
     title: 'Melding laden | HondAanZee.be',
@@ -139,6 +140,10 @@ const ReportDetail: React.FC = () => {
                 <p className="mt-4 text-lg leading-relaxed text-slate-800 sm:text-xl">
                   {report.description}
                 </p>
+                <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-800">
+                  <ThumbsUp size={15} />
+                  {report.confirm_count} {report.confirm_count === 1 ? 'bevestiging' : 'bevestigingen'}
+                </div>
               </div>
 
               <div className="grid gap-4">
@@ -180,6 +185,31 @@ const ReportDetail: React.FC = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                disabled={confirming}
+                onClick={async () => {
+                  setConfirming(true);
+                  try {
+                    const result = await confirmReport(report.public_id);
+                    setReport((current) =>
+                      current
+                        ? { ...current, confirm_count: result.confirm_count }
+                        : current,
+                    );
+                  } finally {
+                    setConfirming(false);
+                  }
+                }}
+                className="inline-flex items-center gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 font-bold text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-100 disabled:opacity-60"
+              >
+                <ThumbsUp size={16} />
+                Ik heb dit ook gezien
+                <span className="rounded-full bg-white/80 px-2 py-0.5 text-xs font-black text-emerald-900">
+                  {report.confirm_count}
+                </span>
+              </button>
+
               <button
                 type="button"
                 onClick={async () => {

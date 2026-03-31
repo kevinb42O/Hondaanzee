@@ -5,7 +5,7 @@ import ReportFeed from '../components/meldpunt/ReportFeed.tsx';
 import ReportFilters from '../components/meldpunt/ReportFilters.tsx';
 import ReportFormModal from '../components/meldpunt/ReportFormModal.tsx';
 import type { ReportFilters as ReportFiltersValue, ReportItem } from '../types.ts';
-import { fetchVisibleReports, flagReport } from '../utils/reportData.ts';
+import { confirmReport, fetchVisibleReports, flagReport } from '../utils/reportData.ts';
 import { SEO_DATA, useSEO } from '../utils/seo.ts';
 
 const initialFilters: ReportFiltersValue = {
@@ -112,7 +112,7 @@ const Meldpunt: React.FC = () => {
 
             <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-md">
               <p className="text-[11px] font-black uppercase tracking-[0.22em] text-sky-200">Zo gebruik je dit meldpunt</p>
-              <h2 className="mt-3 text-2xl font-black tracking-tight text-white">Iets verdachts of vuils gezien? Kijk of het al gemeld is, of zet het er zelf meteen bij.</h2>
+              <h2 className="mt-3 text-2xl font-black tracking-tight text-white">Iets verdachts of gevaarlijks gezien? Kijk of het al gemeld is, of zet het er zelf meteen bij.</h2>
               <p className="mt-3 text-sm font-medium leading-relaxed text-slate-300">
                 Gebruik de filters als je wilt checken wat er al gemeld werd. Wil je zelf iets doorgeven, hou het dan simpel: wat lag er, waar lag het en wanneer heb je het gezien?
               </p>
@@ -157,7 +157,7 @@ const Meldpunt: React.FC = () => {
             <p className="text-[11px] font-black uppercase tracking-[0.22em] text-slate-500">Opvolging</p>
             <h2 className="mt-2 text-lg font-black tracking-tight text-slate-900">Wat zie je hier terug?</h2>
             <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
-              Eerst vooral de melding zelf. Als een stad of dienst later een update krijgt toegevoegd, zie je dat er ook meteen bij staan.
+              Elke melding wordt doorgestuurd naar de bevoegde instantie van de gemeente waar ze geplaatst werd. Hier zie je eerst de melding zelf, en zodra er een officiële update is, verschijnt die er ook meteen bij.
             </p>
           </div>
         </div>
@@ -206,6 +206,25 @@ const Meldpunt: React.FC = () => {
           ) : (
             <ReportFeed
               reports={filteredReports}
+              onConfirm={async (publicId) => {
+                const result = await confirmReport(publicId);
+
+                setReports((current) =>
+                  current.map((report) =>
+                    report.public_id === publicId
+                      ? { ...report, confirm_count: result.confirm_count }
+                      : report,
+                  ),
+                );
+
+                setFlagMessage(
+                  result.already_confirmed
+                    ? 'Jouw bevestiging stond al op deze melding.'
+                    : 'Dank. Jouw bevestiging staat nu mee op deze melding.',
+                );
+
+                return { alreadyConfirmed: result.already_confirmed };
+              }}
               onFlag={async (publicId) => {
                 const result = await flagReport(publicId);
                 if (result.is_hidden) {

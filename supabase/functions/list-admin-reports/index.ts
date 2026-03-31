@@ -32,6 +32,7 @@ Deno.serve(async (req) => {
         status,
         is_hidden,
         report_count,
+        confirm_count,
         city_intervention_status,
         city_intervention_note,
         resolved_at

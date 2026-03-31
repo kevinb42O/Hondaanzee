@@ -126,6 +126,7 @@ export interface ReportItem {
   status: ReportStatus;
   is_hidden: boolean;
   report_count: number;
+  confirm_count: number;
   city_intervention_status: ReportInterventionStatus;
   city_intervention_note?: string | null;
   resolved_at?: string | null;

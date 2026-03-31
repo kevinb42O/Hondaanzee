@@ -38,6 +38,23 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '2.1',
+    date: '1 april 2026',
+    title: 'Nieuw: Meldpunt Gif & Overlast voor de hele Belgische kust',
+    subtitle: 'Een nieuwe publieke meldpagina waar je verdachte stoffen, vuil of gevaarlijke situaties meteen kan melden en opvolgen',
+    entries: [
+      { text: 'Het nieuwe Meldpunt Gif & Overlast is live op HondAanZee.be, met een aparte pagina voor de hele Belgische kust', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Je kan nu zelf meldingen plaatsen van gif of verdachte stof, afval, hondenpoep, gevaarlijke situaties en andere overlast', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Elke melding krijgt een eigen detailpagina en deelbare link, zodat waarschuwingen makkelijker kunnen worden doorgestuurd', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Nieuwe meldingen verschijnen meteen in de publieke feed, zodat bezoekers eerst kunnen checken wat er al gemeld werd in hun stad', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Meldingen worden per gemeente doorgestuurd naar de bevoegde instantie, zodat ze niet alleen zichtbaar zijn voor bezoekers maar ook rechtstreeks bij de juiste dienst terechtkomen', tag: { label: 'Belangrijk', color: 'rose' } },
+      { text: 'Op meldingen kan nu ook een publieke update verschijnen, bijvoorbeeld wanneer iets werd doorgestuurd of opgeruimd', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Er is ook een eenvoudige beheerflow toegevoegd om meldingen intern op te volgen zonder rechtstreeks in databanktabellen te moeten werken', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'De nieuwe meldpuntpagina kreeg een volledige visuele uitwerking in de stijl van HondAanZee, maar met een formelere look zodat meldingen serieus en duidelijk leesbaar blijven', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'De pagina werd ook mobiel bijgeschaafd: terugknoppen, header-ruimte en leesvolgorde zitten nu correct op kleine schermen', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
+  {
     version: '2.0',
     date: '31 maart 2026',
     title: 'Hotspots & diensten kregen hun eigen detailpagina’s',

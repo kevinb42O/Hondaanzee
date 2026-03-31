@@ -90,6 +90,10 @@ export const flagReportInputSchema = z.object({
   public_id: sanitizedString(6, 32),
 });
 
+export const confirmReportInputSchema = z.object({
+  public_id: sanitizedString(6, 32),
+});
+
 export const adminListReportsInputSchema = z.object({
   admin_key: sanitizedString(8, 200),
 });

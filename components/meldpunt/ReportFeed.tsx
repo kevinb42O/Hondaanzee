@@ -6,9 +6,10 @@ import ReportCard from './ReportCard.tsx';
 interface ReportFeedProps {
   reports: ReportItem[];
   onFlag: (publicId: string) => Promise<void>;
+  onConfirm: (publicId: string) => Promise<{ alreadyConfirmed: boolean }>;
 }
 
-const ReportFeed: React.FC<ReportFeedProps> = ({ reports, onFlag }) => {
+const ReportFeed: React.FC<ReportFeedProps> = ({ reports, onFlag, onConfirm }) => {
   if (reports.length === 0) {
     return (
       <div className="rounded-[2rem] border border-dashed border-slate-200 bg-white px-6 py-16 text-center shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
@@ -26,7 +27,7 @@ const ReportFeed: React.FC<ReportFeedProps> = ({ reports, onFlag }) => {
   return (
     <div className="grid gap-5 lg:grid-cols-2">
       {reports.map((report) => (
-        <ReportCard key={report.id} report={report} onFlag={onFlag} />
+        <ReportCard key={report.id} report={report} onFlag={onFlag} onConfirm={onConfirm} />
       ))}
     </div>
   );
