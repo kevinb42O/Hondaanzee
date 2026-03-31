@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const WHATSAPP_URL = `https://wa.me/32494816714?text=${encodeURIComponent('Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!')}`;
 const SHOW_FOOTER_WAVE = false;
+const LAST_UPDATE = { day: '31', month: 'mrt', year: '2026' };
 
 const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 18, className }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -271,9 +272,9 @@ const Footer: React.FC = () => {
             <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
               <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-black text-white">15</span>
-                <span className="text-sm font-bold text-cyan-400">mrt</span>
-                <span className="text-xs font-mono text-slate-400">2026</span>
+                <span className="text-2xl font-black text-white">{LAST_UPDATE.day}</span>
+                <span className="text-sm font-bold text-cyan-400">{LAST_UPDATE.month}</span>
+                <span className="text-xs font-mono text-slate-400">{LAST_UPDATE.year}</span>
               </div>
             </div>
           </div>
