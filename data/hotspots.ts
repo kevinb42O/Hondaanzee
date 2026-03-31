@@ -11,7 +11,7 @@ const createHotspotSlug = (name: string): string =>
 const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   {
     id: 1,
-    name: 'Lakaiann Blankenberge',
+    name: 'Lakaiann',
     type: 'Koffiebar',
     recommendationNote: 'Lakaiann is een aanrader omdat het geen gewone koffiestop is. Je springt binnen voor een goede koffie, maar de combinatie van rustige sfeer, originele winkel en vanzelfsprekende gastvrijheid maakt dit tot zo’n plek waar je met hond graag wat langer blijft hangen.',
     description: 'Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars. Geniet van een heerlijke specialty coffee terwijl je rondneust tussen prachtige kristallen, handgemaakte juwelen en andere unieke schatten. De ideale stop na een strandwandeling voor wie houdt van goede vibes, lekkere koffie en… pure verwennerij voor je hond!',
