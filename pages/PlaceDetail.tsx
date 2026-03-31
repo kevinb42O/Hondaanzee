@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Image as ImageIcon, MapPin, Phone, Sparkles, Tag } from 'lucide-react';
 import { HOTSPOTS, SERVICES } from '../constants.ts';
@@ -464,6 +464,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   const navigate = useNavigate();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [initialImageIndex, setInitialImageIndex] = useState(0);
+  const [activeHeroImageIndex, setActiveHeroImageIndex] = useState(0);
 
   const place = useMemo<Place | undefined>(() => {
     if (!city || !slug) return undefined;
@@ -479,7 +480,6 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
 
   const collection = kind === 'hotspot' ? HOTSPOTS : SERVICES;
   const images = place.images?.length ? place.images : [place.image];
-  const image = images[0];
   const paragraphs = splitDescription(place.description);
   const focusTags = getPriorityTags(place);
   const summary = truncateText(
@@ -541,16 +541,38 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
     setIsGalleryOpen(true);
   };
 
+  useEffect(() => {
+    setActiveHeroImageIndex(0);
+  }, [place.slug]);
+
+  useEffect(() => {
+    if (images.length <= 1) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveHeroImageIndex((currentIndex) => (currentIndex + 1) % images.length);
+    }, 6000);
+
+    return () => window.clearInterval(intervalId);
+  }, [images]);
+
   return (
     <div className="animate-in fade-in bg-slate-50 min-h-full">
       <div data-header-hero="light" className="relative isolate overflow-hidden bg-slate-950 text-white">
         <div className="absolute inset-0">
-          <img
-            src={image}
-            alt={place.name}
-            className="h-full w-full object-cover"
-            style={{ objectPosition: place.imagePosition || 'center' }}
-          />
+          {images.map((heroImage, index) => (
+            <img
+              key={heroImage}
+              src={heroImage}
+              alt={index === activeHeroImageIndex ? place.name : ''}
+              aria-hidden={index !== activeHeroImageIndex}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                index === activeHeroImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ objectPosition: place.imagePosition || 'center' }}
+            />
+          ))}
           <div className="absolute inset-0 bg-slate-950/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/74 via-slate-950/36 to-slate-950/16" />
         </div>
@@ -749,14 +771,22 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
               onClick={() => openGalleryAt(0)}
               className="group relative block w-full overflow-hidden rounded-[1.5rem] text-left"
             >
-              <img
-                src={image}
-                alt={place.name}
-                className="h-[18rem] w-full object-cover transition duration-500 group-hover:scale-[1.03] sm:h-[24rem]"
-                style={{ objectPosition: place.imagePosition || 'center' }}
-                loading="eager"
-                decoding="async"
-              />
+              <div className="relative h-[18rem] w-full sm:h-[24rem]">
+                {images.map((galleryImage, index) => (
+                  <img
+                    key={galleryImage}
+                    src={galleryImage}
+                    alt={index === activeHeroImageIndex ? place.name : ''}
+                    aria-hidden={index !== activeHeroImageIndex}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 group-hover:scale-[1.03] ${
+                      index === activeHeroImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    style={{ objectPosition: place.imagePosition || 'center' }}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                ))}
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-slate-950/5 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
                 <div>

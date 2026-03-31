@@ -17,8 +17,10 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     description: 'Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars. Geniet van een heerlijke specialty coffee terwijl je rondneust tussen prachtige kristallen, handgemaakte juwelen en andere unieke schatten. De ideale stop na een strandwandeling voor wie houdt van goede vibes, lekkere koffie en… pure verwennerij voor je hond!',
     tags: ['Waterbak aanwezig', 'Hondensnacks', 'Specialty Coffee', 'Aanrader'],
     image: '/lakaiannfinal.webp',
+    images: ['/lakaiannfinal.webp', '/lakaiann2.webp', '/lakaiann3.png'],
     city: 'blankenberge',
     address: 'Zeedijk 205/01, 8370 Blankenberge',
+    phone: '+32 497 93 23 95',
     website: 'https://lakaiann.com/',
     websiteLabel: 'Bekijk Lakaiann'
   },
