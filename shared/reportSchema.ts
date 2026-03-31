@@ -122,8 +122,14 @@ export const adminUpdateReportInputSchema = z.object({
   city_intervention_note: z.string().trim().max(300).optional().or(z.literal('')),
 });
 
+export const adminRemoveReportInputSchema = z.object({
+  admin_key: sanitizedString(8, 200),
+  public_id: sanitizedString(6, 32),
+});
+
 export type AdminListReportsInput = z.infer<typeof adminListReportsInputSchema>;
 export type AdminUpdateReportInput = z.infer<typeof adminUpdateReportInputSchema>;
+export type AdminRemoveReportInput = z.infer<typeof adminRemoveReportInputSchema>;
 
 export const buildObservedAt = (input: Pick<CreateReportInput, 'observed_preset' | 'observed_custom_at'>): string => {
   const now = new Date();

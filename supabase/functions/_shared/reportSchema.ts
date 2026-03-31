@@ -105,6 +105,11 @@ export const adminUpdateReportInputSchema = z.object({
   city_intervention_note: z.string().trim().max(300).optional().or(z.literal('')),
 });
 
+export const adminRemoveReportInputSchema = z.object({
+  admin_key: sanitizedString(8, 200),
+  public_id: sanitizedString(6, 32),
+});
+
 export type CreateReportInput = z.infer<typeof createReportInputSchema>;
 
 export const buildObservedAt = (input: Pick<CreateReportInput, 'observed_preset' | 'observed_custom_at'>): string => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, EyeOff, Loader2, RefreshCw, Save, ShieldCheck, Wand2 } from 'lucide-react';
+import { ArrowLeft, EyeOff, Loader2, RefreshCw, Save, ShieldCheck, Trash2, Wand2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { ReportInterventionStatus, ReportItem } from '../types.ts';
-import { fetchAdminReports, updateAdminReportStatus } from '../utils/reportData.ts';
+import { fetchAdminReports, removeAdminReport, updateAdminReportStatus } from '../utils/reportData.ts';
 import { formatObservedAbsolute, getCategoryMeta, getReportLeadVisual } from '../utils/reportHelpers.ts';
 import { getReportDetailPath, getReportsPath } from '../utils/reportRoutes.ts';
 import { useSEO } from '../utils/seo.ts';
@@ -48,6 +48,7 @@ const MeldpuntAdmin: React.FC = () => {
   const [statusEdits, setStatusEdits] = useState<Record<string, ReportInterventionStatus>>({});
   const [noteEdits, setNoteEdits] = useState<Record<string, string>>({});
   const [savingPublicId, setSavingPublicId] = useState<string | null>(null);
+  const [removingPublicId, setRemovingPublicId] = useState<string | null>(null);
   const noteRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
 
   useEffect(() => {
@@ -236,6 +237,11 @@ const MeldpuntAdmin: React.FC = () => {
                           Verborgen
                         </span>
                       )}
+                      {report.status === 'removed' && (
+                        <span className="rounded-full border border-red-300/30 bg-red-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-red-200">
+                          Verwijderd uit publieke site
+                        </span>
+                      )}
                       <span className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-slate-200">
                         flags: {report.report_count}
                       </span>
@@ -359,32 +365,64 @@ const MeldpuntAdmin: React.FC = () => {
                       </div>
                     </div>
 
-                    <button
-                      type="button"
-                      disabled={savingPublicId === report.public_id || !savedKey}
-                      onClick={async () => {
-                        setSavingPublicId(report.public_id);
-                        setError(null);
+                    <div className="flex flex-col gap-3">
+                      <button
+                        type="button"
+                        disabled={savingPublicId === report.public_id || !savedKey}
+                        onClick={async () => {
+                          setSavingPublicId(report.public_id);
+                          setError(null);
 
-                        try {
-                          await updateAdminReportStatus(
-                            savedKey,
-                            report.public_id,
-                            currentStatus,
-                            currentNote,
+                          try {
+                            await updateAdminReportStatus(
+                              savedKey,
+                              report.public_id,
+                              currentStatus,
+                              currentNote,
+                            );
+                            await loadReports(savedKey);
+                          } catch (saveError) {
+                            setError(saveError instanceof Error ? saveError.message : 'Kon status niet opslaan.');
+                          } finally {
+                            setSavingPublicId(null);
+                          }
+                        }}
+                        className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3 font-black text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        {savingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
+                        Opslaan
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={removingPublicId === report.public_id || !savedKey || report.status === 'removed'}
+                        onClick={async () => {
+                          const confirmed = window.confirm(
+                            `Deze melding wordt verwijderd uit de publieke site voor ${report.city_name}. Verdergaan?`,
                           );
-                          await loadReports(savedKey);
-                        } catch (saveError) {
-                          setError(saveError instanceof Error ? saveError.message : 'Kon status niet opslaan.');
-                        } finally {
-                          setSavingPublicId(null);
-                        }
-                      }}
-                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3 font-black text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {savingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-                      Opslaan
-                    </button>
+
+                          if (!confirmed) {
+                            return;
+                          }
+
+                          setRemovingPublicId(report.public_id);
+                          setError(null);
+
+                          try {
+                            await removeAdminReport(savedKey, report.public_id);
+                            await loadReports(savedKey);
+                          } catch (removeError) {
+                            setError(removeError instanceof Error ? removeError.message : 'Kon melding niet verwijderen.');
+                          } finally {
+                            setRemovingPublicId(null);
+                          }
+                        }}
+                        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 font-black text-red-800 transition hover:border-red-300 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        {removingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                        Verwijder melding
+                      </button>
+                    </div>
                     </div>
                   </div>
                 </article>

@@ -149,3 +149,19 @@ export const updateAdminReportStatus = async (
     throw error;
   }
 };
+
+export const removeAdminReport = async (
+  adminKey: string,
+  publicId: string,
+): Promise<void> => {
+  const { error } = await supabase.functions.invoke('remove-report', {
+    body: {
+      admin_key: adminKey,
+      public_id: publicId,
+    },
+  });
+
+  if (error) {
+    throw error;
+  }
+};
