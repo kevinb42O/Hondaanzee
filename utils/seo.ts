@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import type { City, Hotspot, Service } from '../types.ts';
+import type { City, Hotspot, OffLeashArea, ReportItem, Service } from '../types.ts';
 import type { PlaceKind } from './placeRoutes.ts';
+import { getCategoryMeta } from './reportHelpers.ts';
+import { getReportDetailPath } from './reportRoutes.ts';
 
 interface SEOProps {
   title: string;
@@ -186,6 +188,77 @@ export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps
     canonical,
     ogImage: `https://hondaanzee.be${image}`,
     structuredData,
+  };
+};
+
+export const getOffLeashAreaSEO = (area: OffLeashArea, cityName: string): SEOProps => {
+  const canonical = `https://hondaanzee.be/losloopzones/${area.slug}`;
+  const description = `${area.name} in ${cityName}. ${area.description}`.replace(/\s+/g, ' ').trim().slice(0, 158);
+  const image = area.images?.[0] || area.image || '/offleash.webp';
+
+  return {
+    title: `${area.name} | Losloopzone in ${cityName} | HondAanZee.be`,
+    description,
+    canonical,
+    ogImage: `https://hondaanzee.be${image}`,
+    keywords: `${area.name}, losloopzone ${cityName.toLowerCase()}, hondenweide ${cityName.toLowerCase()}, losloopgebied belgische kust`,
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hondaanzee.be/' },
+          { '@type': 'ListItem', position: 2, name: 'Losloopzones', item: 'https://hondaanzee.be/losloopzones' },
+          { '@type': 'ListItem', position: 3, name: area.name, item: canonical },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Park',
+        name: area.name,
+        description,
+        url: canonical,
+        image: [`https://hondaanzee.be${image}`],
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: area.address,
+          addressLocality: cityName,
+          addressCountry: 'BE',
+        },
+      },
+    ],
+  };
+};
+
+export const getReportSEO = (report: ReportItem): SEOProps => {
+  const category = getCategoryMeta(report.category).label;
+  const canonical = `https://hondaanzee.be${getReportDetailPath(report.public_id)}`;
+  const description = `${category} gemeld in ${report.city_name}. ${report.location_text}. ${report.description}`.replace(/\s+/g, ' ').trim().slice(0, 158);
+
+  return {
+    title: `${category} in ${report.city_name} | Meldpunt | HondAanZee.be`,
+    description,
+    canonical,
+    ogImage: 'https://hondaanzee.be/properstrand.webp',
+    keywords: `${category}, meldpunt ${report.city_name.toLowerCase()}, verdachte stof melden ${report.city_name.toLowerCase()}, overlast melding belgische kust`,
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hondaanzee.be/' },
+          { '@type': 'ListItem', position: 2, name: 'Meldpunt', item: 'https://hondaanzee.be/meldpunt' },
+          { '@type': 'ListItem', position: 3, name: report.location_text, item: canonical },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Report',
+        name: `${category} in ${report.city_name}`,
+        description,
+        url: canonical,
+      },
+    ],
   };
 };
 
@@ -577,6 +650,31 @@ export const SEO_DATA = {
         }
       }
     ]
+  },
+
+  meldpunt: {
+    title: 'Meldpunt Gif & Overlast Belgische Kust | HondAanZee.be',
+    description: 'Meld verdachte stoffen, gif, afval, hondenpoep en andere overlast aan de Belgische kust. Publieke meldingen per kuststad, direct zichtbaar op HondAanZee.be.',
+    keywords: 'meldpunt gif kust, verdachte stof melden oostende, afval melden strand belgie, overlast melden kust, meldpunt belgische kust',
+    canonical: 'https://hondaanzee.be/meldpunt',
+    ogImage: 'https://hondaanzee.be/properstrand.webp',
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hondaanzee.be/' },
+          { '@type': 'ListItem', position: 2, name: 'Meldpunt', item: 'https://hondaanzee.be/meldpunt' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'Meldpunt Gif & Overlast',
+        url: 'https://hondaanzee.be/meldpunt',
+        description: 'Publieke meldpagina voor verdachte stoffen, afval en overlast aan de Belgische kust.',
+      },
+    ],
   },
 
   blog: {

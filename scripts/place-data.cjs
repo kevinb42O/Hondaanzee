@@ -20,6 +20,7 @@ const STATIC_ROUTES = [
   '/blog',
   '/agenda',
   '/community',
+  '/meldpunt',
   '/updates',
 ];
 

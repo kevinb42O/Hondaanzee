@@ -46,6 +46,7 @@ const NAV_ENTRIES: NavEntry[] = [
             label: 'Ontdek',
             children: [
                 { to: '/agenda', label: 'Agenda' },
+                { to: '/meldpunt', label: 'Meldpunt' },
                 { to: '/blog', label: 'Blog', startsWith: true },
                 { to: '/community', label: 'Community' },
             ],

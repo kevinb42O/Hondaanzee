@@ -29,6 +29,9 @@ const PlaceDetail = React.lazy(() => import('./pages/PlaceDetail.tsx'));
 const Community = React.lazy(() => import('./pages/Community.tsx'));
 const Agenda = React.lazy(() => import('./pages/Agenda.tsx'));
 const Updates = React.lazy(() => import('./pages/Updates.tsx'));
+const Meldpunt = React.lazy(() => import('./pages/Meldpunt.tsx'));
+const ReportDetail = React.lazy(() => import('./pages/ReportDetail.tsx'));
+const MeldpuntAdmin = React.lazy(() => import('./pages/MeldpuntAdmin.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -133,6 +136,7 @@ const AppContent = () => {
               <Route path="/diensten" element={<AllServices />} />
               <Route path="/:city/hotspots/:slug" element={<PlaceDetail kind="hotspot" />} />
               <Route path="/:city/diensten/:slug" element={<PlaceDetail kind="service" />} />
+              <Route path="/losloopzones/:slug" element={<AllOffLeashAreas />} />
               <Route path="/losloopzones" element={<AllOffLeashAreas />} />
               <Route path="/kaart" element={<CoastalMap />} />
               <Route path="/privacy" element={<Privacy />} />
@@ -145,6 +149,9 @@ const AppContent = () => {
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/agenda" element={<Agenda />} />
               <Route path="/community" element={<Community />} />
+              <Route path="/meldpunt" element={<Meldpunt />} />
+              <Route path="/meldpunt/:publicId" element={<ReportDetail />} />
+              <Route path="/_meldpunt-admin" element={<MeldpuntAdmin />} />
               <Route path="/updates" element={<Updates />} />
               <Route path="/:slug" element={<CityPage />} />
               <Route path="*" element={<NotFound />} />

@@ -1,0 +1,2 @@
+export const SUPABASE_URL = 'https://zpllibfxaizavcvztnut.supabase.co';
+export const SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwbGxpYmZ4YWl6YXZjdnp0bnV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MjkzMzYsImV4cCI6MjA4NTMwNTMzNn0.9p9OsSV7p6HAksWeBA3HY90fxkbah2rAZQfESlGwj4w';

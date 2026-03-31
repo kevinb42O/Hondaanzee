@@ -155,6 +155,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/meldpunt" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                  Meldpunt
+                </Link>
+              </li>
+              <li>
                 <Link to="/goed-om-te-weten" className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Goed om te weten
                 </Link>

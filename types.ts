@@ -98,3 +98,40 @@ export interface City {
   labelOverride?: { x: number; y: number }; // Manual override for label position
   offLeashAreas: OffLeashArea[];
 }
+
+export type ReportCategory =
+  | 'gif'
+  | 'afval'
+  | 'weggegooid_voorwerp'
+  | 'hondenpoep'
+  | 'gevaarlijke_situatie'
+  | 'andere_overlast';
+
+export type ReportStatus = 'published' | 'removed';
+
+export type ReportInterventionStatus = 'not_applicable' | 'pending' | 'forwarded' | 'resolved';
+
+export type ObservedPreset = 'now' | 'today-earlier' | 'yesterday' | 'custom';
+
+export interface ReportItem {
+  id: string;
+  public_id: string;
+  category: ReportCategory;
+  city_slug: string;
+  city_name: string;
+  location_text: string;
+  description: string;
+  observed_at: string;
+  created_at: string;
+  status: ReportStatus;
+  is_hidden: boolean;
+  report_count: number;
+  city_intervention_status: ReportInterventionStatus;
+  city_intervention_note?: string | null;
+  resolved_at?: string | null;
+}
+
+export interface ReportFilters {
+  city: string;
+  category: 'all' | ReportCategory;
+}

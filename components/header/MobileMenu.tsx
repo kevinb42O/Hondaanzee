@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, CalendarDays, Sparkles, type LucideIcon } from 'lucide-react';
+import { X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, CalendarDays, Sparkles, Siren, type LucideIcon } from 'lucide-react';
 import { CITIES } from '../../cityData.ts';
 import { SupportCard } from './SupportCard.tsx';
 
@@ -19,6 +19,7 @@ const MOBILE_NAV_ITEMS: readonly NavItem[] = [
     { to: '/diensten', label: 'Diensten', icon: ShoppingBag },
     { to: '/losloopzones', label: 'Losloopzones', icon: TreePine },
     { to: '/agenda', label: 'Agenda', icon: CalendarDays },
+    { to: '/meldpunt', label: 'Meldpunt', icon: Siren },
     { to: '/goed-om-te-weten', label: 'Goed om te weten', icon: ShieldAlert },
     { to: '/blog', label: 'Blog', icon: BookOpen, startsWith: true },
     { to: '/community', label: 'Community', icon: Camera },

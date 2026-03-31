@@ -1,5 +1,11 @@
 {
   "buildCommand": "npm run build",
+    "crons": [
+        {
+            "path": "/api/keepalive",
+            "schedule": "0 9 * * *"
+        }
+    ],
     "redirects": [
         {
             "source": "/:path*",
