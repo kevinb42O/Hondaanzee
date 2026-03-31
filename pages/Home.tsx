@@ -187,18 +187,18 @@ const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems
           <Link
             key={city.slug}
             to={`/${city.slug}`}
-            className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] h-[280px] sm:h-[300px] lg:h-[380px] w-full sm:w-auto ${
+            className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] h-[280px] sm:h-[300px] lg:h-[380px] w-full ${isThreeItems ? 'lg:w-auto lg:flex-[var(--dynamic-flex)_1_0%]' : 'sm:w-auto sm:flex-[var(--dynamic-flex)_1_0%]'} ${
               isFeatured
                 ? 'shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5'
                 : 'shadow-md hover:shadow-xl'
             }`}
             style={{
-              flex: `${activeFlex} 1 0%`,
+              '--dynamic-flex': activeFlex,
               contain: 'paint layout', // Isoleert de layout-berekeningen voor meer performantie
               willChange: 'flex, transform', // Hint voor de rendering engine
               transition: 'flex 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease-out',
               animationDelay: `${(rowIndex * cities.length + i) * 0.04}s`
-            }}
+            } as React.CSSProperties}
             onMouseEnter={() => setHoveredIdx(i)}
             onMouseLeave={() => setHoveredIdx(null)}
           >
