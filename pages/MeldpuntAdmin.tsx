@@ -1,15 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import type { Session } from '@supabase/supabase-js';
-import { ArrowLeft, ChevronDown, ChevronUp, Loader2, LogIn, LogOut, RefreshCw, Save, ShieldCheck, Trash2, Wand2 } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronUp, Loader2, LogOut, RefreshCw, Save, ShieldCheck, Trash2, Wand2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { ReportInterventionStatus, ReportItem } from '../types.ts';
+import AdminLoginCard from '../components/meldpunt/AdminLoginCard.tsx';
 import { fetchAdminReports, removeAdminReport, updateAdminReportStatus } from '../utils/reportData.ts';
 import { formatObservedAbsolute, getCategoryMeta, getReportLeadVisual } from '../utils/reportHelpers.ts';
 import { getReportDetailPath, getReportsPath } from '../utils/reportRoutes.ts';
 import { useSEO } from '../utils/seo.ts';
-import { supabase } from '../utils/supabaseClient.ts';
-
-const ADMIN_LOGIN_EMAIL = 'admin@hondaanzee.be';
+import { ADMIN_LOGIN_EMAIL, useAdminAuth } from '../utils/useAdminAuth.ts';
 
 const interventionOptions: Array<{ value: ReportInterventionStatus; label: string }> = [
   { value: 'not_applicable', label: 'Niet van toepassing' },
@@ -35,7 +33,7 @@ const noteQuickPhrases = [
   'Opgeruimd door stadsdiensten.',
 ];
 
-type VisibilityFilter = 'all' | 'visible' | 'hidden' | 'removed';
+type VisibilityFilter = 'all' | 'visible' | 'hidden';
 
 const MeldpuntAdmin: React.FC = () => {
   useSEO({
@@ -44,12 +42,19 @@ const MeldpuntAdmin: React.FC = () => {
     canonical: 'https://hondaanzee.be/admin',
   });
 
-  const [session, setSession] = useState<Session | null>(null);
-  const [sessionLoading, setSessionLoading] = useState(true);
-  const [email, setEmail] = useState(ADMIN_LOGIN_EMAIL);
-  const [password, setPassword] = useState('');
-  const [authLoading, setAuthLoading] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
+  const {
+    authError,
+    authLoading,
+    email,
+    password,
+    session,
+    sessionLoading,
+    setAuthError,
+    setEmail,
+    setPassword,
+    signIn,
+    signOut,
+  } = useAdminAuth();
   const [reports, setReports] = useState<ReportItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -66,49 +71,18 @@ const MeldpuntAdmin: React.FC = () => {
   const noteRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
 
   useEffect(() => {
-    let active = true;
+    if (session) {
+      return;
+    }
 
-    const loadSession = async () => {
-      const { data, error: sessionError } = await supabase.auth.getSession();
-      if (!active) {
-        return;
-      }
-
-      if (sessionError) {
-        setAuthError(sessionError.message);
-      }
-
-      setSession(data.session ?? null);
-      setSessionLoading(false);
-    };
-
-    void loadSession();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      if (!active) {
-        return;
-      }
-
-      setSession(nextSession);
-      setSessionLoading(false);
-      setAuthError(null);
-
-      if (!nextSession) {
-        setReports([]);
-        setStatusEdits({});
-        setNoteEdits({});
-        setExpandedReports({});
-        setSavingPublicId(null);
-        setRemovingPublicId(null);
-        setLoading(false);
-      }
-    });
-
-    return () => {
-      active = false;
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
+    setReports([]);
+    setStatusEdits({});
+    setNoteEdits({});
+    setExpandedReports({});
+    setSavingPublicId(null);
+    setRemovingPublicId(null);
+    setLoading(false);
+  }, [session]);
 
   const loadReports = async () => {
     setLoading(true);
@@ -141,20 +115,25 @@ const MeldpuntAdmin: React.FC = () => {
     void loadReports();
   }, [session]);
 
-  const cityOptions = useMemo(
-    () => Array.from(new Set(reports.map((report) => report.city_name))).sort((a, b) => a.localeCompare(b, 'nl')),
+  const activeReports = useMemo(
+    () => reports.filter((report) => report.status !== 'removed'),
     [reports],
   );
 
   const categoryOptions = useMemo(
-    () => Array.from(new Set(reports.map((report) => report.category))),
-    [reports],
+    () => Array.from(new Set(activeReports.map((report) => report.category))),
+    [activeReports],
+  );
+
+  const cityOptions = useMemo(
+    () => Array.from(new Set(activeReports.map((report) => report.city_name))).sort((a, b) => a.localeCompare(b, 'nl')),
+    [activeReports],
   );
 
   const filteredReports = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    return [...reports]
+    return [...activeReports]
       .filter((report) => {
         if (normalizedQuery) {
           const haystack = [
@@ -192,14 +171,10 @@ const MeldpuntAdmin: React.FC = () => {
           return false;
         }
 
-        if (visibilityFilter === 'removed' && report.status !== 'removed') {
-          return false;
-        }
-
         return true;
       })
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-  }, [reports, searchQuery, cityFilter, categoryFilter, interventionFilter, visibilityFilter]);
+  }, [activeReports, searchQuery, cityFilter, categoryFilter, interventionFilter, visibilityFilter]);
 
   const hasActiveFilters = Boolean(
     searchQuery.trim() || cityFilter !== 'all' || categoryFilter !== 'all' || interventionFilter !== 'all' || visibilityFilter !== 'all',
@@ -256,79 +231,18 @@ const MeldpuntAdmin: React.FC = () => {
         </Link>
 
         {!session ? (
-          <div className="mb-8 flex min-h-[72vh] items-center justify-center">
-            <section className="w-full max-w-md overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-[0_40px_120px_-50px_rgba(15,23,42,0.5)]">
-              <div className="border-b border-slate-100 px-7 py-6 sm:px-8">
-                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">Admin sign in</p>
-                <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950">Log in</h2>
-              </div>
-
-              <div className="px-7 py-7 sm:px-8 sm:py-8">
-                {sessionLoading ? (
-                  <div className="flex items-center gap-3 rounded-[1.6rem] border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-medium text-slate-600">
-                    <Loader2 size={16} className="animate-spin" />
-                    Sessie controleren...
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={async (event) => {
-                      event.preventDefault();
-                      setAuthLoading(true);
-                      setAuthError(null);
-                      setError(null);
-
-                      const { error: loginError } = await supabase.auth.signInWithPassword({
-                        email: email.trim().toLowerCase(),
-                        password,
-                      });
-
-                      if (loginError) {
-                        setAuthError(loginError.message || 'Kon niet inloggen.');
-                      } else {
-                        setPassword('');
-                      }
-
-                      setAuthLoading(false);
-                    }}
-                    className="space-y-5"
-                  >
-                    <label className="block">
-                      <span className="mb-2 block text-sm font-bold text-slate-700">Emailadres</span>
-                      <input
-                        type="email"
-                        autoComplete="username"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        placeholder={ADMIN_LOGIN_EMAIL}
-                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10"
-                      />
-                    </label>
-
-                    <label className="block">
-                      <span className="mb-2 block text-sm font-bold text-slate-700">Wachtwoord</span>
-                      <input
-                        type="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="Voer je wachtwoord in"
-                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10"
-                      />
-                    </label>
-
-                    <button
-                      type="submit"
-                      disabled={authLoading}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3.5 font-black text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {authLoading ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
-                      Inloggen
-                    </button>
-                  </form>
-                )}
-              </div>
-            </section>
-          </div>
+          <AdminLoginCard
+            authLoading={authLoading}
+            email={email}
+            onEmailChange={setEmail}
+            onPasswordChange={setPassword}
+            onSubmit={async () => {
+              setError(null);
+              await signIn();
+            }}
+            password={password}
+            sessionLoading={sessionLoading}
+          />
         ) : (
           <div className="mb-8 overflow-hidden rounded-[2.2rem] border border-slate-200 bg-white shadow-[0_28px_90px_-40px_rgba(15,23,42,0.35)]">
             <div className="relative overflow-hidden bg-slate-950 px-6 pb-8 pt-6 text-white sm:px-8">
@@ -348,11 +262,17 @@ const MeldpuntAdmin: React.FC = () => {
             </div>
 
             <div className="p-6 sm:p-8">
-              <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
+              <div className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto]">
                 <div className="rounded-[1.6rem] border border-emerald-200 bg-emerald-50 px-4 py-4">
                   <p className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-700">Ingelogd</p>
                   <p className="mt-1 text-sm font-bold text-emerald-950">{session.user.email || ADMIN_LOGIN_EMAIL}</p>
                 </div>
+                <Link
+                  to="/admin/log"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-black text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
+                >
+                  Logboek
+                </Link>
                 <button
                   type="button"
                   onClick={() => void loadReports()}
@@ -366,7 +286,7 @@ const MeldpuntAdmin: React.FC = () => {
                   onClick={async () => {
                     setError(null);
                     setAuthError(null);
-                    await supabase.auth.signOut();
+                    await signOut();
                   }}
                   className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-black text-slate-700 transition hover:border-slate-300 hover:bg-slate-100"
                 >
@@ -462,14 +382,16 @@ const MeldpuntAdmin: React.FC = () => {
                       <option value="all">Alles</option>
                       <option value="visible">Publiek zichtbaar</option>
                       <option value="hidden">Verborgen</option>
-                      <option value="removed">Verwijderd</option>
                     </select>
                   </label>
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center gap-3">
                   <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700">
-                    {filteredReports.length} van {reports.length} meldingen
+                    {filteredReports.length} van {activeReports.length} actieve meldingen
+                  </div>
+                  <div className="rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-bold text-amber-800">
+                    {reports.length - activeReports.length} in logboek
                   </div>
                   <button
                     type="button"
