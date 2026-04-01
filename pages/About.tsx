@@ -10,29 +10,71 @@ const About: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-50 to-slate-50">
-            <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen pb-20 bg-gradient-to-b from-sky-50 to-slate-50">
+            <section
+                data-header-hero="light"
+                className="relative isolate min-h-[62vh] sm:min-h-[68vh] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden flex items-center bg-cover bg-center"
+                style={{
+                    backgroundColor: '#0f172a',
+                    backgroundImage: "linear-gradient(to bottom, rgba(2, 6, 23, 0.72), rgba(2, 6, 23, 0.42) 45%, rgba(240, 249, 255, 0.96) 100%), url('/lexi.webp')",
+                    backgroundPosition: 'center 30%',
+                }}
+            >
+                <div className="absolute top-0 right-0 z-10 w-96 h-96 bg-sky-300/18 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute bottom-0 left-0 z-10 w-72 h-72 bg-cyan-300/14 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
 
-                {/* Header Section */}
-                <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center p-4 bg-sky-100 text-sky-600 rounded-2xl mb-6 shadow-sm">
+                <div className="relative z-20 max-w-4xl mx-auto text-center">
+                    <div className="inline-flex items-center justify-center p-4 bg-white/12 backdrop-blur-md border border-white/20 text-white rounded-2xl mb-6 shadow-sm">
                         <PawPrint size={40} strokeWidth={2.5} />
                     </div>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
-                        Over <span className="text-sky-600 relative inline-block">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight drop-shadow-[0_12px_34px_rgba(0,0,0,0.38)]">
+                        Over <span className="text-sky-300 relative inline-block">
                             HondAanZee
-                            <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-600/30" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                                 <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
                             </svg>
                         </span>
                     </h1>
-                    <p className="text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-xl text-slate-100 leading-relaxed max-w-2xl mx-auto drop-shadow-[0_8px_24px_rgba(0,0,0,0.32)]">
                         De complete gids voor een zorgeloos verblijf met je viervoeter aan de Belgische kust
                     </p>
                 </div>
 
+                <div className="absolute -bottom-3 left-0 z-20 w-full overflow-hidden leading-[0]">
+                    <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
+                        <svg
+                            className="block h-[60px] sm:h-[80px] md:h-[110px]"
+                            style={{ minWidth: '100%', flex: '0 0 50%' }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 1200 120"
+                            preserveAspectRatio="none"
+                        >
+                            <path
+                                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                                className="fill-current text-sky-50"
+                            />
+                        </svg>
+                        <svg
+                            className="block h-[60px] sm:h-[80px] md:h-[110px]"
+                            style={{ minWidth: '100%', flex: '0 0 50%' }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 1200 120"
+                            preserveAspectRatio="none"
+                        >
+                            <path
+                                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                                className="fill-current text-sky-50"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                {/* Header Section */}
                 {/* Hero Image Section */}
-                <div className="mb-16 rounded-3xl overflow-hidden shadow-2xl">
+                <div className="relative z-30 mb-16 -mt-16 sm:-mt-20 md:-mt-24 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/70">
                     <img 
                         src="/jaxenikV5.webp" 
                         alt="Kevin en Jax aan zee" 

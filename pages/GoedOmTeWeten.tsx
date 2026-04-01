@@ -264,71 +264,77 @@ const GoedOmTeWeten: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50">
       {/* ─── Hero Section ─── */}
-      <section className="relative pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden">
-        {/* Decorative Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-100/80 via-white to-cyan-50/60 -z-10"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
+      <section
+        data-header-hero="light"
+        className="relative isolate min-h-[68vh] sm:min-h-[72vh] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden flex items-center bg-cover bg-center"
+        style={{
+          backgroundColor: '#0f172a',
+          backgroundImage: "linear-gradient(to bottom, rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.38) 45%, rgba(240, 249, 255, 0.96) 100%), url('/lexi.webp')",
+          backgroundPosition: 'center 30%',
+        }}
+      >
+        <div className="absolute top-0 right-0 z-10 w-96 h-96 bg-sky-300/18 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 left-0 z-10 w-72 h-72 bg-cyan-300/14 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
 
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-white border-2 border-sky-100 text-sky-700 px-5 py-2.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.15em] mb-4 shadow-lg rounded-full">
+        <div className="relative z-20 max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-white/14 backdrop-blur-md border border-white/22 text-white px-5 py-2.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.15em] mb-4 shadow-lg rounded-full">
             <BookOpen size={14} strokeWidth={2.5} />
             <span>De Ultieme Kustgids</span>
           </div>
 
           {/* Freshness Signal */}
-          <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider mb-6 rounded-full">
+          <div className="inline-flex items-center gap-1.5 bg-emerald-400/16 backdrop-blur-md border border-emerald-200/28 text-emerald-50 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider mb-6 rounded-full">
             <Calendar size={12} strokeWidth={2.5} />
             <span>Laatst bijgewerkt: februari 2026</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-[1.1]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.1] drop-shadow-[0_12px_34px_rgba(0,0,0,0.38)]">
             Goed om te{' '}
-            <span className="text-sky-600 relative inline-block">
+            <span className="text-sky-300 relative inline-block">
               Weten
-              <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-600/30" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
               </svg>
             </span>
           </h1>
-          <p className="text-slate-600 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-slate-100 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.32)]">
             Van kwallenbeten tot pietermansteken, van zeehonden tot teken in de duinen.
-            Alles wat je moet weten voor een <strong className="text-slate-800">veilig en respectvol</strong> dagje strand met je viervoeter.
+            Alles wat je moet weten voor een <strong className="text-white">veilig en respectvol</strong> dagje strand met je viervoeter.
           </p>
 
           {/* Quick Navigation Bento */}
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 max-w-4xl mx-auto">
-            <a href="#medisch" className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-red-100 hover:border-red-300 hover:shadow-lg transition-all">
+            <a href="#medisch" className="group flex flex-col items-center gap-2 p-4 bg-white/92 backdrop-blur-md rounded-2xl border-2 border-red-100/80 hover:border-red-300 hover:shadow-lg transition-all">
               <div className="p-2.5 bg-red-50 rounded-xl group-hover:bg-red-100 transition-colors">
                 <ShieldAlert size={22} className="text-red-500" />
               </div>
               <span className="text-xs font-bold text-slate-700">EHBO</span>
             </a>
-            <a href="#seizoensgevaren" className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-violet-100 hover:border-violet-300 hover:shadow-lg transition-all">
+            <a href="#seizoensgevaren" className="group flex flex-col items-center gap-2 p-4 bg-white/92 backdrop-blur-md rounded-2xl border-2 border-violet-100/80 hover:border-violet-300 hover:shadow-lg transition-all">
               <div className="p-2.5 bg-violet-50 rounded-xl group-hover:bg-violet-100 transition-colors">
                 <Search size={22} className="text-violet-500" />
               </div>
               <span className="text-xs font-bold text-slate-700">Seizoens</span>
             </a>
-            <a href="#natuur" className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-emerald-100 hover:border-emerald-300 hover:shadow-lg transition-all">
+            <a href="#natuur" className="group flex flex-col items-center gap-2 p-4 bg-white/92 backdrop-blur-md rounded-2xl border-2 border-emerald-100/80 hover:border-emerald-300 hover:shadow-lg transition-all">
               <div className="p-2.5 bg-emerald-50 rounded-xl group-hover:bg-emerald-100 transition-colors">
                 <Leaf size={22} className="text-emerald-500" />
               </div>
               <span className="text-xs font-bold text-slate-700">Wildlife</span>
             </a>
-            <a href="#etiquette" className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-amber-100 hover:border-amber-300 hover:shadow-lg transition-all">
+            <a href="#etiquette" className="group flex flex-col items-center gap-2 p-4 bg-white/92 backdrop-blur-md rounded-2xl border-2 border-amber-100/80 hover:border-amber-300 hover:shadow-lg transition-all">
               <div className="p-2.5 bg-amber-50 rounded-xl group-hover:bg-amber-100 transition-colors">
                 <HandHeart size={22} className="text-amber-500" />
               </div>
               <span className="text-xs font-bold text-slate-700">Etiquette</span>
             </a>
-            <a href="#losloopweides" className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-teal-100 hover:border-teal-300 hover:shadow-lg transition-all">
+            <a href="#losloopweides" className="group flex flex-col items-center gap-2 p-4 bg-white/92 backdrop-blur-md rounded-2xl border-2 border-teal-100/80 hover:border-teal-300 hover:shadow-lg transition-all">
               <div className="p-2.5 bg-teal-50 rounded-xl group-hover:bg-teal-100 transition-colors">
                 <Fence size={22} className="text-teal-500" />
               </div>
               <span className="text-xs font-bold text-slate-700">Losloop</span>
             </a>
-            <a href="#faq" className="group flex flex-col items-center gap-2 p-4 bg-white rounded-2xl border-2 border-sky-100 hover:border-sky-300 hover:shadow-lg transition-all">
+            <a href="#faq" className="group flex flex-col items-center gap-2 p-4 bg-white/92 backdrop-blur-md rounded-2xl border-2 border-sky-100/80 hover:border-sky-300 hover:shadow-lg transition-all">
               <div className="p-2.5 bg-sky-50 rounded-xl group-hover:bg-sky-100 transition-colors">
                 <Lightbulb size={22} className="text-sky-500" />
               </div>

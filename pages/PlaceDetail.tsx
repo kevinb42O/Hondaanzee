@@ -1,10 +1,25 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Image as ImageIcon, MapPin, Phone, Sparkles, Tag } from 'lucide-react';
+import {
+  ArrowLeft,
+  Bed,
+  Beer,
+  Coffee,
+  ExternalLink,
+  Image as ImageIcon,
+  MapPin,
+  Phone,
+  ShoppingBag,
+  Sparkles,
+  Stethoscope,
+  Tag,
+  Utensils,
+  Wine,
+} from 'lucide-react';
 import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { getPlaceSEO, useSEO } from '../utils/seo.ts';
-import { getPlaceCollectionPath, getPlaceTypeLabel, type PlaceKind } from '../utils/placeRoutes.ts';
+import { getPlaceCollectionPath, type PlaceKind } from '../utils/placeRoutes.ts';
 import type { Hotspot, Service } from '../types.ts';
 import ImageModal from '../components/ImageModal.tsx';
 import NotFound from './NotFound.tsx';
@@ -114,6 +129,28 @@ const getIntentLabel = (place: Place, kind: PlaceKind): string => {
       return 'een winkelstop waar je hond mee welkom is';
     default:
       return 'een hondvriendelijk adres aan zee';
+  }
+};
+
+const getPlaceTypeIcon = (type: Place['type'], size = 18): React.ReactNode => {
+  switch (type) {
+    case 'Café':
+      return <Beer size={size} />;
+    case 'Koffiebar':
+      return <Coffee size={size} />;
+    case 'Restaurant':
+      return <Utensils size={size} />;
+    case 'Brasserie':
+      return <Wine size={size} />;
+    case 'Slapen':
+      return <Bed size={size} />;
+    case 'Shoppen':
+    case 'Dierenspeciaalzaak':
+      return <ShoppingBag size={size} />;
+    case 'Dierenarts':
+      return <Stethoscope size={size} />;
+    default:
+      return <Tag size={size} />;
   }
 };
 
@@ -495,10 +532,32 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   const placePath = kind === 'hotspot' ? 'hotspots' : 'diensten';
   const currentPath = `${location.pathname}${location.search}${location.hash}`;
   const snapshotCards = [
-    { label: 'Type', value: place.type },
-    { label: 'Past goed bij', value: getIntentLabel(place, kind) },
-    { label: 'Handig om weten', value: getPracticalHighlight(place, kind) },
-    { label: 'Adres', value: getStreetLabel(place.address), href: getDirectionsUrl(place.address) },
+    {
+      label: 'Type',
+      value: place.type,
+      labelIcon: getPlaceTypeIcon(place.type, 14),
+      contentIcon: getPlaceTypeIcon(place.type, 22),
+      variant: 'default' as const,
+    },
+    {
+      label: 'Past goed bij',
+      value: getIntentLabel(place, kind),
+      labelIcon: <Sparkles size={14} />,
+      variant: 'default' as const,
+    },
+    {
+      label: 'Handig om weten',
+      value: getPracticalHighlight(place, kind),
+      labelIcon: <Tag size={14} />,
+      variant: 'default' as const,
+    },
+    {
+      label: 'Adres',
+      value: getStreetLabel(place.address),
+      labelIcon: <MapPin size={14} />,
+      href: getDirectionsUrl(place.address),
+      variant: 'link' as const,
+    },
   ];
 
   const moreInCity = useMemo(
@@ -556,6 +615,90 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
 
     return () => window.clearInterval(intervalId);
   }, [images]);
+
+  const cityLogoSrc =
+    cityData.slug === 'oostende'
+      ? '/oostendelogo.png'
+      : cityData.slug === 'blankenberge'
+        ? '/blankenbergelogo.png'
+        : cityData.slug === 'knokke-heist'
+          ? '/knokkelogo.png'
+          : cityData.slug === 'de-haan'
+            || cityData.slug === 'wenduine'
+            ? '/logodehaan.png'
+            : cityData.slug === 'de-panne'
+              ? '/logodepanne.gif'
+              : cityData.slug === 'nieuwpoort'
+                ? '/logonieuwpoort.png'
+                : cityData.slug === 'koksijde'
+                  ? '/logokoksijde.png'
+                  : cityData.slug === 'middelkerke'
+                    ? '/logomiddelkerke.png'
+        : null;
+
+  const practicalInfoCard = (
+    <div className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200">
+      <h2 className="mb-4 text-xl font-black tracking-tight text-slate-900">Praktische info</h2>
+
+      <div className={`mb-5 rounded-2xl border ${cityLogoSrc ? 'flex h-[5.5rem] items-center justify-center overflow-hidden p-2' : 'p-4'} ${accents.panel}`}>
+        {cityLogoSrc ? (
+          <div className="flex h-full w-full items-center justify-center">
+            <img
+              src={cityLogoSrc}
+              alt={cityData.name}
+              className="max-h-full w-auto object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ) : (
+          <>
+            <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Locatie</p>
+            <p className="font-bold text-slate-900">{cityData.name}</p>
+          </>
+        )}
+      </div>
+
+      <a
+        href={getDirectionsUrl(place.address)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mb-4 flex rounded-2xl border border-slate-200 p-4 transition hover:border-slate-300 hover:bg-slate-50"
+      >
+        <MapPin size={18} className="mt-0.5 shrink-0 text-slate-500" />
+        <div className="ml-3">
+          <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Adres</p>
+          <p className="font-bold text-slate-900">{place.address}</p>
+          <p className={`mt-1 text-sm font-bold ${accents.link}`}>Open route in Google Maps</p>
+        </div>
+      </a>
+
+      {place.phone && (
+        <a
+          href={`tel:${place.phone}`}
+          className="mb-4 flex rounded-2xl border border-slate-200 p-4 transition hover:border-slate-300 hover:bg-slate-50"
+        >
+          <Phone size={18} className="mt-0.5 shrink-0 text-slate-500" />
+          <div className="ml-3">
+            <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Telefoon</p>
+            <p className={`font-bold ${accents.link}`}>{place.phone}</p>
+          </div>
+        </a>
+      )}
+
+      {place.website && (
+        <a
+          href={place.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-bold text-white transition ${accents.button}`}
+        >
+          <ExternalLink size={18} />
+          {place.websiteLabel || 'Bezoek website'}
+        </a>
+      )}
+    </div>
+  );
 
   return (
     <div className="animate-in fade-in bg-slate-50 min-h-full">
@@ -693,23 +836,20 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             </div>
 
             <div className="relative">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="max-w-2xl">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
                   <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-600">Snel gelezen</p>
                   <h2 className="mt-1 text-2xl font-black tracking-tight text-slate-900">Wat je hier mag verwachten</h2>
-                  <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-slate-600">
-                    Meteen de belangrijkste info op een rij, zodat je snel voelt of deze plek past bij je wandeling, lunch, verblijf of boodschap met hond.
-                  </p>
                 </div>
                 {place.tags.includes('Aanrader') && (
-                  <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-amber-900 ring-1 ring-amber-200 shadow-sm">
+                  <div className="ml-auto inline-flex items-center gap-2 self-start rounded-full bg-white px-4 py-2 text-sm font-black text-amber-900 ring-1 ring-amber-200 shadow-sm sm:self-center">
                     <Sparkles size={16} />
                     Aanrader
                   </div>
                 )}
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-6 grid auto-rows-fr grid-cols-2 gap-3 xl:grid-cols-4">
                 {snapshotCards.map((card) => (
                   card.href ? (
                     <a
@@ -717,16 +857,51 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
                       href={card.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-slate-300"
+                      className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-slate-300"
                     >
-                      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-600">{card.label}</p>
-                      <p className="mt-2 font-bold leading-snug text-slate-900">{card.value}</p>
-                      <p className={`mt-3 text-sm font-bold ${accents.link}`}>Open in Google Maps</p>
+                      <div className="min-h-[3.6rem]">
+                        <div className="flex items-center gap-2 text-slate-500">
+                          <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
+                            {card.labelIcon}
+                          </span>
+                          <p className="text-[11px] font-black uppercase tracking-[0.18em] leading-[1.35]">{card.label}</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex flex-1 flex-col">
+                        <p className="max-w-full text-[1.08rem] font-semibold leading-[1.42] text-slate-900 sm:text-[1.1rem]">
+                          {card.value}
+                        </p>
+                        <span className={`mt-auto inline-flex w-fit items-center rounded-full px-3 py-1.5 text-[13px] font-bold ${accents.link} bg-slate-50 transition hover:bg-slate-100`}>
+                          Open in Google Maps
+                        </span>
+                      </div>
                     </a>
                   ) : (
-                    <div key={card.label} className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-                      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-600">{card.label}</p>
-                      <p className="mt-2 font-bold leading-snug text-slate-900">{card.value}</p>
+                    <div key={card.label} className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+                      <div className="min-h-[3.6rem]">
+                        <div className="flex items-center gap-2 text-slate-500">
+                          <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
+                            {card.labelIcon}
+                          </span>
+                          <p className="text-[11px] font-black uppercase tracking-[0.18em] leading-[1.35]">{card.label}</p>
+                        </div>
+                      </div>
+                      {card.label === 'Type' && card.contentIcon ? (
+                        <div className="mt-3 flex flex-1 flex-col items-center text-center">
+                          <p className="max-w-full text-[1.08rem] font-semibold leading-[1.42] text-slate-900 sm:text-[1.1rem]">
+                            {card.value}
+                          </p>
+                          <span className="mt-4 inline-flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-slate-100 text-slate-700 ring-1 ring-slate-200/80">
+                            {card.contentIcon}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="mt-3 flex-1">
+                          <p className="max-w-full text-[1.08rem] font-semibold leading-[1.42] text-slate-900 sm:text-[1.1rem]">
+                            {card.value}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )
                 ))}
@@ -830,6 +1005,10 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             </div>
           </div>
 
+          <div className="md:hidden">
+            {practicalInfoCard}
+          </div>
+
           {place.tags.filter((tag) => tag !== 'Aanrader').length > 0 && (
             <div className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
               <div className="mb-4 flex items-center gap-2">
@@ -890,52 +1069,8 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
 
         <aside className="h-fit md:sticky md:top-28 md:self-start">
           <div className="space-y-6">
-          <div className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <h2 className="mb-4 text-xl font-black tracking-tight text-slate-900">Praktische info</h2>
-
-            <div className={`mb-5 rounded-2xl border p-4 ${accents.panel}`}>
-              <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Locatie</p>
-              <p className="font-bold text-slate-900">{cityData.name}</p>
-            </div>
-
-            <a
-              href={getDirectionsUrl(place.address)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mb-4 flex rounded-2xl border border-slate-200 p-4 transition hover:border-slate-300 hover:bg-slate-50"
-            >
-              <MapPin size={18} className="mt-0.5 shrink-0 text-slate-500" />
-              <div className="ml-3">
-                <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Adres</p>
-                <p className="font-bold text-slate-900">{place.address}</p>
-                <p className={`mt-1 text-sm font-bold ${accents.link}`}>Open route in Google Maps</p>
-              </div>
-            </a>
-
-            {place.phone && (
-              <a
-                href={`tel:${place.phone}`}
-                className="mb-4 flex rounded-2xl border border-slate-200 p-4 transition hover:border-slate-300 hover:bg-slate-50"
-              >
-                <Phone size={18} className="mt-0.5 shrink-0 text-slate-500" />
-                <div className="ml-3">
-                  <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Telefoon</p>
-                  <p className={`font-bold ${accents.link}`}>{place.phone}</p>
-                </div>
-              </a>
-            )}
-
-            {place.website && (
-              <a
-                href={place.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-bold text-white transition ${accents.button}`}
-              >
-                <ExternalLink size={18} />
-                {place.websiteLabel || 'Bezoek website'}
-              </a>
-            )}
+          <div className="hidden md:block">
+            {practicalInfoCard}
           </div>
 
           {place.sameAs && place.sameAs.length > 0 && (

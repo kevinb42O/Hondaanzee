@@ -124,7 +124,7 @@ const AllServices: React.FC = () => {
             >
               <path
                 d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-white"
+                className="fill-current text-slate-50"
               />
             </svg>
             <svg
@@ -136,7 +136,7 @@ const AllServices: React.FC = () => {
             >
               <path
                 d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-white"
+                className="fill-current text-slate-50"
               />
             </svg>
           </div>

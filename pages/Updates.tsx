@@ -369,7 +369,7 @@ const Updates: React.FC = () => {
               Wat is er{' '}
               <span className="relative inline-block text-sky-300">
                 nieuw?
-                <svg className="absolute -bottom-1 left-0 h-3 w-full text-sky-300/35 sm:-bottom-2 sm:h-4" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
                 </svg>
               </span>

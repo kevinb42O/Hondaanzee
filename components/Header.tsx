@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { PawPrint, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { DesktopNav } from './header/DesktopNav.tsx';
@@ -19,6 +19,9 @@ const Header: React.FC = () => {
   // Handle scroll effect for header appearance
   useEffect(() => {
     let ticking = false;
+
+    setIsScrolled(globalThis.scrollY > 30);
+
     const handleScroll = () => {
       if (!ticking) {
         globalThis.requestAnimationFrame(() => {
@@ -32,11 +35,37 @@ const Header: React.FC = () => {
     return () => globalThis.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let ticking = false;
+    let resizeObserver: ResizeObserver | null = null;
+    let observedHero: HTMLElement | null = null;
+
+    const disconnectResizeObserver = () => {
+      resizeObserver?.disconnect();
+      resizeObserver = null;
+      observedHero = null;
+    };
+
+    const ensureHeroResizeObserver = (hero: HTMLElement | null) => {
+      if (!hero) {
+        disconnectResizeObserver();
+        return;
+      }
+
+      if (observedHero === hero) return;
+
+      disconnectResizeObserver();
+      resizeObserver = new ResizeObserver(() => {
+        requestUpdate();
+      });
+      resizeObserver.observe(hero);
+      observedHero = hero;
+    };
 
     const updateHeroState = () => {
       const hero = document.querySelector<HTMLElement>('[data-header-hero="light"]');
+      ensureHeroResizeObserver(hero);
+
       if (!hero) {
         setIsOverHero(false);
         ticking = false;
@@ -56,12 +85,25 @@ const Header: React.FC = () => {
     };
 
     requestUpdate();
+    globalThis.requestAnimationFrame(requestUpdate);
     globalThis.addEventListener('scroll', requestUpdate, { passive: true });
     globalThis.addEventListener('resize', requestUpdate);
+    globalThis.addEventListener('load', requestUpdate);
+
+    const mutationObserver = new MutationObserver(() => {
+      requestUpdate();
+    });
+
+    if (document.body) {
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
+    }
 
     return () => {
       globalThis.removeEventListener('scroll', requestUpdate);
       globalThis.removeEventListener('resize', requestUpdate);
+      globalThis.removeEventListener('load', requestUpdate);
+      mutationObserver.disconnect();
+      disconnectResizeObserver();
     };
   }, [location.pathname, location.search, location.hash]);
 

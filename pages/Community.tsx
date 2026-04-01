@@ -165,6 +165,35 @@ const Community: React.FC = () => {
             Elke week kiezen we één hond als Topper van de Week — groot in beeld op onze site. Stuur je foto via WhatsApp en wie weet sta jij er volgende week!
           </p>
         </div>
+
+        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
+          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[110px]"
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                className="fill-current text-white"
+              />
+            </svg>
+            <svg
+              className="block h-[60px] sm:h-[80px] md:h-[110px]"
+              style={{ minWidth: '100%', flex: '0 0 50%' }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                className="fill-current text-white"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
 
       {/* ═══════════ MAANDTHEMA ═══════════ */}

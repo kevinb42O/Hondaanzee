@@ -109,7 +109,8 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     summary: 'Stijlvolle gastrobar in Oostende met open keuken, sterke vis- en vleesgerechten en een opvallend vlotte ontvangst voor honden, zowel binnen als op het terras.',
     description: 'Gastrobar Sam combineert de gezelligheid van het vroegere Jan\'s Café met een frisse, hedendaagse sfeer en de beleving van een open keuken. Je eet hier gastronomisch zonder stijve bedoening: biologisch rundvlees, nachtvers gevangen vis, producten uit de korte keten, huisgemaakte Oostendse garnaalkroketten en sharing dishes zijn hier geen bijzaak maar mee het handelsmerk van de zaak. Voor hondenbaasjes zit de meerwaarde in de vanzelfsprekende ontvangst: je hond is welkom binnen én op het terras, er staat water klaar en je voelt meteen dat samen tafelen hier niet als lastig wordt bekeken. Vlak bij de zeedijk is dit een sterk adres voor wie in Oostende rustig en goed wil eten met zijn hond gewoon mee aan tafel.',
     tags: ['Aanrader', 'Indoor toegelaten', 'Terras', 'Waterbak aanwezig', 'Hondvriendelijk team', 'Visgerechten', 'Sharing'],
-    image: '/gastrobarsamoostende.webp',
+    image: '/gastrobarsam3.webp',
+    images: ['/gastrobarsam1.webp', '/gastrobarsam2.webp', '/gastrobarsam3.webp'],
     city: 'oostende',
     address: 'Van Iseghemlaan 60, 8400 Oostende',
     phone: '+32 473 55 59 38',
@@ -1429,7 +1430,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     city: 'blankenberge',
     address: 'Langestraat 1, 8370 Blankenberge',
     phone: '+32 50 95 04 42',
-    website: 'https://daily-grind-skateshop.webshopapp.com/',
+    website: 'https://www.daily-grind.be/',
     websiteLabel: 'Bekijk skateshop'
   },
   {
@@ -1441,8 +1442,11 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     description: 'Restaurant Koekie’s ligt op een handige plek in Blankenberge, dicht bij zowel de haven als het strand. De zaak wordt lokaal vooral gelinkt aan haar ribbetjes en huisgemaakte garnaalkroketten, twee klassiekers die goed passen bij het soort toegankelijke restaurant dat je hier mag verwachten. Dat maakt Koekie’s geen ingewikkeld concept, maar wel een adres waar je gemakkelijk voor kiest als je na een wandeling of uitstap met hond gewoon degelijk en smaakvol wil eten. Door die combinatie van ligging, herkenbare keuken en warme sfeer is dit het soort plek waar veel mensen graag op terugvallen.',
     tags: ['Aanrader', 'Hondvriendelijk team', 'Buiten dineren', 'Huisgemaakte garnaalkroketten', 'Ribbetjes specialiteit', 'Nabij strand', 'Nabij haven'],
     image: '/koekies.webp',
+    images: ['/koekies1.jpg', '/koekies2.jpg', '/koekies3.jpg', '/koekies.webp'],
     city: 'blankenberge',
     address: 'Leopoldstraat 10, 8370 Blankenberge',
+    website: 'https://reserveringrestaurantkoekies.guestplan.io/?fbclid=IwY2xjawQ5OPdleHRuA2FlbQIxMABicmlkETBZU2RZYmNibDkwYTA5R3hlc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHkqlHpuCdmjrSKvTb1qUNDiHDAc6zLw__h_3K1YLZPdNFNtxH7bRbEmhXN6x_aem_tbtay-Q7ht8pu_FuAmpGwA',
+    websiteLabel: 'Reserveer tafel',
   },
   {
     id: 125,
