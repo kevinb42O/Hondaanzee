@@ -40,7 +40,7 @@ const getAdminInvokeHeaders = async (): Promise<Record<string, string>> => {
   return {
     apikey: SUPABASE_PUBLISHABLE_KEY,
     'Content-Type': 'application/json',
-    'x-admin-access-token': accessToken,
+    Authorization: `Bearer ${accessToken}`,
   };
 };
 
