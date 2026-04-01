@@ -1,6 +1,7 @@
 import { CITIES } from '../cityData.ts';
 import type { ReportInterventionStatus, ReportItem } from '../types.ts';
 import { supabase } from './supabaseClient.ts';
+import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from './supabasePublicConfig.ts';
 
 export const REPORT_SELECT_COLUMNS = `
   id,
@@ -37,28 +38,40 @@ const getAdminInvokeHeaders = async (): Promise<Record<string, string>> => {
   }
 
   return {
+    apikey: SUPABASE_PUBLISHABLE_KEY,
+    'Content-Type': 'application/json',
     'x-admin-access-token': accessToken,
   };
 };
 
-const unwrapFunctionError = async (error: unknown): Promise<Error> => {
-  if (error instanceof Error) {
-    const maybeResponse = (error as Error & { context?: Response }).context;
-    if (maybeResponse instanceof Response) {
-      try {
-        const payload = await maybeResponse.json();
-        if (payload && typeof payload.error === 'string' && payload.error.trim()) {
-          return new Error(payload.error);
-        }
-      } catch {
-        // Ignore JSON parsing failures and fall back to the original error.
-      }
+const parseAdminErrorResponse = async (response: Response): Promise<Error> => {
+  try {
+    const payload = await response.json();
+    if (payload && typeof payload.error === 'string' && payload.error.trim()) {
+      return new Error(payload.error);
     }
-
-    return error;
+    if (payload && typeof payload.message === 'string' && payload.message.trim()) {
+      return new Error(payload.message);
+    }
+  } catch {
+    // Ignore JSON parsing failures and fall back to a generic HTTP error.
   }
 
-  return new Error('Er ging iets mis bij het laden van de admin.');
+  return new Error(`Admin request mislukt (${response.status}).`);
+};
+
+const invokeAdminFunction = async <TResponse>(name: string, body: Record<string, unknown>): Promise<TResponse> => {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+    method: 'POST',
+    headers: await getAdminInvokeHeaders(),
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw await parseAdminErrorResponse(response);
+  }
+
+  return response.json() as Promise<TResponse>;
 };
 
 export const hydrateReport = (row: ReportRow): ReportItem => ({
@@ -154,14 +167,7 @@ export const confirmReport = async (
 };
 
 export const fetchAdminReports = async (): Promise<ReportItem[]> => {
-  const { data, error } = await supabase.functions.invoke('list-admin-reports', {
-    body: {},
-    headers: await getAdminInvokeHeaders(),
-  });
-
-  if (error) {
-    throw await unwrapFunctionError(error);
-  }
+  const data = await invokeAdminFunction<{ reports: ReportRow[] }>('list-admin-reports', {});
 
   return ((data?.reports || []) as ReportRow[]).map(hydrateReport);
 };
@@ -171,29 +177,15 @@ export const updateAdminReportStatus = async (
   cityInterventionStatus: ReportInterventionStatus,
   cityInterventionNote: string,
 ): Promise<void> => {
-  const { error } = await supabase.functions.invoke('update-report-status', {
-    body: {
+  await invokeAdminFunction('update-report-status', {
       public_id: publicId,
       city_intervention_status: cityInterventionStatus,
       city_intervention_note: cityInterventionNote,
-    },
-    headers: await getAdminInvokeHeaders(),
   });
-
-  if (error) {
-    throw await unwrapFunctionError(error);
-  }
 };
 
 export const removeAdminReport = async (publicId: string): Promise<void> => {
-  const { error } = await supabase.functions.invoke('remove-report', {
-    body: {
-      public_id: publicId,
-    },
-    headers: await getAdminInvokeHeaders(),
+  await invokeAdminFunction('remove-report', {
+    public_id: publicId,
   });
-
-  if (error) {
-    throw await unwrapFunctionError(error);
-  }
 };
