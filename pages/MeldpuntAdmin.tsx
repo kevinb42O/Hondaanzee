@@ -35,20 +35,7 @@ const noteQuickPhrases = [
   'Opgeruimd door stadsdiensten.',
 ];
 
-type ReportSortOption =
-  | 'created_desc'
-  | 'observed_desc'
-  | 'confirm_desc'
-  | 'flags_desc'
-  | 'city_asc';
-
-const sortOptions: Array<{ value: ReportSortOption; label: string }> = [
-  { value: 'created_desc', label: 'Nieuwste eerst' },
-  { value: 'observed_desc', label: 'Recent gezien eerst' },
-  { value: 'confirm_desc', label: 'Meeste bevestigingen' },
-  { value: 'flags_desc', label: 'Meeste flags' },
-  { value: 'city_asc', label: 'Gemeente A-Z' },
-];
+type VisibilityFilter = 'all' | 'visible' | 'hidden' | 'removed';
 
 const MeldpuntAdmin: React.FC = () => {
   useSEO({
@@ -68,8 +55,12 @@ const MeldpuntAdmin: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [statusEdits, setStatusEdits] = useState<Record<string, ReportInterventionStatus>>({});
   const [noteEdits, setNoteEdits] = useState<Record<string, string>>({});
-  const [sortBy, setSortBy] = useState<ReportSortOption>('created_desc');
   const [expandedReports, setExpandedReports] = useState<Record<string, boolean>>({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [cityFilter, setCityFilter] = useState('all');
+  const [categoryFilter, setCategoryFilter] = useState<'all' | ReportItem['category']>('all');
+  const [interventionFilter, setInterventionFilter] = useState<'all' | ReportInterventionStatus>('all');
+  const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>('all');
   const [savingPublicId, setSavingPublicId] = useState<string | null>(null);
   const [removingPublicId, setRemovingPublicId] = useState<string | null>(null);
   const noteRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
@@ -150,27 +141,69 @@ const MeldpuntAdmin: React.FC = () => {
     void loadReports();
   }, [session]);
 
-  const sortedReports = useMemo(() => {
-    const nextReports = [...reports];
+  const cityOptions = useMemo(
+    () => Array.from(new Set(reports.map((report) => report.city_name))).sort((a, b) => a.localeCompare(b, 'nl')),
+    [reports],
+  );
 
-    nextReports.sort((a, b) => {
-      switch (sortBy) {
-        case 'observed_desc':
-          return new Date(b.observed_at).getTime() - new Date(a.observed_at).getTime();
-        case 'confirm_desc':
-          return b.confirm_count - a.confirm_count || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        case 'flags_desc':
-          return b.report_count - a.report_count || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        case 'city_asc':
-          return a.city_name.localeCompare(b.city_name, 'nl') || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        case 'created_desc':
-        default:
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      }
-    });
+  const categoryOptions = useMemo(
+    () => Array.from(new Set(reports.map((report) => report.category))),
+    [reports],
+  );
 
-    return nextReports;
-  }, [reports, sortBy]);
+  const filteredReports = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    return [...reports]
+      .filter((report) => {
+        if (normalizedQuery) {
+          const haystack = [
+            report.location_text,
+            report.description,
+            report.city_name,
+            report.public_id,
+            report.city_intervention_note || '',
+          ]
+            .join(' ')
+            .toLowerCase();
+
+          if (!haystack.includes(normalizedQuery)) {
+            return false;
+          }
+        }
+
+        if (cityFilter !== 'all' && report.city_name !== cityFilter) {
+          return false;
+        }
+
+        if (categoryFilter !== 'all' && report.category !== categoryFilter) {
+          return false;
+        }
+
+        if (interventionFilter !== 'all' && report.city_intervention_status !== interventionFilter) {
+          return false;
+        }
+
+        if (visibilityFilter === 'visible' && (report.is_hidden || report.status === 'removed')) {
+          return false;
+        }
+
+        if (visibilityFilter === 'hidden' && !report.is_hidden) {
+          return false;
+        }
+
+        if (visibilityFilter === 'removed' && report.status !== 'removed') {
+          return false;
+        }
+
+        return true;
+      })
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }, [reports, searchQuery, cityFilter, categoryFilter, interventionFilter, visibilityFilter]);
+
+  const hasActiveFilters = Boolean(
+    searchQuery.trim() || cityFilter !== 'all' || categoryFilter !== 'all' || interventionFilter !== 'all' || visibilityFilter !== 'all',
+  );
 
   const insertIntoNote = (publicId: string, insertion: string) => {
     const textarea = noteRefs.current[publicId];
@@ -208,7 +241,7 @@ const MeldpuntAdmin: React.FC = () => {
   };
 
   const setAllExpanded = (expanded: boolean) => {
-    setExpandedReports(Object.fromEntries(reports.map((report) => [report.public_id, expanded])));
+    setExpandedReports(Object.fromEntries(filteredReports.map((report) => [report.public_id, expanded])));
   };
 
   return (
@@ -359,15 +392,59 @@ const MeldpuntAdmin: React.FC = () => {
           ) : (
             <div className="grid gap-4">
               <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="grid gap-4 lg:grid-cols-[1fr_auto_auto] lg:items-end">
+                <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_repeat(4,minmax(0,1fr))]">
                   <label className="block">
-                    <span className="mb-2 block text-sm font-bold text-slate-700">Sorteer meldingen</span>
+                    <span className="mb-2 block text-sm font-bold text-slate-700">Zoeken</span>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(event) => setSearchQuery(event.target.value)}
+                      placeholder="Zoek op locatie, beschrijving, gemeente of public id"
+                      className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-bold text-slate-700">Gemeente</span>
                     <select
-                      value={sortBy}
-                      onChange={(event) => setSortBy(event.target.value as ReportSortOption)}
+                      value={cityFilter}
+                      onChange={(event) => setCityFilter(event.target.value)}
                       className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
                     >
-                      {sortOptions.map((option) => (
+                      <option value="all">Alle gemeenten</option>
+                      {cityOptions.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-bold text-slate-700">Categorie</span>
+                    <select
+                      value={categoryFilter}
+                      onChange={(event) => setCategoryFilter(event.target.value as 'all' | ReportItem['category'])}
+                      className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
+                    >
+                      <option value="all">Alle categorieën</option>
+                      {categoryOptions.map((category) => (
+                        <option key={category} value={category}>
+                          {getCategoryMeta(category).label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-bold text-slate-700">Opvolgstatus</span>
+                    <select
+                      value={interventionFilter}
+                      onChange={(event) => setInterventionFilter(event.target.value as 'all' | ReportInterventionStatus)}
+                      className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
+                    >
+                      <option value="all">Alle statussen</option>
+                      {interventionOptions.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -375,6 +452,25 @@ const MeldpuntAdmin: React.FC = () => {
                     </select>
                   </label>
 
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-bold text-slate-700">Zichtbaarheid</span>
+                    <select
+                      value={visibilityFilter}
+                      onChange={(event) => setVisibilityFilter(event.target.value as VisibilityFilter)}
+                      className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
+                    >
+                      <option value="all">Alles</option>
+                      <option value="visible">Publiek zichtbaar</option>
+                      <option value="hidden">Verborgen</option>
+                      <option value="removed">Verwijderd</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-bold text-slate-700">
+                    {filteredReports.length} van {reports.length} meldingen
+                  </div>
                   <button
                     type="button"
                     onClick={() => setAllExpanded(true)}
@@ -383,7 +479,6 @@ const MeldpuntAdmin: React.FC = () => {
                     <ChevronDown size={16} />
                     Alles open
                   </button>
-
                   <button
                     type="button"
                     onClick={() => setAllExpanded(false)}
@@ -392,10 +487,25 @@ const MeldpuntAdmin: React.FC = () => {
                     <ChevronUp size={16} />
                     Alles dicht
                   </button>
+                  {hasActiveFilters && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearchQuery('');
+                        setCityFilter('all');
+                        setCategoryFilter('all');
+                        setInterventionFilter('all');
+                        setVisibilityFilter('all');
+                      }}
+                      className="inline-flex items-center justify-center rounded-2xl border border-red-200 bg-red-50 px-4 py-3 font-black text-red-700 transition hover:border-red-300 hover:bg-red-100"
+                    >
+                      Reset filters
+                    </button>
+                  )}
                 </div>
               </div>
 
-              {sortedReports.map((report) => {
+              {filteredReports.map((report) => {
                 const category = getCategoryMeta(report.category);
                 const CategoryIcon = category.icon;
                 const leadVisual = getReportLeadVisual(report);
@@ -637,7 +747,7 @@ const MeldpuntAdmin: React.FC = () => {
                 );
               })}
 
-              {!loading && sortedReports.length === 0 && !error && (
+              {!loading && filteredReports.length === 0 && !error && (
                 <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-12 text-center text-slate-500 shadow-sm">
                   Geen meldingen gevonden.
                 </div>
