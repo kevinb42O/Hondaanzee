@@ -37,7 +37,7 @@ const getAdminInvokeHeaders = async (): Promise<Record<string, string>> => {
   }
 
   return {
-    Authorization: `Bearer ${accessToken}`,
+    'x-admin-access-token': accessToken,
   };
 };
 

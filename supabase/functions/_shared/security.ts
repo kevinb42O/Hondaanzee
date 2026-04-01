@@ -15,6 +15,11 @@ export const hashIpAddress = async (ipAddress: string): Promise<string> => {
 };
 
 const readBearerToken = (req: Request): string => {
+  const customToken = req.headers.get('x-admin-access-token')?.trim();
+  if (customToken) {
+    return customToken;
+  }
+
   const authHeader = req.headers.get('Authorization') || '';
 
   if (!authHeader.toLowerCase().startsWith('bearer ')) {

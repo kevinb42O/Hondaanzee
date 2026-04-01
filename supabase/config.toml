@@ -1,0 +1,10 @@
+project_id = "zpllibfxaizavcvztnut"
+
+[functions.list-admin-reports]
+verify_jwt = false
+
+[functions.update-report-status]
+verify_jwt = false
+
+[functions.remove-report]
+verify_jwt = false
