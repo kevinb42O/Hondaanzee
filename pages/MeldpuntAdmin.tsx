@@ -1,13 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, EyeOff, Loader2, RefreshCw, Save, ShieldCheck, Trash2, Wand2 } from 'lucide-react';
+import type { Session } from '@supabase/supabase-js';
+import { ArrowLeft, Loader2, LogIn, LogOut, RefreshCw, Save, ShieldCheck, Trash2, Wand2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { ReportInterventionStatus, ReportItem } from '../types.ts';
 import { fetchAdminReports, removeAdminReport, updateAdminReportStatus } from '../utils/reportData.ts';
 import { formatObservedAbsolute, getCategoryMeta, getReportLeadVisual } from '../utils/reportHelpers.ts';
 import { getReportDetailPath, getReportsPath } from '../utils/reportRoutes.ts';
 import { useSEO } from '../utils/seo.ts';
+import { supabase } from '../utils/supabaseClient.ts';
 
-const ADMIN_STORAGE_KEY = 'meldpunt-admin-key';
+const ADMIN_LOGIN_EMAIL = 'admin@hondaanzee.be';
 
 const interventionOptions: Array<{ value: ReportInterventionStatus; label: string }> = [
   { value: 'not_applicable', label: 'Niet van toepassing' },
@@ -37,11 +39,15 @@ const MeldpuntAdmin: React.FC = () => {
   useSEO({
     title: 'Meldpunt Admin | HondAanZee.be',
     description: 'Interne adminpagina voor interventiestatus van meldingen.',
-    canonical: 'https://hondaanzee.be/_meldpunt-admin',
+    canonical: 'https://hondaanzee.be/admin',
   });
 
-  const [adminKey, setAdminKey] = useState('');
-  const [savedKey, setSavedKey] = useState('');
+  const [session, setSession] = useState<Session | null>(null);
+  const [sessionLoading, setSessionLoading] = useState(true);
+  const [email, setEmail] = useState(ADMIN_LOGIN_EMAIL);
+  const [password, setPassword] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   const [reports, setReports] = useState<ReportItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,21 +58,55 @@ const MeldpuntAdmin: React.FC = () => {
   const noteRefs = useRef<Record<string, HTMLTextAreaElement | null>>({});
 
   useEffect(() => {
-    const storedKey = window.localStorage.getItem(ADMIN_STORAGE_KEY) || '';
-    if (!storedKey) {
-      return;
-    }
+    let active = true;
 
-    setAdminKey(storedKey);
-    setSavedKey(storedKey);
+    const loadSession = async () => {
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      if (!active) {
+        return;
+      }
+
+      if (sessionError) {
+        setAuthError(sessionError.message);
+      }
+
+      setSession(data.session ?? null);
+      setSessionLoading(false);
+    };
+
+    void loadSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      if (!active) {
+        return;
+      }
+
+      setSession(nextSession);
+      setSessionLoading(false);
+      setAuthError(null);
+
+      if (!nextSession) {
+        setReports([]);
+        setStatusEdits({});
+        setNoteEdits({});
+        setSavingPublicId(null);
+        setRemovingPublicId(null);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      active = false;
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
-  const loadReports = async (keyToUse: string) => {
+  const loadReports = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const nextReports = await fetchAdminReports(keyToUse);
+      const nextReports = await fetchAdminReports();
       setReports(nextReports);
       setStatusEdits(
         Object.fromEntries(nextReports.map((report) => [report.public_id, report.city_intervention_status])),
@@ -82,12 +122,12 @@ const MeldpuntAdmin: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!savedKey) {
+    if (!session) {
       return;
     }
 
-    void loadReports(savedKey);
-  }, [savedKey]);
+    void loadReports();
+  }, [session]);
 
   const sortedReports = useMemo(
     () => [...reports].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()),
@@ -123,319 +163,375 @@ const MeldpuntAdmin: React.FC = () => {
   };
 
   return (
-    <div className="bg-slate-50">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.16),transparent_26%),radial-gradient(circle_at_top_right,rgba(16,185,129,0.1),transparent_24%),linear-gradient(180deg,#020617_0%,#0f172a_28%,#e2e8f0_28%,#f8fafc_100%)]">
       <div className="mx-auto max-w-6xl px-4 pb-10 pt-24 md:px-6 md:pb-16 md:pt-20">
         <Link
           to={getReportsPath()}
-          className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-sky-600 transition hover:text-sky-700"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-sky-100 transition hover:text-white"
         >
           <ArrowLeft size={16} />
           Terug naar meldpunt
         </Link>
 
-        <div className="mb-8 overflow-hidden rounded-[2.2rem] border border-slate-200 bg-white shadow-[0_28px_90px_-40px_rgba(15,23,42,0.35)]">
-          <div className="relative overflow-hidden bg-slate-950 px-6 pb-8 pt-6 text-white sm:px-8">
-            <div className="report-grid-pattern absolute inset-0 opacity-20" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.15),transparent_28%),radial-gradient(circle_at_top_right,rgba(16,185,129,0.12),transparent_26%)]" />
-            <div className="relative">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-white">
-                <ShieldCheck size={14} />
-                Verborgen adminflow
+        {!session ? (
+          <div className="mb-8 flex min-h-[72vh] items-center justify-center">
+            <section className="w-full max-w-md overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-[0_40px_120px_-50px_rgba(15,23,42,0.5)]">
+              <div className="border-b border-slate-100 px-7 py-6 sm:px-8">
+                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">Admin sign in</p>
+                <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950">Log in</h2>
               </div>
 
-              <h1 className="text-3xl font-black tracking-tight">Meldpunt admin</h1>
-              <p className="mt-3 max-w-3xl text-sm font-medium leading-relaxed text-slate-300 sm:text-base">
-                Beheerpaneel voor bevoegde instanties. Hier kan je meldingen nakijken, de opvolgstatus vastleggen en een duidelijke publieke terugkoppeling publiceren.
-              </p>
-            </div>
-          </div>
+              <div className="px-7 py-7 sm:px-8 sm:py-8">
+                {sessionLoading ? (
+                  <div className="flex items-center gap-3 rounded-[1.6rem] border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-medium text-slate-600">
+                    <Loader2 size={16} className="animate-spin" />
+                    Sessie controleren...
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={async (event) => {
+                      event.preventDefault();
+                      setAuthLoading(true);
+                      setAuthError(null);
+                      setError(null);
 
-          <div className="p-6 sm:p-8">
-            <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
-            <input
-              type="password"
-              value={adminKey}
-              onChange={(event) => setAdminKey(event.target.value)}
-              placeholder="Admin-sleutel"
-              className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                window.localStorage.setItem(ADMIN_STORAGE_KEY, adminKey);
-                setSavedKey(adminKey);
-              }}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-600 px-4 py-3 font-black text-white transition hover:bg-sky-700"
-            >
-              <ShieldCheck size={16} />
-              Open admin
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                window.localStorage.removeItem(ADMIN_STORAGE_KEY);
-                setSavedKey('');
-                setAdminKey('');
-                setReports([]);
-                setError(null);
-              }}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-black text-slate-700 transition hover:border-slate-300 hover:bg-slate-100"
-            >
-              <EyeOff size={16} />
-              Reset sleutel
-            </button>
-            </div>
+                      const { error: loginError } = await supabase.auth.signInWithPassword({
+                        email: email.trim().toLowerCase(),
+                        password,
+                      });
 
-            {savedKey && (
-              <div className="mt-4">
-              <button
-                type="button"
-                onClick={() => void loadReports(savedKey)}
-                className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
-              >
-                <RefreshCw size={16} />
-                Herlaad meldingen
-              </button>
+                      if (loginError) {
+                        setAuthError(loginError.message || 'Kon niet inloggen.');
+                      } else {
+                        setPassword('');
+                      }
+
+                      setAuthLoading(false);
+                    }}
+                    className="space-y-5"
+                  >
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-bold text-slate-700">Emailadres</span>
+                      <input
+                        type="email"
+                        autoComplete="username"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder={ADMIN_LOGIN_EMAIL}
+                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-bold text-slate-700">Wachtwoord</span>
+                      <input
+                        type="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        placeholder="Voer je wachtwoord in"
+                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10"
+                      />
+                    </label>
+
+                    <button
+                      type="submit"
+                      disabled={authLoading}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3.5 font-black text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {authLoading ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
+                      Inloggen
+                    </button>
+                  </form>
+                )}
               </div>
-            )}
+            </section>
           </div>
-        </div>
+        ) : (
+          <div className="mb-8 overflow-hidden rounded-[2.2rem] border border-slate-200 bg-white shadow-[0_28px_90px_-40px_rgba(15,23,42,0.35)]">
+            <div className="relative overflow-hidden bg-slate-950 px-6 pb-8 pt-6 text-white sm:px-8">
+              <div className="report-grid-pattern absolute inset-0 opacity-20" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.15),transparent_28%),radial-gradient(circle_at_top_right,rgba(16,185,129,0.12),transparent_26%)]" />
+              <div className="relative">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-white">
+                  <ShieldCheck size={14} />
+                  Admin session active
+                </div>
 
-        {error && (
-          <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
-            {error}
+                <h1 className="text-3xl font-black tracking-tight">Meldpunt admin</h1>
+                <p className="mt-3 max-w-3xl text-sm font-medium leading-relaxed text-slate-300 sm:text-base">
+                  Beheer meldingen, pas de opvolgstatus aan en publiceer duidelijke terugkoppeling voor bezoekers.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8">
+              <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
+                <div className="rounded-[1.6rem] border border-emerald-200 bg-emerald-50 px-4 py-4">
+                  <p className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-700">Ingelogd</p>
+                  <p className="mt-1 text-sm font-bold text-emerald-950">{session.user.email || ADMIN_LOGIN_EMAIL}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void loadReports()}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-black text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
+                >
+                  <RefreshCw size={16} />
+                  Herlaad meldingen
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setError(null);
+                    setAuthError(null);
+                    await supabase.auth.signOut();
+                  }}
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-black text-slate-700 transition hover:border-slate-300 hover:bg-slate-100"
+                >
+                  <LogOut size={16} />
+                  Uitloggen
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
-        {loading ? (
-          <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-16 text-center text-slate-400 shadow-sm">
-            <Loader2 className="mx-auto animate-spin" />
+        {(authError || error) && (
+          <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+            {authError || error}
           </div>
-        ) : (
-          <div className="grid gap-4">
-            {sortedReports.map((report) => {
-              const category = getCategoryMeta(report.category);
-              const CategoryIcon = category.icon;
-              const leadVisual = getReportLeadVisual(report);
-              const LeadIcon = leadVisual.icon;
-              const currentStatus = statusEdits[report.public_id] || report.city_intervention_status;
-              const currentNote = noteEdits[report.public_id] || '';
+        )}
 
-              return (
-                <article key={report.id} className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
-                  <div className="border-b border-slate-100 bg-slate-950 px-6 py-5 text-white">
-                    <div className="mb-4 flex flex-wrap items-center gap-2">
-                      <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] ${category.tone} ${category.accent}`}>
-                        <CategoryIcon size={14} />
-                        {category.label}
-                      </span>
-                      <span className="rounded-full border border-sky-300/30 bg-sky-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
-                        Gemeente: {report.city_name}
-                      </span>
-                      {report.is_hidden && (
-                        <span className="rounded-full border border-amber-300/30 bg-amber-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
-                          Verborgen
+        {session ? (
+          loading ? (
+            <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-16 text-center text-slate-400 shadow-sm">
+              <Loader2 className="mx-auto animate-spin" />
+            </div>
+          ) : (
+            <div className="grid gap-4">
+              {sortedReports.map((report) => {
+                const category = getCategoryMeta(report.category);
+                const CategoryIcon = category.icon;
+                const leadVisual = getReportLeadVisual(report);
+                const LeadIcon = leadVisual.icon;
+                const currentStatus = statusEdits[report.public_id] || report.city_intervention_status;
+                const currentNote = noteEdits[report.public_id] || '';
+
+                return (
+                  <article key={report.id} className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
+                    <div className="border-b border-slate-100 bg-slate-950 px-6 py-5 text-white">
+                      <div className="mb-4 flex flex-wrap items-center gap-2">
+                        <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] ${category.tone} ${category.accent}`}>
+                          <CategoryIcon size={14} />
+                          {category.label}
                         </span>
-                      )}
-                      {report.status === 'removed' && (
-                        <span className="rounded-full border border-red-300/30 bg-red-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-red-200">
-                          Verwijderd uit publieke site
+                        <span className="rounded-full border border-sky-300/30 bg-sky-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
+                          Gemeente: {report.city_name}
                         </span>
-                      )}
-                      <span className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-slate-200">
-                        flags: {report.report_count}
-                      </span>
-                      <span className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-slate-200">
-                        bevestigingen: {report.confirm_count}
-                      </span>
-                    </div>
-
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h2 className="text-xl font-black text-white sm:text-2xl">{report.location_text}</h2>
-                        <p className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-sky-200">
-                          Bevoegde gemeente: {report.city_name}
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-slate-300">
-                          {formatObservedAbsolute(report.observed_at)} · public id: <span className="font-bold">{report.public_id}</span>
-                        </p>
+                        {report.is_hidden && (
+                          <span className="rounded-full border border-amber-300/30 bg-amber-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
+                            Verborgen
+                          </span>
+                        )}
+                        {report.status === 'removed' && (
+                          <span className="rounded-full border border-red-300/30 bg-red-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-red-200">
+                            Verwijderd uit publieke site
+                          </span>
+                        )}
+                        <span className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-slate-200">
+                          flags: {report.report_count}
+                        </span>
+                        <span className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-slate-200">
+                          bevestigingen: {report.confirm_count}
+                        </span>
                       </div>
-                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.35rem] border ${leadVisual.tone}`}>
-                        <LeadIcon size={20} strokeWidth={2.2} />
+
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h2 className="text-xl font-black text-white sm:text-2xl">{report.location_text}</h2>
+                          <p className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-sky-200">
+                            Bevoegde gemeente: {report.city_name}
+                          </p>
+                          <p className="mt-1 text-sm font-medium text-slate-300">
+                            {formatObservedAbsolute(report.observed_at)} · public id: <span className="font-bold">{report.public_id}</span>
+                          </p>
+                        </div>
+                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[1.35rem] border ${leadVisual.tone}`}>
+                          <LeadIcon size={20} strokeWidth={2.2} />
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-5 px-6 py-6">
-                    <div className="rounded-[1.6rem] border border-slate-200 bg-slate-50 px-5 py-5">
-                      <p className="mb-3 text-[11px] font-black uppercase tracking-[0.22em] text-slate-500">Melding zoals bezoekers ze zien</p>
-                      <p className="text-base leading-relaxed text-slate-800">{report.description}</p>
-                      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-800">
-                        {report.confirm_count} {report.confirm_count === 1 ? 'persoon bevestigt deze melding' : 'personen bevestigen deze melding'}
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="text-sm font-medium text-slate-600">
-                        Kies hieronder de officiële status en voeg indien nodig een korte publieke terugkoppeling toe.
-                      </p>
-                      <Link
-                        to={getReportDetailPath(report.public_id)}
-                        className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
-                      >
-                        Bekijk publiek
-                      </Link>
-                    </div>
-
-                    <div className="grid gap-4 lg:grid-cols-[220px_1fr_auto] lg:items-start">
-                    <label className="block">
-                      <span className="mb-2 block text-sm font-bold text-slate-700">Officiële opvolgstatus</span>
-                      <select
-                        value={currentStatus}
-                        onChange={(event) =>
-                          setStatusEdits((current) => ({
-                            ...current,
-                            [report.public_id]: event.target.value as ReportInterventionStatus,
-                          }))
-                        }
-                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
-                      >
-                        {interventionOptions.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-
-                    <div className="block">
-                      <div className="mb-2 flex items-center justify-between gap-3">
-                        <span className="block text-sm font-bold text-slate-700">Publieke terugkoppeling</span>
-                        <div className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
-                          <Wand2 size={12} />
-                          1 klik
+                    <div className="space-y-5 px-6 py-6">
+                      <div className="rounded-[1.6rem] border border-slate-200 bg-slate-50 px-5 py-5">
+                        <p className="mb-3 text-[11px] font-black uppercase tracking-[0.22em] text-slate-500">Melding zoals bezoekers ze zien</p>
+                        <p className="text-base leading-relaxed text-slate-800">{report.description}</p>
+                        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-800">
+                          {report.confirm_count} {report.confirm_count === 1 ? 'persoon bevestigt deze melding' : 'personen bevestigen deze melding'}
                         </div>
                       </div>
 
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        {noteQuickIcons.map((item) => (
-                          <button
-                            key={item.label}
-                            type="button"
-                            onClick={() => insertIntoNote(report.public_id, item.value)}
-                            className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-black text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <p className="text-sm font-medium text-slate-600">
+                          Kies hieronder de officiële status en voeg indien nodig een korte publieke terugkoppeling toe.
+                        </p>
+                        <Link
+                          to={getReportDetailPath(report.public_id)}
+                          className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
+                        >
+                          Bekijk publiek
+                        </Link>
+                      </div>
+
+                      <div className="grid gap-4 lg:grid-cols-[220px_1fr_auto] lg:items-start">
+                        <label className="block">
+                          <span className="mb-2 block text-sm font-bold text-slate-700">Officiële opvolgstatus</span>
+                          <select
+                            value={currentStatus}
+                            onChange={(event) =>
+                              setStatusEdits((current) => ({
+                                ...current,
+                                [report.public_id]: event.target.value as ReportInterventionStatus,
+                              }))
+                            }
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
                           >
-                            {item.value.trim()} {item.label}
-                          </button>
-                        ))}
-                      </div>
+                            {interventionOptions.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
 
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        {noteQuickPhrases.map((phrase) => (
+                        <div className="block">
+                          <div className="mb-2 flex items-center justify-between gap-3">
+                            <span className="block text-sm font-bold text-slate-700">Publieke terugkoppeling</span>
+                            <div className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+                              <Wand2 size={12} />
+                              1 klik
+                            </div>
+                          </div>
+
+                          <div className="mb-3 flex flex-wrap gap-2">
+                            {noteQuickIcons.map((item) => (
+                              <button
+                                key={item.label}
+                                type="button"
+                                onClick={() => insertIntoNote(report.public_id, item.value)}
+                                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-black text-slate-700 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700"
+                              >
+                                {item.value.trim()} {item.label}
+                              </button>
+                            ))}
+                          </div>
+
+                          <div className="mb-3 flex flex-wrap gap-2">
+                            {noteQuickPhrases.map((phrase) => (
+                              <button
+                                key={phrase}
+                                type="button"
+                                onClick={() => insertIntoNote(report.public_id, `${currentNote.trim() ? ' ' : ''}${phrase}`)}
+                                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
+                              >
+                                {phrase}
+                              </button>
+                            ))}
+                          </div>
+
+                          <textarea
+                            ref={(element) => {
+                              noteRefs.current[report.public_id] = element;
+                            }}
+                            value={currentNote}
+                            onChange={(event) =>
+                              setNoteEdits((current) => ({
+                                ...current,
+                                [report.public_id]: event.target.value,
+                              }))
+                            }
+                            maxLength={300}
+                            rows={4}
+                            placeholder="Bijv. ✅ Opgeruimd door stadsdiensten op 31 maart 2026."
+                            className="w-full rounded-[1.6rem] border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
+                          />
+                          <div className="mt-2 flex items-center justify-between gap-3 text-xs font-medium text-slate-500">
+                            <span>Deze tekst kan zichtbaar worden op de publieke meldingspagina.</span>
+                            <span>{currentNote.length}/300</span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-3">
                           <button
-                            key={phrase}
                             type="button"
-                            onClick={() => insertIntoNote(report.public_id, `${currentNote.trim() ? ' ' : ''}${phrase}`)}
-                            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
+                            disabled={savingPublicId === report.public_id || !session}
+                            onClick={async () => {
+                              setSavingPublicId(report.public_id);
+                              setError(null);
+
+                              try {
+                                await updateAdminReportStatus(
+                                  report.public_id,
+                                  currentStatus,
+                                  currentNote,
+                                );
+                                await loadReports();
+                              } catch (saveError) {
+                                setError(saveError instanceof Error ? saveError.message : 'Kon status niet opslaan.');
+                              } finally {
+                                setSavingPublicId(null);
+                              }
+                            }}
+                            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3 font-black text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
                           >
-                            {phrase}
+                            {savingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
+                            Opslaan
                           </button>
-                        ))}
+
+                          <button
+                            type="button"
+                            disabled={removingPublicId === report.public_id || !session || report.status === 'removed'}
+                            onClick={async () => {
+                              const confirmed = window.confirm(
+                                `Deze melding wordt verwijderd uit de publieke site voor ${report.city_name}. Verdergaan?`,
+                              );
+
+                              if (!confirmed) {
+                                return;
+                              }
+
+                              setRemovingPublicId(report.public_id);
+                              setError(null);
+
+                              try {
+                                await removeAdminReport(report.public_id);
+                                await loadReports();
+                              } catch (removeError) {
+                                setError(removeError instanceof Error ? removeError.message : 'Kon melding niet verwijderen.');
+                              } finally {
+                                setRemovingPublicId(null);
+                              }
+                            }}
+                            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 font-black text-red-800 transition hover:border-red-300 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            {removingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                            Verwijder melding
+                          </button>
+                        </div>
                       </div>
-
-                      <textarea
-                        ref={(element) => {
-                          noteRefs.current[report.public_id] = element;
-                        }}
-                        value={currentNote}
-                        onChange={(event) =>
-                          setNoteEdits((current) => ({
-                            ...current,
-                            [report.public_id]: event.target.value,
-                          }))
-                        }
-                        maxLength={300}
-                        rows={4}
-                        placeholder="Bijv. ✅ Opgeruimd door stadsdiensten op 31 maart 2026."
-                        className="w-full rounded-[1.6rem] border border-slate-200 bg-slate-50 px-4 py-3 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white"
-                      />
-                      <div className="mt-2 flex items-center justify-between gap-3 text-xs font-medium text-slate-500">
-                        <span>Deze tekst kan zichtbaar worden op de publieke meldingspagina.</span>
-                        <span>{currentNote.length}/300</span>
-                      </div>
                     </div>
+                  </article>
+                );
+              })}
 
-                    <div className="flex flex-col gap-3">
-                      <button
-                        type="button"
-                        disabled={savingPublicId === report.public_id || !savedKey}
-                        onClick={async () => {
-                          setSavingPublicId(report.public_id);
-                          setError(null);
-
-                          try {
-                            await updateAdminReportStatus(
-                              savedKey,
-                              report.public_id,
-                              currentStatus,
-                              currentNote,
-                            );
-                            await loadReports(savedKey);
-                          } catch (saveError) {
-                            setError(saveError instanceof Error ? saveError.message : 'Kon status niet opslaan.');
-                          } finally {
-                            setSavingPublicId(null);
-                          }
-                        }}
-                        className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-4 py-3 font-black text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        {savingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-                        Opslaan
-                      </button>
-
-                      <button
-                        type="button"
-                        disabled={removingPublicId === report.public_id || !savedKey || report.status === 'removed'}
-                        onClick={async () => {
-                          const confirmed = window.confirm(
-                            `Deze melding wordt verwijderd uit de publieke site voor ${report.city_name}. Verdergaan?`,
-                          );
-
-                          if (!confirmed) {
-                            return;
-                          }
-
-                          setRemovingPublicId(report.public_id);
-                          setError(null);
-
-                          try {
-                            await removeAdminReport(savedKey, report.public_id);
-                            await loadReports(savedKey);
-                          } catch (removeError) {
-                            setError(removeError instanceof Error ? removeError.message : 'Kon melding niet verwijderen.');
-                          } finally {
-                            setRemovingPublicId(null);
-                          }
-                        }}
-                        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 font-black text-red-800 transition hover:border-red-300 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        {removingPublicId === report.public_id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
-                        Verwijder melding
-                      </button>
-                    </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-
-            {!loading && sortedReports.length === 0 && savedKey && !error && (
-              <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-12 text-center text-slate-500 shadow-sm">
-                Geen meldingen gevonden.
-              </div>
-            )}
-          </div>
-        )}
+              {!loading && sortedReports.length === 0 && !error && (
+                <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-12 text-center text-slate-500 shadow-sm">
+                  Geen meldingen gevonden.
+                </div>
+              )}
+            </div>
+          )
+        ) : null}
       </div>
     </div>
   );

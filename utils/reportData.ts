@@ -24,6 +24,43 @@ type ReportRow = Omit<ReportItem, 'city_name'>;
 
 const cityNameMap = new Map(CITIES.map((city) => [city.slug, city.name]));
 
+const getAdminInvokeHeaders = async (): Promise<Record<string, string>> => {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error) {
+    throw error;
+  }
+
+  const accessToken = data.session?.access_token;
+  if (!accessToken) {
+    throw new Error('Je adminsessie ontbreekt. Log opnieuw in.');
+  }
+
+  return {
+    Authorization: `Bearer ${accessToken}`,
+  };
+};
+
+const unwrapFunctionError = async (error: unknown): Promise<Error> => {
+  if (error instanceof Error) {
+    const maybeResponse = (error as Error & { context?: Response }).context;
+    if (maybeResponse instanceof Response) {
+      try {
+        const payload = await maybeResponse.json();
+        if (payload && typeof payload.error === 'string' && payload.error.trim()) {
+          return new Error(payload.error);
+        }
+      } catch {
+        // Ignore JSON parsing failures and fall back to the original error.
+      }
+    }
+
+    return error;
+  }
+
+  return new Error('Er ging iets mis bij het laden van de admin.');
+};
+
 export const hydrateReport = (row: ReportRow): ReportItem => ({
   ...row,
   confirm_count: Number(row.confirm_count || 0),
@@ -116,52 +153,47 @@ export const confirmReport = async (
   };
 };
 
-export const fetchAdminReports = async (adminKey: string): Promise<ReportItem[]> => {
+export const fetchAdminReports = async (): Promise<ReportItem[]> => {
   const { data, error } = await supabase.functions.invoke('list-admin-reports', {
-    body: {
-      admin_key: adminKey,
-    },
+    body: {},
+    headers: await getAdminInvokeHeaders(),
   });
 
   if (error) {
-    throw error;
+    throw await unwrapFunctionError(error);
   }
 
   return ((data?.reports || []) as ReportRow[]).map(hydrateReport);
 };
 
 export const updateAdminReportStatus = async (
-  adminKey: string,
   publicId: string,
   cityInterventionStatus: ReportInterventionStatus,
   cityInterventionNote: string,
 ): Promise<void> => {
   const { error } = await supabase.functions.invoke('update-report-status', {
     body: {
-      admin_key: adminKey,
       public_id: publicId,
       city_intervention_status: cityInterventionStatus,
       city_intervention_note: cityInterventionNote,
     },
+    headers: await getAdminInvokeHeaders(),
   });
 
   if (error) {
-    throw error;
+    throw await unwrapFunctionError(error);
   }
 };
 
-export const removeAdminReport = async (
-  adminKey: string,
-  publicId: string,
-): Promise<void> => {
+export const removeAdminReport = async (publicId: string): Promise<void> => {
   const { error } = await supabase.functions.invoke('remove-report', {
     body: {
-      admin_key: adminKey,
       public_id: publicId,
     },
+    headers: await getAdminInvokeHeaders(),
   });
 
   if (error) {
-    throw error;
+    throw await unwrapFunctionError(error);
   }
 };

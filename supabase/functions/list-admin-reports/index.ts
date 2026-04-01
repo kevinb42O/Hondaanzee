@@ -1,6 +1,6 @@
 import { adminListReportsInputSchema } from '../_shared/reportSchema.ts';
 import { getSupabaseAdmin, handleOptions, json } from '../_shared/http.ts';
-import { assertAdminKey } from '../_shared/security.ts';
+import { requireAdminUser } from '../_shared/security.ts';
 
 Deno.serve(async (req) => {
   const optionsResponse = handleOptions(req);
@@ -13,9 +13,9 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const body = await req.json();
-    const input = adminListReportsInputSchema.parse(body);
-    await assertAdminKey(input.admin_key);
+    const body = await req.json().catch(() => ({}));
+    adminListReportsInputSchema.parse(body);
+    await requireAdminUser(req);
 
     const supabase = getSupabaseAdmin();
     const { data, error } = await supabase

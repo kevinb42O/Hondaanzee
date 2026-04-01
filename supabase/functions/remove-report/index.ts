@@ -1,6 +1,6 @@
 import { adminRemoveReportInputSchema } from '../_shared/reportSchema.ts';
 import { getSupabaseAdmin, handleOptions, json } from '../_shared/http.ts';
-import { assertAdminKey } from '../_shared/security.ts';
+import { requireAdminUser } from '../_shared/security.ts';
 
 Deno.serve(async (req) => {
   const optionsResponse = handleOptions(req);
@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json();
     const input = adminRemoveReportInputSchema.parse(body);
-    await assertAdminKey(input.admin_key);
+    await requireAdminUser(req);
 
     const supabase = getSupabaseAdmin();
 

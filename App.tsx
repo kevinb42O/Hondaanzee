@@ -1,6 +1,6 @@
 
 import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, useInRouterContext, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route, useInRouterContext, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
@@ -151,7 +151,8 @@ const AppContent = () => {
               <Route path="/community" element={<Community />} />
               <Route path="/meldpunt" element={<Meldpunt />} />
               <Route path="/meldpunt/:publicId" element={<ReportDetail />} />
-              <Route path="/_meldpunt-admin" element={<MeldpuntAdmin />} />
+              <Route path="/admin" element={<MeldpuntAdmin />} />
+              <Route path="/_meldpunt-admin" element={<Navigate to="/admin" replace />} />
               <Route path="/updates" element={<Updates />} />
               <Route path="/:slug" element={<CityPage />} />
               <Route path="*" element={<NotFound />} />

@@ -94,19 +94,15 @@ export const confirmReportInputSchema = z.object({
   public_id: sanitizedString(6, 32),
 });
 
-export const adminListReportsInputSchema = z.object({
-  admin_key: sanitizedString(8, 200),
-});
+export const adminListReportsInputSchema = z.object({});
 
 export const adminUpdateReportInputSchema = z.object({
-  admin_key: sanitizedString(8, 200),
   public_id: sanitizedString(6, 32),
   city_intervention_status: z.enum(REPORT_INTERVENTION_STATUSES),
   city_intervention_note: z.string().trim().max(300).optional().or(z.literal('')),
 });
 
 export const adminRemoveReportInputSchema = z.object({
-  admin_key: sanitizedString(8, 200),
   public_id: sanitizedString(6, 32),
 });
 
