@@ -121,12 +121,15 @@ const LocationAwareErrorBoundary = ({ children }: { children: React.ReactNode })
 };
 
 const AppContent = () => {
+  const { pathname } = useLocation();
+  const isAdminRoute = pathname === '/admin' || pathname === '/_meldpunt-admin';
+
   return (
     <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900" style={{ overflowX: 'clip' }}>
       <ScrollToHash />
       <HeroPrerenderToggle />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">Ga naar inhoud</a>
-      <Header />
+      {!isAdminRoute && <Header />}
       <main id="main-content" className="flex-grow">
         <LocationAwareErrorBoundary>
           <Suspense fallback={<PageLoader />}>
@@ -160,13 +163,17 @@ const AppContent = () => {
           </Suspense>
         </LocationAwareErrorBoundary>
       </main>
-      <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
-        <ResponsibilityBanner />
-      </Suspense>
-      <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
-        <Footer />
-      </Suspense>
-      <ErrorBoundary><FloatingSupport /></ErrorBoundary>
+      {!isAdminRoute && (
+        <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
+          <ResponsibilityBanner />
+        </Suspense>
+      )}
+      {!isAdminRoute && (
+        <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
+          <Footer />
+        </Suspense>
+      )}
+      {!isAdminRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
       <Analytics />
     </div>
   );
