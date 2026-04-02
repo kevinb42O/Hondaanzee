@@ -34,7 +34,11 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
 
   // Get unique types from hotspots for this city
   const allCityHotspots = HOTSPOTS.filter(spot => spot.city === city.slug);
-  const uniqueTypes = Array.from(new Set(allCityHotspots.map(spot => spot.type)));
+  const hasShoppenTag = allCityHotspots.some((spot) => spot.tags.includes('Shoppen'));
+  const uniqueTypes = Array.from(new Set([
+    ...allCityHotspots.map(spot => spot.type),
+    ...(hasShoppenTag ? ['Shoppen'] : []),
+  ]));
   const filterOptions = ['Alles', ...uniqueTypes];
   const topPicks = [...allCityHotspots]
     .sort((a, b) => {
@@ -49,7 +53,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
     .filter(spot => {
       if (spot.city !== city.slug) return false;
       if (selectedFilter === 'Alles') return true;
-      return spot.type === selectedFilter;
+      return spot.type === selectedFilter || spot.tags.includes(selectedFilter);
     })
     .sort((a, b) => {
       const aIsAanrader = a.tags.includes('Aanrader') ? 1 : 0;

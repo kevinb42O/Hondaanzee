@@ -4,6 +4,8 @@ import {
   ArrowLeft,
   Bed,
   Beer,
+  ChevronLeft,
+  ChevronRight,
   Coffee,
   ExternalLink,
   Image as ImageIcon,
@@ -502,6 +504,8 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [initialImageIndex, setInitialImageIndex] = useState(0);
   const [activeHeroImageIndex, setActiveHeroImageIndex] = useState(0);
+  const [thumbStart, setThumbStart] = useState(0);
+  const [thumbsPerPage, setThumbsPerPage] = useState(3);
 
   const place = useMemo<Place | undefined>(() => {
     if (!city || !slug) return undefined;
@@ -601,8 +605,27 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   };
 
   useEffect(() => {
+    const updateThumbsPerPage = () => {
+      setThumbsPerPage(window.innerWidth < 640 ? 2 : 3);
+    };
+
+    updateThumbsPerPage();
+    window.addEventListener('resize', updateThumbsPerPage);
+
+    return () => window.removeEventListener('resize', updateThumbsPerPage);
+  }, []);
+
+  useEffect(() => {
     setActiveHeroImageIndex(0);
+    setThumbStart(0);
   }, [place.slug]);
+
+  useEffect(() => {
+    setThumbStart((prev) => {
+      const lastStart = Math.max(0, images.length - thumbsPerPage);
+      return Math.min(prev, lastStart);
+    });
+  }, [images.length, thumbsPerPage]);
 
   useEffect(() => {
     if (images.length <= 1) {
@@ -974,24 +997,51 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             </button>
 
             {images.length > 1 && (
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {images.map((galleryImage, index) => (
-                  <button
-                    key={galleryImage}
-                    type="button"
-                    onClick={() => openGalleryAt(index)}
-                    className="overflow-hidden rounded-2xl ring-1 ring-slate-200 transition hover:ring-slate-300"
-                  >
-                    <img
-                      src={galleryImage}
-                      alt={`${place.name} foto ${index + 1}`}
-                      className="h-28 w-full object-cover transition duration-300 hover:scale-105"
-                      style={{ objectPosition: place.imagePosition || 'center' }}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </button>
-                ))}
+              <div className="relative mt-4">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  {images.slice(thumbStart, thumbStart + thumbsPerPage).map((galleryImage, index) => (
+                    <button
+                      key={galleryImage}
+                      type="button"
+                      onClick={() => openGalleryAt(thumbStart + index)}
+                      className="overflow-hidden rounded-2xl ring-1 ring-slate-200 transition hover:ring-slate-300"
+                    >
+                      <img
+                        src={galleryImage}
+                        alt={`${place.name} foto ${thumbStart + index + 1}`}
+                        className="h-28 w-full object-cover transition duration-300 hover:scale-105"
+                        style={{ objectPosition: place.imagePosition || 'center' }}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </button>
+                  ))}
+                </div>
+                {images.length > thumbsPerPage && (
+                  <div className="mt-3 flex items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setThumbStart((prev) => Math.max(0, prev - thumbsPerPage))}
+                      disabled={thumbStart === 0}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200 disabled:opacity-30 disabled:cursor-not-allowed"
+                      aria-label="Vorige foto's"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <span className="text-xs font-bold text-slate-400 tabular-nums">
+                      {Math.floor(thumbStart / thumbsPerPage) + 1} / {Math.ceil(images.length / thumbsPerPage)}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setThumbStart((prev) => Math.min(Math.max(0, images.length - thumbsPerPage), prev + thumbsPerPage))}
+                      disabled={thumbStart >= Math.max(0, images.length - thumbsPerPage)}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200 disabled:opacity-30 disabled:cursor-not-allowed"
+                      aria-label="Volgende foto's"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
