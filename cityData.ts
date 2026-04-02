@@ -35,14 +35,14 @@ export const CITIES: City[] = [
       summer: {
         start: '03-15',
         end: '10-15',
-        rule: '✅ ZONE WEST (24/7 vrij loslopen): Vanaf de westelijke strekdam richting Wenduine - honden steeds welkom zonder leiband, heel het jaar door! ⚠️ ZONE MIDDEN**: Tussen Oosterstaketsel en J. Gadeynehelling - honden niet toegelaten (paasvakantie t/m 15 sept)*, buiten deze periode aan leiband. ⚠️ ZONE OOST***: Vanaf J. Gadeynehelling richting Zeebrugge - aan leiband (15 maart - 15 okt), zonder leiband (16 okt - 14 maart).',
+        rule: '✅ ZONE WEST\nWesterstaketsel → Wenduine\nVrij loslopen zonder leiband, 24/7 het hele jaar door.\n\n⚠️ ZONE MIDDEN**\nOosterstaketsel → J. Gadeynehelling\nPaasvakantie t/m 15 sept: honden niet toegelaten.\nBuiten dit seizoen: toegelaten aan leiband.\n\n⚠️ ZONE OOST***\nJ. Gadeynehelling → Zeebrugge\n15 maart – 15 okt: aan leiband.\n16 okt – 14 maart: vrij loslopen zonder leiband.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Zone West: Jaarrond vrij loslopen zonder leiband.\n\nZone Midden: Aan leiband toegelaten\n(16 sept - paasvakantie).\n\nZone Oost: Vrij loslopen zonder leiband (16 okt - 14 maart).',
+        rule: '✅ Zone West\nWesterstaketsel → Wenduine\nJaarrond vrij loslopen zonder leiband.\n\n🟡 Zone Midden\nOosterstaketsel → J. Gadeynehelling\nAan leiband toegelaten (16 sept – paasvakantie).\n\n✅ Zone Oost\nJ. Gadeynehelling → Zeebrugge\nVrij loslopen zonder leiband (16 okt – 14 maart).',
         status: 'JA'
       },
-      special: '*Zone West:\nStrand vanaf Westerstaketsel richting Wenduine.\n\n**Zone Midden:\nCentraal strand tussen het Oosterstaketsel & Pier.\n\n***Zone Oost:\nStrand richting Zeebrugge vanaf strandopgang J. Gadeynehelling.',
+      special: '* Zone West: strand vanaf Westerstaketsel richting Wenduine.\n** Zone Midden: centraal strand tussen Oosterstaketsel & Pier.\n*** Zone Oost: strand richting Zeebrugge vanaf strandopgang J. Gadeynehelling.',
       note: 'Gecertificeerde assistentiehonden zijn altijd toegelaten.'
     }
   },
@@ -63,7 +63,7 @@ export const CITIES: City[] = [
         end: '10-15',
         startTime: '10:00',
         endTime: '20:00',
-        rule: '✅ GROENE ZONE (altijd toegelaten): Vanaf einde Zeedijk bij Surfclub Icarus richting Blankenberge - vrij loslopen het hele jaar! 🚫 RODE ZONE (hoofdstrand): Vanaf Surfclub Icarus tot aan de St. George\'s Day-wandeling (pier) - verboden 10u-20u (15 maart - 15 okt). Buiten die uren en buiten deze periode: overal op het strand vrij loslopen.',
+        rule: '✅ GROENE ZONE\nSurfclub Icarus → Blankenberge\nVrij loslopen het hele jaar!\n\n🚫 RODE ZONE\nSurfclub Icarus → St. George\'s Day-wandeling (pier)\nVerboden 10u–20u (15 maart – 15 okt).\nBuiten die uren en buiten dit seizoen: overal vrij loslopen.',
         status: 'DEELS'
       },
       winter: {
@@ -99,11 +99,11 @@ export const CITIES: City[] = [
         end: '10-15',
         startTime: '10:00',
         endTime: '20:00',
-        rule: '🚫 HOOFDSTRANDEN (Knokke, Heist, Duinbergen): Verboden 10u-20u (15 maart - 15 okt). Vóór 10u en na 20u aan leiband toegelaten. ✅ HET ZOUTE - ALTIJD VRIJ LOSLOPEN: Vanaf ten oosten van watersportclub "Surfers Paradise" richting Nederlandse grens (Zwin) - honden mogen hier 24/7 vrij loslopen, het hele jaar door!',
+        rule: '🚫 HOOFDSTRANDEN\nKnokke, Heist, Duinbergen\nVerboden 10u–20u (15 maart – 15 okt).\nVóór 10u en na 20u: aan leiband toegelaten.\n\n✅ HET ZOUTE\nTen oosten van Surfers Paradise → Zwin (Nederlandse grens)\n24/7 vrij loslopen, het hele jaar door!',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand. Het Zoute blijft jaarrond vrij loslopen.',
+        rule: 'Van 16 okt t/m 14 maart: honden overal vrij loslopen op het volledige strand.\nHet Zoute: jaarrond vrij loslopen.',
         status: 'JA'
       },
       special: 'Honden mogen onder begeleiding loslopen buiten de bebouwde kom op openbaar domein waar geen verbod geldt. Assistentiehonden altijd toegelaten.'
@@ -162,11 +162,11 @@ export const CITIES: City[] = [
         end: '09-15',
         startTime: '10:00',
         endTime: '19:00',
-        rule: '🚫 BEWAAKTE ZWEMZONES (met redders): Verboden 10u-19u. ✅ ONBEWAAKTE STRANDDELEN (tussen de zwemzones): 24/7 vrij loslopen, het hele jaar door! 💡 TIP: Bij Vosseslag en Harendijke mag je aan korte leiband door de bewaakte zone lopen om de hondenzone te bereiken.',
+        rule: '🚫 BEWAAKTE ZWEMZONES\nZones met redders (1 juni – 15 sept)\nVerboden 10u–19u.\n\n✅ ONBEWAAKTE STRANDDELEN\nTussen de zwemzones\n24/7 vrij loslopen, het hele jaar door!\n\n💡 TIP\nBij Vosseslag en Harendijke mag je aan korte leiband door de bewaakte zone lopen om de hondenzone te bereiken.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Zeer hondvriendelijk! Overal toegelaten. Onbewaakte zones: vrij loslopen. Bewaakte zones: geen tijdsbeperkingen.',
+        rule: 'Zeer hondvriendelijk!\nOnbewaakte zones: vrij loslopen.\nBewaakte zones: geen tijdsbeperkingen.',
         status: 'JA'
       },
       special: 'De Haan is één van de meest hondvriendelijke badplaatsen! Grote onbewaakte stranddelen zijn 365 dagen per jaar toegankelijk.'
@@ -207,11 +207,11 @@ export const CITIES: City[] = [
         end: '09-15',
         startTime: '10:00',
         endTime: '19:00',
-        rule: '🚫 BEWAAKTE ZWEMZONES (met redders): Verboden 10u-19u. ✅ ONBEWAAKTE STRANDDELEN (tussen de zwemzones): 24/7 vrij loslopen, het hele jaar door!',
+        rule: '🚫 BEWAAKTE ZWEMZONES\nZones met redders (1 juni – 15 sept)\nVerboden 10u–19u.\n\n✅ ONBEWAAKTE STRANDDELEN\nTussen de zwemzones\n24/7 vrij loslopen, het hele jaar door!',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Zeer hondvriendelijk! Overal toegelaten. Onbewaakte zones: vrij loslopen. Bewaakte zones: geen tijdsbeperkingen.',
+        rule: 'Zeer hondvriendelijk!\nOnbewaakte zones: vrij loslopen.\nBewaakte zones: geen tijdsbeperkingen.',
         status: 'JA'
       },
       special: 'Wenduine deelt dezelfde hondvriendelijke regels als De Haan. Grote onbewaakte stranddelen zijn 365 dagen per jaar toegankelijk.'
@@ -244,14 +244,14 @@ export const CITIES: City[] = [
           end: '06-30',
           status: 'DEELS',
           label: 'Opgelet: Tussenseizoen',
-          rule: '⚠️ TUSSENSEIZOEN (16 maart - 30 juni): Overal op strand en in duinen toegelaten aan leiband. Bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
+          rule: '⚠️ TUSSENSEIZOEN\n16 maart – 30 juni\nOveral op strand en in duinen toegelaten aan leiband.\nLet op: bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
         },
         {
           start: '09-01',
           end: '10-14',
           status: 'DEELS',
           label: 'Opgelet: Tussenseizoen',
-          rule: '⚠️ TUSSENSEIZOEN (1 september - 14 oktober): Overal op strand en in duinen toegelaten aan leiband. Bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
+          rule: '⚠️ TUSSENSEIZOEN\n1 september – 14 oktober\nOveral op strand en in duinen toegelaten aan leiband.\nLet op: bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
         }
       ],
       summer: {
@@ -259,7 +259,7 @@ export const CITIES: City[] = [
         end: '08-31',
         startTime: '10:30',
         endTime: '18:30',
-        rule: '🚫 JULI & AUGUSTUS: Verboden 10u30-18u30 op strand én in duinen (behalve verharde paden). ✅ UITZONDERING OVERDAG (10u30-18u30): Strandzone voorbij concessie Twins tot de grens met Oostende + een gedeelte aan strandpost 6 (altijd aan leiband). 🌅 Buiten deze uren: overal aan leiband toegelaten.',
+        rule: '🚫 STRAND & DUINEN\nJuli & augustus, 10u30–18u30\nVerboden op strand én in duinen (behalve verharde paden).\n\n✅ UITZONDERING\nVoorbij concessie Twins → grens Oostende + strandpost 6\nToegegaan, maar altijd aan leiband.\n\n🌅 BUITEN DE UREN\nVóór 10u30 en na 18u30\nOveral aan leiband toegelaten.',
         status: 'DEELS'
       },
       winter: {
@@ -355,7 +355,7 @@ export const CITIES: City[] = [
         end: '09-30',
         startTime: '10:00',
         endTime: '18:30',
-        rule: '🚫 HOOFDSTRAND: Verboden 10u-18u30 (april, mei, juni, sept) of 10u-20u (juli-aug). ✅ JAARROND VRIJ (24/7): Oosteroever - vanaf strandhoofd 5 (Halve Maan) tot grens Bredene. ⚠️ JAARROND AAN LEIBAND (24/7): Klein Strand (tussen Westerstaketsel en Strekdam) én Raversijde (strandhoofd 15bis tot grens Middelkerke).',
+        rule: '🚫 HOOFDSTRAND\nApril–juni & september: verboden 10u–18u30.\nJuli–augustus: verboden 10u–20u.\n\n✅ OOSTEROEVER\nStrandhoofd 5 (Halve Maan) → grens Bredene\n24/7 vrij loslopen, het hele jaar door.\n\n⚠️ KLEIN STRAND\nTussen Westerstaketsel en Strekdam\n24/7 aan leiband, het hele jaar door.\n\n⚠️ RAVERSIJDE\nStrandhoofd 15bis → grens Middelkerke\n24/7 aan leiband, het hele jaar door.',
         status: 'DEELS'
       },
       winter: {
@@ -399,11 +399,11 @@ export const CITIES: City[] = [
       summer: {
         start: '06-15',
         end: '09-15',
-        rule: '🚫 ALGEMEEN STRAND: Verboden (15 juni - 15 sept). ✅ DRIE UITZONDERINGEN (jaarrond toegelaten): 1️⃣ VRIJ LOSLOPEN: Vanaf Residentie Carlton (Sluisvaartstraat, Westende) richting Oostende. 2️⃣ LEIBAND 10M: Ten westen van het Sportstrand (Louis Logierlaan). 3️⃣ LEIBAND 10M: Ten westen van Residentie Cristal Palace (Idyllelaan) richting Nieuwpoort.',
+        rule: '🚫 ALGEMEEN STRAND\nVolledig strand\nHonden verboden (15 juni – 15 sept).\n\n✅ ZONE CARLTON\nResidentie Carlton (Westende) → Oostende\nVrij loslopen, jaarrond toegelaten.\n\n⚠️ ZONE SPORTSTRAND\nTen westen van Sportstrand (Louis Logierlaan)\nAan leiband max 10m, jaarrond toegelaten.\n\n⚠️ ZONE CRISTAL PALACE\nTen westen van Residentie Cristal Palace (Idyllelaan) → Nieuwpoort\nAan leiband max 10m, jaarrond toegelaten.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 16 sept t/m 14 juni: Overal toegelaten aan korte leiband (max 2m). Carlton-zone blijft vrij loslopen. Sportstrand en Cristal Palace zones: leiband max 10m.',
+        rule: 'Van 16 sept t/m 14 juni: overal aan korte leiband (max 2m).\nZone Carlton: vrij loslopen.\nZone Sportstrand & Cristal Palace: leiband max 10m.',
         status: 'JA'
       },
       special: 'Strenge zomerregels! Maar de 3 uitzonderingszones zijn het hele jaar toegankelijk - zoek de gebouwen Carlton, Sportstrand of Cristal Palace.'
@@ -443,7 +443,7 @@ export const CITIES: City[] = [
       summer: {
         start: '06-15',
         end: '09-15',
-        rule: '🚫 STRIKT VERBODEN: Van 15 juni t/m 15 september zijn honden op het VOLLEDIGE strand verboden - 24 uur per dag, 7 dagen per week. Er zijn GEEN uitzonderingen of hondenzones!',
+        rule: '🚫 STRIKT VERBODEN\nVolledig strand\nVan 15 juni t/m 15 sept: honden compleet verboden, 24/7.\nGeen uitzonderingen of hondenzones!',
         status: 'NEE'
       },
       winter: {
@@ -488,7 +488,7 @@ export const CITIES: City[] = [
         end: '09-15',
         startTime: '10:30',
         endTime: '18:30',
-        rule: 'Van 15 juni t/m 15 september: tussen 10u30-18u30 zijn honden enkel toegelaten in 3 hondenzones (altijd aan leiband, max 10m). Voor 10u30 en na 18u30: overal op het strand toegelaten aan leiband. 🐾 ZONES: 1️⃣ Sint-Idesbald (grens De Panne tot Pieterlaan, ±350m) 2️⃣ Koksijde-Bad (Elisabethplein tot Sint-André/G. Scottlaan, ±1,2km) 3️⃣ Oostduinkerke (Felix Timmermanslaan tot Paardevissersweg/Groenendijk, ±1,6km).',
+        rule: '⚠️ BUITEN DE HONDENZONES\n10u30–18u30 (15 juni – 15 sept)\nHonden niet toegelaten.\nVóór 10u30 en na 18u30: overal aan leiband.\n\n🐾 ZONE SINT-IDESBALD\nGrens De Panne → Pieterlaan (±350m)\nAan leiband max 10m.\n\n🐾 ZONE KOKSIJDE-BAD\nElisabethplein → Sint-André / G. Scottlaan (±1,2km)\nAan leiband max 10m.\n\n🐾 ZONE OOSTDUINKERKE\nFelix Timmermanslaan → Paardevissersweg / Groenendijk (±1,6km)\nAan leiband max 10m.',
         status: 'DEELS'
       },
       winter: {
@@ -533,11 +533,11 @@ export const CITIES: City[] = [
         end: '09-15',
         startTime: '10:30',
         endTime: '18:30',
-        rule: '4 STRANDZONES (zomer = 15 juni - 15 sept): 1️⃣ ZONE 1 (Canadezenplein → Koksijde): aan leiband. 2️⃣ ZONE 2 (Canadezenplein → De Rampe + Planché): 🚫 honden verboden. 3️⃣ ZONE 3 (De Rampe → Zeilwagencentrum): aan leiband. 4️⃣ ZONE 4 (Zeilwagencentrum → Franse grens tot slufter): ✅ loslopen 18u30-10u30, overdag (10u30-18u30) aan leiband.',
+        rule: '⚠️ ZONE 1\nCanadezenplein → Koksijde\nAan leiband.\n\n🚫 ZONE 2\nCanadezenplein → De Rampe + Planché\nHonden verboden.\n\n⚠️ ZONE 3\nDe Rampe → Zeilwagencentrum\nAan leiband.\n\n✅ ZONE 4\nZeilwagencentrum → Franse grens (slufter)\n18u30–10u30: vrij loslopen.\n10u30–18u30: aan leiband.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 16 sept t/m 14 juni: Zone 1 en 3 altijd aan leiband, Zone 2 aan leiband, Zone 4 (richting Frankrijk) 24/7 vrij loslopen. Op de betonnen duinvoetversterking blijft leiband verplicht.',
+        rule: '⚠️ ZONE 1 & 3\nAltijd aan leiband.\n\n⚠️ ZONE 2\nAan leiband (16 sept – 14 juni).\n\n✅ ZONE 4\nRichting Frankrijk\n24/7 vrij loslopen.\n\nLet op: op de betonnen duinvoetversterking blijft leiband verplicht.',
         status: 'JA'
       },
       special: 'Zone 4 (vanaf Zeilwagencentrum richting Frankrijk) is dé losloopzone! Op de betonnen duinvoetversterking moet je hond altijd aangelijnd zijn.'
