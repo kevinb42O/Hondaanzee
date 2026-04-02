@@ -1,4 +1,8 @@
 
+/** Opening hours keyed by short Dutch day abbreviation.
+ *  Value: time range string like "10:30–18:00", or null = closed that day. */
+export type OpeningHours = Partial<Record<'ma' | 'di' | 'wo' | 'do' | 'vr' | 'za' | 'zo', string | null>>;
+
 export interface Hotspot {
   id: number;
   slug: string;
@@ -17,6 +21,7 @@ export interface Hotspot {
   website?: string;
   websiteLabel?: string;
   sameAs?: string[];
+  openingHours?: OpeningHours;
 }
 
 export interface Service {

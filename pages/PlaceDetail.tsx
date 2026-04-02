@@ -6,6 +6,7 @@ import {
   Beer,
   ChevronLeft,
   ChevronRight,
+  Clock,
   Coffee,
   ExternalLink,
   Image as ImageIcon,
@@ -22,7 +23,7 @@ import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { getPlaceSEO, useSEO } from '../utils/seo.ts';
 import { getPlaceCollectionPath, type PlaceKind } from '../utils/placeRoutes.ts';
-import type { Hotspot, Service } from '../types.ts';
+import type { Hotspot, OpeningHours, Service } from '../types.ts';
 import ImageModal from '../components/ImageModal.tsx';
 import NotFound from './NotFound.tsx';
 
@@ -113,24 +114,24 @@ const getPriorityTags = (place: Place): string[] => {
 
 const getIntentLabel = (place: Place, kind: PlaceKind): string => {
   if (kind === 'service') {
-    return place.type === 'Dierenarts' ? 'zorg en opvolging' : 'advies, voeding en spullen';
+    return place.type === 'Dierenarts' ? 'Snel medische hulp' : 'Voeding en advies';
   }
 
   switch (place.type) {
     case 'Koffiebar':
-      return 'een ontspannen koffiestop met hond';
+      return 'Koffie stop met je hond';
     case 'Café':
-      return 'een losse stop voor een drankje met hond';
+      return 'Los drankje samen';
     case 'Restaurant':
-      return 'een volwaardig etentje zonder gedoe aan de deur';
+      return 'Rustig samen dineren';
     case 'Brasserie':
-      return 'een klassieke, toegankelijke stop waar sfeer telt';
+      return 'Toegankelijk tafelen';
     case 'Slapen':
-      return 'een verblijf waar je hond echt mee kan inplannen';
+      return 'Overnachten met je hond';
     case 'Shoppen':
-      return 'een winkelstop waar je hond mee welkom is';
+      return 'Winkelstop met je hond';
     default:
-      return 'een hondvriendelijk adres aan zee';
+      return 'Hondvriendelijke stop';
   }
 };
 
@@ -182,6 +183,21 @@ const getPracticalHighlight = (place: Place, kind: PlaceKind): string => {
 
 const getStreetLabel = (address: string): string => address.split(',')[0].trim();
 
+const toCompactCardTag = (value: string): string => {
+  const compactMap: Record<string, string> = {
+    'Waterbak aanwezig': 'Waterbak',
+    'Hondvriendelijk team': 'Warm onthaal',
+    'Nabij strand': 'Dicht bij strand',
+    'Specialty Coffee': 'Specialty coffee',
+    'Indoor toegelaten': 'Binnen welkom',
+    'Honden toegelaten op kamer': 'Hond op kamer',
+    'Consultatie op afspraak': 'Op afspraak',
+    'Online afspraak': 'Online boeken',
+  };
+
+  return compactMap[value] || value;
+};
+
 type OverviewPanelTheme = {
   style: React.CSSProperties;
   gridOpacityClass: string;
@@ -192,194 +208,31 @@ type OverviewPanelTheme = {
 };
 
 const getOverviewPanelTheme = (citySlug: string, kind: PlaceKind): OverviewPanelTheme => {
-  const themes: Record<string, Omit<OverviewPanelTheme, 'waveClass'>> = {
-    blankenberge: {
-      style: {
-        backgroundImage: `
-          linear-gradient(180deg, rgba(240, 249, 255, 0.98) 0%, rgba(255,255,255,0.99) 28%, rgba(255,255,255,0.99) 68%, rgba(248,250,252,0.97) 100%),
-          linear-gradient(90deg, rgba(14, 165, 233, 0.06) 0%, rgba(14, 165, 233, 0) 26%, rgba(255,255,255,0) 74%, rgba(148, 163, 184, 0.06) 100%),
-          radial-gradient(circle at 88% 14%, rgba(255,255,255,0.82) 0, transparent 18%)
-        `,
-      },
-      gridOpacityClass: 'opacity-20',
-      gridStyle: {
-        backgroundImage:
-          'linear-gradient(to right, rgba(148,163,184,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(226,232,240,0.5) 1px, transparent 1px)',
-        backgroundSize: '52px 100%, 100% 22px',
-        maskImage: 'linear-gradient(135deg, black 8%, rgba(0,0,0,0.18) 55%, transparent 100%)',
-      },
-      orbOneClass: 'bg-white/80',
-      orbTwoClass: 'bg-sky-50/45',
-    },
-    oostende: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 14% 16%, rgba(15, 23, 42, 0.08) 0, transparent 24%),
-          radial-gradient(circle at 85% 14%, rgba(56, 189, 248, 0.18) 0, transparent 24%),
-          radial-gradient(circle at 72% 82%, rgba(251, 191, 36, 0.12) 0, transparent 26%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.96) 42%, rgba(241,245,249,0.98) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-45',
-      orbOneClass: 'bg-slate-100/70',
-      orbTwoClass: 'bg-sky-50/70',
-    },
-    'knokke-heist': {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 15% 20%, rgba(2, 132, 199, 0.12) 0, transparent 24%),
-          radial-gradient(circle at 84% 16%, rgba(250, 204, 21, 0.14) 0, transparent 20%),
-          radial-gradient(circle at 72% 82%, rgba(226, 232, 240, 0.7) 0, transparent 30%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(250,250,249,0.98) 46%, rgba(248,250,252,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-30',
-      orbOneClass: 'bg-stone-100/80',
-      orbTwoClass: 'bg-sky-50/65',
-    },
-    'de-haan': {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 12% 18%, rgba(163, 230, 53, 0.14) 0, transparent 26%),
-          radial-gradient(circle at 84% 18%, rgba(251, 191, 36, 0.14) 0, transparent 20%),
-          radial-gradient(circle at 76% 84%, rgba(110, 231, 183, 0.1) 0, transparent 24%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(250,250,249,0.98) 42%, rgba(248,250,252,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-30',
-      orbOneClass: 'bg-lime-50/70',
-      orbTwoClass: 'bg-amber-50/65',
-    },
-    wenduine: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 10% 16%, rgba(125, 211, 252, 0.16) 0, transparent 25%),
-          radial-gradient(circle at 88% 18%, rgba(255, 237, 213, 0.9) 0, transparent 22%),
-          radial-gradient(circle at 78% 84%, rgba(186, 230, 253, 0.12) 0, transparent 26%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(249,250,251,0.98) 45%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-30',
-      orbOneClass: 'bg-sky-50/70',
-      orbTwoClass: 'bg-orange-50/65',
-    },
-    middelkerke: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 12% 20%, rgba(45, 212, 191, 0.14) 0, transparent 24%),
-          radial-gradient(circle at 86% 16%, rgba(253, 224, 71, 0.15) 0, transparent 20%),
-          radial-gradient(circle at 74% 84%, rgba(56, 189, 248, 0.1) 0, transparent 28%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 44%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-35',
-      orbOneClass: 'bg-teal-50/70',
-      orbTwoClass: 'bg-yellow-50/70',
-    },
-    nieuwpoort: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 12% 18%, rgba(96, 165, 250, 0.16) 0, transparent 26%),
-          radial-gradient(circle at 85% 16%, rgba(251, 191, 36, 0.14) 0, transparent 18%),
-          radial-gradient(circle at 72% 84%, rgba(191, 219, 254, 0.16) 0, transparent 28%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(247,250,252,0.98) 46%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-35',
-      orbOneClass: 'bg-blue-50/70',
-      orbTwoClass: 'bg-amber-50/65',
-    },
-    'de-panne': {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 10% 16%, rgba(110, 231, 183, 0.14) 0, transparent 25%),
-          radial-gradient(circle at 86% 15%, rgba(253, 186, 116, 0.15) 0, transparent 20%),
-          radial-gradient(circle at 74% 84%, rgba(45, 212, 191, 0.1) 0, transparent 28%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(250,250,249,0.98) 44%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-30',
-      orbOneClass: 'bg-emerald-50/70',
-      orbTwoClass: 'bg-orange-50/65',
-    },
-    koksijde: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 12% 18%, rgba(14, 165, 233, 0.16) 0, transparent 24%),
-          radial-gradient(circle at 86% 16%, rgba(251, 191, 36, 0.14) 0, transparent 20%),
-          radial-gradient(circle at 74% 84%, rgba(125, 211, 252, 0.12) 0, transparent 30%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 44%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-35',
-      orbOneClass: 'bg-sky-50/70',
-      orbTwoClass: 'bg-amber-50/60',
-    },
-    zeebrugge: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 12% 18%, rgba(15, 23, 42, 0.09) 0, transparent 24%),
-          radial-gradient(circle at 86% 16%, rgba(14, 165, 233, 0.16) 0, transparent 22%),
-          radial-gradient(circle at 76% 84%, rgba(251, 191, 36, 0.1) 0, transparent 26%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 44%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-40',
-      orbOneClass: 'bg-slate-100/70',
-      orbTwoClass: 'bg-sky-50/65',
-    },
-    bredene: {
-      style: {
-        backgroundImage: `
-          radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.16) 0, transparent 24%),
-          radial-gradient(circle at 84% 16%, rgba(253, 224, 71, 0.14) 0, transparent 20%),
-          radial-gradient(circle at 74% 84%, rgba(191, 219, 254, 0.14) 0, transparent 28%),
-          linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 44%, rgba(255,255,255,0.99) 100%)
-        `,
-      },
-      gridOpacityClass: 'opacity-30',
-      orbOneClass: 'bg-blue-50/70',
-      orbTwoClass: 'bg-yellow-50/65',
-    },
-  };
-
-  const fallback =
+  void citySlug;
+  const tint =
     kind === 'hotspot'
-      ? {
-          style: {
-            backgroundImage: `
-              radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.18) 0, transparent 28%),
-              radial-gradient(circle at 82% 14%, rgba(251, 191, 36, 0.18) 0, transparent 24%),
-              radial-gradient(circle at 74% 82%, rgba(14, 165, 233, 0.08) 0, transparent 28%),
-              linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.97) 46%, rgba(255,255,255,0.99) 100%)
-            `,
-          },
-          gridOpacityClass: 'opacity-40',
-          orbOneClass: 'bg-sky-100/70',
-          orbTwoClass: 'bg-amber-50/70',
-        }
-      : {
-          style: {
-            backgroundImage: `
-              radial-gradient(circle at 12% 18%, rgba(16, 185, 129, 0.16) 0, transparent 28%),
-              radial-gradient(circle at 82% 14%, rgba(251, 191, 36, 0.14) 0, transparent 22%),
-              radial-gradient(circle at 74% 82%, rgba(5, 150, 105, 0.08) 0, transparent 28%),
-              linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.97) 46%, rgba(255,255,255,0.99) 100%)
-            `,
-          },
-          gridOpacityClass: 'opacity-35',
-          orbOneClass: 'bg-emerald-100/70',
-          orbTwoClass: 'bg-amber-50/65',
-        };
-
-  const baseTheme = themes[citySlug] || fallback;
+      ? 'rgba(56, 189, 248, 0.08)'
+      : 'rgba(16, 185, 129, 0.08)';
 
   return {
-    ...baseTheme,
-    waveClass:
-      kind === 'hotspot'
-        ? 'text-sky-100/70'
-        : 'text-emerald-100/70',
+    style: {
+      backgroundImage: `
+        linear-gradient(160deg, rgba(250,252,255,0.98) 0%, rgba(235,240,248,0.98) 42%, rgba(246,248,252,0.98) 100%),
+        linear-gradient(112deg, rgba(255,255,255,0.92) 8%, rgba(255,255,255,0.24) 32%, rgba(255,255,255,0) 52%),
+        linear-gradient(24deg, rgba(148,163,184,0.16) 0%, rgba(148,163,184,0) 36%),
+        radial-gradient(circle at 84% 12%, rgba(255,255,255,0.88) 0, rgba(255,255,255,0) 26%),
+        radial-gradient(circle at 14% 82%, ${tint} 0, rgba(255,255,255,0) 28%)
+      `,
+    },
+    gridOpacityClass: 'opacity-45',
+    gridStyle: {
+      backgroundImage: 'repeating-linear-gradient(168deg, rgba(100,116,139,0.18) 0 1px, rgba(100,116,139,0) 1px 7px)',
+      backgroundSize: '100% 100%',
+      maskImage: 'linear-gradient(115deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.12) 48%, transparent 82%)',
+    },
+    orbOneClass: 'bg-white/50',
+    orbTwoClass: 'bg-slate-200/38',
+    waveClass: kind === 'hotspot' ? 'text-slate-200/65' : 'text-slate-200/65',
   };
 };
 
@@ -497,6 +350,140 @@ const RelatedPlaceCard: React.FC<RelatedPlaceCardProps> = ({
   );
 };
 
+// ─── Opening hours helpers ────────────────────────────────────────────────────
+
+const DAY_KEYS = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'] as const;
+const DAY_LABELS: Record<typeof DAY_KEYS[number], string> = {
+  ma: 'Maandag',
+  di: 'Dinsdag',
+  wo: 'Woensdag',
+  do: 'Donderdag',
+  vr: 'Vrijdag',
+  za: 'Zaterdag',
+  zo: 'Zondag',
+};
+
+/** Returns the short day key for today (using Belgian locale). */
+function getTodayKey(): typeof DAY_KEYS[number] {
+  // JS getDay(): 0=Sunday, 1=Monday … 6=Saturday
+  const jsDay = new Date().getDay();
+  const map: Record<number, typeof DAY_KEYS[number]> = {
+    0: 'zo', 1: 'ma', 2: 'di', 3: 'wo', 4: 'do', 5: 'vr', 6: 'za',
+  };
+  return map[jsDay];
+}
+
+function getPreviousDayKey(dayKey: typeof DAY_KEYS[number]): typeof DAY_KEYS[number] {
+  const index = DAY_KEYS.indexOf(dayKey);
+  return DAY_KEYS[(index - 1 + DAY_KEYS.length) % DAY_KEYS.length];
+}
+
+function parseTimeToMinutes(timeValue: string): number | null {
+  const match = timeValue.trim().match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) return null;
+  const hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  if (Number.isNaN(hours) || Number.isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+    return null;
+  }
+  return hours * 60 + minutes;
+}
+
+function parseHourRanges(hours: string): Array<{ open: number; close: number }> {
+  return hours
+    .split(',')
+    .map((part) => part.trim())
+    .map((part) => {
+      const match = part.match(/^(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})$/);
+      if (!match) return null;
+      const open = parseTimeToMinutes(match[1]);
+      const close = parseTimeToMinutes(match[2]);
+      if (open === null || close === null) return null;
+      return { open, close };
+    })
+    .filter((value): value is { open: number; close: number } => value !== null);
+}
+
+function isOpenNow(hours: OpeningHours): boolean {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const todayKey = getTodayKey();
+  const previousDayKey = getPreviousDayKey(todayKey);
+  const todayValue = hours[todayKey];
+  const previousDayValue = hours[previousDayKey];
+
+  const todayRanges = typeof todayValue === 'string' ? parseHourRanges(todayValue) : [];
+  const previousRanges = typeof previousDayValue === 'string' ? parseHourRanges(previousDayValue) : [];
+
+  const openFromToday = todayRanges.some(({ open, close }) => {
+    if (open === close) return false;
+    if (close > open) return currentMinutes >= open && currentMinutes < close;
+    return currentMinutes >= open || currentMinutes < close;
+  });
+
+  if (openFromToday) return true;
+
+  return previousRanges.some(({ open, close }) => close < open && currentMinutes < close);
+}
+
+interface OpeningHoursBlockProps {
+  hours: OpeningHours;
+  accentLink: string;
+}
+
+const OpeningHoursBlock: React.FC<OpeningHoursBlockProps> = ({ hours, accentLink }) => {
+  const todayKey = getTodayKey();
+  const previousDayKey = getPreviousDayKey(todayKey);
+  const todayValue = hours[todayKey];
+  const previousDayValue = hours[previousDayKey];
+  const openNow = isOpenNow(hours);
+  const showStatus = todayValue !== undefined || previousDayValue !== undefined;
+
+  return (
+    <div className="mb-4 rounded-2xl border border-slate-200 p-4">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Clock size={18} className="shrink-0 text-slate-500" />
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Openingstijden</p>
+        </div>
+        {showStatus && (
+          <span
+            className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
+              openNow
+                ? 'bg-green-100 text-green-700'
+                : 'bg-red-100 text-red-600'
+            }`}
+          >
+            {openNow ? 'Nu open' : 'Nu gesloten'}
+          </span>
+        )}
+      </div>
+      <ul className="space-y-1">
+        {DAY_KEYS.map((key) => {
+          const value = hours[key];
+          if (value === undefined) return null;
+          const isToday = key === todayKey;
+          return (
+            <li
+              key={key}
+              className={`flex justify-between rounded-lg px-2 py-1 text-sm ${
+                isToday ? 'bg-slate-100 font-bold text-slate-900' : 'text-slate-600'
+              }`}
+            >
+              <span className={isToday ? `font-bold ${accentLink}` : ''}>{DAY_LABELS[key]}</span>
+              <span className={value === null ? 'text-slate-400' : ''}>
+                {value ?? 'Gesloten'}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   const { city, slug } = useParams<{ city: string; slug: string }>();
   const location = useLocation();
@@ -534,30 +521,36 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   const collectionPath = getPlaceCollectionPath(kind);
   const from = typeof location.state?.from === 'string' ? location.state.from : null;
   const placePath = kind === 'hotspot' ? 'hotspots' : 'diensten';
+  const heroTitle = place.slug === 'cozy-moments' ? 'COZY Moments' : place.name;
   const currentPath = `${location.pathname}${location.search}${location.hash}`;
+  const practicalCardTags = getPriorityTags(place).slice(0, 2).map(toCompactCardTag);
   const snapshotCards = [
     {
       label: 'Type',
       value: place.type,
+      secondary: undefined,
       labelIcon: getPlaceTypeIcon(place.type, 14),
       contentIcon: getPlaceTypeIcon(place.type, 22),
       variant: 'default' as const,
     },
     {
-      label: 'Past goed bij',
+      label: 'Past bij',
       value: getIntentLabel(place, kind),
+      secondary: kind === 'service' ? 'Duidelijk en vlot' : 'Binnen zonder gedoe',
       labelIcon: <Sparkles size={14} />,
       variant: 'default' as const,
     },
     {
-      label: 'Handig om weten',
-      value: getPracticalHighlight(place, kind),
+      label: 'Praktisch',
+      value: practicalCardTags[0] || (kind === 'service' ? 'Praktische info' : 'Handige extra'),
+      secondary: practicalCardTags[1] || (kind === 'service' ? 'Bel gerust vooraf' : 'Check openingstijden'),
       labelIcon: <Tag size={14} />,
       variant: 'default' as const,
     },
     {
       label: 'Adres',
       value: getStreetLabel(place.address),
+      secondary: cityData.name,
       labelIcon: <MapPin size={14} />,
       href: getDirectionsUrl(place.address),
       variant: 'link' as const,
@@ -639,48 +632,9 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
     return () => window.clearInterval(intervalId);
   }, [images]);
 
-  const cityLogoSrc =
-    cityData.slug === 'oostende'
-      ? '/oostendelogo.png'
-      : cityData.slug === 'blankenberge'
-        ? '/blankenbergelogo.png'
-        : cityData.slug === 'knokke-heist'
-          ? '/knokkelogo.png'
-          : cityData.slug === 'de-haan'
-            || cityData.slug === 'wenduine'
-            ? '/logodehaan.png'
-            : cityData.slug === 'de-panne'
-              ? '/logodepanne.gif'
-              : cityData.slug === 'nieuwpoort'
-                ? '/logonieuwpoort.png'
-                : cityData.slug === 'koksijde'
-                  ? '/logokoksijde.png'
-                  : cityData.slug === 'middelkerke'
-                    ? '/logomiddelkerke.png'
-        : null;
-
   const practicalInfoCard = (
     <div className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200">
       <h2 className="mb-4 text-xl font-black tracking-tight text-slate-900">Praktische info</h2>
-
-      <div className={`mb-5 rounded-2xl border ${cityLogoSrc ? 'flex h-[5.5rem] items-center justify-center overflow-hidden p-2' : 'p-4'} ${accents.panel}`}>
-        {cityLogoSrc ? (
-          <div className="flex h-full w-full items-center justify-center">
-            <img
-              src={cityLogoSrc}
-              alt={cityData.name}
-              className="max-h-full w-auto object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ) : (
-          <>
-            <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Locatie</p>
-            <p className="font-bold text-slate-900">{cityData.name}</p>
-          </>
-        )}
-      </div>
 
       <a
         href={getDirectionsUrl(place.address)}
@@ -707,6 +661,10 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             <p className={`font-bold ${accents.link}`}>{place.phone}</p>
           </div>
         </a>
+      )}
+
+      {place.openingHours && (
+        <OpeningHoursBlock hours={place.openingHours} accentLink={accents.link} />
       )}
 
       {place.website && (
@@ -775,7 +733,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             </div>
 
             <h1 className="mb-4 text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
-              {place.name}
+              {heroTitle}
             </h1>
             <p className="max-w-2xl text-sm font-black uppercase tracking-[0.22em] text-slate-300 sm:text-base">
               {cityData.name} • {kind === 'hotspot' ? 'Hondvriendelijke hotspot' : 'Praktische dienst'}
@@ -828,123 +786,12 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
 
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[minmax(0,1fr)_22rem] md:items-start md:py-14">
         <section className="space-y-8">
-          <div
-            className="relative overflow-hidden rounded-[2rem] p-6 shadow-sm ring-1 ring-slate-200 sm:p-8"
-            style={overviewTheme.style}
-          >
-            <div
-              className={`absolute inset-0 ${overviewTheme.gridOpacityClass}`}
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right, rgba(148,163,184,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.12) 1px, transparent 1px)',
-                backgroundSize: '36px 36px',
-                maskImage: 'linear-gradient(135deg, black 5%, rgba(0,0,0,0.12) 58%, transparent 100%)',
-                ...overviewTheme.gridStyle,
-              }}
-            />
-            <div className={`absolute -right-16 top-8 h-44 w-44 rounded-full border border-white/70 blur-[2px] ${overviewTheme.orbOneClass}`} />
-            <div className={`absolute -left-12 bottom-10 h-28 w-72 rounded-full border border-white/60 blur-sm ${overviewTheme.orbTwoClass}`} />
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] opacity-45">
-              <svg
-                className={`block h-[76px] w-full ${overviewTheme.waveClass}`}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1200 120"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                  className="fill-current"
-                />
-              </svg>
-            </div>
-
-            <div className="relative">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div>
-                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-600">Snel gelezen</p>
-                  <h2 className="mt-1 text-2xl font-black tracking-tight text-slate-900">Wat je hier mag verwachten</h2>
-                </div>
-                {place.tags.includes('Aanrader') && (
-                  <div className="ml-auto inline-flex items-center gap-2 self-start rounded-full bg-white px-4 py-2 text-sm font-black text-amber-900 ring-1 ring-amber-200 shadow-sm sm:self-center">
-                    <Sparkles size={16} />
-                    Aanrader
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-6 grid auto-rows-fr grid-cols-2 gap-3 xl:grid-cols-4">
-                {snapshotCards.map((card) => (
-                  card.href ? (
-                    <a
-                      key={card.label}
-                      href={card.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-slate-300"
-                    >
-                      <div className="min-h-[3.6rem]">
-                        <div className="flex items-center gap-2 text-slate-500">
-                          <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
-                            {card.labelIcon}
-                          </span>
-                          <p className="text-[11px] font-black uppercase tracking-[0.18em] leading-[1.35]">{card.label}</p>
-                        </div>
-                      </div>
-                      <div className="mt-3 flex flex-1 flex-col">
-                        <p className="max-w-full text-[1.08rem] font-semibold leading-[1.42] text-slate-900 sm:text-[1.1rem]">
-                          {card.value}
-                        </p>
-                        <span className={`mt-auto inline-flex w-fit items-center rounded-full px-3 py-1.5 text-[13px] font-bold ${accents.link} bg-slate-50 transition hover:bg-slate-100`}>
-                          Open in Google Maps
-                        </span>
-                      </div>
-                    </a>
-                  ) : (
-                    <div key={card.label} className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
-                      <div className="min-h-[3.6rem]">
-                        <div className="flex items-center gap-2 text-slate-500">
-                          <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
-                            {card.labelIcon}
-                          </span>
-                          <p className="text-[11px] font-black uppercase tracking-[0.18em] leading-[1.35]">{card.label}</p>
-                        </div>
-                      </div>
-                      {card.label === 'Type' && card.contentIcon ? (
-                        <div className="mt-3 flex flex-1 flex-col items-center text-center">
-                          <p className="max-w-full text-[1.08rem] font-semibold leading-[1.42] text-slate-900 sm:text-[1.1rem]">
-                            {card.value}
-                          </p>
-                          <span className="mt-4 inline-flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-slate-100 text-slate-700 ring-1 ring-slate-200/80">
-                            {card.contentIcon}
-                          </span>
-                        </div>
-                      ) : (
-                        <div className="mt-3 flex-1">
-                          <p className="max-w-full text-[1.08rem] font-semibold leading-[1.42] text-slate-900 sm:text-[1.1rem]">
-                            {card.value}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  )
-                ))}
-              </div>
-
-              {place.tags.includes('Aanrader') && (
-                <div className="mt-6 rounded-[1.5rem] border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white px-5 py-4 shadow-sm">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
-                      <Sparkles size={18} />
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-700">Waarom dit een aanrader is</p>
-                      <p className="mt-1 text-sm font-medium leading-relaxed text-amber-950 sm:text-base">
-                        {getRecommendedNote(place, cityData.name, kind)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
+          <div className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+            <h2 className="mb-4 text-2xl font-black tracking-tight text-slate-900">Over {place.name}</h2>
+            <div className="space-y-4 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+              {paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
 
@@ -952,7 +799,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             <div className="mb-4 flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">Beelden</p>
-                <h2 className="text-2xl font-black tracking-tight text-slate-900">Foto{images.length > 1 ? '\'s' : ''} van deze plek</h2>
+                <h2 className="text-2xl font-black tracking-tight text-slate-900">Foto{images.length > 1 ? '\'s' : ''} van {place.name}</h2>
               </div>
               <button
                 type="button"
@@ -1046,12 +893,140 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             )}
           </div>
 
-          <div className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
-            <h2 className="mb-4 text-2xl font-black tracking-tight text-slate-900">Over deze plek</h2>
-            <div className="space-y-4 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
-              {paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+          <div
+            className="relative overflow-hidden rounded-[2rem] p-6 shadow-sm ring-1 ring-slate-200 sm:p-8"
+            style={overviewTheme.style}
+          >
+            <div
+              className={`absolute inset-0 ${overviewTheme.gridOpacityClass}`}
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, rgba(148,163,184,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.12) 1px, transparent 1px)',
+                backgroundSize: '36px 36px',
+                maskImage: 'linear-gradient(135deg, black 5%, rgba(0,0,0,0.12) 58%, transparent 100%)',
+                ...overviewTheme.gridStyle,
+              }}
+            />
+            <div className={`absolute -right-16 top-8 h-44 w-44 rounded-full border border-white/70 blur-[2px] ${overviewTheme.orbOneClass}`} />
+            <div className={`absolute -left-12 bottom-10 h-28 w-72 rounded-full border border-white/60 blur-sm ${overviewTheme.orbTwoClass}`} />
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] opacity-45">
+              <svg
+                className={`block h-[76px] w-full ${overviewTheme.waveClass}`}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1200 120"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
+                  className="fill-current"
+                />
+              </svg>
+            </div>
+
+            <div className="relative">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-600">Snel gelezen</p>
+                  <h2 className="mt-1 text-2xl font-black tracking-tight text-slate-900">Wat je hier mag verwachten</h2>
+                </div>
+                {place.tags.includes('Aanrader') && (
+                  <div className="ml-auto inline-flex items-center gap-2 self-start rounded-full bg-white px-4 py-2 text-sm font-black text-amber-900 ring-1 ring-amber-200 shadow-sm sm:self-center">
+                    <Sparkles size={16} />
+                    Aanrader
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-6 grid auto-rows-fr grid-cols-2 gap-3 xl:grid-cols-4">
+                {snapshotCards.map((card) => (
+                  card.href ? (
+                    <a
+                      key={card.label}
+                      href={card.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-slate-300"
+                    >
+                      <div className="min-h-[3.6rem]">
+                        <div className="flex items-center gap-2 text-slate-500">
+                          <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
+                            {card.labelIcon}
+                          </span>
+                          <p className="text-[11px] font-black uppercase tracking-[0.18em] leading-[1.35]">{card.label}</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex flex-1 flex-col">
+                        {card.label === 'Type' && card.contentIcon ? (
+                          <div className="flex min-h-[4.5rem] flex-col items-center justify-center gap-2 text-center">
+                            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 ring-1 ring-slate-200/80">
+                              {card.contentIcon}
+                            </span>
+                            <p className="text-[1rem] font-semibold leading-[1.28] text-slate-900">
+                              {card.value}
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="max-w-full min-h-[4.5rem] text-[1rem] font-semibold leading-[1.28] text-slate-900 line-clamp-3">
+                            {card.value}
+                          </p>
+                        )}
+                        {card.secondary && (
+                          <p className="mt-1 text-sm font-medium text-slate-500 line-clamp-2">{card.secondary}</p>
+                        )}
+                        <span className={`mt-auto inline-flex w-fit items-center rounded-full px-3 py-1.5 text-[13px] font-bold ${accents.link} bg-slate-50 transition hover:bg-slate-100`}>
+                          Open in Google Maps
+                        </span>
+                      </div>
+                    </a>
+                  ) : (
+                    <div key={card.label} className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
+                      <div className="min-h-[3.6rem]">
+                        <div className="flex items-center gap-2 text-slate-500">
+                          <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
+                            {card.labelIcon}
+                          </span>
+                          <p className="text-[11px] font-black uppercase tracking-[0.18em] leading-[1.35]">{card.label}</p>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex flex-1 flex-col">
+                        {card.label === 'Type' && card.contentIcon ? (
+                          <div className="flex min-h-[4.5rem] flex-col items-center justify-center gap-2 text-center">
+                            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 ring-1 ring-slate-200/80">
+                              {card.contentIcon}
+                            </span>
+                            <p className="text-[1rem] font-semibold leading-[1.28] text-slate-900">
+                              {card.value}
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="max-w-full min-h-[4.5rem] text-[1rem] font-semibold leading-[1.28] text-slate-900 line-clamp-3">
+                            {card.value}
+                          </p>
+                        )}
+                        {card.secondary ? (
+                          <p className="mt-1 text-sm font-medium text-slate-500 line-clamp-2">{card.secondary}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                  )
+                ))}
+              </div>
+
+              {place.tags.includes('Aanrader') && (
+                <div className="mt-6 rounded-[1.5rem] border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white px-5 py-4 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
+                      <Sparkles size={18} />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-700">Waarom dit een aanrader is</p>
+                      <p className="mt-1 text-sm font-medium leading-relaxed text-amber-950 sm:text-base">
+                        {getRecommendedNote(place, cityData.name, kind)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
