@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader2, LogIn } from 'lucide-react';
+import { Loader2, LockKeyhole, LogIn } from 'lucide-react';
 
 interface AdminLoginCardProps {
   authLoading: boolean;
@@ -20,16 +20,24 @@ const AdminLoginCard: React.FC<AdminLoginCardProps> = ({
   password,
   sessionLoading,
 }) => (
-  <div className="mb-8 flex min-h-[72vh] items-center justify-center">
-    <section className="w-full max-w-md overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white shadow-[0_40px_120px_-50px_rgba(15,23,42,0.5)]">
-      <div className="border-b border-slate-100 px-7 py-6 sm:px-8">
-        <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">Admin sign in</p>
-        <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950">Log in</h2>
+  <div className="flex min-h-[72vh] items-center justify-center">
+    <section className="admin-surface w-full max-w-md p-6 sm:p-7">
+      <div className="mb-6 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-600">
+          <LockKeyhole size={18} />
+        </div>
+        <div>
+          <p className="admin-eyebrow">Admin sign in</p>
+          <h2 className="text-2xl font-black tracking-tight text-slate-950">Log in</h2>
+        </div>
       </div>
+      <p className="mb-6 text-sm leading-6 text-slate-600">
+        Meld je aan om meldingen te beheren en het logboek te bekijken.
+      </p>
 
-      <div className="px-7 py-7 sm:px-8 sm:py-8">
+      <div>
         {sessionLoading ? (
-          <div className="flex items-center gap-3 rounded-[1.6rem] border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-medium text-slate-600">
+          <div className="admin-surface-subtle flex items-center gap-3 px-4 py-4 text-sm font-medium text-slate-600">
             <Loader2 size={16} className="animate-spin" />
             Sessie controleren...
           </div>
@@ -48,7 +56,7 @@ const AdminLoginCard: React.FC<AdminLoginCardProps> = ({
                 autoComplete="username"
                 value={email}
                 onChange={(event) => onEmailChange(event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10"
+                className="admin-input"
               />
             </label>
 
@@ -60,14 +68,14 @@ const AdminLoginCard: React.FC<AdminLoginCardProps> = ({
                 value={password}
                 onChange={(event) => onPasswordChange(event.target.value)}
                 placeholder="Voer je wachtwoord in"
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10"
+                className="admin-input"
               />
             </label>
 
             <button
               type="submit"
               disabled={authLoading}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3.5 font-black text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              className="admin-btn-primary w-full"
             >
               {authLoading ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
               Inloggen
