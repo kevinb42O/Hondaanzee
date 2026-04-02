@@ -18,12 +18,12 @@ const URL_PATTERN = /\b(?:https?:\/\/|www\.)\S+\b/i;
 const LICENSE_PLATE_PATTERN = /\b(?:[1-9]-[A-Z]{3}-\d{3}|[A-Z]{3}-\d{3}|[A-Z]-[A-Z]{3}-\d{3})\b/i;
 const LONG_REPEAT_PATTERN = /(.)\1{5,}/i;
 
-const sanitizedString = (min: number, max: number) =>
+const boundedString = (fieldName: string, min: number, max: number) =>
   z
     .string()
     .trim()
-    .min(min)
-    .max(max);
+    .min(min, `${fieldName} is te kort. Gebruik minstens ${min} tekens.`)
+    .max(max, `${fieldName} is te lang. Gebruik maximaal ${max} tekens.`);
 
 const looksLikeShouting = (value: string): boolean => {
   const letters = value.replace(/[^a-zA-Z]/g, '');
@@ -34,7 +34,7 @@ const looksLikeShouting = (value: string): boolean => {
 };
 
 const personalDataSafeString = (fieldName: string, min: number, max: number) =>
-  sanitizedString(min, max)
+  boundedString(fieldName, min, max)
     .refine((value) => !PHONE_PATTERN.test(value), `${fieldName} mag geen telefoonnummer bevatten.`)
     .refine((value) => !EMAIL_PATTERN.test(value), `${fieldName} mag geen e-mailadres bevatten.`)
     .refine((value) => !URL_PATTERN.test(value), `${fieldName} mag geen link bevatten.`)
@@ -45,13 +45,19 @@ const personalDataSafeString = (fieldName: string, min: number, max: number) =>
 
 export const createReportInputSchema = z
   .object({
-    category: z.enum(REPORT_CATEGORIES),
-    city_slug: sanitizedString(2, 60),
+    category: z.enum(REPORT_CATEGORIES, {
+      error: 'Kies wat je wil melden.',
+    }),
+    city_slug: boundedString('De kuststad', 2, 60),
     location_text: personalDataSafeString('De locatie', 6, 140),
     description: personalDataSafeString('De beschrijving', 12, 600),
-    observed_preset: z.enum(OBSERVED_PRESETS),
+    observed_preset: z.enum(OBSERVED_PRESETS, {
+      error: 'Kies wanneer je dit gezien hebt.',
+    }),
     observed_custom_at: z.string().trim().optional().or(z.literal('')),
-    confirm_no_personal_data: z.literal(true),
+    confirm_no_personal_data: z.literal(true, {
+      error: 'Bevestig dat je geen persoonsgegevens of beschuldigingen deelt.',
+    }),
   })
   .superRefine((value, ctx) => {
     if (value.observed_preset !== 'custom') {
@@ -87,23 +93,25 @@ export const createReportInputSchema = z
   });
 
 export const flagReportInputSchema = z.object({
-  public_id: sanitizedString(6, 32),
+  public_id: boundedString('De melding', 6, 32),
 });
 
 export const confirmReportInputSchema = z.object({
-  public_id: sanitizedString(6, 32),
+  public_id: boundedString('De melding', 6, 32),
 });
 
 export const adminListReportsInputSchema = z.object({});
 
 export const adminUpdateReportInputSchema = z.object({
-  public_id: sanitizedString(6, 32),
-  city_intervention_status: z.enum(REPORT_INTERVENTION_STATUSES),
-  city_intervention_note: z.string().trim().max(300).optional().or(z.literal('')),
+  public_id: boundedString('De melding', 6, 32),
+  city_intervention_status: z.enum(REPORT_INTERVENTION_STATUSES, {
+    error: 'Kies een geldige interventiestatus.',
+  }),
+  city_intervention_note: z.string().trim().max(300, 'De terugkoppeling is te lang. Gebruik maximaal 300 tekens.').optional().or(z.literal('')),
 });
 
 export const adminRemoveReportInputSchema = z.object({
-  public_id: sanitizedString(6, 32),
+  public_id: boundedString('De melding', 6, 32),
 });
 
 export type CreateReportInput = z.infer<typeof createReportInputSchema>;

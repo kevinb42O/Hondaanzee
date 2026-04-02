@@ -26,6 +26,23 @@ describe('createReportInputSchema', () => {
     expect(result.success).toBe(false);
   });
 
+  it('geeft duidelijke melding bij te korte locatie en beschrijving', () => {
+    const result = createReportInputSchema.safeParse({
+      ...basePayload,
+      location_text: 'test',
+      description: 'test',
+    });
+
+    expect(result.success).toBe(false);
+    if (result.success) {
+      return;
+    }
+
+    const messages = result.error.issues.map((issue) => issue.message);
+    expect(messages).toContain('De locatie is te kort. Gebruik minstens 6 tekens.');
+    expect(messages).toContain('De beschrijving is te kort. Gebruik minstens 12 tekens.');
+  });
+
   it('vereist custom datetime bij custom preset', () => {
     const result = createReportInputSchema.safeParse({
       ...basePayload,
