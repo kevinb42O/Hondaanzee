@@ -259,7 +259,7 @@ const MeldpuntAdmin: React.FC = () => {
           <AdminPageHeader
             eyebrow="Actieve meldingen"
             title="Meldpunt admin"
-            subtitle="Werk vanuit een rustige queue: filter, scan en werk meldingen af zonder visuele ruis."
+            subtitle="Beheer actieve meldingen."
             sessionEmail={session.user.email || ADMIN_LOGIN_EMAIL}
             actions={(
               <>

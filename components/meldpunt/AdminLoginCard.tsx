@@ -31,10 +31,6 @@ const AdminLoginCard: React.FC<AdminLoginCardProps> = ({
           <h2 className="text-2xl font-black tracking-tight text-slate-950">Log in</h2>
         </div>
       </div>
-      <p className="mb-6 text-sm leading-6 text-slate-600">
-        Meld je aan om meldingen te beheren en het logboek te bekijken.
-      </p>
-
       <div>
         {sessionLoading ? (
           <div className="admin-surface-subtle flex items-center gap-3 px-4 py-4 text-sm font-medium text-slate-600">

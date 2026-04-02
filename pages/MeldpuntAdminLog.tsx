@@ -152,7 +152,7 @@ const MeldpuntAdminLog: React.FC = () => {
           <AdminPageHeader
             eyebrow="Historiek"
             title="Meldpunt logboek"
-            subtitle="Bekijk in één rustig overzicht wat actief, verborgen, opgelost of verwijderd werd."
+            subtitle="Overzicht van actieve, verborgen, opgeloste en verwijderde meldingen."
             sessionEmail={session.user.email || ADMIN_LOGIN_EMAIL}
             actions={(
               <>
