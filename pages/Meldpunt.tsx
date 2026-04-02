@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AlertTriangle, ArrowLeft, CheckCircle2, Copy, Plus, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, CheckCircle2, Copy, Plus, ShieldAlert, Users } from 'lucide-react';
 import ReportFeed from '../components/meldpunt/ReportFeed.tsx';
 import ReportFilters from '../components/meldpunt/ReportFilters.tsx';
 import ReportFormModal from '../components/meldpunt/ReportFormModal.tsx';
@@ -105,25 +105,25 @@ const Meldpunt: React.FC = () => {
                   href="#meldingen-feed"
                   className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-white/15"
                 >
-                  Bekijk publieke feed
+                  Bekijk meldingen
                 </a>
               </div>
             </div>
 
             <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-md">
               <p className="text-[11px] font-black uppercase tracking-[0.22em] text-sky-200">Zo gebruik je dit meldpunt</p>
-              <h2 className="mt-3 text-2xl font-black tracking-tight text-white">Iets verdachts of gevaarlijks gezien? Kijk of het al gemeld is, of zet het er zelf meteen bij.</h2>
+              <h2 className="mt-3 text-2xl font-black tracking-tight text-white">Iets verdachts of gevaarlijks gezien?</h2>
               <p className="mt-3 text-sm font-medium leading-relaxed text-slate-300">
-                Gebruik de filters als je wilt checken wat er al gemeld werd. Wil je zelf iets doorgeven, hou het dan simpel: wat lag er, waar lag het en wanneer heb je het gezien?
+                Check via de filters of het gevaar al bekend is in de publieke feed, of voeg direct zelf een nieuwe waarschuwing toe.
               </p>
               <div className="mt-5 grid gap-3">
                 <div className="rounded-[1.4rem] border border-white/10 bg-slate-900/60 px-4 py-4">
                   <p className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-200">Wat zet je erbij?</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">Een duidelijke locatie, een korte beschrijving en het moment waarop je het zag.</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">Hou het simpel. Geef de exacte locatie door, omschrijf kort wat je zag en vermeld het tijdstip.</p>
                 </div>
                 <div className="rounded-[1.4rem] border border-white/10 bg-slate-900/60 px-4 py-4">
                   <p className="text-[11px] font-black uppercase tracking-[0.2em] text-sky-200">Zie je direct gevaar?</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">Bel meteen de hulpdiensten of de bevoegde stadsdienst. Dit meldpunt is alleen om meldingen zichtbaar te maken.</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">Bel dan meteen de hulpdiensten of de bevoegde stadsdienst. Dit meldpunt is alleen om andere wandelaars online te waarschuwen.</p>
                 </div>
               </div>
             </div>
@@ -157,8 +157,38 @@ const Meldpunt: React.FC = () => {
             <p className="text-[11px] font-black uppercase tracking-[0.22em] text-slate-500">Opvolging</p>
             <h2 className="mt-2 text-lg font-black tracking-tight text-slate-900">Wat zie je hier terug?</h2>
             <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">
-              Elke melding wordt doorgestuurd naar de bevoegde instantie van de gemeente waar ze geplaatst werd. Hier zie je eerst de melding zelf, en zodra er een officiële update is, verschijnt die er ook meteen bij.
+              Elke melding wordt doorgestuurd naar onze vrijwilligers in de gemeente waar het geplaatst werd. Hier zie je eerst de melding zelf, en zodra er een officiële update is, verschijnt die er ook meteen bij.
             </p>
+          </div>
+        </div>
+
+        <div className="mb-6 overflow-hidden rounded-[2rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-emerald-50 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
+          <div className="grid gap-6 p-6 lg:grid-cols-[minmax(0,1.35fr)_auto] lg:items-center lg:p-8">
+            <div className="max-w-3xl">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-sky-700">
+                <Users size={14} />
+                Vrijwilligers gezocht
+              </div>
+              <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                Meehelpen in jouw gemeente?
+              </h2>
+              <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+                Voor het meldpunt zoeken we per kustgemeente betrokken mensen die af en toe een oogje in het zeil willen houden. Bekijk eerst de rol en meld je alleen aan als het echt bij je past.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 lg:items-end">
+              <Link
+                to="/meldpunt/vrijwilligers"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-600 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-sky-700"
+              >
+                <Users size={18} />
+                Bekijk vrijwilligersrol
+              </Link>
+              <p className="text-xs font-medium text-slate-500">
+                Lees wat dit precies inhoudt.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -170,6 +200,13 @@ const Meldpunt: React.FC = () => {
                 <p className="font-black">Je melding staat live.</p>
                 <p className="text-sm font-medium">
                   Deelbare link: <Link className="underline underline-offset-2" to={createdDetailPath}>{createdDetailPath}</Link>
+                </p>
+                <p className="mt-2 text-xs font-medium text-emerald-800">
+                  Ken jij jouw gemeente goed en wil je af en toe meehelpen?{' '}
+                  <Link className="underline underline-offset-2" to="/meldpunt/vrijwilligers">
+                    Bekijk hier de vrijwilligersrol
+                  </Link>
+                  .
                 </p>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { Heart, Bone, Wallet, QrCode, Copy, Check, MapPin, Share2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Heart, Bone, Wallet, QrCode, Copy, Check, MapPin, Share2, Users } from 'lucide-react';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import KoekjesMeter from '../components/KoekjesMeter.tsx';
 import StickerMeter from '../components/StickerMeter.tsx';
@@ -253,8 +254,38 @@ const Support: React.FC = () => {
                     </div>
                 </div>
 
+                <div className="mt-12 overflow-hidden rounded-[2rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-emerald-50 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
+                    <div className="grid gap-6 p-6 lg:grid-cols-[minmax(0,1.35fr)_auto] lg:items-center lg:p-8">
+                        <div className="max-w-3xl">
+                            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-sky-700">
+                                <Users size={14} />
+                                Vrijwilligers gezocht
+                            </div>
+                            <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                                Liever tijd geven dan geld?
+                            </h2>
+                            <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+                                Je kunt HondAanZee ook helpen zonder donatie. Voor het meldpunt zoeken we per kustgemeente betrokken mensen die af en toe lokaal willen meekijken bij meldingen rond gif, gevaarlijke stoffen en andere risico&apos;s.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col gap-3 lg:items-end">
+                            <Link
+                                to="/meldpunt/vrijwilligers"
+                                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-600 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-sky-700"
+                            >
+                                <Users size={18} />
+                                Vrijwilligerspagina bekijken
+                            </Link>
+                            <p className="text-xs font-medium text-slate-500">
+                                Misschien past dit beter bij jou dan een donatie.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Keurmerk Sticker Section */}
-                <div className="mt-16">
+                <div id="sticker" className="mt-16 scroll-mt-28">
                     <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
 
                         {/* Hero: Sticker groot & centraal */}

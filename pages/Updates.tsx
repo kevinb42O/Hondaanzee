@@ -38,6 +38,24 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '2.2',
+    date: '2 april 2026',
+    title: 'Vrijwilligers, zaak-aanmelden en meldpunt verder uitgewerkt',
+    subtitle: 'Nieuwe pagina’s, duidelijkere meldingen en een reeks verbeteringen die de site praktischer maken',
+    entries: [
+      { text: 'Nieuwe vrijwilligerspagina toegevoegd voor mensen die per kustgemeente willen meehelpen om meldingen rond gif, verdachte stoffen en andere risico’s sneller opgevolgd te krijgen', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Vrijwilligers kunnen zich nu eenvoudig aanmelden via e-mail of WhatsApp, met een warmere en duidelijkere uitleg over wat die rol precies inhoudt', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Op de homepage, steunpagina, stadspagina’s en in het mobiele menu zijn subtiele nieuwe verwijzingen toegevoegd voor wie wil meehelpen als vrijwilliger', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Nieuwe pagina “Zaak aanmelden” toegevoegd voor hondvriendelijke zaken aan de kust, met duidelijke uitleg over de gratis vermelding, persoonlijke kennismaking en de mogelijkheid om ook een sticker aan te vragen', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'De knop om een zaak aan te melden stuurt je niet langer meteen blind naar WhatsApp, maar eerst naar een duidelijke pagina met alle voordelen voor de zaak zelf', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Het meldpunt geeft nu veel duidelijkere foutmeldingen wanneer iets ontbreekt of te kort is, in plaats van vage meldingen zoals “invalid input”', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Na het melden van ongepaste inhoud zie je nu meteen dat je actie geregistreerd werd, en kan je niet per ongeluk nog eens op dezelfde knop klikken', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Het admin-overzicht voor meldingen werd verder opgeruimd: actieve meldingen en historiek zijn nu beter gescheiden zodat het werkoverzicht properder blijft', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Op de steunpagina tonen we nu ook correct dat al 72 zaken de HondAanZee-sticker dragen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Homepage-callouts voor vrijwilligers en hondvriendelijke zaken kregen een rustigere, duidelijkere opbouw en betere balans tussen tekst en actieknoppen', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
+  {
     version: '2.1',
     date: '1 april 2026',
     title: 'Nieuw: Meldpunt Gif & Overlast voor de hele Belgische kust',

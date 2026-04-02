@@ -1,8 +1,7 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Rocket, Megaphone, HeartHandshake, Star } from 'lucide-react';
-
-const WHATSAPP_URL = `https://wa.me/32494816714?text=${encodeURIComponent('Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!')}`;
 
 const BusinessCTA: React.FC = () => {
   return (
@@ -21,15 +20,13 @@ const BusinessCTA: React.FC = () => {
             <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-lg leading-relaxed font-medium">
               Word gevonden door duizenden hondeneigenaars die onze site gebruiken als gids. Meld je gratis aan en zet jouw zaak op de kaart.
             </p>
-            <a 
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/zaak-aanmelden"
               className="btn-lift w-full sm:w-auto bg-gradient-to-r from-white to-sky-50 text-slate-900 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-black text-base sm:text-lg hover:from-sky-50 hover:to-sky-100 active:scale-95 shadow-xl shadow-sky-900/20 flex items-center justify-center gap-3 touch-target group transition-all"
             >
               <Megaphone size={18} className="text-sky-600 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
-              Gratis aanmelden via WhatsApp
-            </a>
+              Meer over aanmelden
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">

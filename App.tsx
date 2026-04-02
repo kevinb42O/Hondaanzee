@@ -21,6 +21,7 @@ const Cookies = React.lazy(() => import('./pages/Cookies.tsx'));
 const NotFound = React.lazy(() => import('./pages/NotFound.tsx'));
 const CoastalMap = React.lazy(() => import('./pages/CoastalMap.tsx'));
 const Support = React.lazy(() => import('./pages/Support.tsx'));
+const ZaakAanmelden = React.lazy(() => import('./pages/ZaakAanmelden.tsx'));
 const About = React.lazy(() => import('./pages/About.tsx'));
 const GoedOmTeWeten = React.lazy(() => import('./pages/GoedOmTeWeten.tsx'));
 const Blog = React.lazy(() => import('./pages/Blog.tsx'));
@@ -30,6 +31,7 @@ const Community = React.lazy(() => import('./pages/Community.tsx'));
 const Agenda = React.lazy(() => import('./pages/Agenda.tsx'));
 const Updates = React.lazy(() => import('./pages/Updates.tsx'));
 const Meldpunt = React.lazy(() => import('./pages/Meldpunt.tsx'));
+const MeldpuntVrijwilligers = React.lazy(() => import('./pages/MeldpuntVrijwilligers.tsx'));
 const ReportDetail = React.lazy(() => import('./pages/ReportDetail.tsx'));
 const MeldpuntAdmin = React.lazy(() => import('./pages/MeldpuntAdmin.tsx'));
 const MeldpuntAdminLog = React.lazy(() => import('./pages/MeldpuntAdminLog.tsx'));
@@ -149,11 +151,13 @@ const AppContent = () => {
               <Route path="/over-ons" element={<About />} />
               <Route path="/goed-om-te-weten" element={<GoedOmTeWeten />} />
               <Route path="/steun-ons" element={<Support />} />
+              <Route path="/zaak-aanmelden" element={<ZaakAanmelden />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/agenda" element={<Agenda />} />
               <Route path="/community" element={<Community />} />
               <Route path="/meldpunt" element={<Meldpunt />} />
+              <Route path="/meldpunt/vrijwilligers" element={<MeldpuntVrijwilligers />} />
               <Route path="/meldpunt/:publicId" element={<ReportDetail />} />
               <Route path="/admin" element={<MeldpuntAdmin />} />
               <Route path="/admin/log" element={<MeldpuntAdminLog />} />

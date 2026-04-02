@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 /* ─── Config ─── */
-const STICKER_COUNT = 26;
+const STICKER_COUNT = 72;
 const STICKER_GOAL = 100;
 const STORAGE_KEY = 'haz_sticker_meter';
 

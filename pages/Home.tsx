@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
 
@@ -603,11 +603,11 @@ const Home: React.FC = () => {
             />
           </div>
         )}
-        <div className="absolute inset-0 z-[1] bg-slate-900/60"></div>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50 via-transparent to-slate-900/50"></div>
+        <div className="absolute inset-0 z-[1] bg-slate-950/28"></div>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50/78 via-slate-900/6 to-slate-900/18"></div>
 
         <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2">
-          <h1 className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 drop-shadow-2xl font-heading" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+          <h1 className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 font-heading" style={{ textShadow: '0 2px 10px rgba(2,6,23,0.22)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}>
             Met je hond naar zee? <br className="hidden sm:block" />
             <span className="text-sky-300 relative inline-block max-w-full">
               Wij weten precies
@@ -617,7 +617,7 @@ const Home: React.FC = () => {
             </span> waar het mag.
           </h1>
 
-          <p className="text-slate-100 max-w-3xl mx-auto leading-relaxed px-4 mb-10 sm:mb-14 text-sm sm:text-base md:text-lg" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.4)', fontWeight: 400 }}>
+          <p className="text-slate-100 max-w-3xl mx-auto leading-relaxed px-4 mb-10 sm:mb-14 text-sm sm:text-base md:text-lg" style={{ textShadow: '0 1px 6px rgba(2,6,23,0.18)', fontWeight: 400 }}>
             Nooit meer gissen naar strandregels. Ontdek actuele toegankelijkheid,{' '}
             <span className="text-white font-semibold">verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
           </p>
@@ -868,6 +868,72 @@ const Home: React.FC = () => {
           )}
         </div>
       </div>
+
+      <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid gap-6 xl:grid-cols-2">
+            <div className="overflow-hidden rounded-[2rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-emerald-50 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
+              <div className="flex h-full flex-col justify-between gap-8 p-6 lg:p-8">
+                <div className="max-w-3xl">
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-sky-700">
+                    <Users size={14} />
+                    Lokaal meehelpen
+                  </div>
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    Help mee de kust veilig te houden voor elke hond
+                  </h2>
+                  <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+                    Voor het <strong className="font-black text-slate-900">meldpunt</strong> zoeken we in elke kustgemeente mensen die hun buurt goed kennen en willen meehelpen wanneer er meldingen binnenkomen over gif, verdachte stoffen of andere risico&apos;s.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <Link
+                    to="/meldpunt/vrijwilligers"
+                    className="inline-flex self-start items-center justify-center gap-2 rounded-2xl bg-sky-600 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-sky-700"
+                  >
+                    <Users size={18} />
+                    Ontdek hoe jij helpt
+                  </Link>
+                  <p className="text-xs font-medium text-slate-500">
+                    Ontdek of dit iets voor jou is.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-[2rem] border border-amber-100 bg-gradient-to-r from-amber-50 via-white to-sky-50 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
+              <div className="flex h-full flex-col justify-between gap-8 p-6 lg:p-8">
+                <div className="max-w-3xl xl:ml-auto xl:text-right">
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-amber-700 lg:ml-auto">
+                    <Megaphone size={14} />
+                    Meld jouw zaak aan
+                  </div>
+                  <h2 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                    Krijg meer hondenbaasjes over de vloer in jouw zaak
+                  </h2>
+                  <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+                    Dan kan je <strong className="font-black text-slate-900">gratis</strong> vermeld worden op HondAanZee.be. Zo zien hondeneigenaars meteen dat ze welkom zijn bij jou, en kan je ook een sticker aanvragen voor je zaak.
+                  </p>
+                </div>
+
+                <div className="order-2 flex flex-col gap-3 xl:items-end">
+                  <Link
+                    to="/zaak-aanmelden"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-amber-600"
+                  >
+                    <Megaphone size={18} />
+                    Meld je zaak GRATIS aan
+                  </Link>
+                  <p className="text-xs font-medium text-slate-500 xl:text-right">
+                    Bekijk eerst de voordelen voor jouw zaak.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ Section — visible for users + crawlable for AI */}
       <section className="bg-stone-50 py-12 sm:py-16 md:py-20">

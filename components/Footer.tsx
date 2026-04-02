@@ -3,7 +3,6 @@ import React from 'react';
 import { PawPrint, ExternalLink, Mail, Check, Bike, Caravan, Baby } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const WHATSAPP_URL = `https://wa.me/32494816714?text=${encodeURIComponent('Dag! 👋\n\nIk wil mijn hondvriendelijke zaak graag gratis laten vermelden op hondaanzee.be.\n\nKun je me meer info geven over hoe ik kan aanmelden?\n\nBedankt!')}`;
 const SHOW_FOOTER_WAVE = false;
 const LAST_UPDATE = { day: '31', month: 'mrt', year: '2026' };
 
@@ -180,14 +179,12 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/zaak-aanmelden"
                   className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block"
                 >
                   Meld je zaak aan
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/updates" className="text-cyan-400 hover:text-cyan-300 hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-1.5">
