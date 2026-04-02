@@ -86,10 +86,10 @@ const Meldpunt: React.FC = () => {
               Meldpunt Gif & Overlast
               </div>
               <h1 className="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
-                Publiek meldpunt voor <span className="text-sky-300">gif, verdachte stoffen en overlast</span> aan de Belgische kust
+                Meldpunt: <span className="text-sky-300">Veilig wandelen aan de Belgische kust</span>
               </h1>
               <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-slate-200 sm:text-lg md:text-xl">
-                Eén kustbreed overzicht voor signalen op straat, in parken en rond losloopzones. Meldingen komen publiek in beeld en kunnen zichtbaar worden opgevolgd door bevoegde stadsdiensten.
+                Iets verdachts gezien? Meld gif, gevaarlijke stoffen of overlast direct. Samen houden we straten, parken en losloopweides veilig. Jouw melding is direct openbaar zichtbaar: zo waarschuwen we andere baasjes én kunnen lokale stadsdiensten snel ingrijpen.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
