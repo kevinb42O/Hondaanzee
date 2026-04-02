@@ -25,6 +25,12 @@ type ReportRow = Omit<ReportItem, 'city_name'>;
 
 const cityNameMap = new Map(CITIES.map((city) => [city.slug, city.name]));
 
+const getPublicInvokeHeaders = (): Record<string, string> => ({
+  apikey: SUPABASE_PUBLISHABLE_KEY,
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+});
+
 const getAdminInvokeHeaders = async (): Promise<Record<string, string>> => {
   const { data, error } = await supabase.auth.getSession();
 
@@ -44,7 +50,7 @@ const getAdminInvokeHeaders = async (): Promise<Record<string, string>> => {
   };
 };
 
-const parseAdminErrorResponse = async (response: Response): Promise<Error> => {
+const parseFunctionErrorResponse = async (response: Response): Promise<Error> => {
   try {
     const payload = await response.json();
     if (payload && typeof payload.error === 'string' && payload.error.trim()) {
@@ -57,7 +63,21 @@ const parseAdminErrorResponse = async (response: Response): Promise<Error> => {
     // Ignore JSON parsing failures and fall back to a generic HTTP error.
   }
 
-  return new Error(`Admin request mislukt (${response.status}).`);
+  return new Error(`Request mislukt (${response.status}).`);
+};
+
+const invokePublicFunction = async <TResponse>(name: string, body: Record<string, unknown>): Promise<TResponse> => {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+    method: 'POST',
+    headers: getPublicInvokeHeaders(),
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw await parseFunctionErrorResponse(response);
+  }
+
+  return response.json() as Promise<TResponse>;
 };
 
 const invokeAdminFunction = async <TResponse>(name: string, body: Record<string, unknown>): Promise<TResponse> => {
@@ -68,7 +88,7 @@ const invokeAdminFunction = async <TResponse>(name: string, body: Record<string,
   });
 
   if (!response.ok) {
-    throw await parseAdminErrorResponse(response);
+    throw await parseFunctionErrorResponse(response);
   }
 
   return response.json() as Promise<TResponse>;
@@ -112,13 +132,10 @@ export const fetchVisibleReportByPublicId = async (publicId: string): Promise<Re
 };
 
 export const submitReport = async (payload: unknown): Promise<{ detail_path: string; public_id: string }> => {
-  const { data, error } = await supabase.functions.invoke('create-report', {
-    body: payload,
-  });
-
-  if (error) {
-    throw error;
-  }
+  const data = await invokePublicFunction<{ report?: { detail_path?: string; public_id?: string } }>(
+    'create-report',
+    payload as Record<string, unknown>,
+  );
 
   if (!data?.report?.detail_path || !data?.report?.public_id) {
     throw new Error('De melding werd opgeslagen, maar de detailpagina ontbreekt.');
@@ -131,15 +148,9 @@ export const submitReport = async (payload: unknown): Promise<{ detail_path: str
 };
 
 export const flagReport = async (publicId: string): Promise<{ report_count: number; is_hidden: boolean }> => {
-  const { data, error } = await supabase.functions.invoke('flag-report', {
-    body: {
-      public_id: publicId,
-    },
+  const data = await invokePublicFunction<{ report_count?: number; is_hidden?: boolean }>('flag-report', {
+    public_id: publicId,
   });
-
-  if (error) {
-    throw error;
-  }
 
   return {
     report_count: Number(data?.report_count || 0),
@@ -150,15 +161,9 @@ export const flagReport = async (publicId: string): Promise<{ report_count: numb
 export const confirmReport = async (
   publicId: string,
 ): Promise<{ confirm_count: number; already_confirmed: boolean }> => {
-  const { data, error } = await supabase.functions.invoke('confirm-report', {
-    body: {
-      public_id: publicId,
-    },
+  const data = await invokePublicFunction<{ confirm_count?: number; already_confirmed?: boolean }>('confirm-report', {
+    public_id: publicId,
   });
-
-  if (error) {
-    throw error;
-  }
 
   return {
     confirm_count: Number(data?.confirm_count || 0),
