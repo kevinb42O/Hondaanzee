@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Flag, MapPin, Share2, ThumbsUp } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Flag, MapPin, Share2, ThumbsUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { ReportItem } from '../../types.ts';
 import {
@@ -22,6 +22,7 @@ interface ReportCardProps {
 
 const ReportCard: React.FC<ReportCardProps> = ({ report, onFlag, onConfirm }) => {
   const [flagging, setFlagging] = useState(false);
+  const [flagged, setFlagged] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const category = getCategoryMeta(report.category);
   const CategoryIcon = category.icon;
@@ -154,19 +155,25 @@ const ReportCard: React.FC<ReportCardProps> = ({ report, onFlag, onConfirm }) =>
 
           <button
             type="button"
-            disabled={flagging}
+            disabled={flagging || flagged}
             onClick={async () => {
               setFlagging(true);
               try {
                 await onFlag(report.public_id);
+                setFlagged(true);
               } finally {
                 setFlagging(false);
               }
             }}
-            className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-bold text-slate-700 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700 disabled:opacity-60"
+            aria-pressed={flagged}
+            className={`inline-flex items-center gap-2 rounded-2xl px-4 py-3 font-bold transition disabled:cursor-not-allowed disabled:opacity-100 ${
+              flagged
+                ? 'border border-amber-200 bg-amber-50 text-amber-800'
+                : 'border border-slate-200 text-slate-700 hover:border-red-200 hover:bg-red-50 hover:text-red-700'
+            }`}
           >
-            <Flag size={16} />
-            Meld ongepaste inhoud
+            {flagged ? <CheckCircle2 size={16} /> : <Flag size={16} />}
+            {flagged ? 'Gemeld voor review' : 'Meld ongepaste inhoud'}
           </button>
         </div>
       </div>

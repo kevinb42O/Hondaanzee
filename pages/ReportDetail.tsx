@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AlertTriangle, ArrowLeft, Copy, Flag, Loader2, Share2, ThumbsUp } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, CheckCircle2, Copy, Flag, Loader2, Share2, ThumbsUp } from 'lucide-react';
 import type { ReportItem } from '../types.ts';
 import { confirmReport, fetchVisibleReportByPublicId, flagReport } from '../utils/reportData.ts';
 import {
@@ -23,6 +23,7 @@ const ReportDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [flagging, setFlagging] = useState(false);
+  const [flagged, setFlagged] = useState(false);
   const [confirming, setConfirming] = useState(false);
 
   useSEO(report ? getReportSEO(report) : {
@@ -33,6 +34,7 @@ const ReportDetail: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setFlagged(false);
 
     if (!publicId) {
       setLoading(false);
@@ -241,7 +243,7 @@ const ReportDetail: React.FC = () => {
 
               <button
                 type="button"
-                disabled={flagging}
+                disabled={flagging || flagged}
                 onClick={async () => {
                   setFlagging(true);
                   try {
@@ -250,14 +252,20 @@ const ReportDetail: React.FC = () => {
                       setReport(null);
                       return;
                     }
+                    setFlagged(true);
                   } finally {
                     setFlagging(false);
                   }
                 }}
-                className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 px-4 py-3 font-bold text-slate-700 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700 disabled:opacity-60"
+                aria-pressed={flagged}
+                className={`inline-flex items-center gap-2 rounded-2xl px-4 py-3 font-bold transition disabled:cursor-not-allowed disabled:opacity-100 ${
+                  flagged
+                    ? 'border border-amber-200 bg-amber-50 text-amber-800'
+                    : 'border border-slate-200 text-slate-700 hover:border-red-200 hover:bg-red-50 hover:text-red-700'
+                }`}
               >
-                <Flag size={16} />
-                Meld ongepaste inhoud
+                {flagged ? <CheckCircle2 size={16} /> : <Flag size={16} />}
+                {flagged ? 'Gemeld voor review' : 'Meld ongepaste inhoud'}
               </button>
             </div>
           </div>
