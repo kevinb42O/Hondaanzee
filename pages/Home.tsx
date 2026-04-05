@@ -266,7 +266,10 @@ const Home: React.FC = () => {
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [hasPrerenderHero, setHasPrerenderHero] = useState(false);
+  // Determine once at mount whether the prerender hero div exists in the DOM.
+  // Using lazy initialization avoids calling setState inside useLayoutEffect,
+  // which would trigger a synchronous re-render and force a layout recalculation.
+  const [hasPrerenderHero] = useState(() => !!document.getElementById('hero-prerender'));
   const navigate = useNavigate();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
@@ -322,7 +325,6 @@ const Home: React.FC = () => {
     // Grab the prerender hero from index.html for parallax
     const prerender = document.getElementById('hero-prerender');
     if (prerender) {
-      setHasPrerenderHero(true);
       prerenderRef.current = prerender;
       // Ensure it's visible (may have been hidden on a previous navigation)
       prerender.style.display = '';
@@ -343,8 +345,6 @@ const Home: React.FC = () => {
       if (heroRef.current) {
         heroRef.current.prepend(prerender);
       }
-    } else {
-      setHasPrerenderHero(false);
     }
     
     if (prefersReduced || !prerender) return;

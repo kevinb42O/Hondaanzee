@@ -10,11 +10,14 @@ const ResponsibilityBanner: React.FC = () => {
   const isCityPage = CITIES.some((city) => `/${city.slug}` === location.pathname);
 
   return (
-    <section className="relative py-20 sm:py-28 md:py-36 overflow-hidden">
+    <section
+      className="relative overflow-hidden"
+      style={{ paddingTop: 'clamp(5rem, 10vw, 9rem)', paddingBottom: 'clamp(5rem, 10vw, 9rem)' }}
+    >
       {/* Parallax Background Image - keep only on non-city pages */}
       {!isCityPage && (
         <div
-          className="absolute inset-0 bg-cover bg-center md:bg-fixed"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(/blankenberge.webp)' }}
         />
       )}

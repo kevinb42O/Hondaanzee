@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import type { City, Hotspot, OffLeashArea, ReportItem, Service } from '../types.ts';
+import type { City, Hotspot, OffLeashArea, OpeningHours, ReportItem, Service } from '../types.ts';
 import type { PlaceKind } from './placeRoutes.ts';
 import { getCategoryMeta } from './reportHelpers.ts';
 import { getReportDetailPath } from './reportRoutes.ts';
@@ -93,6 +93,37 @@ export const useSEO = ({
 
 type Place = Hotspot | Service;
 
+// Maps Dutch day abbreviations to schema.org day-of-week URIs
+const SCHEMA_DAY: Record<string, string> = {
+  ma: 'https://schema.org/Monday',
+  di: 'https://schema.org/Tuesday',
+  wo: 'https://schema.org/Wednesday',
+  do: 'https://schema.org/Thursday',
+  vr: 'https://schema.org/Friday',
+  za: 'https://schema.org/Saturday',
+  zo: 'https://schema.org/Sunday',
+};
+
+/**
+ * Converts the internal OpeningHours map to schema.org OpeningHoursSpecification
+ * objects. Closed days (null values) are omitted.
+ * Time strings are expected in "HH:mm–HH:mm" format (en-dash or hyphen).
+ */
+const buildOpeningHoursSpecification = (hours: OpeningHours): object[] =>
+  Object.entries(hours).flatMap(([day, value]) => {
+    if (!value) return [];
+    const parts = value.split(/–|-/);
+    if (parts.length !== 2) return [];
+    const opens = parts[0].trim();
+    const closes = parts[1].trim();
+    return [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: SCHEMA_DAY[day],
+      opens,
+      closes,
+    }];
+  });
+
 const PLACE_SCHEMA_TYPES = {
   hotspot: {
     'Café': 'CafeOrCoffeeShop',
@@ -147,6 +178,11 @@ export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps
   const summary = buildPlaceSummary(place, city, kind);
   const description = `${summary} ${place.description.replace(/\s+/g, ' ').trim()}`.slice(0, 158).trimEnd() + (summary.length + place.description.length > 158 ? '...' : '');
 
+  const openingHoursSpec =
+    'openingHours' in place && place.openingHours
+      ? buildOpeningHoursSpecification(place.openingHours)
+      : [];
+
   const structuredData = [
     {
       '@context': 'https://schema.org',
@@ -178,6 +214,7 @@ export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps
         name: city.name,
       },
       ...(place.website ? { sameAs: [...(place.sameAs || []), place.website] } : {}),
+      ...(openingHoursSpec.length > 0 ? { openingHoursSpecification: openingHoursSpec } : {}),
     },
   ];
 
