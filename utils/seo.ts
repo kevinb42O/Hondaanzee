@@ -107,21 +107,24 @@ const SCHEMA_DAY: Record<string, string> = {
 /**
  * Converts the internal OpeningHours map to schema.org OpeningHoursSpecification
  * objects. Closed days (null values) are omitted.
- * Time strings are expected in "HH:mm–HH:mm" format (en-dash or hyphen).
+ * Supports single periods ("HH:mm–HH:mm") and comma-separated multiple periods
+ * per day ("HH:mm–HH:mm, HH:mm–HH:mm").
  */
 const buildOpeningHoursSpecification = (hours: OpeningHours): object[] =>
   Object.entries(hours).flatMap(([day, value]) => {
     if (!value) return [];
-    const parts = value.split(/–|-/);
-    if (parts.length !== 2) return [];
-    const opens = parts[0].trim();
-    const closes = parts[1].trim();
-    return [{
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: SCHEMA_DAY[day],
-      opens,
-      closes,
-    }];
+    const schemaDay = SCHEMA_DAY[day];
+    // Split on comma to support multiple periods per day
+    return value.split(',').flatMap((period) => {
+      const parts = period.trim().split(/\u2013|–|-/);
+      if (parts.length !== 2) return [];
+      return [{
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: schemaDay,
+        opens: parts[0].trim(),
+        closes: parts[1].trim(),
+      }];
+    });
   });
 
 const PLACE_SCHEMA_TYPES = {

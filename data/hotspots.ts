@@ -760,8 +760,16 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     city: 'blankenberge',
     address: 'Zeedijk 145, 8370 Blankenberge',
     website: 'https://legrandcafe-blankenberge.be/',
-    websiteLabel: 'Bekijk Le Grand Café'
-  },
+    websiteLabel: 'Bekijk Le Grand Café',
+    openingHours: {
+      ma: '11:45–14:30, 17:45–20:30',
+      di: '11:45–14:30, 17:45–20:30',
+      wo: '11:45–14:30, 17:45–20:30',
+      do: null,
+      vr: '11:45–14:30, 17:45–20:30',
+      za: '11:45–14:30, 17:45–21:00',
+      zo: '11:45–14:30, 17:45–20:30',
+    },
   {
     id: 47,
     name: "Fondue & Co 't Keteltje",
