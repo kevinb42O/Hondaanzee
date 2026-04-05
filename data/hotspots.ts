@@ -1543,6 +1543,15 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     address: 'Leopoldstraat 10, 8370 Blankenberge',
     website: 'https://reserveringrestaurantkoekies.guestplan.io/?fbclid=IwY2xjawQ5OPdleHRuA2FlbQIxMABicmlkETBZU2RZYmNibDkwYTA5R3hlc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHkqlHpuCdmjrSKvTb1qUNDiHDAc6zLw__h_3K1YLZPdNFNtxH7bRbEmhXN6x_aem_tbtay-Q7ht8pu_FuAmpGwA',
     websiteLabel: 'Reserveer tafel',
+    openingHours: {
+      ma: '11:30–14:00, 17:30–20:30',
+      di: '11:30–14:00, 17:30–20:30',
+      wo: '11:30–14:30, 17:30–22:30',
+      do: null,
+      vr: '11:30–14:00, 17:30–20:30',
+      za: '11:30–14:00, 17:30–20:30',
+      zo: '11:30–14:00, 17:30–20:30',
+    },
   },
   {
     id: 125,
