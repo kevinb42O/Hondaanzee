@@ -336,6 +336,15 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     images: ['/plazaamante.webp', '/plazaamante2.webp', '/plazaamante3.webp', '/plazaamante4.webp'],
     city: 'de-haan',
     address: 'Zeedijk - De Haan 17, 8420 De Haan',
+    openingHours: {
+      ma: '10:00–18:00',
+      di: '10:00–18:00',
+      wo: '10:00–18:00',
+      do: '10:00–18:00',
+      vr: '10:00–18:00',
+      za: '10:00–18:00',
+      zo: '10:00–18:00',
+    },
     website: 'https://lexperiencedamante.be/nl/'
   },
   {
@@ -1164,6 +1173,31 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     phone: '+32 473 13 02 61',
     website: '',
     websiteLabel: 'Bel De Zeegeuzen'
+  },
+  {
+    id: 133,
+    name: "'t Waterhuis",
+    type: 'Brasserie',
+    summary: "Bekende brasserie in Oostende waar honden met open armen worden ontvangen en je van lunch tot late avond terechtkunt.",
+    recommendationNote: "'t Waterhuis is een aanrader omdat ze in Oostende al lang bekendstaan als een van de meest hondvriendelijke zaken van de stad, met een ontvangst die ook voor je viervoeter echt warm en vanzelfsprekend aanvoelt.",
+    description: "'t Waterhuis is een gevestigde brasserie in Oostende waar honden van harte welkom zijn. De zaak staat lokaal bekend als een van de meest hondvriendelijke adressen van de stad, en dat merk je meteen aan de relaxte ontvangst en de aandacht voor je viervoeter. Er is een waterbak aanwezig en je kan comfortabel buiten zitten terwijl je geniet van de kaart. Met lekkere cocktails, veganistische opties en ruime openingsuren is dit een toegankelijke stop voor wie in Oostende samen met hond zorgeloos wil tafelen of iets drinken.",
+    tags: ['Aanrader', 'Waterbak aanwezig', 'Zitplaatsen buiten', 'Lekkere cocktails', 'Veganistische opties', 'Hondvriendelijk team'],
+    image: '/waterhuis.jpg',
+    images: ['/waterhuis.jpg', '/waterhuis1.png', '/waterhuis2.png'],
+    city: 'oostende',
+    address: 'Vindictivelaan 35, 8400 Oostende',
+    phone: '+32 59 80 32 73',
+    website: 'https://www.waterhuisoostende.be/',
+    websiteLabel: "Bekijk 't Waterhuis",
+    openingHours: {
+      ma: '11:00–23:00',
+      di: '11:00–23:00',
+      wo: '11:00–23:00',
+      do: '11:00–23:00',
+      vr: '11:00–23:00',
+      za: '11:00–23:00',
+      zo: '11:00–23:00',
+    },
   },
   {
     id: 128,
