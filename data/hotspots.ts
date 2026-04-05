@@ -770,6 +770,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
       za: '11:45–14:30, 17:45–21:00',
       zo: '11:45–14:30, 17:45–20:30',
     },
+  },
   {
     id: 47,
     name: "Fondue & Co 't Keteltje",
