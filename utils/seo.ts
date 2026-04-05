@@ -221,8 +221,20 @@ export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps
     },
   ];
 
+  const TYPE_TAGLINE: Record<string, string> = {
+    Restaurant: 'Hondvriendelijk Eten & Drinken',
+    Brasserie: 'Hondvriendelijke Brasserie aan de Kust',
+    Café: 'Hondvriendelijk Café aan de Kust',
+    Koffiebar: 'Hondvriendelijke Koffiebar aan de Kust',
+    Shoppen: 'Hondvriendelijk Winkelen aan de Kust',
+    Slapen: 'Hondvriendelijk Verblijf aan de Kust',
+    Dierenarts: 'Dierenarts aan de Belgische Kust',
+    Dierenspeciaalzaak: 'Dierenspeciaalzaak aan de Belgische Kust',
+  };
+  const tagline = TYPE_TAGLINE[place.type] ?? 'Hondvriendelijk aan de Belgische Kust';
+
   return {
-    title: `${place.name} in ${city.name} | ${place.type} | HondAanZee.be`,
+    title: `${place.type} ${place.name} in ${city.name} | ${tagline}`,
     description,
     keywords: buildPlaceKeywords(place, city, kind),
     canonical,
