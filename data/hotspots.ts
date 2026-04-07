@@ -1652,6 +1652,28 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
       zo: '10:00–19:00',
     },
   },
+  {
+    id: 135,
+    name: 'Brassi Beach Terrace',
+    type: 'Café',
+    description: 'Brassi Beach Terrace is een hondvriendelijk terras pal aan de Albert I-promenade in Oostende, met een onverslaanbaar zicht op zee. De zaak staat recent in de krant omdat ze als een van de weinige zaken aan de kust een echte hondenmaaltijd op de kaart hebben — jouw viervoeter wordt hier dus echt als gast behandeld. Verder is er een waterbak aanwezig, een warm en vriendelijk team en een ruim terras om zorgeloos van de omgeving te genieten.',
+    tags: ['Aanrader', 'Waterbak aanwezig', 'Hondenmaaltijd', 'Zicht op zee', 'Terras', 'Hondvriendelijk team', 'Nabij strand'],
+    image: '/brassi1.jpeg',
+    images: ['/brassi1.jpeg', '/brassi.jpg', '/brassi2.jpg'],
+    city: 'oostende',
+    address: 'Albert I-promenade, Kursaal-Westhelling, 8400 Oostende',
+    website: 'https://www.brassi.be/brassibeachterrace/',
+    websiteLabel: 'Bekijk Brassi Beach Terrace',
+    openingHours: {
+      ma: '10:30–22:00',
+      di: '10:30–22:00',
+      wo: '10:30–22:00',
+      do: '10:30–22:00',
+      vr: '10:30–22:00',
+      za: '10:30–22:00',
+      zo: '10:30–22:00',
+    },
+  },
 ];
 
 export const HOTSPOTS: Hotspot[] = HOTSPOT_ENTRIES.map((spot) => ({
