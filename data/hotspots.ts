@@ -1630,6 +1630,28 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     website: 'https://www.facebook.com/Aupingouin/',
     websiteLabel: 'Bekijk Facebook-pagina'
   },
+  {
+    id: 134,
+    name: 'Beachclub Blankenberge',
+    type: 'Café',
+    description: 'Beachclub Blankenberge is dé perfecte stop op de Zeedijk voor hondenbaasjes! Vanaf hier tot en met Zeebrugge mogen honden het hele jaar door op het strand — ideaal om even te ontprikkelen voor of na een drankje. Het terras is ruim en relaxt ingericht, er staat altijd een waterbak klaar voor je viervoeter en de sfeer is er heerlijk casual. Kom gewoon binnenwandelen met je hond en geniet van de zee.',
+    tags: ['Terras', 'Waterbak aanwezig', 'Honden welkom op strand', 'Nabij strand', 'Relaxte sfeer'],
+    image: '/beachclub.webp',
+    images: ['/beachclub.webp', '/beachclub1.jpg', '/beachclub2.jpg'],
+    city: 'blankenberge',
+    address: 'Zeedijk 245, 8370 Blankenberge',
+    website: 'https://beachclubblankenberge.be/',
+    websiteLabel: 'Bekijk Beachclub Blankenberge',
+    openingHours: {
+      ma: '10:00–19:00',
+      di: '10:00–19:00',
+      wo: '10:00–19:00',
+      do: '10:00–19:00',
+      vr: '10:00–19:00',
+      za: '10:00–19:00',
+      zo: '10:00–19:00',
+    },
+  },
 ];
 
 export const HOTSPOTS: Hotspot[] = HOTSPOT_ENTRIES.map((spot) => ({
