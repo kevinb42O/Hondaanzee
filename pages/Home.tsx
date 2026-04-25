@@ -269,7 +269,6 @@ const Home: React.FC = () => {
   // Determine once at mount whether the prerender hero div exists in the DOM.
   // Using lazy initialization avoids calling setState inside useLayoutEffect,
   // which would trigger a synchronous re-render and force a layout recalculation.
-  const [hasPrerenderHero] = useState(() => !!document.getElementById('hero-prerender'));
   const navigate = useNavigate();
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
@@ -282,111 +281,20 @@ const Home: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Parallax effect for hero background
-  // Reuses the prerender hero from index.html (#hero-prerender) instead of
-  // rendering a duplicate image. This ensures the preloaded img stays as the LCP element.
+  // Hero ref (kept for potential future parallax / measurements)
   const heroRef = useRef<HTMLDivElement>(null);
-  const rafId = useRef<number>(0);
-  const lastScrollY = useRef<number>(0);
-  // Cache hero geometry to avoid forced reflows on every scroll frame
-  const cachedHeroHeight = useRef<number>(0);
-  const cachedHeroOffsetTop = useRef<number>(0);
-  // Reference to the prerender hero element from index.html
-  const prerenderRef = useRef<HTMLElement | null>(null);
 
-  const handleParallax = useCallback(() => {
-    const bgEl = prerenderRef.current;
-    if (!heroRef.current || !bgEl) return;
-    // Measure hero geometry only once (invalidated on resize)
-    if (!cachedHeroHeight.current) {
-      const rect = heroRef.current.getBoundingClientRect();
-      cachedHeroHeight.current = rect.height;
-      cachedHeroOffsetTop.current = rect.top + window.scrollY;
-    }
-    const heroHeight = cachedHeroHeight.current;
-    // Derive viewport-relative position from scroll without forcing reflow
-    const rectTop = cachedHeroOffsetTop.current - window.scrollY;
-    const rectBottom = rectTop + heroHeight;
-    // Only animate when hero is in viewport
-    if (rectBottom < 0 || rectTop > window.innerHeight) return;
-    // Calculate scroll progress (0 at top, 1 when hero scrolled out)
-    const scrollProgress = -rectTop / heroHeight;
-    const translateY = scrollProgress * heroHeight * 0.35;
-    const scale = 1 + scrollProgress * 0.08;
-    bgEl.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-  }, []);
-
+  // On mount, hide the static hero-prerender div from index.html so it doesn't
+  // double up with the React-rendered hero image. The prerender div exists only
+  // to give the browser an instant LCP element before React hydrates.
   useLayoutEffect(() => {
-    // Check for reduced motion preference
-    const prefersReduced = (() => {
-      try { return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false; } catch { return false; }
-    })();
-    
-    // Grab the prerender hero from index.html for parallax
     const prerender = document.getElementById('hero-prerender');
-    if (prerender) {
-      prerenderRef.current = prerender;
-      // Ensure it's visible (may have been hidden on a previous navigation)
-      prerender.style.display = '';
-      // Clear inset shorthand so individual properties take effect on all browsers
-      prerender.style.inset = '';
-      // Make it clip to the hero section height instead of fixed full-screen
-      prerender.style.position = 'absolute';
-      prerender.style.zIndex = '0';
-      prerender.style.willChange = 'transform';
-      // Give extra height for parallax travel
-      prerender.style.top = '-15%';
-      prerender.style.bottom = '-15%';
-      prerender.style.left = '0';
-      prerender.style.right = '0';
-      prerender.style.height = 'auto';
-      prerender.style.transform = '';
-      // Move it inside the hero section for proper clipping
-      if (heroRef.current) {
-        heroRef.current.prepend(prerender);
-      }
-    }
-    
-    if (prefersReduced || !prerender) return;
-
-    const onScroll = () => {
-      if (lastScrollY.current !== window.scrollY) {
-        lastScrollY.current = window.scrollY;
-        cancelAnimationFrame(rafId.current);
-        rafId.current = requestAnimationFrame(handleParallax);
-      }
-    };
-
-    // Initial position
-    handleParallax();
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Invalidate cached geometry on resize
-    const onResize = () => { cachedHeroHeight.current = 0; cachedHeroOffsetTop.current = 0; };
-    window.addEventListener('resize', onResize, { passive: true });
-
+    if (prerender) prerender.style.display = 'none';
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-      cancelAnimationFrame(rafId.current);
-      // Move prerender hero back to body so it survives React unmount
-      // and can be found again by getElementById on re-mount
-      if (prerender?.parentNode) {
-        prerender.style.display = 'none';
-        prerender.style.position = 'fixed';
-        prerender.style.inset = '0';
-        prerender.style.top = '';
-        prerender.style.bottom = '';
-        prerender.style.left = '';
-        prerender.style.right = '';
-        prerender.style.height = '';
-        prerender.style.willChange = '';
-        prerender.style.transform = '';
-        document.body.insertBefore(prerender, document.getElementById('root'));
-      }
+      // Restore on unmount so future remounts still benefit from instant paint.
+      if (prerender) prerender.style.display = '';
     };
-  }, [handleParallax]);
+  }, []);
 
   // Scroll to results section
   const scrollToResults = () => {
@@ -583,26 +491,26 @@ const Home: React.FC = () => {
   return (
     <div>
       {/* Hero Section with Dynamic Background */}
-      <div ref={heroRef} data-header-hero="light" className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden">
-        {/* Prerender hero from index.html is moved here by useEffect for parallax.
-            The gradient overlays are rendered below to ensure contrast. */}
-        {!hasPrerenderHero && (
-          <div className="absolute inset-0 z-0 bg-slate-900">
-            <img
-              src="/lexi.webp"
-              srcSet="/lexi-mobile.webp 800w, /lexi.webp 1920w"
-              sizes="100vw"
-              alt="Hond aan het strand"
-              className="w-full h-full object-cover"
-              style={{ objectPosition: 'center 30%' }}
-              width={1920}
-              height={1080}
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
-          </div>
-        )}
+      <div ref={heroRef} data-header-hero="light" className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden bg-slate-900">
+        {/* ALWAYS render the hero image as a guaranteed fallback. The prerender hero from index.html
+            (when present) is moved on top of this for parallax. If the prerender div is missing
+            for any reason (cache, SW, prerender script change), this keeps the dark image visible
+            so the white hero text stays readable. */}
+        <div className="absolute inset-0 z-0 bg-slate-900">
+          <img
+            src="/lexi.webp"
+            srcSet="/lexi-mobile.webp 800w, /lexi.webp 1920w"
+            sizes="100vw"
+            alt="Hond aan het strand"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 30%' }}
+            width={1920}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </div>
         <div className="absolute inset-0 z-[1] bg-slate-950/28"></div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50/78 via-slate-900/6 to-slate-900/18"></div>
 
