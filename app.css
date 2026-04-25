@@ -141,6 +141,38 @@ img, video, iframe, embed, object, svg:not([class]) {
 .safe-area-left { padding-left: env(safe-area-inset-left); }
 .safe-area-right { padding-right: env(safe-area-inset-right); }
 
+/* Margin variants — useful for fixed elements that don't want extra padding-collapse */
+.safe-area-mb { margin-bottom: env(safe-area-inset-bottom); }
+.safe-area-mt { margin-top: env(safe-area-inset-top); }
+
+/* ====================================
+   GLOBAL FOCUS-VISIBLE RING (a11y)
+   Keyboard / voice-control users get a clear indicator,
+   pointer users still see no outline on click.
+   ==================================== */
+:where(button, a, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Native dialog backdrop should not allow page scroll behind it on iOS */
+dialog[open] {
+  overscroll-behavior: contain;
+}
+
+/* Respect reduced motion globally for animations & smooth scrolls */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ====================================
    CUSTOM SCROLLBAR
    ==================================== */

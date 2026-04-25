@@ -40,7 +40,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-in zoom-in-95 duration-200 relative">
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+                    className="absolute top-3 right-3 p-2 text-slate-400 hover:text-slate-600 transition-colors touch-target rounded-full"
                     aria-label="Sluiten"
                 >
                     <X size={20} />
@@ -66,10 +66,19 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                                 <input
                                     type="email"
                                     id="email"
+                                    name="email"
                                     required
+                                    inputMode="email"
+                                    autoComplete="email"
+                                    autoCapitalize="none"
+                                    autoCorrect="off"
+                                    spellCheck={false}
+                                    autoFocus
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all font-medium text-slate-900"
+                                    aria-invalid={message?.type === 'error' ? true : false}
+                                    aria-describedby={message ? 'auth-email-msg' : undefined}
+                                    className={`w-full pl-10 pr-4 py-3 bg-slate-50 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all font-medium text-slate-900 min-h-[44px] ${message?.type === 'error' ? 'border-red-300' : 'border-slate-200'}`}
                                     placeholder="jouw@email.com"
                                 />
                                 <Mail className="absolute left-3.5 top-3 text-slate-400" size={18} />
@@ -78,6 +87,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
                         {message && (
                             <div
+                                id="auth-email-msg"
+                                role={message.type === 'error' ? 'alert' : 'status'}
+                                aria-live="polite"
                                 className={`p-3 rounded-lg text-sm font-medium ${message.type === 'success'
                                     ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                                     : 'bg-red-50 text-red-700 border border-red-200'
@@ -90,7 +102,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-sky-600/20 transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full min-h-[48px] bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-sky-600/20 transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
                             {loading ? <Loader2 size={18} className="animate-spin" /> : 'Stuur inloglink'}
                         </button>

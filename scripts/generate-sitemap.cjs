@@ -35,6 +35,7 @@ const priorityForRoute = (route) => {
   if (route.includes('/hotspots/') || route.includes('/diensten/')) return '0.8';
   if (route === '/hotspots' || route === '/losloopzones') return '0.9';
   if (route === '/diensten') return '0.8';
+  if (route.startsWith('/losloopzones/')) return '0.8';
   if (/^\/[^/]+$/.test(route) && route !== '/blog') return '0.9';
   return '0.7';
 };
@@ -44,6 +45,7 @@ const changefreqForRoute = (route) => {
   if (route === '/updates') return 'weekly';
   if (route === '/agenda' || route === '/blog') return 'weekly';
   if (route.includes('/hotspots/') || route.includes('/diensten/')) return 'weekly';
+  if (route.startsWith('/losloopzones/')) return 'weekly';
   if (/^\/[^/]+$/.test(route) && route !== '/blog') return 'weekly';
   return 'monthly';
 };
@@ -67,6 +69,10 @@ const getRouteFiles = (route) => {
 
   if (/^\/[^/]+\/diensten\/[^/]+$/.test(route)) {
     return ['pages/PlaceDetail.tsx', 'data/services.ts', 'utils/seo.ts', 'utils/placeRoutes.ts'];
+  }
+
+  if (/^\/losloopzones\/[^/]+$/.test(route)) {
+    return ['pages/AllOffLeashAreas.tsx', 'data/offLeashAreas.ts', 'utils/seo.ts', 'utils/offLeashRoutes.ts'];
   }
 
   if (/^\/[^/]+$/.test(route)) {

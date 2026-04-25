@@ -3,10 +3,11 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import {
   ArrowLeft, ArrowRight, Calendar, Clock, BookOpen,
   Lightbulb, AlertTriangle, Quote, Info,
-  Share2, ChevronRight
+  Share2
 } from 'lucide-react';
 import { useSEO } from '../utils/seo.ts';
 import { blogPosts, BlogSection } from '../data/blogs.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const BlogDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -19,6 +20,11 @@ const BlogDetail: React.FC = () => {
     ogImage: post?.ogImage ? `https://hondaanzee.be${post.ogImage}` : post?.image ? `https://hondaanzee.be${post.image}` : undefined,
     ogType: 'article',
     canonical: post ? `https://hondaanzee.be/blog/${post.slug}` : undefined,
+    articlePublishedTime: post?.date,
+    articleModifiedTime: post?.date,
+    articleSection: post?.category,
+    articleAuthor: 'HondAanZee.be',
+    ogImageAlt: post?.imageAlt || post?.title,
     structuredData: post ? [
       {
         "@context": "https://schema.org",
@@ -368,13 +374,14 @@ const BlogDetail: React.FC = () => {
       <div className="max-w-3xl mx-auto">
 
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-slate-400 mb-8">
-          <Link to="/" className="hover:text-sky-600 transition-colors">Home</Link>
-          <ChevronRight size={14} />
-          <Link to="/blog" className="hover:text-sky-600 transition-colors">Blog</Link>
-          <ChevronRight size={14} />
-          <span className="text-slate-600 font-medium truncate">{post.title}</span>
-        </nav>
+        <Breadcrumb
+          className="mb-8"
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Blog', to: '/blog' },
+            { label: post.title },
+          ]}
+        />
 
         {/* Back link */}
         <Link

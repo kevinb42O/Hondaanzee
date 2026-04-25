@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Routes, Route, useInRouterContext, useLocation
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
+import ScrollToTop from './components/ScrollToTop.tsx';
 
 // Lazy-loaded below-the-fold components
 const ResponsibilityBanner = React.lazy(() => import('./components/ResponsibilityBanner.tsx'));
@@ -180,6 +181,7 @@ const AppContent = () => {
         </Suspense>
       )}
       {!isAdminRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
+      {!isAdminRoute && <ScrollToTop />}
       <Analytics />
     </div>
   );

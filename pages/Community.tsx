@@ -76,6 +76,8 @@ const Confetti = () => {
 const Community: React.FC = () => {
   useSEO(SEO_DATA.community);
 
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -148,6 +150,14 @@ const Community: React.FC = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full mt-8 sm:mt-12">
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6 [&>ol]:justify-center"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Community' },
+            ]}
+          />
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
             <Heart size={14} className="text-pink-400" />
             <span>Community</span>

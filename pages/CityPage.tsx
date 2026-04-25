@@ -11,6 +11,7 @@ import LocalHero from '../components/LocalHero.tsx';
 import CityFAQ from '../components/CityFAQ.tsx';
 import { CITIES } from '../cityData.ts';
 import { useSEO, getCitySEO } from '../utils/seo.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 import { WeatherWidget } from '../components/WeatherWidget.tsx';
 import { buildCityFAQSchema } from '../utils/cityFaq.ts';
 
@@ -70,6 +71,15 @@ const CityPage: React.FC = () => {
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
             <span className="text-sm sm:text-base">Terug naar overzicht</span>
           </Link>
+
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: city.name },
+            ]}
+          />
         </div>
 
         <section className="pb-10 sm:pb-12 md:pb-20 px-4">

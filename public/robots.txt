@@ -1,5 +1,5 @@
 # HondAanZee.be - Robots.txt
-# Updated: 2026-03-14
+# Updated: 2026-04-25
 
 User-agent: *
 Allow: /
@@ -45,9 +45,20 @@ Allow: /
 # Crawl-delay (be nice to smaller bots)
 Crawl-delay: 1
 
-# Block specific paths (if needed in future)
-# Disallow: /admin/
-# Disallow: /private/
+# Block private/admin paths
+User-agent: *
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/log
+Disallow: /_meldpunt-admin
+Disallow: /api/
+Disallow: /*?city=
+Disallow: /*?type=
+Disallow: /*?q=
+Disallow: /*?area=
+Disallow: /*&city=
+Disallow: /*&type=
+Disallow: /*&q=
 
 # Allow all images and assets
 Allow: /*.jpg$

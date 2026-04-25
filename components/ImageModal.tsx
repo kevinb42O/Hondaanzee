@@ -58,6 +58,26 @@ const ImageModal: React.FC<ImageModalProps> = ({
         setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     }, [images.length]);
 
+    // Swipe gesture support (mobile)
+    const touchStartX = useRef<number | null>(null);
+    const touchStartY = useRef<number | null>(null);
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+    };
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        if (touchStartX.current === null || touchStartY.current === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX.current;
+        const dy = e.changedTouches[0].clientY - touchStartY.current;
+        // Only treat as horizontal swipe when clearly horizontal
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) handleNext();
+            else handlePrevious();
+        }
+        touchStartX.current = null;
+        touchStartY.current = null;
+    };
+
     // Arrow key navigation
     useEffect(() => {
         if (!isOpen) return;
@@ -86,11 +106,19 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 if (e.key === 'Escape') onClose();
             }}
         >
-            <div className="relative flex items-center justify-center min-h-[50vh]">
+            <div
+                className="relative flex items-center justify-center min-h-[50vh]"
+                style={{
+                    paddingTop: 'env(safe-area-inset-top)',
+                    paddingBottom: 'env(safe-area-inset-bottom)',
+                }}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-0 right-0 z-10 bg-white/95 backdrop-blur rounded-full p-3 shadow-lg hover:bg-white transition-colors active:scale-95"
+                    className="absolute top-0 right-0 z-10 bg-white/95 backdrop-blur rounded-full p-3 shadow-lg hover:bg-white transition-colors active:scale-95 touch-target"
                     aria-label="Sluit afbeelding"
                 >
                     <X size={24} className="text-slate-700" />
@@ -100,10 +128,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 {showNavigation && (
                     <button
                         onClick={handlePrevious}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/95 backdrop-blur rounded-full p-4 shadow-lg hover:bg-white hover:scale-110 transition-all active:scale-95 group"
+                        className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white/95 backdrop-blur rounded-full p-3 sm:p-4 shadow-lg hover:bg-white hover:scale-110 transition-all active:scale-95 group touch-target"
                         aria-label="Vorige afbeelding"
                     >
-                        <ChevronLeft size={28} className="text-slate-700 group-hover:text-sky-600 transition-colors" />
+                        <ChevronLeft size={24} className="sm:w-7 sm:h-7 text-slate-700 group-hover:text-sky-600 transition-colors" />
                     </button>
                 )}
 
@@ -111,10 +139,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 {showNavigation && (
                     <button
                         onClick={handleNext}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/95 backdrop-blur rounded-full p-4 shadow-lg hover:bg-white hover:scale-110 transition-all active:scale-95 group"
+                        className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white/95 backdrop-blur rounded-full p-3 sm:p-4 shadow-lg hover:bg-white hover:scale-110 transition-all active:scale-95 group touch-target"
                         aria-label="Volgende afbeelding"
                     >
-                        <ChevronRight size={28} className="text-slate-700 group-hover:text-sky-600 transition-colors" />
+                        <ChevronRight size={24} className="sm:w-7 sm:h-7 text-slate-700 group-hover:text-sky-600 transition-colors" />
                     </button>
                 )}
 

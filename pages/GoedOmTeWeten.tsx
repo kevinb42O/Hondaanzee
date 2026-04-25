@@ -6,6 +6,7 @@ import {
   Calendar, Fence, Search, Leaf, HandHeart
 } from 'lucide-react';
 import { useSEO } from '../utils/seo.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 import { FAQItem } from '../components/goed-om-te-weten/SharedComponents.tsx';
 import MedischSection from '../components/goed-om-te-weten/MedischSection.tsx';
 import SeizoenSection from '../components/goed-om-te-weten/SeizoenSection.tsx';
@@ -246,6 +247,9 @@ const GoedOmTeWeten: React.FC = () => {
     title: 'Goed om te Weten | Veiligheid, EHBO & Etiquette voor Honden aan het Strand – HondAanZee.be',
     description: '🐾 Alles over veiligheid met je hond aan de Belgische kust: kwallenbeten, pietermansteken, zeehonden, zoutwatervergiftiging, teken, blauwalgen, duinetiquette & de Code van de Goede Kustvriend.',
     keywords: 'hond in kwal getrapt, pieterman steek hond, zeehond op strand, veiligheid honden strand, hond zeewater drinken, hond heet zand, kwallen belgische kust hond, hond duinen loslopend, strandregels honden belgie, honden ehbo strand, teken hond duinen, blauwalgen hond gevaarlijk, hondenzwemvest noordzee, scherpe schelpen hondenpoten, losloopweide kust, losloopzone regels hond, puppy socialisatie losloopweide, hondenspeelweide belgische kust, bijtincident losloopweide, etiquette losloopweide, GAS boete hond strand, hond loslopend boete belgie, DogID registratie hond, aansprakelijkheid hond belgie, familiale verzekering hond',
+    canonical: 'https://hondaanzee.be/goed-om-te-weten',
+    ogImage: 'https://hondaanzee.be/lexi.webp',
+    ogImageAlt: 'Hond op het strand aan de Belgische kust',
     structuredData
   });
 
@@ -277,6 +281,14 @@ const GoedOmTeWeten: React.FC = () => {
         <div className="absolute bottom-0 left-0 z-10 w-72 h-72 bg-cyan-300/14 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
 
         <div className="relative z-20 max-w-4xl mx-auto text-center">
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6 [&>ol]:justify-center"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Goed om te weten' },
+            ]}
+          />
           <div className="inline-flex items-center gap-2 bg-white/14 backdrop-blur-md border border-white/22 text-white px-5 py-2.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.15em] mb-4 shadow-lg rounded-full">
             <BookOpen size={14} strokeWidth={2.5} />
             <span>De Ultieme Kustgids</span>
@@ -285,7 +297,7 @@ const GoedOmTeWeten: React.FC = () => {
           {/* Freshness Signal */}
           <div className="inline-flex items-center gap-1.5 bg-emerald-400/16 backdrop-blur-md border border-emerald-200/28 text-emerald-50 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider mb-6 rounded-full">
             <Calendar size={12} strokeWidth={2.5} />
-            <span>Laatst bijgewerkt: februari 2026</span>
+            <span>Laatst bijgewerkt: april 2026</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.1] drop-shadow-[0_12px_34px_rgba(0,0,0,0.38)]">

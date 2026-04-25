@@ -16,7 +16,11 @@ export const FloatingSupport: React.FC = () => {
     return (
         <Link
             to="/steun-ons"
-            className="md:hidden fixed bottom-6 right-4 z-50 w-12 h-12 bg-amber-500 rounded-full shadow-2xl flex items-center justify-center text-white active:scale-90 transition-all duration-300 safe-area-bottom safe-area-right overflow-hidden"
+            className="md:hidden fixed right-4 z-50 w-12 h-12 bg-amber-500 rounded-full shadow-2xl flex items-center justify-center text-white active:scale-90 transition-all duration-300 overflow-hidden touch-target"
+            style={{
+                bottom: 'max(1.5rem, calc(env(safe-area-inset-bottom) + 0.75rem))',
+                right: 'max(1rem, calc(env(safe-area-inset-right) + 1rem))',
+            }}
             aria-label="Steun ons"
         >
             {!prefersReducedMotion && (

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BookOpen, ArrowRight, Calendar, Clock, Leaf, Shield, Trees, Droplets, Brain, Star } from 'lucide-react';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { blogPosts } from '../data/blogs.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   'emerald': <Shield size={16} className="text-emerald-600" />,
@@ -35,6 +36,14 @@ const Blog: React.FC = () => {
   return (
     <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-50 to-slate-50">
       <div className="max-w-5xl mx-auto">
+
+        <Breadcrumb
+          className="mb-8 [&>ol]:justify-center"
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Blog' },
+          ]}
+        />
 
         {/* Header */}
         <div className="text-center mb-16">

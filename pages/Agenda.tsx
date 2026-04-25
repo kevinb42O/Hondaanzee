@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, MapPin, Clock, Tag, X, ChevronRight, PartyPopper, 
 import LocalHero from '../components/LocalHero.tsx';
 import { EVENTS, type DogEvent } from '../data/events.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const SEASON_EMOJI: Record<string, string> = {
   Lente: '🌸',
@@ -122,6 +123,15 @@ const Agenda: React.FC = () => {
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
             <span className="text-sm sm:text-base">Terug naar home</span>
           </Link>
+
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Agenda' },
+            ]}
+          />
 
           <div className="max-w-3xl relative">
             <div className="absolute -left-20 top-0 text-6xl hidden xl:block" style={{ animation: 'float 2.5s ease-in-out infinite' }}>

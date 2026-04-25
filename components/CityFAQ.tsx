@@ -33,12 +33,12 @@ const CityFAQ: React.FC<CityFAQProps> = ({ city }) => {
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-start gap-3 sm:gap-4"
+                  className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-start gap-3 sm:gap-4 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 rounded-2xl"
                   aria-expanded={isOpen}
                 >
                   <span className="text-slate-900 font-extrabold text-sm sm:text-base leading-relaxed flex-1">{entry.question}</span>
                   <ChevronDown
-                    size={18}
+                    size={22}
                     className={`mt-0.5 shrink-0 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
                     aria-hidden="true"
                   />

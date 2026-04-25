@@ -10,23 +10,49 @@ interface SEOProps {
   description: string;
   keywords?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
   canonical?: string;
   structuredData?: object | object[];
+  /** When true, page is excluded from search index (e.g. filtered list combos). */
+  noindex?: boolean;
+  /** ISO date used for article:published_time when ogType='article'. */
+  articlePublishedTime?: string;
+  /** ISO date used for article:modified_time when ogType='article'. */
+  articleModifiedTime?: string;
+  /** Optional list of section/category names for article:section. */
+  articleSection?: string;
+  /** Optional author name for article:author. */
+  articleAuthor?: string;
 }
+
+const SITE_ORIGIN = 'https://hondaanzee.be';
+const TWITTER_HANDLE = '@hondaanzee';
 
 export const useSEO = ({
   title,
   description,
   keywords,
-  ogImage = 'https://hondaanzee.be/og-imagefinal.webp',
+  ogImage = `${SITE_ORIGIN}/og-imagefinal.webp`,
+  ogImageAlt,
   ogType = 'website',
   canonical,
-  structuredData
+  structuredData,
+  noindex = false,
+  articlePublishedTime,
+  articleModifiedTime,
+  articleSection,
+  articleAuthor,
 }: SEOProps) => {
   const location = useLocation();
 
   useEffect(() => {
+    // Ensure html lang is set (also covered statically in index.html, but
+    // re-asserting prevents 3rd-party scripts from clobbering it).
+    if (document.documentElement.lang !== 'nl-BE') {
+      document.documentElement.lang = 'nl-BE';
+    }
+
     // Update title
     document.title = title;
 
@@ -43,24 +69,69 @@ export const useSEO = ({
       element.setAttribute('content', content);
     };
 
+    const removeMeta = (name: string, isProperty = false) => {
+      const attribute = isProperty ? 'property' : 'name';
+      const element = document.querySelector(`meta[${attribute}="${name}"]`);
+      if (element) element.remove();
+    };
+
+    const resolvedCanonical = canonical || `${SITE_ORIGIN}${location.pathname}`;
+
     // Basic meta tags
     updateMeta('description', description);
     if (keywords) updateMeta('keywords', keywords);
+
+    // Robots — granular control for filter permutations / private routes
+    updateMeta(
+      'robots',
+      noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+    );
 
     // Open Graph
     updateMeta('og:title', title, true);
     updateMeta('og:description', description, true);
     updateMeta('og:image', ogImage, true);
-    updateMeta('og:url', canonical || `https://hondaanzee.be${location.pathname}`, true);
+    updateMeta('og:image:url', ogImage, true);
+    updateMeta('og:image:secure_url', ogImage, true);
+    // Default OG image is 1200x630 webp; covers all SEO_DATA entries unless
+    // overridden via a future width/height prop.
+    updateMeta('og:image:width', '1200', true);
+    updateMeta('og:image:height', '630', true);
+    updateMeta(
+      'og:image:type',
+      ogImage.endsWith('.png') ? 'image/png' : ogImage.endsWith('.jpg') || ogImage.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp',
+      true,
+    );
+    if (ogImageAlt) updateMeta('og:image:alt', ogImageAlt, true);
+    updateMeta('og:url', resolvedCanonical, true);
     updateMeta('og:type', ogType, true);
     updateMeta('og:site_name', 'HondAanZee.be', true);
     updateMeta('og:locale', 'nl_BE', true);
 
+    // Article-specific tags (only meaningful when ogType='article')
+    if (ogType === 'article') {
+      if (articlePublishedTime) updateMeta('article:published_time', articlePublishedTime, true);
+      if (articleModifiedTime) updateMeta('article:modified_time', articleModifiedTime, true);
+      if (articleSection) updateMeta('article:section', articleSection, true);
+      updateMeta('article:author', articleAuthor || 'HondAanZee.be', true);
+    } else {
+      removeMeta('article:published_time', true);
+      removeMeta('article:modified_time', true);
+      removeMeta('article:section', true);
+      removeMeta('article:author', true);
+    }
+
     // Twitter Card
     updateMeta('twitter:card', 'summary_large_image');
+    updateMeta('twitter:site', TWITTER_HANDLE);
+    updateMeta('twitter:creator', TWITTER_HANDLE);
+    updateMeta('twitter:url', resolvedCanonical);
     updateMeta('twitter:title', title);
     updateMeta('twitter:description', description);
     updateMeta('twitter:image', ogImage);
+    if (ogImageAlt) updateMeta('twitter:image:alt', ogImageAlt);
 
     // Canonical URL
     let linkCanonical = document.querySelector('link[rel="canonical"]');
@@ -69,7 +140,7 @@ export const useSEO = ({
       linkCanonical.setAttribute('rel', 'canonical');
       document.head.appendChild(linkCanonical);
     }
-    linkCanonical.setAttribute('href', canonical || `https://hondaanzee.be${location.pathname}`);
+    linkCanonical.setAttribute('href', resolvedCanonical);
 
     // Structured Data
     if (structuredData) {
@@ -88,7 +159,22 @@ export const useSEO = ({
       const dynamicScript = document.querySelector('script[type="application/ld+json"][data-dynamic]');
       if (dynamicScript) dynamicScript.remove();
     };
-  }, [title, description, keywords, ogImage, canonical, structuredData, location]);
+  }, [
+    title,
+    description,
+    keywords,
+    ogImage,
+    ogImageAlt,
+    ogType,
+    canonical,
+    structuredData,
+    noindex,
+    articlePublishedTime,
+    articleModifiedTime,
+    articleSection,
+    articleAuthor,
+    location,
+  ]);
 };
 
 type Place = Hotspot | Service;

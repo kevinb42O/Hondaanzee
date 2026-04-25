@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { supabase } from '../utils/supabaseClient';
 import StarRating from './StarRating';
 import { Loader2, Send } from 'lucide-react';
@@ -14,17 +14,22 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
     const [userName, setUserName] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+    const ratingRef = useRef<HTMLFieldSetElement>(null);
+    const nameRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (rating === 0) {
             setMessage({ type: 'error', text: 'Selecteer minimaal 1 ster.' });
+            ratingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
         if (!userName.trim()) {
             setMessage({ type: 'error', text: 'Vul alsjeblieft je naam in.' });
+            nameRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            nameRef.current?.focus();
             return;
         }
 
@@ -63,13 +68,13 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                 Deel jouw ervaring
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <fieldset>
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                <fieldset ref={ratingRef}>
                     <legend className="block text-sm font-bold text-slate-700 mb-2">
                         Hoeveel sterren geef je?
                     </legend>
                     <div className="flex justify-center md:justify-start">
-                        <StarRating rating={rating} onRate={setRating} size={36} />
+                        <StarRating rating={rating} onRate={setRating} size={44} />
                     </div>
                 </fieldset>
 
@@ -78,12 +83,17 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                         Jouw naam
                     </label>
                     <input
+                        ref={nameRef}
                         type="text"
                         id="userName"
+                        name="userName"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value.slice(0, 50))}
                         maxLength={50}
-                        className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium placeholder:text-slate-400"
+                        autoComplete="name"
+                        inputMode="text"
+                        autoCapitalize="words"
+                        className="w-full p-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium placeholder:text-slate-400 min-h-[44px]"
                         placeholder="Jouw naam"
                         required
                     />
@@ -95,17 +105,21 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                     </label>
                     <textarea
                         id="comment"
+                        name="comment"
                         rows={4}
                         value={comment}
                         onChange={(e) => setComment(e.target.value.slice(0, 500))}
                         maxLength={500}
-                        className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium resize-none placeholder:text-slate-400"
+                        className="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 font-medium resize-none placeholder:text-slate-400"
                         placeholder="Was het druk? Is de omheining goed? Is er water in de buurt?..."
                     />
+                    <p className="text-xs text-slate-400 mt-1 text-right">{comment.length}/500</p>
                 </div>
 
                 {message && (
                     <div
+                        role={message.type === 'error' ? 'alert' : 'status'}
+                        aria-live="polite"
                         className={`p-4 rounded-xl text-sm font-bold flex items-center gap-2 ${message.type === 'success'
                             ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
                             : 'bg-red-50 text-red-700 border border-red-100'
@@ -118,7 +132,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-sky-600/20 transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full min-h-[48px] bg-sky-600 hover:bg-sky-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-sky-600/20 transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                     {loading ? (
                         <Loader2 className="animate-spin" />

@@ -6,13 +6,15 @@ import { SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { getServiceDetailPath } from '../utils/placeRoutes.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const AllServices: React.FC = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
-  // Apply SEO metadata
-  useSEO(SEO_DATA.diensten);
+  const hasActiveFilters = (searchParams.get('city') && searchParams.get('city') !== 'all')
+    || (searchParams.get('type') && searchParams.get('type') !== 'all');
+  useSEO({ ...SEO_DATA.diensten, noindex: hasActiveFilters });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,6 +100,15 @@ const AllServices: React.FC = () => {
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
             <span className="text-sm sm:text-base">Terug naar home</span>
           </Link>
+
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Diensten' },
+            ]}
+          />
 
           <div className="max-w-3xl relative">
             <div className="absolute -left-20 top-0 text-6xl hidden xl:block animate-bounce" style={{ animationDuration: '2s', animationDelay: '0.5s' }}>

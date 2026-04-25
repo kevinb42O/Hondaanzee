@@ -970,7 +970,7 @@ const Home: React.FC = () => {
               },
               {
                 q: 'Kan ik mijn hondvriendelijke zaak aanmelden op hondaanzee.be?',
-                a: 'Ja! We werken voortdurend aan het uitbreiden van ons netwerk. Als je een hondvriendelijk restaurant, café, hotel, winkel of dienst hebt aan de Belgische kust, neem dan contact met ons op via de Steun-pagina. We checken elke aanmelding persoonlijk voordat die op de website verschijnt. Momenteel zijn er al 50+ horeca-zaken en 24 dienstverleners (dierenartsen, trimsalons, dierenwinkels) opgenomen.'
+                a: 'Absoluut — en het is gratis. Vandaag staan er al 132 hondvriendelijke horeca-, verblijf- en winkelzaken én 24 dienstverleners (dierenartsen en dierenspeciaalzaken) op de gids, verspreid over alle 11 kustgemeenten van De Panne tot Knokke-Heist. 54 daarvan dragen het Aanrader-label en 72 zaken hebben de officiële HondAanZee-sticker aan hun deur. Heb je een café, restaurant, hotel, vakantiewoning, winkel of dienst waar honden écht welkom zijn? Meld je aan via /zaak-aanmelden — we checken elke aanmelding persoonlijk, schrijven een eerlijke beschrijving en zorgen voor je eigen detailpagina met foto en route, volledig gratis.'
               }
             ].map(({ q, a }, i) => {
               const isOpen = openFaq === i;

@@ -6,6 +6,7 @@ import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const INITIAL_SHOW = 12;
 const SEARCH_SUGGESTION_LIMIT = 6;
@@ -21,8 +22,12 @@ const AllHotspots: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Apply SEO metadata
-  useSEO(SEO_DATA.hotspots);
+  // Apply SEO metadata. When filters are active we mark the URL noindex so
+  // permutations don't dilute crawl budget; the canonical still points at /hotspots.
+  const hasActiveFilters = (searchParams.get('city') && searchParams.get('city') !== 'all')
+    || (searchParams.get('type') && searchParams.get('type') !== 'all')
+    || Boolean(searchParams.get('q'));
+  useSEO({ ...SEO_DATA.hotspots, noindex: hasActiveFilters });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -242,6 +247,15 @@ const AllHotspots: React.FC = () => {
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
             <span className="text-sm sm:text-base">Terug naar home</span>
           </Link>
+
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Hotspots' },
+            ]}
+          />
 
           <div className="max-w-3xl relative">
             <div className="absolute -left-20 top-0 text-6xl hidden xl:block" style={{ animation: 'float 2.5s ease-in-out infinite' }}>

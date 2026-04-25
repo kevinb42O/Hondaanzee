@@ -107,15 +107,39 @@ const Header: React.FC = () => {
     };
   }, [location.pathname, location.search, location.hash]);
 
-  // Prevent scroll when menu is open
+  // Prevent scroll when menu is open — preserves scroll position on iOS
   useEffect(() => {
+    const body = document.body;
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      const scrollY = window.scrollY;
+      body.dataset.scrollLockY = String(scrollY);
+      body.style.overflow = 'hidden';
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollY}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.width = '100%';
     } else {
-      document.body.style.overflow = 'unset';
+      const storedY = body.dataset.scrollLockY;
+      body.style.overflow = '';
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      if (storedY !== undefined) {
+        const y = parseInt(storedY, 10) || 0;
+        delete body.dataset.scrollLockY;
+        window.scrollTo(0, y);
+      }
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      body.style.overflow = '';
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
     };
   }, [isMenuOpen]);
 

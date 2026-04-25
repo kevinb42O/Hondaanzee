@@ -29,6 +29,10 @@
     <link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/">
     <link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/">
 
+    <!-- Performance: preconnect to API/CDN origins so first hit doesn't pay handshake cost -->
+    <link rel="preconnect" href="https://zpllibfxaizavcvztnut.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://zpllibfxaizavcvztnut.supabase.co">
+
     <!-- Google Fonts - Non-render-blocking with preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +62,8 @@
     <meta property="og:description"
         content="✓ Actuele strandregels voor honden aan de Belgische kust ✓ Losloopzones en hondenweides ✓ Hondvriendelijke hotspots ✓ Van De Panne tot Knokke">
     <meta property="og:image" content="https://hondaanzee.be/og-imagefinal.webp">
+    <meta property="og:image:secure_url" content="https://hondaanzee.be/og-imagefinal.webp">
+    <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="HondAanZee.be - Jouw gids voor honden aan de Belgische kust">
@@ -66,6 +72,9 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@hondaanzee">
+    <meta name="twitter:creator" content="@hondaanzee">
+    <meta name="twitter:url" content="https://hondaanzee.be/">
     <meta name="twitter:title" content="Honden aan Zee België 2026 | Strandregels & Hondvriendelijke Plekken">
     <meta name="twitter:description"
         content="✓ Actuele strandregels voor honden ✓ Losloopzones ✓ Hondvriendelijke hotspots aan de Belgische kust">
@@ -152,16 +161,36 @@
     <div id="root" style="position:relative;z-index:1;background:transparent"></div>
     <script type="module" src="/index.tsx"></script>
     <script>
-    // Clean up any previously installed service worker + caches
+    // Register PWA service worker on idle so it never delays LCP.
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(regs) {
-        regs.forEach(function(r) { r.unregister(); });
-      });
-      if ('caches' in window) {
-        caches.keys().then(function(names) {
-          names.forEach(function(n) { caches.delete(n); });
+      var register = function () {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function (reg) {
+          // When a new SW is found, activate it as soon as it's installed.
+          reg.addEventListener('updatefound', function () {
+            var nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener('statechange', function () {
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+                nw.postMessage('SKIP_WAITING');
+              }
+            });
+          });
+        }).catch(function () { /* ignore registration failures */ });
+      };
+      if (document.readyState === 'complete') {
+        ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(register, 1);
+      } else {
+        window.addEventListener('load', function () {
+          ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(register, 1);
         });
       }
+      // Reload once when the active SW changes, so users see the new build.
+      var didReload = false;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (didReload) return;
+        didReload = true;
+        window.location.reload();
+      });
     }
     </script>
 </body>

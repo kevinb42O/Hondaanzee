@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Heart, MapPin, Clock, Database, Coffee, PawPrint, Mail, MessageCircle, Camera } from 'lucide-react';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const About: React.FC = () => {
     useSEO(SEO_DATA.about);
@@ -24,6 +25,14 @@ const About: React.FC = () => {
                 <div className="absolute bottom-0 left-0 z-10 w-72 h-72 bg-cyan-300/14 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
 
                 <div className="relative z-20 max-w-4xl mx-auto text-center">
+                    <Breadcrumb
+                        variant="light"
+                        className="mb-4 sm:mb-6 justify-center [&>ol]:justify-center"
+                        items={[
+                            { label: 'Home', to: '/' },
+                            { label: 'Over ons' },
+                        ]}
+                    />
                     <div className="inline-flex items-center justify-center p-4 bg-white/12 backdrop-blur-md border border-white/20 text-white rounded-2xl mb-6 shadow-sm">
                         <PawPrint size={40} strokeWidth={2.5} />
                     </div>

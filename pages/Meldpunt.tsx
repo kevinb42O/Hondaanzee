@@ -7,6 +7,7 @@ import ReportFormModal from '../components/meldpunt/ReportFormModal.tsx';
 import type { ReportFilters as ReportFiltersValue, ReportItem } from '../types.ts';
 import { confirmReport, fetchVisibleReports, flagReport } from '../utils/reportData.ts';
 import { SEO_DATA, useSEO } from '../utils/seo.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 const initialFilters: ReportFiltersValue = {
   city: 'all',
@@ -78,6 +79,15 @@ const Meldpunt: React.FC = () => {
             <ArrowLeft size={16} />
             Terug naar home
           </Link>
+
+          <Breadcrumb
+            variant="light"
+            className="mb-6"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Meldpunt' },
+            ]}
+          />
 
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.3fr)_360px] lg:items-end">
             <div className="max-w-3xl">

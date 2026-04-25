@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Sparkles, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrint, Rocket } from 'lucide-react';
 import { useSEO } from '../utils/seo.ts';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 
 interface UpdateTag {
   label: string;
@@ -37,6 +38,34 @@ const VERSION_ACCENT: Record<string, string> = {
 };
 
 const releases: UpdateRelease[] = [
+  {
+    version: '2.3',
+    date: '25 april 2026',
+    title: 'Mobiele ervaring, vindbaarheid en snelheid in één grote update',
+    subtitle: 'Een diepe poetsbeurt: vlotter op de telefoon, beter vindbaar in Google en sneller wanneer je terugkeert',
+    entries: [
+      { text: 'Mobiel menu houdt nu netjes je scrollpositie vast wanneer je het opent en weer sluit, zodat je niet meer terug naar boven gegooid wordt', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Foto’s zijn op de telefoon helemaal swipebaar geworden: vegen om te wisselen, dubbeltikken om te sluiten, en alle knoppen zijn groot genoeg voor duimen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Inlog- en aanmeldvelden kennen nu het juiste toetsenbord op iOS en Android (e-mailadressen, geen automatische hoofdletters), wat het invullen merkbaar sneller maakt', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Bij een fout in een formulier scrollt de pagina nu automatisch naar de exacte regel waar iets misging, met een duidelijke focus zodat je niet hoeft te zoeken', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Sterren bij reviews zijn groter en makkelijker aan te tikken op kleine schermen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Nieuwe “terug naar boven”-knop verschijnt vanzelf wanneer je ver naar beneden scrollt op lange pagina’s', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Toetsenbord-navigatie en focuscontouren zijn nu zichtbaar op de hele site, voor wie via tab of een schermlezer surft', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Wie gevoelig is aan beweging krijgt nu automatisch een rustigere versie zonder zware animaties (respecteert de “reduce motion”-instelling van het toestel)', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'iPhones met een notch krijgen nu de juiste extra ruimte onderaan, zodat zwevende knoppen niet langer onder de home-balk verdwijnen', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Volledig nieuwe service worker: tweede bezoek aan de site is merkbaar sneller, en updates worden zonder gedoe automatisch in de juiste volgorde geladen zonder witte schermen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Kruimelpaden (breadcrumbs) toegevoegd op alle grote overzichts- en sectiepagina’s, zodat je altijd ziet waar je zit en met één tik terug kan', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Alle 27 losloopzones hebben nu een eigen, deelbare detailpagina die ook in Google indexeerbaar is — eindelijk vindbaar als je googelt op een specifieke losloopweide', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Sitemap volledig automatisch opnieuw opgebouwd: 218 pagina’s waaronder elke losloopzone, elke hotspot, elke dienst, elke stad en elke blogpost', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Sociale previewkaarten op WhatsApp, iMessage, Facebook, X en Slack tonen nu een volledig correcte afbeelding met juiste afmetingen, type en alt-tekst', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Blogartikelen geven nu hun publicatie- en wijzigingsdatum mee aan zoekmachines, wat ze sneller doet opduiken in Google Discover en in nieuwsresultaten', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Filterpagina’s (zoals een specifieke stad + categorie in hotspots of diensten) worden niet langer apart geïndexeerd, zodat zoekers altijd op de meest complete pagina belanden', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Admin- en interne beheerpagina’s zijn nu officieel verborgen voor zoekmachines via robots.txt', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Pagina’s als “Over ons”, “Goed om te weten”, “Updates”, “Agenda”, “Community” en alle stadspagina’s kregen extra technische SEO-finetuning (canonicals, taalcode, robots-instructies)', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Eerste verbinding met onze database verloopt nu razendsnel via een vooraf opgezette netwerklaag — vooral merkbaar op trage 4G-verbindingen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Homepage-FAQ over zaak-aanmelden toont nu de echte aantallen (132 hotspots, 24 diensten, 54 Aanraders, 72 stickerzaken, alle 11 kustgemeenten) in plaats van een vaag “50+”', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
   {
     version: '2.2',
     date: '2 april 2026',
@@ -379,6 +408,14 @@ const Updates: React.FC = () => {
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
+            <Breadcrumb
+              variant="light"
+              className="mb-5"
+              items={[
+                { label: 'Home', to: '/' },
+                { label: 'Updates' },
+              ]}
+            />
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
               <Sparkles size={14} />
               Laatste grote update: vandaag

@@ -14,6 +14,7 @@ const STATIC_ROUTES = [
   '/over-ons',
   '/goed-om-te-weten',
   '/steun-ons',
+  '/zaak-aanmelden',
   '/privacy',
   '/algemene-voorwaarden',
   '/cookies',
@@ -21,6 +22,7 @@ const STATIC_ROUTES = [
   '/agenda',
   '/community',
   '/meldpunt',
+  '/meldpunt/vrijwilligers',
   '/updates',
 ];
 
@@ -56,17 +58,21 @@ const { HOTSPOTS } = loadTsModule('data/hotspots.ts');
 const { SERVICES } = loadTsModule('data/services.ts');
 const { CITIES } = loadTsModule('cityData.ts');
 const { blogPosts } = loadTsModule('data/blogs.ts');
+const { OFF_LEASH_AREAS } = loadTsModule('data/offLeashAreas.ts');
 
 const getPlaceRoutes = () => [
   ...HOTSPOTS.map((spot) => `/${spot.city}/hotspots/${spot.slug}`),
   ...SERVICES.map((service) => `/${service.city}/diensten/${service.slug}`),
 ];
 
+const getOffLeashRoutes = () => OFF_LEASH_AREAS.map((area) => `/losloopzones/${area.slug}`);
+
 const getAllRoutes = () => [
   ...STATIC_ROUTES,
   ...CITIES.map((city) => `/${city.slug}`),
   ...blogPosts.map((post) => `/blog/${post.slug}`),
   ...getPlaceRoutes(),
+  ...getOffLeashRoutes(),
 ];
 
 module.exports = {
@@ -74,7 +80,9 @@ module.exports = {
   SERVICES,
   CITIES,
   blogPosts,
+  OFF_LEASH_AREAS,
   STATIC_ROUTES,
   getPlaceRoutes,
+  getOffLeashRoutes,
   getAllRoutes,
 };

@@ -25,6 +25,7 @@ import { getPlaceSEO, useSEO } from '../utils/seo.ts';
 import { getPlaceCollectionPath, type PlaceKind } from '../utils/placeRoutes.ts';
 import type { Hotspot, OpeningHours, Service } from '../types.ts';
 import ImageModal from '../components/ImageModal.tsx';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 import NotFound from './NotFound.tsx';
 
 interface PlaceDetailProps {
@@ -706,18 +707,20 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
             <button
               type="button"
               onClick={handleBack}
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-white transition hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-white transition hover:bg-white/20 min-h-[44px]"
             >
               <ArrowLeft size={16} />
               Terug
             </button>
-            <Link to={`/${place.city}`} className="text-slate-200 transition hover:text-white">
-              {cityData.name}
-            </Link>
-            <span className="text-slate-500">/</span>
-            <Link to={collectionPath} className="text-slate-200 transition hover:text-white">
-              {kind === 'hotspot' ? 'Hotspots' : 'Diensten'}
-            </Link>
+            <Breadcrumb
+              variant="light"
+              items={[
+                { label: 'Home', to: '/' },
+                { label: cityData.name, to: `/${place.city}` },
+                { label: kind === 'hotspot' ? 'Hotspots' : 'Diensten', to: collectionPath },
+                { label: place.name },
+              ]}
+            />
           </div>
 
           <div className="max-w-3xl">

@@ -7,6 +7,7 @@ import { CITIES } from '../cityData.ts';
 import { getOffLeashAreaSEO, useSEO, SEO_DATA } from '../utils/seo.ts';
 import ImagePlaceholder from '../components/ImagePlaceholder.tsx';
 import ImageModal from '../components/ImageModal.tsx';
+import Breadcrumb from '../components/Breadcrumb.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ReviewSection from '../components/ReviewSection';
@@ -256,6 +257,23 @@ const AllOffLeashAreas: React.FC = () => {
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
             <span className="text-sm sm:text-base">Terug naar home</span>
           </Link>
+
+          <Breadcrumb
+            variant="light"
+            className="mb-4 sm:mb-6"
+            items={
+              displayedArea && displayedCity
+                ? [
+                    { label: 'Home', to: '/' },
+                    { label: 'Losloopzones', to: '/losloopzones' },
+                    { label: displayedArea.name },
+                  ]
+                : [
+                    { label: 'Home', to: '/' },
+                    { label: 'Losloopzones' },
+                  ]
+            }
+          />
 
           <div className="max-w-3xl relative">
             <div className="absolute -left-20 sm:-left-24 md:-left-28 top-0 text-5xl sm:text-6xl md:text-7xl hidden sm:block" style={{ animation: 'float 2.5s ease-in-out infinite' }}>
