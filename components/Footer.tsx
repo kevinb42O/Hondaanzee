@@ -4,7 +4,7 @@ import { PawPrint, ExternalLink, Mail, Check, Bike, Caravan, Baby } from 'lucide
 import { Link } from 'react-router-dom';
 
 const SHOW_FOOTER_WAVE = false;
-const LAST_UPDATE = { day: '31', month: 'mrt', year: '2026' };
+const LAST_UPDATE = { day: '26', month: 'apr', year: '2026' };
 
 const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 18, className }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
