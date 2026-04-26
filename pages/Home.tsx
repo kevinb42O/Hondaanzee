@@ -511,8 +511,8 @@ const Home: React.FC = () => {
             fetchPriority="high"
           />
         </div>
-        <div className="absolute inset-0 z-[1] bg-slate-950/28"></div>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-50/78 via-slate-900/6 to-slate-900/18"></div>
+        <div className="absolute inset-0 z-[1] bg-slate-950/50"></div>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-slate-950/30"></div>
 
         <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2">
           <h1 className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 font-heading" style={{ textShadow: '0 2px 10px rgba(2,6,23,0.22)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}>
