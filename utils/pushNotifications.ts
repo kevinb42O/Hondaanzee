@@ -2,8 +2,11 @@
 // VAPID public key is read from VITE_VAPID_PUBLIC_KEY at build time.
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from './supabasePublicConfig.ts';
 
+const DEFAULT_VAPID_PUBLIC_KEY = 'BFfI18UTP8F_RvqA2e3NYr_rXx4G6HmurtJy1bPMFLVv-9-3RibhjJsT2Eqzo2uXHZOAK3CPdj7BU1mgvaG3yaA';
+
 export const VAPID_PUBLIC_KEY: string =
-  (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_VAPID_PUBLIC_KEY || '';
+  (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_VAPID_PUBLIC_KEY
+  || DEFAULT_VAPID_PUBLIC_KEY;
 
 export type PushPermission = NotificationPermission | 'unsupported';
 
