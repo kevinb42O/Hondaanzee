@@ -9,14 +9,21 @@
  * Bumping CACHE_VERSION invalidates all old caches on activate.
  */
 
-const CACHE_VERSION = 'haz-v2026.05.02-2';
+const CACHE_VERSION = 'haz-v2026.05.02-3';
 const PRECACHE = `${CACHE_VERSION}-precache`;
 const RUNTIME_HTML = `${CACHE_VERSION}-html`;
 const RUNTIME_ASSETS = `${CACHE_VERSION}-assets`;
 const RUNTIME_IMAGES = `${CACHE_VERSION}-images`;
 const RUNTIME_FONTS = `${CACHE_VERSION}-fonts`;
 
-const APP_SHELL = ['/', '/index.html', '/site.webmanifest', '/robots.txt'];
+const APP_SHELL = [
+  '/',
+  '/index.html',
+  '/site.webmanifest',
+  '/robots.txt',
+  '/notification-icon-192.png',
+  '/notification-badge-96.png',
+];
 
 const ALLOWED_CACHES = new Set([
   PRECACHE,
@@ -172,8 +179,8 @@ self.addEventListener('push', (event) => {
   const title = payload.title || 'HondAanZee';
   const options = {
     body: payload.body || '',
-    icon: '/favicon-192x192.svg',
-    badge: '/favicon-192x192.svg',
+    icon: '/notification-icon-192.png',
+    badge: '/notification-badge-96.png',
     data: { url: payload.url || '/' },
     tag: payload.tag || 'haz-notification',
     renotify: false,
