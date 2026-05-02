@@ -48,7 +48,13 @@ const NotificationOptIn: React.FC = () => {
   };
 
   useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setStatus((current) => (current === 'loading' ? 'not-subscribed' : current));
+    }, 4500);
+
     void refresh();
+
+    return () => window.clearTimeout(timeout);
   }, []);
 
   const handleSubscribe = async () => {

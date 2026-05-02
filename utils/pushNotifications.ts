@@ -10,6 +10,22 @@ export const VAPID_PUBLIC_KEY: string =
 
 export type PushPermission = NotificationPermission | 'unsupported';
 
+const SERVICE_WORKER_URL = '/sw.js';
+const SERVICE_WORKER_SCOPE = '/';
+
+const withTimeout = async <T,>(promise: Promise<T>, timeoutMs: number): Promise<T> => {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error('Service worker timeout.')), timeoutMs);
+  });
+
+  try {
+    return await Promise.race([promise, timeout]);
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
+  }
+};
+
 const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
@@ -33,15 +49,23 @@ export const getPushPermission = (): PushPermission => {
   return Notification.permission;
 };
 
-const getRegistration = async (): Promise<ServiceWorkerRegistration | null> => {
+const getRegistration = async (timeoutMs = 5000): Promise<ServiceWorkerRegistration | null> => {
   if (!('serviceWorker' in navigator)) return null;
-  const reg = await navigator.serviceWorker.ready;
-  return reg || null;
+
+  const existing = await navigator.serviceWorker.getRegistration(SERVICE_WORKER_SCOPE).catch(() => undefined);
+  const registration = existing || await navigator.serviceWorker
+    .register(SERVICE_WORKER_URL, { scope: SERVICE_WORKER_SCOPE })
+    .catch(() => undefined);
+
+  if (!registration) return null;
+  if (registration.active) return registration;
+
+  return withTimeout(navigator.serviceWorker.ready, timeoutMs).catch(() => registration);
 };
 
 export const getCurrentSubscription = async (): Promise<PushSubscription | null> => {
   if (!isPushSupported()) return null;
-  const reg = await getRegistration();
+  const reg = await getRegistration(3000);
   if (!reg) return null;
   return reg.pushManager.getSubscription();
 };
@@ -88,7 +112,7 @@ export const subscribeToPush = async (): Promise<PushSubscription> => {
     throw new Error('Toestemming geweigerd. Sta notificaties toe in je browserinstellingen.');
   }
 
-  const reg = await getRegistration();
+  const reg = await getRegistration(8000);
   if (!reg) throw new Error('Service worker niet beschikbaar.');
 
   let subscription = await reg.pushManager.getSubscription();
