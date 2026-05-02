@@ -39,8 +39,12 @@ const NotificationOptIn: React.FC = () => {
       setStatus('denied');
       return;
     }
-    const sub = await getCurrentSubscription();
-    setStatus(sub ? 'subscribed' : 'not-subscribed');
+    try {
+      const sub = await getCurrentSubscription();
+      setStatus(sub ? 'subscribed' : 'not-subscribed');
+    } catch {
+      setStatus('not-subscribed');
+    }
   };
 
   useEffect(() => {
@@ -73,13 +77,6 @@ const NotificationOptIn: React.FC = () => {
     }
   };
 
-  if (status === 'loading') return null;
-
-  if (!VAPID_PUBLIC_KEY) {
-    // Not configured at build time — render nothing rather than a broken button.
-    return null;
-  }
-
   return (
     <div className="rounded-2xl bg-slate-800/40 border border-slate-700/50 p-4 text-left">
       <div className="flex items-start gap-3">
@@ -91,6 +88,19 @@ const NotificationOptIn: React.FC = () => {
           <p className="text-slate-400 text-xs leading-relaxed mb-3">
             Krijg een melding bij belangrijke updates over de Belgische kust voor je hond.
           </p>
+
+          {status === 'loading' && (
+            <div className="inline-flex items-center gap-2 rounded-xl bg-slate-700/70 px-3 py-2 text-xs font-bold text-slate-200">
+              <Loader2 size={14} className="animate-spin" />
+              Status controleren...
+            </div>
+          )}
+
+          {!VAPID_PUBLIC_KEY && status !== 'loading' && (
+            <p className="text-amber-300/90 text-xs">
+              Notificaties zijn nog niet volledig geconfigureerd.
+            </p>
+          )}
 
           {status === 'unsupported' && (
             <p className="text-slate-500 text-xs">
@@ -106,7 +116,7 @@ const NotificationOptIn: React.FC = () => {
             </p>
           )}
 
-          {status === 'not-subscribed' && (
+          {VAPID_PUBLIC_KEY && status === 'not-subscribed' && (
             <button
               type="button"
               onClick={handleSubscribe}

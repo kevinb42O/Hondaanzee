@@ -9,7 +9,7 @@
  * Bumping CACHE_VERSION invalidates all old caches on activate.
  */
 
-const CACHE_VERSION = 'haz-v2026.05.02-1';
+const CACHE_VERSION = 'haz-v2026.05.02-2';
 const PRECACHE = `${CACHE_VERSION}-precache`;
 const RUNTIME_HTML = `${CACHE_VERSION}-html`;
 const RUNTIME_ASSETS = `${CACHE_VERSION}-assets`;

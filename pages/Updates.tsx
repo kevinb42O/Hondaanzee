@@ -39,6 +39,21 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '2.4',
+    date: '2 mei 2026',
+    title: 'Pushmeldingen en admin-notificaties toegevoegd',
+    subtitle: 'Belangrijke updates kunnen nu rechtstreeks naar aangemelde toestellen worden gestuurd',
+    entries: [
+      { text: 'Nieuwe pushmeldingen toegevoegd voor de PWA: bezoekers kunnen zich aanmelden om belangrijke HondAanZee-updates rechtstreeks op hun toestel te ontvangen', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Android en desktop kunnen notificaties rechtstreeks via de browser activeren; iPhone en iPad krijgen duidelijke uitleg om de site eerst op het beginscherm te zetten', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Nieuwe adminpagina toegevoegd om een titel, bericht en link naar alle aangemelde toestellen te versturen', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Supabase kreeg veilige push-subscription opslag, verzendlogboek en Edge Functions om notificaties te versturen zonder publieke toegang tot de databank', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Service worker uitgebreid zodat notificaties ook openen naar de juiste pagina wanneer je erop tikt', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Notificatiekaart in de footer blijft nu zichtbaar terwijl de browser de push-status controleert, zodat de knop niet meer stil kan verdwijnen', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Laatste update-datum in de footer bijgewerkt naar 2 mei 2026', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
+  {
     version: '2.3',
     date: '25 april 2026',
     title: 'Mobiele ervaring, vindbaarheid en snelheid in één grote update',
