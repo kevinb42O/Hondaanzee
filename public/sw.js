@@ -9,7 +9,7 @@
  * Bumping CACHE_VERSION invalidates all old caches on activate.
  */
 
-const CACHE_VERSION = 'haz-v2026.04.25-1';
+const CACHE_VERSION = 'haz-v2026.05.02-1';
 const PRECACHE = `${CACHE_VERSION}-precache`;
 const RUNTIME_HTML = `${CACHE_VERSION}-html`;
 const RUNTIME_ASSETS = `${CACHE_VERSION}-assets`;
@@ -159,4 +159,47 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Default: pass-through (no caching) — Supabase data, analytics, anything else.
+});
+
+// ---- Web Push ----
+self.addEventListener('push', (event) => {
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch (e) {
+    payload = { title: 'HondAanZee', body: event.data ? event.data.text() : '' };
+  }
+  const title = payload.title || 'HondAanZee';
+  const options = {
+    body: payload.body || '',
+    icon: '/favicon-192x192.svg',
+    badge: '/favicon-192x192.svg',
+    data: { url: payload.url || '/' },
+    tag: payload.tag || 'haz-notification',
+    renotify: false,
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || '/';
+  event.waitUntil(
+    (async () => {
+      const allClients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      for (const client of allClients) {
+        try {
+          const clientUrl = new URL(client.url);
+          if (clientUrl.origin === self.location.origin) {
+            await client.focus();
+            if ('navigate' in client) {
+              try { await client.navigate(target); } catch (_) { /* noop */ }
+            }
+            return;
+          }
+        } catch (_) { /* noop */ }
+      }
+      await self.clients.openWindow(target);
+    })(),
+  );
 });

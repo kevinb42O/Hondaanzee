@@ -8,3 +8,15 @@ verify_jwt = false
 
 [functions.remove-report]
 verify_jwt = false
+
+[functions.subscribe-push]
+verify_jwt = false
+
+[functions.unsubscribe-push]
+verify_jwt = false
+
+[functions.send-push]
+verify_jwt = false
+
+[functions.list-push-stats]
+verify_jwt = false

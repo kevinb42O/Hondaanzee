@@ -263,6 +263,9 @@ const MeldpuntAdmin: React.FC = () => {
             sessionEmail={session.user.email || ADMIN_LOGIN_EMAIL}
             actions={(
               <>
+                <Link to="/admin/notificaties" className="admin-btn-secondary">
+                  Notificaties
+                </Link>
                 <Link to="/admin/log" className="admin-btn-secondary">
                   Logboek
                 </Link>

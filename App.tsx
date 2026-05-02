@@ -36,6 +36,7 @@ const MeldpuntVrijwilligers = React.lazy(() => import('./pages/MeldpuntVrijwilli
 const ReportDetail = React.lazy(() => import('./pages/ReportDetail.tsx'));
 const MeldpuntAdmin = React.lazy(() => import('./pages/MeldpuntAdmin.tsx'));
 const MeldpuntAdminLog = React.lazy(() => import('./pages/MeldpuntAdminLog.tsx'));
+const AdminNotifications = React.lazy(() => import('./pages/AdminNotifications.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -126,7 +127,7 @@ const LocationAwareErrorBoundary = ({ children }: { children: React.ReactNode })
 
 const AppContent = () => {
   const { pathname } = useLocation();
-  const isAdminRoute = pathname === '/admin' || pathname === '/admin/log' || pathname === '/_meldpunt-admin';
+  const isAdminRoute = pathname === '/admin' || pathname === '/admin/log' || pathname === '/admin/notificaties' || pathname === '/_meldpunt-admin';
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900" style={{ overflowX: 'clip' }}>
@@ -162,6 +163,7 @@ const AppContent = () => {
               <Route path="/meldpunt/:publicId" element={<ReportDetail />} />
               <Route path="/admin" element={<MeldpuntAdmin />} />
               <Route path="/admin/log" element={<MeldpuntAdminLog />} />
+              <Route path="/admin/notificaties" element={<AdminNotifications />} />
               <Route path="/_meldpunt-admin" element={<Navigate to="/admin" replace />} />
               <Route path="/updates" element={<Updates />} />
               <Route path="/:slug" element={<CityPage />} />

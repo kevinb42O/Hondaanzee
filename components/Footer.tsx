@@ -2,6 +2,7 @@
 import React from 'react';
 import { PawPrint, ExternalLink, Mail, Check, Bike, Caravan, Baby } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import NotificationOptIn from './NotificationOptIn.tsx';
 
 const SHOW_FOOTER_WAVE = false;
 const LAST_UPDATE = { day: '26', month: 'apr', year: '2026' };
@@ -278,6 +279,9 @@ const Footer: React.FC = () => {
                 <span className="text-sm font-bold text-cyan-400">{LAST_UPDATE.month}</span>
                 <span className="text-xs font-mono text-slate-400">{LAST_UPDATE.year}</span>
               </div>
+            </div>
+            <div className="mt-4 w-full">
+              <NotificationOptIn />
             </div>
           </div>
         </div>
