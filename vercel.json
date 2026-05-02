@@ -1,5 +1,6 @@
 {
   "buildCommand": "npm run build",
+    "trailingSlash": false,
     "crons": [
         {
             "path": "/api/keepalive",
@@ -7,6 +8,11 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/community/",
+            "destination": "/community",
+            "permanent": true
+        },
         {
             "source": "/:path*",
             "has": [
