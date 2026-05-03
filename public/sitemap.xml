@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hondaanzee.be/</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/hundestrand-belgien" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/plages-chiens-belgique" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
     <lastmod>2026-05-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -79,7 +74,7 @@
   </url>
   <url>
     <loc>https://hondaanzee.be/blog</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -115,560 +110,109 @@
   </url>
   <url>
     <loc>https://hondaanzee.be/blankenberge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/blankenberge" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/zeebrugge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/zeebrugge" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/knokke-heist</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/knokke-heist" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/de-haan</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-haan" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-haan" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-haan" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-haan" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-haan" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/wenduine</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/wenduine" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/wenduine" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/wenduine" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/wenduine" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/wenduine" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/bredene</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/bredene" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/bredene" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/bredene" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/bredene" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/bredene" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/oostende</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/oostende" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/oostende" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/oostende" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/oostende" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/oostende" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/middelkerke</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/middelkerke" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/nieuwpoort</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/nieuwpoort" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/koksijde</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/koksijde" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/koksijde" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/koksijde" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/koksijde" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/koksijde" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/de-panne</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-panne" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-panne" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-panne" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-panne" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-panne" />
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/hundestrand-belgien</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/hundestrand-belgien" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/plages-chiens-belgique" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/plages-chiens-belgique</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/hundestrand-belgien" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/plages-chiens-belgique" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/dog-friendly-beaches-belgium</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/hundestrand-belgien" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/plages-chiens-belgique" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/dog-friendly-beaches-belgium" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/blankenberge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/blankenberge" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/zeebrugge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/zeebrugge" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/knokke-heist</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/knokke-heist" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/de-haan</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-haan" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-haan" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-haan" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-haan" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-haan" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/wenduine</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/wenduine" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/wenduine" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/wenduine" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/wenduine" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/wenduine" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/bredene</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/bredene" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/bredene" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/bredene" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/bredene" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/bredene" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/oostende</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/oostende" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/oostende" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/oostende" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/oostende" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/oostende" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/middelkerke</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/middelkerke" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/nieuwpoort</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/nieuwpoort" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/koksijde</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/koksijde" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/koksijde" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/koksijde" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/koksijde" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/koksijde" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/de/de-panne</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-panne" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-panne" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-panne" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-panne" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-panne" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/blankenberge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/blankenberge" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/zeebrugge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/zeebrugge" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/knokke-heist</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/knokke-heist" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/de-haan</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-haan" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-haan" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-haan" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-haan" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-haan" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/wenduine</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/wenduine" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/wenduine" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/wenduine" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/wenduine" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/wenduine" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/bredene</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/bredene" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/bredene" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/bredene" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/bredene" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/bredene" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/oostende</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/oostende" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/oostende" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/oostende" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/oostende" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/oostende" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/middelkerke</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/middelkerke" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/nieuwpoort</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/nieuwpoort" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/koksijde</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/koksijde" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/koksijde" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/koksijde" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/koksijde" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/koksijde" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/fr/de-panne</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-panne" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-panne" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-panne" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-panne" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-panne" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/blankenberge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/blankenberge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/blankenberge" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/zeebrugge</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/zeebrugge" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/zeebrugge" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/knokke-heist</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/knokke-heist" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/knokke-heist" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/de-haan</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-haan" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-haan" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-haan" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-haan" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-haan" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/wenduine</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/wenduine" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/wenduine" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/wenduine" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/wenduine" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/wenduine" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/bredene</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/bredene" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/bredene" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/bredene" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/bredene" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/bredene" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/oostende</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/oostende" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/oostende" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/oostende" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/oostende" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/oostende" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/middelkerke</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/middelkerke" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/middelkerke" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/nieuwpoort</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/nieuwpoort" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/nieuwpoort" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/koksijde</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/koksijde" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/koksijde" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/koksijde" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/koksijde" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/koksijde" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hondaanzee.be/en/de-panne</loc>
-    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://hondaanzee.be/de-panne" />
-    <xhtml:link rel="alternate" hreflang="de-DE" href="https://hondaanzee.be/de/de-panne" />
-    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://hondaanzee.be/fr/de-panne" />
-    <xhtml:link rel="alternate" hreflang="en-GB" href="https://hondaanzee.be/en/de-panne" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://hondaanzee.be/en/de-panne" />
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/van-trekhond-tot-strandkoning-geschiedenis-kusthonden</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/zeehonden-aan-de-belgische-kust</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/opruimacties-proper-strand-lopers</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/mooiste-bossen-belgische-kust-wandelen-met-hond</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/zwemplekjes-honden-belgische-kust</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/mentale-leiband-vrijheid-met-connectie</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hondaanzee.be/blog/spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
