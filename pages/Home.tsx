@@ -9,6 +9,7 @@ import type { City } from '../types.ts';
 import { findNearestCity } from '../utils/geo.ts';
 import { evaluateCityRuleStatus } from '../utils/rules.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import NotificationOptIn from '../components/NotificationOptIn.tsx';
 
 // Kustlijn volgorde NO → ZW
 const COASTLINE_ORDER = [
@@ -725,6 +726,10 @@ const Home: React.FC = () => {
 
       {/* Cities Grid Section with Warm Background */}
       <div className="bg-stone-50 py-12 sm:py-16 md:py-20">
+        <div className="mx-auto mb-10 max-w-7xl px-4 sm:mb-14">
+          <NotificationOptIn variant="homepage" />
+        </div>
+
         <div id="steden" className="max-w-7xl mx-auto px-4 scroll-mt-24">
           {/* Cities Grid Header */}
           <div className="mb-10 flex items-center justify-between px-2">
@@ -828,7 +833,7 @@ const Home: React.FC = () => {
                 <div className="order-2 flex flex-col gap-3 xl:items-end">
                   <Link
                     to="/zaak-aanmelden"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-amber-600"
+                    className="inline-flex self-start items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-amber-600"
                   >
                     <Megaphone size={18} />
                     Meld je zaak GRATIS aan
