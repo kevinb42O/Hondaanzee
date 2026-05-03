@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx puppeteer browsers install chrome && npm run build",
+    "buildCommand": "npm run build:no-prerender",
     "trailingSlash": false,
     "crons": [
         {
