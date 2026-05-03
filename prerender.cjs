@@ -72,13 +72,24 @@ async function prerender() {
   }
   
   const server = await startServer();
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+  });
   
   let rendered = 0;
   
   for (const route of ROUTES) {
+    let page;
     try {
-      const page = await browser.newPage();
+      page = await browser.newPage();
+      await page.setBypassServiceWorker(true);
+      await page.evaluateOnNewDocument(() => {
+        Object.defineProperty(navigator, 'serviceWorker', {
+          configurable: true,
+          value: undefined,
+        });
+      });
       
       // Block unnecessary resources for faster rendering
       await page.setRequestInterception(true);
@@ -155,10 +166,12 @@ async function prerender() {
       
       console.log(`  OK ${route}`);
       rendered++;
-      
-      await page.close();
     } catch (err) {
       console.error(`  FAIL ${route}: ${err.message}`);
+    } finally {
+      if (page && !page.isClosed()) {
+        await page.close().catch(() => {});
+      }
     }
   }
   
@@ -166,10 +179,13 @@ async function prerender() {
   server.close();
   
   console.log(`\nDone! Pre-rendered ${rendered}/${ROUTES.length} routes.`);
+
+  if (rendered !== ROUTES.length) {
+    throw new Error(`Pre-rendered ${rendered}/${ROUTES.length} routes. Missing routes should not be deployed.`);
+  }
 }
 
 prerender().catch((err) => {
-  console.error('\n  Pre-rendering failed (non-fatal):', err.message);
-  console.error('  Build continues without pre-rendered HTML.\n');
-  process.exit(0); // Don't fail the Vercel build
+  console.error('\n  Pre-rendering failed:', err.message);
+  process.exit(1);
 });

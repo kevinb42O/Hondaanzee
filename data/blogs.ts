@@ -30,6 +30,166 @@ export interface BlogSection {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'van-trekhond-tot-strandkoning-geschiedenis-kusthonden',
+    title: 'Van trekhond tot strandkoning: de vergeten geschiedenis van kusthonden',
+    subtitle: 'Hoe honden aan de Belgische kust evolueerden van werkdier in het zand tot volwaardig gezinslid op het strand',
+    excerpt: 'Lang voor honden op het strand vooral discussie opriepen over leibanden, zones en GAS-boetes, trokken ze viskarren door het zware zand. Deze vergeten kustgeschiedenis maakt je volgende wandeling met hond plots een stuk rijker.',
+    date: '2026-05-03',
+    readTime: '10 min',
+    category: 'Kustgeschiedenis',
+    categoryColor: 'amber',
+    icon: 'history',
+    image: '/hondmetkar_cover.webp',
+    imageAlt: 'Breed historisch coverbeeld van een trekhond met kar aan de Belgische kust',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Je kent het moment. Je wandelt op de zeedijk van Blankenberge, De Haan of Koksijde. De wind staat scheef op je jas, de leiband trekt net iets te hard, en ergens verderop zoek je naar dat ene blauwe bordje. Mag je hond hier los? Vanaf welke datum verandert de zomerregeling? En hoe duur was die GAS-boete ook alweer?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dat soort verwarring is precies waarom HondAanZee.be bestaat. Maar de geschiedenis van honden aan onze kust is veel ouder, ruwer en merkwaardiger dan de politiereglementen waar we vandaag over mopperen. Achter elke strandwandeling zit een verhaal van arbeid, status, dierenwelzijn en lokale politiek.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Kijk even naar de hond naast je. Vandaag is hij misschien een Border Collie met een tennisbal, een Stafford die de branding inspecteert of een Teckel die doet alsof hij de duinen persoonlijk bezit. Maar spoel een dikke eeuw terug, en het strand was geen speelplek. Het was een werkvloer.'
+      },
+      {
+        type: 'callout',
+        title: 'Eerlijk over dit artikel',
+        text: 'Dit is geen droge academische studie, maar een toegankelijk achtergrondverhaal. Sommige lokale details verschillen per badplaats en periode. De grote lijn staat wel stevig: honden waren aan de Belgische kust lange tijd nuttige werkdieren, pas veel later werden ze vooral gezins- en recreatiehonden.'
+      },
+      {
+        type: 'heading',
+        text: 'Het paard van de armen'
+      },
+      {
+        type: 'paragraph',
+        text: 'Eind negentiende en begin twintigste eeuw was de kust voor veel lokale gezinnen geen vakantiekaartje, maar een plek van overleven. Vissers, garnaalkruiers, visleursters en kleine handelaars moesten hun waar van het strand naar de dijk, de markt of het hinterland krijgen. Een paard was duur in aankoop, duur in onderhoud en voor veel mensen simpelweg onhaalbaar.'
+      },
+      {
+        type: 'paragraph',
+        text: 'De hond werd daarom het praktische alternatief: kleiner, goedkoper en sterk genoeg voor het werk dat moest gebeuren. Niet voor niets kreeg hij de bijnaam "het paard van de armen". In karrenharnassen trokken honden vis, garnalen, melk, brood of handelswaar door straten en over harde stukken zand.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Romantisch was dat niet. Denk aan houten karren, natte netten, glibberige manden, zwaar zand en koude zeewind. Een, twee of soms meerdere forse honden liepen voor de kar. Hun taak was niet poseren voor een vakantiefoto, maar trekken tot de vracht op bestemming was.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Het waren zelden sierlijke rashonden met een stamboom. Vaak ging het om stevige, gespierde werkhonden en kruisingen, geselecteerd op kracht, uithouding en koppigheid. Hun voer was wat er beschikbaar was: oud brood, resten van vis, slachtafval. Het strand dat wij vandaag zien als vrijheid, was voor hen vooral weerstand onder de poten.'
+      },
+      {
+        type: 'image',
+        imageSrc: '/hondmetkar.webp',
+        imageAlt: 'Trekhond met houten viskar op een strandpromenade aan de Belgische kust',
+        text: 'Een beeld dat veel dichter ligt bij de historische realiteit van de kusthond: geen strandrecreant, maar een werkdier in dienst van visserij en handel.'
+      },
+      {
+        type: 'heading',
+        text: 'De Belle Epoque: twee soorten honden op dezelfde kustlijn'
+      },
+      {
+        type: 'paragraph',
+        text: 'Terwijl lokale honden karren trokken, veranderden badplaatsen als Oostende en Blankenberge razendsnel. De Belle Epoque bracht hotels, promenades, casino’s, badkarren en een nieuwe klasse bezoekers naar zee. De kust werd niet alleen een plek om te werken, maar ook een decor om gezien te worden.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Daardoor ontstond een vreemd contrast. Beneden, dicht bij het water, zag je de werkhond van vissers en handelaars: nat, sterk, soms gehavend, altijd nuttig. Boven op de dijk liep de burgerij met kleine gezelschapshonden: poedels, mopshonden, spaniëls en andere honden die vooral status en verfijning uitstraalden.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voor het eerst botsten aan de kust twee ideeën over wat een hond was. Voor de lokale bevolking bleef hij een noodzakelijk werkdier. Voor de badgast werd hij steeds vaker een luxegezelschap, een dier dat mee mocht flaneren, rusten en genieten van zeelucht.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Uit die botsing groeiden ook de eerste spanningen rond honden in publieke kustzones. Werkhonden waren luid, vuil, sterk en zichtbaar. Toeristen klaagden over stank, geblaf en overlast. Gemeentebesturen wilden de welgestelde bezoeker te vriend houden. De voorlopers van onze strandregels kwamen dus niet uit het niets: ze ontstonden op het kruispunt van toerisme, economie en klasse.'
+      },
+      {
+        type: 'quote',
+        text: 'De hond op het strand was nooit alleen een hond. Hij vertelde iets over geld, arbeid, status en wie de kust mocht gebruiken.'
+      },
+      {
+        type: 'heading',
+        text: 'Voor de GAS-boete was er de hondenpenning'
+      },
+      {
+        type: 'paragraph',
+        text: 'Vandaag zuchten we bij onduidelijke zomerregelingen of een boete voor loslopen buiten de toegelaten zone. Rond de eeuwwisseling lag de inzet harder. Gemeenten gebruikten hondenbelasting om de hondenpopulatie te controleren en inkomsten te halen. Wie betaalde, kreeg een penning die de hond zichtbaar moest dragen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een hond zonder penning liep risico. In verschillende steden en gemeenten werden hondenvangers of hondenslagers ingezet om loslopende of ongeregistreerde honden te vangen. Dat klinkt vandaag bijna onwerkelijk, maar het hoorde bij een tijd waarin dierenbescherming nog beperkt was en een hond juridisch vooral bezit of nuttig instrument was.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wie zijn hond terug wilde, moest snel handelen: achterstallige taks betalen, kosten vergoeden en bewijzen dat het dier bij iemand hoorde. Voor arme gezinnen kon dat een harde klap zijn. Dezelfde hond die nodig was om geld te verdienen, kon door geldgebrek ook weer verdwijnen.'
+      },
+      {
+        type: 'warning',
+        title: 'Geen nostalgie zonder nuance',
+        text: 'De oude kust had charme, maar voor veel werkhonden was ze hard. Wie vandaag moppert over regels heeft vaak gelijk, maar historisch gezien leven onze honden in een ongezien comfortabele periode.'
+      },
+      {
+        type: 'heading',
+        text: '14 augustus 1986: van hulpmiddel naar beschermd gezelschapsdier'
+      },
+      {
+        type: 'paragraph',
+        text: 'België hield lang vast aan het gebruik van honden als trekdier. In de loop van de twintigste eeuw verdween de praktijk geleidelijk uit het straatbeeld, maar het echte wettelijke kantelpunt kwam met de Wet betreffende de bescherming en het welzijn der dieren van 14 augustus 1986. Die wet maakte komaf met een manier van denken waarin dieren vooral bruikbaar moesten zijn.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Voor honden betekende dat een fundamentele verschuiving. Ze werden niet langer bekeken als goedkope motor voor een kar, maar als dieren met welzijnsnoden. Dat klinkt vanzelfsprekend voor wie vandaag een hondenmand, dierenartsverzekering en favoriete snackvoorraad heeft, maar historisch is het behoorlijk recent.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Vanaf dat moment veranderde ook de betekenis van het strand. Honden kwamen er steeds minder om te werken en steeds meer om te wandelen, snuffelen, zwemmen en spelen. De kust werd voor hen langzaam een recreatieruimte, niet langer een economische werkstrook.'
+      },
+      {
+        type: 'heading',
+        text: 'Wat ligt er onder dat zand?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Er zit nog een extra laag geschiedenis onder je voeten. De Noordzee was in de ijstijden deels droog land: een uitgestrekt landschap dat vaak onder de naam Doggerland wordt besproken. Daar leefden grote prehistorische dieren zoals mammoeten en wolharige neushoorns. Door natuurlijke erosie en zandsuppleties spoelen fossiele resten soms aan op stranden langs de Noordzee.'
+      },
+      {
+        type: 'paragraph',
+        text: 'De kans dat je hond tijdens een wandeling een spectaculair fossiel opgraaft, blijft klein. Maar het idee is prachtig: dezelfde poot die vandaag een kuil graaft naast je strandlaken, krabt misschien door zand dat verhalen draagt van vissers, trekhonden, stormen en prehistorische landschappen.'
+      },
+      {
+        type: 'tip',
+        title: 'Vondst op het strand?',
+        text: 'Vind je iets dat op een fossiel bot, tand of oud voorwerp lijkt? Neem een foto, noteer de vindplaats en laat het beoordelen door een museum, lokale erfgoeddienst of natuurhistorische expert. Niet alles wat oud lijkt is waardevol, maar sommige vondsten zijn te interessant om zomaar weg te gooien.'
+      },
+      {
+        type: 'heading',
+        text: 'Waarom dit verhaal vandaag relevant is'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een blog over trekhonden klinkt op het eerste gezicht misschien minder praktisch dan een lijst met losloopzones. Toch heeft dit verhaal waarde voor HondAanZee.be. Het geeft diepte aan wat we vandaag doen: hondenbezitters helpen om de kust correct, vrij en respectvol te gebruiken.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Regels blijven soms frustrerend. Gemeenten communiceren niet altijd helder. Zones veranderen. Borden staan niet altijd logisch. Maar de lange lijn is duidelijk: de hond is aan onze kust opgeschoven van werktuig naar metgezel, van lastdier naar strandgenoot.'
+      },
+      {
+        type: 'paragraph',
+        text: 'De volgende keer dat je via HondAanZee.be een losloopstrand, wandeling of hondvriendelijke zaak vindt, wandel je dus niet zomaar over zand. Je loopt over een plek waar honden generaties lang hebben gewerkt, geleden, gewacht, getrokken, gerend en uiteindelijk hun vrijheid hebben teruggekregen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Onze honden hebben het aan de Belgische kust nog nooit zo goed gehad als vandaag. Ze zijn geen motor meer voor een viskar. Ze zijn gezinsleden, wandelpartners en, eerlijk is eerlijk, vaak de echte reden waarom wij naar zee willen.'
+      },
+      {
+        type: 'quote',
+        text: 'Van het zware zand naar de losse lijn: de kustgeschiedenis van de hond is eigenlijk een verhaal van emancipatie op vier poten.'
+      }
+    ]
+  },
+  {
     slug: 'zeehonden-aan-de-belgische-kust',
     title: 'Zeehonden aan de Belgische kust: wat als je hond er eentje tegenkomt?',
     subtitle: 'Alles wat je moet weten over zeehonden op het strand — en hoe je jouw hond (en de zeehond) veilig houdt',
