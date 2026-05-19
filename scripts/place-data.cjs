@@ -58,6 +58,7 @@ const { HOTSPOTS } = loadTsModule('data/hotspots.ts');
 const { SERVICES } = loadTsModule('data/services.ts');
 const { CITIES } = loadTsModule('cityData.ts');
 const { blogPosts } = loadTsModule('data/blogs.ts');
+const { EVENTS } = loadTsModule('data/events.ts');
 const { OFF_LEASH_AREAS } = loadTsModule('data/offLeashAreas.ts');
 
 const getPlaceRoutes = () => [
@@ -71,6 +72,7 @@ const getAllRoutes = () => [
   ...STATIC_ROUTES,
   ...CITIES.map((city) => `/${city.slug}`),
   ...blogPosts.map((post) => `/blog/${post.slug}`),
+  ...EVENTS.map((event) => `/agenda/${event.slug}`),
   ...getPlaceRoutes(),
   ...getOffLeashRoutes(),
 ];
@@ -80,6 +82,7 @@ module.exports = {
   SERVICES,
   CITIES,
   blogPosts,
+  EVENTS,
   OFF_LEASH_AREAS,
   STATIC_ROUTES,
   getPlaceRoutes,

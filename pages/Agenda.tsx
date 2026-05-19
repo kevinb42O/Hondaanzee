@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, MapPin, Clock, Tag, X, ChevronRight, PartyPopper, Accessibility, Mail, Phone, Globe, Sparkles, Heart, Utensils, TreePine } from 'lucide-react';
-import ImageModal from '../components/ImageModal.tsx';
-import LocalHero from '../components/LocalHero.tsx';
-import { EVENTS, type DogEvent } from '../data/events.ts';
+import { ArrowLeft, Calendar, MapPin, Clock, X, PartyPopper, Mail, Sparkles, Heart } from 'lucide-react';
+import { EVENTS } from '../data/events.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
 
@@ -22,67 +19,14 @@ const SEASON_COLORS: Record<string, { bg: string; text: string; border: string }
   Winter: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
 };
 
-const renderDescriptionWithHighlight = (event: DogEvent) => {
-  if (!event.descriptionHighlight || !event.description.includes(event.descriptionHighlight)) {
-    return event.description;
-  }
-
-  const [before, after] = event.description.split(event.descriptionHighlight);
-
-  return (
-    <>
-      {before}
-      <strong className="font-black text-slate-900">{event.descriptionHighlight}</strong>
-      {after}
-    </>
-  );
-};
-
 const Agenda: React.FC = () => {
-  const [selectedEvent, setSelectedEvent] = useState<DogEvent | null>(null);
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedSeason, setSelectedSeason] = useState<string>('all');
-  const [isEventImageModalOpen, setIsEventImageModalOpen] = useState(false);
-  const [eventImageIndex, setEventImageIndex] = useState(0);
 
   useSEO(SEO_DATA.agenda);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleEventClick = (event: DogEvent) => {
-    setSelectedEvent(event);
-    setIsDetailOpen(true);
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.overflow = 'hidden';
-  };
-
-  const handleCloseDetail = useCallback(() => {
-    setIsDetailOpen(false);
-    setIsEventImageModalOpen(false);
-    const scrollY = document.body.style.top;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.overflow = '';
-    window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-    setTimeout(() => setSelectedEvent(null), 300);
-  }, []);
-
-  // Close modal on Escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isDetailOpen) handleCloseDetail();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isDetailOpen, handleCloseDetail]);
 
   const filteredEvents = EVENTS
     .filter(e => selectedSeason === 'all' || e.season === selectedSeason)
@@ -248,11 +192,10 @@ const Agenda: React.FC = () => {
               const isPast = countdown === 'Afgelopen';
 
               return (
-                <button
+                <Link
                   key={event.id}
-                  type="button"
+                  to={`/agenda/${event.slug}`}
                   className={`group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col ${isPast ? 'opacity-60' : ''}`}
-                  onClick={() => handleEventClick(event)}
                 >
                   <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
                     <img
@@ -331,7 +274,7 @@ const Agenda: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -388,331 +331,6 @@ const Agenda: React.FC = () => {
       </div>
     </div>
 
-      {/* Event Detail Modal — portalled to body to escape all stacking contexts */}
-      {selectedEvent && createPortal(
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={selectedEvent.title}
-          className={`fixed inset-0 z-[9999] transition-all duration-300 ${isDetailOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-          onClick={handleCloseDetail}
-          onKeyDown={(e) => { if (e.key === 'Escape') handleCloseDetail(); }}
-        >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-          {/* Modal Content */}
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-          <div
-            className={`absolute inset-0 sm:inset-2 md:inset-4 lg:inset-6 bg-white sm:rounded-3xl overflow-y-auto custom-scrollbar transition-all duration-300 ${isDetailOpen ? 'translate-y-0 scale-100' : 'translate-y-8 scale-95'}`}
-            style={{ overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={handleCloseDetail}
-              className="absolute top-3 right-3 sm:top-5 sm:right-5 z-50 bg-white/90 backdrop-blur-sm p-2.5 sm:p-3 rounded-full shadow-lg hover:bg-white transition-colors"
-              aria-label="Sluiten"
-            >
-              <X size={22} className="sm:w-6 sm:h-6 text-slate-700" />
-            </button>
-
-            {/* Hero Image */}
-            <div className="relative h-[35vh] sm:h-[40vh] md:h-[50vh]">
-              <img
-                src={selectedEvent.image}
-                alt={selectedEvent.title}
-                className="w-full h-full object-cover"
-                style={{ objectPosition: selectedEvent.imagePosition || 'center' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-              {/* Title overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-12">
-                <div className="flex flex-wrap gap-2 mb-2 sm:mb-3">
-                  {(() => {
-                    const sc = SEASON_COLORS[selectedEvent.season] || SEASON_COLORS.Lente;
-                    return (
-                      <span className={`${sc.bg} ${sc.text} px-3 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider border ${sc.border}`}>
-                        {selectedEvent.season}
-                      </span>
-                    );
-                  })()}
-                  <span className="bg-white/20 backdrop-blur text-white px-3 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider">
-                    {selectedEvent.category}
-                  </span>
-                  {selectedEvent.price.toLowerCase().includes('gratis') && (
-                    <span className="bg-emerald-500/90 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-1">
-                      <Sparkles size={14} /> Gratis
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center gap-3 sm:gap-4 mb-1 sm:mb-2">
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-                    {selectedEvent.title}
-                  </h2>
-                  {selectedEvent.tags.includes('Top-event') && (
-                    <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-400 to-amber-500 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg shadow-lg shadow-amber-500/40">
-                      <Sparkles size={16} className="sm:w-5 sm:h-5 text-amber-50" />
-                      <span className="text-[10px] sm:text-xs md:text-sm font-extrabold uppercase tracking-[0.15em] text-white whitespace-nowrap">Top</span>
-                    </div>
-                  )}
-                </div>
-                <p className="text-sky-300 text-base sm:text-lg md:text-xl font-bold">{selectedEvent.subtitle}</p>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="p-5 sm:p-8 md:p-12 lg:p-16">
-              {/* Quick Info Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
-                <div className="bg-sky-50 border border-sky-100 rounded-2xl p-4 sm:p-5 text-center">
-                  <Calendar size={24} className="mx-auto text-sky-600 mb-2 sm:w-7 sm:h-7" />
-                  <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Datum</p>
-                  <p className="text-sm sm:text-lg font-black text-slate-900">{selectedEvent.dateDisplay}</p>
-                </div>
-                <div className="bg-sky-50 border border-sky-100 rounded-2xl p-4 sm:p-5 text-center">
-                  <Clock size={24} className="mx-auto text-sky-600 mb-2 sm:w-7 sm:h-7" />
-                  <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Uur</p>
-                  <p className="text-sm sm:text-lg font-black text-slate-900">{selectedEvent.timeDisplay}</p>
-                </div>
-                <div className="bg-sky-50 border border-sky-100 rounded-2xl p-4 sm:p-5 text-center">
-                  <MapPin size={24} className="mx-auto text-sky-600 mb-2 sm:w-7 sm:h-7" />
-                  <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Locatie</p>
-                  <p className="text-sm sm:text-lg font-black text-slate-900">{selectedEvent.location}</p>
-                </div>
-                <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 sm:p-5 text-center">
-                  <Tag size={24} className="mx-auto text-emerald-600 mb-2 sm:w-7 sm:h-7" />
-                  <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Prijs</p>
-                  <p className="text-sm sm:text-lg font-black text-emerald-700">{selectedEvent.price}</p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="mb-8 sm:mb-12">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3">
-                  <PartyPopper size={26} className="text-sky-600 sm:w-8 sm:h-8" />
-                  Over dit evenement
-                </h3>
-                <p className="text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-                  {renderDescriptionWithHighlight(selectedEvent)}
-                </p>
-                {selectedEvent.detailGallery && (
-                  <div className="mt-6 sm:mt-8 bg-gradient-to-br from-emerald-50 via-white to-sky-50 border border-emerald-100 rounded-2xl p-4 sm:p-6">
-                    <div className="mb-4 sm:mb-5">
-                      {selectedEvent.detailGallery.eyebrow && (
-                        <p className="text-[11px] sm:text-xs font-black uppercase tracking-[0.25em] text-emerald-600 mb-2">
-                          {selectedEvent.detailGallery.eyebrow}
-                        </p>
-                      )}
-                      <h4 className="text-lg sm:text-2xl font-black text-slate-900 mb-2">
-                        {selectedEvent.detailGallery.title}
-                      </h4>
-                      {selectedEvent.detailGallery.description && (
-                        <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
-                          {selectedEvent.detailGallery.description}
-                        </p>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                      {selectedEvent.detailGallery.images.map((image, index) => (
-                        <button
-                          key={image.src}
-                          type="button"
-                          onClick={() => {
-                            setEventImageIndex(index);
-                            setIsEventImageModalOpen(true);
-                          }}
-                          className="group text-left bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all"
-                        >
-                          <div className="bg-slate-100 p-3 sm:p-4">
-                            <img
-                              src={image.src}
-                              alt={image.alt}
-                              className="w-full h-[320px] sm:h-[460px] object-contain rounded-xl bg-white"
-                              loading="lazy"
-                            />
-                          </div>
-                          <div className="px-4 pb-4 sm:px-5 sm:pb-5">
-                            <p className="text-slate-900 text-sm sm:text-base font-black mb-1">{image.label}</p>
-                            <p className="text-slate-500 text-xs sm:text-sm font-semibold">Klik om groter te bekijken</p>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Highlights */}
-              {selectedEvent.highlights.length > 0 && (
-                <div className="mb-8 sm:mb-12">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3">
-                    <Sparkles size={26} className="text-sky-600 sm:w-8 sm:h-8" />
-                    Wat te verwachten
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    {selectedEvent.highlights.map((highlight) => (
-                      <div key={highlight} className="bg-slate-50 border border-slate-100 rounded-xl p-4 sm:p-5 flex items-center gap-3 font-bold text-slate-700 text-base sm:text-lg">
-                        <ChevronRight size={18} className="text-sky-600 flex-shrink-0 sm:w-5 sm:h-5" />
-                        {highlight}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Accessibility */}
-              {selectedEvent.accessibility && selectedEvent.accessibility.length > 0 && (
-                <div className="mb-8 sm:mb-12">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3">
-                    <Accessibility size={26} className="text-sky-600 sm:w-8 sm:h-8" />
-                    Toegankelijkheid
-                  </h3>
-                  <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 sm:p-7">
-                    <ul className="space-y-3">
-                      {selectedEvent.accessibility.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-slate-700 text-base sm:text-lg font-medium">
-                          <span className="text-blue-500 mt-0.5 text-lg">✓</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-
-              {/* Practical Info */}
-              <div className="mb-8 sm:mb-12">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3">
-                  <MapPin size={26} className="text-sky-600 sm:w-8 sm:h-8" />
-                  Praktische info
-                </h3>
-                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 sm:p-7 space-y-4 sm:space-y-5">
-                  <div className="flex items-start gap-3">
-                    <MapPin size={20} className="text-sky-600 flex-shrink-0 mt-0.5 sm:w-6 sm:h-6" />
-                    <div>
-                      <p className="font-bold text-slate-900 text-base sm:text-lg">{selectedEvent.location}</p>
-                      <p className="text-slate-500 text-sm sm:text-base">{selectedEvent.address}</p>
-                    </div>
-                  </div>
-                  {selectedEvent.phone && (
-                    <div className="flex items-center gap-3">
-                      <Phone size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                      <a href={`tel:${selectedEvent.phone}`} className="text-sky-600 font-bold text-base sm:text-lg hover:underline">{selectedEvent.phone}</a>
-                    </div>
-                  )}
-                  {selectedEvent.email && (
-                    <div className="flex items-center gap-3">
-                      <Mail size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                      <a href={`mailto:${selectedEvent.email}`} className="text-sky-600 font-bold text-base sm:text-lg hover:underline">{selectedEvent.email}</a>
-                    </div>
-                  )}
-                  {selectedEvent.website && (
-                    <div className="flex items-center gap-3">
-                      <Globe size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                      <a href={selectedEvent.website} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{selectedEvent.websiteLabel || selectedEvent.website}</a>
-                    </div>
-                  )}
-                  {selectedEvent.additionalLinks?.map((link) => (
-                    <div key={link.url} className="flex items-center gap-3">
-                      <Globe size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{link.label}</a>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-12">
-                {selectedEvent.tags.filter(tag => tag !== 'Top-event').map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] sm:text-xs uppercase tracking-widest font-black px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border bg-sky-50 text-sky-600 border-sky-100"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Cross-linking: Discover more in this city */}
-              <div className="bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 border-2 border-sky-100 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
-                <div className="flex items-center gap-3 mb-4 sm:mb-5">
-                  <div className="bg-sky-100 text-sky-600 p-2.5 rounded-xl">
-                    <Sparkles size={22} />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900">
-                    Meer ontdekken in {selectedEvent.cityName}
-                  </h3>
-                </div>
-                <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed mb-6">
-                  {selectedEvent.category === 'Wandeling'
-                    ? `Trek je wandelschoenen aan voor ${selectedEvent.cityName}! Ontdek ook de leukste losloopzones en hondvriendelijke plekken in de buurt.`
-                    : `Honger gekregen na het festival? Ontdek de leukste hondvriendelijke terrassen, restaurants en plekjes in ${selectedEvent.cityName}.`
-                  }
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                  <Link
-                    to={`/${selectedEvent.citySlug}`}
-                    onClick={handleCloseDetail}
-                    className="flex items-center gap-3 bg-white border border-sky-100 rounded-xl p-4 hover:border-sky-300 hover:shadow-md transition-all group"
-                  >
-                    <div className="bg-sky-100 text-sky-600 p-2 rounded-lg group-hover:bg-sky-200 transition-colors">
-                      <MapPin size={18} />
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-sm sm:text-base">Strandregels</p>
-                      <p className="text-slate-500 text-xs sm:text-sm">{selectedEvent.cityName}</p>
-                    </div>
-                    <ChevronRight size={16} className="ml-auto text-slate-300 group-hover:text-sky-500 transition-colors" />
-                  </Link>
-                  <Link
-                    to="/hotspots"
-                    onClick={handleCloseDetail}
-                    className="flex items-center gap-3 bg-white border border-sky-100 rounded-xl p-4 hover:border-sky-300 hover:shadow-md transition-all group"
-                  >
-                    <div className="bg-amber-100 text-amber-600 p-2 rounded-lg group-hover:bg-amber-200 transition-colors">
-                      <Utensils size={18} />
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-sm sm:text-base">Hotspots</p>
-                      <p className="text-slate-500 text-xs sm:text-sm">Cafés & restaurants</p>
-                    </div>
-                    <ChevronRight size={16} className="ml-auto text-slate-300 group-hover:text-sky-500 transition-colors" />
-                  </Link>
-                  <Link
-                    to="/losloopzones"
-                    onClick={handleCloseDetail}
-                    className="flex items-center gap-3 bg-white border border-sky-100 rounded-xl p-4 hover:border-sky-300 hover:shadow-md transition-all group"
-                  >
-                    <div className="bg-emerald-100 text-emerald-600 p-2 rounded-lg group-hover:bg-emerald-200 transition-colors">
-                      <TreePine size={18} />
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900 text-sm sm:text-base">Losloopzones</p>
-                      <p className="text-slate-500 text-xs sm:text-sm">Vrij loslopen</p>
-                    </div>
-                    <ChevronRight size={16} className="ml-auto text-slate-300 group-hover:text-sky-500 transition-colors" />
-                  </Link>
-                </div>
-
-                {/* Local Hero: random place shout-out for this city */}
-                <LocalHero citySlug={selectedEvent.citySlug} cityName={selectedEvent.cityName} />
-              </div>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
-      {selectedEvent?.detailGallery && (
-        <ImageModal
-          images={selectedEvent.detailGallery.images.map((image) => image.src)}
-          altText={`${selectedEvent.title} - Stratier flyers`}
-          isOpen={isEventImageModalOpen}
-          onClose={() => setIsEventImageModalOpen(false)}
-          initialIndex={eventImageIndex}
-        />
-      )}
     </div>
   );
 };

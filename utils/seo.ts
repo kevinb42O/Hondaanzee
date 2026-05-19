@@ -570,7 +570,7 @@ export const SEO_DATA = {
                 }
               },
               "image": "https://hondaanzee.be/kwispelfestival.webp",
-              "url": "https://hondaanzee.be/agenda",
+              "url": "https://hondaanzee.be/agenda/kwispelfestival-de-panne-2026",
               "isAccessibleForFree": true,
               "offers": {
                 "@type": "Offer",
@@ -578,7 +578,7 @@ export const SEO_DATA = {
                 "priceCurrency": "EUR",
                 "validFrom": "2026-01-01T00:00:00+01:00",
                 "availability": "https://schema.org/InStock",
-                "url": "https://hondaanzee.be/agenda"
+                "url": "https://hondaanzee.be/agenda/kwispelfestival-de-panne-2026"
               },
               "performer": {
                 "@type": "Organization",
@@ -614,7 +614,7 @@ export const SEO_DATA = {
                 }
               },
               "image": "https://hondaanzee.be/oostendshondenfestival.webp",
-              "url": "https://hondaanzee.be/agenda",
+              "url": "https://hondaanzee.be/agenda/groot-oostends-hondenfestival-2026",
               "isAccessibleForFree": true,
               "offers": {
                 "@type": "Offer",
@@ -622,7 +622,7 @@ export const SEO_DATA = {
                 "priceCurrency": "EUR",
                 "validFrom": "2026-01-01T00:00:00+01:00",
                 "availability": "https://schema.org/InStock",
-                "url": "https://hondaanzee.be/agenda"
+                "url": "https://hondaanzee.be/agenda/groot-oostends-hondenfestival-2026"
               },
               "subEvent": [
                 {
@@ -720,7 +720,7 @@ export const SEO_DATA = {
                 }
               },
               "image": "https://hondaanzee.be/hondenbredene.webp",
-              "url": "https://hondaanzee.be/agenda",
+              "url": "https://hondaanzee.be/agenda/grote-hondenwandeling-bredene-2026",
               "isAccessibleForFree": false,
               "offers": {
                 "@type": "Offer",
@@ -728,7 +728,7 @@ export const SEO_DATA = {
                 "priceCurrency": "EUR",
                 "validFrom": "2026-01-01T00:00:00+01:00",
                 "availability": "https://schema.org/InStock",
-                "url": "https://hondaanzee.be/agenda"
+                "url": "https://hondaanzee.be/agenda/grote-hondenwandeling-bredene-2026"
               },
               "performer": {
                 "@type": "Organization",

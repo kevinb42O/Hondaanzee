@@ -9,6 +9,8 @@ export interface DogEvent {
   date: string; // YYYY-MM-DD for sorting
   dateDisplay: string; // Human-readable date
   timeDisplay: string; // e.g. "11:00 - 17:00"
+  schemaStartDate: string;
+  schemaEndDate: string;
   season: 'Lente' | 'Zomer' | 'Herfst' | 'Winter';
   category: string; // e.g. 'Festival', 'Wandeling', 'Workshop'
   description: string;
@@ -21,6 +23,8 @@ export interface DogEvent {
   imagePosition?: string;
   website?: string;
   websiteLabel?: string;
+  organizerName?: string;
+  organizerUrl?: string;
   additionalLinks?: Array<{
     label: string;
     url: string;
@@ -53,6 +57,8 @@ export const EVENTS: DogEvent[] = [
     date: '2026-05-17',
     dateDisplay: '17 mei 2026',
     timeDisplay: '11:00 - 17:00',
+    schemaStartDate: '2026-05-17T11:00:00+02:00',
+    schemaEndDate: '2026-05-17T17:00:00+02:00',
     season: 'Lente',
     category: 'Festival',
     description: 'Maak je klaar voor dé dag van het jaar waar jouw viervoeter de absolute ster is! Op het Kwispelfestival in De Panne draait alles om plezier, avontuur en heel veel kwispelende staartjes. Geniet samen van een prachtige wandeltocht langs de kust, ontdek leuke workshops waar je hond nieuwe tricks leert, en laat een professionele foto maken als aandenken. Terwijl jouw trouwe metgezel zich uitleeft, kun jij gezellig rondsnuffelen op de gezellige hondenmarkt vol leuke spulletjes, of kijk je ogen uit bij spectaculaire demonstraties. Een dag vol beleving, ontmoeting en onvergetelijke momenten — voor honden én hun baasjes!',
@@ -70,6 +76,8 @@ export const EVENTS: DogEvent[] = [
     image: '/kwispelfestival.webp',
     imagePosition: 'center',
     website: 'https://www.visitdepanne.be',
+    organizerName: 'Visit De Panne',
+    organizerUrl: 'https://www.visitdepanne.be',
     email: 'visit@depanne.be',
     phone: '058 42 18 18',
     accessibility: [
@@ -90,6 +98,8 @@ export const EVENTS: DogEvent[] = [
     date: '2026-05-23',
     dateDisplay: '23 & 24 mei 2026',
     timeDisplay: 'Festival 10:00-17:00, wandeling 11:00',
+    schemaStartDate: '2026-05-23T10:00:00+02:00',
+    schemaEndDate: '2026-05-24T17:00:00+02:00',
     season: 'Lente',
     category: 'Festival',
     description: 'Na het overweldigende succes van de eerste editie in 2025 keert het Groot Oostends Hondenfestival terug — en dit keer nog groter. Op zaterdag 23 en zondag 24 mei 2026 verandert Domein Duin & Zee opnieuw in een hondenparadijs van 12.000 m² vol demonstraties, standhouders, losloopplezier en food corners voor mens en dier. Nieuw dit jaar is de grote Stratier-hondenwandeling ten voordele van dierenasielen: beide dagen vertrekt die om 11:00 aan de Stratier-stand op het festivalterrein. Zo combineer je een gratis festivaldag aan zee met een extra wandeling die niet alleen leuk is, maar ook adoptie en asieldieren extra in de kijker zet.',
@@ -113,6 +123,8 @@ export const EVENTS: DogEvent[] = [
     imagePosition: 'center',
     website: 'https://www.pooches.be',
     websiteLabel: 'Officiële festivalinfo',
+    organizerName: 'Pooches.be & vzw Hondenfestival',
+    organizerUrl: 'https://www.pooches.be',
     additionalLinks: [
       {
         label: 'Inschrijven voor de Stratier-wandeling',
@@ -160,6 +172,8 @@ export const EVENTS: DogEvent[] = [
     date: '2026-05-24',
     dateDisplay: '24 mei 2026',
     timeDisplay: 'Vrije start vanaf 11:00',
+    schemaStartDate: '2026-05-24T11:00:00+02:00',
+    schemaEndDate: '2026-05-24T17:00:00+02:00',
     season: 'Lente',
     category: 'Wandeling',
     description: 'De zee, het strand en de Bredense duinen vormen opnieuw het decor voor de jaarlijkse Grote Hondenwandeling! Vanaf 11 uur vertrek je aan het Jeugdhuis Creatuur en volg je de pijltjes doorheen het Bredense groen, de duinen en langs het strand. De bewegwijzering brengt je heen en terug samen met je favoriete viervoeter(s). Bij aankomst wacht er een superleuke attentie voor je beste vriend! Speciaal voor de oudere deelnemers is er opnieuw een verkorte route voorzien — zodat elke hond mee kan genieten van deze fantastische dag.',
@@ -177,6 +191,8 @@ export const EVENTS: DogEvent[] = [
     image: '/hondenbredene.webp',
     imagePosition: 'center',
     website: 'https://www.sosreptiel.be',
+    organizerName: 'SOS Reptiel - Reptile Rescue Center Belgium',
+    organizerUrl: 'https://www.sosreptiel.be',
     accessibility: [
       'Verkorte route beschikbaar voor oudere honden',
       'Parcours deels over strand en duinen',

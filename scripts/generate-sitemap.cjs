@@ -32,6 +32,7 @@ const lastmodCache = new Map();
 const priorityForRoute = (route) => {
   if (route === '/') return '1.0';
   if (route.startsWith('/blog/')) return '0.8';
+  if (route.startsWith('/agenda/')) return '0.8';
   if (route.includes('/hotspots/') || route.includes('/diensten/')) return '0.8';
   if (route === '/hotspots' || route === '/losloopzones') return '0.9';
   if (route === '/diensten') return '0.8';
@@ -44,6 +45,7 @@ const changefreqForRoute = (route) => {
   if (route === '/') return 'daily';
   if (route === '/updates') return 'weekly';
   if (route === '/agenda' || route === '/blog') return 'weekly';
+  if (route.startsWith('/agenda/')) return 'weekly';
   if (route.includes('/hotspots/') || route.includes('/diensten/')) return 'weekly';
   if (route.startsWith('/losloopzones/')) return 'weekly';
   if (/^\/[^/]+$/.test(route) && route !== '/blog') return 'weekly';
@@ -61,6 +63,10 @@ const getRouteFiles = (route) => {
 
   if (/^\/blog\/[^/]+$/.test(route)) {
     return ['pages/BlogDetail.tsx', 'data/blogs.ts'];
+  }
+
+  if (/^\/agenda\/[^/]+$/.test(route)) {
+    return ['pages/EventDetail.tsx', 'components/EventDetailContent.tsx', 'data/events.ts', 'utils/seo.ts'];
   }
 
   if (/^\/[^/]+\/hotspots\/[^/]+$/.test(route)) {
