@@ -526,8 +526,8 @@ export const SEO_DATA = {
 
   agenda: {
     title: 'Hondvriendelijke Evenementen Belgische Kust 2026 | Agenda & Events – HondAanZee.be',
-    description: 'Ontdek alle hondvriendelijke evenementen aan de Belgische kust in 2026: Kwispelfestival De Panne, Groot Oostends Hondenfestival & Grote Hondenwandeling Bredene. Festivals, wandelingen & meer voor jou en je viervoeter!',
-    keywords: 'hondenevenement belgische kust 2026, hondenfestival aan zee, kwispelfestival de panne 2026, groot oostends hondenfestival 2026, hondenwandeling bredene, hondvriendelijk event kust, hondendag strand belgie, hondenwandeling aan zee, pinksterweekend honden oostende, losloopzone festival, evenementen honden belgie 2026, hondenfestival gratis',
+    description: 'Ontdek alle hondvriendelijke evenementen aan de Belgische kust in 2026: Kwispelfestival De Panne, Groot Oostends Hondenfestival met Stratier-benefietwandeling en Grote Hondenwandeling Bredene.',
+    keywords: 'hondenevenement belgische kust 2026, hondenfestival aan zee, kwispelfestival de panne 2026, groot oostends hondenfestival 2026, stratier oostende, benefiet hondenwandeling, dierenasielen oostende, hondenwandeling bredene, hondvriendelijk event kust, hondenwandeling aan zee, pinksterweekend honden oostende, losloopzone festival, evenementen honden belgie 2026, hondenfestival gratis',
     canonical: 'https://hondaanzee.be/agenda',
     ogImage: 'https://hondaanzee.be/kwispelfestival.webp',
     structuredData: [
@@ -597,9 +597,9 @@ export const SEO_DATA = {
             "item": {
               "@type": "Event",
               "name": "Groot Oostends Hondenfestival",
-              "description": "Tweedaags hondenfestival op 12.000 m² met losloopzone, demonstraties, hondenboetiekjes en food corner aan zee in Oostende.",
+              "description": "Tweedaags hondenfestival op 12.000 m² met losloopzone, demonstraties en food corners in Oostende. Stratier organiseert beide dagen om 11:00 een benefietwandeling ten voordele van dierenasielen.",
               "startDate": "2026-05-23T10:00:00+02:00",
-              "endDate": "2026-05-24T18:00:00+02:00",
+              "endDate": "2026-05-24T17:00:00+02:00",
               "eventStatus": "https://schema.org/EventScheduled",
               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
               "location": {
@@ -624,6 +624,68 @@ export const SEO_DATA = {
                 "availability": "https://schema.org/InStock",
                 "url": "https://hondaanzee.be/agenda"
               },
+              "subEvent": [
+                {
+                  "@type": "Event",
+                  "name": "Stratier hondenwandeling - zaterdag",
+                  "description": "Benefietwandeling ten voordele van dierenasielen. Start om 11:00 aan de Stratier-stand op het festivalterrein.",
+                  "startDate": "2026-05-23T11:00:00+02:00",
+                  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                  "location": {
+                    "@type": "Place",
+                    "name": "Stratier-stand, Groot Oostends Hondenfestival",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "streetAddress": "Fortstraat 128",
+                      "addressLocality": "Oostende",
+                      "postalCode": "8400",
+                      "addressCountry": "BE"
+                    }
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "3",
+                    "priceCurrency": "EUR",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://tally.so/r/QK7jx1"
+                  },
+                  "organizer": {
+                    "@type": "Organization",
+                    "name": "Stratier",
+                    "url": "https://www.instagram.com/stratier.be"
+                  }
+                },
+                {
+                  "@type": "Event",
+                  "name": "Stratier hondenwandeling - zondag",
+                  "description": "Benefietwandeling ten voordele van dierenasielen. Start om 11:00 aan de Stratier-stand op het festivalterrein.",
+                  "startDate": "2026-05-24T11:00:00+02:00",
+                  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                  "location": {
+                    "@type": "Place",
+                    "name": "Stratier-stand, Groot Oostends Hondenfestival",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "streetAddress": "Fortstraat 128",
+                      "addressLocality": "Oostende",
+                      "postalCode": "8400",
+                      "addressCountry": "BE"
+                    }
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "3",
+                    "priceCurrency": "EUR",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://tally.so/r/QK7jx1"
+                  },
+                  "organizer": {
+                    "@type": "Organization",
+                    "name": "Stratier",
+                    "url": "https://www.instagram.com/stratier.be"
+                  }
+                }
+              ],
               "performer": {
                 "@type": "Organization",
                 "name": "Pooches.be & vzw Hondenfestival"

@@ -12,6 +12,7 @@ export interface DogEvent {
   season: 'Lente' | 'Zomer' | 'Herfst' | 'Winter';
   category: string; // e.g. 'Festival', 'Wandeling', 'Workshop'
   description: string;
+  descriptionHighlight?: string;
   highlights: string[];
   location: string; // Venue name
   address: string;
@@ -19,9 +20,24 @@ export interface DogEvent {
   image: string;
   imagePosition?: string;
   website?: string;
+  websiteLabel?: string;
+  additionalLinks?: Array<{
+    label: string;
+    url: string;
+  }>;
   email?: string;
   phone?: string;
   accessibility?: string[];
+  detailGallery?: {
+    eyebrow?: string;
+    title: string;
+    description?: string;
+    images: Array<{
+      src: string;
+      alt: string;
+      label: string;
+    }>;
+  };
   tags: string[];
 }
 
@@ -73,33 +89,65 @@ export const EVENTS: DogEvent[] = [
     cityName: 'Oostende',
     date: '2026-05-23',
     dateDisplay: '23 & 24 mei 2026',
-    timeDisplay: 'Za & zo — volledig weekend',
+    timeDisplay: 'Festival 10:00-17:00, wandeling 11:00',
     season: 'Lente',
     category: 'Festival',
-    description: 'Na het overweldigende succes van de eerste editie in 2025 keert het Groot Oostends Hondenfestival terug — en dit keer nóg groter! Twee volle dagen lang wordt Domein Duin & Zee omgetoverd tot het ultieme hondenparadijs voor jou en je viervoeter. Op maar liefst 12.000 m² festivalterrein wacht je een mix van beleving, ontmoeting en puur hondenplezier. Bekijk spectaculaire demonstraties in diverse disciplines, laat je hond los in de losloopzone, snuister door de hondenboetiekjes of geniet samen van de uitgebreide food corner — voor mens én dier! De locatie vlakbij het hondenstrand maakt het compleet: na het festival gewoon lekker door wandelen langs zee.',
+    description: 'Na het overweldigende succes van de eerste editie in 2025 keert het Groot Oostends Hondenfestival terug — en dit keer nog groter. Op zaterdag 23 en zondag 24 mei 2026 verandert Domein Duin & Zee opnieuw in een hondenparadijs van 12.000 m² vol demonstraties, standhouders, losloopplezier en food corners voor mens en dier. Nieuw dit jaar is de grote Stratier-hondenwandeling ten voordele van dierenasielen: beide dagen vertrekt die om 11:00 aan de Stratier-stand op het festivalterrein. Zo combineer je een gratis festivaldag aan zee met een extra wandeling die niet alleen leuk is, maar ook adoptie en asieldieren extra in de kijker zet.',
+    descriptionHighlight: 'Nieuw dit jaar is de grote Stratier-hondenwandeling',
     highlights: [
       '🎪 12.000 m² festivalterrein op toplocatie aan zee',
+      '🐾 Stratier-hondenwandeling start beide dagen om 11:00',
+      '💙 €3 per persoon voor de wandeling, integraal naar dierenasielen',
       '🐕 Losloopzone voor je viervoeter',
       '🎯 Demonstraties in diverse disciplines',
       '🛍️ Hondenboetiekjes & standhouders',
       '🍔 Uitgebreide food corner voor mens & dier',
-      '📸 Leuke fotospots & kinderzones',
+      '📝 Vooraf inschrijven kan, maar ter plaatse aansluiten ook',
       '🏖️ Vlakbij het hondenstrand',
       '🅿️ Ruime gratis parking',
     ],
     location: 'Domein Duin & Zee',
     address: 'Fortstraat 128, 8400 Oostende',
-    price: 'Gratis — vrije toegang!',
+    price: 'Festival gratis - Stratier-wandeling €3 p.p.',
     image: '/oostendshondenfestival.webp',
     imagePosition: 'center',
     website: 'https://www.pooches.be',
+    websiteLabel: 'Officiële festivalinfo',
+    additionalLinks: [
+      {
+        label: 'Inschrijven voor de Stratier-wandeling',
+        url: 'https://tally.so/r/QK7jx1',
+      },
+      {
+        label: 'Instagram van Stratier',
+        url: 'https://www.instagram.com/stratier.be',
+      },
+    ],
     accessibility: [
       'Ruim terrein met verharde paden',
+      'Start van de Stratier-wandeling aan de Stratier-stand op het terrein',
       'Vlakbij het hondenstrand voor een wandeling na het festival',
       'Gratis parking op het terrein',
       'Honden aan de lijn verplicht (behalve in losloopzone)',
     ],
-    tags: ['Gratis', 'Tweedaags', 'Hondenfestival', 'Pinksterweekend', 'Aan zee', 'Losloopzone'],
+    detailGallery: {
+      eyebrow: 'Stratier apart',
+      title: 'Flyers van de Stratier-wandeling',
+      description: 'Bekijk hier de voor- en achterkant van de flyer met alle praktische info voor de wandeling.',
+      images: [
+        {
+          src: '/gohf-stratier-flyer-voor.webp',
+          alt: 'Flyer voorkant van de Stratier-wandeling op het Groot Oostends Hondenfestival',
+          label: 'Flyer voorkant',
+        },
+        {
+          src: '/gohf-stratier-flyer-achter.webp',
+          alt: 'Flyer achterkant van de Stratier-wandeling op het Groot Oostends Hondenfestival',
+          label: 'Flyer achterkant',
+        },
+      ],
+    },
+    tags: ['Gratis festival', 'Tweedaags', 'Hondenfestival', 'Goed doel', 'Aan zee', 'Losloopzone'],
   },
   {
     id: 3,

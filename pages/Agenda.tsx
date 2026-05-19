@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Clock, Tag, X, ChevronRight, PartyPopper, Accessibility, Mail, Phone, Globe, Sparkles, Heart, Utensils, TreePine } from 'lucide-react';
+import ImageModal from '../components/ImageModal.tsx';
 import LocalHero from '../components/LocalHero.tsx';
 import { EVENTS, type DogEvent } from '../data/events.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
@@ -21,10 +22,28 @@ const SEASON_COLORS: Record<string, { bg: string; text: string; border: string }
   Winter: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
 };
 
+const renderDescriptionWithHighlight = (event: DogEvent) => {
+  if (!event.descriptionHighlight || !event.description.includes(event.descriptionHighlight)) {
+    return event.description;
+  }
+
+  const [before, after] = event.description.split(event.descriptionHighlight);
+
+  return (
+    <>
+      {before}
+      <strong className="font-black text-slate-900">{event.descriptionHighlight}</strong>
+      {after}
+    </>
+  );
+};
+
 const Agenda: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<DogEvent | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedSeason, setSelectedSeason] = useState<string>('all');
+  const [isEventImageModalOpen, setIsEventImageModalOpen] = useState(false);
+  const [eventImageIndex, setEventImageIndex] = useState(0);
 
   useSEO(SEO_DATA.agenda);
 
@@ -45,6 +64,7 @@ const Agenda: React.FC = () => {
 
   const handleCloseDetail = useCallback(() => {
     setIsDetailOpen(false);
+    setIsEventImageModalOpen(false);
     const scrollY = document.body.style.top;
     document.body.style.position = '';
     document.body.style.top = '';
@@ -475,8 +495,53 @@ const Agenda: React.FC = () => {
                   Over dit evenement
                 </h3>
                 <p className="text-slate-600 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-                  {selectedEvent.description}
+                  {renderDescriptionWithHighlight(selectedEvent)}
                 </p>
+                {selectedEvent.detailGallery && (
+                  <div className="mt-6 sm:mt-8 bg-gradient-to-br from-emerald-50 via-white to-sky-50 border border-emerald-100 rounded-2xl p-4 sm:p-6">
+                    <div className="mb-4 sm:mb-5">
+                      {selectedEvent.detailGallery.eyebrow && (
+                        <p className="text-[11px] sm:text-xs font-black uppercase tracking-[0.25em] text-emerald-600 mb-2">
+                          {selectedEvent.detailGallery.eyebrow}
+                        </p>
+                      )}
+                      <h4 className="text-lg sm:text-2xl font-black text-slate-900 mb-2">
+                        {selectedEvent.detailGallery.title}
+                      </h4>
+                      {selectedEvent.detailGallery.description && (
+                        <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
+                          {selectedEvent.detailGallery.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                      {selectedEvent.detailGallery.images.map((image, index) => (
+                        <button
+                          key={image.src}
+                          type="button"
+                          onClick={() => {
+                            setEventImageIndex(index);
+                            setIsEventImageModalOpen(true);
+                          }}
+                          className="group text-left bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all"
+                        >
+                          <div className="bg-slate-100 p-3 sm:p-4">
+                            <img
+                              src={image.src}
+                              alt={image.alt}
+                              className="w-full h-[320px] sm:h-[460px] object-contain rounded-xl bg-white"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+                            <p className="text-slate-900 text-sm sm:text-base font-black mb-1">{image.label}</p>
+                            <p className="text-slate-500 text-xs sm:text-sm font-semibold">Klik om groter te bekijken</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Highlights */}
@@ -546,9 +611,15 @@ const Agenda: React.FC = () => {
                   {selectedEvent.website && (
                     <div className="flex items-center gap-3">
                       <Globe size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                      <a href={selectedEvent.website} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{selectedEvent.website}</a>
+                      <a href={selectedEvent.website} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{selectedEvent.websiteLabel || selectedEvent.website}</a>
                     </div>
                   )}
+                  {selectedEvent.additionalLinks?.map((link) => (
+                    <div key={link.url} className="flex items-center gap-3">
+                      <Globe size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{link.label}</a>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -632,6 +703,15 @@ const Agenda: React.FC = () => {
           </div>
         </div>,
         document.body
+      )}
+      {selectedEvent?.detailGallery && (
+        <ImageModal
+          images={selectedEvent.detailGallery.images.map((image) => image.src)}
+          altText={`${selectedEvent.title} - Stratier flyers`}
+          isOpen={isEventImageModalOpen}
+          onClose={() => setIsEventImageModalOpen(false)}
+          initialIndex={eventImageIndex}
+        />
       )}
     </div>
   );
