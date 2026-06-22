@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone } from 'lucide-react';
+import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
 
@@ -781,6 +781,84 @@ const Home: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Summer Safety Blog Teaser — drives traffic to /blog/hond-strand-warm-weer during summer */}
+      <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <Link
+            to="/blog/hond-strand-warm-weer"
+            aria-label="Lees onze gids: Met je hond naar zee bij warm weer — do's en don'ts voor een veilige stranddag"
+            className="group relative block overflow-hidden rounded-[2rem] border border-amber-200/80 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.4)]"
+          >
+            {/* Animated sun glow */}
+            <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-br from-amber-300/40 via-orange-300/30 to-transparent blur-3xl transition-opacity duration-700 group-hover:opacity-90" />
+            <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-gradient-to-tr from-rose-200/30 via-amber-200/20 to-transparent blur-3xl" />
+
+            <div className="relative grid gap-6 md:grid-cols-[1.1fr_1fr] md:gap-0">
+              {/* Image */}
+              <div className="relative h-56 sm:h-64 md:h-auto md:min-h-[320px] overflow-hidden md:order-2">
+                <img
+                  src="/schaduwv1.webp"
+                  srcSet="/schaduwv1-640w.webp 640w, /schaduwv1.webp 1034w"
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  alt="Hond zoekt de schaduw op tijdens een warme dag aan de Belgische kust"
+                  loading="lazy"
+                  decoding="async"
+                  width={1034}
+                  height={746}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-50/80 via-amber-50/20 to-transparent md:bg-gradient-to-l" />
+              </div>
+
+              {/* Text */}
+              <div className="relative flex flex-col justify-center gap-4 p-6 sm:p-8 lg:p-10 md:order-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-white/80 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-amber-700 backdrop-blur">
+                    <Sun size={13} className="text-amber-500" />
+                    Zomer-tip
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-300/60 bg-white/80 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-rose-700 backdrop-blur">
+                    <Thermometer size={13} className="text-rose-500" />
+                    Bij warm weer
+                  </span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-black leading-tight tracking-tight text-slate-900">
+                  Met je hond naar zee bij warm weer:{' '}
+                  <span className="relative inline-block text-amber-700">
+                    do's en don'ts
+                    <svg
+                      className="pointer-events-none absolute -bottom-1 left-0 h-2 w-full text-amber-400/60"
+                      viewBox="0 0 100 8"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <path d="M0 4 Q 25 0 50 4 T 100 4" fill="none" stroke="currentColor" strokeWidth="6" />
+                    </svg>
+                  </span>
+                </h2>
+
+                <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-700">
+                  Honden zweten niet zoals wij — en op het open zand loopt de temperatuur snel op tot{' '}
+                  <strong className="font-black text-slate-900">50 °C of meer</strong>. Lees onze complete gids met de{' '}
+                  <strong className="font-black text-slate-900">7-seconden zandtest</strong>, een hitteslag-checklist en wat je écht moet doen in een noodgeval.
+                </p>
+
+                <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                  <span className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-white shadow-lg shadow-amber-200/60 transition-all duration-300 group-hover:shadow-xl group-hover:from-amber-600 group-hover:to-orange-600">
+                    Lees de hittegids
+                    <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-700/80">
+                    9 min · veiligheid &amp; hitte
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
 
       <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
         <div className="mx-auto max-w-7xl px-4">

@@ -30,6 +30,271 @@ export interface BlogSection {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'hond-strand-warm-weer',
+    title: 'Met je hond naar zee bij warm weer: do\'s en don\'ts voor een veilige stranddag',
+    subtitle: 'Zo bescherm je je viervoeter tegen hitte, brandend zand, zoute zee en uitdroging aan de Belgische kust',
+    excerpt: 'Een dagje uitwaaien op het strand met je hond is heerlijk — tot de temperaturen oplopen. Honden zweten niet zoals wij en kunnen op het open zand snel oververhit raken. Met deze do\'s, don\'ts en een handige hitteslag-checklist hou je jullie stranddag aan de Belgische kust veilig en plezant.',
+    date: '2026-06-22',
+    readTime: '9 min',
+    category: 'Veiligheid & Hitte',
+    categoryColor: 'emerald',
+    icon: 'sun',
+    image: '/schaduwv1.webp',
+    imageAlt: 'Hond zoekt de schaduw op tijdens een warme dag aan de Belgische kust',
+    ogImage: '/OG_schaduwv1.webp',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Een dagje uitwaaien op het strand met je trouwe viervoeter is natuurlijk super plezant. Zeker hier aan onze mooie Belgische kust zien we niets liever dan blije honden die door de branding rennen, in de duinen snuffelen of een dutje doen onder de parasol. Maar als de zon volop schijnt en de temperaturen de hoogte in schieten, schuilt er ook gevaar.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Honden zweten namelijk niet zoals wij. Ze kunnen hun warmte enkel kwijt via hun voetzooltjes en door te hijgen. Omdat er op het open zand weinig tot geen schaduw is en het zand zelf in de zon snel oploopt tot 50 °C of meer, ligt oververhitting — of in het ergste geval een hitteslag — snel op de loer.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wil je er zeker van zijn dat jullie stranduitstap veilig en leuk blijft? Volg dan deze onmisbare do\'s en don\'ts van HondAanZee.be. We leggen je uit wat je écht moet vermijden, hoe je een hitteslag herkent en wat je doet in een noodgeval.'
+      },
+      {
+        type: 'callout',
+        title: 'Goed om te weten',
+        text: 'Vooral korte snuiten (zoals Franse Bulldog, Mopshond of Boxer), oudere honden, pups, honden met overgewicht of een dikke vacht en honden met hart- of luchtwegaandoeningen zijn extra gevoelig voor hitte. Voor hen geldt: bij temperaturen boven 22 °C is een rustige wandeling in de schaduw vaak veiliger dan een dag op het strand.'
+      },
+      {
+        type: 'heading',
+        text: 'Waarom warm weer aan zee extra gevaarlijk is'
+      },
+      {
+        type: 'paragraph',
+        text: 'Het strand voelt voor ons aan als de koelste plek op een warme zomerdag — er staat altijd een zeebriesje en er is water in de buurt. Voor je hond ziet die rekening er anders uit. Het zand reflecteert de zon, er is amper natuurlijke schaduw, de wind kan je laten onderschatten hoe hoog de gevoelstemperatuur eigenlijk is, en de zee is geen drinkwater. Bovendien wandelt je hond letterlijk op een hete kookplaat, terwijl jij zelf op slippers loopt.'
+      },
+      {
+        type: 'subheading',
+        text: 'Hoe een hond zijn warmte regelt'
+      },
+      {
+        type: 'paragraph',
+        text: 'Mensen koelen af door over het volledige lichaam te zweten. Honden hebben enkel zweetkliertjes in hun voetzooltjes — en dat is bij lange na niet genoeg om hun lichaamstemperatuur naar beneden te halen. Daarom hijgen ze: bij elke ademhaling verdampt vocht uit de bek en de longen, wat een beetje koeling oplevert. Maar dit systeem werkt minder goed naarmate de luchtvochtigheid stijgt of de omgevingstemperatuur dichter bij de lichaamstemperatuur van je hond komt (ongeveer 38–39 °C).'
+      },
+      {
+        type: 'heading',
+        text: 'Onze praktische do\'s op een warme stranddag'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een goede voorbereiding is alles. Met deze simpele vuistregels voorkom je een hoop miserie — en hou je het voor je hond een uitstap in plaats van een beproeving.'
+      },
+      {
+        type: 'list',
+        items: [
+          '☀️ Kies het juiste moment. Kom in de vroege voormiddag (vóór 10u) of in de late namiddag (na 18u) naar het strand, wanneer zon en zand een stuk milder zijn.',
+          '⛱️ Zorg voor je eigen schaduw. Breng altijd een parasol, een goed ventilerend strandtentje of een SPF-doek mee waar je hond onder kan liggen.',
+          '💧 Neem véél vers drinkwater mee. Voorzie minstens 1,5 liter per hond, een handig opvouwbaar bakje, en bied elke 15 à 20 minuten fris water aan.',
+          '🧊 Voorzie veilige afkoeling. Een koelmat, een nat T-shirt over de rug, of een frisse (zoetwater) douche op buik, liezen en pootjes doet wonderen.',
+          '🐾 Doe de 7-seconden zandtest. Vóór je het strand opstapt: hou de rug van je hand 7 seconden op het zand. Te heet voor jou? Dan verbrandt je hond zijn pootjes.',
+          '🚶 Wandel langs de waterlijn. Het natte zand is meetbaar koeler dan het droge zand boven de hoogwaterlijn — en het loopt ook nog eens lekkerder.',
+          '🦺 Hou je hond aan de lijn op drukke stranden. Bij hitte raken honden sneller gedesoriënteerd; een leiband voorkomt paniek en uitputting.',
+          '🩺 Ken het adres van een lokale dierenarts. Sla het nummer van een kustdierenarts op in je telefoon vóór je vertrekt — bij hitteslag telt elke minuut.'
+        ]
+      },
+      {
+        type: 'tip',
+        title: 'De 7-seconden zandtest',
+        text: 'Leg de rug van je hand plat op het zand en tel rustig tot 7. Voelt het te warm om je hand erop te houden? Dan is het ook te heet voor je hond. Wacht tot later op de dag, blijf op het vochtige zand langs de vloedlijn, of overweeg poot-schoentjes voor extra bescherming.'
+      },
+      {
+        type: 'heading',
+        text: 'En de don\'ts: wat je beter écht vermijdt'
+      },
+      {
+        type: 'list',
+        items: [
+          '🔥 Vermijd de middagzon. Tussen 12u en 16u is de zon op haar felst en is het strand simpelweg te heet voor een hond.',
+          '🌊 Laat je hond geen zeewater drinken. Zout water zorgt onmiddellijk voor uitdroging, hevige braakneigingen en stevige buikloop — soms gevaarlijk voor pups en kleine honden.',
+          '🥵 Loop niet op loeiheet zand. Slaag je de 7-seconden test niet? Dan ook niet "even snel" oversteken naar de waterlijn.',
+          '🎾 Gooi geen uren met de bal. Beperk zware fysieke inspanningen. Sprinten en duiken naar speeltjes in de hitte is een rechtstreekse uitnodiging voor een hitteslag.',
+          '🚗 Laat je hond NOOIT alleen achter in de auto. Zelfs niet "heel even" en zelfs niet met een raampje open. Een wagen wordt in 10 minuten een oven van 50 °C en meer.',
+          '🥤 Geef geen ijskoud water of ijsblokjes om af te koelen. Te koud water kan in extreme gevallen leiden tot maagdraaiing of vaatkrampen — koel water is voldoende.',
+          '🐕 Vertrouw niet op "mijn hond geeft het wel aan". Veel honden blijven doorgaan om hun baasje te plezieren, ook als hun lichaam allang oververhit is.',
+          '🧂 Spoel niet enkel met zeewater af. Zout op de huid blijft de hond uitdrogen — spoel thuis of bij een strandkraantje altijd na met zoet water.'
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Pas op met zeewater',
+        text: 'Een paar slokjes na het apporteren van een drijver kan al volstaan om een hond ziek te maken. Bied je hond regelmatig vers water aan vóór hij dorst krijgt — een dorstige hond drinkt anders van het eerste het beste plasje, en dat is aan zee meestal zout.'
+      },
+      {
+        type: 'heading',
+        text: 'Hitteslag bij honden: hoe herken je het?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Soms gaat het sneller dan je denkt. Een hitteslag (medisch: hyperthermie) is een levensbedreigende noodsituatie waarbij de lichaamstemperatuur van je hond oploopt tot boven 40 °C en het lichaam zichzelf niet meer kan koelen. Het is cruciaal dat je als baasje de signalen van oververhitting leert herkennen — en dat je weet dat de meeste honden pas symptomen tonen als ze al ernstig in de problemen zitten.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Grijp direct in als je hond een of meer van de volgende symptomen toont:'
+      },
+      {
+        type: 'list',
+        items: [
+          '🫁 Extreem hard, aanhoudend en luidruchtig hijgen — sneller en dieper dan je gewend bent',
+          '💦 Hevig kwijlen, schuimbekken of slijmerig speeksel',
+          '👅 Een opvallend donkerrode, paarse of bleke tong en tandvlees',
+          '🦵 Plotse lusteloosheid, waggelen, struikelen of weigeren om nog verder te stappen',
+          '🤢 Braken, hevige diarree (soms met bloed) of moeite met slikken',
+          '😨 Glazige of paniekerige blik in de ogen, niet meer reageren op zijn naam',
+          '💓 Heel snelle hartslag of juist een onregelmatig, zwak ritme',
+          '😵 Verwardheid, trillen, omvallen of bewustzijnsverlies'
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Wachten is geen optie',
+        text: 'Bij hitteslag telt elke minuut. Een hond die collapseert door oververhitting kan binnen het uur overlijden als er niet snel én correct wordt afgekoeld én een dierenarts wordt verwittigd. Twijfel je? Behandel het als een hitteslag — beter te voorzichtig dan te laat.'
+      },
+      {
+        type: 'heading',
+        text: 'Wat doe je in een noodgeval?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Vermoed je een hitteslag? Volg dan dit stappenplan, in deze volgorde:'
+      },
+      {
+        type: 'list',
+        items: [
+          '1. Breng je hond onmiddellijk uit de zon — naar de schaduw, een koele binnenruimte of een airco-auto met de motor uit en deuren open.',
+          '2. Begin rustig met afkoelen: maak voetzooltjes, oksels, liezen, oren en buik nat met lauw tot fris (NIET ijskoud) water. Een natte handdoek over de schedel mag, maar niet over het hele lichaam.',
+          '3. Zet eventueel een ventilator aan of wapper met een handdoek — verdamping versnelt de afkoeling.',
+          '4. Bied kleine slokjes koel water aan als hij bij bewustzijn is. Dwing niet, en geef nooit ijswater.',
+          '5. Bel onmiddellijk een lokale dierenarts aan de kust voor verdere instructies — ook als je hond lijkt op te knappen, is medische controle nodig.',
+          '6. Vervoer je hond gekoeld naar de dierenarts: een nat T-shirt over zijn rug, raampjes open of airco aan.'
+        ]
+      },
+      {
+        type: 'warning',
+        title: 'Doe dit NIET',
+        text: 'Gebruik nooit ijskoud water of dompel je hond niet onder in ijswater — dat doet de bloedvaten samentrekken en houdt de hitte juist vast in de kern van het lichaam. Leg ook geen kletsnatte, zware handdoek over de rug van je hond: daaronder stapelt de hitte zich net op. Lauw tot fris stromend water op de juiste plekken (poten, liezen, buik) werkt het best.'
+      },
+      {
+        type: 'heading',
+        text: 'Slim plannen: kies de juiste plek én het juiste moment'
+      },
+      {
+        type: 'paragraph',
+        text: 'Niet elk strand of elke wandelplek is in de zomer even geschikt voor je hond. In de zomermaanden zijn honden bovendien op de meeste bewaakte stranden verboden tussen 10u en 20u — net tijdens de heetste uren. Wij raden aan om in juli en augustus uit te wijken naar plekken met schaduw, water en een lossere reglementering.',
+        links: [
+          { text: 'losloopzones aan de Belgische kust', url: '/losloopzones' },
+          { text: 'hondvriendelijke zaken', url: '/hotspots' }
+        ]
+      },
+      {
+        type: 'list',
+        items: [
+          '🌳 Kies een losloopzone met schaduw en bomen, zoals het Hondenbos in Oostende of de Duinbossen in Wenduine. Bekijk alle losloopzones aan de Belgische kust voor een volledig overzicht.',
+          '🏖️ Op een hondenstrand? Ga vóór 10u of na 19u, en blijf dicht bij de waterlijn waar het zand vochtig en koel is.',
+          '🍦 Kies hondvriendelijke terrasjes met schaduw, waterbakjes en koeling. Veel zaken aan de kust hebben een speciale plek voor honden — handig voor een tussenstop.',
+          '🐕 Plan een korte stop bij een dierenarts in de buurt als je een dagje weggaat. Bekijk vooraf de lijst met kustdierenartsen zodat je weet waar je terecht kan in geval van nood.'
+        ]
+      },
+      {
+        type: 'callout',
+        title: 'Let op de zomerregeling per gemeente',
+        text: 'De regels rond honden op het strand verschillen per kustgemeente. In Knokke-Heist, Blankenberge, De Haan, Bredene, Oostende, Middelkerke, Nieuwpoort, Koksijde en De Panne gelden andere toegangsuren en zones in juli en augustus. Check vooraf de pagina van jouw bestemming op HondAanZee.be zodat je niet voor een gesloten strand staat — net wanneer het tijd is om af te koelen.'
+      },
+      {
+        type: 'heading',
+        text: 'Slim afkoelen: 5 ideeën die écht werken'
+      },
+      {
+        type: 'list',
+        items: [
+          '🧊 Een koelmat of koelvest (op maat) onder de parasol — werkt op verdamping, geen vriezer nodig.',
+          '🧴 Een plantensproeier met koel zoet water — neveltje over de buik en pootjes is verfrissend.',
+          '🪣 Een opvouwbare emmer of klein opblaasbaar zwembadje voor in de tuin of bij de tent.',
+          '🥒 Bevroren snacks: stukjes komkommer, watermeloen (zonder pitten) of natuurlijke yoghurt in een Kong — koelt langzaam en houdt je hond bezig.',
+          '🌬️ Een mini-ventilator op batterijen of USB — handig voor in de auto of bij het strandtentje.'
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Korte checklist voor je tas'
+      },
+      {
+        type: 'list',
+        items: [
+          '✅ Minstens 1,5 liter vers drinkwater per hond',
+          '✅ Een opvouwbaar of siliconen drinkbakje',
+          '✅ Parasol, strandtentje of grote handdoek voor schaduw',
+          '✅ Een (natte) handdoek, koelmat of koelvest',
+          '✅ Plantensproeier of klein flesje voor verfrissende mist',
+          '✅ Bevroren snacks of een gevulde Kong',
+          '✅ Eventueel pootschoentjes voor heet zand of scherpe schelpen',
+          '✅ Het telefoonnummer van een dierenarts in de buurt',
+          '✅ Je leiband — ook al mag je hond officieel los'
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Veelgestelde vragen over honden en warm weer aan zee'
+      },
+      {
+        type: 'subheading',
+        text: 'Vanaf welke temperatuur is het strand te warm voor mijn hond?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een algemene vuistregel: vanaf 22–25 °C in de schaduw begin je voorzichtig te zijn, vanaf 27 °C in de schaduw vermijd je actieve inspanning, en boven de 30 °C blijf je in de schaduw of binnen. Maar context telt: hoge luchtvochtigheid, weinig wind, fel zonlicht en heet zand maken de gevoelstemperatuur fors hoger. Gevoelige honden (korte snuiten, oude honden, pups) reageren al bij lagere temperaturen.'
+      },
+      {
+        type: 'subheading',
+        text: 'Mag mijn hond zwemmen in de zee bij warm weer?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Zwemmen is een heerlijke manier om af te koelen — mits je een paar regels respecteert. Vermijd dat je hond te veel zout water binnenkrijgt, beperk de zwemtijd (vermoeide honden in branding is gevaarlijk), spoel hem nadien af met zoet water en hou hem in de gaten op een ondiepe, rustige plek. Wist je dat we ook een artikel hebben over de leukste zwemplekjes voor honden aan onze kust?',
+        links: [
+          { text: 'zwemplekjes voor honden aan onze kust', url: '/blog/zwemplekjes-honden-belgische-kust' }
+        ]
+      },
+      {
+        type: 'subheading',
+        text: 'Wat doe ik als ik een hond in nood zie op het strand?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Zie je een hond met duidelijke symptomen van een hitteslag — hevig hijgen, wankelen, lusteloos zijn — spreek het baasje meteen aan. Helpt dat niet of is er geen baasje in de buurt? Verplaats de hond samen met anderen naar de schaduw, koel hem af met fris (geen ijskoud) water op buik, liezen en pootjes, en bel een dierenarts in de buurt. Bij verlaten of dronken baasjes mag je ook de politie verwittigen.'
+      },
+      {
+        type: 'subheading',
+        text: 'Helpen pootschoentjes echt tegen heet zand?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Ja, mits goed passend. Schoentjes met een rubberen of EVA-zool isoleren effectief tegen brandend zand en scherpe schelpen, maar moeten oefenmatig gewend worden. Probeer ze eerst thuis een paar minuten, beloon je hond royaal, en bouw rustig op. Voor honden met gevoelige voetzolen of bij langdurige stranddagen zijn ze een investering waard.'
+      },
+      {
+        type: 'heading',
+        text: 'Geniet, maar hou het veilig'
+      },
+      {
+        type: 'paragraph',
+        text: 'De zee is een fantastische speelplek voor honden, zolang we ons gezond verstand gebruiken. Luister goed naar je hond, verplicht hem tot voldoende rust in de schaduw, drink samen veel water en geniet van een heerlijke en veilige stranddag aan onze Belgische kust. Want eerlijk: een blije hond op het strand is het hele jaar door het mooiste wat onze kust te bieden heeft.'
+      },
+      {
+        type: 'quote',
+        text: 'Wie zijn hond echt graag ziet, plant zijn stranddag rond zíjn comfort — niet rond het zonneschijntje van het baasje.'
+      },
+      {
+        type: 'callout',
+        title: 'Handige links voor jouw stranddag',
+        text: 'Op HondAanZee.be vind je alle losloopzones aan de Belgische kust, een overzicht van hondvriendelijke zaken met schaduw en waterbakjes, en een lijst met kustdierenartsen voor noodgevallen. Check vooraf de pagina van jouw kustgemeente om te weten wanneer en waar je hond welkom is.'
+      }
+    ]
+  },
+  {
     slug: 'van-trekhond-tot-strandkoning-geschiedenis-kusthonden',
     title: 'Van trekhond tot strandkoning: de vergeten geschiedenis van kusthonden',
     subtitle: 'Hoe honden aan de Belgische kust evolueerden van werkdier in het zand tot volwaardig gezinslid op het strand',
