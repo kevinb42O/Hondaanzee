@@ -39,6 +39,25 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '2.5',
+    date: '22 juni 2026',
+    title: 'Zomerblog, levende stadspagina’s en een nieuwe weer-widget',
+    subtitle: 'Een nieuwe gids voor warm strandweer, slimmere stadspagina’s die meebewegen met je scroll en een rustigere homepage-opbouw',
+    entries: [
+      { text: 'Nieuw zomerblog “Hond, strand en warm weer — de echte do’s en don’ts” met hitteslag-stappenplan, de 7-seconden zandtest en een uitgebreide FAQ voor de zomer', tag: { label: 'Blog', color: 'blue' } },
+      { text: 'Opvallende zomerbanner op de homepage die rechtstreeks naar het hitte-blog leidt zolang het warm weer is aan de kust', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Homepage-volgorde herzien: de zomerblog staat nu bovenaan boven de stedenkaart voor maximale zichtbaarheid, en de notificatieknop verhuisde rustig naar onder de steden', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Stadspagina’s: het antwoord “mag mijn hond hier?” blijft nu op desktop netjes meescrollen, zodat je altijd ziet of het JA, DEELS of NEE is, ook tijdens het lezen', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Volledig nieuwe weer-widget op elke stadspagina: actuele temperatuur, hitteslag-waarschuwing voor honden, wind en zachte motion-animaties die het overzicht meteen leesbaar maken', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Status-kaart per stad kreeg een visuele upgrade met grotere icons, kleur-glow en zachte overgangen — voelt meteen levendiger en moderner', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: '“Populaire vragen”-pillen op de stadspagina schuiven nu zachtjes vanzelf, zodat je in één oogopslag alle vragen ziet langskomen zonder zelf te moeten swipen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Header schakelt nu slim naar lichte tekst alleen op mobiel wanneer een pagina op desktop een lichtere editorial layout heeft — zo blijft de menubalk overal goed leesbaar', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Zomerafbeelding (schaduwv1) automatisch geconverteerd naar WebP in drie maten (hero, social preview, mobiel 640w) zodat het blog merkbaar sneller laadt op de telefoon', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Sitemap opnieuw opgebouwd met de datums van vandaag, voor snellere indexatie van de nieuwe blog en de hernieuwde stadspagina’s in Google', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Laatste update-datum in de footer bijgewerkt naar 22 juni 2026', tag: { label: 'Opgelost', color: 'emerald' } },
+    ],
+  },
+  {
     version: '2.4',
     date: '2 mei 2026',
     title: 'Pushmeldingen en admin-notificaties toegevoegd',
@@ -396,10 +415,12 @@ function getReleaseStyles(isLaunch: boolean, isNewest: boolean): ReleaseStyles {
 
 const Updates: React.FC = () => {
   useSEO({
-    title: 'Updates & Nieuwigheden | HondAanZee.be',
-    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — jouw gids voor de Belgische kust.',
-    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, nieuwe zaken kust',
+    title: 'Updates & Nieuwigheden — laatste update 22 juni 2026 | HondAanZee.be',
+    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 22 juni 2026.',
+    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, nieuwe zaken kust, juni 2026',
     canonical: 'https://hondaanzee.be/updates',
+    ogType: 'article',
+    articleModifiedTime: '2026-06-22T00:00:00+02:00',
   });
 
   useEffect(() => {
