@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallba
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer } from 'lucide-react';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
 
@@ -47,6 +48,42 @@ const getGridClass = (index: number, total: number): string => {
 
 // Steden die dezelfde hoogte krijgen als de grote kaarten
 const TALL_CARDS = new Set(['wenduine', 'de-haan', 'de-panne', 'oostende', 'middelkerke', 'nieuwpoort', 'koksijde']);
+
+// ── Hero motion variants ────────────────────────────────────────────────
+const HERO_STAGGER: Variants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
+};
+const HERO_FADE_UP: Variants = {
+  hidden:  { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
+const HERO_PATH_DRAW: Variants = {
+  hidden:  { pathLength: 0, opacity: 0 },
+  visible: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.05, ease: [0.65, 0, 0.35, 1], delay: 0.85 },
+  },
+};
+const HERO_SEARCH_POP: Variants = {
+  hidden:  { opacity: 0, y: 28, scale: 0.96 },
+  visible: {
+    opacity: 1, y: 0, scale: 1,
+    transition: { type: 'spring', stiffness: 130, damping: 18, delay: 0.45 },
+  },
+};
+const HERO_PILL_GROUP: Variants = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.85 } },
+};
+const HERO_PILL: Variants = {
+  hidden:  { opacity: 0, y: 14, scale: 0.9 },
+  visible: {
+    opacity: 1, y: 0, scale: 1,
+    transition: { type: 'spring', stiffness: 220, damping: 18 },
+  },
+};
 
 // Images with pre-generated 640w responsive variants
 const RESPONSIVE_IMAGES = new Set([
@@ -258,6 +295,7 @@ const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems
 };
 
 const Home: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
   const [searchParams] = useSearchParams();
   const initialSearch = searchParams.get('search') || '';
   const [searchQuery, setSearchQuery] = useState(initialSearch);
@@ -515,23 +553,51 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 z-[1] bg-slate-950/50"></div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-slate-950/30"></div>
 
-        <div className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2">
-          <h1 className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 font-heading" style={{ textShadow: '0 2px 10px rgba(2,6,23,0.22)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+        <motion.div
+          initial={prefersReducedMotion ? 'visible' : 'hidden'}
+          animate="visible"
+          variants={HERO_STAGGER}
+          className="max-w-7xl mx-auto relative z-20 text-center safe-area-left safe-area-right overflow-hidden px-2"
+        >
+          <motion.h1
+            variants={HERO_FADE_UP}
+            className="text-[1.7rem] sm:text-4xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-bold text-white mb-6 sm:mb-8 leading-[1.15] max-w-5xl mx-auto px-2 font-heading"
+            style={{ textShadow: '0 2px 10px rgba(2,6,23,0.22)', letterSpacing: '-0.5px', fontWeight: 700, overflowWrap: 'break-word', wordBreak: 'break-word' }}
+          >
             Met je hond naar zee? <br className="hidden sm:block" />
             <span className="text-sky-300 relative inline-block max-w-full">
               Wij weten precies
               <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
+                {prefersReducedMotion ? (
+                  <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
+                ) : (
+                  <motion.path
+                    d="M0 5 Q 25 0 50 5 T 100 5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    variants={HERO_PATH_DRAW}
+                  />
+                )}
               </svg>
             </span> waar het mag.
-          </h1>
+          </motion.h1>
 
-          <p className="text-slate-100 max-w-3xl mx-auto leading-relaxed px-4 mb-10 sm:mb-14 text-sm sm:text-base md:text-lg" style={{ textShadow: '0 1px 6px rgba(2,6,23,0.18)', fontWeight: 400 }}>
+          <motion.p
+            variants={HERO_FADE_UP}
+            className="text-slate-100 max-w-3xl mx-auto leading-relaxed px-4 mb-10 sm:mb-14 text-sm sm:text-base md:text-lg"
+            style={{ textShadow: '0 1px 6px rgba(2,6,23,0.18)', fontWeight: 400 }}
+          >
             Nooit meer gissen naar strandregels. Ontdek actuele toegankelijkheid,{' '}
             <span className="text-white font-semibold">verborgen losloopweides</span> en de meest gastvrije hotspots voor jou en je viervoeter.
-          </p>
+          </motion.p>
 
-          <div ref={searchContainerRef} className="max-w-lg md:max-w-3xl mx-auto relative px-2 sm:px-4 md:px-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+          <motion.div
+            ref={searchContainerRef}
+            variants={HERO_SEARCH_POP}
+            className="max-w-lg md:max-w-3xl mx-auto relative px-2 sm:px-4 md:px-8"
+          >
             <div ref={searchBarRef} className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
               <div className="pl-3 sm:pl-4 md:pl-6 flex items-center pointer-events-none">
                 <Search size={20} className="search-icon text-slate-400 sm:w-[22px] sm:h-[22px]" />
@@ -663,24 +729,44 @@ const Home: React.FC = () => {
               </div>
             )}
 
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
-              <span className="popular-label text-[9px] sm:text-[10px] font-medium text-white/70 uppercase tracking-[0.15em] sm:tracking-[0.2em] w-full sm:w-auto text-center mb-2 sm:mb-0">Populair</span>
-              {['Oostende', 'Blankenberge', 'Knokke'].map((pop, index) => (
-                <button
+            <motion.div
+              variants={HERO_PILL_GROUP}
+              className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-4"
+            >
+              <motion.span
+                variants={HERO_PILL}
+                className="popular-label text-[9px] sm:text-[10px] font-medium text-white/70 uppercase tracking-[0.15em] sm:tracking-[0.2em] w-full sm:w-auto text-center mb-2 sm:mb-0"
+              >
+                Populair
+              </motion.span>
+              {['Oostende', 'Blankenberge', 'Knokke'].map((pop) => (
+                <motion.button
                   key={pop}
-                  onClick={() => setSearchQuery(pop)}
-                  className="popular-pill group relative text-xs sm:text-sm font-semibold text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-heading transition-all duration-300 hover:scale-105 hover:bg-white hover:text-slate-900 active:scale-95 touch-target bg-white/20 backdrop-blur-sm border border-white/30"
-                  style={{
-                    animationDelay: `${0.6 + index * 0.1}s`
+                  variants={HERO_PILL}
+                  whileHover={prefersReducedMotion ? undefined : { y: -3, scale: 1.05 }}
+                  whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+                  transition={{ type: 'spring', stiffness: 320, damping: 18 }}
+                  onClick={() => {
+                    setSearchQuery(pop);
+                    setShowSuggestions(false);
+                    setSelectedSuggestionIndex(-1);
+                    // Wacht één frame zodat React de gefilterde grid heeft gerenderd
+                    // vóór we ernaartoe scrollen — anders kan scrollIntoView de oude
+                    // (kortere) hoogte gebruiken en op een verkeerde positie eindigen.
+                    requestAnimationFrame(() => scrollToResults());
                   }}
+                  className="popular-pill group relative text-xs sm:text-sm font-semibold text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-heading hover:bg-white hover:text-slate-900 touch-target bg-white/20 backdrop-blur-sm border border-white/30"
                 >
                   {pop}
-                </button>
+                </motion.button>
               ))}
-            </div>
-            
+            </motion.div>
+
             {/* Kaart CTA Button */}
-            <div className="mt-6 sm:mt-8 flex justify-center">
+            <motion.div
+              variants={HERO_FADE_UP}
+              className="mt-6 sm:mt-8 flex justify-center"
+            >
               <Link
                 to="/kaart"
                 className="group inline-flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm border-2 border-white/40 hover:bg-white hover:border-white text-white hover:text-sky-700 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base md:text-lg font-heading transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 active:scale-95 touch-target"
@@ -689,9 +775,9 @@ const Home: React.FC = () => {
                 <span>Bekijk interactieve kaart</span>
                 <ArrowRight size={18} className="sm:w-[20px] sm:h-[20px] transition-transform group-hover:translate-x-1" />
               </Link>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
         {/* Organic Wave Divider with Infinite Animation */}
         <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">

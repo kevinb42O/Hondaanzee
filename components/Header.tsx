@@ -72,6 +72,15 @@ const Header: React.FC = () => {
         return;
       }
 
+      // Opt-out: hero wants light-text only on small viewports. Used by
+      // pages whose desktop layout swaps to a light editorial pane.
+      const mobileOnly = hero.dataset.headerHeroMobileOnly === 'true';
+      if (mobileOnly && globalThis.matchMedia('(min-width: 1024px)').matches) {
+        setIsOverHero(false);
+        ticking = false;
+        return;
+      }
+
       const rect = hero.getBoundingClientRect();
       const headerProbeY = 96;
       setIsOverHero(rect.top <= headerProbeY && rect.bottom > headerProbeY);

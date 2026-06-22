@@ -12,7 +12,6 @@ import CityFAQ from '../components/CityFAQ.tsx';
 import { CITIES } from '../cityData.ts';
 import { useSEO, getCitySEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
-import { WeatherWidget } from '../components/WeatherWidget.tsx';
 import { buildCityFAQSchema } from '../utils/cityFaq.ts';
 
 const CityPage: React.FC = () => {
@@ -60,21 +59,44 @@ const CityPage: React.FC = () => {
         <div className="absolute inset-0 bg-slate-950/72" />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/78 via-slate-900/52 to-slate-50/96" />
         <div className="absolute inset-x-0 top-0 h-[52vh] bg-gradient-to-b from-slate-900/38 to-transparent" />
+
+        {/* Editorial LIGHT pane — desktop only.
+            Fades from near-white on the left to fully transparent before
+            the right column so the answer card still sits on the dark hero.
+            Sits in the same fixed layer → extends from the very top of the
+            page down to wherever solid white sections begin to cover it. */}
+        <div
+          className="hidden lg:block absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(105deg, rgba(248,250,252,0.98) 0%, rgba(248,250,252,0.96) 26%, rgba(248,250,252,0.62) 42%, rgba(248,250,252,0.22) 54%, rgba(248,250,252,0) 66%)',
+          }}
+        />
       </div>
 
-      <div data-header-hero="light">
-        <div className="max-w-3xl mx-auto px-4 pt-24 sm:pt-28 md:pt-32">
+      <div data-header-hero="light" data-header-hero-mobile-only="true">
+        <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 pt-24 sm:pt-28 md:pt-32">
           <Link
             to="/"
-            className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/92 backdrop-blur-md border border-white text-slate-900 font-extrabold shadow-lg shadow-slate-900/20 hover:bg-white transition-colors active:opacity-90 touch-target"
+            className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white border border-slate-200 text-slate-900 font-extrabold shadow-lg shadow-slate-900/20 hover:bg-slate-50 transition-colors active:opacity-90 touch-target"
           >
             <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
             <span className="text-sm sm:text-base">Terug naar overzicht</span>
           </Link>
 
+          {/* Mobile/tablet: light-on-dark breadcrumb */}
           <Breadcrumb
             variant="light"
-            className="mb-4 sm:mb-6"
+            className="mb-4 sm:mb-6 lg:hidden"
+            items={[
+              { label: 'Home', to: '/' },
+              { label: city.name },
+            ]}
+          />
+          {/* Desktop: dark text on the new light editorial pane */}
+          <Breadcrumb
+            variant="default"
+            className="mb-4 sm:mb-6 hidden lg:flex"
             items={[
               { label: 'Home', to: '/' },
               { label: city.name },
@@ -84,7 +106,6 @@ const CityPage: React.FC = () => {
 
         <section className="pb-10 sm:pb-12 md:pb-20 px-4">
           <StatusCheck city={city} />
-          <WeatherWidget city={city} />
         </section>
       </div>
 
