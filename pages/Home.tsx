@@ -726,65 +726,8 @@ const Home: React.FC = () => {
 
       {/* Cities Grid Section with Warm Background */}
       <div className="bg-stone-50 py-12 sm:py-16 md:py-20">
+        {/* Summer Safety Blog Teaser — drives traffic to /blog/hond-strand-warm-weer during summer */}
         <div className="mx-auto mb-10 max-w-7xl px-4 sm:mb-14">
-          <NotificationOptIn variant="homepage" />
-        </div>
-
-        <div id="steden" className="max-w-7xl mx-auto px-4 scroll-mt-24">
-          {/* Cities Grid Header */}
-          <div className="mb-10 flex items-center justify-between px-2">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-              <Waves size={24} className="text-sky-500" />
-              Onze Badsteden
-            </h2>
-            <div className="hidden sm:block text-sm font-bold text-slate-500 uppercase tracking-widest">
-              Totaal: {filteredCities.length} resultaten
-            </div>
-          </div>
-
-          {filteredCities.length > 0 ? (
-            <>
-              {isFullView ? (
-                <div className="flex flex-col">
-                  {fullViewRows.map((row, index) => (
-                    <HoverRow key={index} cities={row.cities} defaultFlexes={row.flexes} isThreeItems={row.flexes.length === 3} rowIndex={index} />
-                  ))}
-                </div>
-              ) : (
-                <div className={
-                  filteredCities.length >= 5
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
-                    : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
-                }>
-                  {filteredCities.map((city, index) => (
-                    <CityCard key={city.slug} city={city} index={index} total={filteredCities.length} />
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-20 md:py-32 px-6 bg-white rounded-[4rem] border-2 border-dashed border-slate-100 animate-in fade-in shadow-inner">
-              <div className="bg-slate-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-10 text-slate-200">
-                <Search size={48} />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">Geen stad gevonden</h2>
-              <p className="text-slate-500 font-medium text-lg mb-10 max-w-md mx-auto">
-                We hebben geen match voor "<span className="text-slate-900 font-bold">{searchQuery}</span>". Probeer een andere badstad of bekijk de volledige lijst.
-              </p>
-              <button
-                onClick={() => setSearchQuery('')}
-                className="btn-lift bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-sky-600 shadow-2xl shadow-slate-900/20 flex items-center gap-3 mx-auto"
-              >
-                Reset zoekopdracht
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Summer Safety Blog Teaser — drives traffic to /blog/hond-strand-warm-weer during summer */}
-      <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
-        <div className="mx-auto max-w-7xl px-4">
           <Link
             to="/blog/hond-strand-warm-weer"
             aria-label="Lees onze gids: Met je hond naar zee bij warm weer — do's en don'ts voor een veilige stranddag"
@@ -857,6 +800,63 @@ const Home: React.FC = () => {
               </div>
             </div>
           </Link>
+        </div>
+
+        <div id="steden" className="max-w-7xl mx-auto px-4 scroll-mt-24">
+          {/* Cities Grid Header */}
+          <div className="mb-10 flex items-center justify-between px-2">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+              <Waves size={24} className="text-sky-500" />
+              Onze Badsteden
+            </h2>
+            <div className="hidden sm:block text-sm font-bold text-slate-500 uppercase tracking-widest">
+              Totaal: {filteredCities.length} resultaten
+            </div>
+          </div>
+
+          {filteredCities.length > 0 ? (
+            <>
+              {isFullView ? (
+                <div className="flex flex-col">
+                  {fullViewRows.map((row, index) => (
+                    <HoverRow key={index} cities={row.cities} defaultFlexes={row.flexes} isThreeItems={row.flexes.length === 3} rowIndex={index} />
+                  ))}
+                </div>
+              ) : (
+                <div className={
+                  filteredCities.length >= 5
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
+                    : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
+                }>
+                  {filteredCities.map((city, index) => (
+                    <CityCard key={city.slug} city={city} index={index} total={filteredCities.length} />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-20 md:py-32 px-6 bg-white rounded-[4rem] border-2 border-dashed border-slate-100 animate-in fade-in shadow-inner">
+              <div className="bg-slate-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-10 text-slate-200">
+                <Search size={48} />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">Geen stad gevonden</h2>
+              <p className="text-slate-500 font-medium text-lg mb-10 max-w-md mx-auto">
+                We hebben geen match voor "<span className="text-slate-900 font-bold">{searchQuery}</span>". Probeer een andere badstad of bekijk de volledige lijst.
+              </p>
+              <button
+                onClick={() => setSearchQuery('')}
+                className="btn-lift bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-sky-600 shadow-2xl shadow-slate-900/20 flex items-center gap-3 mx-auto"
+              >
+                Reset zoekopdracht
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <NotificationOptIn variant="homepage" />
         </div>
       </section>
 
