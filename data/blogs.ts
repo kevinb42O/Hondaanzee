@@ -30,6 +30,207 @@ export interface BlogSection {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'blauwalg-hond-strand-waarschuwing',
+    title: 'Doe de Water-Check: Zo Herken Je Blauwalg Voordat Je Hond Erin Zwemt Of Eruit Drinkt',
+    subtitle: 'Een onzichtbaar (en soms pijnlijk zichtbaar) gevaar in het water tijdens warme nazomerdagen.',
+    excerpt: 'Niets heerlijker dan je hond vrolijk het water in te zien plonzen om die opgewarmde vacht even te laten afkoelen. Maar let op voor blauwalg! Leer hier hoe je dit gevaar herkent en wat je moet doen als het misgaat.',
+    date: '2026-06-30',
+    readTime: '6 min',
+    category: 'Gezondheid & Veiligheid',
+    categoryColor: 'red',
+    icon: 'alert-triangle',
+    image: '/blauwalg.webp',
+    imageAlt: 'Blauwalg in het water',
+    ogImage: '/blauwalg.webp',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Zomer aan de kust. De zon brandt, de zeelucht waait door je haren, en je trouwe viervoeter loopt met een kamerbrede glimlach – en een uitgestoken tong – naast je. Het kwik stijgt en de drang naar verkoeling wordt onweerstaanbaar. Niets heerlijker dan je hond vrolijk het water in te zien plonzen om die opgewarmde vacht even te laten afkoelen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Onze *Chief Testing Officer* Jax weet er alles van. Zodra hij nog maar een wateroppervlak ruikt, begint die staart overuren te draaien. En hoewel we honden die waterpret absoluut gunnen, schuilt er tijdens die warme nazomerdagen een onzichtbaar (en soms pijnlijk zichtbaar) gevaar in het water: blauwalg.'
+      },
+      {
+        type: 'paragraph',
+        text: 'In deze blog duiken we diep in de wereld van dit hardnekkige natuurfenomeen. Geen paniekzaaierij, wel keiharde, nuttige feiten. Want de beste manier om je hond te beschermen, is door te weten waar je precies op moet letten. Pak er een koffie of een ijskoud glas water bij, en laten we ervoor zorgen dat jouw hond deze zomer veilig kan zwemmen.'
+      },
+      {
+        type: 'heading',
+        text: 'Wat is Blauwalg Eigenlijk? (Spoiler: Het is géén alg)'
+      },
+      {
+        type: 'paragraph',
+        text: 'De naam is eigenlijk de grootste misleiding uit de natuur. Blauwalgen zijn helemaal geen algen of zeewier, maar **cyanobacteriën**. Dit zijn microscopisch kleine organismen die al miljarden jaren op onze planeet vertoeven. Ze overleven zowat overal, maar ze hebben één absolute favoriete cocktail om in te exploderen:'
+      },
+      {
+        type: 'list',
+        items: [
+          'Stilstaand of traag stromend water.',
+          'Lekker warme temperaturen (meestal vanaf 20°C).',
+          'Veel voedingsstoffen in het water (zoals meststoffen die vanuit de landbouw in het water spoelen).',
+          'Veel zonlicht.'
+        ]
+      },
+      {
+        type: 'paragraph',
+        text: 'Als al deze elementen samenkomen, gaan die bacteriën zich in sneltreinvaart vermenigvuldigen. Dit noemen we "bloei". En dat is het moment waarop het levensgevaarlijk wordt voor onze honden.'
+      },
+      {
+        type: 'subheading',
+        text: 'Waarom is het zo giftig?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Wanneer deze cyanobacteriën massaal bloeien en vervolgens beginnen af te sterven, breken hun celwanden open. Hierbij komen krachtige toxines (gifstoffen) vrij in het water. We spreken dan over neurotoxines (die het zenuwstelsel aanvallen) en hepatotoxines (die de lever verwoesten). Voor een mens is dit al vervelend, maar voor een hond, wiens lichaam veel kleiner is en die het water in grote hoeveelheden binnenkrijgt, kan het simpelweg fataal zijn.'
+      },
+      {
+        type: 'image',
+        imageSrc: '/blauwalg2.jpg',
+        imageAlt: 'Voorbeeld van blauwalg bloei in het water'
+      },
+      {
+        type: 'heading',
+        text: 'Hoe Herken Je Deze Groene Soep?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Je hoeft gelukkig geen bioloog te zijn om blauwalg te spotten, maar je moet wel weten waar je op moet letten. Voordat je de leiband losklikt en je hond het water in laat stormen, doe je best altijd even de **\'HondAanZee Scan\'**. Neem 10 seconden de tijd om het wateroppervlak te bestuderen.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Dit zijn de absolute rode vlaggen:'
+      },
+      {
+        type: 'list',
+        items: [
+          '**De Verf-Look:** Het water ziet eruit alsof er een pot felgroene, blauwgroene of zelfs roodachtige verf in is leeggegoten.',
+          '**De Olie-achtige Laag:** Het lijkt alsof er een dun, vettig vliesje of een olieachtige smurrie op het water drijft.',
+          '**Groene Vlokken:** Je ziet kleine, groene deeltjes zweven in het water, alsof iemand er gemalen spinazie in heeft gegooid.',
+          '**Schuimkragen:** Aan de randen van het water (waar de wind naartoe blaast) hoopt zich een stinkende, schuimende brij op.',
+          '**De Geur:** Dode blauwalg stinkt enorm. Het ruikt vaak naar rottende planten, mest of een vies riool.'
+        ]
+      },
+      {
+        type: 'tip',
+        title: 'Belangrijke Tip',
+        text: 'De wind is je kompas. Blauwalgen drijven op het oppervlak en worden door de wind naar één kant van de vijver, kreek of plas geblazen. Die kant, waar de smurrie zich ophoopt, is de meest giftige zone.'
+      },
+      {
+        type: 'heading',
+        text: 'Waarom Honden de Perfecte Slachtoffers Zijn'
+      },
+      {
+        type: 'paragraph',
+        text: 'Je vraagt je misschien af: als dat water er zo smerig uitziet en zo stinkt, waarom zou een hond daar dan in hemelsnaam in gaan? Simpel: honden redeneren niet zoals wij.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Waar wij een giftige soep zien, ziet een oververhitte hond gewoon... water. Verkoeling. Bovendien lopen honden drie keer zoveel risico als wij mensen, en wel om de volgende redenen:'
+      },
+      {
+        type: 'list',
+        items: [
+          '**De Onzichtbare Slokken:** Als een hond zwemt, neemt hij – bedoeld of onbedoeld – water op. Zeker als ze graag apporteren en met een bal of stok in hun bek door het water peddelen, slikken ze ongemerkt grote hoeveelheden vervuild water in.',
+          '**De Nasleep (Het Likken):** Dit is misschien wel de meest verraderlijke. Zelfs als je hond niet drinkt tijdens het zwemmen, blijven die microscopische bacteriën in zijn vacht plakken. Zodra jullie weer in de auto of thuis zijn, begint het grote schoonmaakritueel: je hond likt zijn vacht en poten droog. Op dat moment krijgt hij de gifstoffen alsnog in hoge concentratie binnen.',
+          '**Kleine Lichaampjes:** Een golden retriever kan misschien wat meer hebben dan een chihuahua, maar over de hele lijn hebben honden veel minder van de toxines nodig om levensgevaarlijke symptomen te ontwikkelen. Ook oudere honden met een iets zwakker gestel, of puppy\'s die de wereld nog aan het ontdekken zijn, zijn extra kwetsbaar.'
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Symptomen: De Klok Tikt Onverbiddelijk'
+      },
+      {
+        type: 'paragraph',
+        text: 'Als je vermoedt dat je hond in contact is gekomen met blauwalg, telt elke seconde. De toxines werken razendsnel in. Soms treden symptomen al op binnen de 15 tot 30 minuten na blootstelling, in andere gevallen kan het enkele uren duren. Hoe sneller je handelt, hoe groter de overlevingskans.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Let op deze alarmbellen:'
+      },
+      {
+        type: 'list',
+        items: [
+          '**Maag en darmen:** Hevig braken, overmatig kwijlen, schuimbekken en hevige (soms bloederige) diarree.',
+          '**Zenuwstelsel:** Trillen, spiertrekkingen, krampen, stuiptrekkingen en ongecoördineerd lopen (alsof je hond dronken is).',
+          '**Ademhaling:** Moeite met ademhalen, piepen, of extreem hijgen zonder dat er inspanning is geleverd.',
+          '**Gedrag:** Extreme lethargie (plotselinge intense vermoeidheid), verlammingsverschijnselen, of plots wegdraaiende ogen.',
+          '**Slijmvliezen:** Bleke of juist geelachtige tandvlees/oogleden (dit wijst op acuut leverfalen).'
+        ]
+      },
+      {
+        type: 'image',
+        imageSrc: '/blauwalg3.jpg',
+        imageAlt: 'Symptomen of situatie bij blauwalg'
+      },
+      {
+        type: 'heading',
+        text: 'Eerste Hulp Bij Blauwalg (Wat te doen als het toch misgaat?)'
+      },
+      {
+        type: 'paragraph',
+        text: 'Laten we het rampscenario even schetsen: je was even niet aan het opletten, of je merkte de groene laag te laat op, en je hond heeft net een duik genomen in besmet water. Wat nu? De mindset van het baasje is hier cruciaal: **Blijf rustig, maar handel direct.**'
+      },
+      {
+        type: 'list',
+        items: [
+          '**Uit het water, nú!** Roep je hond onmiddellijk uit het water. Laat hem niet nog even schudden of drinken.',
+          '**Voorkom likken.** Dit is essentieel. Laat je hond absoluut niet aan zijn vacht of poten likken. Als je een handdoek bij je hebt, wrijf hem dan zo goed mogelijk af (maar wrijf het vuil niet ín de vacht).',
+          '**Spoelen, spoelen, spoelen.** Zoek zo snel mogelijk schoon, veilig stromend water (kraanwater, een tuinslang, of desnoods je drinkbus) en spoel de vacht van je hond overvloedig uit. Gebruik eventueel hondenshampoo als je die in de buurt hebt.',
+          '**Bel de dierenarts.** Wacht niet tot de symptomen beginnen. Bel je dierenarts (of een wachtdienst als het in het weekend is) en meld duidelijk dat je vermoedt dat je hond in contact is geweest met blauwalg. Ze kunnen zich dan voorbereiden op jullie komst.',
+          '**Neem een foto.** Heb je nog een seconde over? Maak snel een foto van het water met je smartphone. Dit helpt de dierenarts en instanties later enorm bij het identificeren van de bron.'
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Zout vs. Zoet: Is de Zee dan wél Veilig?'
+      },
+      {
+        type: 'paragraph',
+        text: 'Als platform voor de kustvrienden is dit natuurlijk de belangrijkste vraag. Het goede nieuws? De klassieke giftige blauwalg gedijt het best in **zoet, stilstaand water**. De rollende golven van de Noordzee, de stroming en het hoge zoutgehalte maken het strand en de zee in principe een heel veilige plek wat dit specifieke gevaar betreft.'
+      },
+      {
+        type: 'paragraph',
+        text: '**Maar let op, er zijn uitzonderingen aan de kust:**'
+      },
+      {
+        type: 'list',
+        items: [
+          '**Stilstaande plassen op het strand:** Bij laagtij kunnen er grote ondiepe plassen ("zwinnetjes") achterblijven op het strand die razendsnel opwarmen door de zon. Hoewel dit zout water is, is het altijd oppassen met stilstaand, lauw water.',
+          '**De Polders en Kanalen:** Achter de duinen ligt een prachtig netwerk van polderwateren, kreken en kanalen (denk maar aan de vaart in Blankenberge of de Spuikom in Oostende). Dit is wél zoet en vaak traag stromend water. Hier is in de zomermaanden het risico op blauwalg absoluut reëel!'
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'De Code van de Goede Kustvriend: Informeer Elkaar'
+      },
+      {
+        type: 'paragraph',
+        text: 'Veiligheid is niet iets wat je alleen doet, we doen het samen. Zien we ergens gevaar? Dan houden we dat niet voor onszelf, maar beschermen we de hele community.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Heb je blauwalg gespot in een kreek, een vijver in het park, of langs een wandelroute aan de kust?'
+      },
+      {
+        type: 'list',
+        items: [
+          'Waarschuw andere hondenbaasjes die in de buurt wandelen.',
+          'Geef het door aan de lokale overheid of brandweer.',
+          '**Gebruik ons HondAanZee Meldpunt!** Zie je een acute situatie die een direct gevaar vormt voor onze viervoeters? Laat het ons weten via het meldpunt op de website. Zo kunnen we snel schakelen en de community op de hoogte brengen.'
+        ]
+      },
+      {
+        type: 'heading',
+        text: 'Kortom: Voorkomen is beter dan genezen'
+      },
+      {
+        type: 'paragraph',
+        text: 'Een zomer met je hond is bedoeld om herinneringen te maken, niet om uren in de wachtzaal van de dierenarts door te brengen. De moraal van dit verhaal is simpel: gebruik je gezond verstand en je zintuigen. Vertrouw je dat groene, troebele water in het park niet? Blijf er dan gewoon uit. Er is altijd wel een tuinslang, een hondenzwembadje, of natuurlijk de machtige Noordzee in de buurt voor een veilige, frisse duik.'
+      }
+    ]
+  },
+  {
     slug: 'hond-strand-warm-weer',
     title: 'Met je hond naar zee bij warm weer: do\'s en don\'ts voor een veilige stranddag',
     subtitle: 'Zo bescherm je je viervoeter tegen hitte, brandend zand, zoute zee en uitdroging aan de Belgische kust',
