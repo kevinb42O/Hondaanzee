@@ -45,15 +45,15 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: 'paragraph',
-        text: 'Zomer aan de kust. De zon brandt, de zeelucht waait door je haren, en je trouwe viervoeter loopt met een kamerbrede glimlach – en een uitgestoken tong – naast je. Het kwik stijgt en de drang naar verkoeling wordt onweerstaanbaar. Niets heerlijker dan je hond vrolijk het water in te zien plonzen om die opgewarmde vacht even te laten afkoelen.'
+        text: 'Zomer aan de kust. De zon brandt, de zeelucht waait door je haren en je trouwe viervoeter loopt met een kamerbrede glimlach en een uitgestoken tong naast je. Het kwik stijgt en de drang naar verkoeling wordt onweerstaanbaar. Niets heerlijker dan je hond vrolijk het water in te zien plonzen om die opgewarmde vacht even te laten afkoelen.'
       },
       {
         type: 'paragraph',
-        text: 'Onze *Chief Testing Officer* Jax weet er alles van. Zodra hij nog maar een wateroppervlak ruikt, begint die staart overuren te draaien. En hoewel we honden die waterpret absoluut gunnen, schuilt er tijdens die warme nazomerdagen een onzichtbaar (en soms pijnlijk zichtbaar) gevaar in het water: blauwalg.'
+        text: 'Onze Chief Testing Officer Jax weet er alles van. Zodra hij nog maar een wateroppervlak ruikt, begint die staart overuren te draaien. En hoewel we honden die waterpret absoluut gunnen, schuilt er tijdens die warme nazomerdagen een onzichtbaar (en soms pijnlijk zichtbaar) gevaar in het water: blauwalg.'
       },
       {
         type: 'paragraph',
-        text: 'In deze blog duiken we diep in de wereld van dit hardnekkige natuurfenomeen. Geen paniekzaaierij, wel keiharde, nuttige feiten. Want de beste manier om je hond te beschermen, is door te weten waar je precies op moet letten. Pak er een koffie of een ijskoud glas water bij, en laten we ervoor zorgen dat jouw hond deze zomer veilig kan zwemmen.'
+        text: 'In deze blog duiken we diep in de wereld van dit hardnekkige natuurfenomeen. Geen paniekzaaierij, wel keiharde en nuttige feiten. Want de beste manier om je hond te beschermen, is door te weten waar je precies op moet letten. Pak er een koffie of een ijskoud glas water bij, en laten we ervoor zorgen dat jouw hond deze zomer veilig kan zwemmen.'
       },
       {
         type: 'heading',
@@ -61,7 +61,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'De naam is eigenlijk de grootste misleiding uit de natuur. Blauwalgen zijn helemaal geen algen of zeewier, maar **cyanobacteriën**. Dit zijn microscopisch kleine organismen die al miljarden jaren op onze planeet vertoeven. Ze overleven zowat overal, maar ze hebben één absolute favoriete cocktail om in te exploderen:'
+        text: 'De naam is eigenlijk de grootste misleiding uit de natuur. Blauwalgen zijn helemaal geen algen of zeewier, maar cyanobacteriën. Dit zijn microscopisch kleine organismen die al miljarden jaren op onze planeet vertoeven. Ze overleven zowat overal, maar ze hebben één absolute favoriete cocktail om in te exploderen:'
       },
       {
         type: 'list',
@@ -95,7 +95,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Je hoeft gelukkig geen bioloog te zijn om blauwalg te spotten, maar je moet wel weten waar je op moet letten. Voordat je de leiband losklikt en je hond het water in laat stormen, doe je best altijd even de **\'HondAanZee Scan\'**. Neem 10 seconden de tijd om het wateroppervlak te bestuderen.'
+        text: 'Je hoeft gelukkig geen bioloog te zijn om blauwalg te spotten, maar je moet wel weten waar je op moet letten. Voordat je de leiband losklikt en je hond het water in laat stormen, doe je best altijd even de HondAanZee Scan. Neem 10 seconden de tijd om het wateroppervlak te bestuderen.'
       },
       {
         type: 'paragraph',
@@ -104,11 +104,11 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          '**De Verf-Look:** Het water ziet eruit alsof er een pot felgroene, blauwgroene of zelfs roodachtige verf in is leeggegoten.',
-          '**De Olie-achtige Laag:** Het lijkt alsof er een dun, vettig vliesje of een olieachtige smurrie op het water drijft.',
-          '**Groene Vlokken:** Je ziet kleine, groene deeltjes zweven in het water, alsof iemand er gemalen spinazie in heeft gegooid.',
-          '**Schuimkragen:** Aan de randen van het water (waar de wind naartoe blaast) hoopt zich een stinkende, schuimende brij op.',
-          '**De Geur:** Dode blauwalg stinkt enorm. Het ruikt vaak naar rottende planten, mest of een vies riool.'
+          'De Verf-Look: Het water ziet eruit alsof er een pot felgroene, blauwgroene of zelfs roodachtige verf in is leeggegoten.',
+          'De Olie-achtige Laag: Het lijkt alsof er een dun, vettig vliesje of een olieachtige smurrie op het water drijft.',
+          'Groene Vlokken: Je ziet kleine, groene deeltjes zweven in het water, alsof iemand er gemalen spinazie in heeft gegooid.',
+          'Schuimkragen: Aan de randen van het water (waar de wind naartoe blaast) hoopt zich een stinkende, schuimende brij op.',
+          'De Geur: Dode blauwalg stinkt enorm. Het ruikt vaak naar rottende planten, mest of een vies riool.'
         ]
       },
       {
@@ -126,14 +126,14 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Waar wij een giftige soep zien, ziet een oververhitte hond gewoon... water. Verkoeling. Bovendien lopen honden drie keer zoveel risico als wij mensen, en wel om de volgende redenen:'
+        text: 'Waar wij een giftige soep zien, ziet een oververhitte hond gewoon... water. Verkoeling. Bovendien lopen honden drie keer zoveel risico als wij mensen om de volgende redenen:'
       },
       {
         type: 'list',
         items: [
-          '**De Onzichtbare Slokken:** Als een hond zwemt, neemt hij – bedoeld of onbedoeld – water op. Zeker als ze graag apporteren en met een bal of stok in hun bek door het water peddelen, slikken ze ongemerkt grote hoeveelheden vervuild water in.',
-          '**De Nasleep (Het Likken):** Dit is misschien wel de meest verraderlijke. Zelfs als je hond niet drinkt tijdens het zwemmen, blijven die microscopische bacteriën in zijn vacht plakken. Zodra jullie weer in de auto of thuis zijn, begint het grote schoonmaakritueel: je hond likt zijn vacht en poten droog. Op dat moment krijgt hij de gifstoffen alsnog in hoge concentratie binnen.',
-          '**Kleine Lichaampjes:** Een golden retriever kan misschien wat meer hebben dan een chihuahua, maar over de hele lijn hebben honden veel minder van de toxines nodig om levensgevaarlijke symptomen te ontwikkelen. Ook oudere honden met een iets zwakker gestel, of puppy\'s die de wereld nog aan het ontdekken zijn, zijn extra kwetsbaar.'
+          'De Onzichtbare Slokken: Als een hond zwemt, neemt hij bedoeld of onbedoeld water op. Zeker als ze graag apporteren en met een bal of stok in hun bek door het water peddelen, slikken ze ongemerkt grote hoeveelheden vervuild water in.',
+          'De Nasleep (Het Likken): Dit is misschien wel de meest verraderlijke. Zelfs als je hond niet drinkt tijdens het zwemmen, blijven die microscopische bacteriën in zijn vacht plakken. Zodra jullie weer in de auto of thuis zijn, begint het grote schoonmaakritueel: je hond likt zijn vacht en poten droog. Op dat moment krijgt hij de gifstoffen alsnog in hoge concentratie binnen.',
+          'Kleine Lichaampjes: Een golden retriever kan misschien wat meer hebben dan een chihuahua, maar over de hele lijn hebben honden veel minder van de toxines nodig om levensgevaarlijke symptomen te ontwikkelen. Ook oudere honden met een iets zwakker gestel, of puppy\'s die de wereld nog aan het ontdekken zijn, zijn extra kwetsbaar.'
         ]
       },
       {
@@ -151,11 +151,11 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          '**Maag en darmen:** Hevig braken, overmatig kwijlen, schuimbekken en hevige (soms bloederige) diarree.',
-          '**Zenuwstelsel:** Trillen, spiertrekkingen, krampen, stuiptrekkingen en ongecoördineerd lopen (alsof je hond dronken is).',
-          '**Ademhaling:** Moeite met ademhalen, piepen, of extreem hijgen zonder dat er inspanning is geleverd.',
-          '**Gedrag:** Extreme lethargie (plotselinge intense vermoeidheid), verlammingsverschijnselen, of plots wegdraaiende ogen.',
-          '**Slijmvliezen:** Bleke of juist geelachtige tandvlees/oogleden (dit wijst op acuut leverfalen).'
+          'Maag en darmen: Hevig braken, overmatig kwijlen, schuimbekken en hevige (soms bloederige) diarree.',
+          'Zenuwstelsel: Trillen, spiertrekkingen, krampen, stuiptrekkingen en ongecoördineerd lopen (alsof je hond dronken is).',
+          'Ademhaling: Moeite met ademhalen, piepen, of extreem hijgen zonder dat er inspanning is geleverd.',
+          'Gedrag: Extreme lethargie (plotselinge intense vermoeidheid), verlammingsverschijnselen, of plots wegdraaiende ogen.',
+          'Slijmvliezen: Bleke of juist geelachtige tandvlees/oogleden (dit wijst op acuut leverfalen).'
         ]
       },
       {
@@ -169,16 +169,19 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Laten we het rampscenario even schetsen: je was even niet aan het opletten, of je merkte de groene laag te laat op, en je hond heeft net een duik genomen in besmet water. Wat nu? De mindset van het baasje is hier cruciaal: **Blijf rustig, maar handel direct.**'
+        text: 'Laten we het rampscenario even schetsen: je was even niet aan het opletten, of je merkte de groene laag te laat op, en je hond heeft net een duik genomen in besmet water. Wat nu? De mindset van het baasje is hier cruciaal: Blijf rustig, maar handel direct.',
+        links: [
+          { text: 'Zoek hier meteen een dierenarts in de buurt', url: '/diensten' }
+        ]
       },
       {
         type: 'list',
         items: [
-          '**Uit het water, nú!** Roep je hond onmiddellijk uit het water. Laat hem niet nog even schudden of drinken.',
-          '**Voorkom likken.** Dit is essentieel. Laat je hond absoluut niet aan zijn vacht of poten likken. Als je een handdoek bij je hebt, wrijf hem dan zo goed mogelijk af (maar wrijf het vuil niet ín de vacht).',
-          '**Spoelen, spoelen, spoelen.** Zoek zo snel mogelijk schoon, veilig stromend water (kraanwater, een tuinslang, of desnoods je drinkbus) en spoel de vacht van je hond overvloedig uit. Gebruik eventueel hondenshampoo als je die in de buurt hebt.',
-          '**Bel de dierenarts.** Wacht niet tot de symptomen beginnen. Bel je dierenarts (of een wachtdienst als het in het weekend is) en meld duidelijk dat je vermoedt dat je hond in contact is geweest met blauwalg. Ze kunnen zich dan voorbereiden op jullie komst.',
-          '**Neem een foto.** Heb je nog een seconde over? Maak snel een foto van het water met je smartphone. Dit helpt de dierenarts en instanties later enorm bij het identificeren van de bron.'
+          'Uit het water, nú! Roep je hond onmiddellijk uit het water. Laat hem niet nog even schudden of drinken.',
+          'Voorkom likken. Dit is essentieel. Laat je hond absoluut niet aan zijn vacht of poten likken. Als je een handdoek bij je hebt, wrijf hem dan zo goed mogelijk af (maar wrijf het vuil niet ín de vacht).',
+          'Spoelen, spoelen, spoelen. Zoek zo snel mogelijk schoon, veilig stromend water (kraanwater, een tuinslang, of desnoods je drinkbus) en spoel de vacht van je hond overvloedig uit. Gebruik eventueel hondenshampoo als je die in de buurt hebt.',
+          'Bel de dierenarts. Wacht niet tot de symptomen beginnen. Bel je dierenarts (of een wachtdienst als het in het weekend is) en meld duidelijk dat je vermoedt dat je hond in contact is geweest met blauwalg. Ze kunnen zich dan voorbereiden op jullie komst.',
+          'Neem een foto. Heb je nog een seconde over? Maak snel een foto van het water met je smartphone. Dit helpt de dierenarts en instanties later enorm bij het identificeren van de bron.'
         ]
       },
       {
@@ -187,17 +190,17 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Als platform voor de kustvrienden is dit natuurlijk de belangrijkste vraag. Het goede nieuws? De klassieke giftige blauwalg gedijt het best in **zoet, stilstaand water**. De rollende golven van de Noordzee, de stroming en het hoge zoutgehalte maken het strand en de zee in principe een heel veilige plek wat dit specifieke gevaar betreft.'
+        text: 'Als platform voor de kustvrienden is dit natuurlijk de belangrijkste vraag. Het goede nieuws? De klassieke giftige blauwalg gedijt het best in zoet, stilstaand water. De rollende golven van de Noordzee, de stroming en het hoge zoutgehalte maken het strand en de zee in principe een heel veilige plek wat dit specifieke gevaar betreft.'
       },
       {
         type: 'paragraph',
-        text: '**Maar let op, er zijn uitzonderingen aan de kust:**'
+        text: 'Maar let op, er zijn uitzonderingen aan de kust:'
       },
       {
         type: 'list',
         items: [
-          '**Stilstaande plassen op het strand:** Bij laagtij kunnen er grote ondiepe plassen ("zwinnetjes") achterblijven op het strand die razendsnel opwarmen door de zon. Hoewel dit zout water is, is het altijd oppassen met stilstaand, lauw water.',
-          '**De Polders en Kanalen:** Achter de duinen ligt een prachtig netwerk van polderwateren, kreken en kanalen (denk maar aan de vaart in Blankenberge of de Spuikom in Oostende). Dit is wél zoet en vaak traag stromend water. Hier is in de zomermaanden het risico op blauwalg absoluut reëel!'
+          'Stilstaande plassen op het strand: Bij laagtij kunnen er grote ondiepe plassen ("zwinnetjes") achterblijven op het strand die razendsnel opwarmen door de zon. Hoewel dit zout water is, is het altijd oppassen met stilstaand, lauw water.',
+          'De Polders en Kanalen: Achter de duinen ligt een prachtig netwerk van polderwateren, kreken en kanalen (denk maar aan de vaart in Blankenberge of de Spuikom in Oostende). Dit is wél zoet en vaak traag stromend water. Hier is in de zomermaanden het risico op blauwalg absoluut reëel!'
         ]
       },
       {
@@ -210,14 +213,17 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Heb je blauwalg gespot in een kreek, een vijver in het park, of langs een wandelroute aan de kust?'
+        text: 'Heb je blauwalg gespot in een kreek, een vijver in het park, of langs een wandelroute aan de kust?',
+        links: [
+          { text: 'Meld gevaarlijke situaties op ons HondAanZee Meldpunt', url: '/meldpunt' }
+        ]
       },
       {
         type: 'list',
         items: [
           'Waarschuw andere hondenbaasjes die in de buurt wandelen.',
           'Geef het door aan de lokale overheid of brandweer.',
-          '**Gebruik ons HondAanZee Meldpunt!** Zie je een acute situatie die een direct gevaar vormt voor onze viervoeters? Laat het ons weten via het meldpunt op de website. Zo kunnen we snel schakelen en de community op de hoogte brengen.'
+          'Gebruik ons HondAanZee Meldpunt! Zie je een acute situatie die een direct gevaar vormt voor onze viervoeters? Laat het ons weten via het meldpunt op de website. Zo kunnen we snel schakelen en de community op de hoogte brengen.'
         ]
       },
       {
