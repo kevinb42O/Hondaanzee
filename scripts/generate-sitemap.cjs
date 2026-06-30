@@ -22,7 +22,6 @@ const STATIC_ROUTE_FILES = {
   '/cookies': ['pages/Cookies.tsx'],
   '/blog': ['pages/Blog.tsx', 'data/blogs.ts'],
   '/agenda': ['pages/Agenda.tsx', 'data/events.ts'],
-  '/community': ['pages/Community.tsx'],
   '/meldpunt/vrijwilligers': ['pages/MeldpuntVrijwilligers.tsx', 'cityData.ts'],
   '/updates': ['pages/Updates.tsx', 'components/Footer.tsx'],
 };

@@ -48,7 +48,6 @@ const NAV_ENTRIES: NavEntry[] = [
                 { to: '/agenda', label: 'Agenda' },
                 { to: '/meldpunt', label: 'Meldpunt' },
                 { to: '/blog', label: 'Blog', startsWith: true },
-                { to: '/community', label: 'Community' },
             ],
         },
     },

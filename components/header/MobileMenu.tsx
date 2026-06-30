@@ -22,7 +22,6 @@ const MOBILE_NAV_ITEMS: readonly NavItem[] = [
     { to: '/meldpunt', label: 'Meldpunt', icon: Siren },
     { to: '/goed-om-te-weten', label: 'Goed om te weten', icon: ShieldAlert },
     { to: '/blog', label: 'Blog', icon: BookOpen, startsWith: true },
-    { to: '/community', label: 'Community', icon: Camera },
     { to: '/over-ons', label: 'Over ons', icon: Info },
     { to: '/updates', label: 'Wat is er nieuw?', icon: Sparkles },
 ];

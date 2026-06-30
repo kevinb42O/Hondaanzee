@@ -78,12 +78,6 @@ const TEMPLATES = [
     url: '/blog',
   },
   {
-    label: 'Community',
-    title: '🐾 Nieuwe Topper van de Week',
-    body: 'Neem een kijkje op de communitypagina en ontdek welke hond deze week in de spotlight staat.',
-    url: '/community',
-  },
-  {
     label: 'Evenement',
     title: '📅 Hondvriendelijk event aan zee',
     body: 'Er staat een nieuw hondvriendelijk evenement in de agenda. Ideaal om samen met je hond te plannen.',
@@ -96,7 +90,6 @@ const QUICK_URLS = [
   { label: 'Updates', value: '/updates' },
   { label: 'Meldpunt', value: '/meldpunt' },
   { label: 'Blog', value: '/blog' },
-  { label: 'Community', value: '/community' },
   { label: 'Agenda', value: '/agenda' },
   { label: 'Losloopzones', value: '/losloopzones' },
   { label: 'Kaart', value: '/kaart' },

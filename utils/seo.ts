@@ -824,34 +824,6 @@ export const SEO_DATA = {
     }
   },
 
-  community: {
-    title: 'Kusthonden Community 📸 | Topper van de Week — HondAanZee.be',
-    description: 'Word deel van de HondAanZee community! Stuur je mooiste hondenfotos aan de Belgische kust via WhatsApp. Elke week een nieuwe topper, elke gemeente een Wall of Fame.',
-    keywords: 'hondenfoto kust, community hondaanzee, topper van de week hond zee, hondenfoto belgische kust, kusthonden community, wall of fame hond strand',
-    structuredData: [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hondaanzee.be/" },
-          { "@type": "ListItem", "position": 2, "name": "Community", "item": "https://hondaanzee.be/community" }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Kusthonden Community",
-        "url": "https://hondaanzee.be/community",
-        "description": "Community pagina waar hondeneigenaars hun mooiste fotos aan de Belgische kust delen",
-        "publisher": {
-          "@type": "Organization",
-          "name": "HondAanZee.be",
-          "url": "https://hondaanzee.be"
-        }
-      }
-    ]
-  },
-
   meldpunt: {
     title: 'Meldpunt Gif & Overlast Belgische Kust | HondAanZee.be',
     description: 'Meld verdachte stoffen, gif, afval, hondenpoep en andere overlast aan de Belgische kust. Publieke meldingen per kuststad, direct zichtbaar op HondAanZee.be.',

@@ -28,7 +28,6 @@ const GoedOmTeWeten = React.lazy(() => import('./pages/GoedOmTeWeten.tsx'));
 const Blog = React.lazy(() => import('./pages/Blog.tsx'));
 const BlogDetail = React.lazy(() => import('./pages/BlogDetail.tsx'));
 const PlaceDetail = React.lazy(() => import('./pages/PlaceDetail.tsx'));
-const Community = React.lazy(() => import('./pages/Community.tsx'));
 const Agenda = React.lazy(() => import('./pages/Agenda.tsx'));
 const EventDetail = React.lazy(() => import('./pages/EventDetail.tsx'));
 const Updates = React.lazy(() => import('./pages/Updates.tsx'));
@@ -159,7 +158,6 @@ const AppContent = () => {
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/agenda" element={<Agenda />} />
               <Route path="/agenda/:slug" element={<EventDetail />} />
-              <Route path="/community" element={<Community />} />
               <Route path="/meldpunt" element={<Meldpunt />} />
               <Route path="/meldpunt/vrijwilligers" element={<MeldpuntVrijwilligers />} />
               <Route path="/meldpunt/:publicId" element={<ReportDetail />} />

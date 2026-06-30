@@ -20,7 +20,6 @@ const STATIC_ROUTES = [
   '/cookies',
   '/blog',
   '/agenda',
-  '/community',
   '/meldpunt',
   '/meldpunt/vrijwilligers',
   '/updates',
