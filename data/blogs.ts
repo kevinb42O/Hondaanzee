@@ -169,10 +169,12 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Laten we het rampscenario even schetsen: je was even niet aan het opletten, of je merkte de groene laag te laat op, en je hond heeft net een duik genomen in besmet water. Wat nu? De mindset van het baasje is hier cruciaal: Blijf rustig, maar handel direct.',
-        links: [
-          { text: 'Zoek hier meteen een dierenarts in de buurt', url: '/diensten' }
-        ]
+        text: 'Laten we het rampscenario even schetsen: je was even niet aan het opletten, of je merkte de groene laag te laat op, en je hond heeft net een duik genomen in besmet water. Wat nu? De mindset van het baasje is hier cruciaal: Blijf rustig, maar handel direct.'
+      },
+      {
+        type: 'cta',
+        text: 'Zoek hier meteen een dierenarts in de buurt',
+        url: '/diensten'
       },
       {
         type: 'list',
@@ -213,10 +215,12 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Heb je blauwalg gespot in een kreek, een vijver in het park, of langs een wandelroute aan de kust?',
-        links: [
-          { text: 'Meld gevaarlijke situaties op ons HondAanZee Meldpunt', url: '/meldpunt' }
-        ]
+        text: 'Heb je blauwalg gespot in een kreek, een vijver in het park, of langs een wandelroute aan de kust?'
+      },
+      {
+        type: 'cta',
+        text: 'Meld gevaarlijke situaties op ons HondAanZee Meldpunt',
+        url: '/meldpunt'
       },
       {
         type: 'list',
