@@ -373,6 +373,7 @@ const BlogDetail: React.FC = () => {
     'green': 'bg-green-50 text-green-700 border-green-200',
     'amber': 'bg-amber-50 text-amber-700 border-amber-200',
     'blue': 'bg-blue-50 text-blue-700 border-blue-200',
+    'red': 'bg-red-50 text-red-700 border-red-200',
   };
 
   return (
@@ -457,15 +458,22 @@ const BlogDetail: React.FC = () => {
             {previousPost ? (
               <Link
                 to={`/blog/${previousPost.slug}`}
-                className="group relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl border border-slate-100 hover:border-sky-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+                className="group relative flex flex-col justify-center p-6 sm:p-8 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 min-h-[160px]"
               >
-                <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-gradient-to-b from-sky-400 to-blue-500 transition-all duration-500" />
-                <div className="flex flex-col h-full justify-center">
-                  <span className="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 group-hover:text-sky-500 transition-colors">
+                {previousPost.image ? (
+                  <>
+                    <img src={previousPost.image} alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                    <div className="absolute inset-0 bg-slate-900/60 group-hover:bg-slate-900/50 transition-colors duration-300" />
+                  </>
+                ) : (
+                  <div className="absolute inset-0 bg-slate-800" />
+                )}
+                <div className="relative z-10 flex flex-col h-full justify-center">
+                  <span className="flex items-center gap-1.5 text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">
                     <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                    Vorige Artikel (Nieuwer)
+                    Vorig Artikel
                   </span>
-                  <h4 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
+                  <h4 className="text-xl font-bold text-white group-hover:text-sky-100 transition-colors duration-300 line-clamp-2">
                     {previousPost.title}
                   </h4>
                 </div>
@@ -476,15 +484,22 @@ const BlogDetail: React.FC = () => {
             {nextPost ? (
               <Link
                 to={`/blog/${nextPost.slug}`}
-                className="group relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl border border-slate-100 hover:border-sky-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden sm:text-right"
+                className="group relative flex flex-col justify-center p-6 sm:p-8 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 min-h-[160px] sm:text-right"
               >
-                <div className="absolute top-0 right-0 w-1 h-0 group-hover:h-full bg-gradient-to-b from-sky-400 to-blue-500 transition-all duration-500" />
-                <div className="flex flex-col h-full justify-center sm:items-end">
-                  <span className="flex items-center sm:justify-end gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 group-hover:text-sky-500 transition-colors">
-                    Volgende Artikel (Ouder)
+                {nextPost.image ? (
+                  <>
+                    <img src={nextPost.image} alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                    <div className="absolute inset-0 bg-slate-900/60 group-hover:bg-slate-900/50 transition-colors duration-300" />
+                  </>
+                ) : (
+                  <div className="absolute inset-0 bg-slate-800" />
+                )}
+                <div className="relative z-10 flex flex-col h-full justify-center sm:items-end">
+                  <span className="flex items-center sm:justify-end gap-1.5 text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">
+                    Volgend Artikel
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
-                  <h4 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
+                  <h4 className="text-xl font-bold text-white group-hover:text-sky-100 transition-colors duration-300 line-clamp-2">
                     {nextPost.title}
                   </h4>
                 </div>

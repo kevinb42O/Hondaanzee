@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, ArrowRight, Calendar, Clock, Leaf, Shield, Trees, Droplets, Brain } from 'lucide-react';
+import { BookOpen, ArrowRight, Calendar, Clock, Leaf, Shield, Trees, Droplets, Brain, AlertTriangle } from 'lucide-react';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { blogPosts } from '../data/blogs.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
@@ -12,6 +12,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   'green': <Trees size={16} className="text-green-600" />,
   'amber': <Droplets size={16} className="text-amber-600" />,
   'blue': <Brain size={16} className="text-blue-600" />,
+  'red': <AlertTriangle size={16} className="text-red-600" />,
 };
 
 const categoryStyles: Record<string, string> = {
@@ -20,6 +21,7 @@ const categoryStyles: Record<string, string> = {
   'green': 'bg-green-50 text-green-700 border-green-200',
   'amber': 'bg-amber-50 text-amber-700 border-amber-200',
   'blue': 'bg-blue-50 text-blue-700 border-blue-200',
+  'red': 'bg-red-50 text-red-700 border-red-200',
 };
 
 const Blog: React.FC = () => {
@@ -79,11 +81,11 @@ const Blog: React.FC = () => {
           className="flex items-end justify-between mb-12 border-b border-slate-200 pb-8"
         >
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 text-white rounded-full text-sm font-bold tracking-wide uppercase mb-4 shadow-sm">
-              <BookOpen size={14} /> Journal
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-sm font-bold tracking-wide uppercase mb-4 shadow-sm">
+              <BookOpen size={14} /> Blogs
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">
-              Nieuwste <span className="text-sky-600">Verhalen</span>
+              Onze <span className="text-sky-600">Blog</span>
             </h1>
           </div>
           <p className="hidden md:block text-lg text-slate-500 max-w-sm text-right leading-relaxed font-medium">
@@ -101,52 +103,53 @@ const Blog: React.FC = () => {
           >
             <Link 
               to={`/blog/${heroPost.slug}`}
-              className="group relative flex flex-col lg:flex-row bg-white rounded-[2.5rem] shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-500 border border-slate-100"
+              className="group flex flex-col lg:flex-row bg-white rounded-3xl p-3 sm:p-4 shadow-lg hover:shadow-2xl border border-slate-100 transition-all duration-500"
             >
               {heroPost.image && (
-                <div className="lg:w-[60%] relative overflow-hidden min-h-[400px] lg:min-h-[500px]">
+                <div className="relative w-full lg:w-1/2 h-64 sm:h-80 lg:h-auto min-h-[300px] rounded-2xl overflow-hidden">
                   <img
                     src={heroPost.image}
                     alt={heroPost.imageAlt || heroPost.title}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                     loading="eager"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-slate-900/10 lg:to-slate-900/80" />
+                  <div className="absolute top-4 left-4">
+                     <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border shadow-sm backdrop-blur-md bg-white/90 ${(categoryStyles[heroPost.categoryColor] || categoryStyles['blue']).replace('bg-', 'bg-opacity-0 text-')}`}>
+                       {categoryIcons[heroPost.categoryColor] || categoryIcons['blue']}
+                       {heroPost.category}
+                     </span>
+                  </div>
                 </div>
               )}
               
-              <div className="lg:w-[40%] flex flex-col justify-center p-8 sm:p-12 lg:p-16 relative bg-white lg:bg-transparent lg:absolute lg:right-0 lg:inset-y-0 lg:max-w-xl z-10 lg:backdrop-blur-md lg:bg-white/90 border-l border-white/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${categoryStyles[heroPost.categoryColor]}`}>
-                    {categoryIcons[heroPost.categoryColor]}
-                    {heroPost.category}
-                  </span>
-                  <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-500">
+              <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+                <div className="flex items-center gap-3 text-sm text-slate-400 font-semibold mb-4">
+                  <span className="flex items-center gap-1.5">
                     <Calendar size={14} />
                     {formatDate(heroPost.date)}
                   </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={14} />
+                    {heroPost.readTime}
+                  </span>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 leading-[1.1] tracking-tight group-hover:text-sky-600 transition-colors duration-300">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 leading-tight group-hover:text-sky-600 transition-colors duration-300">
                   {heroPost.title}
                 </h2>
                 
-                <p className="text-lg text-slate-600 font-medium mb-6 italic">
+                <p className="text-lg sm:text-xl text-sky-700 font-medium mb-6 italic">
                   {heroPost.subtitle}
                 </p>
 
-                <p className="text-slate-600 leading-relaxed mb-8 line-clamp-3 text-lg">
+                <p className="text-slate-600 leading-relaxed mb-8 text-lg">
                   {heroPost.excerpt}
                 </p>
 
-                <div className="mt-auto flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-sm font-bold text-slate-400">
-                    <Clock size={16} />
-                    {heroPost.readTime}
-                  </span>
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-900 text-white group-hover:bg-sky-600 transition-colors duration-300 shadow-md group-hover:shadow-sky-600/30">
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
+                <div className="mt-auto inline-flex items-center gap-2 bg-sky-50 hover:bg-sky-100 text-sky-700 px-6 py-3 rounded-xl font-bold transition-colors duration-300 w-fit">
+                  Lees artikel
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </div>
             </Link>
@@ -176,8 +179,8 @@ const Blog: React.FC = () => {
                       loading="lazy"
                     />
                     <div className="absolute top-4 left-4">
-                       <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border shadow-sm backdrop-blur-md bg-white/90 ${categoryStyles[post.categoryColor].replace('bg-', 'bg-opacity-0 text-')}`}>
-                         {categoryIcons[post.categoryColor]}
+                       <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border shadow-sm backdrop-blur-md bg-white/90 ${(categoryStyles[post.categoryColor] || categoryStyles['blue']).replace('bg-', 'bg-opacity-0 text-')}`}>
+                         {categoryIcons[post.categoryColor] || categoryIcons['blue']}
                          {post.category}
                        </span>
                     </div>
