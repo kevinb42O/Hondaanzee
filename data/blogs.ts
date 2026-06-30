@@ -32,7 +32,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: 'blauwalg-hond-strand-waarschuwing',
     title: 'Doe de Water-Check: Zo Herken Je Blauwalg Voordat Je Hond Erin Zwemt Of Eruit Drinkt',
-    subtitle: 'Een onzichtbaar (en soms pijnlijk zichtbaar) gevaar in het water tijdens warme nazomerdagen.',
+    subtitle: 'Zomerse waterpret kan snel omslaan. Leer hoe je dit onzichtbare en levensgevaarlijke fenomeen tijdig herkent.',
     excerpt: 'Niets heerlijker dan je hond vrolijk het water in te zien plonzen om die opgewarmde vacht even te laten afkoelen. Maar let op voor blauwalg! Leer hier hoe je dit gevaar herkent en wat je moet doen als het misgaat.',
     date: '2026-06-30',
     readTime: '6 min',
@@ -104,11 +104,11 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          'De Verf-Look: Het water ziet eruit alsof er een pot felgroene, blauwgroene of zelfs roodachtige verf in is leeggegoten.',
-          'De Olie-achtige Laag: Het lijkt alsof er een dun, vettig vliesje of een olieachtige smurrie op het water drijft.',
-          'Groene Vlokken: Je ziet kleine, groene deeltjes zweven in het water, alsof iemand er gemalen spinazie in heeft gegooid.',
-          'Schuimkragen: Aan de randen van het water (waar de wind naartoe blaast) hoopt zich een stinkende, schuimende brij op.',
-          'De Geur: Dode blauwalg stinkt enorm. Het ruikt vaak naar rottende planten, mest of een vies riool.'
+          'De Verf-Look: Het water ziet eruit alsof er een pot felgroene, blauwgroene of roodachtige verf is uitgegoten.',
+          'De Olie-achtige Laag: Er drijft een vettig vliesje of olieachtige smurrie op het water.',
+          'Groene Vlokken: Kleine groene deeltjes in het water, alsof iemand er spinazie in gooide.',
+          'Schuimkragen: Een stinkende, schuimende brij die zich aan de randen ophoopt.',
+          'De Geur: Dode blauwalg stinkt naar rottende planten, mest of riool.'
         ]
       },
       {
@@ -131,9 +131,9 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          'De Onzichtbare Slokken: Als een hond zwemt, neemt hij bedoeld of onbedoeld water op. Zeker als ze graag apporteren en met een bal of stok in hun bek door het water peddelen, slikken ze ongemerkt grote hoeveelheden vervuild water in.',
-          'De Nasleep (Het Likken): Dit is misschien wel de meest verraderlijke. Zelfs als je hond niet drinkt tijdens het zwemmen, blijven die microscopische bacteriën in zijn vacht plakken. Zodra jullie weer in de auto of thuis zijn, begint het grote schoonmaakritueel: je hond likt zijn vacht en poten droog. Op dat moment krijgt hij de gifstoffen alsnog in hoge concentratie binnen.',
-          'Kleine Lichaampjes: Een golden retriever kan misschien wat meer hebben dan een chihuahua, maar over de hele lijn hebben honden veel minder van de toxines nodig om levensgevaarlijke symptomen te ontwikkelen. Ook oudere honden met een iets zwakker gestel, of puppy\'s die de wereld nog aan het ontdekken zijn, zijn extra kwetsbaar.'
+          'De Onzichtbare Slokken: Honden slikken ongemerkt vervuild water in, zeker bij het apporteren van een bal of stok.',
+          'De Nasleep (Het Likken): Zelfs zonder te drinken blijven bacteriën in de vacht plakken. Bij het drooglikken komen de gifstoffen alsnog binnen.',
+          'Kleine Lichaampjes: Honden hebben veel minder toxines nodig voor levensgevaarlijke symptomen. Pups en oudere honden zijn extra kwetsbaar.'
         ]
       },
       {
@@ -151,11 +151,11 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          'Maag en darmen: Hevig braken, overmatig kwijlen, schuimbekken en hevige (soms bloederige) diarree.',
-          'Zenuwstelsel: Trillen, spiertrekkingen, krampen, stuiptrekkingen en ongecoördineerd lopen (alsof je hond dronken is).',
-          'Ademhaling: Moeite met ademhalen, piepen, of extreem hijgen zonder dat er inspanning is geleverd.',
-          'Gedrag: Extreme lethargie (plotselinge intense vermoeidheid), verlammingsverschijnselen, of plots wegdraaiende ogen.',
-          'Slijmvliezen: Bleke of juist geelachtige tandvlees/oogleden (dit wijst op acuut leverfalen).'
+          'Maag en darmen: Hevig braken, overmatig kwijlen, schuimbekken en (bloederige) diarree.',
+          'Zenuwstelsel: Trillen, krampen, stuiptrekkingen en ongecoördineerd (dronken) lopen.',
+          'Ademhaling: Moeite met ademen, piepen of extreem hijgen zonder inspanning.',
+          'Gedrag: Intense vermoeidheid, verlammingsverschijnselen of wegdraaiende ogen.',
+          'Slijmvliezen: Bleek of geelachtig tandvlees (wijst op acuut leverfalen).'
         ]
       },
       {
@@ -173,17 +173,17 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'cta',
-        text: 'Zoek hier meteen een dierenarts in de buurt',
+        text: 'Vind onmiddellijk een dierenarts in jouw buurt',
         url: '/diensten'
       },
       {
         type: 'list',
         items: [
-          'Uit het water, nú! Roep je hond onmiddellijk uit het water. Laat hem niet nog even schudden of drinken.',
-          'Voorkom likken. Dit is essentieel. Laat je hond absoluut niet aan zijn vacht of poten likken. Als je een handdoek bij je hebt, wrijf hem dan zo goed mogelijk af (maar wrijf het vuil niet ín de vacht).',
-          'Spoelen, spoelen, spoelen. Zoek zo snel mogelijk schoon, veilig stromend water (kraanwater, een tuinslang, of desnoods je drinkbus) en spoel de vacht van je hond overvloedig uit. Gebruik eventueel hondenshampoo als je die in de buurt hebt.',
-          'Bel de dierenarts. Wacht niet tot de symptomen beginnen. Bel je dierenarts (of een wachtdienst als het in het weekend is) en meld duidelijk dat je vermoedt dat je hond in contact is geweest met blauwalg. Ze kunnen zich dan voorbereiden op jullie komst.',
-          'Neem een foto. Heb je nog een seconde over? Maak snel een foto van het water met je smartphone. Dit helpt de dierenarts en instanties later enorm bij het identificeren van de bron.'
+          'Uit het water, nú! Roep je hond direct. Laat hem niet meer drinken of uitschudden.',
+          'Voorkom likken. Dit is essentieel. Wrijf de vacht af, maar wrijf het vuil niet in.',
+          'Spoelen, spoelen, spoelen. Gebruik veilig stromend water (tuinslang of drinkbus) om je hond overvloedig af te spoelen.',
+          'Bel de dierenarts. Wacht niet op symptomen. Meld duidelijk dat je hond mogelijk in contact kwam met blauwalg.',
+          'Neem een foto. Maak snel een foto van het water. Dit helpt later enorm bij de identificatie.'
         ]
       },
       {
@@ -219,7 +219,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'cta',
-        text: 'Meld gevaarlijke situaties op ons HondAanZee Meldpunt',
+        text: 'Meld een onveilige situatie direct via ons meldpunt',
         url: '/meldpunt'
       },
       {
@@ -236,7 +236,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Een zomer met je hond is bedoeld om herinneringen te maken, niet om uren in de wachtzaal van de dierenarts door te brengen. De moraal van dit verhaal is simpel: gebruik je gezond verstand en je zintuigen. Vertrouw je dat groene, troebele water in het park niet? Blijf er dan gewoon uit. Er is altijd wel een tuinslang, een hondenzwembadje, of natuurlijk de machtige Noordzee in de buurt voor een veilige, frisse duik.'
+        text: 'Een zomer met je hond is bedoeld om herinneringen te maken, niet om uren in de wachtzaal van de dierenarts door te brengen. De moraal van dit verhaal is simpel: gebruik je gezond verstand en je zintuigen. Vertrouw je dat water niet helemaal? Blijf er dan gewoon uit. Er is altijd wel een tuinslang, een hondenzwembadje, of natuurlijk de machtige Noordzee in de buurt voor een veilige, frisse duik.'
       }
     ]
   },
