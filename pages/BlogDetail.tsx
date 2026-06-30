@@ -94,7 +94,13 @@ const BlogDetail: React.FC = () => {
     }
   };
 
-  const otherPosts = blogPosts.filter(p => p.slug !== slug);
+  // Chronological sorting (newest first)
+  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const currentIndex = sortedPosts.findIndex(p => p.slug === slug);
+  
+  // Previous post is the newer one (index - 1), Next post is the older one (index + 1)
+  const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 
   const renderSection = (section: BlogSection, index: number) => {
     switch (section.type) {
@@ -444,39 +450,48 @@ const BlogDetail: React.FC = () => {
           </div>
         </article>
 
-        {/* Other Posts */}
-        {otherPosts.length > 0 && (
-          <div className="mt-16 pt-10 border-t border-slate-200">
-            <h3 className="text-2xl font-black text-slate-900 mb-6 flex items-center gap-3">
-              <BookOpen size={24} className="text-sky-600" />
-              Lees ook
-            </h3>
-            <div className="space-y-4">
-              {otherPosts.map(otherPost => (
-                <Link
-                  key={otherPost.slug}
-                  to={`/blog/${otherPost.slug}`}
-                  className="group relative block bg-white rounded-2xl shadow-md hover:shadow-xl border border-slate-100 hover:border-sky-200 p-6 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden"
-                >
-                  {/* Animated accent bar */}
-                  <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-gradient-to-b from-sky-400 to-blue-500 transition-all duration-500 rounded-l-2xl" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-sky-50/0 to-blue-50/0 group-hover:from-sky-50/40 group-hover:to-blue-50/20 transition-all duration-500 rounded-2xl pointer-events-none" />
-                  <span className={`relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold border mb-3 transition-transform duration-300 group-hover:scale-105 ${categoryStyles[otherPost.categoryColor]}`}>
-                    {otherPost.category}
+        {/* Prev / Next Navigation */}
+        <div className="mt-20 pt-10 border-t border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Previous Post (Newer) */}
+            {previousPost ? (
+              <Link
+                to={`/blog/${previousPost.slug}`}
+                className="group relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl border border-slate-100 hover:border-sky-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+              >
+                <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-gradient-to-b from-sky-400 to-blue-500 transition-all duration-500" />
+                <div className="flex flex-col h-full justify-center">
+                  <span className="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 group-hover:text-sky-500 transition-colors">
+                    <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+                    Vorige Artikel (Nieuwer)
                   </span>
-                  <h4 className="relative text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors duration-300 mb-2">
-                    {otherPost.title}
+                  <h4 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
+                    {previousPost.title}
                   </h4>
-                  <p className="relative text-sm text-slate-500 line-clamp-2">{otherPost.excerpt}</p>
-                  <div className="relative flex items-center gap-1 mt-3 text-sky-600 font-bold text-sm group-hover:gap-2.5 transition-all duration-300">
-                    Lees meer
-                    <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-                  </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            ) : <div />}
+
+            {/* Next Post (Older) */}
+            {nextPost ? (
+              <Link
+                to={`/blog/${nextPost.slug}`}
+                className="group relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl border border-slate-100 hover:border-sky-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden sm:text-right"
+              >
+                <div className="absolute top-0 right-0 w-1 h-0 group-hover:h-full bg-gradient-to-b from-sky-400 to-blue-500 transition-all duration-500" />
+                <div className="flex flex-col h-full justify-center sm:items-end">
+                  <span className="flex items-center sm:justify-end gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 group-hover:text-sky-500 transition-colors">
+                    Volgende Artikel (Ouder)
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <h4 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
+                    {nextPost.title}
+                  </h4>
+                </div>
+              </Link>
+            ) : <div />}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
