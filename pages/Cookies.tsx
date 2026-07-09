@@ -32,7 +32,7 @@ const Cookies: React.FC = () => {
             </h1>
           </div>
           <p className="text-slate-300 text-sm sm:text-base">
-            Laatst bijgewerkt: 22 januari 2026
+            Laatst bijgewerkt: 9 juli 2026
           </p>
         </div>
       </div>
