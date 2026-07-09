@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && vite build && node prerender.cjs",
-    "build:no-prerender": "node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && vite build",
+    "build": "node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build && node prerender.cjs",
+    "build:no-prerender": "node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
     "preview": "vite preview",
     "test": "vitest run"
   },

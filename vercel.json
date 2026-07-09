@@ -66,6 +66,17 @@
     ],
     "rewrites": [
         {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "user-agent",
+                    "value": "(?i).*(facebookexternalhit|twitterbot|linkedinbot|whatsapp|slackbot|telegrambot|skypeuripreview|discordbot|pinterest|vkshare|googlebot|bingbot|yandexbot).*"
+                }
+            ],
+            "destination": "/api/og-proxy?path=$1"
+        },
+        {
             "source": "/:path*",
             "destination": "/index.html"
         }
