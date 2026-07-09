@@ -11,11 +11,12 @@ content += `> Dit document bevat alle gedetailleerde informatie van HondAanZee.b
 content += `## Kuststeden en Strandregels\n\n`;
 CITIES.forEach(city => {
   content += `### ${city.name}\n`;
-  content += `${city.seoDescription}\n\n`;
-  content += `**Zomerregeling:**\n${city.summerRules}\n\n`;
-  content += `**Winterregeling:**\n${city.winterRules}\n\n`;
-  if (city.tips && city.tips.length > 0) {
-    content += `**Tips:**\n${city.tips.map(t => `- ${t}`).join('\n')}\n\n`;
+  content += `${city.description}\n\n`;
+  if (city.rules) {
+    if (city.rules.summer) content += `**Zomerregeling:**\n${city.rules.summer.rule}\n\n`;
+    if (city.rules.winter) content += `**Winterregeling:**\n${city.rules.winter.rule}\n\n`;
+    if (city.rules.special) content += `**Speciale regels:**\n${city.rules.special}\n\n`;
+    if (city.rules.note) content += `**Opmerking:**\n${city.rules.note}\n\n`;
   }
 });
 
