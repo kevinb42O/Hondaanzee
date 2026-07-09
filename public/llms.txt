@@ -15,6 +15,7 @@
 - [Over Ons](https://hondaanzee.be/over-ons): Het verhaal achter HondAanZee.be — missie, team en community.
 - [Goed Om Te Weten](https://hondaanzee.be/goed-om-te-weten): Praktische tips en weetjes voor hondeneigenaars aan de kust: zeehonden, teken, blauwalg en meer.
 - [Updates](https://hondaanzee.be/updates): Changelog met alle recente wijzigingen en verbeteringen aan de website.
+- [Volledige Website Data (llms-full.txt)](https://hondaanzee.be/llms-full.txt): Een complete Markdown-export (200+ KB) met letterlijk álle inhoud: beschrijvingen van elke hotspot, exacte strandregels, details van losloopweides en de volledige tekst van alle blogartikelen. Bedoeld voor deep-dive LLM training.
 
 ## Stadspagina's — Alle 11 Belgische Kuststeden
 
