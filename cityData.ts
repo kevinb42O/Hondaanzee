@@ -62,15 +62,15 @@ export const CITIES: City[] = [
         start: '03-15',
         end: '10-15',
         startTime: '10:00',
-        endTime: '20:00',
-        rule: '✅ GROENE ZONE\nSurfclub Icarus → Blankenberge\nVrij loslopen het hele jaar!\n\n🚫 RODE ZONE\nSurfclub Icarus → St. George\'s Day-wandeling (pier)\nVerboden 10u–20u (15 maart – 15 okt).\nBuiten die uren en buiten dit seizoen: overal vrij loslopen.',
+        endTime: '19:00',
+        rule: '🚫 RODE ZONE\nTussen de strandcabines en de Saint George Day-wandeling: honden niet toegelaten (ook niet aangelijnd).\n\n🟡 GELE ZONE (leiband)\nTussen de strandcabines (kant Blankenberge) en het einde van de zeedijk: enkel aan de leiband. Ze mogen niet in het water, ook niet aangelijnd.\n\n✅ BUITEN DEZE UREN\n(voor 10u / na 19u)\nVrij rondlopen op het volledige strand en in het water, onder toezicht.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 16 okt t/m 14 maart: Honden overal vrij loslopen op het volledige strand.',
+        rule: 'Van 16 okt t/m 14 maart: Vrij rondlopen op het volledige strand en in het water. Dit wel enkel onder toezicht van het baasje of begeleider.',
         status: 'JA'
       },
-      special: 'Nieuwe politieverordening februari 2025. Let op de borden!'
+      special: 'Nieuwe politieverordening juli 2026. Let op de borden!'
     }
   },
   {

@@ -35,12 +35,12 @@ describe('evaluateCityRuleStatus', () => {
     const zeebrugge = getCity('zeebrugge');
 
     const summerStart = evaluateCityRuleStatus(zeebrugge, new Date('2026-03-15T10:00:00'));
-    const summerEnd = evaluateCityRuleStatus(zeebrugge, new Date('2026-10-15T20:00:00'));
+    const summerEnd = evaluateCityRuleStatus(zeebrugge, new Date('2026-10-15T19:00:00'));
 
     expect(summerStart.status).toBe('DEELS');
-    expect(summerStart.label).toBe('Zomerregeling (10:00-20:00)');
+    expect(summerStart.label).toBe('Zomerregeling (10:00-19:00)');
     expect(summerEnd.status).toBe('DEELS');
-    expect(summerEnd.label).toBe('Zomerregeling (10:00-20:00)');
+    expect(summerEnd.label).toBe('Zomerregeling (10:00-19:00)');
   });
 
   it('keeps the current summer contract outside the active summer hours', () => {
@@ -50,7 +50,7 @@ describe('evaluateCityRuleStatus', () => {
 
     expect(result.status).toBe('DEELS');
     expect(result.label).toBe('Opgelet: Zomerregeling');
-    expect(result.rule).toContain('Verboden 10u–20u');
+    expect(result.rule).toContain('GELE ZONE (leiband)');
   });
 
   it('handles override boundary dates exactly on start and end dates', () => {
