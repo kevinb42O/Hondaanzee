@@ -536,18 +536,15 @@ const Home: React.FC = () => {
             for any reason (cache, SW, prerender script change), this keeps the dark image visible
             so the white hero text stays readable. */}
         <div className="absolute inset-0 z-0 bg-slate-900">
-          <img
-            src="/lexi.webp"
-            srcSet="/lexi-mobile.webp 800w, /lexi.webp 1920w"
-            sizes="100vw"
-            alt="Hond aan het strand"
+          <video
+            ref={(el) => { if (el) el.playbackRate = 0.6; }}
+            src="/dogshero.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center 30%' }}
-            width={1920}
-            height={1080}
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
           />
         </div>
         <div className="absolute inset-0 z-[1] bg-slate-950/50"></div>
