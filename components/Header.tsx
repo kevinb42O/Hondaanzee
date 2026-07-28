@@ -170,8 +170,8 @@ const Header: React.FC = () => {
                   <PawPrint size={16} className="sm:w-[18px] sm:h-[18px]" />
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="inline-flex items-center text-sm sm:text-base lg:text-lg font-black tracking-tighter leading-none">
-                    <span className={isOverHero && !isScrolled ? 'text-white' : 'text-slate-800'}>Hond</span><span className="text-sky-500">Aan</span><span className={isOverHero && !isScrolled ? 'text-white' : 'text-slate-800'}>Zee</span>
+                  <span className="inline-flex items-center text-sm sm:text-base lg:text-xl font-extrabold tracking-tight leading-none">
+                    <span className={isOverHero && !isScrolled ? 'text-white' : 'text-slate-800'}>Hond</span><span className="bg-gradient-to-r from-sky-500 to-cyan-400 bg-clip-text text-transparent">Aan</span><span className={isOverHero && !isScrolled ? 'text-white' : 'text-slate-800'}>Zee</span>
                   </span>
                 </div>
               </Link>
