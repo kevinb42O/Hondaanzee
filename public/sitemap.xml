@@ -1033,6 +1033,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://hondaanzee.be/blankenberge/hotspots/riva</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://hondaanzee.be/oostende/diensten/dierenarts-frederik-galle</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>weekly</changefreq>
