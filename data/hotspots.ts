@@ -1676,17 +1676,17 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 136,
-    name: 'Riva',
+    name: 'Riva Boutique',
     type: 'Shoppen',
     summary: 'Stijlvolle modeboetiek in hartje Blankenberge waar hondjes en hun baasjes met opvallend veel warmte worden ontvangen.',
-    recommendationNote: 'Riva is een aanrader omdat het warme onthaal hier geen detail is, maar deel van de winkelervaring. Terwijl jij op je gemak rondkijkt, krijgt je hond even oprechte aandacht — compleet met vers water en, als het mag, een lekker koekje.',
+    recommendationNote: 'Riva Boutique is een aanrader omdat het warme onthaal hier geen detail is, maar deel van de winkelervaring. Terwijl jij op je gemak rondkijkt, krijgt je hond even oprechte aandacht — compleet met vers water en, als het mag, een lekker koekje.',
     description: 'In de Visserstraat, midden in het centrum van Blankenberge, vind je Riva Boutique: een eigentijdse damesboetiek waar je op je gemak kunt rondneuzen tussen kleding en accessoires. Ook wie liever wat extra tijd en persoonlijk advies krijgt, zit hier goed, want shoppen op afspraak is mogelijk.\n\nWat Riva voor hondenbaasjes zo bijzonder maakt, is de oprechte warmte van eigenares Inge. Hondjes stappen hier niet zomaar mee naar binnen: ze worden met veel liefde verwelkomd en krijgen alle aandacht. Een waterbakje met vers water staat altijd klaar en, als het baasje toestemming geeft, hoort daar zelfs een lekker koekje bij.\n\nZo wordt een winkelmoment in Blankenberge ook voor je viervoeter een fijne tussenstop. Een mooie collectie voor jou, een warm welkom voor je hond en een superlieve gastvrouw die ervoor zorgt dat jullie allebei met een glimlach weer buitenstappen.',
     tags: ['Aanrader', 'Indoor toegelaten', 'Waterbak aanwezig', 'Hondensnacks', 'Hondvriendelijke eigenaar', 'Damesmode', 'Shoppen op afspraak'],
     image: '/Riva.webp',
     city: 'blankenberge',
     address: 'Visserstraat 6, 8370 Blankenberge',
     website: 'https://www.rivaboutique.be/riva-blankenberge/',
-    websiteLabel: 'Bekijk Riva',
+    websiteLabel: 'Bekijk Riva Boutique',
   },
 ];
 
