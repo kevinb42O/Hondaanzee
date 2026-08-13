@@ -222,7 +222,7 @@ const GoedOmTeWeten: React.FC = () => {
       "description": "Uitgebreide gids over kwallenbeten, pietermansteken, zoutwatervergiftiging, oververhitting en strandetiquette voor hondenbezitters aan de Belgische kust.",
       "url": "https://hondaanzee.be/goed-om-te-weten",
       "datePublished": "2026-02-10",
-      "dateModified": "2026-02-10",
+      "dateModified": "2026-08-13",
       "publisher": {
         "@type": "Organization",
         "name": "HondAanZee.be",
@@ -239,7 +239,7 @@ const GoedOmTeWeten: React.FC = () => {
         "audienceType": "Hondeneigenaren"
       },
       "specialty": "Veterinary Medicine",
-      "lastReviewed": "2026-02-10"
+      "lastReviewed": "2026-08-13"
     }
   ];
 

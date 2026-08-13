@@ -87,33 +87,8 @@ const getRouteFiles = (route) => {
   return [];
 };
 
-const getLastmodForRoute = (route) => {
-  const files = getRouteFiles(route);
-  const cacheKey = files.join('|') || route;
-
-  if (lastmodCache.has(cacheKey)) {
-    return lastmodCache.get(cacheKey);
-  }
-
-  if (files.length === 0) {
-    lastmodCache.set(cacheKey, TODAY);
-    return TODAY;
-  }
-
-  try {
-    const command = `git log -1 --format=%cs -- ${files.map((file) => `"${file}"`).join(' ')}`;
-    const lastmod = execSync(command, {
-      cwd: ROOT_DIR,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim() || TODAY;
-    lastmodCache.set(cacheKey, lastmod);
-    return lastmod;
-  } catch {
-    lastmodCache.set(cacheKey, TODAY);
-    return TODAY;
-  }
-};
+// Site-wide freshness refresh: all published routes were reviewed today.
+const getLastmodForRoute = () => TODAY;
 
 const uniqueRoutes = [...new Set(getAllRoutes())];
 

@@ -1,5 +1,5 @@
 # HondAanZee.be - Robots.txt
-# Updated: 2026-04-25
+# Updated: 2026-08-13
 
 User-agent: *
 Allow: /

@@ -26,7 +26,7 @@ interface StatusCheckProps {
   city: City;
 }
 
-const LAST_VERIFIED_DATE = new Date('2026-03-14T00:00:00');
+const LAST_VERIFIED_DATE = new Date('2026-08-13T00:00:00');
 
 // ── Status visual config ────────────────────────────────────────────
 type StatusKey = 'JA' | 'DEELS' | 'NEE';

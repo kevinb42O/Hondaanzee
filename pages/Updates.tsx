@@ -40,13 +40,13 @@ const VERSION_ACCENT: Record<string, string> = {
 const releases: UpdateRelease[] = [
   {
     version: '2.6',
-    date: '16 juli 2026',
+    date: '13 augustus 2026',
     title: 'Social sharing en slimme meta-tags',
     subtitle: 'Makkelijker delen en betere preview-afbeeldingen op sociale media',
     entries: [
       { text: 'Social media share-knoppen (Facebook, X, WhatsApp) en een handige "Kopieer Link" voor Instagram toegevoegd aan alle blogartikels', tag: { label: 'Nieuw', color: 'sky' } },
       { text: 'Vercel Edge serverless proxy opgezet voor dynamische Open Graph meta-tags (verbeterde weergave als je links deelt)', tag: { label: 'Verbeterd', color: 'amber' } },
-      { text: 'Laatste update-datum in de footer bijgewerkt naar 16 juli 2026', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Alle Google freshness-signalen en de footer bijgewerkt naar 13 augustus 2026', tag: { label: 'Verbeterd', color: 'amber' } },
     ],
   },
   {
@@ -426,12 +426,12 @@ function getReleaseStyles(isLaunch: boolean, isNewest: boolean): ReleaseStyles {
 
 const Updates: React.FC = () => {
   useSEO({
-    title: 'Updates & Nieuwigheden — laatste update 16 juli 2026 | HondAanZee.be',
-    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 16 juli 2026.',
-    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, nieuwe zaken kust, juli 2026',
+    title: 'Updates & Nieuwigheden — laatste update 13 augustus 2026 | HondAanZee.be',
+    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 13 augustus 2026.',
+    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, nieuwe zaken kust, augustus 2026',
     canonical: 'https://hondaanzee.be/updates',
     ogType: 'article',
-    articleModifiedTime: '2026-07-09T00:00:00+02:00',
+    articleModifiedTime: '2026-08-13T00:00:00+02:00',
   });
 
   useEffect(() => {
