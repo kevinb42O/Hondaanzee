@@ -239,7 +239,7 @@ const AllHotspots: React.FC = () => {
           <MapPin size={55} strokeWidth={1.5} />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+        <div className="site-shell relative z-10">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-slate-300 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
@@ -301,7 +301,7 @@ const AllHotspots: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-16">
+      <div className="site-shell py-8 sm:py-12 md:py-16">
         {/* Filters */}
         <div className="bg-white border-2 border-slate-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 shadow-sm">
           <div className="flex items-center gap-3 mb-4 sm:mb-6">

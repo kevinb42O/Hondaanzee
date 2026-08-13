@@ -18,6 +18,9 @@ const ROUTES = [...new Set(getAllRoutes())];
 // Simple static file server for the dist folder
 function startServer() {
   return new Promise((resolve, reject) => {
+    // Keep an immutable SPA shell. Route `/` is written back to dist/index.html
+    // while this server is still rendering the remaining routes.
+    const spaIndex = fs.readFileSync(path.join(DIST_DIR, 'index.html'));
     const server = createServer((req, res) => {
       const requestPath = (req.url || '/').split('?')[0].split('#')[0];
       const relativePath = requestPath === '/' ? 'index.html' : requestPath.replace(/^\/+/, '');
@@ -29,9 +32,8 @@ function startServer() {
       }
 
       // SPA fallback: if file doesn't exist, serve the app index.html.
-      if (!fs.existsSync(filePath)) {
-        filePath = path.join(DIST_DIR, 'index.html');
-      }
+      const isSpaFallback = !fs.existsSync(filePath);
+      if (isSpaFallback) filePath = path.join(DIST_DIR, 'index.html');
       
       const ext = path.extname(filePath);
       const contentTypes = {
@@ -45,7 +47,7 @@ function startServer() {
       };
       
       try {
-        const content = fs.readFileSync(filePath);
+        const content = isSpaFallback ? spaIndex : fs.readFileSync(filePath);
         res.writeHead(200, { 'Content-Type': contentTypes[ext] || 'application/octet-stream' });
         res.end(content);
       } catch {

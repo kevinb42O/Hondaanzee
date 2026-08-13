@@ -156,7 +156,7 @@ const Header: React.FC = () => {
     <>
       {/* Fixed glassmorphism pill header — floats over content, pointer-events-none lets clicks pass through padding */}
       <header className="fixed top-0 left-0 right-0 z-[100] pointer-events-none safe-area-top">
-        <div className={`mx-auto max-w-5xl px-3 sm:px-4 transition-all duration-500 ease-out ${isScrolled ? 'pt-2' : 'pt-3 sm:pt-4'}`}>
+        <div className={`site-shell transition-all duration-500 ease-out ${isScrolled ? 'pt-2' : 'pt-3 sm:pt-4'}`}>
           <div className={`pointer-events-auto rounded-full border transition-all duration-500 ease-out ${
             isScrolled
               ? 'bg-white/70 backdrop-blur-3xl backdrop-saturate-[1.8] border-white/50 shadow-lg shadow-black/[0.08]'

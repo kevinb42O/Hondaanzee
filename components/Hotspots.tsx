@@ -63,7 +63,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
 
   return (
     <section id="hotspots" className="py-10 sm:py-12 md:py-24 bg-white scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="site-shell">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 md:mb-14 gap-4">
           <div className="max-w-xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Hondvriendelijke Hotspots in {city.name}</h2>

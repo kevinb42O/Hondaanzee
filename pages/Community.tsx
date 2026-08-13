@@ -149,7 +149,7 @@ const Community: React.FC = () => {
           <Heart size={60} strokeWidth={1.5} />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full mt-8 sm:mt-12">
+        <div className="site-shell relative z-10 text-center mt-8 sm:mt-12">
           <Breadcrumb
             variant="light"
             className="mb-4 sm:mb-6 [&>ol]:justify-center"

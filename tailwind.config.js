@@ -8,6 +8,16 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1920px',
+      },
+      maxWidth: {
+        // Visual page shells get room on modern desktop and ultrawide displays.
+        // Reading widths (3xl/4xl) intentionally remain unchanged.
+        '5xl': '72rem',
+        '6xl': '84rem',
+        '7xl': '104rem',
+      },
       keyframes: {
         'arrow-salvo': {
           '0%, 100%': { transform: 'translateX(0)' },

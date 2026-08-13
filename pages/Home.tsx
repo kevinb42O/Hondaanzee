@@ -121,9 +121,9 @@ const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city
   const isTall = TALL_CARDS.has(city.slug);
   const gridClass = getGridClass(index, total);
   const heightClass = isFeatured || isTall
-    ? 'h-[300px] sm:h-[340px] lg:h-[380px]'
+    ? 'h-[300px] sm:h-[340px] lg:h-[380px] 2xl:h-[420px]'
     : isMedium
-      ? 'h-[280px] sm:h-[300px] lg:h-[340px]'
+      ? 'h-[280px] sm:h-[300px] lg:h-[340px] 2xl:h-[390px]'
       : 'h-[260px] sm:h-[280px]';
   const srcSet = getResponsiveSrcSet(city.image);
 
@@ -225,7 +225,7 @@ const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems
           <Link
             key={city.slug}
             to={`/${city.slug}`}
-            className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] h-[280px] sm:h-[300px] lg:h-[380px] w-full ${isThreeItems ? 'lg:w-auto lg:flex-[var(--dynamic-flex)_1_0%]' : 'sm:w-auto sm:flex-[var(--dynamic-flex)_1_0%]'} ${
+            className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] h-[280px] sm:h-[300px] lg:h-[380px] 2xl:h-[420px] w-full ${isThreeItems ? 'lg:w-auto lg:flex-[var(--dynamic-flex)_1_0%]' : 'sm:w-auto sm:flex-[var(--dynamic-flex)_1_0%]'} ${
               isFeatured
                 ? 'shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5'
                 : 'shadow-md hover:shadow-xl'
@@ -810,7 +810,7 @@ const Home: React.FC = () => {
       {/* Cities Grid Section with Warm Background */}
       <div className="bg-stone-50 py-12 sm:py-16 md:py-20">
         {/* Summer Safety Blog Teaser — drives traffic to /blog/hond-strand-warm-weer during summer */}
-        <div className="mx-auto mb-10 max-w-7xl px-4 sm:mb-14">
+        <div className="site-shell mb-10 sm:mb-14">
           <Link
             to="/blog/hond-strand-warm-weer"
             aria-label="Lees onze gids: Met je hond naar zee bij warm weer — do's en don'ts voor een veilige stranddag"
@@ -885,7 +885,7 @@ const Home: React.FC = () => {
           </Link>
         </div>
 
-        <div id="steden" className="max-w-7xl mx-auto px-4 scroll-mt-24">
+        <div id="steden" className="site-shell scroll-mt-24">
           {/* Cities Grid Header */}
           <div className="mb-10 flex items-center justify-between px-2">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
@@ -938,13 +938,13 @@ const Home: React.FC = () => {
       </div>
 
       <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
-        <div className="mx-auto max-w-7xl px-4">
+        <div className="site-shell">
           <NotificationOptIn variant="homepage" />
         </div>
       </section>
 
       <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
-        <div className="mx-auto max-w-7xl px-4">
+        <div className="site-shell">
           <div className="grid gap-6 xl:grid-cols-2">
             <div className="overflow-hidden rounded-[2rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-emerald-50 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
               <div className="flex h-full flex-col justify-between gap-8 p-6 lg:p-8">

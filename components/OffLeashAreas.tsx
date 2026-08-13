@@ -248,7 +248,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
 
   return (
     <section className="py-10 sm:py-12 md:py-24 bg-slate-50 border-y border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="site-shell">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
           <div>
             <div className="mb-6 sm:mb-8 md:mb-10">

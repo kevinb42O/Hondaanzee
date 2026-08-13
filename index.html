@@ -161,7 +161,7 @@
     <script type="module" src="/index.tsx"></script>
     <script>
     // Register PWA service worker on idle so it never delays LCP.
-    if ('serviceWorker' in navigator) {
+    if (navigator.serviceWorker) {
       var register = function () {
         navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function (reg) {
           // When a new SW is found, activate it as soon as it's installed.
@@ -176,12 +176,17 @@
           });
         }).catch(function () { /* ignore registration failures */ });
       };
+      var scheduleRegistration = function () {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(register, { timeout: 1000 });
+        } else {
+          window.setTimeout(register, 1);
+        }
+      };
       if (document.readyState === 'complete') {
-        ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(register, 1);
+        scheduleRegistration();
       } else {
-        window.addEventListener('load', function () {
-          ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(register, 1);
-        });
+        window.addEventListener('load', scheduleRegistration, { once: true });
       }
       // Reload once when the active SW changes, so users see the new build.
       var didReload = false;

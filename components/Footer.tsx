@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
       {/* Ocean depth gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-blue-950/20 pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 safe-area-left safe-area-right relative z-10">
+      <div className="site-shell safe-area-left safe-area-right relative z-10">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-16 mb-12 sm:mb-16 text-center sm:text-left">
 

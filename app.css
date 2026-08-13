@@ -3,6 +3,30 @@
 @tailwind utilities;
 
 @layer components {
+  /*
+   * Shared mobile-first layout primitives.
+   * Visual shells expand up to 1664px; copy keeps its own narrower max-width.
+   */
+  .site-shell {
+    width: min(100%, 104rem);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 3vw, 3rem);
+  }
+
+  .site-shell-compact {
+    width: min(100%, 84rem);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 3vw, 3rem);
+  }
+
+  .site-gutter {
+    padding-inline: clamp(1rem, 3vw, 3rem);
+  }
+
+  .section-flow {
+    padding-block: clamp(3rem, 5vw, 6rem);
+  }
+
   .admin-page {
     @apply min-h-screen bg-slate-100 text-slate-900;
     background-image:
@@ -58,6 +82,11 @@
   .admin-btn-danger {
     @apply inline-flex items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-bold text-red-800 transition hover:border-red-300 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-60;
   }
+}
+
+/* Keep long-form copy comfortable even when its surrounding visual shell grows. */
+:where(article, .prose) p {
+  text-wrap: pretty;
 }
 
 /* ====================================

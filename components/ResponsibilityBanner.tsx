@@ -33,7 +33,7 @@ const ResponsibilityBanner: React.FC = () => {
       )}
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-20">
+      <div className="site-shell relative z-20">
         <div className="bg-slate-800/35 backdrop-blur-xl border border-white/15 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-6 sm:p-8 md:p-10 shadow-2xl shadow-black/30">
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16 md:mb-20">

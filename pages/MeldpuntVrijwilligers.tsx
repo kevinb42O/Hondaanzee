@@ -38,7 +38,7 @@ const MeldpuntVrijwilligers: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.2),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.12),transparent_30%)]" />
         <div className="report-grid-pattern absolute inset-0 opacity-15" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-6">
+        <div className="site-shell relative z-10">
           <Link
             to={getReportsPath()}
             className="mb-8 inline-flex items-center gap-2 py-2 text-sm font-bold text-sky-200 transition hover:text-sky-400"
@@ -105,7 +105,7 @@ const MeldpuntVrijwilligers: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-20 mx-auto -mt-10 max-w-7xl px-4 pb-16 md:px-6 md:pb-24">
+      <section className="site-shell relative z-20 -mt-10 pb-16 md:pb-24">
         <div className="grid gap-4 lg:grid-cols-3">
           <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-sky-700">

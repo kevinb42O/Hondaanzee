@@ -63,7 +63,7 @@ const Blog: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-shell">
         
         <Breadcrumb
           className="mb-8"
@@ -224,4 +224,3 @@ const Blog: React.FC = () => {
 };
 
 export default Blog;
-

@@ -75,7 +75,7 @@ const CityPage: React.FC = () => {
       </div>
 
       <div data-header-hero="light" data-header-hero-mobile-only="true">
-        <div className="max-w-3xl lg:max-w-7xl mx-auto px-4 pt-24 sm:pt-28 md:pt-32">
+        <div className="site-shell pt-24 sm:pt-28 md:pt-32">
           <Link
             to="/"
             className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white border border-slate-200 text-slate-900 font-extrabold shadow-lg shadow-slate-900/20 hover:bg-slate-50 transition-colors active:opacity-90 touch-target"

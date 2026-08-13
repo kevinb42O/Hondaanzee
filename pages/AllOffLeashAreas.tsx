@@ -249,7 +249,7 @@ const AllOffLeashAreas: React.FC = () => {
         {/* Decorative Elements */}
 
 
-        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+        <div className="site-shell relative z-10">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-sky-200 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
@@ -321,7 +321,7 @@ const AllOffLeashAreas: React.FC = () => {
 
       {/* Main Content */}
       <div className="bg-slate-50 min-h-screen -mt-1">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="site-shell py-8 md:py-12">
 
           {/* Filters */}
           <div className="mb-6 md:mb-8 bg-white rounded-xl p-4 md:p-6 shadow-sm border border-slate-200">

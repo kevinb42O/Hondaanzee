@@ -71,7 +71,7 @@ const Meldpunt: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(239,68,68,0.16),transparent_32%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-slate-950/50 to-slate-950" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-6">
+        <div className="site-shell relative z-10">
           <Link
             to="/"
             className="mb-8 inline-flex items-center gap-2 py-2 text-sm font-bold text-sky-200 transition hover:text-sky-400"
@@ -141,7 +141,7 @@ const Meldpunt: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative z-20 mx-auto -mt-12 max-w-7xl px-4 pb-16 md:px-6 md:pb-24">
+      <section className="site-shell relative z-20 -mt-12 pb-16 md:pb-24">
         <div className="mb-6 grid gap-4 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="rounded-[2rem] border border-red-100 bg-white p-6 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)]">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-red-700">
