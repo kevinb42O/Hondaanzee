@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer, Sparkles, Calendar, PawPrint } from 'lucide-react';
+import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer, Calendar, PawPrint } from 'lucide-react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
@@ -845,7 +845,7 @@ const Home: React.FC = () => {
               <div className="relative flex flex-col justify-center gap-4 p-6 sm:p-8 lg:p-10 md:order-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300/80 bg-white/90 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-emerald-700 shadow-sm backdrop-blur">
-                    <Sparkles size={13} className="text-emerald-500" />
+                    <PawPrint size={13} className="text-emerald-600" />
                     Goed nieuws
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/80 bg-white/90 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-sky-700 shadow-sm backdrop-blur">
@@ -870,7 +870,7 @@ const Home: React.FC = () => {
                 </h2>
 
                 <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-700">
-                  Het officiële badseizoen loopt ten einde! Vanaf 16 september vallen in het merendeel van de kustgemeenten de strenge dagverboden weg. Tijd voor lange wandelingen, pootjebaden en lekker uitwaaien aan zee.
+                  Het officiële badseizoen loopt ten einde! Vanaf 16 september versoepelen de regels in de meeste badsteden en zijn honden weer de hele dag welkom op het strand. Tijd voor lange wandelingen, pootjebaden en samen lekker uitwaaien aan zee.
                 </p>
 
                 <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
@@ -879,8 +879,8 @@ const Home: React.FC = () => {
                     <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600 flex items-center gap-1.5">
-                    <PawPrint size={14} className="text-sky-600" />
-                    6 badsteden versoepelen direct
+                    <Waves size={14} className="text-sky-600" />
+                    6 badsteden versoepelen meteen
                   </span>
                 </div>
               </div>
