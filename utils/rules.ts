@@ -44,7 +44,7 @@ export const evaluateCityRuleStatus = (city: City, now: Date = new Date()): Eval
   return {
     status: rules.winter.status,
     rule: rules.winter.rule,
-    label: 'Vrije toegang: Winterregeling',
+    label: 'Winterregeling van kracht',
   };
 };
 

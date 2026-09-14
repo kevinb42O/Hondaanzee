@@ -411,6 +411,7 @@ export const SEO_DATA = {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "dateModified": "2026-09-14",
       "mainEntity": [
         {
           "@type": "Question",

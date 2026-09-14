@@ -32,7 +32,7 @@ const BlogDetail: React.FC = () => {
         "headline": post.title,
         "description": post.excerpt,
         "datePublished": post.date,
-        "dateModified": "2026-08-13",
+        "dateModified": "2026-09-14",
         "url": `https://hondaanzee.be/blog/${post.slug}`,
         "mainEntityOfPage": {
           "@type": "WebPage",

@@ -32,6 +32,15 @@ export const CITIES: City[] = [
       }
     ],
     rules: {
+      overrides: [
+        {
+          start: '09-16',
+          end: '10-15',
+          status: 'DEELS',
+          label: 'Najaarsregeling',
+          rule: '✅ ZONE WEST\nWesterstaketsel → Wenduine\nVrij loslopen zonder leiband, 24/7 het hele jaar door.\n\n🟡 ZONE MIDDEN**\nOosterstaketsel → J. Gadeynehelling\nSinds 16 september weer toegelaten aan de leiband!\n\n⚠️ ZONE OOST***\nJ. Gadeynehelling → Zeebrugge\nToegelaten aan de leiband (tot 15 okt).\nVanaf 16 okt: vrij loslopen zonder leiband.'
+        }
+      ],
       summer: {
         start: '03-15',
         end: '10-15',
@@ -241,29 +250,29 @@ export const CITIES: City[] = [
       overrides: [
         {
           start: '03-16',
-          end: '06-30',
+          end: '06-14',
           status: 'DEELS',
           label: 'Opgelet: Tussenseizoen',
-          rule: '⚠️ TUSSENSEIZOEN\n16 maart – 30 juni\nOveral op strand en in duinen toegelaten aan leiband.\nLet op: bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
+          rule: '⚠️ TUSSENSEIZOEN\n16 maart – 14 juni\nOveral op strand en in duinen toegelaten aan de leiband.\nLet op: bij surfzone Twins Club blijft de leiband het hele jaar verplicht.'
         },
         {
-          start: '09-01',
+          start: '09-16',
           end: '10-14',
           status: 'DEELS',
           label: 'Opgelet: Tussenseizoen',
-          rule: '⚠️ TUSSENSEIZOEN\n1 september – 14 oktober\nOveral op strand en in duinen toegelaten aan leiband.\nLet op: bij surfzone Twins Club blijft leiband het hele jaar verplicht.'
+          rule: '⚠️ TUSSENSEIZOEN\n16 september – 14 oktober\nOveral op strand en in duinen toegelaten aan de leiband.\nLet op: bij surfzone Twins Club blijft de leiband het hele jaar verplicht.'
         }
       ],
       summer: {
-        start: '07-01',
-        end: '08-31',
+        start: '06-15',
+        end: '09-15',
         startTime: '10:30',
         endTime: '18:30',
-        rule: '🚫 STRAND & DUINEN\nJuli & augustus, 10u30–18u30\nVerboden op strand én in duinen (behalve verharde paden).\n\n✅ UITZONDERING\nVoorbij concessie Twins → grens Oostende + strandpost 6\nToegegaan, maar altijd aan leiband.\n\n🌅 BUITEN DE UREN\nVóór 10u30 en na 18u30\nOveral aan leiband toegelaten.',
+        rule: '🚫 STRAND & DUINEN\n15 juni – 15 sept, 10u30–18u30\nVerboden op strand én in duinen (behalve verharde paden).\n\n✅ UITZONDERING OVERDAG\nVoorbij concessie Twins → grens Oostende + strandpost 6\nToegelaten, maar altijd aan de leiband.\n\n🌅 BUITEN DEZE UREN\nVóór 10u30 en na 18u30\nOveral aan de leiband toegelaten.',
         status: 'DEELS'
       },
       winter: {
-        rule: 'Van 15 okt t/m 15 maart: Overal vrij loslopen op strand en in duinen!',
+        rule: 'Van 15 okt t/m 15 maart: Overal vrij loslopen op strand en in duinen (behalve surfzone Twins Club, daar altijd leiband).',
         status: 'JA'
       },
       special: 'Let op: Bij surfzone Twins Club (nabij strandpost Bredene) moet je hond het hele jaar aan de leiband.'
@@ -443,14 +452,16 @@ export const CITIES: City[] = [
       summer: {
         start: '06-15',
         end: '09-15',
-        rule: '🚫 STRIKT VERBODEN\nVolledig strand\nVan 15 juni t/m 15 sept: honden compleet verboden, 24/7.\nGeen uitzonderingen of hondenzones!',
-        status: 'NEE'
+        startTime: '10:30',
+        endTime: '18:30',
+        rule: '🚫 OVERDAG VERBODEN\n10u30–18u30 (15 juni – 15 sept)\nHonden niet toegelaten op het strand.\n\n🌅 OCHTEND & AVOND\nVóór 10u30 en na 18u30\nToegelaten op het volledige strand, verplicht aan de leiband (max. 5m).\n\n💡 ALTERNATIEF\nHondenweides Prins Mauritspark (2.500m²) en Leopold II Park zijn 24/7 geopend.',
+        status: 'DEELS'
       },
       winter: {
-        rule: 'Van 16 sept t/m 14 juni: Toegelaten op het volledige strand, verplicht aan leiband.',
+        rule: 'Van 16 sept t/m 14 juni: Toegelaten op het volledige strand, steeds verplicht aan de leiband (max. 5m). Er is geen losloopzone op het strand.',
         status: 'JA'
       },
-      special: 'Nieuwpoort heeft de strengste regels aan de kust! Geen losloopstrand. Tip: Gebruik de hondenloopweide in Prins Mauritspark als alternatief in de zomer.'
+      special: 'Nieuwpoort heeft een permanente leibandplicht (max. 5m) op het strand. Geen losloopstrand. Tip: Gebruik de omheinde hondenweide in het Prins Mauritspark om vrij te laten rennen.'
     }
   },
   {

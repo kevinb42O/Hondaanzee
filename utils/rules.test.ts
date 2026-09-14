@@ -17,7 +17,7 @@ describe('evaluateCityRuleStatus', () => {
     const result = evaluateCityRuleStatus(zeebrugge, new Date('2026-02-01T12:00:00'));
 
     expect(result.status).toBe('JA');
-    expect(result.label).toBe('Vrije toegang: Winterregeling');
+    expect(result.label).toBe('Winterregeling van kracht');
     expect(result.rule).toContain('16 okt');
   });
 
@@ -57,12 +57,58 @@ describe('evaluateCityRuleStatus', () => {
     const bredene = getCity('bredene');
 
     const firstOverrideStart = evaluateCityRuleStatus(bredene, new Date('2026-03-16T00:00:00'));
-    const firstOverrideEnd = evaluateCityRuleStatus(bredene, new Date('2026-06-30T23:59:00'));
-    const secondOverrideStart = evaluateCityRuleStatus(bredene, new Date('2026-09-01T00:00:00'));
+    const firstOverrideEnd = evaluateCityRuleStatus(bredene, new Date('2026-06-14T23:59:00'));
+    const summerDay = evaluateCityRuleStatus(bredene, new Date('2026-09-15T12:00:00'));
+    const secondOverrideStart = evaluateCityRuleStatus(bredene, new Date('2026-09-16T00:00:00'));
+    const secondOverrideEnd = evaluateCityRuleStatus(bredene, new Date('2026-10-14T23:59:00'));
 
     expect(firstOverrideStart.label).toBe('Opgelet: Tussenseizoen');
     expect(firstOverrideEnd.label).toBe('Opgelet: Tussenseizoen');
+    expect(summerDay.label).toBe('Zomerregeling (10:30-18:30)');
     expect(secondOverrideStart.label).toBe('Opgelet: Tussenseizoen');
+    expect(secondOverrideEnd.label).toBe('Opgelet: Tussenseizoen');
+  });
+
+  it('correctly transitions cities on September 15 vs September 16', () => {
+    const sept15 = new Date('2026-09-15T12:00:00');
+    const sept16 = new Date('2026-09-16T12:00:00');
+
+    // Nieuwpoort
+    const nieuwpoort = getCity('nieuwpoort');
+    expect(evaluateCityRuleStatus(nieuwpoort, sept15).status).toBe('DEELS');
+    expect(evaluateCityRuleStatus(nieuwpoort, sept15).label).toBe('Zomerregeling (10:30-18:30)');
+    expect(evaluateCityRuleStatus(nieuwpoort, sept16).status).toBe('JA');
+    expect(evaluateCityRuleStatus(nieuwpoort, sept16).label).toBe('Winterregeling van kracht');
+
+    // Koksijde
+    const koksijde = getCity('koksijde');
+    expect(evaluateCityRuleStatus(koksijde, sept15).status).toBe('DEELS');
+    expect(evaluateCityRuleStatus(koksijde, sept16).status).toBe('JA');
+
+    // De Panne
+    const dePanne = getCity('de-panne');
+    expect(evaluateCityRuleStatus(dePanne, sept15).status).toBe('DEELS');
+    expect(evaluateCityRuleStatus(dePanne, sept16).status).toBe('JA');
+
+    // De Haan
+    const deHaan = getCity('de-haan');
+    expect(evaluateCityRuleStatus(deHaan, sept15).status).toBe('DEELS');
+    expect(evaluateCityRuleStatus(deHaan, sept16).status).toBe('JA');
+
+    // Blankenberge
+    const blankenberge = getCity('blankenberge');
+    expect(evaluateCityRuleStatus(blankenberge, sept15).label).toBe('Opgelet: Zomerregeling');
+    expect(evaluateCityRuleStatus(blankenberge, sept16).label).toBe('Najaarsregeling');
+
+    // Cities that continue summer through October
+    const oostende = getCity('oostende');
+    expect(evaluateCityRuleStatus(oostende, sept16).status).toBe('DEELS');
+
+    const knokke = getCity('knokke-heist');
+    expect(evaluateCityRuleStatus(knokke, sept16).status).toBe('DEELS');
+
+    const zeebrugge = getCity('zeebrugge');
+    expect(evaluateCityRuleStatus(zeebrugge, sept16).status).toBe('DEELS');
   });
 
   it('returns the same status via getCityMapStatus as the full evaluator', () => {

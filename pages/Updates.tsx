@@ -39,6 +39,18 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '2.7',
+    date: '14 september 2026',
+    title: 'Strandregels najaar 2026 en juridische verificatie',
+    subtitle: 'Alle strandregels voor de najaarsovergang van 15/16 september gecontroleerd en gecorrigeerd conform officiële politieverordeningen',
+    entries: [
+      { text: 'Strandregels en seizoensdatums voor alle 10 kustgemeenten geverifieerd conform de officiële gemeentelijke politiereglementen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Zomerregels voor Bredene en Nieuwpoort gecorrigeerd en najaarsregeling voor Blankenberge toegevoegd', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Juridische veiligheidsdisclaimer toegevoegd aan alle antwoordkaarten op de stadspagina’s', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Alle Google freshness-signalen en de footer bijgewerkt naar 14 september 2026', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
+  {
     version: '2.6',
     date: '13 augustus 2026',
     title: 'Social sharing en slimme meta-tags',
@@ -426,12 +438,12 @@ function getReleaseStyles(isLaunch: boolean, isNewest: boolean): ReleaseStyles {
 
 const Updates: React.FC = () => {
   useSEO({
-    title: 'Updates & Nieuwigheden — laatste update 13 augustus 2026 | HondAanZee.be',
-    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 13 augustus 2026.',
-    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, nieuwe zaken kust, augustus 2026',
+    title: 'Updates & Nieuwigheden — laatste update 14 september 2026 | HondAanZee.be',
+    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 14 september 2026.',
+    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, strandregels, september 2026',
     canonical: 'https://hondaanzee.be/updates',
     ogType: 'article',
-    articleModifiedTime: '2026-08-13T00:00:00+02:00',
+    articleModifiedTime: '2026-09-14T00:00:00+02:00',
   });
 
   useEffect(() => {

@@ -26,7 +26,7 @@ interface StatusCheckProps {
   city: City;
 }
 
-const LAST_VERIFIED_DATE = new Date('2026-08-13T00:00:00');
+const LAST_VERIFIED_DATE = new Date('2026-09-15T00:00:00');
 
 // ── Status visual config ────────────────────────────────────────────
 type StatusKey = 'JA' | 'DEELS' | 'NEE';
@@ -382,6 +382,14 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
                 {city.rules.special}
               </motion.p>
             )}
+
+            <motion.p
+              variants={fadeUp}
+              className="text-[11px] lg:text-xs font-semibold text-slate-600/80 px-4 mt-6 pt-4 border-t border-current/10 flex items-center justify-center gap-1.5"
+            >
+              <Info size={13} className="shrink-0 text-slate-500" />
+              <span>Let op: Plaatselijke politieborden aan de strandopgang hebben altijd voorrang.</span>
+            </motion.p>
           </div>
         </motion.div>
       </div>
@@ -413,6 +421,10 @@ const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
               {city.rules.special}
             </p>
           )}
+          <p className="text-[10px] sm:text-[11px] font-semibold text-slate-600/80 px-2 mt-4 pt-3 border-t border-current/10 flex items-center justify-center gap-1.5">
+            <Info size={12} className="shrink-0 text-slate-500" />
+            <span>Let op: Plaatselijke politieborden aan de strandopgang hebben altijd voorrang.</span>
+          </p>
         </div>
       </div>
     </div>
