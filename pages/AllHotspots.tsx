@@ -1,4 +1,5 @@
 import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
+import HotspotSocialSummary from '../components/places/HotspotSocialSummary.tsx';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -520,6 +521,7 @@ const AllHotspots: React.FC = () => {
                   )}
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2 md:group-hover:text-sky-600 md:transition-colors">{spot.name}</h3>
+                  <HotspotSocialSummary place={{city:spot.city,slug:spot.slug}}/>
                 <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed font-medium">{spot.description}</p>
                 <div className="mt-auto">
                   {spot.address && (

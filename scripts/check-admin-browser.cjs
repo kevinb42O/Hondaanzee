@@ -59,7 +59,8 @@ const server = createServer((req, res) => {
         return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify(body)});
       }
       if(request.url().includes('/functions/v1/admin-reviews')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());let body;
-        if(input.action==='overview')body=reviewOverview();
+        if(input.action==='places')body={places:[...fakePlaces,...fakeZones].map(p=>({id:p.id,kind:p.kind,city_slug:p.city_slug,slug:p.slug,name:p.draft.content.name}))};
+        else if(input.action==='overview')body=reviewOverview();
         else if(input.action==='list')body={reviews:fakeReviews.filter(r=>input.filter==='all'||input.filter==='attention'&&r.needs_review||input.filter===r.status)};
         else if(input.action==='detail')body={review:fakeReviews[0],history:moderationRequests.map((a,i)=>({...a,id:String(i),action:a.decision,from_status:'published',to_status:fakeReviews[0].status,created_at:'2026-10-02T12:00:00Z',actor_label:'admin@hondaanzee.be'})),revisions:[{id:'original',public_name:'Bezoeker',public_comment:'Originele ervaring',created_at:'2026-09-20T12:00:00Z'}],flags:[]};
         else{moderationRequests.push(input);fakeReviews[0].version++;fakeReviews[0].needs_review=false;if(input.decision==='hide')fakeReviews[0].status='hidden';if(input.decision==='redact'){fakeReviews[0].public_name=input.publicName;fakeReviews[0].public_comment=input.publicComment;}body={version:fakeReviews[0].version};}

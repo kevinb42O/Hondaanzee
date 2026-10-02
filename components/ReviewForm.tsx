@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { siteReviewAction } from '../utils/zoneReviews.ts';
 import StarRating from './StarRating';
+import { useMember } from './member/MemberProvider.tsx';
+import { Link, useLocation } from 'react-router-dom';
 import { Loader2, Send } from 'lucide-react';
 
 interface ReviewFormProps {
@@ -9,6 +11,8 @@ interface ReviewFormProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) => {
+    const member=useMember(),location=useLocation();
+    const next=encodeURIComponent(location.pathname+location.search+location.hash);
     const [website,setWebsite]=useState('');
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -56,6 +60,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
         }
     };
 
+    if(!member.session)return <div className="p-6 text-center"><p className="text-slate-600 mb-4">Deel je ervaring met een gratis account. Zo houden we reviews persoonlijk en bruikbaar.</p><div className="flex flex-wrap justify-center gap-3"><Link className="member-button member-button-primary" to={`/account?mode=register&next=${next}`}>Maak een gratis account</Link><Link className="member-button" to={`/account?mode=login&next=${next}`}>Inloggen</Link></div></div>;
+    if(member.data?.profile.status!=='active')return <p className="p-6 text-slate-600">{member.loading?'Je account laden…':'Je account kan momenteel geen reviews plaatsen.'}</p>;
     return (
         <div className="bg-white rounded-xl shadow-sm border border-sky-100 p-6 md:p-8">
             <h3 className="text-lg font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">

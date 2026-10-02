@@ -5,6 +5,7 @@ import { supabase } from '../../utils/supabaseClient.ts';
 import { clearPendingSave, requireMemberMutation, type MemberDog } from '../../utils/memberData.ts';
 import { useMember } from './MemberProvider.tsx';
 import { MemberDialog } from './MemberUI.tsx';
+import { hotspotAction, clearCommunityIntent, clearHotspotDrafts } from '../../utils/hotspotCommunity.ts';
 
 export default function MemberSettings() {
   const member = useMember(), data = member.data!;
@@ -36,10 +37,14 @@ export default function MemberSettings() {
         {data.dogs.length ? <div className="member-dog-list">{data.dogs.map(dog => <div key={dog.id}><span className={`member-dog-avatar dog-${dog.avatar}`}><PawPrint size={26} /></span><button className="member-dog-edit" onClick={() => setDogEditor(dog)}><strong>{dog.name}</strong><small>{dog.breed || 'Klaar voor een dag aan zee'}</small></button><button className="member-icon-button" disabled={busy} onClick={() => setRemovingDog(dog)} aria-label={`Verwijder ${dog.name}`}><Trash2 size={16} /></button></div>)}</div> : <div className="member-dog-empty"><PawPrint size={44} strokeWidth={1.2} /><h4>De ereplek is nog vrij.</h4><p>Vertel ons wie er naast je door het zand rent.</p><button className="member-button member-button-small" onClick={() => setDogEditor('new')}><Plus size={16} />Voeg je hond toe</button></div>}
       </section>
     </div>
-    <section className="member-panel member-account-controls"><div><h3>Jouw account, jouw keuze.</h3><p className="member-muted">Download je eigen gegevens of log uit op dit toestel.</p></div><div className="member-button-row"><button className="member-button member-button-small" onClick={() => {
-      const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), ...data }, null, 2)], { type: 'application/json' });
+    <section className="member-panel member-account-controls"><div><h3>Jouw account, jouw keuze.</h3><p className="member-muted">Download je eigen gegevens of log uit op dit toestel.</p></div><div className="member-button-row"><button className="member-button member-button-small" disabled={busy} onClick={async () => {
+      setBusy(true);setError(null);
+      try {
+      const contributions = await hotspotAction<{likes:unknown[];reviews:unknown[]}>({action:'export'});
+      const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), ...data, hotspot_contributions:contributions }, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob), anchor = document.createElement('a'); anchor.href = url; anchor.download = 'mijn-hond-aan-zee.json'; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }}><Download size={16} />Mijn gegevens</button><button className="member-button member-button-small" onClick={() => void member.signOut().catch(e => member.notify(e.message))}><LogOut size={16} />Uitloggen</button></div></section>
+      }catch(cause){setError(cause instanceof Error?cause.message:'Downloaden lukte niet. Probeer opnieuw.');}finally{setBusy(false);}
+    }}>{busy?<Loader2 size={16} className="animate-spin"/>:<Download size={16} />}Mijn gegevens</button><button className="member-button member-button-small" onClick={() => void member.signOut().catch(e => member.notify(e.message))}><LogOut size={16} />Uitloggen</button></div></section>
     <div className="member-delete-row"><span>Je kunt je account en je bewaarde gegevens verwijderen.</span><button className="member-text-button member-danger-text" onClick={() => { setDeleting(true); setError(null); }}>Account verwijderen</button></div>
     {error && !deleting && <p className="member-error" role="alert">{error}</p>}
     {dogEditor && <DogEditor dog={dogEditor === 'new' ? null : dogEditor} onClose={() => setDogEditor(null)} />}
@@ -52,9 +57,9 @@ export default function MemberSettings() {
           const response = deleteError.context instanceof Response ? await deleteError.context.json().catch(() => null) : null;
           throw new Error(response?.error || 'Je account kon niet worden verwijderd. Probeer opnieuw.');
         }
-        clearPendingSave(); await supabase.auth.signOut({ scope: 'local' });
+        clearPendingSave(); clearCommunityIntent(); clearHotspotDrafts(data.profile.id); await supabase.auth.signOut({ scope: 'local' });
       } catch (cause) { setError(cause instanceof Error ? cause.message : 'Verwijderen lukte niet.'); } finally { setBusy(false); }
-    }}><p>Je profiel, honden, favorieten, gevolgde gemeenten en uitstapjes worden verwijderd. Je gedeelde links werken daarna niet meer. Dit kun je niet ongedaan maken.</p><label className="member-field">Vul je e-mailadres in<input type="email" autoComplete="email" required value={deleteEmail} onChange={e => setDeleteEmail(e.target.value)} /></label><label className="member-field">Typ VERWIJDER om te bevestigen<input required pattern="VERWIJDER" value={confirmation} onChange={e => setConfirmation(e.target.value)} autoComplete="off" /></label>{error && <p className="member-error" role="alert">{error}</p>}<button className="member-button member-button-danger" disabled={busy || confirmation !== 'VERWIJDER' || deleteEmail.trim().toLowerCase() !== data.profile.email.toLowerCase()}>{busy ? <Loader2 size={17} className="animate-spin" /> : <Trash2 size={17} />}Verwijder mijn account</button></form></MemberDialog>}
+    }}><p>Je profiel, honden, favorieten, gevolgde gemeenten, uitstapjes, hotspotlikes en hotspotreviews worden verwijderd. Je gedeelde links werken daarna niet meer. Dit kun je niet ongedaan maken.</p><label className="member-field">Vul je e-mailadres in<input type="email" autoComplete="email" required value={deleteEmail} onChange={e => setDeleteEmail(e.target.value)} /></label><label className="member-field">Typ VERWIJDER om te bevestigen<input required pattern="VERWIJDER" value={confirmation} onChange={e => setConfirmation(e.target.value)} autoComplete="off" /></label>{error && <p className="member-error" role="alert">{error}</p>}<button className="member-button member-button-danger" disabled={busy || confirmation !== 'VERWIJDER' || deleteEmail.trim().toLowerCase() !== data.profile.email.toLowerCase()}>{busy ? <Loader2 size={17} className="animate-spin" /> : <Trash2 size={17} />}Verwijder mijn account</button></form></MemberDialog>}
   </>;
 }
 

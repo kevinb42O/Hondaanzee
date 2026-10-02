@@ -7,7 +7,7 @@ import SavePlaceButton from './SavePlaceButton.tsx';
 export function MemberDialog({ title, children, onClose, wide = false }: { title: string; children: React.ReactNode; onClose: () => void; wide?: boolean }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => { const dialog = ref.current; dialog?.showModal(); return () => dialog?.close(); }, []);
-  return <dialog ref={ref} className={`member-dialog ${wide ? 'member-dialog-wide' : ''}`} aria-labelledby="member-dialog-title" onCancel={onClose} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) onClose(); } }}>
+  return <dialog ref={ref} className={`member-dialog ${wide ? 'member-dialog-wide' : ''}`} aria-labelledby="member-dialog-title" onCancel={e=>{e.preventDefault();onClose();}} onClick={e => { if (e.target === e.currentTarget) { const r = e.currentTarget.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) onClose(); } }}>
     <div className="member-dialog-head"><h2 id="member-dialog-title">{title}</h2><button className="member-icon-button" type="button" onClick={onClose} aria-label="Venster sluiten"><X size={21} /></button></div>
     {children}
   </dialog>;

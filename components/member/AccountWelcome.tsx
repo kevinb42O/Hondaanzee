@@ -3,6 +3,8 @@ import { ArrowRight, Compass, Eye, EyeOff, Heart, Loader2, LockKeyhole, MapPin, 
 import { Link, useSearchParams } from 'react-router-dom';
 import { supabase } from '../../utils/supabaseClient.ts';
 import { readPendingSave, resolveSavedPlace } from '../../utils/memberData.ts';
+import { readCommunityIntent } from '../../utils/hotspotCommunity.ts';
+import { HOTSPOTS } from '../../constants.ts';
 import { validateMemberPassword } from '../../utils/memberCredentials.ts';
 
 export default function AccountWelcome() {
@@ -15,6 +17,9 @@ export default function AccountWelcome() {
   const [error, setError] = useState<string | null>(null);
   const pending = readPendingSave();
   const place = pending && resolveSavedPlace(pending);
+  const communityIntent=readCommunityIntent();
+  const communityPlace=communityIntent&&HOTSPOTS.find(p=>p.city===communityIntent.city&&p.slug===communityIntent.slug);
+  const communityReview=communityIntent?.action==='review';
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -53,7 +58,7 @@ export default function AccountWelcome() {
       <section className="member-auth-card" aria-labelledby="account-form-title">
         <div className="member-auth-brand"><PawPrint size={25} /><span>mijn hond aan zee</span></div>
         <div className="member-auth-tabs" aria-label="Accountkeuze"><button type="button" disabled={busy} className={registering ? '' : 'is-active'} onClick={() => switchMode('login')}>Inloggen</button><button type="button" disabled={busy} className={registering ? 'is-active' : ''} onClick={() => switchMode('register')}>Gratis account</button></div>
-        <h2 id="account-form-title">{registering ? 'Jouw kust begint hier.' : 'Fijn dat je er weer bent.'}</h2><p>{registering ? 'Maak je eigen verzameling van fijne plekken en plannen. Gratis, voor jou en je viervoeter.' : 'Je favoriete plekjes en plannen wachten op je. Log in met je e-mailadres en wachtwoord.'}</p>
+        <h2 id="account-form-title">{communityPlace ? (communityReview?'Jouw ervaring telt.':'Een like voor een fijne plek.') : registering ? 'Jouw kust begint hier.' : 'Fijn dat je er weer bent.'}</h2><p>{communityPlace ? `Log in of maak een gratis account. Daarna kom je terug bij ${communityPlace.name} om ${communityReview?'je review te schrijven':'je like te geven'}.` : registering ? 'Maak je eigen verzameling van fijne plekken en plannen. Gratis, voor jou en je viervoeter.' : 'Je favoriete plekjes en plannen wachten op je. Log in met je e-mailadres en wachtwoord.'}</p>
         {place && <div className="member-pending-save"><img src={place.image} alt="" /><span><small>Je eerste favoriet staat klaar</small><strong>{place.name}</strong></span><Heart size={18} /></div>}
         <form onSubmit={submit}>
           <label className="member-field">Je e-mailadres<input type="email" name="email" autoComplete="username" inputMode="email" autoCapitalize="none" spellCheck={false} placeholder="jij@voorbeeld.be" maxLength={254} required disabled={busy} value={email} onChange={e => setEmail(e.target.value)} /></label>

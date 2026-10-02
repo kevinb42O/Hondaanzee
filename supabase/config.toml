@@ -56,3 +56,6 @@ verify_jwt = false
 
 [functions.admin-favorites]
 verify_jwt = false
+
+[functions.site-community]
+verify_jwt = false

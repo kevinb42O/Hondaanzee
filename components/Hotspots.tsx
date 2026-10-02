@@ -1,3 +1,4 @@
+import HotspotSocialSummary from './places/HotspotSocialSummary.tsx';
 
 import React, { useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -152,6 +153,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                     )}
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 sm:mb-2 md:group-hover:text-sky-600 md:transition-colors">{spot.name}</h3>
+                  <HotspotSocialSummary place={{city:spot.city,slug:spot.slug}}/>
                   <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed font-medium">{spot.description}</p>
                   <div className="mt-auto">
                     {spot.address && (
