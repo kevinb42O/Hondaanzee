@@ -75,7 +75,7 @@ const Support: React.FC = () => {
                 <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
                     <div className="p-5 sm:p-8 md:p-10">
                         <div className="mb-6 text-slate-600 leading-relaxed">
-                            <p><span className="font-bold text-slate-900">Hoi, ik ben Kevin.</span> Ik onderhoud HondAanZee en trek met Jax de kust op. Je bijdrage helpt met de kosten en het uitzoekwerk achter deze gids.</p>
+                            <p>HondAanZee is mijn hobbyproject. Ik steek er met veel plezier tijd in, maar betaal de kosten zelf. Heb je iets aan de site? Dan maak je me blij met een bijdrage, groot of klein. <span className="font-semibold text-slate-900">Dikke merci! — Kevin en Jax 🐾</span></p>
                         </div>
 
                         <section aria-labelledby="support-amount-heading" className="rounded-3xl border border-amber-200 bg-amber-50/60 p-4 sm:p-6">
