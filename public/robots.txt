@@ -48,6 +48,8 @@ Crawl-delay: 1
 # Block private/admin paths
 User-agent: *
 Disallow: /admin
+Disallow: /account
+Disallow: /uitstap/
 Disallow: /admin/
 Disallow: /admin/log
 Disallow: /_meldpunt-admin

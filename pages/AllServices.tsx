@@ -1,3 +1,4 @@
+import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
@@ -240,8 +241,9 @@ const AllServices: React.FC = () => {
         {filteredServices.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {filteredServices.map((service) => (
+              <div key={service.id} className="relative flex flex-col">
+              <SavePlaceButton compact place={{ kind: 'service', city_slug: service.city, place_slug: service.slug }} className="absolute right-3 top-14 z-10" />
               <Link
-                key={service.id}
                 to={getServiceDetailPath(service)}
                 state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col h-full"
@@ -292,6 +294,7 @@ const AllServices: React.FC = () => {
                   ))}
                 </div>
               </Link>
+              </div>
             ))}
           </div>
         ) : (

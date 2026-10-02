@@ -15,6 +15,7 @@ import Breadcrumb from '../components/Breadcrumb.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ReviewSection from '../components/ReviewSection';
+import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
 import { supabase } from '../utils/supabaseClient';
 import {
   findOffLeashAreaBySlug,
@@ -439,6 +440,7 @@ const AllOffLeashAreas: React.FC = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <h2 className="text-3xl font-black text-slate-900 mb-3">{displayedArea.name}</h2>
+                        <div className="mb-4"><SavePlaceButton place={{ kind: 'offleash', city_slug: displayedArea.city, place_slug: displayedArea.slug }} /></div>
                         <div className="flex items-center gap-2 text-slate-600 mb-2">
                           <MapPin size={18} className="text-sky-500" />
                           <span className="text-lg">{displayedArea.address}</span>

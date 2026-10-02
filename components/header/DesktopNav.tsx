@@ -2,7 +2,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Bone, ChevronDown } from 'lucide-react';
+import { Bone, ChevronDown, UserRound } from 'lucide-react';
+import { useMember } from '../member/MemberProvider.tsx';
 
 interface DesktopNavProps {
     currentPath: string;
@@ -173,6 +174,7 @@ const DropdownMenu: React.FC<{
 };
 
 export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash, isScrolled, useLightText }) => {
+    const member = useMember();
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     // ONE shared timer for all dropdowns — prevents cross-dropdown cancel bugs
     const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -247,6 +249,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash
                 );
             })}
 
+            <Link to="/account" className={`ml-2 flex items-center gap-2 rounded-full px-3 py-2 text-[12px] font-semibold transition-colors ${useLightText && !isScrolled ? 'text-white bg-white/15 hover:bg-white/25' : 'text-sky-800 bg-sky-50/80 hover:bg-sky-100'}`}><UserRound size={15} />{member.session ? 'Mijn Hond aan Zee' : 'Inloggen'}</Link>
             {/* Steun ons CTA — amber pill button */}
             <div className="ml-1.5">
                 <Link

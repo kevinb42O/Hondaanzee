@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, CalendarDays, Sparkles, Siren, type LucideIcon } from 'lucide-react';
 import { CITIES } from '../../cityData.ts';
 import { SupportCard } from './SupportCard.tsx';
+import { useMember } from '../member/MemberProvider.tsx';
+import { UserRound } from 'lucide-react';
 
 interface NavItem {
     readonly to: string;
@@ -40,6 +42,7 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, currentPath, currentHash }) => {
+    const member = useMember();
     return (
         <div
             className="mobile-menu-overlay fixed inset-0 top-0 lg:hidden bg-white z-[110] transition-all duration-300 ease-out translate-x-0 opacity-100 pointer-events-auto visible"
@@ -63,6 +66,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, current
             <div className="flex flex-col h-full pt-20 pb-6 safe-area-top safe-area-bottom">
                 <div className="flex-grow overflow-y-auto px-4 sm:px-6 py-4 custom-scrollbar overscroll-contain safe-area-left safe-area-right">
                     {/* Quick Links Section */}
+                    <Link to="/account" onClick={onClose} className="mb-5 flex items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 p-4 text-sky-800"><UserRound size={23} /><span className="flex flex-col gap-1"><strong className="text-sm">{member.session ? 'Mijn Hond aan Zee' : 'Jouw eigen stukje kust'}</strong><small className="text-xs text-sky-700/70">{member.session ? 'Favorieten, uitstapjes en jouw gemeenten' : 'Log in of maak gratis je account'}</small></span><ChevronRight size={18} className="ml-auto" /></Link>
                     <div className="mb-6 sm:mb-8">
                         <div className="space-y-2">
                             {MOBILE_NAV_ITEMS.map((item) => {

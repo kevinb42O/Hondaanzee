@@ -5,6 +5,7 @@ import { Stethoscope, ShoppingBag, ChevronRight, ChevronDown, ChevronUp } from '
 import { SERVICES } from '../constants.ts';
 import { City, Service } from '../types.ts';
 import { getServiceDetailPath } from '../utils/placeRoutes.ts';
+import SavePlaceButton from './member/SavePlaceButton.tsx';
 
 interface ServicesProps {
   city: City;
@@ -105,7 +106,8 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
         <>
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           {(showAll ? cityServices : cityServices.slice(0, INITIAL_SHOW)).map((service) => (
-            <div key={service.id} className="flex">
+            <div key={service.id} className="relative flex">
+                <SavePlaceButton compact place={{ kind: 'service', city_slug: service.city, place_slug: service.slug }} className="absolute right-3 top-3 z-10" />
               <Link
                 to={getServiceDetailPath(service)}
                 state={{ from: `${location.pathname}${location.search}${location.hash}` }}

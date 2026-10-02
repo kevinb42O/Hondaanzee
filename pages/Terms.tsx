@@ -32,7 +32,7 @@ const Terms: React.FC = () => {
             </h1>
           </div>
           <p className="text-slate-300 text-sm sm:text-base">
-            Laatst bijgewerkt: 14 september 2026
+            Laatst bijgewerkt: 2 oktober 2026
           </p>
         </div>
       </div>
@@ -105,6 +105,7 @@ const Terms: React.FC = () => {
               <li>Geen acties te ondernemen die de werking van de website kunnen verstoren</li>
               <li>Respectvol om te gaan met anderen en geen beledigende of discriminerende inhoud te delen</li>
             </ul>
+            <p className="text-slate-600 leading-relaxed">Een gratis account is optioneel en geeft toegang tot je persoonlijke favorieten, gemeenten, hondenprofielen en uitstapjes. Je bent verantwoordelijk voor het gebruik van je account en voor de inhoud van je gedeelde uitstapjes. Je kunt het delen stoppen of je account verwijderen vanuit Mijn profiel. Bij misbruik kan het beheer je account schorsen. Opgeslagen plannen en actuele samenvattingen vervangen de officiële strandregels en aanwijzingen ter plaatse niet.</p>
           </section>
 
           <section className="mb-10">

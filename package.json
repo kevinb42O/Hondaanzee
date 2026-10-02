@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:places": "node scripts/verify-place-pages.cjs && node scripts/check-place-browser.cjs",
     "test:admin": "node scripts/check-admin-browser.cjs",
+    "test:members": "vitest run utils/memberData.test.ts utils/memberCredentials.test.ts && node scripts/check-members-browser.cjs",
     "test:search": "vitest run utils/search.test.ts && node scripts/check-search-browser.cjs"
   },
   "dependencies": {

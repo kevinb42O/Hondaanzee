@@ -11,6 +11,19 @@ export const useAdminAuth = () => {
   const [password, setPassword] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [adminAccess, setAdminAccess] = useState<'loading' | 'allowed' | 'denied' | 'error'>('loading');
+  const [accessRevision, setAccessRevision] = useState(0);
+
+  useEffect(() => {
+    let active = true;
+    if (!session) { setAdminAccess('denied'); return; }
+    setAdminAccess('loading');
+    void supabase.functions.invoke('admin-members', { body: { action: 'access' }, headers: { 'x-admin-access-token': session.access_token } }).then(({ data, error }) => {
+      if (!active) return;
+      setAdminAccess(error ? error.context instanceof Response && error.context.status === 403 ? 'denied' : 'error' : data?.allowed === true ? 'allowed' : 'denied');
+    }).catch(() => { if (active) setAdminAccess('error'); });
+    return () => { active = false; };
+  }, [session?.access_token, accessRevision]);
 
   useEffect(() => {
     let active = true;
@@ -72,6 +85,8 @@ export const useAdminAuth = () => {
   };
 
   return {
+    adminAccess,
+    retryAdminAccess: () => setAccessRevision(value => value + 1),
     authError,
     authLoading,
     email,

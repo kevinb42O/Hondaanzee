@@ -32,7 +32,7 @@ const Cookies: React.FC = () => {
             </h1>
           </div>
           <p className="text-slate-300 text-sm sm:text-base">
-            Laatst bijgewerkt: 14 september 2026
+            Laatst bijgewerkt: 2 oktober 2026
           </p>
         </div>
       </div>
@@ -66,6 +66,8 @@ const Cookies: React.FC = () => {
                 <strong>LocalStorage / SessionStorage:</strong> Je browser kan tijdelijk informatie opslaan zoals je filterinstellingen (bijv. welke stad je hebt geselecteerd). 
                 Dit blijft lokaal op je apparaat en wordt <strong>niet</strong> naar onze servers gestuurd of gedeeld met derden.
               </li>
+              <li><strong>Je accountsessie:</strong> Als je inlogt, bewaart Supabase je sessie in de lokale browseropslag zodat je ingelogd blijft. Die sessie wordt gebruikt om je toegang tot je eigen gegevens te controleren. Uitloggen verwijdert de lokale sessie.</li>
+              <li><strong>Je eerste favoriet:</strong> Als je zonder account op een hartje tikt, onthouden we die plek lokaal maximaal 24 uur. Na je login bewaren we de plek in je account en wissen we de tijdelijke keuze.</li>
               <li>
                 <strong>Vercel Analytics:</strong> anonieme paginastatistieken om te begrijpen welke steden, hotspots en diensten het meest bekeken worden.
               </li>

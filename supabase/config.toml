@@ -39,6 +39,12 @@ verify_jwt = false
 [functions.admin-publication]
 verify_jwt = false
 
+[functions.admin-members]
+verify_jwt = false
+
+[functions.member-account]
+verify_jwt = false
+
 [functions.admin-zones]
 verify_jwt = false
 

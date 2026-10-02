@@ -1,3 +1,4 @@
+import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -479,8 +480,9 @@ const AllHotspots: React.FC = () => {
           <>
           <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
             {(showAll ? filteredHotspots : filteredHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
+              <div key={spot.id} className="relative flex flex-col">
+              <SavePlaceButton compact place={{ kind: 'hotspot', city_slug: spot.city, place_slug: spot.slug }} className="absolute right-3 top-14 z-10" />
               <Link
-                key={spot.id}
                 to={getHotspotDetailPath(spot)}
                 state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col"
@@ -535,6 +537,7 @@ const AllHotspots: React.FC = () => {
                 </div>
                 </div>
               </Link>
+              </div>
             ))}
           </div>
 

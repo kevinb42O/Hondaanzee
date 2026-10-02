@@ -55,9 +55,11 @@ const Privacy: React.FC = () => {
             <ul className="list-disc pl-6 text-slate-600 space-y-2 mb-4">
               <li><strong>Via WhatsApp contact:</strong> Wanneer je ons contacteert via WhatsApp voor zakelijke aanmelding, delen je vrijwillig je telefoonnummer en berichtgegevens. Deze communicatie vindt plaats via WhatsApp en wordt beheerd volgens het privacybeleid van WhatsApp/Meta.</li>
               <li><strong>Technische gegevens:</strong> We kunnen basis technische informatie verzamelen zoals IP-adres, browsertype en bezoekgedrag via webserver logs voor beveiligings- en optimalisatiedoeleinden.</li>
+              <li><strong>Je optionele account:</strong> Je e-mailadres, accountstatus en aanmaakdatum. Voor wachtwoorden bewaart onze authenticatiedienst uitsluitend beveiligde hashes; wij kunnen je wachtwoord niet lezen. Als je ze invult, bewaren we ook je voornaam of bijnaam, thuisbasis en hondenprofielen.</li>
+              <li><strong>Je persoonlijke kustgids:</strong> Je favorieten, gevolgde gemeenten, uitstapjes en notities. We bewaren het laatste gebruik van je account, maximaal eenmaal per uur bijgewerkt, om accountgebruik in het beheer te kunnen tellen.</li>
             </ul>
             <p className="text-slate-600 leading-relaxed">
-              <strong>Wij verzamelen GEEN accountgegevens, e-mailadressen of andere persoonsgegevens via de website zelf.</strong> Er is geen registratie of login vereist.
+              Een account is optioneel. Je kunt de openbare kustgids, strandregels en het meldpunt ook zonder registratie raadplegen. Je persoonlijke gegevens zijn afgeschermd. Het beheer ziet je basisprofiel, honden, gevolgde gemeenten en aantallen opgeslagen plekken en uitstapjes, maar krijgt via het ledenbeheer geen inzage in je persoonlijke notities of privécollecties.
             </p>
           </section>
 
@@ -69,6 +71,7 @@ const Privacy: React.FC = () => {
             <ul className="list-disc pl-6 text-slate-600 space-y-2">
               <li>Het beantwoorden van vragen van ondernemers die hun zaak willen aanmelden</li>
               <li>Het verbeteren van de website en gebruikerservaring</li>
+              <li>Je account beveiligen en je favorieten, gemeenten, hondenprofielen en uitstapjes op je eigen toestellen beschikbaar maken</li>
               <li>Het waarborgen van de veiligheid en betrouwbaarheid van de website</li>
             </ul>
           </section>
@@ -97,7 +100,9 @@ const Privacy: React.FC = () => {
             <ul className="list-disc pl-6 text-slate-600 space-y-2">
               <li><strong>WhatsApp (Meta):</strong> Wanneer je ons contacteert via WhatsApp, valt deze communicatie onder het privacybeleid van WhatsApp.</li>
               <li><strong>Hosting provider:</strong> Je gegevens kunnen worden opgeslagen op servers van onze hosting provider binnen de EU.</li>
+              <li><strong>Supabase:</strong> Verzorgt de beveiligde login en de opslag van je accountgegevens en persoonlijke kustgids.</li>
             </ul>
+            <p className="text-slate-600 leading-relaxed mt-4">Als je zelf een uitstap deelt, kan iedereen met die link de titel, datum en gekozen plekken bekijken. Je e-mailadres, hondenprofielen en persoonlijke notitie worden niet gedeeld. Je kunt de link op elk moment intrekken.</p>
           </section>
 
           <section className="mb-10">
@@ -105,6 +110,7 @@ const Privacy: React.FC = () => {
             <p className="text-slate-600 leading-relaxed">
               We bewaren persoonsgegevens niet langer dan noodzakelijk. WhatsApp-conversaties worden beheerd volgens jouw instellingen en ons bedrijfsbeleid. 
               Webserver logs worden maximaal 30 dagen bewaard voor beveiligingsdoeleinden.
+              Je accountgegevens en persoonlijke kustgids blijven bewaard zolang je account bestaat. Vanuit Mijn profiel kun je een kopie downloaden of je account verwijderen; de bijbehorende ledengegevens en gedeelde uitstaplinks worden dan verwijderd. Administratieve logboeken kunnen een verwijzing naar de uitgevoerde beheeractie behouden.
             </p>
           </section>
 

@@ -4,6 +4,8 @@ import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useInRouterContext, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
+import MemberProvider from './components/member/MemberProvider.tsx';
+import './member.css';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
 import ScrollToTop from './components/ScrollToTop.tsx';
 import { getAnalyticsPath, normalizeAnalyticsEvent } from './utils/placeAnalytics.ts';
@@ -48,6 +50,9 @@ const AdminAnalytics = React.lazy(() => import('./pages/AdminAnalytics.tsx'));
 const AdminZones = React.lazy(() => import('./pages/AdminZones.tsx'));
 const AdminZoneEditor = React.lazy(() => import('./pages/AdminZoneEditor.tsx'));
 const AdminReviews = React.lazy(() => import('./pages/AdminReviews.tsx'));
+const AdminMembers = React.lazy(() => import('./pages/AdminMembers.tsx'));
+const Account = React.lazy(() => import('./pages/Account.tsx'));
+const SharedTrip = React.lazy(() => import('./pages/SharedTrip.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -139,6 +144,7 @@ const LocationAwareErrorBoundary = ({ children }: { children: React.ReactNode })
 const AppContent = () => {
   const { pathname } = useLocation();
   const isAdminRoute = pathname === '/admin' || pathname.startsWith('/admin/') || pathname === '/_meldpunt-admin';
+  const isMemberRoute = pathname === '/account' || pathname.startsWith('/uitstap/');
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900" style={{ overflowX: 'clip' }}>
@@ -172,6 +178,8 @@ const AppContent = () => {
               <Route path="/meldpunt" element={<Meldpunt />} />
               <Route path="/meldpunt/vrijwilligers" element={<MeldpuntVrijwilligers />} />
               <Route path="/meldpunt/:publicId" element={<ReportDetail />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/uitstap/:token" element={<SharedTrip />} />
               <Route path="/admin" element={<AdminWorkspace />}>
                 <Route index element={<AdminOverview />} />
                 <Route path="zaken" element={<AdminPlaces />} />
@@ -184,6 +192,7 @@ const AppContent = () => {
                 <Route path="losloopzones/:id" element={<AdminZoneEditor />} />
                 <Route path="reviews" element={<AdminReviews />} />
                 <Route path="reviews/:id" element={<AdminReviews />} />
+                <Route path="leden" element={<AdminMembers />} />
                 <Route path="meldpunt" element={<MeldpuntAdmin />} />
                 <Route path="log" element={<MeldpuntAdminLog />} />
                 <Route path="notificaties" element={<AdminNotifications />} />
@@ -197,20 +206,20 @@ const AppContent = () => {
           </Suspense>
         </LocationAwareErrorBoundary>
       </main>
-      {!isAdminRoute && (
+      {!isAdminRoute && !isMemberRoute && (
         <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
           <ResponsibilityBanner />
         </Suspense>
       )}
       {!isAdminRoute && (
         <Suspense fallback={<div className="bg-slate-900" style={{ minHeight: '200px' }} />}>
-          <Footer />
+          {isMemberRoute ? <footer className="member-site-footer"><div><span>Hond aan Zee <small>· Voor honden, baasjes en fijne dagen.</small></span><nav aria-label="Account voettekst"><a href="/privacy">Privacy</a><a href="/algemene-voorwaarden">Voorwaarden</a><a href="/over-ons">Over ons</a></nav></div></footer> : <Footer />}
         </Suspense>
       )}
-      {!isAdminRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
+      {!isAdminRoute && !isMemberRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
       {!isAdminRoute && <ScrollToTop />}
       <SiteMeasurement />
-      {!isAdminRoute && <Analytics route={getAnalyticsPath(pathname)} path={getAnalyticsPath(pathname)} beforeSend={normalizeAnalyticsEvent} />}
+      {!isAdminRoute && !isMemberRoute && <Analytics route={getAnalyticsPath(pathname)} path={getAnalyticsPath(pathname)} beforeSend={normalizeAnalyticsEvent} />}
     </div>
   );
 };
@@ -219,12 +228,12 @@ function App() {
   const isInRouterContext = useInRouterContext();
 
   if (isInRouterContext) {
-    return <AppContent />;
+    return <MemberProvider><AppContent /></MemberProvider>;
   }
 
   return (
     <BrowserRouter>
-      <AppContent />
+      <MemberProvider><AppContent /></MemberProvider>
     </BrowserRouter>
   );
 }

@@ -15,6 +15,7 @@ import PlaceFacts from '../components/places/PlaceFacts';
 import PlacePractical from '../components/places/PlacePractical';
 import RelatedPlaces from '../components/places/RelatedPlaces';
 import NotFound from './NotFound';
+import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
 
 interface PlaceDetailProps { kind: PlaceKind }
 
@@ -52,6 +53,7 @@ export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; ci
           <p className="max-w-lg text-lg leading-relaxed text-slate-600">{getPlaceIntro(place, cityData.name)}</p>
           <p className="mt-4 flex items-start gap-2 text-sm leading-relaxed text-slate-500"><MapPin size={16} className="mt-0.5 shrink-0" aria-hidden="true" />{place.address}</p>
           <div className="mt-7"><PlaceContact place={place} kind={kind} /></div>
+          {!preview && <div className="mt-4"><SavePlaceButton place={{ kind, city_slug: place.city, place_slug: place.slug }} /></div>}
           <nav aria-label="Op deze zaakpagina" className="mt-7 flex flex-wrap gap-x-5 gap-y-1 border-t border-slate-300/80 pt-4 text-sm font-medium text-slate-600">
             <a href="#over-de-zaak" className="inline-flex min-h-[44px] items-center underline decoration-slate-300 underline-offset-4 hover:text-slate-900">Over de zaak</a>
             <a href="#praktisch" className="inline-flex min-h-[44px] items-center underline decoration-slate-300 underline-offset-4 hover:text-slate-900">{category === 'care' ? 'Afspraak & adres' : 'Praktisch'}</a>

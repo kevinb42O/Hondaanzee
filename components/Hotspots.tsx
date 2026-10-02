@@ -5,6 +5,7 @@ import { Star, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, ChevronRight, Che
 import { HOTSPOTS } from '../constants.ts';
 import { City, Hotspot } from '../types.ts';
 import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
+import SavePlaceButton from './member/SavePlaceButton.tsx';
 
 const HOTSPOT_WHATSAPP_MESSAGE = `Dag! 👋\n\nIk ben een hondvriendelijke ondernemer en ik zou graag mijn zaak op hondaanzee.be laten tonen bij de hotspots.\n\nKun je me meer info geven over de mogelijkheden?\n\nBedankt!`;
 
@@ -113,7 +114,8 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
           <>
           <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
             {(showAll ? cityHotspots : cityHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
-              <div key={spot.id} className="flex">
+              <div key={spot.id} className="relative flex">
+                <SavePlaceButton compact place={{ kind: 'hotspot', city_slug: spot.city, place_slug: spot.slug }} className="absolute right-3 top-3 z-10" />
                 <Link
                   to={getHotspotDetailPath(spot)}
                   state={{ from: `${location.pathname}${location.search}${location.hash}` }}

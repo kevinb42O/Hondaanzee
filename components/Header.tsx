@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { PawPrint, Menu, X } from 'lucide-react';
+import { PawPrint, Menu, X, UserRound } from 'lucide-react';
+import { useMember } from './member/MemberProvider.tsx';
 import { Link, useLocation } from 'react-router-dom';
 import { DesktopNav } from './header/DesktopNav.tsx';
 import { MobileMenu } from './header/MobileMenu.tsx';
 
 const Header: React.FC = () => {
+  const member = useMember();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOverHero, setIsOverHero] = useState(false);
@@ -178,6 +180,8 @@ const Header: React.FC = () => {
 
               {/* Desktop Navigation */}
               <DesktopNav currentPath={location.pathname} currentHash={location.hash} isScrolled={isScrolled} useLightText={isOverHero && !isScrolled} />
+
+              <Link to="/account" aria-label={member.session ? 'Mijn Hond aan Zee' : 'Inloggen of account maken'} className={`lg:hidden ml-auto mr-3 flex h-9 w-9 items-center justify-center rounded-full border ${isOverHero && !isScrolled ? 'border-white/20 bg-white/15 text-white' : 'border-sky-100 bg-sky-50 text-sky-800'}`}><UserRound size={17} /></Link>
 
               {/* Mobile Menu Toggle */}
               {(() => {

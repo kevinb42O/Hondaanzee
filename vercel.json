@@ -107,6 +107,8 @@
         }
     ],
     "rewrites": [
+        {"source": "/account", "destination": "/private.html"},
+        {"source": "/uitstap/:token", "destination": "/private.html"},
         {
             "source": "/:city/hotspots/:slug",
             "destination": "/:city/hotspots/:slug/index.html"

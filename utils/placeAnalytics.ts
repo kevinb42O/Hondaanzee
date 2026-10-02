@@ -9,7 +9,7 @@ export const getAnalyticsPath = (pathname: string) => pathname.replace(/\/+$/, '
 export function normalizeAnalyticsEvent(event: BeforeSendEvent): BeforeSendEvent | null {
   const url = new URL(event.url);
   // Also exclude late SDK events after navigating from a public page to admin.
-  if (url.pathname === '/admin' || url.pathname.startsWith('/admin/') || url.pathname === '/_meldpunt-admin') return null;
+  if (!isMeasuredPath(getAnalyticsPath(url.pathname))) return null;
   url.pathname = getAnalyticsPath(url.pathname);
   url.search = '';
   url.hash = '';

@@ -16,5 +16,5 @@ export function referrerCategory(value: string): string {
  return 'other';
 }
 export function isMeasuredPath(path: string) {
- return analyticsInput.shape.path.safeParse(path).success && path !== '/admin' && !path.startsWith('/admin/') && path !== '/_meldpunt-admin';
+ return analyticsInput.shape.path.safeParse(path).success && path !== '/admin' && !path.startsWith('/admin/') && path !== '/_meldpunt-admin' && path !== '/account' && !path.startsWith('/account/') && !path.startsWith('/uitstap/');
 }
