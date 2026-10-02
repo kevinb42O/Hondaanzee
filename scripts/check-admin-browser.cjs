@@ -31,6 +31,14 @@ const server = createServer((req, res) => {
     const zoneRequests=[], moderationRequests=[];
     const fakeReviews=[{id:'20000000-0000-4000-8000-000000000001',zone_id:fakeZones[0].id,area_slug:fakeZones[0].slug,rating:2,user_name:'Bezoeker',comment:'Originele ervaring',public_name:'Bezoeker',public_comment:'Originele ervaring',status:'published',needs_review:true,version:1,created_at:'2026-09-20T12:00:00Z',with_account:false,zone_name:fakeZones[0].draft.content.name,city_slug:fakeZones[0].city_slug,flags:0}];
     const reviewOverview=()=>({counts:{all:1,pending:0,published:fakeReviews[0].status==='published'?1:0,hidden:fakeReviews[0].status==='hidden'?1:0,rejected:0,attention:fakeReviews[0].needs_review?1:0,flagged:0},zones:{[fakeZones[0].id]:{published:fakeReviews[0].status==='published'?1:0,pending:0,attention:fakeReviews[0].needs_review?1:0,average:fakeReviews[0].status==='published'?2:null}}});
+    const reportRequests=[], pushRequests=[];
+    const fakeReports = [
+      {id:'r1',public_id:'melding-pending',category:'afval',city_slug:'oostende',location_text:'Duinenpad',description:'Oorspronkelijke melding over afval op het pad.',observed_at:'2026-10-02T10:00:00Z',created_at:'2026-10-02T11:00:00Z',status:'published',is_hidden:false,report_count:0,confirm_count:2,city_intervention_status:'pending',city_intervention_note:'',resolved_at:null},
+      {id:'r2',public_id:'melding-hidden',category:'gif',city_slug:'blankenberge',location_text:'Verborgen strandmelding',description:'Gemarkeerde melding',observed_at:'2026-10-01T10:00:00Z',created_at:'2026-10-01T11:00:00Z',status:'published',is_hidden:true,report_count:3,confirm_count:0,city_intervention_status:'not_applicable',city_intervention_note:'',resolved_at:null},
+      {id:'r3',public_id:'melding-archived',category:'andere_overlast',city_slug:'oostende',location_text:'Eerdere melding',description:'Deze oorspronkelijke tekst moet bewaard blijven.',observed_at:'2026-09-30T10:00:00Z',created_at:'2026-09-30T11:00:00Z',status:'removed',is_hidden:true,report_count:0,confirm_count:1,city_intervention_status:'resolved',city_intervention_note:'Opgeruimd.',resolved_at:'2026-10-01T12:00:00Z'},
+    ];
+    const fakePushLog=[{id:'p1',title:'Eerdere strandupdate',body:'Oorspronkelijk bericht',url:'/updates',sent_count:2,failed_count:1,total_count:3,sent_by:null,created_at:'2026-10-01T12:00:00Z'}];
+    let failPush=false, failReport=false;
     const savedRequests = [];
     const publicationRequests=[];
     const history={capturedAt:"2026-10-02T18:00:00Z",timezone:"UTC",lifetime:{query:{since:"2026-01-26",until:"2026-10-03"},data:{pageviews:100,visitors:15}},datasets:Object.fromEntries(["daily","pages","referrers","devices"].map(name=>[name,{query:{since:"2026-10-01",until:"2026-10-03"},data:[{timestamp:"2026-10-01T00:00:00Z",pageviews:10,visitors:10,requestPath:"/",referrerHostname:"",deviceType:"mobile"},{timestamp:"2026-10-02T00:00:00Z",pageviews:10,visitors:10,requestPath:"/",referrerHostname:"",deviceType:"mobile"}]}]))};
@@ -72,6 +80,24 @@ const server = createServer((req, res) => {
           fakePlaces.push(place);
           return request.respond({ status: 201, headers: cors, contentType: 'application/json', body: JSON.stringify({id: place.id}) });
         }
+      }
+      if(request.url().includes('/functions/v1/list-admin-reports')) return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({reports:fakeReports})});
+      if(request.url().includes('/functions/v1/update-report-status')||request.url().includes('/functions/v1/remove-report')) {
+        if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});
+        const input=JSON.parse(request.postData());reportRequests.push(input);
+        if(failReport)return request.respond({status:500,headers:cors,contentType:'application/json',body:JSON.stringify({error:'Test: bewaren tijdelijk niet beschikbaar'})});
+        const report=fakeReports.find(r=>r.public_id===input.public_id);
+        if(request.url().includes('remove-report')){report.status='removed';report.is_hidden=true;}
+        else{report.city_intervention_status=input.city_intervention_status;report.city_intervention_note=input.city_intervention_note;report.resolved_at=input.city_intervention_status==='resolved'?'2026-10-02T12:00:00Z':null;}
+        return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({report})});
+      }
+      if(request.url().includes('/functions/v1/list-push-stats'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({subscriber_count:3,log:fakePushLog})});
+      if(request.url().includes('/functions/v1/send-push')){
+        if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});
+        const input=JSON.parse(request.postData());pushRequests.push(input);
+        const result={ok:true,sent:failPush?0:2,failed:failPush?3:1,total:3,expired:0};
+        fakePushLog.unshift({...input,id:'p'+(pushRequests.length+1),sent_count:result.sent,failed_count:result.failed,total_count:result.total,sent_by:null,created_at:'2026-10-02T12:00:00Z'});
+        return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify(result)});
       }
       if (request.url().includes('/functions/v1/')) return request.respond({ status: 200, headers: cors, contentType: 'application/json', body: JSON.stringify({ reports: [], subscriber_count: 0, logs: [] }) });
       if (!request.url().startsWith(base)) return request.abort();
@@ -197,13 +223,68 @@ const server = createServer((req, res) => {
     assert.equal(moderationRequests.at(-1).version,1);assert.equal(moderationRequests.at(-1).decision,'hide');assert.equal(fakeReviews[0].comment,'Originele ervaring');
     await page.setViewport({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Review panel has no mobile overflow');
     await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-reviews-mobile.png'),fullPage:true});await page.setViewport({width:1440,height:1000});
+    // Workbench UX: one selected report, retained originals, failure recovery and archive.
+    await page.goto(base+'/admin/meldpunt');await page.waitForSelector('.workspace-report-row');
+    assert.equal(await page.$$eval('.workspace-report-row',els=>els.length),2);
+    assert.equal(await page.$('.admin-shell'),null,'No nested legacy shell');
+    assert.equal(await page.$$eval('button',els=>els.filter(el=>el.textContent==='Uitloggen').length),1,'One shared sign-out action');
+    await page.click('[aria-label="Bekijk melding: Duinenpad"]');await page.waitForSelector('.workspace-report-followup');
+    await page.select('.workspace-report-followup select','forwarded');await page.type('.workspace-report-followup textarea','Doorgestuurd naar stadsdiensten.');
+    await page.click('[aria-label="Bekijk melding: Verborgen strandmelding"]');await page.waitForSelector('dialog[open]');
+    assert.equal(reportRequests.length,0,'Changing selection must not save a public update');
+    await page.keyboard.press('Escape');await page.waitForFunction(()=>!document.querySelector('dialog[open]'));
+    assert.equal(await page.$eval('.workspace-report-followup textarea',el=>el.value),'Doorgestuurd naar stadsdiensten.');
+    failReport=true;await page.click('.workspace-report-save button[type=submit]');await page.waitForSelector('.workspace-error');
+    assert.equal(await page.$eval('.workspace-report-followup textarea',el=>el.value),'Doorgestuurd naar stadsdiensten.','Failed save preserves draft');
+    failReport=false;await page.click('.workspace-report-save button[type=submit]');await page.waitForSelector('.workspace-success');
+    assert.equal(reportRequests.at(-1).city_intervention_status,'forwarded');assert.equal(fakeReports[0].description,'Oorspronkelijke melding over afval op het pad.');
+    await page.click('.workspace-report-archive button');await page.waitForSelector('dialog[open]');await page.click('dialog[open] .workspace-dialog-actions button:last-child');
+    await page.waitForFunction(()=>document.querySelector('.workspace-report-detail')?.textContent.includes('Bewaard in logboek'));
+    assert.equal(fakeReports[0].status,'removed');assert.equal(fakeReports[0].city_intervention_note,'Doorgestuurd naar stadsdiensten.');
+    await page.goto(base+'/admin/log?report=melding-pending');await page.waitForSelector('.workspace-report-record');
+    assert.equal(await page.$('.workspace-report-followup'),null,'Log is read-only');assert.match(await page.$eval('.workspace-report-detail',el=>el.textContent),/Oorspronkelijke melding/);
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-report-workbench-desktop.png'),fullPage:true});
+    await page.setViewport({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Report workbench has no mobile overflow');
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-report-workbench-mobile.png'),fullPage:true});
+    await page.setViewport({width:1440,height:1000});
+
+    // Notifications: real sending happens only after explicit review; all recipients here are mocked.
+    await page.goto(base+'/admin/notificaties');await page.waitForSelector('[name=push-title]');
+    await page.waitForFunction(()=>document.querySelector('.workspace-stat strong')?.textContent==='3');
+    await page.type('[name=push-title]','Nieuwe kustupdate');await page.type('[name=push-body]','Controleer het nieuwe wandelpad.');
+    await page.$eval('[name=push-url]',el=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;setter.call(el,'javascript:alert(1)');el.dispatchEvent(new Event('input',{bubbles:true}));});
+    await page.waitForFunction(()=>document.querySelector('.workspace-push-submit button').disabled);
+    assert.equal(await page.$('.workspace-push-destination a'),null,'Unsafe preview link is unavailable');
+    await page.$eval('[name=push-url]',el=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;setter.call(el,'/updates');el.dispatchEvent(new Event('input',{bubbles:true}));});
+    await page.waitForFunction(()=>!document.querySelector('.workspace-push-submit button').disabled);
+    await page.click('.workspace-push-submit button');await page.waitForSelector('dialog[open]');
+    assert.equal(pushRequests.length,0,'Opening review never sends a notification');
+    await page.keyboard.press('Escape');await page.waitForFunction(()=>!document.querySelector('dialog[open]'));
+    assert.equal(await page.$eval('[name=push-title]',el=>el.value),'Nieuwe kustupdate','Cancel retains the message');
+    await page.reload();await page.waitForFunction(()=>document.querySelector('[name=push-title]')?.value==='Nieuwe kustupdate');
+    failPush=true;await page.waitForFunction(()=>!document.querySelector('.workspace-push-submit button').disabled);await page.click('.workspace-push-submit button');await page.waitForSelector('dialog[open]');
+    await page.click('dialog[open] .workspace-dialog-actions button:last-child');await page.waitForFunction(()=>document.querySelector('[role=status]')?.textContent.includes('Geen notificaties afgeleverd'));
+    assert.equal(await page.$eval('[name=push-title]',el=>el.value),'Nieuwe kustupdate','Zero delivery keeps draft and reports the failure honestly');
+    failPush=false;await page.waitForFunction(()=>!document.querySelector('.workspace-push-submit button').disabled);await page.click('.workspace-push-submit button');await page.waitForSelector('dialog[open]');
+    await page.click('dialog[open] .workspace-dialog-actions button:last-child');await page.waitForFunction(()=>document.querySelector('[role=status]')?.textContent.includes('Gedeeltelijk afgeleverd'));
+    assert.deepEqual(pushRequests.at(-1),{title:'Nieuwe kustupdate',body:'Controleer het nieuwe wandelpad.',url:'/updates'});
+    assert.equal(await page.$eval('[name=push-title]',el=>el.value),'','A sent message clears the local draft but retains its delivery result');
+    await page.click('[aria-label="Notificatieweergave"] button:last-child');await page.waitForSelector('.workspace-dispatch-row');
+    await page.click('.workspace-dispatch-row');await page.waitForSelector('.workspace-operation-detail');
+    await page.click('.workspace-operation-detail>button');await page.waitForSelector('[name=push-title]');
+    assert.equal(await page.$eval('[name=push-title]',el=>el.value),'Nieuwe kustupdate');assert.equal(pushRequests.length,2,'Reusing a message never sends it');
+    await page.select('[aria-label="Begin met een sjabloon"]','0');await page.waitForSelector('dialog[open]');await page.keyboard.press('Escape');
+    assert.equal(await page.$eval('[name=push-title]',el=>el.value),'Nieuwe kustupdate','Replacing a draft requires explicit choice');
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-notifications-desktop.png'),fullPage:true});
+    await page.setViewport({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Notifications have no mobile overflow');
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-notifications-mobile.png'),fullPage:true});
+    await page.setViewport({width:1440,height:1000});
+    await page.goto(base + '/_meldpunt-admin');
+    await page.waitForFunction(() => location.pathname === '/admin/meldpunt' && document.querySelector('.workspace-report-list'));
     for (const route of ['/admin/meldpunt', '/admin/log', '/admin/notificaties']) {
-      await page.goto(base + route);
-      await page.waitForSelector('.admin-title');
+      await page.goto(base + route); await page.waitForSelector('.workspace-page-heading h1');
       assert.match(await page.$eval('meta[name="robots"]', el => el.content), /noindex/);
     }
-    await page.goto(base + '/_meldpunt-admin');
-    await page.waitForFunction(() => location.pathname === '/admin/meldpunt' && document.querySelector('.admin-title'));
     await page.setViewport({ width: 390, height: 844 });
     await page.goto(base + '/admin');
     await page.waitForSelector('.workspace-stats');
@@ -215,7 +296,7 @@ const server = createServer((req, res) => {
     assert.equal(await page.$('.workspace-stats'), null, 'Sign out removes the dashboard');
     assert.deepEqual(analyticsRequests, [], 'Admin navigation sends no analytics requests');
     assert.deepEqual(errors, []);
-    console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, cursor tooltip, legacy routes, noindex, mobile, sign out, no analytics requests.');
+    console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, cursor tooltip, report workbench, preserved originals, save failure recovery, archive, notification preview and confirmation, draft recovery, partial/failed delivery, legacy routes, noindex, mobile, sign out, no analytics requests.');
   } finally {
     if (browser) await browser.close();
     server.close();

@@ -181,12 +181,14 @@ export const updateAdminReportStatus = async (
   publicId: string,
   cityInterventionStatus: ReportInterventionStatus,
   cityInterventionNote: string,
-): Promise<void> => {
-  await invokeAdminFunction('update-report-status', {
+): Promise<Partial<ReportItem>> => {
+  const data = await invokeAdminFunction<{report: Partial<ReportItem>}>('update-report-status', {
       public_id: publicId,
       city_intervention_status: cityInterventionStatus,
       city_intervention_note: cityInterventionNote,
   });
+  if (!data.report) throw new Error('De opgeslagen melding ontbreekt in het antwoord. Vernieuw om de status te controleren.');
+  return data.report;
 };
 
 export const removeAdminReport = async (publicId: string): Promise<void> => {
