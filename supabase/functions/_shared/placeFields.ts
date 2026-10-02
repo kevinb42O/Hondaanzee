@@ -44,7 +44,7 @@ export function parseHourPeriods(value: string): { opens: string; closes: string
   return periods.map(period => ({ opens: period![1], closes: period![2] }));
 }
 export function cleanHours(hours?: Hours | null): Hours | undefined {
-  const entries = DAYS.flatMap(([day]) => {
+  const entries = DAYS.flatMap<[keyof Hours, string | null]>(([day]) => {
     const value = hours?.[day];
     return value === null ? [[day, null]] : typeof value === 'string' && value.trim() ? [[day, value.trim()]] : [];
   });

@@ -7,14 +7,18 @@
     "dev": "vite",
     "build": "npm run build:no-prerender && node scripts/render-places.mjs && node scripts/verify-place-pages.cjs",
     "build:prerender": "npm run build && node prerender.cjs",
-    "build:no-prerender": "node scripts/prepare-catalog.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
+    "build:no-prerender": "npm run typecheck && node scripts/prepare-catalog.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:places": "node scripts/verify-place-pages.cjs && node scripts/check-place-browser.cjs",
     "test:admin": "node scripts/check-admin-browser.cjs",
     "test:members": "vitest run utils/memberData.test.ts utils/memberCredentials.test.ts && node scripts/check-members-browser.cjs",
     "test:search": "vitest run utils/search.test.ts && node scripts/check-search-browser.cjs",
-    "test:community": "vitest run utils/hotspotCommunity.test.ts && node scripts/check-hotspot-community.cjs"
+    "test:community": "vitest run utils/hotspotCommunity.test.ts && node scripts/check-hotspot-community.cjs",
+    "typecheck": "npm run typecheck:web && npm run typecheck:edge",
+    "typecheck:web": "tsc --noEmit",
+    "typecheck:edge": "node scripts/check-edge-types.mjs",
+    "test:public": "node scripts/check-public-browser.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.93.3",
@@ -36,6 +40,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.20",
+    "deno": "2.9.6",
     "postcss": "^8.4.49",
     "puppeteer": "^24.37.2",
     "sharp": "^0.34.5",

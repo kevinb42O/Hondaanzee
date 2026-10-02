@@ -51,7 +51,7 @@ const AdminReportCard: React.FC<AdminReportCardProps> = ({
               </div>
               <div className="min-w-0">
                 <h2 className="text-lg font-black tracking-tight text-slate-950 sm:text-xl">{report.location_text}</h2>
-                {showBody || variant === 'log' ? (
+                {showBody ? (
                   <p className="mt-1 text-sm leading-6 text-slate-600">{report.description}</p>
                 ) : null}
                 <p className="mt-2 text-xs font-medium text-slate-500">

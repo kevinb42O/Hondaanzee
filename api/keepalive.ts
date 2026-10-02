@@ -1,7 +1,12 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from '../utils/supabasePublicConfig';
 
-export default async function handler(_req: VercelRequest, res: VercelResponse) {
+export default async function handler(_req: IncomingMessage, res: ServerResponse) {
+  const send = (status: number, ok: boolean) => {
+    res.statusCode = status;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.end(JSON.stringify({ ok }));
+  };
   try {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/reports?select=id&limit=1`, {
       headers: {
@@ -11,11 +16,11 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
     });
 
     if (!response.ok) {
-      return res.status(response.status).json({ ok: false });
+      return send(response.status, false);
     }
 
-    return res.status(200).json({ ok: true });
+    return send(200, true);
   } catch {
-    return res.status(500).json({ ok: false });
+    return send(500, false);
   }
 }
