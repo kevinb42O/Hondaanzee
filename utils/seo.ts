@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { StaticSEOContext } from './staticSEO';
 import { useLocation } from 'react-router-dom';
 import type { City, OffLeashArea, ReportItem } from '../types.ts';
 import { getCategoryMeta } from './reportHelpers.ts';
@@ -45,6 +46,8 @@ export const useSEO = ({
   articleAuthor,
 }: SEOProps) => {
   const location = useLocation();
+  const collectStaticSEO = useContext(StaticSEOContext);
+  collectStaticSEO?.({ title, description, keywords, ogImage, ogImageAlt, ogType, canonical: canonical || `${SITE_ORIGIN}${location.pathname}`, structuredData, noindex, articlePublishedTime, articleModifiedTime, articleSection, articleAuthor });
 
   useEffect(() => {
     // Ensure html lang is set (also covered statically in index.html, but

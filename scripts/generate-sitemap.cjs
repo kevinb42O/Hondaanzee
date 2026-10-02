@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { execSync } = require('node:child_process');
+const { createHash } = require('node:crypto');
 const placeData = require('./place-data.cjs');
 const { getAllRoutes, PAGE_UPDATED_DATES } = placeData;
 const { getPlacePageRevisions } = require('./place-page-revisions.cjs');
@@ -39,6 +40,7 @@ const STATIC_ROUTE_FILES = {
   '/cookies': ['pages/Cookies.tsx'],
   '/blog': ['pages/Blog.tsx', 'data/blogs.ts'],
   '/agenda': ['pages/Agenda.tsx', 'data/events.ts'],
+  '/meldpunt': ['pages/Meldpunt.tsx'],
   '/meldpunt/vrijwilligers': ['pages/MeldpuntVrijwilligers.tsx', 'cityData.ts'],
   '/updates': ['pages/Updates.tsx', 'components/Footer.tsx'],
 };
@@ -107,6 +109,7 @@ const getRouteFiles = (route) => {
 // Keep existing dates unless a page's content actually changed.
 const getLastmodForRoute = (route) => {
   if (placeDates[route]) return placeDates[route];
+  if (publicState[route]) return publicState[route].lastmod;
   if (PAGE_UPDATED_DATES[route]) return PAGE_UPDATED_DATES[route];
   if (previousLastmods.has(route)) return previousLastmods.get(route);
   const files = getRouteFiles(route);
@@ -122,6 +125,22 @@ const getLastmodForRoute = (route) => {
 };
 
 const uniqueRoutes = [...new Set(getAllRoutes())];
+
+// Persist revisions for the public pages as well. The first complete HTML
+// publication is a real change; subsequent identical builds retain its date.
+const publicStatePath = path.join(ROOT_DIR, 'data', 'publicPageRevisions.json');
+const previousPublicState = fs.existsSync(publicStatePath) ? JSON.parse(fs.readFileSync(publicStatePath, 'utf8')) : {};
+const publicState = {};
+const sharedFiles = ['scripts/static-pages.tsx', 'scripts/static-html.cjs', 'utils/seo.ts',
+  'components/Header.tsx', 'components/Footer.tsx'];
+for (const route of uniqueRoutes.filter(route => !placeDates[route])) {
+  const files = [...new Set([...sharedFiles, ...getRouteFiles(route)])].sort();
+  const source = files.map(file => fs.readFileSync(path.join(ROOT_DIR, file), 'utf8')).join('\n');
+  const hash = createHash('sha256').update(route + '\n' + source).digest('hex');
+  const previous = previousPublicState[route];
+  publicState[route] = { hash, lastmod: previous?.hash === hash ? previous.lastmod : today };
+}
+fs.writeFileSync(publicStatePath, `${JSON.stringify(publicState, null, 2)}\n`);
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -35,7 +35,8 @@ const server = createServer((req, res) => {
     });
     await page.setViewport({ width: 1440, height: 1000 });
     await page.goto(base);
-    await page.waitForSelector('input[role="combobox"]');
+    await page.waitForFunction(() => !document.querySelector('#root[data-static-page]') && !!document.querySelector('input[role="combobox"]'));
+    await page.waitForNetworkIdle({ idleTime: 100, timeout: 10000 });
 
     // Locate the actual search-engine chunk, excluding Lucide's search-icon chunk.
     const searchChunks = fs.readdirSync(path.join(root, 'assets')).filter(name => /^search-.*\.js$/.test(name) && fs.readFileSync(path.join(root, 'assets', name), 'utf8').includes('brasserie-la-potiniere'));
@@ -49,7 +50,12 @@ const server = createServer((req, res) => {
       await page.keyboard.type(query);
     };
     await typeQuery('de potiniere');
-    await page.waitForFunction(() => document.querySelector('[role="option"]')?.textContent.includes('Brasserie La Potinière'));
+    try {
+      await page.waitForFunction(() => document.querySelector('[role="option"]')?.textContent.includes('Brasserie La Potinière'));
+    } catch (error) {
+      console.error(await page.evaluate(() => ({ url: location.href, input: document.querySelector('input[role="combobox"]')?.value, active: document.activeElement?.outerHTML, status: [...document.querySelectorAll('[role="status"]')].map(el => el.textContent), options: [...document.querySelectorAll('[role="option"]')].map(el => el.textContent) })), errors);
+      throw error;
+    }
     assert(scripts.some(url => url.endsWith(searchChunks[0])), 'Search did not load on interaction');
     assert.equal(await page.$eval('input[role="combobox"]', input => input.getAttribute('aria-autocomplete')), 'list');
     await page.keyboard.press('ArrowDown');

@@ -3,12 +3,14 @@ export default {
   "/": {
     "title": "Honden aan Zee België 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken aan de Belgische Kust",
     "description": "✓ Actuele strandregels voor honden ✓ Losloopzones en hondenweides ✓ Hondvriendelijke cafés, restaurants & hotels ✓ Alle badsteden van De Panne tot Knokke ✓ Gratis & up-to-date info 2026",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Honden aan Zee België 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken aan de Belgische Kust"
   },
   "/blog": {
     "title": "Blog | HondAanZee.be — Tips, Natuur & Nieuws over Honden aan de Belgische Kust",
     "description": "Lees onze blogs over honden aan de Belgische kust: van zeehonden op het strand tot opruimacties. Nuttige info, tips en achtergronden voor elke hondenbezitter.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Blog | HondAanZee.be — Tips, Natuur & Nieuws over Honden aan de Belgische Kust"
   },
   "/hotspots": {
     "title": "Hondvriendelijke Hotspots Belgische Kust | Cafés, Restaurants, Hotels & Winkels waar Honden Welkom Zijn",
@@ -24,186 +26,201 @@ export default {
   },
   "/losloopzones": {
     "title": "Losloopzones Belgische Kust | Overzicht Hondenweides & Losloopgebieden aan Zee",
-    "description": "Interactieve kaart met alle losloopzones en hondenweides aan de Belgische kust. Van De Panne tot Knokke.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "description": "Interactieve kaart met alle losloopzones en hondenweides aan de Belgische kust. Van De Panne tot Knokke - vind de perfecte plek waar je hond vrij kan loslopen. Met ratings, foto's en routebeschrijvingen.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Losloopzones Belgische Kust | Overzicht Hondenweides & Losloopgebieden aan Zee"
   },
   "/over-ons": {
     "title": "Over HondAanZee.be | Ons Verhaal & Missie – De Belgische Kust voor Hondenbezitters",
-    "description": "Leer het team achter HondAanZee.be kennen. Onze missie: de meest complete, gratis gids voor hondeneigenaars aan de Belgische kust.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "description": "Leer het team achter HondAanZee.be kennen. Onze missie: de meest complete, gratis gids voor hondeneigenaars aan de Belgische kust. Van De Panne tot Knokke.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Over HondAanZee.be | Ons Verhaal & Missie – De Belgische Kust voor Hondenbezitters"
   },
   "/steun-ons": {
     "title": "Steun HondAanZee.be | Trakteer ons op een Hondenkoekje 🐾",
     "description": "HondAanZee.be is 100% gratis. Steun ons werk en help ons de leukste plekken aan de Belgische kust te blijven delen voor hondenbezitters.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Steun HondAanZee.be | Trakteer ons op een Hondenkoekje 🐾"
   },
   "/agenda": {
     "title": "Hondvriendelijke Evenementen Belgische Kust 2026 | Agenda & Events – HondAanZee.be",
-    "description": "Ontdek alle hondvriendelijke evenementen aan de Belgische kust in 2026: festivals, wandelingen en meer.",
-    "image": "https://hondaanzee.be/kwispelfestival.webp"
+    "description": "Ontdek alle hondvriendelijke evenementen aan de Belgische kust in 2026: Kwispelfestival De Panne, Groot Oostends Hondenfestival met Stratier-benefietwandeling en Grote Hondenwandeling Bredene.",
+    "image": "https://hondaanzee.be/kwispelfestival.webp",
+    "imageAlt": "Hondvriendelijke Evenementen Belgische Kust 2026 | Agenda & Events – HondAanZee.be"
   },
   "/kaart": {
     "title": "Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart – HondAanZee.be",
-    "description": "Bekijk alle hondvriendelijke stranden, losloopzones, cafés, restaurants en dierenartsen op onze interactieve kaart.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "description": "Bekijk alle hondvriendelijke stranden, losloopzones, cafés, restaurants en dierenartsen op onze interactieve kaart van de Belgische kust. Van De Panne tot Knokke.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart – HondAanZee.be"
   },
   "/meldpunt": {
     "title": "Meldpunt Gif & Overlast Belgische Kust | HondAanZee.be",
-    "description": "Meld verdachte stoffen, gif, afval, hondenpoep en andere overlast aan de Belgische kust.",
-    "image": "https://hondaanzee.be/properstrand.webp"
+    "description": "Meld verdachte stoffen, gif, afval, hondenpoep en andere overlast aan de Belgische kust. Publieke meldingen per kuststad, direct zichtbaar op HondAanZee.be.",
+    "image": "https://hondaanzee.be/properstrand.webp",
+    "imageAlt": "Meldpunt Gif & Overlast Belgische Kust | HondAanZee.be"
   },
   "/blog/blauwalg-hond-strand-waarschuwing": {
     "title": "Doe de Water-Check: Zo Herken Je Blauwalg Voordat Je Hond Erin Zwemt Of Eruit Drinkt | HondAanZee.be Blog",
     "description": "Niets heerlijker dan je hond vrolijk het water in te zien plonzen om die opgewarmde vacht even te laten afkoelen. Maar let op voor blauwalg! Leer hier hoe je dit gevaar herkent en wat je moet doen als het misgaat.",
     "image": "https://hondaanzee.be/blauwalg.webp",
-    "type": "article",
-    "imageAlt": "Blauwalg in het water"
+    "imageAlt": "Doe de Water-Check: Zo Herken Je Blauwalg Voordat Je Hond Erin Zwemt Of Eruit Drinkt | HondAanZee.be Blog"
   },
   "/blog/hond-strand-warm-weer": {
     "title": "Met je hond naar zee bij warm weer: do's en don'ts voor een veilige stranddag | HondAanZee.be Blog",
     "description": "Een dagje uitwaaien op het strand met je hond is heerlijk — tot de temperaturen oplopen. Honden zweten niet zoals wij en kunnen op het open zand snel oververhit raken. Met deze do's, don'ts en een handige hitteslag-checklist hou je jullie stranddag aan de Belgische kust veilig en plezant.",
     "image": "https://hondaanzee.be/OG_schaduwv1.webp",
-    "type": "article",
-    "imageAlt": "Hond zoekt de schaduw op tijdens een warme dag aan de Belgische kust"
+    "imageAlt": "Met je hond naar zee bij warm weer: do's en don'ts voor een veilige stranddag | HondAanZee.be Blog"
   },
   "/blog/van-trekhond-tot-strandkoning-geschiedenis-kusthonden": {
     "title": "Van trekhond tot strandkoning: de vergeten geschiedenis van kusthonden | HondAanZee.be Blog",
     "description": "Lang voor honden op het strand vooral discussie opriepen over leibanden, zones en GAS-boetes, trokken ze viskarren door het zware zand. Deze vergeten kustgeschiedenis maakt je volgende wandeling met hond plots een stuk rijker.",
     "image": "https://hondaanzee.be/hondmetkar_cover.webp",
-    "type": "article",
-    "imageAlt": "Breed historisch coverbeeld van een trekhond met kar aan de Belgische kust"
+    "imageAlt": "Van trekhond tot strandkoning: de vergeten geschiedenis van kusthonden | HondAanZee.be Blog"
   },
   "/blog/zeehonden-aan-de-belgische-kust": {
     "title": "Zeehonden aan de Belgische kust: wat als je hond er eentje tegenkomt? | HondAanZee.be Blog",
     "description": "Steeds vaker rusten zeehonden uit op onze Belgische stranden. Prachtig om te zien, maar wat doe je als je hond er eentje ontdekt? In deze gids lees je alles over de twee zeehondensoorten aan onze kust, wat je moet doen bij een ontmoeting, en hoe je bijdraagt aan hun bescherming.",
     "image": "https://hondaanzee.be/zeehond.webp",
-    "type": "article",
-    "imageAlt": "Zeehond rustend op het Belgische strand"
+    "imageAlt": "Zeehonden aan de Belgische kust: wat als je hond er eentje tegenkomt? | HondAanZee.be Blog"
   },
   "/blog/opruimacties-proper-strand-lopers": {
     "title": "Opruimacties aan de kust: samen voor een proper strand | HondAanZee.be Blog",
     "description": "Elk jaar belandt er tonnen zwerfvuil op onze Belgische stranden. Gelukkig zijn er duizenden vrijwilligers die de handen uit de mouwen steken. Ontdek hoe organisaties als de Proper Strand Lopers en Mooimakers onze kust schoon houden — en hoe jij kunt meehelpen.",
     "image": "https://hondaanzee.be/properstrand.webp",
-    "type": "article",
-    "imageAlt": "Vrijwilligers ruimen zwerfvuil op aan het Belgische strand"
+    "imageAlt": "Opruimacties aan de kust: samen voor een proper strand | HondAanZee.be Blog"
   },
   "/blog/mooiste-bossen-belgische-kust-wandelen-met-hond": {
     "title": "De 6 mooiste bossen aan de Belgische kust om te wandelen met je hond | HondAanZee.be Blog",
     "description": "De Belgische kust is veel meer dan strand en zee. Verscholen achter de duinen liggen prachtige bossen waar je heerlijk kunt wandelen met je hond. Van het historische Calmeynbos in De Panne tot het Zeebos in Blankenberge: wij zetten de 6 mooiste kustbossen op een rij — inclusief praktische info over hondenzones, wandelroutes en bereikbaarheid.",
     "image": "https://hondaanzee.be/zeebos.webp",
-    "type": "article",
-    "imageAlt": "Wandelpad door het Zeebos aan de Belgische kust"
+    "imageAlt": "De 6 mooiste bossen aan de Belgische kust om te wandelen met je hond | HondAanZee.be Blog"
   },
   "/blog/zwemplekjes-honden-belgische-kust": {
     "title": "De leukste zwemplekjes voor je hond aan de Belgische kust (en het is niet de zee!) | HondAanZee.be Blog",
     "description": "Strand en zee zijn niet de enige plekken waar je hond kan zwemmen aan de kust. Ontdek de mooiste vijvers, kreken, kanalen en waterlopen waar je viervoeter veilig en heerlijk kan afkoelen — ver weg van golven en kwallen.",
     "image": "https://hondaanzee.be/zwemhond.webp",
-    "type": "article",
-    "imageAlt": "Hond zwemt vrolijk in een vijver aan de Belgische kust"
+    "imageAlt": "De leukste zwemplekjes voor je hond aan de Belgische kust (en het is niet de zee!) | HondAanZee.be Blog"
   },
   "/blog/mentale-leiband-vrijheid-met-connectie": {
     "title": "De Mentale Leiband: Vrijheid door middel van Connectie en Controle | HondAanZee.be Blog",
     "description": "De Belgische kust is voor honden een zintuiglijk paradijs. Maar achter het idyllische beeld van een loslopende hond schuilt een complexe realiteit. Ontdek de filosofie van de \"mentale leiband\" en hoe je een wandeling transformeert van controle naar vertrouwen.",
     "image": "https://hondaanzee.be/OG_verantwoordelijklos.webp",
-    "type": "article",
-    "imageAlt": "Hond loopt los aan zee met mentale connectie - VZW Verantwoord Los"
+    "imageAlt": "De Mentale Leiband: Vrijheid door middel van Connectie en Controle | HondAanZee.be Blog"
   },
   "/blog/spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux": {
     "title": "De Spiegel aan de Leiband: Waarom Echte Hondenliefde Begint in de Rust | HondAanZee.be Blog",
     "description": "We trainen commando's, kopen speeltjes en overladen onze honden met enthousiasme. Maar wat als echte hondenliefde juist in stilte en rust begint? Ontdek de 4C-methode en een verfrissende visie over de band tussen mens en hond.",
     "image": "https://hondaanzee.be/OG_brunosamlulu.webp",
-    "type": "article",
-    "imageAlt": "Bruno, Sam en Lulu — de viervoeters achter de hondenpsychologie van Guillaume Dervaux"
+    "imageAlt": "De Spiegel aan de Leiband: Waarom Echte Hondenliefde Begint in de Rust | HondAanZee.be Blog"
   },
   "/goed-om-te-weten": {
-    "title": "Goed om te weten | Honden aan de Belgische kust",
-    "description": "Praktische informatie over wandelen, gezondheid en veilig op pad gaan met je hond aan de Belgische kust.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "title": "Goed om te Weten | Veiligheid, EHBO & Etiquette voor Honden aan het Strand – HondAanZee.be",
+    "description": "🐾 Alles over veiligheid met je hond aan de Belgische kust: kwallenbeten, pietermansteken, zeehonden, zoutwatervergiftiging, teken, blauwalgen, duinetiquette & de Code van de Goede Kustvriend.",
+    "image": "https://hondaanzee.be/lexi.webp",
+    "imageAlt": "Goed om te Weten | Veiligheid, EHBO & Etiquette voor Honden aan het Strand – HondAanZee.be"
   },
   "/zaak-aanmelden": {
-    "title": "Zaak aanmelden | HondAanZee.be",
-    "description": "Meld je hondvriendelijke zaak aan voor vermelding op HondAanZee.be.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "title": "Zaak Aanmelden | HondAanZee.be",
+    "description": "Heb jij een hondvriendelijke zaak aan de Belgische kust? Ontdek waarom een vermelding op HondAanZee.be interessant is en meld je zaak aan via WhatsApp of e-mail.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Zaak Aanmelden | HondAanZee.be"
   },
   "/privacy": {
     "title": "Privacybeleid | HondAanZee.be",
-    "description": "Lees hoe HondAanZee.be omgaat met privacy en anonieme bezoekersstatistieken.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "description": "Privacybeleid van HondAanZee.be - Hoe wij omgaan met je gegevens volgens AVG/GDPR",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Privacybeleid | HondAanZee.be"
   },
   "/algemene-voorwaarden": {
-    "title": "Algemene voorwaarden | HondAanZee.be",
-    "description": "De algemene voorwaarden voor het gebruik van HondAanZee.be.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "title": "Algemene Voorwaarden | HondAanZee.be",
+    "description": "Algemene voorwaarden voor het gebruik van HondAanZee.be",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Algemene Voorwaarden | HondAanZee.be"
   },
   "/cookies": {
     "title": "Cookiebeleid | HondAanZee.be",
-    "description": "Informatie over cookies en bezoekersstatistieken op HondAanZee.be.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "description": "Cookiebeleid van HondAanZee.be - Welke cookies we gebruiken en waarom",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Cookiebeleid | HondAanZee.be"
   },
   "/meldpunt/vrijwilligers": {
-    "title": "Vrijwilligers voor het meldpunt | HondAanZee.be",
-    "description": "Help mee aan een veilige en schone Belgische kust voor honden en hun baasjes.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "title": "Vrijwilligers voor het Meldpunt | HondAanZee.be",
+    "description": "Help mee als vrijwilliger voor het meldpunt aan de Belgische kust. We zoeken per gemeente mensen die stand-by staan om problemen sneller op te volgen en mee te helpen oplossen.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Vrijwilligers voor het Meldpunt | HondAanZee.be"
   },
   "/updates": {
-    "title": "Updates | HondAanZee.be",
-    "description": "Bekijk de laatste wijzigingen en aanvullingen op HondAanZee.be.",
-    "image": "https://hondaanzee.be/og-imagefinal.webp"
+    "title": "Updates & Nieuwigheden — laatste update 2 oktober 2026 | HondAanZee.be",
+    "description": "Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 2 oktober 2026.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Updates & Nieuwigheden — laatste update 2 oktober 2026 | HondAanZee.be"
   },
   "/blankenberge": {
-    "title": "Met je hond naar Blankenberge | Strandregels en hondvriendelijke zaken",
-    "description": "Bruisende badstad - strand ten westen van de pier is 24/7 vrij voor honden.",
-    "image": "https://hondaanzee.be/blankenberge-new.webp"
+    "title": "Hond Strand Blankenberge 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Blankenberge",
+    "description": "✓ Actuele strandregels voor honden in Blankenberge ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Blankenberge",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Blankenberge 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Blankenberge"
   },
   "/zeebrugge": {
-    "title": "Met je hond naar Zeebrugge | Strandregels en hondvriendelijke zaken",
-    "description": "Breed strand met een jaarrond hondenzone richting Blankenberge.",
-    "image": "https://hondaanzee.be/zeebrugge.webp"
+    "title": "Hond Strand Zeebrugge 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Zeebrugge",
+    "description": "✓ Actuele strandregels voor honden in Zeebrugge ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Zeebrugge",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Zeebrugge 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Zeebrugge"
   },
   "/knokke-heist": {
-    "title": "Met je hond naar Knokke-Heist | Strandregels en hondvriendelijke zaken",
-    "description": "De mondaine badstad met luxe beachclubs en een unieke 24/7 losloopzone aan het Zwin.",
-    "image": "https://hondaanzee.be/knokke.webp"
+    "title": "Hond Strand Knokke-Heist 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Knokke-Heist",
+    "description": "✓ Actuele strandregels voor honden in Knokke-Heist ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Knokke-Heist",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Knokke-Heist 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Knokke-Heist"
   },
   "/de-haan": {
-    "title": "Met je hond naar De Haan | Strandregels en hondvriendelijke zaken",
-    "description": "Eén van de meest hondvriendelijke badplaatsen - grote onbewaakte stranddelen altijd toegankelijk.",
-    "image": "https://hondaanzee.be/dehaan.webp"
+    "title": "Hond Strand De Haan 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken De Haan",
+    "description": "✓ Actuele strandregels voor honden in De Haan ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in De Haan",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand De Haan 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken De Haan"
   },
   "/wenduine": {
-    "title": "Met je hond naar Wenduine | Strandregels en hondvriendelijke zaken",
-    "description": "Charmant kustdorpje met gezellige cafés en restaurants waar honden overal welkom zijn.",
-    "image": "https://hondaanzee.be/wenduine.webp"
+    "title": "Hond Strand Wenduine 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Wenduine",
+    "description": "✓ Actuele strandregels voor honden in Wenduine ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Wenduine",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Wenduine 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Wenduine"
   },
   "/bredene": {
-    "title": "Met je hond naar Bredene | Strandregels en hondvriendelijke zaken",
-    "description": "Enige badplaats zonder zeedijk - in winter vrij loslopen op strand én in duinen.",
-    "image": "https://hondaanzee.be/bredene.webp"
+    "title": "Hond Strand Bredene 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Bredene",
+    "description": "✓ Actuele strandregels voor honden in Bredene ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Bredene",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Bredene 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Bredene"
   },
   "/oostende": {
-    "title": "Met je hond naar Oostende | Strandregels en hondvriendelijke zaken",
-    "description": "Koningin der Badsteden met 3 jaarrond hondenzones: Oosteroever, Klein Strand en Raversijde.",
-    "image": "https://hondaanzee.be/oostende.webp"
+    "title": "Hond Strand Oostende 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Oostende",
+    "description": "✓ Actuele strandregels voor honden in Oostende ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Oostende",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Oostende 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Oostende"
   },
   "/middelkerke": {
-    "title": "Met je hond naar Middelkerke - Westende | Strandregels en hondvriendelijke zaken",
-    "description": "Strenge zomerregels, maar 3 uitzonderingszones (Carlton, Sportstrand, Cristal Palace) zijn jaarrond toegankelijk.",
-    "image": "https://hondaanzee.be/middelkerke.webp"
+    "title": "Hond Strand Middelkerke - Westende 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Middelkerke - Westende",
+    "description": "✓ Actuele strandregels voor honden in Middelkerke - Westende ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Middelkerke - Westende",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Middelkerke - Westende 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Middelkerke - Westende"
   },
   "/nieuwpoort": {
-    "title": "Met je hond naar Nieuwpoort | Strandregels en hondvriendelijke zaken",
-    "description": "Let op: strengste regels van de kust! In zomer volledig verboden, geen uitzonderingen.",
-    "image": "https://hondaanzee.be/nieuwpoort.webp"
+    "title": "Hond Strand Nieuwpoort 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Nieuwpoort",
+    "description": "✓ Actuele strandregels voor honden in Nieuwpoort ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Nieuwpoort",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Nieuwpoort 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Nieuwpoort"
   },
   "/koksijde": {
-    "title": "Met je hond naar Koksijde - Oostduinkerke | Strandregels en hondvriendelijke zaken",
-    "description": "Drie jaarrond hondenzones (±3km totaal) - maar altijd aan leiband (max 10m).",
-    "image": "https://hondaanzee.be/oostduinkerke.webp"
+    "title": "Hond Strand Koksijde - Oostduinkerke 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Koksijde - Oostduinkerke",
+    "description": "✓ Actuele strandregels voor honden in Koksijde - Oostduinkerke ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in Koksijde - Oostduinkerke",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand Koksijde - Oostduinkerke 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Koksijde - Oostduinkerke"
   },
   "/de-panne": {
-    "title": "Met je hond naar De Panne | Strandregels en hondvriendelijke zaken",
-    "description": "Zone 4 (richting Frankrijk) is dé losloopzone - in winter 24/7 vrij, in zomer 's avonds en 's ochtends.",
-    "image": "https://hondaanzee.be/depanne.webp"
+    "title": "Hond Strand De Panne 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken De Panne",
+    "description": "✓ Actuele strandregels voor honden in De Panne ✓ Losloopzones en hondenweides ✓ Waar mag je hond vrij lopen? ✓ Seizoensregels winter & zomer ✓ Hondvriendelijke cafés en restaurants in De Panne",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hond Strand De Panne 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken De Panne"
   },
   "/blankenberge/hotspots/lakaiann": {
     "title": "Lakaiann in Blankenberge | HondAanZee.be",
@@ -1149,152 +1166,182 @@ export default {
   },
   "/agenda/kwispelfestival-de-panne-2026": {
     "title": "Kwispelfestival De Panne | Agenda HondAanZee.be",
-    "description": "Maak je klaar voor dé dag van het jaar waar jouw viervoeter de absolute ster is! Op het Kwispelfestival in De Panne draait alles om plezier, avontuur en heel veel kwispelende staartjes. Geniet samen van een prachtige wandeltocht langs de kust, ontdek leuke workshops waar je hond nieuwe tricks leert, en laat een professionele foto maken als aandenken. Terwijl jouw trouwe metgezel zich uitleeft, kun jij gezellig rondsnuffelen op de gezellige hondenmarkt vol leuke spulletjes, of kijk je ogen uit bij spectaculaire demonstraties. Een dag vol beleving, ontmoeting en onvergetelijke momenten — voor honden én hun baasjes!",
-    "image": "https://hondaanzee.be/kwispelfestival.webp"
+    "description": "17 mei 2026 in De Panne: Maak je klaar voor dé dag van het jaar waar jouw viervoeter de absolute ster is! Op het Kwispelfestival in De Panne draait alles om plezier, avontuur en heel veel kwispelende staartjes. Geniet samen van een prachtige wandeltocht langs de kust, ontdek leuke workshops waar je hond nieuwe tricks leert, en laat een professionele foto maken als aandenken. Terwijl jouw trouwe metgezel zich uitleeft, kun jij gezellig rondsnuffelen op de gezellige hondenmarkt vol leuke spulletjes, of kijk je ogen uit bij spectaculaire demonstraties. Een dag vol beleving, ontmoeting en onvergetelijke momenten — voor honden én hun baasjes!",
+    "image": "https://hondaanzee.be/kwispelfestival.webp",
+    "imageAlt": "Kwispelfestival De Panne | Agenda HondAanZee.be"
   },
   "/agenda/groot-oostends-hondenfestival-2026": {
     "title": "Groot Oostends Hondenfestival | Agenda HondAanZee.be",
-    "description": "Na het overweldigende succes van de eerste editie in 2025 keert het Groot Oostends Hondenfestival terug — en dit keer nog groter. Op zaterdag 23 en zondag 24 mei 2026 verandert Domein Duin & Zee opnieuw in een hondenparadijs van 12.000 m² vol demonstraties, standhouders, losloopplezier en food corners voor mens en dier. Nieuw dit jaar is de grote Stratier-hondenwandeling ten voordele van dierenasielen: beide dagen vertrekt die om 11:00 aan de Stratier-stand op het festivalterrein. Zo combineer je een gratis festivaldag aan zee met een extra wandeling die niet alleen leuk is, maar ook adoptie en asieldieren extra in de kijker zet.",
-    "image": "https://hondaanzee.be/oostendshondenfestival.webp"
+    "description": "23 & 24 mei 2026 in Oostende: Na het overweldigende succes van de eerste editie in 2025 keert het Groot Oostends Hondenfestival terug — en dit keer nog groter. Op zaterdag 23 en zondag 24 mei 2026 verandert Domein Duin & Zee opnieuw in een hondenparadijs van 12.000 m² vol demonstraties, standhouders, losloopplezier en food corners voor mens en dier. Nieuw dit jaar is de grote Stratier-hondenwandeling ten voordele van dierenasielen: beide dagen vertrekt die om 11:00 aan de Stratier-stand op het festivalterrein. Zo combineer je een gratis festivaldag aan zee met een extra wandeling die niet alleen leuk is, maar ook adoptie en asieldieren extra in de kijker zet.",
+    "image": "https://hondaanzee.be/oostendshondenfestival.webp",
+    "imageAlt": "Groot Oostends Hondenfestival | Agenda HondAanZee.be"
   },
   "/agenda/grote-hondenwandeling-bredene-2026": {
     "title": "Grote Hondenwandeling Bredene | Agenda HondAanZee.be",
-    "description": "De zee, het strand en de Bredense duinen vormen opnieuw het decor voor de jaarlijkse Grote Hondenwandeling! Vanaf 11 uur vertrek je aan het Jeugdhuis Creatuur en volg je de pijltjes doorheen het Bredense groen, de duinen en langs het strand. De bewegwijzering brengt je heen en terug samen met je favoriete viervoeter(s). Bij aankomst wacht er een superleuke attentie voor je beste vriend! Speciaal voor de oudere deelnemers is er opnieuw een verkorte route voorzien — zodat elke hond mee kan genieten van deze fantastische dag.",
-    "image": "https://hondaanzee.be/hondenbredene.webp"
+    "description": "24 mei 2026 in Bredene: De zee, het strand en de Bredense duinen vormen opnieuw het decor voor de jaarlijkse Grote Hondenwandeling! Vanaf 11 uur vertrek je aan het Jeugdhuis Creatuur en volg je de pijltjes doorheen het Bredense groen, de duinen en langs het strand. De bewegwijzering brengt je heen en terug samen met je favoriete viervoeter(s). Bij aankomst wacht er een superleuke attentie voor je beste vriend! Speciaal voor de oudere deelnemers is er opnieuw een verkorte route voorzien — zodat elke hond mee kan genieten van deze fantastische dag.",
+    "image": "https://hondaanzee.be/hondenbredene.webp",
+    "imageAlt": "Grote Hondenwandeling Bredene | Agenda HondAanZee.be"
   },
   "/losloopzones/blankenberge-vande-puttelaan": {
-    "title": "Hondenweide J. Vande Puttelaan | Losloopzones HondAanZee.be",
-    "description": "Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.",
-    "image": "https://hondaanzee.be/vandeputtelaan.webp"
+    "title": "Hondenweide J. Vande Puttelaan | Losloopzone in Blankenberge | HondAanZee.be",
+    "description": "Hondenweide J. Vande Puttelaan in Blankenberge. Omheinde hondenweide op het grasveld tussen Oude Steenweg en J. Vande Puttelaan.",
+    "image": "https://hondaanzee.be/vandeputtelaan.webp",
+    "imageAlt": "Hondenweide J. Vande Puttelaan | Losloopzone in Blankenberge | HondAanZee.be"
   },
   "/losloopzones/blankenberge-van-ackersquare": {
-    "title": "Hondenweide A. Van Ackersquare | Losloopzones HondAanZee.be",
-    "description": "Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.",
-    "image": "https://hondaanzee.be/noordzeebad.webp"
+    "title": "Hondenweide A. Van Ackersquare | Losloopzone in Blankenberge | HondAanZee.be",
+    "description": "Hondenweide A. Van Ackersquare in Blankenberge. Omheinde hondenweide op de site van het voormalige zwembad/Nordzeebad.",
+    "image": "https://hondaanzee.be/noordzeebad.webp",
+    "imageAlt": "Hondenweide A. Van Ackersquare | Losloopzone in Blankenberge | HondAanZee.be"
   },
   "/losloopzones/knokke-heist-losloopweide-heist": {
-    "title": "Losloopweide Heist | Losloopzones HondAanZee.be",
-    "description": "Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.",
-    "image": "https://hondaanzee.be/weideheist.webp"
+    "title": "Losloopweide Heist | Losloopzone in Knokke-Heist | HondAanZee.be",
+    "description": "Losloopweide Heist in Knokke-Heist. Nieuwe weide (geopend 2024) in de groene zone naast de parking en het bufferbekken.",
+    "image": "https://hondaanzee.be/weideheist.webp",
+    "imageAlt": "Losloopweide Heist | Losloopzone in Knokke-Heist | HondAanZee.be"
   },
   "/losloopzones/de-haan-vosseslag": {
-    "title": "Losloopzone Vosseslag | Losloopzones HondAanZee.be",
-    "description": "Omheinde zone naast de parking.",
-    "image": "https://hondaanzee.be/losloopzonevosseslag.webp"
+    "title": "Losloopzone Vosseslag | Losloopzone in De Haan | HondAanZee.be",
+    "description": "Losloopzone Vosseslag in De Haan. Omheinde zone naast de parking.",
+    "image": "https://hondaanzee.be/losloopzonevosseslag.webp",
+    "imageAlt": "Losloopzone Vosseslag | Losloopzone in De Haan | HondAanZee.be"
   },
   "/losloopzones/de-haan-centrum-sport": {
-    "title": "Losloopzone Centrum/Sport | Losloopzones HondAanZee.be",
-    "description": "Gelegen bij Sport- en Recreatiecentrum Haneveld.",
-    "image": "https://hondaanzee.be/losloopweide_sport.webp"
+    "title": "Losloopzone Centrum/Sport | Losloopzone in De Haan | HondAanZee.be",
+    "description": "Losloopzone Centrum/Sport in De Haan. Gelegen bij Sport- en Recreatiecentrum Haneveld.",
+    "image": "https://hondaanzee.be/losloopweide_sport.webp",
+    "imageAlt": "Losloopzone Centrum/Sport | Losloopzone in De Haan | HondAanZee.be"
   },
   "/losloopzones/de-haan-haneveld": {
-    "title": "Losloopzone Haneveld | Losloopzones HondAanZee.be",
-    "description": "Zone nabij het sportcomplex Haneveld.",
-    "image": "https://hondaanzee.be/losloopzonehaneveld.webp"
+    "title": "Losloopzone Haneveld | Losloopzone in De Haan | HondAanZee.be",
+    "description": "Losloopzone Haneveld in De Haan. Zone nabij het sportcomplex Haneveld.",
+    "image": "https://hondaanzee.be/losloopzonehaneveld.webp",
+    "imageAlt": "Losloopzone Haneveld | Losloopzone in De Haan | HondAanZee.be"
   },
   "/losloopzones/de-haan-duinbossen": {
-    "title": "Losloopzone Duinbossen | Losloopzones HondAanZee.be",
-    "description": "Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).",
-    "image": "https://hondaanzee.be/losloopzoneduinbossen.webp"
+    "title": "Losloopzone Duinbossen | Losloopzone in De Haan | HondAanZee.be",
+    "description": "Losloopzone Duinbossen in De Haan. Grote omheinde boszone van 1,2 hectare. Bereikbaar via parking Zwarte Kiezel (ca. 100m wandelen).",
+    "image": "https://hondaanzee.be/losloopzoneduinbossen.webp",
+    "imageAlt": "Losloopzone Duinbossen | Losloopzone in De Haan | HondAanZee.be"
   },
   "/losloopzones/wenduine-manitobastraat": {
-    "title": "Losloopzone Wenduine - Manitobastraat | Losloopzones HondAanZee.be",
-    "description": "Omheinde hondenweide in Wenduine.",
-    "image": "https://hondaanzee.be/losloopzonewenduinemanitobastraat.webp"
+    "title": "Losloopzone Wenduine - Manitobastraat | Losloopzone in Wenduine | HondAanZee.be",
+    "description": "Losloopzone Wenduine - Manitobastraat in Wenduine. Omheinde hondenweide in Wenduine.",
+    "image": "https://hondaanzee.be/losloopzonewenduinemanitobastraat.webp",
+    "imageAlt": "Losloopzone Wenduine - Manitobastraat | Losloopzone in Wenduine | HondAanZee.be"
   },
   "/losloopzones/wenduine-westhinderlaan": {
-    "title": "Losloopzone Wenduine - Westhinderlaan | Losloopzones HondAanZee.be",
-    "description": "Gelegen op de hoek van Westhinderlaan en Wancourstraat.",
-    "image": "https://hondaanzee.be/losloopzonewenduinewesthinderlaan.webp"
+    "title": "Losloopzone Wenduine - Westhinderlaan | Losloopzone in Wenduine | HondAanZee.be",
+    "description": "Losloopzone Wenduine - Westhinderlaan in Wenduine. Gelegen op de hoek van Westhinderlaan en Wancourstraat.",
+    "image": "https://hondaanzee.be/losloopzonewenduinewesthinderlaan.webp",
+    "imageAlt": "Losloopzone Wenduine - Westhinderlaan | Losloopzone in Wenduine | HondAanZee.be"
   },
   "/losloopzones/bredene-kerkstraat": {
-    "title": "Hondenweide Kerkstraat | Losloopzones HondAanZee.be",
-    "description": "Volledig omheind grasveld naast jeugdhuis Creatuur.",
-    "image": "https://hondaanzee.be/brouwerijstraatbredene.webp"
+    "title": "Hondenweide Kerkstraat | Losloopzone in Bredene | HondAanZee.be",
+    "description": "Hondenweide Kerkstraat in Bredene. Volledig omheind grasveld naast jeugdhuis Creatuur.",
+    "image": "https://hondaanzee.be/brouwerijstraatbredene.webp",
+    "imageAlt": "Hondenweide Kerkstraat | Losloopzone in Bredene | HondAanZee.be"
   },
   "/losloopzones/oostende-maria-hendrikapark": {
-    "title": "Maria Hendrikapark | Losloopzones HondAanZee.be",
-    "description": "Grootste en populairste hondenloopweide van Oostende. De weide ligt achter het Dierenasiel \"Het Blauwe Kruis\". Niet zichtbaar vanaf de hoofdweg.",
-    "image": "https://hondaanzee.be/hendrikapark.webp"
+    "title": "Maria Hendrikapark | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Maria Hendrikapark in Oostende. Grootste en populairste hondenloopweide van Oostende. De weide ligt achter het Dierenasiel \"Het Blauwe Kruis\". Niet zichtbaar ",
+    "image": "https://hondaanzee.be/hendrikapark.webp",
+    "imageAlt": "Maria Hendrikapark | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-raversijde": {
-    "title": "Losloopzone Raversijde | Losloopzones HondAanZee.be",
-    "description": "Ruime losloopzone nabij de luchthaven en Nieuwpoortsesteenweg. Gelegen aan de rand van het Provinciedomein Raversijde, met veel open ruimte om te rennen en te spelen.",
-    "image": "https://hondaanzee.be/raversijde.webp"
+    "title": "Losloopzone Raversijde | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Losloopzone Raversijde in Oostende. Ruime losloopzone nabij de luchthaven en Nieuwpoortsesteenweg. Gelegen aan de rand van het Provinciedomein Raversijde, met",
+    "image": "https://hondaanzee.be/raversijde.webp",
+    "imageAlt": "Losloopzone Raversijde | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-leffingestraat": {
-    "title": "Losloopzone Leffingestraat | Losloopzones HondAanZee.be",
-    "description": "Veilige, omheinde zone achter de Ostend Tennis Club. Volledig verborgen achter de tennisvelden, je moet langs het tennisgebouw kijken.",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Losloopzone Leffingestraat | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Losloopzone Leffingestraat in Oostende. Veilige, omheinde zone achter de Ostend Tennis Club. Volledig verborgen achter de tennisvelden, je moet langs het tenn",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Losloopzone Leffingestraat | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-lijndraaiersstraat": {
-    "title": "Losloopzone Lijndraaiersstraat | Losloopzones HondAanZee.be",
-    "description": "Omheind stuk gras op de hoek van Stapelshuisstraat en Lijndraaiersstraat (Oosteroever). Voorheen bekend als \"Slachthuiskaai\".",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Losloopzone Lijndraaiersstraat | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Losloopzone Lijndraaiersstraat in Oostende. Omheind stuk gras op de hoek van Stapelshuisstraat en Lijndraaiersstraat (Oosteroever). Voorheen bekend als \"Slach",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Losloopzone Lijndraaiersstraat | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-ankerstraat": {
-    "title": "Losloopzone Ankerstraat | Losloopzones HondAanZee.be",
-    "description": "Smalle, langgerekte strook gras die parallel loopt aan de tramsporen. Ziet eruit als een berm, maar is omheind voor honden.",
-    "image": "https://hondaanzee.be/ankerstraat.webp"
+    "title": "Losloopzone Ankerstraat | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Losloopzone Ankerstraat in Oostende. Smalle, langgerekte strook gras die parallel loopt aan de tramsporen. Ziet eruit als een berm, maar is omheind voor honde",
+    "image": "https://hondaanzee.be/ankerstraat.webp",
+    "imageAlt": "Losloopzone Ankerstraat | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-hondenbos": {
-    "title": "Hondenbos | Losloopzones HondAanZee.be",
-    "description": "Groot hondenbos (ca. 3,5 hectare) in natuurzone nabij de brug van de A10. Je moet de Karperstraat inrijden (doodlopend) om de toegang te vinden.",
-    "image": "https://hondaanzee.be/hondenbos.webp"
+    "title": "Hondenbos | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Hondenbos in Oostende. Groot hondenbos (ca. 3,5 hectare) in natuurzone nabij de brug van de A10. Je moet de Karperstraat inrijden (doodlopend) om de toegang t",
+    "image": "https://hondaanzee.be/hondenbos.webp",
+    "imageAlt": "Hondenbos | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-brigade-pironlaan": {
-    "title": "Losloopzone Brigade Pironlaan | Losloopzones HondAanZee.be",
-    "description": "Praktische zone in de groene strook voor buurtbewoners. Recent vernieuwd met speeltoestellen (april 2023).",
-    "image": "https://hondaanzee.be/pironlaan.webp"
+    "title": "Losloopzone Brigade Pironlaan | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Losloopzone Brigade Pironlaan in Oostende. Praktische zone in de groene strook voor buurtbewoners. Recent vernieuwd met speeltoestellen (april 2023).",
+    "image": "https://hondaanzee.be/pironlaan.webp",
+    "imageAlt": "Losloopzone Brigade Pironlaan | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-provinciedomein-raversijde": {
-    "title": "Provinciedomein Raversijde | Losloopzones HondAanZee.be",
-    "description": "Specifieke speelweide binnen het provinciedomein (ingang via Westlaan). In de rest van het park moeten honden aan de leiband.",
-    "image": "https://hondaanzee.be/provinciedomein.webp"
+    "title": "Provinciedomein Raversijde | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Provinciedomein Raversijde in Oostende. Specifieke speelweide binnen het provinciedomein (ingang via Westlaan). In de rest van het park moeten honden aan de l",
+    "image": "https://hondaanzee.be/provinciedomein.webp",
+    "imageAlt": "Provinciedomein Raversijde | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/oostende-schorrepark": {
-    "title": "Losloopweide Schorrepark | Losloopzones HondAanZee.be",
-    "description": "Eén van de mooiste en grootste losloopweiden aan de kust. Dit uitgestrekte natuurgebied aan de rand van Oostende (Stene) biedt vijvers waar honden kunnen zwemmen, bunkers, heuvels en prachtige wilde bloemen. Het terrein is niet omheind maar afgelegen genoeg voor honden om voluit te lopen. Een toplocatie voor grotere rassen en honden die graag zwemmen.",
-    "image": "https://hondaanzee.be/losloopweidedeschorre.webp"
+    "title": "Losloopweide Schorrepark | Losloopzone in Oostende | HondAanZee.be",
+    "description": "Losloopweide Schorrepark in Oostende. Eén van de mooiste en grootste losloopweiden aan de kust. Dit uitgestrekte natuurgebied aan de rand van Oostende (Stene)",
+    "image": "https://hondaanzee.be/losloopweidedeschorre.webp",
+    "imageAlt": "Losloopweide Schorrepark | Losloopzone in Oostende | HondAanZee.be"
   },
   "/losloopzones/middelkerke-koninginnelaan": {
-    "title": "Hondenweide Middelkerke | Losloopzones HondAanZee.be",
-    "description": "Gezellige, volledig omheinde hondenweide in de rustige wijk achter de Stille Meers. Een sociale plek waar je altijd wel andere baasjes en honden tegenkomt - perfect voor je viervoeter om nieuwe speelkameraadjes te maken! De veilige, afgeslotenzone ligt tegenover het Woonzorgcentrum Haerlebout. Tip: help mee om deze fijne plek proper te houden voor iedereen.",
-    "image": "https://hondaanzee.be/stillemeers.webp"
+    "title": "Hondenweide Middelkerke | Losloopzone in Middelkerke - Westende | HondAanZee.be",
+    "description": "Hondenweide Middelkerke in Middelkerke - Westende. Gezellige, volledig omheinde hondenweide in de rustige wijk achter de Stille Meers. Een sociale plek waar j",
+    "image": "https://hondaanzee.be/stillemeers.webp",
+    "imageAlt": "Hondenweide Middelkerke | Losloopzone in Middelkerke - Westende | HondAanZee.be"
   },
   "/losloopzones/middelkerke-westende": {
-    "title": "Hondenweide Westende | Losloopzones HondAanZee.be",
-    "description": "Rustige plek vlakbij Sportpark \"De Krokodiel\". Zoek naar de kruising met de Voetbalstraat.",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Hondenweide Westende | Losloopzone in Middelkerke - Westende | HondAanZee.be",
+    "description": "Hondenweide Westende in Middelkerke - Westende. Rustige plek vlakbij Sportpark \"De Krokodiel\". Zoek naar de kruising met de Voetbalstraat.",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Hondenweide Westende | Losloopzone in Middelkerke - Westende | HondAanZee.be"
   },
   "/losloopzones/nieuwpoort-prins-mauritspark": {
-    "title": "Hondenweide Prins Mauritspark | Losloopzones HondAanZee.be",
-    "description": "Grote omheinde zone (ca. 2.500 m┬▓) aan de kant van de havengeul, vlakbij het vakantiepark. Uitstekend alternatief voor het strand in de zomer!",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Hondenweide Prins Mauritspark | Losloopzone in Nieuwpoort | HondAanZee.be",
+    "description": "Hondenweide Prins Mauritspark in Nieuwpoort. Grote omheinde zone (ca. 2.500 m┬▓) aan de kant van de havengeul, vlakbij het vakantiepark. Uitstekend alternatie",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Hondenweide Prins Mauritspark | Losloopzone in Nieuwpoort | HondAanZee.be"
   },
   "/losloopzones/nieuwpoort-leopold-ii-park": {
-    "title": "Hondenweide Leopold II Park | Losloopzones HondAanZee.be",
-    "description": "Kleinere omheinde zone binnenin het park, voorzien van een saskluis bij de ingang.",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Hondenweide Leopold II Park | Losloopzone in Nieuwpoort | HondAanZee.be",
+    "description": "Hondenweide Leopold II Park in Nieuwpoort. Kleinere omheinde zone binnenin het park, voorzien van een saskluis bij de ingang.",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Hondenweide Leopold II Park | Losloopzone in Nieuwpoort | HondAanZee.be"
   },
   "/losloopzones/koksijde-sportpark-oostduinkerke": {
-    "title": "Losloopzone Sportpark Oostduinkerke | Losloopzones HondAanZee.be",
-    "description": "Ruime zone aan de rand van sportcomplex \"Hazebeek\".",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Losloopzone Sportpark Oostduinkerke | Losloopzone in Koksijde - Oostduinkerke | HondAanZee.be",
+    "description": "Losloopzone Sportpark Oostduinkerke in Koksijde - Oostduinkerke. Ruime zone aan de rand van sportcomplex \"Hazebeek\".",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Losloopzone Sportpark Oostduinkerke | Losloopzone in Koksijde - Oostduinkerke | HondAanZee.be"
   },
   "/losloopzones/koksijde-ster-der-zee": {
-    "title": "Losloopzone Koksijde Ster Der Zee | Losloopzones HondAanZee.be",
-    "description": "Hondenspeelzone nabij het Abdijmuseum Ten Duinen. Ingang via de Gladiolenlaan.",
-    "image": "https://hondaanzee.be/losloopzonekoksijdesterderzee.webp"
+    "title": "Losloopzone Koksijde Ster Der Zee | Losloopzone in Koksijde - Oostduinkerke | HondAanZee.be",
+    "description": "Losloopzone Koksijde Ster Der Zee in Koksijde - Oostduinkerke. Hondenspeelzone nabij het Abdijmuseum Ten Duinen. Ingang via de Gladiolenlaan.",
+    "image": "https://hondaanzee.be/losloopzonekoksijdesterderzee.webp",
+    "imageAlt": "Losloopzone Koksijde Ster Der Zee | Losloopzone in Koksijde - Oostduinkerke | HondAanZee.be"
   },
   "/losloopzones/de-panne-kerkstraat": {
-    "title": "Hondenweide Kerkstraat | Losloopzones HondAanZee.be",
-    "description": "Belangrijkste omheinde losloopweide in De Panne. Je moet helemaal naar achteren, naast de begraafplaats en motorclub \"t Motosiekeltje\".",
-    "image": "https://hondaanzee.be/placeholder.webp"
+    "title": "Hondenweide Kerkstraat | Losloopzone in De Panne | HondAanZee.be",
+    "description": "Hondenweide Kerkstraat in De Panne. Belangrijkste omheinde losloopweide in De Panne. Je moet helemaal naar achteren, naast de begraafplaats en motorclub \"t Mo",
+    "image": "https://hondaanzee.be/placeholder.webp",
+    "imageAlt": "Hondenweide Kerkstraat | Losloopzone in De Panne | HondAanZee.be"
   },
   "/losloopzones/adinkerke-doornstraat": {
-    "title": "Hondenweide Doornstraat | Losloopzones HondAanZee.be",
-    "description": "Ruime omheinde hondenlosloopzone op het domein van Vijvers Markey, ook bereikbaar via de Moersesteenweg. De weide heeft twee ingangen en is heuvelachtig aangelegd. Er kan langs de weg geparkeerd worden. Een hondentoilet ligt op ongeveer 30 meter van de losloopzone. Zitbank aanwezig.",
-    "image": "https://hondaanzee.be/weidedoornstraat.webp"
+    "title": "Hondenweide Doornstraat | Losloopzone in De Panne | HondAanZee.be",
+    "description": "Hondenweide Doornstraat in De Panne. Ruime omheinde hondenlosloopzone op het domein van Vijvers Markey, ook bereikbaar via de Moersesteenweg. De weide heeft t",
+    "image": "https://hondaanzee.be/weidedoornstraat.webp",
+    "imageAlt": "Hondenweide Doornstraat | Losloopzone in De Panne | HondAanZee.be"
   }
 };

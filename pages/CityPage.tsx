@@ -12,6 +12,7 @@ import CityFAQ from '../components/CityFAQ.tsx';
 import { CITIES } from '../cityData.ts';
 import { useSEO, getCitySEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import NotFound from './NotFound';
 import { buildCityFAQSchema } from '../utils/cityFaq.ts';
 
 const CityPage: React.FC = () => {
@@ -32,19 +33,17 @@ const CityPage: React.FC = () => {
           ]
         }
       : {
-          title: 'Stad niet gevonden | HondAanZee.be',
-          description: 'Deze stad werd niet gevonden in onze database'
+          title: 'Pagina niet gevonden | HondAanZee.be',
+          description: 'Deze pagina bestaat helaas niet (meer). Ga terug naar de homepage voor alle informatie over honden aan de Belgische kust.',
+          noindex: true,
         }
   );
 
   useEffect(() => {
-    if (!city) {
-      navigate('/');
-    }
     window.scrollTo(0, 0);
   }, [city, navigate]);
 
-  if (!city) return null;
+  if (!city) return <NotFound />;
 
   return (
     <div className="animate-in fade-in relative isolate">

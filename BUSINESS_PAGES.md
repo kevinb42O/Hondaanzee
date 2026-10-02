@@ -13,9 +13,13 @@ Gecontroleerd op 2 oktober 2026: **133 hotspots en 24 diensten, samen 157 zaakpa
 - Vercel serveert deze bestanden voor bezoekers en crawlers. De zaakroutes worden vóór de sociale proxy afgehandeld; Googlebot wordt niet langer naar die beperkte proxy omgeleid.
 - Dubbele URLs/IDs, ontbrekende slugs, onbekende gemeenten en ontbrekende inhoud stoppen de build. Ontbrekende HTML, metadata, schema of indexlinks stoppen de build eveneens.
 
-`npm run build` genereert en controleert de 157 zaakpagina’s en twee volledige overzichten. `vercel.json` gebruikt deze opdracht. Andere pagina’s behouden hun client rendering; `npm run build:prerender` kan aanvullend alle overige routes via Chromium renderen.
+`npm run build` genereert en controleert **alle 224 publieke URLs**, waaronder de 157 zaakpagina’s, twee volledige overzichten, alle gemeenten, blogs, evenementen en losloopzones. `vercel.json` serveert het bijbehorende HTML-bestand voor elke route. Dezelfde bestaande React-pagina levert de tekst en SEO voor zowel de build als de browser. De build gebruikt geen Chromium, netwerkaanvragen of GitHub Actions. Framer Motion toont de statische inhoud meteen; Leaflet initialiseert alleen in de browser.
+
+Onbekende URLs krijgen HTTP 404 met de bestaande foutpagina en `noindex`. Dynamische meldingen behouden een aparte app-shell zonder homepage-canonical. Adminroutes krijgen een afzonderlijke `noindex`-shell. De algemene rewrite naar de homepage is verwijderd.
 
 De sitemap en het WebPage-schema gebruiken dezelfde echte wijzigingsdatum per zaak. `data/placePageRevisions.json` bewaart een inhoudsvingerafdruk; een ongewijzigde herbouw wijzigt de datum niet. Commit bij inhoudswijzigingen ook de gegenereerde revisiestatus, `data/placePageDates.ts` en sitemap. Een wijziging aan de gedeelde zaakinhoud of het zaak-SEO-sjabloon krijgt een nieuwe wijzigingsdatum.
+
+`data/publicPageRevisions.json` bewaart ook de revisies van de overige sitemaproutes. De eerste volledige HTML-publicatie krijgt de datum van deze wijziging. Herbouwen zonder gewijzigde bronbestanden verhoogt die datum niet.
 
 ## Vercel Analytics gebruiken
 
@@ -38,6 +42,8 @@ Custom events vereisen volgens [Vercel](https://vercel.com/docs/analytics/custom
 npm run build
 npm test
 npm run test:places
+node scripts/check-public-browser.cjs
+npm run test:search
 ```
 
 De controles verifiëren alle 157 HTML-bestanden en testen in Chromium ook inhoud zonder JavaScript, navigatie tussen zaken, pageviews, een websiteklik, foutieve routes en een mobiel scherm. Alle bestaande zaak-URLs en hun zakelijke gegevens zijn behouden.

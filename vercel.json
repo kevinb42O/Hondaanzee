@@ -24,43 +24,79 @@
         {
             "source": "/llms(.*)\\.txt",
             "headers": [
-                { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
-                { "key": "Access-Control-Allow-Origin", "value": "*" },
-                { "key": "Cache-Control", "value": "public, max-age=3600" }
+                {
+                    "key": "Content-Type",
+                    "value": "text/markdown; charset=utf-8"
+                },
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
             ]
         },
         {
             "source": "/(.*)",
             "headers": [
-                { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-                { "key": "X-Content-Type-Options", "value": "nosniff" },
-                { "key": "X-Frame-Options", "value": "DENY" },
-                { "key": "X-XSS-Protection", "value": "1; mode=block" },
-                { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+                {
+                    "key": "Cache-Control",
+                    "value": "no-cache, no-store, must-revalidate"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "X-XSS-Protection",
+                    "value": "1; mode=block"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
+                }
             ]
         },
         {
             "source": "/sw.js",
             "headers": [
-                { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+                {
+                    "key": "Cache-Control",
+                    "value": "no-cache, no-store, must-revalidate"
+                }
             ]
         },
         {
             "source": "/assets/(.*)",
             "headers": [
-                { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
             ]
         },
         {
             "source": "/(.*).webp",
             "headers": [
-                { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
             ]
         },
         {
             "source": "/(.*).(svg|ico|png|jpg|jpeg|avif|jfif)",
             "headers": [
-                { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400, stale-while-revalidate=604800"
+                }
             ]
         }
     ],
@@ -82,6 +118,130 @@
             "destination": "/diensten/index.html"
         },
         {
+            "source": "/losloopzones",
+            "destination": "/losloopzones/index.html"
+        },
+        {
+            "source": "/kaart",
+            "destination": "/kaart/index.html"
+        },
+        {
+            "source": "/over-ons",
+            "destination": "/over-ons/index.html"
+        },
+        {
+            "source": "/goed-om-te-weten",
+            "destination": "/goed-om-te-weten/index.html"
+        },
+        {
+            "source": "/steun-ons",
+            "destination": "/steun-ons/index.html"
+        },
+        {
+            "source": "/zaak-aanmelden",
+            "destination": "/zaak-aanmelden/index.html"
+        },
+        {
+            "source": "/privacy",
+            "destination": "/privacy/index.html"
+        },
+        {
+            "source": "/algemene-voorwaarden",
+            "destination": "/algemene-voorwaarden/index.html"
+        },
+        {
+            "source": "/cookies",
+            "destination": "/cookies/index.html"
+        },
+        {
+            "source": "/blog",
+            "destination": "/blog/index.html"
+        },
+        {
+            "source": "/agenda",
+            "destination": "/agenda/index.html"
+        },
+        {
+            "source": "/meldpunt",
+            "destination": "/meldpunt/index.html"
+        },
+        {
+            "source": "/meldpunt/vrijwilligers",
+            "destination": "/meldpunt/vrijwilligers/index.html"
+        },
+        {
+            "source": "/updates",
+            "destination": "/updates/index.html"
+        },
+        {
+            "source": "/blankenberge",
+            "destination": "/blankenberge/index.html"
+        },
+        {
+            "source": "/zeebrugge",
+            "destination": "/zeebrugge/index.html"
+        },
+        {
+            "source": "/knokke-heist",
+            "destination": "/knokke-heist/index.html"
+        },
+        {
+            "source": "/de-haan",
+            "destination": "/de-haan/index.html"
+        },
+        {
+            "source": "/wenduine",
+            "destination": "/wenduine/index.html"
+        },
+        {
+            "source": "/bredene",
+            "destination": "/bredene/index.html"
+        },
+        {
+            "source": "/oostende",
+            "destination": "/oostende/index.html"
+        },
+        {
+            "source": "/middelkerke",
+            "destination": "/middelkerke/index.html"
+        },
+        {
+            "source": "/nieuwpoort",
+            "destination": "/nieuwpoort/index.html"
+        },
+        {
+            "source": "/koksijde",
+            "destination": "/koksijde/index.html"
+        },
+        {
+            "source": "/de-panne",
+            "destination": "/de-panne/index.html"
+        },
+        {
+            "source": "/blog/:slug",
+            "destination": "/blog/:slug/index.html"
+        },
+        {
+            "source": "/agenda/:slug",
+            "destination": "/agenda/:slug/index.html"
+        },
+        {
+            "source": "/losloopzones/:slug",
+            "destination": "/losloopzones/:slug/index.html"
+        },
+        {
+            "source": "/meldpunt/:publicId",
+            "destination": "/spa.html"
+        },
+        {
+            "source": "/admin/:path*",
+            "destination": "/private.html"
+        },
+        {
+            "source": "/_meldpunt-admin",
+            "destination": "/private.html"
+        },
+        {
             "source": "/(.*)",
             "has": [
                 {
@@ -91,10 +251,6 @@
                 }
             ],
             "destination": "/api/og-proxy?path=$1"
-        },
-        {
-            "source": "/:path*",
-            "destination": "/index.html"
         }
     ]
 }

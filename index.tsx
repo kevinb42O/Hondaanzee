@@ -11,6 +11,7 @@ if (!rootElement) {
 
 // Always do a client mount to avoid hydration mismatch crashes from prerendered HTML.
 rootElement.innerHTML = '';
+rootElement.removeAttribute('data-static-page');
 const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>

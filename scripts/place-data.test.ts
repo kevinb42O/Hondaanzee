@@ -43,7 +43,7 @@ describe('business page build safety', () => {
     expect(html).not.toContain('hero-prerender');
     expect(html).not.toContain('/lexi.webp');
     expect(html).not.toContain('<script>bad()');
-    expect(html).toContain('<div id="root"><h1>Een zaak</h1></div>');
+    expect(html).toMatch(/<div id="root"[^>]*><h1>Een zaak<\/h1><\/div>/);
     expect(html).toContain('/assets/app.js');
   });
 });
