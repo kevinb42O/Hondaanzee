@@ -53,4 +53,4 @@ Herhaalbare controles:
 
 De browserchecks onderscheppen externe writes. De SQL-fixtures worden volledig teruggedraaid. De livecontrole publiceert geen testreview, verstuurt geen e-mail en verwijdert het tijdelijke account in `finally`.
 
-De resterende TypeScript-fouten zijn daarna hersteld. `npm run typecheck` controleert de webapp, Node-endpoint, buildhelpers en tests met TypeScript, en alle Supabase-functies en gedeelde modules met Deno. Beide controles zijn verplicht vóór iedere productiebuild. De verouderde, niet-gerouteerde Community-pagina is verwijderd; `/community` blijft een 404 met `noindex`.
+De resterende TypeScript-fouten zijn daarna hersteld. `npm run typecheck` controleert de webapp, buildhelpers en tests met TypeScript, Node-endpoints met een aparte `NodeNext`-configuratie, en alle Supabase-functies en gedeelde modules met Deno. Alle drie controles zijn verplicht vóór iedere productiebuild. De verouderde, niet-gerouteerde Community-pagina is verwijderd; `/community` blijft een 404 met `noindex`.

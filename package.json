@@ -15,10 +15,11 @@
     "test:members": "vitest run utils/memberData.test.ts utils/memberCredentials.test.ts && node scripts/check-members-browser.cjs",
     "test:search": "vitest run utils/search.test.ts && node scripts/check-search-browser.cjs",
     "test:community": "vitest run utils/hotspotCommunity.test.ts && node scripts/check-hotspot-community.cjs",
-    "typecheck": "npm run typecheck:web && npm run typecheck:edge",
+    "typecheck": "npm run typecheck:web && npm run typecheck:api && npm run typecheck:edge",
     "typecheck:web": "tsc --noEmit",
     "typecheck:edge": "node scripts/check-edge-types.mjs",
-    "test:public": "node scripts/check-public-browser.cjs"
+    "test:public": "node scripts/check-public-browser.cjs",
+    "typecheck:api": "tsc --project tsconfig.api.json"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.93.3",

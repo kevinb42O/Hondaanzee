@@ -1,7 +1,7 @@
 import { createServer, get } from 'node:http';
 import { once } from 'node:events';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import handler from './keepalive.ts';
+import handler from '../api/keepalive.ts';
 
 afterEach(() => vi.unstubAllGlobals());
 
