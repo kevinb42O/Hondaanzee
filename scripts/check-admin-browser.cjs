@@ -64,6 +64,11 @@ const server = createServer((req, res) => {
         else{moderationRequests.push(input);fakeReviews[0].version++;fakeReviews[0].needs_review=false;if(input.decision==='hide')fakeReviews[0].status='hidden';if(input.decision==='redact'){fakeReviews[0].public_name=input.publicName;fakeReviews[0].public_comment=input.publicComment;}body={version:fakeReviews[0].version};}
         return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify(body)});
       }
+      if (request.url().includes('/functions/v1/admin-favorites')) {
+        if (request.method() === 'OPTIONS') return request.respond({status:204,headers:cors});
+        const counts = Object.fromEntries([...fakePlaces.map((p,i)=>[p.id,i===0?3:0]),...fakeZones.map((z,i)=>[z.id,i===0?2:0])]);
+        return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({generated_at:'2026-10-02T18:00:00Z',counts})});
+      }
       if (request.url().includes('/functions/v1/admin-members')) return request.respond({ status: 200, headers: cors, contentType: 'application/json', body: JSON.stringify({ allowed: true, members: [], total: 0, stats: { total: 0, new30: 0, active30: 0, saved: 0 } }) });
       if(request.url().includes('/functions/v1/admin-media'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({ready:false,message:'Mediadomein in voorbereiding',assets:[]})});
       if(request.url().includes('/functions/v1/admin-analytics')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const hourly=JSON.parse(request.postData()).hours===24;return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({today:'2026-10-02',history,rows:[{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/',event:'pageview',referrer:'direct',device:'desktop',count:7},{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/blankenberge/hotspots/lakaiann',event:'website',referrer:'google',device:'mobile',count:2}],...(hourly?{window:{start:'2026-10-01T20:00:00Z',end:'2026-10-02T19:00:00Z',now:'2026-10-02T19:15:00Z',startedAt:'2026-10-02T18:30:00Z'}}:{})})});}
@@ -129,6 +134,8 @@ const server = createServer((req, res) => {
     await page.waitForFunction(() => document.querySelectorAll('.workspace-table tbody tr').length === 1);
     const expected = HOTSPOTS.find(place => place.name === 'Lakaiann');
     assert.equal(await page.$eval('.workspace-table img', el => el.getAttribute('src')), expected.image);
+    await page.waitForFunction(() => document.querySelector('.workspace-favorite-count')?.textContent.trim() === '3');
+    assert.equal(await page.$eval('.workspace-favorite-count',el=>el.textContent.trim()),'3','Place counters show current member saves');
     assert.equal(await page.$eval('.workspace-table a[aria-label]', el => el.getAttribute('href')), '/blankenberge/hotspots/lakaiann');
     await page.$eval('input[type="search"]', input => { const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set; setter.call(input, 'Onbestaandezaak'); input.dispatchEvent(new Event('input', { bubbles: true })); });
     await page.waitForSelector('.workspace-empty button');

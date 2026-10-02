@@ -1,3 +1,4 @@
+import AdminFavoriteCount from '../components/admin/AdminFavoriteCount.tsx';
 import { ResolvedPlaceDetail } from './PlaceDetail.tsx';
 import type { Hotspot,Service } from '../types.ts';
 import AdminMediaPicker, { type PlaceMedia } from '../components/admin/AdminMediaPicker.tsx';
@@ -93,6 +94,7 @@ export default function AdminPlaceEditor() {
   return <>
     <Link to="/admin/zaken" className="workspace-text-link"><ArrowLeft size={15} />Alle zaken</Link>
     <div className="workspace-page-heading workspace-editor-heading"><div><p className="workspace-eyebrow">Zakenbeheer</p><h1>{isNew ? 'Nieuwe zaak' : values.name || 'Zaak bewerken'}</h1><p>{isNew ? 'Begin met een concept voor je kustgids.' : `Concept · versie ${place?.version || '…'}`}</p></div><button type="button" className="workspace-button" onClick={() => setPreview(value => !value)}>{preview ? 'Verder bewerken' : 'Concept bekijken'}</button></div>
+    {place && <AdminFavoriteCount key={place.id} id={place.id} />}
     {loading ? <section className="workspace-panel" role="status">Zaak laden…</section> : !isNew && !place ? <section className="workspace-panel"><p className="workspace-error" role="alert">{error}</p><button className="workspace-button" onClick={() => void load()}>Opnieuw proberen</button></section> : <form onSubmit={save}>
       <div className="workspace-editor-grid"><div className="workspace-panel workspace-form">
         {preview ? <div className="workspace-public-preview" onClickCapture={event=>{if((event.target as Element).closest('a'))event.preventDefault();}}><ResolvedPlaceDetail preview kind={kind} cityData={CITIES.find(item=>item.slug===city)!} place={{...(place?.draft.content||{id:0,tags:[],image:''}),...values,name:values.name||'Naam van je zaak',type:values.type||types[0],description:values.description||'',city,slug:slug||'concept',tags:(values.tags||'').split(',').map(value=>value.trim()).filter(Boolean),sameAs:(values.sameAs||'').split('\n').filter(Boolean),...(kind==='hotspot'?{openingHours:Object.fromEntries(['ma','di','wo','do','vr','za','zo'].map(day=>[day,(values[`hours_${day}`]||'').toLowerCase()==='gesloten'?null:values[`hours_${day}`]||''])),openingHoursWeatherDependent:values.openingHoursWeatherDependent==='true'}:{}),...media} as Hotspot|Service}/></div> : <>

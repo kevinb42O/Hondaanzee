@@ -53,3 +53,6 @@ verify_jwt = false
 
 [functions.site-reviews]
 verify_jwt = false
+
+[functions.admin-favorites]
+verify_jwt = false

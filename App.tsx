@@ -50,6 +50,7 @@ const AdminAnalytics = React.lazy(() => import('./pages/AdminAnalytics.tsx'));
 const AdminZones = React.lazy(() => import('./pages/AdminZones.tsx'));
 const AdminZoneEditor = React.lazy(() => import('./pages/AdminZoneEditor.tsx'));
 const AdminReviews = React.lazy(() => import('./pages/AdminReviews.tsx'));
+const AdminFavorites = React.lazy(() => import('./pages/AdminFavorites.tsx'));
 const AdminMembers = React.lazy(() => import('./pages/AdminMembers.tsx'));
 const Account = React.lazy(() => import('./pages/Account.tsx'));
 const SharedTrip = React.lazy(() => import('./pages/SharedTrip.tsx'));
@@ -193,6 +194,7 @@ const AppContent = () => {
                 <Route path="reviews" element={<AdminReviews />} />
                 <Route path="reviews/:id" element={<AdminReviews />} />
                 <Route path="leden" element={<AdminMembers />} />
+                <Route path="favorieten" element={<AdminFavorites />} />
                 <Route path="meldpunt" element={<MeldpuntAdmin />} />
                 <Route path="log" element={<MeldpuntAdminLog />} />
                 <Route path="notificaties" element={<AdminNotifications />} />

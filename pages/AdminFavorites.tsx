@@ -1,0 +1,79 @@
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowRight, ArrowUpRight, Download, Heart, MapPin, RefreshCw, Search, ShieldCheck, Users } from 'lucide-react';
+import { CITIES } from '../cityData.ts';
+import { adminFunction } from '../utils/adminContent.ts';
+import { favoriteAdminPath, favoriteCsv, favoriteKey, favoriteKindLabels, favoriteMetricLabels, favoritePublicPath, favoriteStatusLabels, filterFavoritePlaces, type FavoriteInsights, type FavoriteMetric, type FavoritePlace } from '../utils/favoriteInsights.ts';
+import { FavoriteCount } from '../components/admin/AdminFavoriteCount.tsx';
+
+const cities = Object.fromEntries(CITIES.map(c => [c.slug, c.name]));
+const number = (value: number) => value.toLocaleString('nl-BE');
+const when = (value: string | null) => value ? new Date(value).toLocaleString('nl-BE', { timeZone: 'Europe/Brussels', dateStyle: 'short', timeStyle: 'short' }) : 'Nog niet bewaard';
+const kinds = ['hotspot', 'service', 'offleash'] as const;
+const metrics = ['saved_count', 'recent7_count', 'recent30_count'] as const;
+const cityName = (slug: string) => cities[slug] || slug;
+function PlaceName({ place }: { place: FavoritePlace }) {
+  const adminPath = favoriteAdminPath(place);
+  return <div className="workspace-place-name">{place.image ? <img src={place.image} alt="" loading="lazy" /> : <span className="workspace-favorite-placeholder"><MapPin size={19} /></span>}<span>{adminPath ? <Link to={adminPath}><strong>{place.name}</strong></Link> : <strong>{place.name}</strong>}<small>{favoriteKindLabels[place.kind]} · {cityName(place.city_slug)}</small></span></div>;
+}
+export default function AdminFavorites() {
+  const [params, setParams] = useSearchParams();
+  const [data, setData] = useState<FavoriteInsights | null>(null), [loading, setLoading] = useState(true), [error, setError] = useState(''), [page, setPage] = useState(1);
+  const sequence = useRef(0);
+  const load = async () => {
+    const request = ++sequence.current; setLoading(true); setError('');
+    try { const result = await adminFunction<FavoriteInsights>('admin-favorites', { action: 'overview' }); if (request === sequence.current) setData(result); }
+    catch (cause) { if (request === sequence.current) setError(cause instanceof Error ? cause.message : 'Kon favorieten niet laden.'); }
+    finally { if (request === sequence.current) setLoading(false); }
+  };
+  useEffect(() => { void load(); return () => { sequence.current++; }; }, []);
+  const change = (key: string, value: string) => setParams(previous => { const next = new URLSearchParams(previous); value ? next.set(key, value) : next.delete(key); return next; }, { replace: true });
+  const metric: FavoriteMetric = metrics.includes(params.get('metric') as FavoriteMetric) ? params.get('metric') as FavoriteMetric : 'saved_count';
+  const query = params.get('q') || '', city = params.get('city') || '', kind = params.get('kind') || '', status = params.get('status') || '', selected = params.get('place') || '';
+  const includeEmpty = params.get('empty') === '1' || !!selected;
+  const matches = useMemo(() => filterFavoritePlaces(data?.places || [], { query, city, kind, status, metric, includeEmpty }, cities).filter(p => !selected || p.place_id === selected), [data, query, city, kind, status, metric, includeEmpty, selected]);
+  useEffect(() => { setPage(1); }, [query, city, kind, status, metric, includeEmpty, selected]);
+  const pageCount = Math.max(1, Math.ceil(matches.length / 25)), currentPage = Math.min(page, pageCount);
+  const shown = matches.slice((currentPage - 1) * 25, currentPage * 25), leaders = matches.filter(p => p[metric] > 0).slice(0, 3);
+  const filteredTotal = matches.reduce((sum, p) => sum + p[metric], 0);
+  const exportCsv = () => {
+    const url = URL.createObjectURL(new Blob([favoriteCsv(matches, cities)], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a'); a.href = url; a.download = `hondaanzee-favorieten-${new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Brussels' }).format(new Date())}.csv`; a.click(); URL.revokeObjectURL(url);
+  };
+  return <>
+    <div className="workspace-page-heading"><div><p className="workspace-eyebrow">Van ontdekken naar onthouden</p><h1>Favorieten</h1><p>Welke plekken verdienen een plaats in de persoonlijke kustgids van je leden?</p></div><button type="button" className="workspace-button workspace-button-primary" disabled={loading} onClick={() => void load()}><RefreshCw size={16} className={loading ? 'animate-spin' : ''} />{loading ? 'Laden…' : 'Vernieuwen'}</button></div>
+    {error && <div className="workspace-error" role="alert"><p>{error}</p><button className="workspace-button" disabled={loading} onClick={() => void load()}>Opnieuw proberen</button></div>}
+    {loading && !data ? <section className="workspace-panel" role="status">Bewaarstatistieken laden…</section> : data && <div className="workspace-favorites" aria-busy={loading}>
+      <p className="workspace-note">Momentopname van alle accounts · bijgewerkt op {when(data.generated_at)} (Brussel). {error && 'Vernieuwen mislukt: de cijfers hieronder zijn de vorige momentopname.'}</p>
+      <div className="workspace-stats workspace-favorite-stats">
+        <section className="workspace-stat"><span><Heart size={16} />Opgeslagen favorieten</span><strong>{number(data.summary.saved_count)}</strong><small>Nu bewaard, over alle soorten en gemeenten</small></section>
+        <section className="workspace-stat"><span><Users size={16} />Accounts die bewaren</span><strong>{number(data.summary.member_count)}</strong><small>{number(data.summary.member_count)} van {number(data.summary.account_count)} accounts{data.summary.account_count > 0 ? ` · ${Math.round(100 * data.summary.member_count / data.summary.account_count)}%` : ''}</small></section>
+        <section className="workspace-stat"><span><MapPin size={16} />Plekken met favorieten</span><strong>{number(data.summary.place_count)}</strong><small>Inclusief eerder bewaarde, niet publieke plekken</small></section>
+        <section className="workspace-stat"><span><Heart size={16} />Recent toegevoegd</span><strong>{number(data.summary.recent7_count)}</strong><small>Laatste 7 dagen · {number(data.summary.recent30_count)} in 30 dagen, nog bewaard</small></section>
+      </div>
+      {data.summary.saved_count === 0 && <section className="workspace-panel workspace-favorites-intro"><Heart size={26} /><div><h2>De eerste bewaarde plek begint hier.</h2><p>De cijfers vullen zich zodra een lid een hotspot, dienst of losloopzone bewaart. Er zijn nog geen favorieten; de beschikbare plekken kun je hieronder wel bekijken.</p></div></section>}
+      {data.summary.unavailable_count > 0 && <div className="workspace-favorites-notice"><ShieldCheck size={18} /><span>{number(data.summary.unavailable_count)} {data.summary.unavailable_count === 1 ? 'favoriet verwijst' : 'favorieten verwijzen'} naar een concept, gearchiveerde plek of een plek zonder cataloguskoppeling.</span><button onClick={() => { setParams({ status: 'unavailable' }); }}>Bekijk deze plekken <ArrowRight size={14} /></button></div>}
+      <section className="workspace-panel">
+        <div className="workspace-section-heading"><div><h2><Heart size={20} />De bewaarde kust</h2><p className="workspace-muted">Verken populariteit per plek. Filters gelden voor de top, lijst en CSV hieronder.</p></div><button type="button" className="workspace-button" disabled={!matches.length || loading || !!error} onClick={exportCsv}><Download size={15} />CSV exporteren</button></div>
+        <div className="workspace-period" aria-label="Rangschik favorieten">{metrics.map(m => <button key={m} className={m === metric ? 'is-active' : ''} aria-pressed={m === metric} onClick={() => change('metric', m === 'saved_count' ? '' : m)}>{favoriteMetricLabels[m]}</button>)}</div>
+        <div className="workspace-filters workspace-favorite-filters">
+          <label className="workspace-search"><Search size={16} /><input aria-label="Zoek een bewaarde plek" type="search" placeholder="Naam, soort of gemeente" value={query} onChange={e => change('q', e.target.value)} /></label>
+          <select aria-label="Gemeente voor favorieten" value={city} onChange={e => change('city', e.target.value)}><option value="">Alle gemeenten</option>{CITIES.map(c => <option key={c.slug} value={c.slug}>{c.name}</option>)}{data.cities.filter(c => !cities[c.city_slug]).map(c => <option key={c.city_slug} value={c.city_slug}>{c.city_slug}</option>)}</select>
+          <select aria-label="Soort bewaarde plek" value={kind} onChange={e => change('kind', e.target.value)}><option value="">Alle soorten</option>{kinds.map(k => <option key={k} value={k}>{favoriteKindLabels[k]}</option>)}</select>
+          <select aria-label="Publicatiestatus van bewaarde plekken" value={status} onChange={e => change('status', e.target.value)}><option value="">Alle statussen</option><option value="published">Gepubliceerd</option><option value="unavailable">Niet publiek beschikbaar</option><option value="archived">Gearchiveerd</option><option value="draft">Concept</option><option value="unlinked">Niet meer gekoppeld</option></select>
+        </div>
+        <div className="workspace-favorite-options"><label><input type="checkbox" checked={includeEmpty} disabled={!!selected} onChange={e => change('empty', e.target.checked ? '1' : '')} />Toon ook plekken zonder {metric === 'saved_count' ? 'favorieten' : 'recente favorieten'}</label>{(params.size > 0) && <button type="button" className="workspace-text-link" onClick={() => setParams({})}>Wis filters</button>}</div>
+        {selected && <p className="workspace-note">Je bekijkt één plek. <button className="workspace-text-link" onClick={() => change('place', '')}>Bekijk alle plekken</button></p>}
+        <p className="workspace-result-count" role="status">{number(matches.length)} {matches.length === 1 ? 'plek' : 'plekken'} · {number(filteredTotal)} {metric === 'saved_count' ? filteredTotal === 1 ? 'huidige favoriet' : 'huidige favorieten' : filteredTotal === 1 ? 'recent toegevoegde favoriet die nog bewaard is' : 'recent toegevoegde favorieten die nog bewaard zijn'}</p>
+        {leaders.length > 0 && <div className="workspace-favorite-leaders">{leaders.map((p, index) => <article key={favoriteKey(p)}><span className="workspace-favorite-rank">{index + 1}</span><PlaceName place={p} /><div className="workspace-favorite-leader-value"><strong>{number(p[metric])}</strong><small>{metric === 'saved_count' ? p.saved_count === 1 ? 'account bewaart deze plek' : 'accounts bewaren deze plek' : 'recent toegevoegd, nog bewaard'}</small></div>{p.status !== 'published' && <small className="workspace-status">{favoriteStatusLabels[p.status]}</small>}</article>)}</div>}
+        {shown.length ? <div className="workspace-table-scroll"><table className="workspace-table workspace-favorites-table"><thead><tr><th><span className="sr-only">Positie</span>#</th><th>Plek</th><th>Status</th><th aria-sort={metric === 'saved_count' ? 'descending' : 'none'}>Bewaard</th><th aria-sort={metric === 'recent7_count' ? 'descending' : 'none'}>In 7 dagen</th><th aria-sort={metric === 'recent30_count' ? 'descending' : 'none'}>In 30 dagen</th><th>Laatste toevoeging</th><th>Acties</th></tr></thead><tbody>{shown.map((p, index) => <tr key={favoriteKey(p)} className={selected === p.place_id ? 'is-selected' : ''}><td className="workspace-favorite-position">{p[metric] ? (currentPage - 1) * 25 + index + 1 : '—'}</td><td><PlaceName place={p} /></td><td><span className={`workspace-status favorite-status-${p.status}`}>{favoriteStatusLabels[p.status]}</span>{p.temporarily_closed && <small className="workspace-closed-label">Tijdelijk gesloten</small>}</td><td><FavoriteCount count={p.saved_count} /></td><td>{number(p.recent7_count)}</td><td>{number(p.recent30_count)}</td><td><small>{when(p.last_saved_at)}</small></td><td><div className="workspace-actions">{favoriteAdminPath(p) && <Link to={favoriteAdminPath(p)!}>Beheer</Link>}{favoritePublicPath(p) && <Link to={favoritePublicPath(p)!} target="_blank" rel="noopener noreferrer" aria-label={`Bekijk ${p.name} op de website`}><ArrowUpRight size={15} /></Link>}{!p.place_id && <span className="workspace-muted">Geen koppeling</span>}</div></td></tr>)}</tbody></table></div> : <div className="workspace-empty"><Search size={25} /><h2>{data.summary.saved_count === 0 && !query && !city && !kind && !status ? 'Nog geen bewaarde plekken' : 'Geen plekken in deze selectie'}</h2><p>{metric === 'saved_count' ? 'Pas de filters aan of toon ook plekken zonder favorieten.' : 'Er zijn geen huidige favorieten toegevoegd binnen deze periode en selectie.'}</p><button className="workspace-button" onClick={() => setParams({ empty: '1' })}>Toon alle plekken</button></div>}
+        {pageCount > 1 && <div className="workspace-member-pagination"><button className="workspace-button" disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)}>Vorige</button><span>Pagina {currentPage} van {pageCount}</span><button className="workspace-button" disabled={currentPage === pageCount} onClick={() => setPage(currentPage + 1)}>Volgende</button></div>}
+      </section>
+      <div className="workspace-columns">
+        <section className="workspace-panel"><h2>Gemeenten in beeld</h2><p className="workspace-muted">Alle huidige favorieten, over alle soorten plekken. Klik om de lijst te filteren.</p><div className="workspace-favorite-city-list">{data.cities.length ? data.cities.map(c => <button key={c.city_slug} onClick={() => { setParams({ city: c.city_slug }); }} aria-label={`Bekijk favorieten in ${cityName(c.city_slug)}`}><span><strong>{cityName(c.city_slug)}</strong><small>{number(c.member_count)} {c.member_count === 1 ? 'account' : 'accounts'}</small></span><span className="workspace-favorite-bar" aria-hidden="true"><i style={{ width: `${100 * c.saved_count / Math.max(...data.cities.map(x => x.saved_count), 1)}%` }} /></span><b>{number(c.saved_count)}</b></button>) : <p className="workspace-muted">Gemeenten verschijnen zodra er een plek bewaard is.</p>}</div></section>
+        <section className="workspace-panel"><h2>Wat bewaren je leden?</h2><p className="workspace-muted">De verdeling van alle huidige favorieten.</p><div className="workspace-favorite-kind-list">{kinds.map(k => { const total = data.places.filter(p => p.kind === k).reduce((sum, p) => sum + p.saved_count, 0); return <button key={k} onClick={() => setParams({ kind: k })}><span>{favoriteKindLabels[k]}</span><strong>{number(total)}</strong><small>{data.summary.saved_count ? Math.round(100 * total / data.summary.saved_count) : 0}% van de favorieten</small><ArrowRight size={16} /></button>; })}</div><p className="workspace-note">Een account kan meerdere soorten plekken bewaren. De percentages verdelen favorieten, niet personen.</p></section>
+      </div>
+      <section className="workspace-panel workspace-favorite-explanation"><ShieldCheck size={21} /><div><h2>Wat deze cijfers vertellen</h2><ul><li>Iedere combinatie van account en plek telt één keer. Ook favorieten van geschorste accounts tellen mee zolang ze bestaan.</li><li>De 7- en 30-dagencijfers tonen huidige favorieten op basis van hun toevoegdatum. Een verwijderde favoriet of verwijderd account telt niet meer mee. Opnieuw bewaren krijgt een nieuwe toevoegdatum.</li><li>Dit is een actuele bewaarstand, geen historiek van alle hartjes, groei, bezoek, omzet of reserveringen. Bij gelijke cijfers bepaalt de totale bewaarstand en vervolgens de naam de volgorde.</li><li>De statistiek toont aantallen per plek, geen namen, e-mailadressen of persoonlijke favorietenlijsten.</li></ul><Link to="/admin/analytics" className="workspace-text-link">Vergelijk met paginaweergaven en contactkliks <ArrowRight size={14} /></Link></div></section>
+    </div>}
+  </>;
+}
