@@ -1,22 +1,24 @@
 .workspace-chart-scroll { min-width: 0; }
-.workspace-chart-scroll-hourly {
+.workspace-chart-scroll-detailed {
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: #c6d0e4 #f4f6fa;
 }
-.workspace-chart-hourly {
+.workspace-chart-detailed {
   display: block;
   min-width: 1000px;
   touch-action: pan-x pan-y;
 }
 .workspace-chart-time-label { font-variant-numeric: tabular-nums; }
-.workspace-chart-hourly-caption {
+.workspace-chart-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
   margin: 4px 0 16px;
   color: #667085;
   font-size: 12px;
 }
-.workspace-chart-hourly-caption span { display: none; }
-@media (max-width: 1280px) {
-  .workspace-chart-hourly-caption span { display: inline; }
-}
+.workspace-chart-caption strong { font-weight: 600; color: #475467; }
+.workspace-chart-scroll-hint { flex-basis: 100%; font-size: inherit; }

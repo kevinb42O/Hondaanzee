@@ -5,6 +5,7 @@ const { createServer } = require('node:http');
 const puppeteer = require('puppeteer');
 const { HOTSPOTS, SERVICES, OFF_LEASH_AREAS } = require('./place-data.cjs');
 
+const analyticsOnly = process.argv.includes('--analytics-only');
 const dist = path.resolve(__dirname, '../dist');
 const mime = { '.js': 'application/javascript', '.css': 'text/css', '.html': 'text/html', '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml', '.json': 'application/json' };
 const server = createServer((req, res) => {
@@ -127,6 +128,7 @@ const server = createServer((req, res) => {
     const exp = Math.floor(Date.now() / 1000) + 3600;
     const token = [Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url'), Buffer.from(JSON.stringify({ sub: user.id, exp, aud: 'authenticated', role: 'authenticated' })).toString('base64url'), 'test-only-invalid-signature'].join('.');
     await page.evaluate(session => localStorage.setItem('sb-zpllibfxaizavcvztnut-auth-token', JSON.stringify(session)), { access_token: token, refresh_token: 'test-only', token_type: 'bearer', expires_at: exp, expires_in: 3600, user });
+    if (!analyticsOnly) {
     await page.goto(base + '/admin');
     await page.waitForSelector('.workspace-stats');
     assert.deepEqual(await page.$$eval('.workspace-stat strong', els => els.map(el => Number(el.textContent))), [HOTSPOTS.length + SERVICES.length, HOTSPOTS.length, SERVICES.length, OFF_LEASH_AREAS.length]);
@@ -230,7 +232,8 @@ const server = createServer((req, res) => {
     await page.select('[name=visibility_hours]','show');await page.click('.workspace-savebar button');
     await page.waitForFunction(()=>document.querySelector('[name=name]')?.value==='Nieuwe dierenwinkel' && location.pathname.endsWith('000000001000'));
     assert.equal(savedRequests.at(-1).kind,'service');assert.deepEqual(savedRequests.at(-1).patch.openingHours,{ma:'10:00–17:00'});
-    await page.click('nav a[href="/admin/analytics"]');
+    }
+    await page.goto(base + '/admin/analytics');
     await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Analytics');
     await page.waitForSelector('.workspace-chart');
     assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[7,0,2]);
@@ -260,6 +263,27 @@ const server = createServer((req, res) => {
     await page.keyboard.press('Escape');
     await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-hourly-analytics-mobile.png'),fullPage:true});
     await page.setViewport({width:1440,height:1000});
+    for (const period of [{button:2,mode:'day',count:7},{button:3,mode:'date',count:30},{button:4,mode:'week'},{button:5,mode:'month'}]) {
+      await page.click(`[aria-label="Meetperiode"] button:nth-child(${period.button})`);
+      await page.waitForFunction(mode => document.querySelector('.workspace-chart-interactive')?.dataset.axisMode===mode,{},period.mode);
+      const labels=await page.$$eval('.workspace-chart-time-label',els=>els.map(el=>el.textContent));
+      if(period.count) assert.equal(labels.length,period.count); else assert.ok(labels.length>=12,'Long ranges have calendar week or month labels');
+      await page.waitForFunction(() => {const els=[...document.querySelectorAll('.workspace-chart-time-label')];return els.length>3 && els.every((el,i)=>!i||els[i-1].getBoundingClientRect().right<el.getBoundingClientRect().left);});
+      assert.match(await page.$eval('.workspace-chart-caption',el=>el.textContent),/2026/,'Complete range includes year');
+      await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp',`hondaanzee-calendar-${period.mode}-desktop.png`),fullPage:true});
+      await page.setViewport({width:390,height:844});
+      await page.$eval('.workspace-chart-interactive',el=>{el.scrollIntoView({block:'center',behavior:'instant'});el.focus({preventScroll:true});});
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`No page overflow in ${period.mode} mode`);
+      await page.keyboard.press('End');
+      await page.waitForFunction(()=>document.querySelector('[role=tooltip]')?.textContent.includes('Paginaweergaven7'));
+      assert.match(await page.$eval('[role=tooltip]',el=>el.textContent),/2 oktober 2026/i,'Hover still reports the exact day in long periods');
+      assert.ok(await page.$eval('[role=tooltip]',el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;}),'Date tooltip stays inside mobile viewport');
+      await page.keyboard.press('Home');
+      await page.waitForFunction(()=>document.querySelector('.workspace-chart-scroll-detailed').scrollLeft===0);
+      await page.keyboard.press('Escape');
+      await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp',`hondaanzee-calendar-${period.mode}-mobile.png`),fullPage:true});
+      await page.setViewport({width:1440,height:1000});
+    }
     await page.click('[aria-label="Gegevensbron"] button:nth-child(2)');
     await page.waitForFunction(()=>document.querySelector('.workspace-stat strong')?.textContent==='100');
     assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[100,15,20], 'Historical daily visitors must never be summed into unique period visitors');
@@ -276,9 +300,11 @@ const server = createServer((req, res) => {
     await page.keyboard.press('Escape');assert.equal(await page.$('[role=tooltip]'),null);
     await page.setViewport({width:390,height:844});
     await page.$eval('.workspace-chart-interactive',el=>el.scrollIntoView({block:'center',behavior:'instant'}));
+    await page.$eval('.workspace-chart-interactive',el=>el.focus());await page.keyboard.press('End');
     const mobilePoint=await page.$eval('.workspace-chart-interactive',el=>{const m=el.getScreenCTM();const p=new DOMPoint(900,140).matrixTransform(m);return{x:p.x,y:p.y};});await page.mouse.move(mobilePoint.x-5,mobilePoint.y);await page.mouse.move(mobilePoint.x,mobilePoint.y);
     await page.waitForSelector('[role=tooltip]');assert.ok(await page.$eval('[role=tooltip]',el=>el.getBoundingClientRect().right<=innerWidth&&el.getBoundingClientRect().left>=0),'Tooltip stays inside mobile viewport');
     await page.setViewport({width:1440,height:1000});
+    if (!analyticsOnly) {
     await page.click('nav a[href="/admin/publiceren"]');
     await page.waitForSelector('.workspace-publication-list input[type=checkbox]');
     assert.equal(await page.$$eval('.workspace-publication-list input',els=>els.length),fakePlaces.filter(p=>p.draft_revision_id!==p.published_revision_id).length,'Only unpublished drafts are selected for publication');
@@ -380,8 +406,10 @@ const server = createServer((req, res) => {
     assert.equal(await page.$('.workspace-error'), null, await page.$eval('body', el => el.textContent));
     assert.equal(await page.$('.workspace-stats'), null, 'Sign out removes the dashboard');
     assert.deepEqual(analyticsRequests, [], 'Admin navigation sends no analytics requests');
+    }
     assert.deepEqual(errors, []);
-    console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, cursor tooltip, report workbench, preserved originals, save failure recovery, archive, notification preview and confirmation, draft recovery, partial/failed delivery, legacy routes, noindex, mobile, sign out, no analytics requests.');
+    if (analyticsOnly) console.log('All five analytics periods passed on desktop and mobile: calendar labels, midnight, month/year boundaries, cursor and keyboard tooltips, Vercel history and contained scrolling.');
+    else console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, cursor tooltip, report workbench, preserved originals, save failure recovery, archive, notification preview and confirmation, draft recovery, partial/failed delivery, legacy routes, noindex, mobile, sign out, no analytics requests.');
   } finally {
     if (browser) await browser.close();
     server.close();
