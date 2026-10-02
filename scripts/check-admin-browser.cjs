@@ -243,6 +243,8 @@ const server = createServer((req, res) => {
     assert.equal(fakeReports[0].status,'removed');assert.equal(fakeReports[0].city_intervention_note,'Doorgestuurd naar stadsdiensten.');
     await page.goto(base+'/admin/log?report=melding-pending');await page.waitForSelector('.workspace-report-record');
     assert.equal(await page.$('.workspace-report-followup'),null,'Log is read-only');assert.match(await page.$eval('.workspace-report-detail',el=>el.textContent),/Oorspronkelijke melding/);
+    await page.click('[aria-label="Meldingdetails sluiten"]');await page.waitForFunction(()=>document.activeElement?.classList.contains('workspace-report-row'));
+    await page.click('[aria-label="Bekijk melding: Duinenpad"]');await page.waitForSelector('.workspace-report-record');
     await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-report-workbench-desktop.png'),fullPage:true});
     await page.setViewport({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Report workbench has no mobile overflow');
     await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-report-workbench-mobile.png'),fullPage:true});
@@ -252,6 +254,8 @@ const server = createServer((req, res) => {
     await page.goto(base+'/admin/notificaties');await page.waitForSelector('[name=push-title]');
     await page.waitForFunction(()=>document.querySelector('.workspace-stat strong')?.textContent==='3');
     await page.type('[name=push-title]','Nieuwe kustupdate');await page.type('[name=push-body]','Controleer het nieuwe wandelpad.');
+    await page.select('[aria-label="Kies een bestemmingspagina"]','custom');await page.waitForFunction(()=>document.querySelector('.workspace-push-submit button').disabled);
+    assert.match(await page.$eval('#push-url-help',el=>el.textContent),/Vul een bestemmingslink/);
     await page.$eval('[name=push-url]',el=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;setter.call(el,'javascript:alert(1)');el.dispatchEvent(new Event('input',{bubbles:true}));});
     await page.waitForFunction(()=>document.querySelector('.workspace-push-submit button').disabled);
     assert.equal(await page.$('.workspace-push-destination a'),null,'Unsafe preview link is unavailable');

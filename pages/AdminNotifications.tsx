@@ -18,9 +18,9 @@ interface SendResult { ok: boolean; sent: number; failed: number; total: number;
 const emptyDraft: Draft = {title:'',body:'',url:'/'};
 const dateLabel = (iso: string) => new Date(iso).toLocaleString('nl-BE',{timeZone:'Europe/Brussels',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
 
-function NotificationPreview({ draft, placeholder = true }: { draft: Draft; placeholder?: boolean }) {
+function NotificationPreview({ draft, placeholder = true, timeLabel = 'nu' }: { draft: Draft; placeholder?: boolean; timeLabel?: string }) {
   return <div className="workspace-push-preview" aria-label="Voorvertoning notificatie">
-    <div className="workspace-push-preview-meta"><span><Bell size={12}/> HOND AAN ZEE</span><span>nu</span></div>
+    <div className="workspace-push-preview-meta"><span><Bell size={12}/> HOND AAN ZEE</span><span>{timeLabel}</span></div>
     <div className="workspace-push-preview-message"><img src="/notification-icon-192.png" alt=""/><div>
       <h3>{draft.title.trim() || (placeholder ? 'Je titel verschijnt hier' : '')}</h3>
       {(draft.body.trim() || placeholder) && <p>{draft.body.trim() || 'Schrijf een korte boodschap voor een fijne dag aan zee.'}</p>}
@@ -51,7 +51,7 @@ export default function AdminNotifications() {
   const alive = useRef(true);
   const sendLock = useRef(false);
   const normalizedUrl = normalizePushUrl(draft.url);
-  const urlError = pushUrlError(draft.url);
+  const urlError = draft.url.trim() ? pushUrlError(draft.url) : 'Vul een bestemmingslink in of kies Home.';
   const hasDraft = !!(draft.title || draft.body || normalizedUrl !== '/');
   const canSend = statsReady && !loading && !sending && !!draft.title.trim() && draft.title.length <= PUSH_TITLE_LIMIT && draft.body.length <= PUSH_BODY_LIMIT && !urlError && (subscribers ?? 0) > 0;
   const filteredLog = log.filter(entry => `${entry.title} ${entry.body || ''} ${entry.url || ''}`.toLocaleLowerCase('nl').includes(search.trim().toLocaleLowerCase('nl')));
@@ -147,7 +147,7 @@ export default function AdminNotifications() {
         </button>)}</div>:<div className="workspace-empty"><History size={26}/><h2>{search?'Geen berichten gevonden':'Nog geen verzendingen'}</h2><p>{search?'Probeer een andere zoekterm.':'Je verstuurde berichten verschijnen hier met hun afleverresultaat.'}</p>{search&&<button className="workspace-button" onClick={()=>setSearch('')}>Zoekopdracht wissen</button>}</div>}
         <p className="workspace-note">De laatste 25 verzendingen. Afgeleverd betekent aanvaard door de pushdienst, geen bevestiging dat iemand het bericht las.</p>
       </section>
-      {selectedLog&&<section className="workspace-panel workspace-operation-detail"><div className="workspace-section-heading"><h2>Verzonden bericht</h2><button className="workspace-text-link" onClick={()=>setSelectedLog(null)}>Sluiten</button></div><p className="workspace-muted">{dateLabel(selectedLog.created_at)}</p><NotificationPreview placeholder={false} draft={{title:selectedLog.title,body:selectedLog.body||'',url:selectedLog.url||'/'}}/>
+      {selectedLog&&<section className="workspace-panel workspace-operation-detail"><div className="workspace-section-heading"><h2>Verzonden bericht</h2><button className="workspace-text-link" onClick={()=>setSelectedLog(null)}>Sluiten</button></div><p className="workspace-muted">{dateLabel(selectedLog.created_at)}</p><NotificationPreview placeholder={false} timeLabel="verstuurd" draft={{title:selectedLog.title,body:selectedLog.body||'',url:selectedLog.url||'/'}}/>
         <dl className="workspace-operation-facts"><div><dt>Afgeleverd</dt><dd>{selectedLog.sent_count}</dd></div><div><dt>Mislukt</dt><dd>{selectedLog.failed_count}</dd></div><div><dt>Totaal geprobeerd</dt><dd>{selectedLog.total_count}</dd></div><div><dt>Bestemming</dt><dd>{pushUrlError(selectedLog.url||'/')?<span>{selectedLog.url}</span>:<a href={normalizePushUrl(selectedLog.url||'/')} target="_blank" rel="noopener noreferrer">{selectedLog.url||'/'}<ExternalLink size={12}/></a>}</dd></div></dl>
         <button className="workspace-button" onClick={()=>requestReplace({title:selectedLog.title,body:selectedLog.body||'',url:selectedLog.url||'/'},'Bericht hergebruiken')}><Copy size={15}/>Als nieuw concept gebruiken</button><p className="workspace-note">Dit opent de editor. Het bericht wordt niet opnieuw verstuurd.</p>
       </section>}
