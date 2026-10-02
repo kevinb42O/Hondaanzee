@@ -676,6 +676,16 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
         />
       )}
 
+      {'openingHoursNote' in place && place.openingHoursNote && !place.openingHours && (
+        <div className="mb-4 rounded-2xl border border-slate-200 p-4">
+          <div className="mb-2 flex items-center gap-2">
+            <Clock size={18} className="shrink-0 text-slate-500" />
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Voor je bezoek</p>
+          </div>
+          <p className="text-sm leading-relaxed text-slate-600">{place.openingHoursNote}</p>
+        </div>
+      )}
+
       {place.website && (
         <a
           href={place.website}

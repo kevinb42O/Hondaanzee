@@ -1601,17 +1601,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     address: 'Leopoldlaan 13, 8420 De Haan',
     phone: '+32 59 42 83 93',
     website: 'https://www.brasserielapotiniere.be/nl/home',
-    openingHoursNote: 'Huidig seizoen: maandag, dinsdag en vrijdag gesloten. De openingsdagen kunnen variëren naargelang het weer; bel vooraf om zeker te zijn. In de zomerperiode is de brasserie elke dag open van 11:00 tot 21:00.',
-    openingHoursWeatherDependent: true,
-    openingHours: {
-      ma: null,
-      di: null,
-      wo: '11:00–21:00',
-      do: '11:00–21:00',
-      vr: null,
-      za: '11:00–21:00',
-      zo: '11:00–21:00',
-    },
+    openingHoursNote: 'De openingsuren variëren naargelang het seizoen en het weer. Bel vooraf of bekijk de website van de brasserie voor actuele informatie.',
   },
   {
     id: 130,

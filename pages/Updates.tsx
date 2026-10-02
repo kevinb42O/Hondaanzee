@@ -42,10 +42,10 @@ const releases: UpdateRelease[] = [
   {
     version: '2.8',
     date: SITE_UPDATE_LABEL,
-    title: 'Seizoensuren La Potinière en actuele wijzigingsdatums',
-    subtitle: 'Duidelijke openingsuren voor het huidige seizoen en een bijgewerkte datum op de website',
+    title: 'Praktische info La Potinière en actuele wijzigingsdatums',
+    subtitle: 'Actuele contactinformatie en een duidelijke toelichting voor je bezoek',
     entries: [
-      { text: 'La Potinière: maandag, dinsdag en vrijdag gesloten in dit seizoen; de overige dagen open van 11:00 tot 21:00, met vermelding van weersafhankelijke wijzigingen en de zomeruren', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'La Potinière: vaste openingsuren verwijderd op vraag van de uitbater. De uren variëren per seizoen en naargelang het weer; bezoekers kunnen vooraf bellen of de website van de brasserie raadplegen.', tag: { label: 'Opgelost', color: 'emerald' } },
       { text: 'Laatste update in de footer, wijzigingsdatums in de gestructureerde gegevens en relevante sitemapdatums bijgewerkt naar 2 oktober 2026', tag: { label: 'Verbeterd', color: 'amber' } },
     ],
   },
