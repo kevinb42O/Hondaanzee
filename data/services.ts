@@ -1,3 +1,4 @@
+import { resolvePublicPlace } from '../supabase/functions/_shared/placeFields.ts';
 import dashboardCatalog from './dashboardCatalog.json';
 import type { Service } from '../types';
 
@@ -297,5 +298,5 @@ const LEGACY_SERVICES: Service[] = [
 ];
 
 // Build preparation freezes the same catalog for client and static HTML.
-export const SERVICES: Service[] = dashboardCatalog.services ? dashboardCatalog.services as Service[] : LEGACY_SERVICES;
+export const SERVICES: Service[] = (dashboardCatalog.services ? dashboardCatalog.services as Service[] : LEGACY_SERVICES).map(resolvePublicPlace);
 export { LEGACY_SERVICES };

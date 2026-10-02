@@ -17,9 +17,9 @@ describe('admin content editing', () => {
       expect(contentDraftPatch.safeParse(patch).success).toBe(false);
     }
   });
-  it('rejects categories from another kind and service opening hours', () => {
+  it('rejects categories from another kind but supports service opening hours', () => {
     expect(() => mergeContentDraft('hotspot', {}, { type: 'Dierenarts' })).toThrow();
-    expect(() => mergeContentDraft('service', {}, { openingHoursNote: 'Test' })).toThrow();
+    expect(mergeContentDraft('service', {}, { openingHoursNote: 'Test', openingHours: { ma: '09:00–18:00' } })).toMatchObject({ openingHoursNote: 'Test', openingHours: { ma: '09:00–18:00' } });
   });
   it('requires complete minimum data and a stable route for new drafts', () => {
     const request = { action: 'create', kind: 'hotspot', city: 'blankenberge', slug: 'nieuwe-zaak', patch: { name: 'Nieuwe zaak', description: 'Een beschrijving', address: 'Kerkstraat 1', type: 'Café' } };

@@ -1,5 +1,6 @@
 import type { City, Hotspot, Service, OpeningHours } from '../types.ts';
 import type { PlaceKind } from './placeRoutes.ts';
+import { resolvePublicPlace, parseHourPeriods } from '../supabase/functions/_shared/placeFields.ts';
 import type { SEOProps } from './seo.ts';
 import { getPlaceDetailPath } from './placeRoutes.ts';
 import { PLACE_PAGE_DATES } from '../data/placePageDates.ts';
@@ -27,17 +28,10 @@ const buildOpeningHoursSpecification = (hours: OpeningHours): object[] =>
   Object.entries(hours).flatMap(([day, value]) => {
     if (!value) return [];
     const schemaDay = SCHEMA_DAY[day];
-    // Split on comma to support multiple periods per day
-    return value.split(',').flatMap((period) => {
-      const parts = period.trim().split(/\u2013|–|-/);
-      if (parts.length !== 2) return [];
-      return [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: schemaDay,
-        opens: parts[0].trim(),
-        closes: parts[1].trim(),
-      }];
-    });
+    return (parseHourPeriods(value) || []).map(period => ({
+      '@type': 'OpeningHoursSpecification', dayOfWeek: schemaDay,
+      opens: period.opens, closes: period.closes,
+    }));
   });
 
 const PLACE_SCHEMA_TYPES = {
@@ -100,7 +94,8 @@ export const getPlacePostalAddress = (address: string, fallbackCity: string) => 
   };
 };
 
-export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps => {
+export const getPlaceSEO = (draft: Place, city: City, kind: PlaceKind): SEOProps => {
+  const place = resolvePublicPlace(draft);
   const collectionLabel = getPlaceCollectionLabel(kind);
   const route = getPlaceDetailPath(place, kind);
   const canonical = `https://hondaanzee.be${route}`;

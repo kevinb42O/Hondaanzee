@@ -79,9 +79,15 @@ const server = createServer((req, res) => {
         if (input.action === 'list') return request.respond({ status: 200, headers: cors, contentType: 'application/json', body: JSON.stringify({places: fakePlaces}) });
         if (input.action === 'detail') return request.respond({ status: 200, headers: cors, contentType: 'application/json', body: JSON.stringify({place: fakePlaces.find(place => place.id === input.id)}) });
         savedRequests.push(input);
-        if (input.action === 'save') return request.respond({ status: conflict ? 409 : 200, headers: cors, contentType: 'application/json', body: JSON.stringify(conflict ? {error: 'Deze zaak is intussen gewijzigd. Herlaad de laatste versie voordat je opnieuw opslaat.'} : {version: 2, revision_id: 'saved'}) });
+        if (input.action === 'save') {
+          const place = fakePlaces.find(place => place.id === input.id);
+          if (conflict || input.version !== place.version) return request.respond({ status: 409, headers: cors, contentType: 'application/json', body: JSON.stringify({error: 'Deze zaak is intussen gewijzigd. Herlaad de laatste versie voordat je opnieuw opslaat.'}) });
+          const content = {...place.draft.content, ...input.patch, ...(input.patch.presentation ? {presentation: {...place.draft.content.presentation, ...input.patch.presentation}} : {}), ...input.media};
+          place.draft = {content}; place.version++; place.draft_revision_id = 'saved';
+          return request.respond({ status: 200, headers: cors, contentType: 'application/json', body: JSON.stringify({version: place.version, revision_id: 'saved', content}) });
+        }
         if (input.action === 'create') {
-          const place = { ...fakePlaces[0], id: '00000000-0000-4000-8000-000000000999', slug: input.slug, city_slug: input.city, kind: input.kind, published_revision_id: null, published: null, draft: {content: {...input.patch, id: 999, slug: input.slug, city: input.city, tags: [], image: ''}} };
+          const place = { ...fakePlaces[0], id: `00000000-0000-4000-8000-${String(999+fakePlaces.length-157).padStart(12,'0')}`, slug: input.slug, city_slug: input.city, kind: input.kind, version: 1, draft_revision_id: 'new', published_revision_id: null, published: null, draft: {content: {...input.patch, id: 999, slug: input.slug, city: input.city, tags: [], image: ''}} };
           fakePlaces.push(place);
           return request.respond({ status: 201, headers: cors, contentType: 'application/json', body: JSON.stringify({id: place.id}) });
         }
@@ -177,6 +183,52 @@ const server = createServer((req, res) => {
     await page.goto(base + '/admin/zaken/' + lakaiann.id);
     await page.waitForSelector('input[name="name"]');
     await page.screenshot({path: path.join(process.env.TMPDIR || '/tmp', 'hondaanzee-admin-editor-desktop.png'), fullPage: true});
+    // Same field control for both collections; a hidden value survives reload and category changes.
+    const store = fakePlaces.find(place => place.draft.content.type === 'Dierenspeciaalzaak');
+    await page.goto(base + '/admin/zaken/' + store.id); await page.waitForSelector('[name=openingHoursMode]');
+    await page.select('[name=openingHoursMode]', 'schedule');
+    await page.type('[name=hours_ma]', '09:00–18:00');
+    await page.type('[name=hours_di]', 'Gesloten');
+    await page.type('[name=openingHoursNote]', 'Eigen urenopmerking');
+    await page.select('[name=openingHoursWeatherDependent]', 'true');
+    await page.select('[name=visibility_hours]', 'hide');
+    await page.click('.workspace-savebar button'); await page.waitForSelector('.workspace-success');
+    assert.deepEqual(savedRequests.at(-1).patch.openingHours, {ma:'09:00–18:00',di:null});
+    await page.reload(); await page.waitForSelector('[name=hours_ma]');
+    assert.equal(await page.$eval('[name=hours_ma]', el=>el.value), '09:00–18:00');
+    assert.equal(await page.$eval('[name=visibility_hours]', el=>el.value), 'hide');
+    await page.click('.workspace-editor-heading>button'); await page.waitForSelector('.workspace-public-preview');
+    assert.equal(await page.$('[data-place-availability]'), null);
+    await page.click('.workspace-editor-heading>button'); await page.waitForSelector('[name=visibility_hours]');
+    await page.select('[name=visibility_hours]', 'show');
+    await page.click('.workspace-editor-heading>button'); await page.waitForSelector('[data-place-hours]');
+    assert.match(await page.$eval('[data-place-availability]',el=>el.textContent), /09:00–18:00.*Gesloten.*weersafhankelijk/s);
+    await page.click('.workspace-editor-heading>button'); await page.waitForSelector('[name=type]');
+    await page.select('[name=type]', 'Dierenarts');
+    assert.equal(await page.$eval('[name=hours_ma]',el=>el.value),'09:00–18:00');
+    await page.select('[name=openingHoursMode]', 'appointment');
+    await page.click('.workspace-editor-heading>button'); await page.waitForSelector('[data-place-availability]');
+    assert.match(await page.$eval('[data-place-availability]',el=>el.textContent), /Alleen op afspraak/);
+    assert.equal(await page.$('[data-place-hours]'),null);
+    await page.click('.workspace-editor-heading>button'); await page.waitForSelector('[name=hours_ma]');
+    await page.select('[name=openingHoursMode]', 'schedule');
+    for(const name of ['hours_ma','hours_di']) await page.$eval(`[name=${name}]`,el=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;setter.call(el,'');el.dispatchEvent(new Event('input',{bubbles:true}));});
+    await page.click('.workspace-savebar button'); await page.waitForSelector('.workspace-success');
+    assert.equal(savedRequests.at(-1).patch.openingHours, null);
+    await page.reload();await page.waitForSelector('[name=hours_ma]');
+    assert.equal(await page.$eval('[name=hours_ma]',el=>el.value),'');
+    await page.setViewport({width:390,height:844});
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Field controls do not overflow on mobile');
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-place-fields-mobile.png'),fullPage:true});
+    await page.setViewport({width:1440,height:1000});
+    await page.goto(base + '/admin/zaken/nieuw');await page.waitForSelector('[name=kind]');
+    await page.select('[name=kind]','service');
+    await page.type('[name=name]','Nieuwe dierenwinkel');await page.type('textarea[name=description]','Een winkel voor je huisdier.');await page.type('[name=address]','Teststraat 1');
+    await page.type('input[placeholder="naam-van-de-zaak"]','nieuwe-dierenwinkel');await page.select('[name=type]','Dierenspeciaalzaak');
+    await page.select('[name=openingHoursMode]','schedule');await page.type('[name=hours_ma]','10:00–17:00');
+    await page.select('[name=visibility_hours]','show');await page.click('.workspace-savebar button');
+    await page.waitForFunction(()=>document.querySelector('[name=name]')?.value==='Nieuwe dierenwinkel' && location.pathname.endsWith('000000001000'));
+    assert.equal(savedRequests.at(-1).kind,'service');assert.deepEqual(savedRequests.at(-1).patch.openingHours,{ma:'10:00–17:00'});
     await page.click('nav a[href="/admin/analytics"]');
     await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Analytics');
     await page.waitForSelector('.workspace-chart');
@@ -207,8 +259,8 @@ const server = createServer((req, res) => {
     await page.setViewport({width:1440,height:1000});
     await page.click('nav a[href="/admin/publiceren"]');
     await page.waitForSelector('.workspace-publication-list input[type=checkbox]');
-    assert.equal(await page.$$eval('.workspace-publication-list input',els=>els.length),1,'Only unpublished drafts are selected for publication');
-    await page.click('.workspace-publication-list input[type=checkbox]');
+    assert.equal(await page.$$eval('.workspace-publication-list input',els=>els.length),fakePlaces.filter(p=>p.draft_revision_id!==p.published_revision_id).length,'Only unpublished drafts are selected for publication');
+    const unpublishedInputs=await page.$$('.workspace-publication-list input[type=checkbox]');await unpublishedInputs.at(-1).click();
     await page.click('.workspace-savebar button');
     await page.waitForSelector('.workspace-success');
     assert.deepEqual(publicationRequests[0].places,{[fakePlaces.at(-1).id]:1});

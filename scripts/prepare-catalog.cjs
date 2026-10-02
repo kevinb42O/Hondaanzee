@@ -1,5 +1,7 @@
 const fs=require('node:fs');const path=require('node:path');const {createHash}=require('node:crypto');
 const root=path.resolve(__dirname,'..');
+const {loadTsModule}=require('./place-data.cjs');
+const {resolvePublicPlace}=loadTsModule('supabase/functions/_shared/placeFields.ts');
 async function prepareCatalog(){
  const token=process.env.CATALOG_BUILD_TOKEN,release=process.env.HAZ_RELEASE_ID;
  let catalog={releaseId:null,hotspots:null,services:null,offLeashAreas:null};
@@ -17,7 +19,7 @@ async function prepareCatalog(){
    const {CITIES}=require('./place-data.cjs');const {validatePlaceData}=require('./validate-place-data.cjs');
    validatePlaceData({HOTSPOTS:snapshot.hotspots,SERVICES:snapshot.services,CITIES});
    if(snapshot.offLeashAreas){const slugs=new Set();for(const zone of snapshot.offLeashAreas){if(!zone.name||!zone.slug||slugs.has(zone.slug)||!CITIES.some(c=>c.slug===zone.city)||!Number.isFinite(zone.lat)||!Number.isFinite(zone.lng))throw new Error('Invalid zone catalog');slugs.add(zone.slug);}}
-   catalog={releaseId:body.releaseId,sha256:body.sha256,hotspots:snapshot.hotspots,services:snapshot.services,offLeashAreas:snapshot.offLeashAreas??null};
+   catalog={releaseId:body.releaseId,sha256:body.sha256,hotspots:snapshot.hotspots.map(resolvePublicPlace),services:snapshot.services.map(resolvePublicPlace),offLeashAreas:snapshot.offLeashAreas??null};
   }
  }
  fs.writeFileSync(path.join(root,'data/dashboardCatalog.json'),JSON.stringify(catalog));

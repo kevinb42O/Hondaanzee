@@ -1,7 +1,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { HOTSPOTS, SERVICES } = require('./place-data.cjs');
+const { loadTsModule } = require('./place-data.cjs');
+// Import the complete original records, never a public projection.
+const { LEGACY_HOTSPOTS: HOTSPOTS } = loadTsModule('data/hotspots.ts');
+const { LEGACY_SERVICES: SERVICES } = loadTsModule('data/services.ts');
 
 // This script only prepares SQL. It never connects to Supabase or uploads media.
 // A repeat import inserts missing identities only; it never replaces drafts.

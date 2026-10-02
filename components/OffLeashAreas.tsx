@@ -268,7 +268,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                             <p className="text-slate-400 text-xs mb-3 leading-relaxed">{area.description}</p>
                           )}
                           <div className="flex items-center gap-4">
-                            {area.openingHours && (
+                            {area.openingHours && (area.access === 'hours' || !area.access) && (
                               <div className="flex items-center gap-1.5 text-slate-400 font-bold text-[10px] uppercase">
                                 <Clock size={12} /> {area.openingHours.open} - {area.openingHours.close}
                               </div>

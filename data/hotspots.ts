@@ -1,3 +1,4 @@
+import { resolvePublicPlace } from '../supabase/functions/_shared/placeFields.ts';
 import dashboardCatalog from './dashboardCatalog.json';
 import type { Hotspot } from '../types';
 
@@ -1831,5 +1832,5 @@ const LEGACY_HOTSPOTS: Hotspot[] = [
 ];
 
 // Build preparation freezes the same catalog for client and static HTML.
-export const HOTSPOTS: Hotspot[] = dashboardCatalog.hotspots ? dashboardCatalog.hotspots as Hotspot[] : LEGACY_HOTSPOTS;
+export const HOTSPOTS: Hotspot[] = (dashboardCatalog.hotspots ? dashboardCatalog.hotspots as Hotspot[] : LEGACY_HOTSPOTS).map(resolvePublicPlace);
 export { LEGACY_HOTSPOTS };

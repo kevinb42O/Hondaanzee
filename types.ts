@@ -3,13 +3,12 @@
  *  Value: time range string like "10:30–18:00", or null = closed that day. */
 export type OpeningHours = Partial<Record<'ma' | 'di' | 'wo' | 'do' | 'vr' | 'za' | 'zo', string | null>>;
 
-export interface Hotspot {
+export interface PlaceBase {
   id: number;
   slug: string;
   name: string;
   summary?: string;
   recommendationNote?: string;
-  type: 'Café' | 'Koffiebar' | 'Slapen' | 'Restaurant' | 'Brasserie' | 'Shoppen';
   description: string;
   tags: string[];
   image: string;
@@ -21,29 +20,21 @@ export interface Hotspot {
   website?: string;
   websiteLabel?: string;
   sameAs?: string[];
-  openingHours?: OpeningHours;
+  openingHours?: OpeningHours | null;
+  openingHoursMode?: import('./supabase/functions/_shared/placeFields.ts').HoursMode;
+  presentation?: import('./supabase/functions/_shared/placeFields.ts').PlacePresentation;
+  tagGroups?: import('./supabase/functions/_shared/placeFields.ts').TagGroups;
+  practicalNote?: string;
   openingHoursNote?: string;
   openingHoursWeatherDependent?: boolean;
 }
 
-export interface Service {
-  id: number;
-  slug: string;
-  name: string;
-  summary?: string;
-  recommendationNote?: string;
+export interface Hotspot extends PlaceBase {
+  type: 'Café' | 'Koffiebar' | 'Slapen' | 'Restaurant' | 'Brasserie' | 'Shoppen';
+}
+
+export interface Service extends PlaceBase {
   type: 'Dierenarts' | 'Dierenspeciaalzaak';
-  description: string;
-  tags: string[];
-  image: string;
-  images?: string[];
-  imagePosition?: string; // e.g. 'center top' or '50% 25%'
-  city: string; // city slug
-  address: string;
-  phone?: string;
-  website: string;
-  websiteLabel?: string;
-  sameAs?: string[];
 }
 
 export type StatusValue = 'JA' | 'DEELS' | 'NEE';

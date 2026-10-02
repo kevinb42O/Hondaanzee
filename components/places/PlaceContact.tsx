@@ -1,10 +1,12 @@
 import React from 'react';
+import { resolvePublicPlace } from '../../supabase/functions/_shared/placeFields.ts';
 import { ArrowUpRight, MapPin, Phone } from 'lucide-react';
 import { CATEGORY_COPY, directionsUrl, getPlaceCategory, type Place } from '../../utils/placePresentation';
 import { trackPlaceAction } from '../../utils/placeAnalytics';
 import type { PlaceKind } from '../../utils/placeRoutes';
 
-export default function PlaceContact({ place, kind }: { place: Place; kind: PlaceKind }) {
+export default function PlaceContact({ place: draft, kind }: { place: Place; kind: PlaceKind }) {
+  const place = resolvePublicPlace(draft);
   const copy = CATEGORY_COPY[getPlaceCategory(place)];
   const button = 'inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700';
   return (

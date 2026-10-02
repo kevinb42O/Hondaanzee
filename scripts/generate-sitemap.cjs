@@ -10,7 +10,7 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const OUTPUT_PATH = path.join(ROOT_DIR, 'public', 'sitemap.xml');
 const statePath = path.join(ROOT_DIR, 'data', 'placePageRevisions.json');
 const previousState = fs.existsSync(statePath) ? JSON.parse(fs.readFileSync(statePath, 'utf8')) : {};
-const template = ['utils/placeSEO.ts', 'utils/placeRoutes.ts', 'utils/placePresentation.ts', 'pages/PlaceDetail.tsx',
+const template = ['supabase/functions/_shared/placeFields.ts', 'utils/placeSEO.ts', 'utils/placeRoutes.ts', 'utils/placePresentation.ts', 'pages/PlaceDetail.tsx',
   ...fs.readdirSync(path.join(ROOT_DIR, 'components/places')).filter(file => file.endsWith('.tsx')).sort().map(file => `components/places/${file}`)]
   .map((file) => fs.readFileSync(path.join(ROOT_DIR, file), 'utf8')).join('\n');
 const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Brussels' }).format(new Date());

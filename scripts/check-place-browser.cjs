@@ -21,7 +21,7 @@ const server = createServer((req, res) => {
     res.end(shell);
 });
 const assert = require('node:assert/strict');
-const { HOTSPOTS } = require('./place-data.cjs');
+const { HOTSPOTS, SERVICES } = require('./place-data.cjs');
 (async () => {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     const base = `http://127.0.0.1:${server.address().port}`;
@@ -63,7 +63,7 @@ const { HOTSPOTS } = require('./place-data.cjs');
         await page.evaluate(() => document.querySelector('a[href="/hotspots"]').click());
         await page.waitForFunction(() => location.pathname === '/hotspots' && document.querySelector('h1')?.textContent.includes('Hotspots'));
         await page.evaluate(() => document.querySelector('a[href="/blankenberge/hotspots/cozy-moments"]').click());
-        await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'COZY Moments');
+        await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Cozy Moments');
         views = await page.evaluate(() => window.__analytics.filter(x => x.type === 'pageview'));
         assert.deepEqual(views.map(x => x.path), ['/blankenberge/hotspots/lakaiann', '/hotspots', '/blankenberge/hotspots/cozy-moments']);
         await page.evaluate(() => { history.pushState(null, '', '/blankenberge/hotspots/bestaat-niet'); dispatchEvent(new PopStateEvent('popstate')); });
@@ -83,6 +83,10 @@ const { HOTSPOTS } = require('./place-data.cjs');
             { route: '/nieuwpoort/hotspots/dune-hotel-nieuwpoort', category: 'stay', heading: 'Voor je verblijf', title: 'Dune Hotel Nieuwpoort' },
             { route: '/oostende/diensten/dierenarts-frederik-galle', category: 'care', heading: 'Afspraak & consultatie', title: 'Dierenarts Frederik Galle' },
         ];
+        for (const [kind, catalog] of [['hotspots', HOTSPOTS], ['diensten', SERVICES]]) {
+            const store=catalog.find(place=>['Shoppen','Dierenspeciaalzaak'].includes(place.type));
+            examples.push({route:`/${store.city}/${kind}/${store.slug}`,category:'shop',heading:'Voor je winkelbezoek',title:store.name});
+        }
         for (const width of [390, 1440]) {
             await page.setViewport({ width, height: width === 390 ? 844 : 1000 });
             for (const example of examples) {

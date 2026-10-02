@@ -47,7 +47,7 @@ Deno.serve(async req => {
     }
     const { data, error: saveError } = await db.rpc('save_content_place_draft', { p_place_id: input.id, p_expected_version: input.version, p_content: content, p_actor_id: actor.id });
     if (saveError) throw saveError;
-    return json(data);
+    return json({ ...data, content });
   } catch (error) {
     const message = typeof error === 'object' && error && 'message' in error ? String(error.message) : '';
     if (message.includes('VERSION_CONFLICT')) return json({ error: 'Deze zaak is intussen gewijzigd. Herlaad de laatste versie voordat je opnieuw opslaat.', code: 'VERSION_CONFLICT' }, 409);

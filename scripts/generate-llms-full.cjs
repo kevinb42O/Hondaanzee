@@ -1,6 +1,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { HOTSPOTS, SERVICES, CITIES, blogPosts, EVENTS, OFF_LEASH_AREAS } = require('./place-data.cjs');
+const { loadTsModule, HOTSPOTS, SERVICES, CITIES, blogPosts, EVENTS, OFF_LEASH_AREAS } = require('./place-data.cjs');
+
+const { publicPlaceText } = loadTsModule('supabase/functions/_shared/placeFields.ts');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const OUTPUT_PATH = path.join(ROOT_DIR, 'public', 'llms-full.txt');
@@ -21,30 +23,10 @@ CITIES.forEach(city => {
 });
 
 content += `## Hondvriendelijke Hotspots (Restaurants, Cafés, Hotels)\n\n`;
-HOTSPOTS.forEach(spot => {
-  content += `### ${spot.name} (${spot.city}, ${spot.type})\n`;
-  content += `Adres: ${spot.address}\n`;
-  if (spot.description) content += `Beschrijving: ${spot.description}\n`;
-  if (spot.recommendationNote) content += `Aanrader omdat: ${spot.recommendationNote}\n`;
-  if (spot.tags && spot.tags.length > 0) content += `Kenmerken: ${spot.tags.join(', ')}\n`;
-  if (spot.website) content += `Website: ${spot.website}\n`;
-  if (spot.openingHoursNote) {
-    if (spot.phone) content += `Telefoon: ${spot.phone}\n`;
-    if (spot.openingHours) content += `Openingstijden: ${Object.entries(spot.openingHours).map(([day, hours]) => `${day}: ${hours ?? 'gesloten'}`).join('; ')}\n`;
-    content += `Opmerking openingsuren: ${spot.openingHoursNote}\n`;
-  }
-  content += `\n`;
-});
+HOTSPOTS.forEach(spot => { content += publicPlaceText(spot); });
 
-content += `## Diensten (Dierenartsen, Trimsalons, Winkels)\n\n`;
-SERVICES.forEach(service => {
-  content += `### ${service.name} (${service.city}, ${service.type})\n`;
-  content += `Adres: ${service.address}\n`;
-  if (service.description) content += `Beschrijving: ${service.description}\n`;
-  if (service.tags && service.tags.length > 0) content += `Kenmerken: ${service.tags.join(', ')}\n`;
-  if (service.website) content += `Website: ${service.website}\n`;
-  content += `\n`;
-});
+content += `## Diensten (Dierenartsen, Winkels)\n\n`;
+SERVICES.forEach(service => { content += publicPlaceText(service); });
 
 content += `## Losloopzones en Hondenweides\n\n`;
 OFF_LEASH_AREAS.forEach(area => {

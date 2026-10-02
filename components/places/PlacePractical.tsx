@@ -4,8 +4,7 @@ import { CATEGORY_COPY, directionsUrl, getPlaceCategory, type Place } from '../.
 import { trackPlaceAction } from '../../utils/placeAnalytics';
 import type { PlaceKind } from '../../utils/placeRoutes';
 import type { OpeningHours } from '../../types';
-
-const DAYS = [['ma', 'Maandag'], ['di', 'Dinsdag'], ['wo', 'Woensdag'], ['do', 'Donderdag'], ['vr', 'Vrijdag'], ['za', 'Zaterdag'], ['zo', 'Zondag']] as const;
+import { resolvePublicPlace, isPlaceBlockVisible, getHoursMode, DAYS } from '../../supabase/functions/_shared/placeFields.ts';
 
 function Hours({ hours, note }: { hours: OpeningHours; note?: string }) {
   return <div data-place-hours>
@@ -18,7 +17,9 @@ function Hours({ hours, note }: { hours: OpeningHours; note?: string }) {
   </div>;
 }
 
-export default function PlacePractical({ place, kind }: { place: Place; kind: PlaceKind }) {
+export default function PlacePractical({ place: draft, kind }: { place: Place; kind: PlaceKind }) {
+  const place = resolvePublicPlace(draft);
+  const mode = getHoursMode(place);
   const copy = CATEGORY_COPY[getPlaceCategory(place)];
   const linkClass = 'inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-sky-800 underline decoration-sky-800/30 underline-offset-4 hover:decoration-sky-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4';
   return <section data-place-practical aria-labelledby="practical-title" className="rounded-xl border border-slate-200 bg-white p-6 sm:p-7">
@@ -31,11 +32,14 @@ export default function PlacePractical({ place, kind }: { place: Place; kind: Pl
         <a href={directionsUrl(place.address)} target="_blank" rel="noopener noreferrer" onClick={() => trackPlaceAction(place, kind, 'route')} className={linkClass}>Open in Google Maps<ArrowUpRight size={15} aria-hidden="true" /></a>
       </div>
       {place.phone && <div className="pt-6"><h3 className="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-900"><Phone size={17} aria-hidden="true" />Telefoon</h3><a href={`tel:${place.phone}`} onClick={() => trackPlaceAction(place, kind, 'telefoon')} className={linkClass}>{place.phone}</a></div>}
-      {'openingHours' in place && place.openingHours && <div className="pt-6"><Hours hours={place.openingHours} note={place.openingHoursNote} /></div>}
-      <div className="pt-6">
-        <p className="text-sm leading-relaxed text-slate-600">{'openingHoursNote' in place && place.openingHoursNote && !place.openingHours ? place.openingHoursNote : copy.note}</p>
+      {isPlaceBlockVisible(place, 'hours') && <div className="pt-6" data-place-availability>
+        {place.openingHours ? <Hours hours={place.openingHours} note={place.openingHoursNote} /> : <><h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900"><Clock size={17} aria-hidden="true" />Beschikbaarheid</h3><p className="text-sm leading-relaxed text-slate-600">{mode === 'appointment' ? 'Alleen op afspraak.' : mode === 'variable' ? 'De openingsuren kunnen variëren.' : mode === 'not_applicable' ? 'Geen vaste openingsuren van toepassing.' : 'De openingsuren zijn nog niet bevestigd.'}</p>{place.openingHoursNote && <p className="mt-3 text-sm leading-relaxed text-slate-600">{place.openingHoursNote}</p>}</>}
+        {place.openingHoursWeatherDependent && <p className="mt-3 text-sm leading-relaxed text-slate-600">De openingsuren zijn weersafhankelijk. Controleer vooraf de beschikbaarheid bij de zaak.</p>}
+      </div>}
+      {(isPlaceBlockVisible(place, 'practicalAdvice') || place.website) && <div className="pt-6">
+        {isPlaceBlockVisible(place, 'practicalAdvice') && <p data-place-advice className="text-sm leading-relaxed text-slate-600">{place.practicalNote?.trim() || copy.note}</p>}
         {place.website && <a href={place.website} target="_blank" rel="noopener noreferrer" onClick={() => trackPlaceAction(place, kind, 'website')} className={`${linkClass} mt-2`}>{place.websiteLabel || copy.website}<ArrowUpRight size={15} aria-hidden="true" /></a>}
-      </div>
+      </div>}
     </div>
   </section>;
 }

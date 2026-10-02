@@ -1,630 +1,630 @@
 {
   "/blankenberge/hotspots/lakaiann": {
-    "hash": "873fbcc6cc3232ffcb2c0266dbf11d82568340f69ac39e88cfc2708ff3f9709b",
+    "hash": "899189c9ac90c142c278a0dd08a1c18304b48958f3c73f1b55e29920ade8b586",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/dune-hotel-nieuwpoort": {
-    "hash": "c7a9915de5308d5c569f7ce742db5341a7a9f5be1e060c096fab1b62dab53b1e",
+    "hash": "63cda5fd465da93c3c3894ee96789bea58bb4f2dc21050d1aa2f2c316a186f98",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/cosmopolite-hotel": {
-    "hash": "302a04ca9186c342b5a3e83045c6529777c6b15f27a3926ebfbd650695a27a94",
+    "hash": "340798c8753db609b4e4b88239f9b86e111ff88b3225140cd9da01fd4b7235b2",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/beachbar-de-kwinte": {
-    "hash": "6f1b04b30b44781e641193949f2f3b4a917e013aa6ee6640e3a77e3c38269fe9",
+    "hash": "ab98077ab2f6a5ec3ba37d9bea6ced4ff771f59ab9b1a104de98aeef0a148896",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/madam-caravan": {
-    "hash": "62427328292199d30adc3ba825519e1136193fe4cdd209afb170c5bad386f9d8",
+    "hash": "bfdd0c3b31e6b47e5daf360a696bfe9fdb314e93a5a090e34ab0340871088caa",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/de-frietboetiek": {
-    "hash": "532432cc6a7bb3cef2fcca14d629f3656413f1e8e4dfe40d5f1de14cd6000c7a",
+    "hash": "6f3f26e831a29ffbbaa2aa71a130c8cba67d2469f3eae18cf34a3631bb7a8208",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/bistrot-de-la-mer": {
-    "hash": "37fe7a2053795f9f18560fbd43975063ad4b49fdd960d4c785ce270252d79a8d",
+    "hash": "e4423893837cdff6d3d88b31e0307937f566a847218338471462f27e3b5c7786",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/c-hotels-andromeda": {
-    "hash": "c5e9ebd7e001056805f1116572f21187dfdb7d564f67d815924f4d085fb605f0",
+    "hash": "c9c62ec3dd6575ace550bbf4bdbfd1e6fce9145ecc14d62298bda0de6837e926",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/gastrobar-sam": {
-    "hash": "f547859e7dd2c3217f2e2b7d73e6bfe00b57bc2ccf72e985e64fd8a63686cf8d",
+    "hash": "252ec348d1b02fcfcc6c6cbdced1b70907a6ff7feafaf9481a64e8da12af186c",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/upstairs-hotel": {
-    "hash": "df2ec9fa2dde6dcf54d891316849dc71189705619119208d9e5c8041b6d67a62",
+    "hash": "419c9fb6b3c74b3aebbfbc60de49681dfc91e71bbdd1e86f77dd96925a322324",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/hotspots/siesta-bar": {
-    "hash": "edf1a8bbf493915614f61baed2bbfc07fda54bfa4ff24fc45dc84f712e697815",
+    "hash": "bea725a8a31b02dae21110dc55d3f8a87878023e9caa496555654d453c5f0a98",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/hotspots/brasserie-rubens": {
-    "hash": "f5c93868c01d16dc454df294b9c0512cb8b625ee2307338246e56e8bb403d4da",
+    "hash": "79cb89b1432d552dcb467cd2c97d714a9d626a57bf481abeb1087e6d8fbe11a1",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/belgium-pier-brasserie": {
-    "hash": "fffa52885171a65bc381bb8e4d5db99bebe1c85b5bf34f905090292df2d9b6d4",
+    "hash": "bda07824ae6b7a650118f64e57fa6790885cffb8f246bca3693e438ce062d8e1",
     "lastmod": "2026-10-02"
   },
   "/de-panne/hotspots/de-verloren-gernoare": {
-    "hash": "38b8f5bb50ee61cb0bd65448fc5e00aa4e197411073bceb27e9c50f24a300c2d",
+    "hash": "2e91f51dec9a2ac0472510c2b0ba03b3cc503d18cebed1cef0db35dd19238b96",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/brasserie-carrousel": {
-    "hash": "4d700ec98d539aaab9cd899258d84e93ff1de3e07cea73101a65774dacfefc34",
+    "hash": "11a6678fe198b20d37c0882f535834b275691d5845e75613dd34e924d7623f3d",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/brasserie-het-kompas": {
-    "hash": "5e4716b2905da4183fa6322d4cf85629562affd745d9be1bc4fee214cb607547",
+    "hash": "c3e231337280f42f66d8d3f56d9738b39daf1a3c49bfbacf76dbcf6edf2a83dd",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/cafe-au-blason": {
-    "hash": "360b766b898957971b4b2cb020e800faba6bf3188a04a159f4149a0f182e9217",
+    "hash": "7db8b8a0d9db1afb18eb959344ac0b77b68cb73fcecf1e7c8205892dd23e45e4",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/cremerie-artisanaal-ijs": {
-    "hash": "fcec733543dccb280593b9f7b1f6d8f2d83d8acce3a2c52d8317bed1f0ab4bb0",
+    "hash": "4a3681108a300c8906dd57e1e97760bd441fab02db05eef191b53f3dee17e759",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/bar-buvette": {
-    "hash": "960c00e91b38380bca820b435de2d4110282d45c378c9660eb95711c0cda7406",
+    "hash": "7a3aa858cf9476b3b348592eace586989180644adc359481d35d9d417925f949",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/hotspots/de-vismarkt-aan-zee": {
-    "hash": "94a4c6cba86f4c48776375eeb17a2e8db4fa33599b3656e1678e1568956d040c",
+    "hash": "09f775342afccf1df5be8cf218c854f9169b00e95085c9562d3b7eebefc0abbe",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/bistro-noordzee": {
-    "hash": "5049bc4cc6de8f40274b58ef2ffa3d1319c5e8e25820c23ea64c37746036a7cf",
+    "hash": "de81a308e42a9a70c5c126470aa58fc43df0a5affaae51a3e105eb8494cd7353",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/de-lekpot": {
-    "hash": "25b21ee5c46b6728e660a57923e9f421a612ac406fe6ee3c0e265cea4c2047c2",
+    "hash": "d4c40a1e2dd67acbf3babe2059127964fd887323c3e8155d502932f34132efc5",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/bistra-liva": {
-    "hash": "c20e56f96e9784c445b1ea0bca4e843360831239f92156e598db493b013c61fc",
+    "hash": "9cef57706b0caceb9f47db19339771e8d7c778359ffc68b21746beca7ddd9728",
     "lastmod": "2026-10-02"
   },
   "/de-haan/hotspots/restaurant-de-concessie": {
-    "hash": "2bef248102cbdc99612faefe5a0c13ee236d67bffe0be6725fd29f1360f95f7e",
+    "hash": "fc02cf64e36bf48ee5db10d1093020d466ed03ece213f3b0954a5cffdb4fcb6d",
     "lastmod": "2026-10-02"
   },
   "/de-haan/hotspots/ibis-hotel": {
-    "hash": "836538c11721d080456acf28d5739964534aa65bc5b659178571715a43157873",
+    "hash": "29f4952f3971e6ac3175683672c48a364ef6005d5e4b9f765444f598b7fba014",
     "lastmod": "2026-10-02"
   },
   "/de-haan/hotspots/pizzeria-piano-piano": {
-    "hash": "efa55b7fd282f97fc3506f7c4d4ae17b00a9019268275b67ddeb5fb9ab4d8182",
+    "hash": "c5b5cf9a84ead41d539186f162b2047e2d2464051c3599d57101de90ee8317df",
     "lastmod": "2026-10-02"
   },
   "/de-haan/hotspots/plaza-d-amante": {
-    "hash": "78eee7388b407d3273aa25bedc55a2ab479a2a5dddc4fcc6987f57cb2dc96c6c",
+    "hash": "8f3acf52f6c2524368c9d6e6225d8c6174879a9557bcdd11954d17b626c1035c",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/cozy-moments": {
-    "hash": "96a5e297206473a581945a8c89dc4d9c63c3a25de209d28a12eb751b4e9bc6e5",
+    "hash": "7a3435c400b439134ddda9abd6839c8c98e1dcbe19a3d5415a8294284b07cd6e",
     "lastmod": "2026-10-02"
   },
   "/bredene/hotspots/alaska": {
-    "hash": "2994d073676e6b4eb5888085df777a7ba756ab1a2a491008bfb38a238600bce5",
+    "hash": "5ae05d49955a8d1c4b52ec7b9255141fd85b96a865cdd7d3fd50b7b33d9eb335",
     "lastmod": "2026-10-02"
   },
   "/bredene/hotspots/coffee-wine-de-golf": {
-    "hash": "966f3e19646bdb61aabb61ccf493887df766f13651cdcbac463e5b6044c38158",
+    "hash": "c65829b19d9bc115d5053e86e55cfba04efcc596016d7e2cfc4570a8c0f1ee8f",
     "lastmod": "2026-10-02"
   },
   "/bredene/hotspots/brasserie-shop-n-lunch-p-p": {
-    "hash": "814d85227b22b4f7ce423efe7fd6ea84bb40bff7a087bcb79e8dd0fd0b7b821e",
+    "hash": "494dab0652eb44c313a8504175a29a65f99d79135d5c3b789176689fb22f7775",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/mercure-oostende": {
-    "hash": "14545c3df3cf9e7458461c929427eb9a6fc6bdeddd6056b8c7f298832b8f2254",
+    "hash": "0bf2dfc1217349c5e36dcff8bb2970f86149659e36fba4a04d0e03a54789c94f",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/hotel-pacific": {
-    "hash": "f6f0f9e947d0d3a0af4504374130721c9c9c21c35a7a8da9c9e1d562b15226a6",
+    "hash": "ca7ea23fcce26d9dbf585e1f041d1ab8d4506b2815c0a80fa50e173f9faabd36",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/hotel-royal-astrid": {
-    "hash": "9bcf2ed266ce9d5b68262c88b6076d179c05f8f73a8a7a214fc3ea5d31c5fc4a",
+    "hash": "277c9db705451c3c8c444a27332fd4a8a8fca84bbbcf2b54d99e902f69420565",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/hotel-albert-ii": {
-    "hash": "f5027fa93d8ae51b717efd3a485490757a32a21f4a7f0ff339d5634fe31bec83",
+    "hash": "930a1a3817a623974bd7035c5b7c990414ebf7095273508d77f1e57327036d3d",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/charmehotel-t-kruishof": {
-    "hash": "f3b728fc4182e3c9f07951201af63d9531ec1e93e2cfe33db56687f0f7508b0e",
+    "hash": "3c0dc89bae3d4d8c2f0f1a204b297c57da16d1bc433cbf3ca6a89a9b5080f61f",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/b-b-huyze-elimonica": {
-    "hash": "1ecffec010c9bb5db37c92b1b4204422ef47f5cf2ee5cdb84051819c57c1b17d",
+    "hash": "764cff0015a12ba4eb6ad5b3f923fd0628c59af1819a2f861f5957231856410e",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/villa-cecha-b-b-wellness": {
-    "hash": "8166ca30629c557e5e418d44efbc470a410e170dac5b48bb82afb494a0cd9c54",
+    "hash": "16a2120856f112c612b51306ffb43a39b5474aed1f77a8dc1b5679f4ce7b2ee0",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/maison-martha": {
-    "hash": "d1d6da524b90d24ece1c6aa0cae2269b0347664171e8711e0ad5aa65a866aa64",
+    "hash": "471955182d47c9f0d6f90fbbd31d2cd599c3996013873a49f2017222a89c9e33",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/villa-odette": {
-    "hash": "4acb812e54881071095ecec365a1d879522913025b892ebcf7b4d578794fcac1",
+    "hash": "5ff8ec26c099edf10d5bc70e5aadf234fbbd9da03ec1b352f6b6f738776023d4",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/sea-breeze": {
-    "hash": "e047db780fe8e84a2667c5a6cb10790e2d84da96b6b169a634de64ac613b902a",
+    "hash": "a8c1287a1685abf9298554d21a894bd7da68f63fbdbaf73a80e57b8c3c1bd169",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/zilte-stilte": {
-    "hash": "b36f60f2cd82c01f8e38c821d8b3a2f8022a0e7f4bed931812c0da6c9e53d35f",
+    "hash": "5e5abccd596252937774433f877e3ced2eafe358b23b73c72c8158607cde7acf",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/les-cabanes-d-ostende": {
-    "hash": "cf6738b1b2cc434ee53e38ae4e5fb7c9e776486a46c462c639f3833a34a73b81",
+    "hash": "353a75622dc3168709c952cffd5b3dc10e7eb9ac23582f08274469796859f241",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/taverne-de-klokke": {
-    "hash": "dd82fb7273c881abfebf0cf90f0772273178506c9cb7a2bed11a794fc63991ba",
+    "hash": "1b89083863251c1fe9e462edac784873735243301dd6127b916a614975aa950d",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/yuzu": {
-    "hash": "3e45c8e38e11dce83ff7782c0a447621afc79bda5dca25d216a3486edfe16b27",
+    "hash": "cf17bd6d9a6637ce55a3f84b84183aa05024d6f587358f89a241c01abb629657",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/brasserie-david": {
-    "hash": "d51e92ea7e4a79648b11bcfadbdfec03e3aca5496d01ac86b7a1308a331109c6",
+    "hash": "98489175e9d44906ca53b82fd3e186c6e1b9aba58b15c309a41f2abe06d6b493",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/moby-dick": {
-    "hash": "4a47b84fbf5bc20f00a0019191c8724c988d32423a02b0edbde96e967710c0da",
+    "hash": "d9b72ca794793cc17f2078aeeaf80ee48ed1cf1d01e169658935bb437baff8f0",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/bottarga": {
-    "hash": "4ebd7bc1bf5d24fa12b8f6a595ba9121768593f2937619bd6c7904c8ccb17cde",
+    "hash": "4a569fd3bee0dfb746571a6f4fff3d8ea3490fe80aad6a7b0366390b494bec71",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/cappuccino-rooftop-bar": {
-    "hash": "60ddbff5046d5a0b5d7528896c6ad73555bdc79ca56433886755747b92375374",
+    "hash": "978991dc4fb3fab45775244b7c270f921d88669368b756c76aac9c011a48aad9",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/han-s-centrum": {
-    "hash": "614f8cb0229c17b8af60983b44e96c2d7f52f4dd1a2f9e08be6c79be05738200",
+    "hash": "18cd1b9e4eed3b894a16d52f1021f6572353750b1420cd7aa4709b67ea8acb34",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/lloyd-coffee-eatery": {
-    "hash": "4bda2b23382c954d079467a05b5a5d0f404c35aded8919bdd8bd90dd68a752d7",
+    "hash": "5d4b5ba3f5759b6bb279b6dc1c799e71079221aea29107bd55707572faeb9478",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/meerman-specialty-coffee": {
-    "hash": "c7f844631fba38bad59feeb8ee84f27211a018ace2da7afaff23eacac9e6ec27",
+    "hash": "6740ac2066812c395bf436d6035f80e8c9cb210b35f37ebc917d12ebda81655d",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/manuscript": {
-    "hash": "0153eca6452a5ee2d939ff5ee742d216e5acc68b52eea7ce7d5836b8011f5f4a",
+    "hash": "adb89c89f7a1057d2de92a174e0bbbf4929660ebc8fbb0be6d2bd340f2f500ff",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/restaurant-de-golf": {
-    "hash": "1ff765c72e56d536a3d26e26cd13f160e2b1b6ad9c7e8533d6dd8fc33d0fcb10",
+    "hash": "b360c5f0f8f616365324aea7fb884e3c0c0bc124951ddb814eec0913873e66a2",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/restaurant-le-touquet": {
-    "hash": "972882a1109c0c66fdec381f17dc1f0655a550c1de7b9b8bd579dd92a146a172",
+    "hash": "adf2617ad1022bb3ffcbf452ca633a9f044c050a57c74d42282a52c48093ae43",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/de-witte-ezel": {
-    "hash": "8351ef7fcbc110860902bf3bec3e881665377ad1ab8b6c979d5b6792b71b349b",
+    "hash": "b6ddcc0be874c31dec02894edf6c1431b06e14015253f0c38a791a6a3de063ac",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/la-vie": {
-    "hash": "1754eff3e53612a7b60696b849b1e38e58db87f741f0db1ae8679554a72752e7",
+    "hash": "3f8be6cc066be06beedc684081d6f53658b1b51421fd59cfd015f2e951a6add6",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/gastro-na-jo": {
-    "hash": "2e1d87e8f6a1646030501c398a946659b74ba2627700c5b7044c366582985812",
+    "hash": "6861650ae6309a7d1bddb730276bc8d44016cc0583da5a087ae88dd73ec783fb",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/residence-du-centre": {
-    "hash": "077fb3d57919f2d036d61178ddfaf5c04139dc20bf95b5d7d3a2a5c685f6f872",
+    "hash": "fe8514e9066669e004924cfbb331e47c484d3a37a6b01b0514d0d480682ed665",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/grand-cafe": {
-    "hash": "d698212d89a9f1bbe82a484087863adf0bb79650ffb627a8cd7a417bed94b691",
+    "hash": "517964acf9294d5bf3db2e53c2b9915309f553b2691d6c6c38d5a2e5e42fd5fd",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/fondue-co-t-keteltje": {
-    "hash": "5b1ba482d9c205ec6b980a576a069f20676871d42c42433256a834cb59210fef",
+    "hash": "1379c8b8ef063c24782216e820938fd6e8d5fcc89fd58c2e812d6a1a77efae42",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/frituur-sparkle-chips": {
-    "hash": "a52e28597f17031a8090242bbb909c26b745c69f6312cd85c8bf011c7a00d143",
+    "hash": "153e6311b1c3222e1020e5c6ebc4d6b6d50ece9e9448a9e6ba22a8aca41f9386",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/de-sleutel-la-clef": {
-    "hash": "b73c53b31527224bd391457b23cf4aa7952f0681b5f18d9662f3905b8611f71f",
+    "hash": "d4f2bf6b35e9cd858de0c2460dce8cbb9de19f3ea6d3c25f931c2561889c943b",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/frituur-taste": {
-    "hash": "e4744ff935c72615fcf69c5a4538aa9febf1c68d77fcb27a8296cfb42b3c0cd1",
+    "hash": "f701e0b961dbb1e64b7bb8f38cf7071ae6e33337dc26462ae02e9c60a52b9b00",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/huisje-van-majutte": {
-    "hash": "945e8551511f0dc274fe16cfadabe8a82f124bb090a119b52fa57754de93728a",
+    "hash": "eb8280742442d855ef23c08e5e1223da9ed6ef3e3d262187682bf704059ada69",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/tearoom-koffiepotje": {
-    "hash": "bcee06557232b5a3570164f7b865ce533acfff69e868417c321f3eb659a36b77",
+    "hash": "e3e2a0f7182975630b1927c86b68910a808e97fd2e5be9c468791ac6a7296411",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/my-home-my-coffee": {
-    "hash": "784c3e84399d3d59aef8e9401672c276f1e87a473a360c1b9b47abdd879f29b6",
+    "hash": "08a7a9d2710d1fd650335856636d7d8b2a7246c9ab86ff3caa3b6934658261bb",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/b-b-chez-ba-nus": {
-    "hash": "0485d951afd3844d640f9f6070f60c73257dea8cc028d51aeb03cdd41214f476",
+    "hash": "ef075c6a1c563f9c4ffb8c764050c14d9daa7296917c3e97a8c81534d4d24a5e",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/vakantieappartement-ld383277": {
-    "hash": "160ebe02b0a1c357eb19ce091f252ea528036d4f90d2841a62898c276b2a4ee4",
+    "hash": "f1b9b44162b9fb0c1ebe5151790a8294a51729d2f95937a3e2e181b4cb72b764",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/vakantieappartement-maison-clementine": {
-    "hash": "93bb3fc73bf23b7b9475e0b8a5a048884a6a83f01548f7292b0c25554d3693cf",
+    "hash": "63dac9b2cd86e12007b0777d7070f9001253447e2955e95e8799447300a1152c",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/brasserie-eloise": {
-    "hash": "3c3b3a08d431d0208fe53edf8cd0df12eb7505e021e449b157214b6e39c21938",
+    "hash": "a0dc921903ebceb3fa7876579d1c922d9c07fc451e97caab4c393255206783ad",
     "lastmod": "2026-10-02"
   },
   "/bredene/hotspots/hippo-12": {
-    "hash": "24ec4876a1acfa957d5e11ada944405ae94957b55f987b2e2cee051e1185957e",
+    "hash": "694c7c997665369d79f9db6a2da6dcbfce74756b248edf84d1e9d3ad18505e9a",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/hotspots/bar-delta": {
-    "hash": "7e2342c17635460b42d25ca0a2059ec42d8bf361c240f1824ff387ba7777ac46",
+    "hash": "8de5848dd1b396276cadb80153c30d460a0372a3a3580fc6ac88342c717785e0",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/sea-sparkle": {
-    "hash": "954cf2c8d530c783c9423c51f97cc12f1bba85567c17241b3f279aced605c9c7",
+    "hash": "4d3ae6c1752df244e4e5e1fc153cddf98f622f8955309e8dfa6084a6f12df79c",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/pancho": {
-    "hash": "ab07131d330532d60f907b936859e57fb10fc37dbd880e99bf221d40951b010d",
+    "hash": "8d73ef49d94a40e6b21550ca9578c0d94dc3a7e01a8e5fddb353d3c1abccd467",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/casa-mati": {
-    "hash": "8d55d92834f3f522347619f433ca272430056ef66269ce193f1830eabadc33f5",
+    "hash": "528e473f2e61fa663278cbb833b46635927e4d3d00ec3d9998fa870f3aad918a",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/restaurant-t-pomptje": {
-    "hash": "52488d0a71cd8c1073e19ab818e2b3ca1fb6561ae858b11efa0244fbd8ef55a1",
+    "hash": "22295e115b7410d72c563e1a15c885178e0e6efe555d6518e74b086790d4ea97",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/tearoom-wielingen-bar": {
-    "hash": "4f0a5eb76c4a2f7432ffbf2c3e0575c0e4891b10311d911e67d6c405b7d08398",
+    "hash": "8b593f3e2b636fca2361b600d4728234e1472bf3aeb009d357a2aa7020b3f048",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/maison-elza": {
-    "hash": "1a9e5a16f235c95d2b0ff9a0bdfb0d27e4c2d8e7c555a59f944b945974f43261",
+    "hash": "f81b99de994f5e1d7b7034c1c4c5e3321cb695daef72d3b50a7e73f72a4ba15d",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/cafe-central": {
-    "hash": "8163eafceb0bb27126a48513fd57767837d919bfa88f8d41e79d3c30e6c07a67",
+    "hash": "4838046324ad90ae487cf8ad656f22d459f21fe27c5884c63dcb76bac96f660f",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/praatcafe-de-spioenkop": {
-    "hash": "d52bff5c16ae8d2098e5804235909054f99eeec6bda3906035aa5c02c34c9540",
+    "hash": "6a5352ac8d9ac26819699e4ba13eb3ca1e48ab753a2cdc25bab81b82e20b1288",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/de-zoete-zonde": {
-    "hash": "71b050683f0667734abc3aa5cdee17d7334a8ea125c41d36cf3a698e3532b515",
+    "hash": "1c87cd2104d5a88346dbf1273c7b3aae07f2c4cedc39190540b99eee09f71810",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/bistro-thuus": {
-    "hash": "b7b65735d5ae0b5687f033d7531abda288f4cca3daa9a89f5fe9be87da397a84",
+    "hash": "c75223df69c045fc792f109b2cf6f72bfe443a64651e05054ae2752d0578ddd7",
     "lastmod": "2026-10-02"
   },
   "/wenduine/hotspots/vissershuisje-89": {
-    "hash": "7b9fede5fc9bfb5cf1dac6c23fed2fe512162b1b3869dc639376365fc9a178ec",
+    "hash": "ddebc4a10de69cafb0d70efb78ec499f7e6a9d07a31590d228c2c878ef2d1f39",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/brasserie-bon-appetit": {
-    "hash": "f03bdc79dd8d7ac02993e132d59c1481c99ba166f58ee16c4173f454b4a3636c",
+    "hash": "f2bb8fdf9ad10177e896c46ba5022f7a281bba7dde1196cc690305382c9ec48f",
     "lastmod": "2026-10-02"
   },
   "/de-panne/hotspots/vakantiehuis-zee-hond": {
-    "hash": "46200f95d9bdf817af5859b25cb3d132c34a7469650bc37469d97ab6c44eac37",
+    "hash": "2ea70a83652704565c2da5c577399e31a2496a2a814a8c23ff2d365d4e1a0bb9",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/bungalowpark-jonckershof": {
-    "hash": "079840af66c9b8d780dcfa8d87cf88ce884312331cc8ad6fa6bfebbee7f4c266",
+    "hash": "1d301a1f3b413327d43be1d3e0dbdaa6d0dcebb7036407ea2981c5c196c75174",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/hotspots/surfers-paradise": {
-    "hash": "e08a4e195c30272e8e650e69b722325ec58d8602fd869822a24a962adea6f40f",
+    "hash": "01ff268ee9801fe600adc01f71a66cff75434be481e87b6c23227c5a17eb8dcb",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/hotspots/zaelig-hotel": {
-    "hash": "e21e022b40b4a695ade9e4f9c75711e11c1dfd2d7e65a388fc908181101245c0",
+    "hash": "77c8282c01708904d20714eb08400cd9453c7d5f52ea0c814b77d31e4e216fcd",
     "lastmod": "2026-10-02"
   },
   "/de-panne/hotspots/restaurant-imperial": {
-    "hash": "961c3baa73cd869977c19a46e2fb9c7ccd062eb0b48aa4ab38dda24a13e8294d",
+    "hash": "ee224300d6f9ccd9932c0ae852bea709039385259d4c7b5e63c32b7be6f41ba2",
     "lastmod": "2026-10-02"
   },
   "/zeebrugge/hotspots/club-north-by-icarus": {
-    "hash": "923a5d6eef9fe5d4b1b449602ed975ccbeeab62ed7f407793c20dcef15d12cf3",
+    "hash": "8b0861d19d239f9ae05432bf5dbc2566d5653c583e5380693097ab91be5d790e",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/hotspots/zina-s-place": {
-    "hash": "6634aa31ecac3c9760e56a9e5318224175c084ad85014d64e789baf1941f064c",
+    "hash": "8938a6af422cf40c0546a59c6752fb642bc804451e21d0fea9376066638bd690",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/new-poseidon": {
-    "hash": "29079cf3c92142ad5f8ef84e0c55892d2f5c846fe81504b0dfe6d4d4d51cdf52",
+    "hash": "aabaacd4b658aa3811d2f91c4ffe381f2049cd05ad875632f676e8e685799984",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/de-zeegeuzen": {
-    "hash": "5d8177df191aa9e2b3b006b5eb1cabf3d906896069c9eca1c5022c4f4906c143",
+    "hash": "423cad2134231b0dcf83b19dd51c930d30d6a0ec316df9a73dc673872005476a",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/t-waterhuis": {
-    "hash": "d0012b993b327973b5f425b9d280cda5c8b0c3edb4a84cef9b44e41900ce6640",
+    "hash": "270ed008aee50b826b33648c8c9aeabac4487eb621489b24609ab9bf3592774c",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/hotspots/ijssalon-tearoom-zeebries": {
-    "hash": "24e27eaff2fb21088207c4b771cfce2ccec95cbf1350966eae7a13c95f9fae9b",
+    "hash": "96f5efe1628803203f5640caeeb34f9e88fe0d2eef20127307c0028c2a784443",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/brasserie-montmartre": {
-    "hash": "06624101dbfb60d0312b659007e58e050be41e3e93c56e5309d7744a1bc028c6",
+    "hash": "e2a2b6639feacccc5c0197402da2ddad635edd47d277dc790589bbf585e966ff",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/bel-air": {
-    "hash": "e0de163fdbe9c764007ffc9c80177c6127df1d33cf3bb412b12621ad43954fdd",
+    "hash": "a498de06f999791c0928175124e7e8e07e4111f3c16215a3c725c942ecbadc50",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/beach-palace-hotel": {
-    "hash": "855e3fb1a3f25e1a115a727b252950575f818148dc127e606bb74e1dfbcf2258",
+    "hash": "e6d9a2a22e0f49579e6a26bc132e369aae0529dfaffaf1ad87f309dec5fd5bb7",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/seascape-penthouse": {
-    "hash": "f43b66ee6046c00eb92f38f883bd61d7cbfcfeeb3072e2cc4805bf413b23bb20",
+    "hash": "5a0792e116c56cc1130aa5a734c8bfe5c602b0b79f4e9a23f8118d6871605fef",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/boutique-hotel-ter-duinen": {
-    "hash": "ae6d38c2f348e24b5b5ebbab28ce49da5acca2e0ae5c05c7bcdb2e161b9a9657",
+    "hash": "d2556683cc0dfa40b4a861559b5a5c577c5caf028cc533156e4f36ab2b132529",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/hotel-apostroff": {
-    "hash": "8818e8057b7e13975a819fcdf3eb88e74e12f81435d081ca2a572e1cd64fb777",
+    "hash": "f6552ef674a8e9a5f70a77bf9522ad001f51dc4ca59a62fa62ecec9a1db46ad2",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/hotel-lehouck": {
-    "hash": "217228b7aca476f453b0efec365bc34c4fd88370621291a048c44fea76f620b3",
+    "hash": "3e6d19d77836b376005f57aadd589696f01532c6ed9060e602bcce12f8e8adb7",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/casino-hotel": {
-    "hash": "28cae5fc53e082818104d4cab33bc33bf1359393f2ed4c28a61a59a2ea294191",
+    "hash": "49ee38359ad1289048a232d660e00697ddfc0cb79f1e3f02297beea9558c3f5c",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/hotel-domein-westhoek": {
-    "hash": "1965ef675519d8f7a93cb461b1fb4bb994de8252e46716640b86c9e4f2b5660f",
+    "hash": "2019f14ec3c88d4e4f2f2b4aee381c74c7fc5bd1a9ce53ae652db5bd660836e5",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/bistronomie-eglantier": {
-    "hash": "dcc983d8dd21e288ecf59b74de6f636a52ca255b7e513340673ea2da2ad56d07",
+    "hash": "17393736ee546bbad641682c80506ed3d0bfd761de54789189f0c57749ec6f2f",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/restaurant-akote": {
-    "hash": "74c27c3dd67b2d91a906757a58caf3552c58b1bf577979c967ee2dbbc3341034",
+    "hash": "31d2e4b591f648c384decb2b733911a376c5abd97dde20ca9c7697645e491ccc",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/de-spelleplekke": {
-    "hash": "9c75fc56572d4aa1c998efc55210d3913042b11833c16637e7245f65044adfba",
+    "hash": "1d1ce08ac0aafbb8cd51b40596dcbd89a6fac064c39e1f7112e3fb1545c62f88",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/t-zoet-genot": {
-    "hash": "9bee10f69d5ee21154dc5cacf4b33827f87d339a6b5a3d6469e83d09127fd2de",
+    "hash": "76aa21f1131d506849210dd826a2a953a42fd01a4dcba844b2d83f96fb9e40a9",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/tearoom-t-zand": {
-    "hash": "b6c6f72ffa7bc6b943969b39a3c3a6cb461e81cb45eb23ce6e53506419405d40",
+    "hash": "137790e9b62e130702d6519f82dc2053d1431a5f2c323185fcfd63e2aad8379f",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/de-clochard": {
-    "hash": "a3586d5b12e3b5ab00c7646f96acbba04d7c3f1059b0975f557ddc4792df974b",
+    "hash": "5c0b0c10e70952e4349d867c5ec1dc45208d7b4a7377e6d7abbed5b0ab4ee937",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/koffiebar-cafelito": {
-    "hash": "ebb38afc931b8f6f8099d691980e52c25f3e6ec4d7722f3e972709682b0c5712",
+    "hash": "fb588cc7a7a51f586e1574056d587c73fe16c50f2a3ab21a8bab26399008be00",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/tearoom-chopin": {
-    "hash": "387d67ecd07cf16076475da31f74f0e1927d97adddfb1e1123eff8b5363b6593",
+    "hash": "11000639d455cc2923fa408b78babc1bb0ef7215fea18ea71394187ef7e6f418",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/bistro-t-fornhuis": {
-    "hash": "bb4c50d29ebe585e0fe919e0f07d252a2ca8c56a59eb058ce527c79f838ae256",
+    "hash": "bd73f20ed274eebed7f579aea803c840910b6063a75ff12ec39582a3cf037b7c",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/happy-times": {
-    "hash": "985f3fcd88fc588058eba526db4fb42eea01737733cba1b29082556ef5a09cd7",
+    "hash": "d5ebab116f16288fe2e18420e6966599a29638206bc7a68667aa792395df5edb",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/eethuis-t-blekkertje": {
-    "hash": "0613e9354f57e31d7e92cada345ccc510c48c2001dd936ea31a2113a05a501da",
+    "hash": "914a76adb66398c31e4a7828018b9a940c30c82ca2f02dc6996788e7abc5a9ee",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/restaurant-lehouck": {
-    "hash": "0a51fbbbc5cf34773a1030b2abb9505a604557d6f8ebcd4a79389bfa2c8aa6ef",
+    "hash": "16e9cced810fc0d071c6a64970d16107737d28d2ef62e793aae4418cf6f3885f",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/in-t-dorp": {
-    "hash": "90203fedacc25c7de5c30a38a1f4a1fb4f264b3682c32a1931496fb41529aa5a",
+    "hash": "1a301284801bb65eb930d60bbec6795740192bde1197a3b3573ef0d245699a10",
     "lastmod": "2026-10-02"
   },
   "/de-panne/hotspots/agora-bar-food-drinks": {
-    "hash": "bc59410cd768a1ec9ac232bd1615cb795ed26cf69f351d90b681902612aeb05a",
+    "hash": "c20489f859ed2392ef2e2280ffd2e5615e1cb3a7567dfd6f842780ba76cdd086",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/d-appeti-jt": {
-    "hash": "dea80e05eb2b5c94e7925ea860d5c5f26fd20c8c03c2126cc55a23d3d8de13cf",
+    "hash": "c2c1bdbfd8d93bbc768f72e44f7efb65eca2a3747d668cbb94d70672f9a04d31",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/koffiebar-kantine": {
-    "hash": "4fcbc3a3e5f181179757c3f39ffef4af1e4da698805964acf982ccd27e27b294",
+    "hash": "83e6f03a6bb07932ca06f195b3f20f9b61b2489439e3380dd17cc1d0c7f21c7e",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/visrestaurant-ode": {
-    "hash": "d596d2e66a3ea457d6f4d5c27bc997cd0bd91b877941d940689b7c228785240b",
+    "hash": "c9721bf484610ea3fbe2de83c1decdd8197e9dce0705b17373ca32accb306502",
     "lastmod": "2026-10-02"
   },
   "/koksijde/hotspots/brasserie-de-barkentijn": {
-    "hash": "aa455a490f47eeb59c11d2dfd647ae0d9235140ce7078d87d1be9ad4acad6030",
+    "hash": "15ec6b41fb1be597e82718de3eeac72f02473929b509606bf682d43e1e713453",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/skateshop-daily-grind": {
-    "hash": "1da6132524c98acc2dc6ab2c033f2b7228d54e70af389636e7a262ac85bc5fbd",
+    "hash": "23e9b2e00a45ff879ecd93ad24a8336fa5dea1abb41504c9b2a470e8753d7347",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/restaurant-koekie-s": {
-    "hash": "23efd8b87413622a7acb913ed0b9502d53ef81a3ed5fc3c04c7eecceb275a8af",
+    "hash": "a714d8e09e1aa2aeb6f57701f897528428f49bf20bb1b88b328bf13bf11b3ee4",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/brasserie-cappuccino": {
-    "hash": "bf89874974a0f46b643f1f140e45d29fd79c2d3805825b5038752d0c9ef706cd",
+    "hash": "dae63441ac804b5556f5080b28084d1cbd29b877f6ca32bb3ace081796c713ff",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/two-for-you-crystals-and-gifts": {
-    "hash": "18386f6ed1f664817fd4d05052d1fea10f77604c2ed70b736237f84758d206f2",
+    "hash": "549dfc72c43349a89a2c9748a5c1e04bfb7110316abaa6e71653b257715b8811",
     "lastmod": "2026-10-02"
   },
   "/de-haan/hotspots/brasserie-la-potiniere": {
-    "hash": "71e6b1c213414e5239539eeda1d10af4a0d025079d351a11c6732f4f3346ed47",
+    "hash": "5a91ab81483aad46bab993f4c3ab81652d76b378ccc290e9c39d6e0bf246a6ca",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/abc-hotel": {
-    "hash": "15b187b0bd50e2c74c3cb82dae4c2104111a092da0d3300f1ccfdfda0aa503d2",
+    "hash": "e9e6f9e386007d5c20f10e41ee58b07cd9b30303d9891be39225ebd54774ecb9",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/au-pengouin": {
-    "hash": "9238d7271326ddfd6a7dd36316eaf47be58b8f229ffe310e45eb533c4f091f8d",
+    "hash": "2365a3702b6ab323ebaf258b967b78239f8e088495a269b669b4c5107e4a6fac",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/beachclub-blankenberge": {
-    "hash": "cc87d1f5c1529f3f13db97f99ae8bf1504d9ec36e94007dbf8d0d3c8c17dd7de",
+    "hash": "b6d5e6c04a82f7cc2c49e1759f33464df3f9ed1da1fc38eb45e566ec47abcf90",
     "lastmod": "2026-10-02"
   },
   "/oostende/hotspots/brassi-beach-terrace": {
-    "hash": "3ea97ed017d44fd35a7d3bb02a902b094ca3ed83ab550bc3a3cc8c13a56db9b0",
+    "hash": "9c6f368159e141105a8100eaf4333fab49edf7cb0428c13fb86e3407544e6d01",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/hotspots/riva-boutique": {
-    "hash": "c5e9676e05e46da7709899524671259d6e49b6f6fa0dbb0d55c00d9a3c370a75",
+    "hash": "c55b5625916e038b1175f679ca1f58378e3d4d9462c9dc49520bb4e7d631844d",
     "lastmod": "2026-10-02"
   },
   "/oostende/diensten/dierenarts-frederik-galle": {
-    "hash": "0364325328c9b88c0ee027913488169f3b61c865b2f0a7ff6c952919bc9c834f",
+    "hash": "bc1c2a904100ee8e0df95b2b83780b6688e97fdb650aa3b7e2f33f411fd2311b",
     "lastmod": "2026-10-02"
   },
   "/oostende/diensten/dier-tuincenter-rommel": {
-    "hash": "3bc26ed4ddbc5fe461b619f8f289b8ee16ef79c26bfe1f9882f915b16ea81d53",
+    "hash": "32b2fe4f0eeba0b633312f29ddf766384a2c80a004b16d3867dd9cd5b43fcfae",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/diensten/dierenarts-ilse-kerckhof": {
-    "hash": "f7d46d02f072ef531ce2a01f271dc723308849eb4667bc62a9834e848725201e",
+    "hash": "534d99a47f988640750c1add457e09f114573e47c6045f856e0b7dcd90b011a8",
     "lastmod": "2026-10-02"
   },
   "/knokke-heist/diensten/dierenplezier-heist": {
-    "hash": "6c14ffe4559d814fd505e2b4e5b395130aff3c93ba27266a5a9bea726b603d3b",
+    "hash": "b491a347bfdaff75d17b8c589851f8459bf51bc9074c0e9ddccafb917fa832c6",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/diensten/de-praktijk-227": {
-    "hash": "b9cef57906d9b8cccd52b29d81db926eb09e4715f374043e8a4d804901ab9ed2",
+    "hash": "bcf34e29dd0813d3078938b4a19bbc749d4bfcb05eab25af198b7306dd5f1fdf",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/diensten/snuffels": {
-    "hash": "6a0f6c59c59233febd82c9c0e0362c246f6ba2513c447d0981bf9a3efc7b659b",
+    "hash": "f88cc35e1c1337259979793483b91a2e69b913290bb1aa1e90b6fd1ad241f998",
     "lastmod": "2026-10-02"
   },
   "/de-panne/diensten/de-dierendokter-alex-salomez": {
-    "hash": "e37d8de7ccf6fedb2cd683f3be85cb753a530cbe7f9179f29f442a6c654cccca",
+    "hash": "53eda1c835fd4214c0b7d24a17f1c8d2a41f06de41125bcd7775d77e4d68be48",
     "lastmod": "2026-10-02"
   },
   "/nieuwpoort/diensten/dierenarts-elise-buyse": {
-    "hash": "611ca9d3d747632b5104db195316e7747d4bc1c93870415e6bf30c40f4a8e8d4",
+    "hash": "ac9198f1e3b025053a2363c08f5dac15d1bfce2783dc9113facda83da6891e94",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/diensten/dierenartsenpraktijk-katty": {
-    "hash": "d95e5f22080a9d4fe2aa4f6f963ab0c2f3311b0ac2ffb936def1245c6d19cf0d",
+    "hash": "f6c5b6e6fba052cab432728d07e51c91900fe1fb82cffab4efa74241ef1c2455",
     "lastmod": "2026-10-02"
   },
   "/middelkerke/diensten/dogs-co": {
-    "hash": "d41c386bd3423101dc395116c23b6a80746a06e5d1189cfd1a62b9756db74617",
+    "hash": "6f783295f1a43b61d729565ee51ea4c675fc2910045d82058062133d435a8595",
     "lastmod": "2026-10-02"
   },
   "/de-haan/diensten/dierenartsenpraktijk-breemersch": {
-    "hash": "7b1037115cb27a08f207502884b1e040969fea5bb19f8e371b4e5856a29a47e5",
+    "hash": "adbff5ffa258600d05aa9dd69cc3c3f82cd19716098d5db747e80523db716a45",
     "lastmod": "2026-10-02"
   },
   "/de-haan/diensten/happy-dog": {
-    "hash": "36cbccc0999af3506f6028e509690fead750036529fa8a24c88329b0ff5010e3",
+    "hash": "3258056524a4185de69c45783f03ceed6de7f00a8d41d943222c71a00692b99b",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/diensten/dogs-cats": {
-    "hash": "43043de4110f409bf7406698da7dec93c8f256a2f6191e3b23a1dde694775c56",
+    "hash": "bd45b8b24c094f316035670f83126ea06e1c3c5fe08c2ec310f69350d09d604e",
     "lastmod": "2026-10-02"
   },
   "/bredene/diensten/q-ties": {
-    "hash": "5ffdd5ebfe6fa4fa391835b1dc16c7085f6cdc03e1d9b4d71c2e3f3d59987e84",
+    "hash": "39baee96314580203267415e0effea9d20d262b142432300c7872b4a45e3db48",
     "lastmod": "2026-10-02"
   },
   "/oostende/diensten/dierenkliniek-anicura": {
-    "hash": "64f21848c553ae33b8fefcd2fb0ef0276ab087cef9052150e29f172a77a471cc",
+    "hash": "d9745996e4254fcbb98aa5d8fc55a789a05aff5c30b52ad71b8de5571056b60b",
     "lastmod": "2026-10-02"
   },
   "/blankenberge/diensten/dierenarts-vanhee-s": {
-    "hash": "96492708d17eedf160081e317275eb96ddd610c9323b84a6ef17865725ec1f73",
+    "hash": "b69ab62b32951f85c0fc1e86a124e6c8a5fee50f4392eabc9392f0a22c4fa14f",
     "lastmod": "2026-10-02"
   },
   "/de-panne/diensten/panimalia-trimsalon-hondenboetiek": {
-    "hash": "159571bd43a3e83886c83d6b216795c5f4f7f26c56fab9fefdcfa61796cdd670",
+    "hash": "4c0f6f2aea1a8420bfdd8699f381b58db1915c436790d4cf7aa96da80938e228",
     "lastmod": "2026-10-02"
   },
   "/de-panne/diensten/famiflora-de-panne": {
-    "hash": "a7370e2ef0dadf9189d08d540fc885412838f2a2d7473462ff72ca6451e065ba",
+    "hash": "109be35cd8b8a47e622314345a3bebda25d2e75eac3b9821c15b2f5c28ad6041",
     "lastmod": "2026-10-02"
   },
   "/de-panne/diensten/dierenarts-johan-devloo": {
-    "hash": "86a9695d083a88b53e6ad877990b28d59d24638ec72539055bfc6f62130634bf",
+    "hash": "280061cf466f87756bb843d363704ce61f95e2b2da75e4aca28d6ca165e4b492",
     "lastmod": "2026-10-02"
   },
   "/koksijde/diensten/bazouf": {
-    "hash": "c1c8a731413083445e2f26cb6a3098528c60e174a769ea0e60d5971e7f38be58",
+    "hash": "ed3eec5e59bdc6600ae30d7d0d9017412cfb751a040454188c1cc2328a8085d8",
     "lastmod": "2026-10-02"
   },
   "/koksijde/diensten/vets-for-pets": {
-    "hash": "c3ecc8b3ddc67546e7894c9018a11a73898d05da455651f49d28d90796cf06b0",
+    "hash": "6274fc6fd942c34f89828f7a397deac21302c664351d2d2e27e0dbcc538c7223",
     "lastmod": "2026-10-02"
   },
   "/koksijde/diensten/dierenartsencentrum-anoa": {
-    "hash": "58965cf012ceaffdadfeb7c91b1da743959b70f902f50540cfcd3419b88b37ee",
+    "hash": "ebe322f1fd69d5159021b5e2c49fe66c6545844e00e5af2035d438e7191bffb1",
     "lastmod": "2026-10-02"
   },
   "/koksijde/diensten/dierenarts-debakker-olivier": {
-    "hash": "320d6273f1faf4c9a56c23e9ab2e6ac746a19ce2a9a2395bb19c8ccaae623f41",
+    "hash": "1d2556264bc22a8897acc26a76998ac854e90a1ade243c5ac837b09c5821758f",
     "lastmod": "2026-10-02"
   },
   "/koksijde/diensten/dierenartsencentrum-clos-fleuri": {
-    "hash": "c98dc3715969659a0ff0565314ffe04e9bbce1014a98b0ed11e8e1f8f33debd2",
+    "hash": "c7dce1ee0f430aed9fdfe6eb0ae3021f7e406377e334911c4a8567950a315040",
     "lastmod": "2026-10-02"
   }
 }

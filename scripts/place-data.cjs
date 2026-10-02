@@ -41,6 +41,7 @@ const loadTsModule = (relativePath) => {
     module,
     exports: module.exports,
     require: (specifier) => {
+      if (specifier.endsWith('/placeFields.ts')) return loadTsModule('supabase/functions/_shared/placeFields.ts');
       if(specifier === './dashboardCatalog.json') return {default:JSON.parse(fs.readFileSync(path.join(ROOT_DIR,'data/dashboardCatalog.json'),'utf8'))};
       throw new Error(`Unexpected runtime import while loading ${relativePath}`);
     },
@@ -83,6 +84,7 @@ const getAllRoutes = () => [
 ];
 
 module.exports = {
+  loadTsModule,
   HOTSPOTS,
   SERVICES,
   CITIES,

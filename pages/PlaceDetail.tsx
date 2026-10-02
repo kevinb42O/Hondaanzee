@@ -15,11 +15,13 @@ import PlaceFacts from '../components/places/PlaceFacts';
 import PlacePractical from '../components/places/PlacePractical';
 import RelatedPlaces from '../components/places/RelatedPlaces';
 import NotFound from './NotFound';
+import { resolvePublicPlace, isPlaceBlockVisible } from '../supabase/functions/_shared/placeFields.ts';
 import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
 
 interface PlaceDetailProps { kind: PlaceKind }
 
-export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; cityData: City; preview?:boolean }> = ({ kind, place, cityData, preview=false }) => {
+export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; cityData: City; preview?:boolean }> = ({ kind, place: draft, cityData, preview=false }) => {
+  const place = resolvePublicPlace(draft);
   const location = useLocation();
   const navigate = useNavigate();
   const category = getPlaceCategory(place);
@@ -30,7 +32,7 @@ export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; ci
   const related = collection.filter(entry => entry.city === place.city && entry.slug !== place.slug)
     .sort((a, b) => Number(b.type === place.type) - Number(a.type === place.type) || a.name.localeCompare(b.name, 'nl')).slice(0, 3);
   const paragraphs = place.description.split(/\n\s*\n/).map(paragraph => paragraph.trim()).filter(Boolean);
-  const heroTitle = place.slug === 'cozy-moments' ? 'COZY Moments' : place.name;
+  const heroTitle = place.name;
   useSEO(preview?{title:`Concept: ${place.name} | Hond aan Zee`,description:'Voorbeeld van een nog niet gepubliceerde vermelding.',canonical:`https://hondaanzee.be${location.pathname}`,noindex:true}:getPlaceSEO(place, cityData, kind));
 
   const back = () => {
@@ -42,7 +44,7 @@ export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; ci
   return <div data-place-category={category} className="min-h-full bg-[#f6f5f1] text-slate-900">
     <div className="mx-auto max-w-[1280px] px-5 pt-28 sm:px-8 lg:px-12">
       <div className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-slate-300/80 pb-5 sm:mb-10">
-        <button onClick={back} type="button" className="inline-flex min-h-[44px] shrink-0 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"><ArrowLeft size={17} aria-hidden="true" />Terug</button>
+        <button onClick={preview ? undefined : back} type="button" className="inline-flex min-h-[44px] shrink-0 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"><ArrowLeft size={17} aria-hidden="true" />Terug</button>
         <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: cityData.name, to: `/${place.city}` }, { label: kind === 'hotspot' ? 'Hotspots' : 'Diensten', to: collectionPath }, { label: place.name }]} />
       </div>
 
@@ -57,11 +59,11 @@ export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; ci
           <nav aria-label="Op deze zaakpagina" className="mt-7 flex flex-wrap gap-x-5 gap-y-1 border-t border-slate-300/80 pt-4 text-sm font-medium text-slate-600">
             <a href="#over-de-zaak" className="inline-flex min-h-[44px] items-center underline decoration-slate-300 underline-offset-4 hover:text-slate-900">Over de zaak</a>
             <a href="#praktisch" className="inline-flex min-h-[44px] items-center underline decoration-slate-300 underline-offset-4 hover:text-slate-900">{category === 'care' ? 'Afspraak & adres' : 'Praktisch'}</a>
-            <a href="#fotos" className="inline-flex min-h-[44px] items-center underline decoration-slate-300 underline-offset-4 hover:text-slate-900">Foto's</a>
+            {isPlaceBlockVisible(place, 'gallery') && <a href="#fotos" className="inline-flex min-h-[44px] items-center underline decoration-slate-300 underline-offset-4 hover:text-slate-900">Foto's</a>}
           </nav>
-          <div id="met-je-hond" className="mt-3 scroll-mt-28"><PlaceFacts place={place} /></div>
+          {isPlaceBlockVisible(place, 'dogInfo') && <div id="met-je-hond" className="mt-3 scroll-mt-28"><PlaceFacts place={place} /></div>}
         </div>
-        <PlaceGallery key={place.slug} place={place} />
+        {isPlaceBlockVisible(place, 'gallery') && <PlaceGallery key={place.slug} place={place} />}
       </div>
 
       <div className="grid items-start gap-8 pb-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16 lg:pb-16">
