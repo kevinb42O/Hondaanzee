@@ -1,164 +1,49 @@
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Cookie } from 'lucide-react';
+import { Cookie } from 'lucide-react';
+import LegalPage, { LegalContact, type LegalSection } from '../components/LegalPage.tsx';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+
+const sections: LegalSection[] = [
+  { id: 'browseropslag', title: 'Cookies en vergelijkbare browseropslag', content: <>
+    <p>Cookies zijn kleine bestanden die een website via je browser bewaart. Daarnaast bestaan localStorage, sessionStorage, een service worker en cache-opslag. Dit beleid beschrijft ook die technieken, omdat er meer op je toestel kan worden opgeslagen dan alleen cookies.</p>
+    <p>Hond aan Zee gebruikt geen marketingcookies of advertentietrackers. Voor je account gebruiken we lokale sessieopslag. We meten ook openbare pagina&apos;s met cookie-loze analytics. De afwezigheid van cookies betekent niet dat er geen gegevens worden verwerkt; daarvoor lees je het <Link to="/privacy">privacybeleid</Link>.</p>
+  </> },
+  { id: 'sessie', title: 'Je accountsessie en eerste favoriet', content: <>
+    <p><strong>Accountsessie:</strong> Supabase bewaart de login in localStorage, doorgaans onder een sleutel van de vorm <code className="break-all">sb-…-auth-token</code>. De sessie wordt gebruikt en met de authenticatiedienst uitgewisseld om je ingelogd te houden en toegang tot je eigen gegevens te controleren. Dit is functionele opslag voor de accountdienst die je vraagt, geen uitsluitend lokale voorkeur.</p>
+    <p>De sessie kan over meerdere bezoeken heen blijven bestaan en worden vernieuwd. Uitloggen verwijdert de lokale login. Alleen sitegegevens wissen of uitloggen verwijdert niet je account of de gegevens die in je kustgids op de server zijn opgeslagen.</p>
+    <p><strong>Eerste favoriet:</strong> als je zonder account een plek wilt bewaren, onthouden we die keuze tijdelijk in localStorage zodat ze na het inloggen kan worden toegevoegd. Een keuze ouder dan 24 uur wordt niet meer gebruikt. Na een geslaagde opslag in je account wordt de tijdelijke keuze gewist. Een verlopen keuze kan fysiek in de browseropslag blijven staan totdat deze wordt gewist of overschreven.</p>
+  </> },
+  { id: 'voorkeuren', title: 'Voorkeuren en cache', content: <>
+    <p>De kaart kan lokaal onthouden dat je de gebruiksuitleg hebt gesloten (<code className="break-all">mapInstructionsDismissed</code>). De steunpagina gebruikt lokale tellers voor de koekjes- en stickerweergave (<code>haz_koekjes</code> en <code className="break-all">haz_sticker_meter</code>). Die tellers zijn geen betaalregistratie en worden niet als zodanig naar onze database gestuurd. De koekjesweergave gebruikt alleen de teller voor de huidige maand; oude opgeslagen inhoud kan blijven staan tot overschrijving of het wissen van sitegegevens.</p>
+    <p>Deze lokale voorkeuren hebben geen vaste automatische wisdatum. Ze blijven doorgaans staan totdat jij sitegegevens wist of de site de waarde vervangt. Beheerders kunnen daarnaast lokaal een concept voor een pushbericht bewaren; dat is geen bezoekersprofiel.</p>
+    <p>Een service worker kan pagina&apos;s, publieke beelden, lettertypes en programmabestanden cachen om herhaald laden en een beperkte offlineweergave mogelijk te maken. Deze cache bevat websitebestanden; loginantwoorden en persoonlijke gegevens die via Supabase worden opgehaald, worden niet door deze service worker opgeslagen. Cachegegevens verdwijnen bij vervanging van een cacheversie, opruiming door de browser of het wissen van sitegegevens.</p>
+  </> },
+  { id: 'analytics', title: 'Cookie-loze statistieken', content: <>
+    <p>We gebruiken Vercel Web Analytics en eigen geaggregeerde statistieken voor openbare pagina&apos;s en contactacties. Accountpagina&apos;s, beheerpagina&apos;s en gedeelde uitstapjes worden uitgesloten. De metingen gebruiken geen analyticscookies en onze eigen meting maakt geen bezoekerprofiel.</p>
+    <p>De eigen meting verwijdert uurgegevens ouder dan 8 dagen en dagtotalen ouder dan 397 kalenderdagen bij de dagelijkse opschoning. Voor misbruikbeperking wordt tijdelijk een dagelijks wisselende IP-hash verwerkt; oude daggegevens worden dagelijks opgeruimd. Onze eigen meting respecteert Do Not Track en Global Privacy Control. Dit beschrijft onze meting en is geen garantie voor het gedrag van externe websites.</p>
+    <p>Vercel licht zijn verwerking toe in het <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">privacyoverzicht van Web Analytics</a>. Meer over de gegevens, doeleinden en rechtsgronden staat in het <Link to="/privacy">privacybeleid</Link>.</p>
+  </> },
+  { id: 'meldingen', title: 'Pushmeldingen en browsertoestemming', content: <>
+    <p>Pushmeldingen vragen afzonderlijke browsertoestemming. Je browser en service worker houden een technisch abonnement bij; onze server bewaart de gegevens die nodig zijn voor de aflevering. Dit staat los van de accountsessie en wordt niet automatisch geactiveerd door registratie.</p>
+    <p>Meld je af via de meldingenfunctie op de site om het abonnement te beëindigen. Je kunt meldingen ook blokkeren in de site- of notificatie-instellingen van je browser. Alleen lokale sitegegevens wissen kan de serverregistratie laten bestaan tot deze wordt afgemeld of als ongeldig wordt verwijderd. Accountverwijdering beëindigt dit afzonderlijke abonnement niet automatisch.</p>
+  </> },
+  { id: 'extern', title: 'Externe bronnen en links', content: <>
+    <p>Lettertypes van Google Fonts, kaarttegels van OpenStreetMap of CARTO en extern geladen afbeeldingen veroorzaken verzoeken aan die leveranciers. Zij ontvangen daarbij technische gegevens, zoals IP-adres en browserinformatie, ook zonder dat je een externe link aanklikt.</p>
+    <p>Als je een link naar bijvoorbeeld een zaak, sociale dienst, routeplanner of WhatsApp opent, gelden daar de eigen regels voor cookies en gegevensverwerking. Onze verklaring dat we geen marketingcookies inzetten, geldt voor onze eigen site en is geen belofte over die externe diensten.</p>
+  </> },
+  { id: 'beheer', title: 'Je browsergegevens beheren', content: <>
+    <p>Via de privacy- of site-instellingen van je browser kun je cookies, lokale opslag en caches voor hondaanzee.be bekijken of wissen. Zoek naar “sitegegevens” of “websitegegevens”. Meldingen en locatietoegang beheer je via de afzonderlijke sitetoestemmingen.</p>
+    <p>Wissen kan je uitloggen en lokale voorkeuren of offlinebestanden verwijderen. Het verwijdert geen servergegevens, openbare reviews of je account. Gebruik daarvoor Mijn profiel of stuur een privacyverzoek naar <a href="mailto:info@hondaanzee.be">info@hondaanzee.be</a>. Een browser die alle functionele opslag blokkeert, kan het ingelogd blijven verstoren.</p>
+    <p>Als we opslag of tracking toevoegen waarvoor toestemming vereist is, vragen we die voordat we deze activeren en werken we dit beleid bij. De datum bovenaan vermeldt de laatste update.</p>
+    <LegalContact />
+  </> },
+];
 
 const Cookies: React.FC = () => {
   useSEO(SEO_DATA.cookies);
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <div className="animate-in fade-in">
-      <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-12 sm:py-16 md:py-20 pb-16 sm:pb-20">
-        <div className="max-w-4xl mx-auto px-4 md:px-6">
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-slate-300 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
-          >
-            <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
-            <span className="text-sm sm:text-base">Terug naar home</span>
-          </Link>
-
-          <div className="flex items-center gap-4 mb-4">
-            <div className="bg-sky-600 p-3 rounded-xl">
-              <Cookie size={24} />
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight">
-              Cookiebeleid
-            </h1>
-          </div>
-          <p className="text-slate-300 text-sm sm:text-base">
-            Laatst bijgewerkt: 2 oktober 2026
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 sm:py-16 md:py-20">
-        <div className="prose prose-slate max-w-none">
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">1. Wat zijn cookies?</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              Cookies zijn kleine tekstbestanden die op je apparaat (computer, tablet of smartphone) worden geplaatst wanneer je een website bezoekt. 
-              Ze helpen websites om jouw voorkeuren te onthouden en je ervaring te verbeteren.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">2. Welke cookies gebruikt HondAanZee.be?</h2>
-            
-            <div className="bg-sky-50 border-2 border-sky-200 rounded-2xl p-6 mb-6">
-              <p className="text-sky-900 font-bold text-lg mb-3">✨ Goed nieuws!</p>
-              <p className="text-sky-800 leading-relaxed mb-3">
-                HondAanZee.be gebruikt <strong>geen marketing cookies of advertentietrackers</strong>.
-              </p>
-              <p className="text-sky-800 leading-relaxed">
-                We gebruiken wel Vercel Analytics om anonieme paginastatistieken te bekijken, zodat we kunnen zien welke pagina&apos;s het meest bezocht worden.
-              </p>
-            </div>
-
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Wat we WEL gebruiken:</h3>
-            <ul className="list-disc pl-6 text-slate-600 space-y-3">
-              <li>
-                <strong>LocalStorage / SessionStorage:</strong> Je browser kan tijdelijk informatie opslaan zoals je filterinstellingen (bijv. welke stad je hebt geselecteerd). 
-                Dit blijft lokaal op je apparaat en wordt <strong>niet</strong> naar onze servers gestuurd of gedeeld met derden.
-              </li>
-              <li><strong>Je accountsessie:</strong> Als je inlogt, bewaart Supabase je sessie in de lokale browseropslag zodat je ingelogd blijft. Die sessie wordt gebruikt om je toegang tot je eigen gegevens te controleren. Uitloggen verwijdert de lokale sessie.</li>
-              <li><strong>Je eerste favoriet:</strong> Als je zonder account op een hartje tikt, onthouden we die plek lokaal maximaal 24 uur. Na je login bewaren we de plek in je account en wissen we de tijdelijke keuze.</li>
-              <li>
-                <strong>Vercel Analytics:</strong> anonieme paginastatistieken om te begrijpen welke steden, hotspots en diensten het meest bekeken worden.
-              </li>
-            </ul>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">3. Toekomstige gebruik van cookies</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              In de toekomst kunnen we besluiten om cookies te gebruiken voor:
-            </p>
-            <ul className="list-disc pl-6 text-slate-600 space-y-2 mb-4">
-              <li><strong>Analytics:</strong> Om te begrijpen hoe bezoekers onze website gebruiken (bijv. Google Analytics)</li>
-              <li><strong>Voorkeuren:</strong> Om je instellingen en voorkeuren te onthouden</li>
-              <li><strong>Functionaliteit:</strong> Om bepaalde features beter te laten werken</li>
-            </ul>
-            <p className="text-slate-600 leading-relaxed">
-              <strong>Mochten we extra niet-noodzakelijke cookies gaan gebruiken, dan vragen we eerst expliciet je toestemming via een cookie banner.</strong> 
-              Dit cookiebeleid zal dan worden bijgewerkt met meer details.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">4. Cookies van derden</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              Externe diensten die we gebruiken kunnen hun eigen cookies plaatsen:
-            </p>
-            <ul className="list-disc pl-6 text-slate-600 space-y-2">
-              <li>
-                <strong>WhatsApp:</strong> Wanneer je op de WhatsApp-link klikt, word je doorgestuurd naar WhatsApp. 
-                WhatsApp (Meta) kan dan cookies plaatsen volgens hun eigen cookiebeleid.
-              </li>
-            </ul>
-            <p className="text-slate-600 leading-relaxed mt-4">
-              Wij hebben geen controle over cookies van derden. Raadpleeg de privacyverklaringen van deze diensten voor meer informatie.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">5. Hoe beheer je cookies?</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              Je kan zelf bepalen of je cookies wilt accepteren of blokkeren via de instellingen van je browser:
-            </p>
-            <div className="grid gap-4 mb-4">
-              <div className="border border-slate-200 rounded-xl p-4">
-                <p className="font-bold text-slate-900 mb-2">Google Chrome</p>
-                <p className="text-slate-600 text-sm">Instellingen → Privacy en beveiliging → Cookies en andere sitegegevens</p>
-              </div>
-              <div className="border border-slate-200 rounded-xl p-4">
-                <p className="font-bold text-slate-900 mb-2">Firefox</p>
-                <p className="text-slate-600 text-sm">Opties → Privacy en beveiliging → Cookies en sitegegevens</p>
-              </div>
-              <div className="border border-slate-200 rounded-xl p-4">
-                <p className="font-bold text-slate-900 mb-2">Safari</p>
-                <p className="text-slate-600 text-sm">Voorkeuren → Privacy → Cookies en website-gegevens</p>
-              </div>
-              <div className="border border-slate-200 rounded-xl p-4">
-                <p className="font-bold text-slate-900 mb-2">Microsoft Edge</p>
-                <p className="text-slate-600 text-sm">Instellingen → Cookies en sitemachtigingen</p>
-              </div>
-            </div>
-            <p className="text-slate-600 leading-relaxed">
-              Let op: Het blokkeren van cookies kan invloed hebben op de functionaliteit van sommige websites.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">6. Wijzigingen in dit cookiebeleid</h2>
-            <p className="text-slate-600 leading-relaxed">
-              We kunnen dit cookiebeleid van tijd tot tijd aanpassen, bijvoorbeeld wanneer we nieuwe cookies gaan gebruiken. 
-              De meest recente versie vind je altijd op deze pagina met de bijbehorende datum bovenaan.
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">7. Vragen?</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              Heb je vragen over ons cookiebeleid of privacy? Neem contact met ons op:
-            </p>
-            <div className="bg-sky-50 border-2 border-sky-200 rounded-2xl p-6">
-              <p className="text-slate-900 font-bold mb-2">HondAanZee.be</p>
-              <p className="text-slate-600">WhatsApp: <a href="https://wa.me/32494816714" className="text-sky-600 font-bold hover:underline">+32 494 81 67 14</a></p>
-              <p className="text-slate-600 text-sm mt-3">
-                Meer over je rechten? Bekijk ons <Link to="/privacy" className="text-sky-600 font-bold hover:underline">Privacybeleid</Link>
-              </p>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-  );
+  return <LegalPage title="Cookiebeleid" icon={Cookie} intro="Wat je browser onthoudt voor je account, voorkeuren, meldingen en het laden van de website."
+    summary={<><p>We gebruiken geen marketingcookies. Je login heeft wel functionele browseropslag nodig. Publieke statistieken gebruiken geen analyticscookies.</p><p>Uitloggen, sitegegevens wissen, pushmeldingen uitschakelen en je account verwijderen zijn verschillende acties. Hieronder lees je wat elke actie doet.</p></>} sections={sections} />;
 };
 
 export default Cookies;
