@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, Check, Loader2, MessageSquare, Pencil, Star, ThumbsUp, Trash2, Flag } from 'lucide-react';
+import { ArrowRight, Check, Loader2, MessageSquare, Pencil, Send, Star, ThumbsUp, Trash2, Flag } from 'lucide-react';
 import { supabase } from '../../utils/supabaseClient.ts';
 import { useMember } from '../member/MemberProvider.tsx';
 import { MemberDialog } from '../member/MemberUI.tsx';
@@ -137,34 +137,46 @@ export default function HotspotReviews() {
 function HotspotReviewEditor({own,onSaved}:{own:OwnReview|null;onSaved:()=>void}) {
  const c=useCommunity(),member=useMember();const actor=member.data!.profile.id,actorRef=useRef(actor);actorRef.current=member.data?.profile.id??'';
  const draftKey=`haz-review-draft/${actor}/${hotspotKey(c.place)}`;
+ const submitLock=useRef(false),successRef=useRef<HTMLHeadingElement>(null);
+ const [submitted,setSubmitted]=useState(false),[previewRating,setPreviewRating]=useState<number|null>(null);
+ useEffect(()=>{if(submitted)successRef.current?.focus();},[submitted]);
  const [initial]=useState(()=>{
   try{const draft=JSON.parse(sessionStorage.getItem(draftKey)||'null');if(draft&&draft.version===(own?.version??null)&&Date.now()-draft.at<86400000)return draft;}catch{/* no valid draft */}
   return {rating:own?.rating??0,comment:own?.comment??'',name:own?.name||member.data?.profile.display_name?.slice(0,50)||'',visitMonth:own?.visit_month?.slice(0,7)??'',version:own?.version??null};
  });
  const [rating,setRating]=useState<number>(initial.rating),[comment,setComment]=useState<string>(initial.comment),[name,setName]=useState<string>(initial.name),[visitMonth,setVisitMonth]=useState<string>(initial.visitMonth),[experience,setExperience]=useState(false),[website,setWebsite]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[baseVersion,setBaseVersion]=useState<number|null>(initial.version),[conflict,setConflict]=useState<OwnReview|null>(null);
- useEffect(()=>{try{sessionStorage.setItem(draftKey,JSON.stringify({rating,comment,name,visitMonth,version:baseVersion,at:Date.now()}));}catch{/* Form remains usable without browser storage. */}},[rating,comment,name,visitMonth,baseVersion]);
- const dirty=rating!==(own?.rating??0)||comment!==(own?.comment??'')||name!==(own?.name||member.data?.profile.display_name?.slice(0,50)||'')||visitMonth!==(own?.visit_month?.slice(0,7)??'');
+ useEffect(()=>{if(submitted)return;try{sessionStorage.setItem(draftKey,JSON.stringify({rating,comment,name,visitMonth,version:baseVersion,at:Date.now()}));}catch{/* Form remains usable without browser storage. */}},[rating,comment,name,visitMonth,baseVersion,submitted]);
+ const dirty=!submitted&&(rating!==(own?.rating??0)||comment!==(own?.comment??'')||name!==(own?.name||member.data?.profile.display_name?.slice(0,50)||'')||visitMonth!==(own?.visit_month?.slice(0,7)??''));
  useEffect(()=>{if(!dirty)return;const before=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue='';};window.addEventListener('beforeunload',before);return()=>window.removeEventListener('beforeunload',before);},[dirty]);
  const submit=async(e:React.FormEvent)=>{
-  e.preventDefault();if(!rating||!experience||comment.trim().length<20||!name.trim()){setError('Kies sterren, vul je naam en ervaring in en bevestig je eigen bezoek.');return;}
-  setBusy(true);setError('');
+  e.preventDefault();if(submitLock.current||submitted)return;if(!rating||!experience||comment.trim().length<20||!name.trim()){setError('Kies sterren, vul je naam en ervaring in en bevestig je eigen bezoek.');return;}
+  submitLock.current=true;setBusy(true);setPreviewRating(null);setError('');
   try{
    const next=await hotspotAction({action:'submit',...c.place,rating,comment,name,visitMonth:visitMonth?`${visitMonth}-01`:null,version:baseVersion,ownExperience:true,website});
    if(actorRef.current!==actor)return;
-   try{sessionStorage.removeItem(draftKey);}catch{/* The server save already succeeded. */}c.setOwn(next);c.closeForm();c.notify('Bedankt! Je ervaring verschijnt na controle.');onSaved();
-  }catch(e){setError((e as Error).message);if((e as Error).message.includes('intussen')){try{const latest=await hotspotAction({action:'state',...c.place});if(actorRef.current===actor){c.setOwn(latest);setConflict(latest.review);}}catch{/* The existing draft remains available. */}}}finally{setBusy(false);}
+   try{sessionStorage.removeItem(draftKey);}catch{/* The server save already succeeded. */}setSubmitted(true);c.setOwn(next);onSaved();
+  }catch(e){setError((e as Error).message);if((e as Error).message.includes('intussen')){try{const latest=await hotspotAction({action:'state',...c.place});if(actorRef.current===actor){c.setOwn(latest);setConflict(latest.review);}}catch{/* The existing draft remains available. */}}}finally{submitLock.current=false;setBusy(false);}
  };
+ if(submitted)return <MemberDialog title="Je ervaring is ontvangen" onClose={c.closeForm} wide>
+  <div className="hotspot-review-celebration">
+   <div className="hotspot-review-success-art" aria-hidden="true"><span className="hotspot-review-success-halo"/><svg className="hotspot-review-success-check" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35"/><path d="M25 40l10 10 21-22"/></svg>{Array.from({length:8},(_,i)=><span className="hotspot-review-spark" key={i} style={{'--spark-angle':`${i*45}deg`,'--spark-delay':`${i%3*50}ms`} as React.CSSProperties}/>)}</div>
+   <h3 ref={successRef} tabIndex={-1} aria-describedby="hotspot-review-received">Bedankt voor je ervaring!</h3>
+   <div className="hotspot-review-success-rating"><StarRating rating={rating} readOnly size={23}/></div>
+   <p id="hotspot-review-received">Je review bij <strong>{c.name}</strong> is veilig ontvangen en verschijnt na controle.</p><p className="hotspot-review-success-note">Je helpt andere baasjes op weg.</p>
+   <button className="member-button member-button-primary" type="button" onClick={c.closeForm}>Terug naar de ervaringen<ArrowRight size={17}/></button>
+  </div>
+ </MemberDialog>;
  return <MemberDialog title={own?'Jouw ervaring aanpassen':'Jouw ervaring met je hond'} onClose={()=>!busy&&c.closeForm()} wide>
-  <form className="hotspot-review-editor" onSubmit={submit}><p className="hotspot-muted">Bij {c.name}. Je review verschijnt na controle.</p>
+  <form className="hotspot-review-editor" onSubmit={submit} aria-busy={busy}><p className="hotspot-muted">Bij {c.name}. Je review verschijnt na controle.</p>
    <div className="review-honeypot" aria-hidden="true"><label>Website<input tabIndex={-1} autoComplete="off" value={website} onChange={e=>setWebsite(e.target.value)}/></label></div>
-   <fieldset disabled={busy}><legend>Hoe was je ervaring met je hond?</legend><StarRating rating={rating} onRate={setRating} size={28}/><p className="hotspot-rating-label" aria-live="polite">{rating?['','Niet fijn','Kon beter','Goed','Heel fijn','Fantastisch'][rating]:'Kies 1 tot 5 sterren'}</p></fieldset>
+   <fieldset disabled={busy}><legend>Hoe was je ervaring met je hond?</legend><StarRating rating={rating} onRate={setRating} onPreview={setPreviewRating} disabled={busy} size={28}/><p className={`hotspot-rating-label ${previewRating||rating?'has-rating':''}`} aria-live="polite">{previewRating||rating?['','Niet fijn','Kon beter','Goed','Heel fijn','Fantastisch'][previewRating??rating]:'Kies 1 tot 5 sterren'}</p></fieldset>
    <label className="member-field">Je ervaring<textarea autoFocus name="review-comment" required minLength={20} maxLength={1000} rows={5} value={comment} disabled={busy||own?.status==='hidden'} onChange={e=>setComment(e.target.value)} placeholder="Was je hond binnen welkom? Hoe werden jullie ontvangen? Wat moeten andere baasjes weten?"/><small>{comment.length}/1000 · minstens 20 tekens</small></label>
    <div className="hotspot-review-fields"><label className="member-field">Naam bij je review<input name="review-name" required maxLength={50} value={name} disabled={busy} onChange={e=>setName(e.target.value)} autoComplete="nickname"/></label><label className="member-field"><span className="hotspot-review-field-label">Wanneer was je er? <small>Optioneel</small></span><input type="month" name="review-visit" min="2000-01" max={new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit'}).format(new Date()).slice(0,7)} value={visitMonth} disabled={busy} onChange={e=>setVisitMonth(e.target.value)}/></label></div>
    <label className="member-checkbox"><input type="checkbox" required checked={experience} disabled={busy} onChange={e=>setExperience(e.target.checked)}/><span>Dit is mijn eigen bezoekervaring. Ik beoordeel niet mijn eigen zaak en plaats deze review zonder vergoeding.</span></label>
    {error&&<p className="hotspot-error" role="alert">{error}</p>}
    {conflict&&<div className="hotspot-own-review" style={{display:'block'}}><details><summary>Bekijk je huidige review</summary><StarRating rating={conflict.rating} readOnly/><p className="hotspot-review-text">{conflict.comment}</p></details><div className="hotspot-editor-footer"><button className="member-button" type="button" onClick={()=>{setRating(conflict.rating);setComment(conflict.comment);setName(conflict.name);setVisitMonth(conflict.visit_month?.slice(0,7)??'');setBaseVersion(conflict.version);setConflict(null);setError('');}}>Huidige review gebruiken</button><button className="member-button" type="button" onClick={()=>{setBaseVersion(conflict.version);setConflict(null);setError('');}}>Verder met mijn tekst</button></div></div>}
    {own?.status==='hidden'&&<p className="hotspot-error">Deze review is verborgen. Neem contact op via info@hondaanzee.be.</p>}
-   <div className="hotspot-editor-footer"><button className="member-button member-button-primary" disabled={busy||Boolean(conflict)||own?.status==='hidden'}>{busy?<Loader2 size={17} className="animate-spin"/>:<Check size={17}/>}Ter controle insturen</button><button className="member-button" type="button" disabled={busy} onClick={c.closeForm}>Later verder</button></div>
+   <div className="hotspot-editor-footer"><button className={`member-button member-button-primary hotspot-review-submit ${busy?'is-sending':''}`} disabled={busy||Boolean(conflict)||own?.status==='hidden'}>{busy?<Loader2 size={17} className="animate-spin"/>:<Send size={17}/>}<span>{busy?'Je ervaring versturen…':'Ter controle insturen'}</span></button><button className="member-button" type="button" disabled={busy} onClick={c.closeForm}>Later verder</button></div>
   </form>
  </MemberDialog>;
 }

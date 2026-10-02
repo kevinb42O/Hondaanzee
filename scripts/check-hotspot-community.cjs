@@ -16,7 +16,7 @@ const server=createServer((req,res)=>{const url=new URL(req.url,'http://localhos
  const user={id,email:'community@example.invalid',aud:'authenticated',role:'authenticated',app_metadata:{},user_metadata:{},created_at:'2026-10-02T18:00:00Z'};
  const exp=Math.floor(Date.now()/1000)+3600,token=[Buffer.from('{"alg":"HS256","typ":"JWT"}').toString('base64url'),Buffer.from(JSON.stringify({sub:id,exp,aud:'authenticated',role:'authenticated'})).toString('base64url'),'invalid-test-signature'].join('.');
  const session={access_token:token,refresh_token:'invalid-test-refresh',expires_at:exp,expires_in:3600,token_type:'bearer',user};
- let own={liked:false,review:null},published=[{id:'b0000000-0000-4000-8000-000000000009',rating:4,user_name:'Lena',comment:'Onze hond was ook binnen welkom. Een heel fijne ontvangst.',visit_month:'2026-09-01',created_at:'2026-09-20T12:00:00Z',updated_at:'2026-09-20T12:00:00Z',edited:false}],failLike=false,failReview=false,failRead=false,admin=true,profileStatus='active',flagged=false;
+ let own={liked:false,review:null},published=[{id:'b0000000-0000-4000-8000-000000000009',rating:4,user_name:'Lena',comment:'Onze hond was ook binnen welkom. Een heel fijne ontvangst.',visit_month:'2026-09-01',created_at:'2026-09-20T12:00:00Z',updated_at:'2026-09-20T12:00:00Z',edited:false}],failLike=false,failReview=false,reviewDelay=0,failRead=false,admin=true,profileStatus='active',flagged=false;
  const requests=[],errors=[],external=[];
  const summary=()=>({place_id:placeId,likes:own.liked?1:0,count:published.length,average:published.length?Math.round(published.reduce((a,r)=>a+r.rating,0)/published.length*10)/10:null});
  const publicData=()=>({...summary(),available:true,reviews:published,distribution:published.reduce((a,r)=>({...a,[r.rating]:(a[r.rating]||0)+1}),{})});
@@ -46,7 +46,7 @@ const server=createServer((req,res)=>{const url=new URL(req.url,'http://localhos
      if(input.action==='submit'){
       if(failReview)return send({error:'Test: bewaren tijdelijk niet beschikbaar'},500);
       assert.equal(input.ownExperience,true);assert.ok(req.headers()['x-user-access-token']);
-      own.review={id:reviewId,version:(own.review?.version||0)+1,status:own.review?.has_published?'published':'pending',needs_review:true,has_published:own.review?.has_published||false,rating:input.rating,comment:input.comment,name:input.name,visit_month:input.visitMonth};return send(own);
+      own.review={id:reviewId,version:(own.review?.version||0)+1,status:own.review?.has_published?'published':'pending',needs_review:true,has_published:own.review?.has_published||false,rating:input.rating,comment:input.comment,name:input.name,visit_month:input.visitMonth};return reviewDelay?setTimeout(()=>send(own),reviewDelay):send(own);
      }
      if(input.action==='withdraw'){own.review.status='withdrawn';own.review.needs_review=false;own.review.version++;own.review.has_published=false;published=published.filter(r=>r.id!==reviewId);return send(own);}
      if(input.action==='flag'){flagged=true;return send({message:'Bedankt. We kijken je melding na.'});}
@@ -82,11 +82,48 @@ const server=createServer((req,res)=>{const url=new URL(req.url,'http://localhos
   await page.click('.hotspot-like-button');await page.waitForSelector('.hotspot-like-button[aria-pressed="false"]:not(:disabled)');failLike=true;
   await page.click('.hotspot-like-button');await page.waitForFunction(()=>document.body.textContent.includes('Test: liken tijdelijk niet beschikbaar'));assert.equal(await page.$eval('.hotspot-like-button',e=>e.getAttribute('aria-pressed')),'false');failLike=false;
   await clickText('Schrijf een review','#reviews');await page.waitForSelector('.hotspot-review-editor');
+  const starGroup='.hotspot-review-editor .star-rating-interactive';
+  for(const n of [3,4,5,2,1]) {
+   await page.hover(`${starGroup} .star-rating-option:nth-child(${n})`);
+   await page.waitForFunction((selector,n)=>document.querySelector(selector).querySelectorAll('.is-filled').length===n,{},starGroup,n);
+   assert.equal(await page.$$eval(`${starGroup} input:checked`,els=>els.length),0,'Hover does not commit rating');
+   assert.equal(await page.$eval('.hotspot-rating-label',e=>e.textContent),['','Niet fijn','Kon beter','Goed','Heel fijn','Fantastisch'][n]);
+  }
+  await page.hover(`${starGroup} .star-rating-option:nth-child(3)`);
+  await page.waitForFunction(()=>Math.abs(parseFloat(getComputedStyle(document.querySelector('.star-rating-option:nth-child(3) .star-rating-fill')).width)-28)<.1);
+  await (await page.$('.hotspot-review-editor fieldset')).screenshot({path:path.join(screenshots,'star-hover-desktop.png')});
+  await page.hover('.hotspot-review-editor legend');
+  assert.equal(await page.$$eval(`${starGroup} .is-filled`,els=>els.length),0,'Leaving clears unselected preview');
   await page.click('input[aria-label="1 ster"]');await page.keyboard.press('ArrowRight');assert.equal(await page.$eval('input[aria-label="2 sterren"]',e=>e.checked),true,'Keyboard changes star rating');await page.click('input[aria-label="5 sterren"]');await page.type('textarea[name="review-comment"]','Onze hond kreeg een fijne plek binnen en een waterbak.');await page.click('.hotspot-review-editor input[type="checkbox"]');
   failReview=true;await page.click('.hotspot-review-editor button[type="submit"], .hotspot-review-editor .member-button-primary');await page.waitForFunction(()=>document.querySelector('.hotspot-review-editor')?.textContent.includes('Test: bewaren tijdelijk niet beschikbaar'));
-  assert.match(await page.$eval('textarea[name="review-comment"]',e=>e.value),/waterbak/);failReview=false;
+  assert.match(await page.$eval('textarea[name="review-comment"]',e=>e.value),/waterbak/);assert.equal(await page.$('.hotspot-review-celebration'),null,'Failed save never celebrates');failReview=false;
   await clickText('Later verder','.hotspot-review-editor');await page.reload({waitUntil:'networkidle0'});await clickText('Schrijf een review','#reviews');await page.waitForSelector('.hotspot-review-editor');assert.match(await page.$eval('textarea[name="review-comment"]',e=>e.value),/waterbak/);
-  await page.click('.hotspot-review-editor input[type="checkbox"]');await page.click('.hotspot-review-editor .member-button-primary');await page.waitForSelector('.hotspot-own-review');assert.equal(await page.$('.hotspot-review-editor'),null);assert.equal(published.length,1,'Pending review not public');assert.match(await page.$eval('.hotspot-own-review',e=>e.textContent),/wacht op controle/);
+  await page.hover(`${starGroup} .star-rating-option:nth-child(2)`);
+  assert.equal(await page.$$eval(`${starGroup} .is-filled`,els=>els.length),2,'Lower hover previews over saved choice');
+  await page.hover('.hotspot-review-editor legend');
+  assert.equal(await page.$$eval(`${starGroup} .is-filled`,els=>els.length),5,'Leaving restores committed rating');
+  await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
+  assert.equal(await page.$eval(`${starGroup} .star-rating-fill`,e=>getComputedStyle(e).transitionDuration),'0s','Reduced motion disables star transitions');
+  await page.emulateMediaFeatures([]);
+  reviewDelay=800;const beforeSubmit=requests.filter(r=>r.action==='submit').length;
+  await page.click('.hotspot-review-editor input[type="checkbox"]');await page.click('.hotspot-review-editor .member-button-primary');
+  await page.waitForSelector('.hotspot-review-editor[aria-busy="true"]');
+  assert.equal(await page.$('.hotspot-review-celebration'),null,'Success waits for server response');
+  assert.equal(await page.$$eval(`${starGroup} input`,els=>els.every(e=>e.disabled)),true,'Stars locked during save');
+  await page.$eval('.hotspot-review-editor',form=>{form.requestSubmit();form.requestSubmit();});
+  await page.waitForSelector('.hotspot-review-celebration');reviewDelay=0;
+  assert.equal(requests.filter(r=>r.action==='submit').length,beforeSubmit+1,'Repeated submission sends one request');
+  assert.equal(await page.evaluate(()=>document.activeElement?.tagName),'H3','Success heading receives focus');
+  assert.equal(await page.evaluate(()=>sessionStorage.getItem(Object.keys(sessionStorage).find(k=>k.startsWith('haz-review-draft/'))||'')),null,'Saved draft is removed');
+  await page.waitForFunction(()=>parseFloat(getComputedStyle(document.querySelector('.hotspot-review-success-check path')).strokeDashoffset)===0);
+  await (await page.$('dialog')).screenshot({path:path.join(screenshots,'review-success-desktop.png')});
+  await page.setViewport({width:390,height:844});
+  assert.equal(await page.$eval('dialog',e=>e.scrollWidth<=e.clientWidth),true,'Success fits mobile dialog');
+  await (await page.$('dialog')).screenshot({path:path.join(screenshots,'review-success-mobile.png')});
+  await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
+  assert.equal(await page.$eval('.hotspot-review-success-check path',e=>getComputedStyle(e).strokeDashoffset),'0px','Reduced motion shows completed check');
+  await page.emulateMediaFeatures([]);await page.setViewport({width:1440,height:1000});
+  await clickText('Terug naar de ervaringen','.hotspot-review-celebration');await page.waitForSelector('.hotspot-own-review');assert.equal(await page.$('.hotspot-review-editor'),null);assert.equal(published.length,1,'Pending review not public');assert.match(await page.$eval('.hotspot-own-review',e=>e.textContent),/wacht op controle/);
   await page.goto(base+'/account?tab=settings',{waitUntil:'networkidle0'});await page.waitForSelector('.member-settings-grid');
   await page.evaluate(()=>{const original=URL.createObjectURL;URL.createObjectURL=blob=>{window.__communityExport=blob.text();return original(blob);};});
   await clickText('Mijn gegevens','.member-account-controls');await page.waitForFunction(()=>Boolean(window.__communityExport));
@@ -95,7 +132,7 @@ const server=createServer((req,res)=>{const url=new URL(req.url,'http://localhos
   assert.match(await page.$eval('.workspace-review-detail a',e=>e.getAttribute('href')),/\/admin\/zaken\//);await clickText('Goedkeuren','.workspace-review-detail');await page.waitForSelector('.workspace-success');assert.equal(published.length,2);
   await page.goto(base+route,{waitUntil:'networkidle0'});await page.waitForSelector('.hotspot-review-score');assert.match(await page.$eval('.hotspot-review-score',e=>e.textContent),/4,5.*2 reviews/);
   await page.$eval('#reviews',e=>e.scrollIntoView({behavior:'instant',block:'start'}));await (await page.$('#reviews')).screenshot({path:path.join(screenshots,'reviews-desktop.png')});
-  await clickText('Mijn review','#reviews');await page.waitForSelector('.hotspot-review-editor');await page.click('input[aria-label="2 sterren"]');await page.$eval('textarea[name="review-comment"]',e=>{e.value='';e.dispatchEvent(new Event('input',{bubbles:true}));});await page.type('textarea[name="review-comment"]','Bij ons tweede bezoek was de ontvangst helaas minder fijn.');await page.click('.hotspot-review-editor input[type="checkbox"]');await page.click('.hotspot-review-editor .member-button-primary');await page.waitForFunction(()=>document.querySelector('.hotspot-own-review')?.textContent.includes('vorige review blijft zichtbaar'));assert.equal(summary().average,4.5,'Pending edit leaves approved rating intact');
+  await clickText('Mijn review','#reviews');await page.waitForSelector('.hotspot-review-editor');await page.click('input[aria-label="2 sterren"]');await page.$eval('textarea[name="review-comment"]',e=>{e.value='';e.dispatchEvent(new Event('input',{bubbles:true}));});await page.type('textarea[name="review-comment"]','Bij ons tweede bezoek was de ontvangst helaas minder fijn.');await page.click('.hotspot-review-editor input[type="checkbox"]');await page.click('.hotspot-review-editor .member-button-primary');await page.waitForFunction(()=>document.querySelector('.hotspot-own-review')?.textContent.includes('vorige review blijft zichtbaar'));assert.equal(summary().average,4.5,'Pending edit leaves approved rating intact');await page.waitForSelector('.hotspot-review-celebration');await clickText('Terug naar de ervaringen','.hotspot-review-celebration');
   await page.setViewport({width:390,height:844});await page.$eval('#reviews',e=>e.scrollIntoView({behavior:'instant',block:'start'}));await (await page.$('#reviews')).screenshot({path:path.join(screenshots,'reviews-mobile.png')});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,'No mobile overflow');
   const starAccessibility=await page.$$eval('.hotspot-review header [role="img"]',els=>els.every(e=>/van 5 sterren/.test(e.getAttribute('aria-label'))));assert.equal(starAccessibility,true);
   await clickText('Melden','.hotspot-review-flag');await page.select('.hotspot-review-flag select','spam');await clickText('Melding versturen','.hotspot-review-flag');await page.waitForFunction(()=>document.querySelector('.hotspot-review-flag')?.textContent.includes('Bedankt'));assert.equal(flagged,true);

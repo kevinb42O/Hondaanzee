@@ -1,0 +1,20 @@
+.star-rating{display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.star-rating-icon{position:relative;display:inline-flex;flex-shrink:0}
+.star-rating-outline{color:#cbd5e1}
+.star-rating-fill{position:absolute;inset:0;overflow:hidden;color:#fbbf24}
+.star-rating-fill>svg{fill:currentColor;max-width:none}
+.star-rating-option{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;isolation:isolate}
+.star-rating-option::before{content:"";position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle,#fef3c7 0%,#fffbeb80 55%,transparent 72%);opacity:0;transform:scale(.65);transition:opacity .22s ease,transform .32s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.star-rating-interactive .star-rating-icon{transition:transform .3s cubic-bezier(.2,.8,.2,1),filter .25s ease;transform-origin:50% 65%}
+.star-rating-interactive .star-rating-outline{transition:color .2s ease}
+.star-rating-interactive .star-rating-fill{transition:width .24s cubic-bezier(.2,.8,.2,1);transition-delay:var(--star-delay)}
+.star-rating-interactive .star-rating-fill>svg{color:#eeb43d;fill:#f5c451}
+.star-rating-option.is-filled .star-rating-outline{color:#eeb43d}
+.star-rating-interactive.is-previewing .is-filled .star-rating-icon{transform:translateY(-2px) scale(1.06);filter:drop-shadow(0 3px 5px #d99b2430)}
+.star-rating-option.is-active::before{opacity:1;transform:scale(1.18)}
+.star-rating-interactive.is-previewing .is-active .star-rating-icon{transform:translateY(-4px) scale(1.17) rotate(-5deg);filter:drop-shadow(0 4px 7px #d99b2445)}
+.star-rating-option.is-selected .star-rating-icon{animation:star-rating-confirm .42s cubic-bezier(.2,.8,.2,1)}
+.star-rating-option input:focus-visible+.star-rating-icon{outline:2px solid #26869b;outline-offset:5px;border-radius:4px}
+.star-rating[aria-disabled="true"] .star-rating-option{cursor:default}
+@keyframes star-rating-confirm{0%,100%{transform:scale(1)}45%{transform:translateY(-3px) scale(1.22) rotate(-6deg)}72%{transform:scale(.98) rotate(2deg)}}
+@media(prefers-reduced-motion:reduce){.star-rating-interactive .star-rating-icon,.star-rating-interactive .star-rating-outline,.star-rating-interactive .star-rating-fill,.star-rating-option::before{transition:none;animation:none}.star-rating-interactive.is-previewing .star-rating-icon{transform:none!important;filter:none}}
