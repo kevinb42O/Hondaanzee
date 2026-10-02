@@ -1,11 +1,14 @@
 
-import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState, useMemo, useEffect, useLayoutEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, Search, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer, Calendar, PawPrint } from 'lucide-react';
+import { ArrowRight, Waves, MapPin, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer, Calendar, PawPrint } from 'lucide-react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
+import HomeSearch from '../components/HomeSearch.tsx';
+import HomeSearchResults from '../components/HomeSearchResults.tsx';
+import { useSiteSearch } from '../utils/useSiteSearch.ts';
+import type { SearchResult } from '../utils/search.ts';
 
 import { findNearestCity } from '../utils/geo.ts';
 import { evaluateCityRuleStatus } from '../utils/rules.ts';
@@ -17,37 +20,6 @@ const COASTLINE_ORDER = [
   'knokke-heist', 'zeebrugge', 'blankenberge', 'wenduine', 'de-haan',
   'bredene', 'oostende', 'middelkerke', 'nieuwpoort', 'koksijde', 'de-panne'
 ];
-
-// Grid layout (6-col): elke rij telt op tot 6
-// Rij 1: [flex]      — Knokke + Zeebrugge (apart, met hover-swap)
-// Rij 2: [4][2]      — Blankenberge groot
-// Rij 3: [2][4]      — Bredene groot (zigzag)
-// Rij 4: [4][2]      — Oostende groot (featured)
-// Rij 5: [2][2][2]   — 3 gelijk (rustpunt)
-const FULL_LAYOUT = [4, 2, 2, 4, 4, 2, 2, 2, 2];
-
-// Fallback: repeating pattern for filtered results
-const FALLBACK_PATTERN = [2, 2, 2];
-
-const getGridSpan = (index: number, total: number): number => {
-  if (total === FULL_LAYOUT.length) return FULL_LAYOUT[index];
-  if (total >= 5) {
-    // Repeating pattern: [3,3] then [2,2,2,...]
-    if (index < 2) return 3;
-    return 2;
-  }
-  return FALLBACK_PATTERN[index % FALLBACK_PATTERN.length];
-};
-
-const getGridClass = (index: number, total: number): string => {
-  const span = getGridSpan(index, total);
-  if (span === 4) return 'sm:col-span-2 lg:col-span-4';
-  if (span === 3) return 'lg:col-span-3';
-  return 'lg:col-span-2';
-};
-
-// Steden die dezelfde hoogte krijgen als de grote kaarten
-const TALL_CARDS = new Set(['wenduine', 'de-haan', 'de-panne', 'oostende', 'middelkerke', 'nieuwpoort', 'koksijde']);
 
 // ── Hero motion variants ────────────────────────────────────────────────
 const HERO_STAGGER: Variants = {
@@ -113,83 +85,6 @@ const STATUS_BADGE_CONFIG = {
     containerClass: 'bg-rose-600/90 text-white ring-rose-200/80'
   }
 } as const;
-
-const CityCard: React.FC<{ city: City; index: number; total: number }> = ({ city, index, total }) => {
-  const span = getGridSpan(index, total);
-  const isFeatured = span >= 4;
-  const isMedium = span === 3;
-  const isTall = TALL_CARDS.has(city.slug);
-  const gridClass = getGridClass(index, total);
-  const heightClass = isFeatured || isTall
-    ? 'h-[300px] sm:h-[340px] lg:h-[380px] 2xl:h-[420px]'
-    : isMedium
-      ? 'h-[280px] sm:h-[300px] lg:h-[340px] 2xl:h-[390px]'
-      : 'h-[260px] sm:h-[280px]';
-  const srcSet = getResponsiveSrcSet(city.image);
-
-  return (
-    <Link
-      key={city.slug}
-      to={`/${city.slug}`}
-      className={`city-card group relative rounded-2xl lg:rounded-3xl overflow-hidden block bg-slate-100 active:scale-[0.98] md:hover:-translate-y-1.5 transition-all duration-500 ease-out ${gridClass} ${heightClass} ${
-        isFeatured || isMedium
-          ? 'shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] ring-1 ring-black/5'
-          : 'shadow-md hover:shadow-xl'
-      }`}
-      style={{ animationDelay: `${Math.min(index * 0.06, 0.5)}s` }}
-    >
-      <img
-        src={city.image}
-        srcSet={srcSet}
-        alt={city.name}
-        className="w-full h-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-105"
-        width={isFeatured ? 800 : isMedium ? 600 : 400}
-        height={isFeatured ? 380 : isMedium ? 340 : 280}
-        loading={index < 2 ? "eager" : "lazy"}
-        decoding="async"
-        sizes={isFeatured ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 66vw' : isMedium ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-      />
-      {(() => {
-        const status = evaluateCityRuleStatus(city).status;
-        const badge = STATUS_BADGE_CONFIG[status];
-        const StatusIcon = badge.icon;
-
-        return (
-          <div
-            className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-2 backdrop-blur-md transition-transform duration-300 md:group-hover:scale-105 ${badge.containerClass}`}
-            aria-label={`${city.name}: ${badge.label}`}
-            title={`${city.name}: ${badge.label}`}
-          >
-            <StatusIcon size={16} strokeWidth={3} className="sm:w-[18px] sm:h-[18px] drop-shadow-sm" />
-          </div>
-        );
-      })()}
-      <div className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8 text-white ${
-        isFeatured || isMedium
-          ? 'bg-gradient-to-t from-black/90 via-black/25 to-transparent'
-          : 'bg-gradient-to-t from-black/85 via-black/40 to-transparent'
-      }`}>
-        <div className="flex items-center gap-2 text-sky-300 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3 drop-shadow-lg">
-          <MapPin size={isFeatured ? 16 : 14} className="sm:w-4 sm:h-4" />
-          <span>Ontdek {city.name}</span>
-        </div>
-        <h3 className={`font-black mb-2 sm:mb-3 flex items-center justify-between tracking-tighter drop-shadow-lg ${
-          isFeatured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'
-        }`}>
-          {city.name}
-          <div className="bg-white/10 backdrop-blur-2xl p-2 sm:p-2.5 lg:p-3 rounded-full md:transition-all md:duration-300 md:group-hover:bg-sky-600 md:group-hover:animate-arrow-salvo shadow-xl flex-shrink-0">
-            <ArrowRight size={isFeatured ? 22 : 18} strokeWidth={3} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-          </div>
-        </h3>
-        <p className={`text-slate-100 font-medium leading-relaxed opacity-95 drop-shadow-md ${
-          isFeatured ? 'text-sm lg:text-base line-clamp-2' : 'text-xs sm:text-sm line-clamp-2'
-        }`}>
-          {city.description}
-        </p>
-      </div>
-    </Link>
-  );
-};
 
 // Rij-component met dynamische hover-swap animatie
 // Op desktop hover: hovered kaart groeit vloeiend, andere krimpt
@@ -296,22 +191,24 @@ const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems
 
 const Home: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [searchParams] = useSearchParams();
-  const initialSearch = searchParams.get('search') || '';
-  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
+  const [searchActivated, setSearchActivated] = useState(false);
+  const { results, loading, error } = useSiteSearch(searchQuery, searchActivated || !!searchQuery.trim());
+  const setSearchQuery = (query: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (query.trim()) next.set('search', query);
+    else next.delete('search');
+    setSearchParams(next, { replace: true, preventScrollReset: true });
+  };
+  const selectSearchResult = (result: SearchResult) => {
+    const from = `/?${new URLSearchParams({ search: searchQuery })}#steden`;
+    navigate(result.path, { state: { from } });
+  };
   const [isLocating, setIsLocating] = useState(false);
   const [locationMsg, setLocationMsg] = useState<string | null>(null);
-  const [showSuggestions, setShowSuggestions] = useState(!!initialSearch);
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
-  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  // Determine once at mount whether the prerender hero div exists in the DOM.
-  // Using lazy initialization avoids calling setState inside useLayoutEffect,
-  // which would trigger a synchronous re-render and force a layout recalculation.
   const navigate = useNavigate();
-  const searchContainerRef = useRef<HTMLDivElement>(null);
-  const searchBarRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useSEO(SEO_DATA.home);
 
@@ -372,23 +269,9 @@ const Home: React.FC = () => {
     );
   };
 
-  const filteredCities = useMemo(() => {
-    const filtered = CITIES.filter((city) =>
-      city.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    // Sorteer op kustlijn volgorde (NO → ZW)
-    return [...filtered].sort((a, b) => {
-      const idxA = COASTLINE_ORDER.indexOf(a.slug);
-      const idxB = COASTLINE_ORDER.indexOf(b.slug);
-      return (idxA === -1 ? 999 : idxA) - (idxB === -1 ? 999 : idxB);
-    });
-  }, [searchQuery]);
-
-  // Toon speciale layouts alleen als alle steden zichtbaar zijn (geen filter)
-  const isFullView = searchQuery.trim() === '' && filteredCities.length === COASTLINE_ORDER.length;
+  const sortedCities = useMemo(() => [...CITIES].sort((a, b) => COASTLINE_ORDER.indexOf(a.slug) - COASTLINE_ORDER.indexOf(b.slug)), []);
 
   const fullViewRows = useMemo(() => {
-    if (!isFullView) return [];
     const ROW_CONFIGS = [
       { count: 2, flexes: [2, 4] },
       { count: 2, flexes: [4, 2] },
@@ -399,133 +282,15 @@ const Home: React.FC = () => {
     const rows = [];
     let idx = 0;
     for (const config of ROW_CONFIGS) {
-      if (idx >= filteredCities.length) break;
+      if (idx >= sortedCities.length) break;
       rows.push({
-        cities: filteredCities.slice(idx, idx + config.count),
+        cities: sortedCities.slice(idx, idx + config.count),
         flexes: config.flexes
       });
       idx += config.count;
     }
     return rows;
-  }, [filteredCities, isFullView]);
-
-  // Create suggestions list (limit to 6 for better UX)
-  const suggestions = useMemo(() => {
-    if (searchQuery.trim().length === 0) return [];
-    return filteredCities.slice(0, 6);
-  }, [filteredCities, searchQuery]);
-
-  // Calculate dropdown position based on searchbar rect
-  const updateDropdownPosition = useCallback(() => {
-    if (searchBarRef.current) {
-      const rect = searchBarRef.current.getBoundingClientRect();
-      setDropdownStyle({
-        position: 'fixed',
-        top: rect.bottom + 8,
-        left: rect.left,
-        width: rect.width,
-        zIndex: 9999,
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (showSuggestions) {
-      updateDropdownPosition();
-      window.addEventListener('scroll', updateDropdownPosition, { passive: true });
-      window.addEventListener('resize', updateDropdownPosition, { passive: true });
-      return () => {
-        window.removeEventListener('scroll', updateDropdownPosition);
-        window.removeEventListener('resize', updateDropdownPosition);
-      };
-    }
-  }, [showSuggestions, updateDropdownPosition]);
-
-  // Handle clicks outside of search to close suggestions
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node;
-      const inSearchBar = searchContainerRef.current?.contains(target);
-      const inDropdown = dropdownRef.current?.contains(target);
-      if (!inSearchBar && !inDropdown) {
-        setShowSuggestions(false);
-        setSelectedSuggestionIndex(-1);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside, { passive: true });
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, []);
-
-  // Handle suggestion selection
-  const handleSuggestionClick = (city: City) => {
-    setSearchQuery(city.name);
-    setShowSuggestions(false);
-    setSelectedSuggestionIndex(-1);
-    // Kort moment zodat de naam zichtbaar is in de searchbar vóór navigatie
-    setTimeout(() => navigate(`/${city.slug}`), 120);
-  };
-
-  // Handle keyboard navigation in suggestions
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!showSuggestions || suggestions.length === 0) {
-      if (e.key === 'Enter') {
-        scrollToResults();
-      }
-      return;
-    }
-
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setSelectedSuggestionIndex((prev) => {
-          const newIndex = prev < suggestions.length - 1 ? prev + 1 : prev;
-          // Scroll suggestion into view
-          setTimeout(() => {
-            document.getElementById(`suggestion-${newIndex}`)?.scrollIntoView({
-              block: 'nearest',
-              behavior: 'smooth'
-            });
-          }, 0);
-          return newIndex;
-        });
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setSelectedSuggestionIndex((prev) => {
-          const newIndex = prev > 0 ? prev - 1 : -1;
-          if (newIndex >= 0) {
-            setTimeout(() => {
-              document.getElementById(`suggestion-${newIndex}`)?.scrollIntoView({
-                block: 'nearest',
-                behavior: 'smooth'
-              });
-            }, 0);
-          }
-          return newIndex;
-        });
-        break;
-      case 'Enter':
-        e.preventDefault();
-        if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
-          handleSuggestionClick(suggestions[selectedSuggestionIndex]);
-        } else if (suggestions.length === 1) {
-          handleSuggestionClick(suggestions[0]);
-        } else {
-          setShowSuggestions(false);
-          scrollToResults();
-        }
-        break;
-      case 'Escape':
-        setShowSuggestions(false);
-        setSelectedSuggestionIndex(-1);
-        break;
-    }
-  };
+  }, [sortedCities]);
 
   return (
     <div>
@@ -591,131 +356,21 @@ const Home: React.FC = () => {
           </motion.p>
 
           <motion.div
-            ref={searchContainerRef}
             variants={HERO_SEARCH_POP}
             className="max-w-lg md:max-w-3xl mx-auto relative px-2 sm:px-4 md:px-8"
           >
-            <div ref={searchBarRef} className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
-              <div className="pl-3 sm:pl-4 md:pl-6 flex items-center pointer-events-none">
-                <Search size={20} className="search-icon text-slate-400 sm:w-[22px] sm:h-[22px]" />
-              </div>
-              <input
-                type="text"
-                placeholder="Waar gaan jullie wandelen?"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setShowSuggestions(e.target.value.trim().length > 0);
-                  setSelectedSuggestionIndex(-1);
-                }}
-                onKeyDown={handleKeyDown}
-                onFocus={() => {
-                  if (searchQuery.trim().length > 0) {
-                    setShowSuggestions(true);
-                  }
-                }}
-                className="search-input flex-1 px-2 sm:px-3 md:px-4 py-3 sm:py-4 md:py-5 bg-transparent text-base sm:text-lg md:text-xl text-slate-900 font-semibold placeholder:text-slate-300 focus:outline-none font-heading min-w-0"
-                aria-label="Zoek een kuststad"
-                enterKeyHint="search"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck="false"
-                role="combobox"
-                aria-expanded={showSuggestions && suggestions.length > 0}
-                aria-controls="search-suggestions"
-                aria-activedescendant={selectedSuggestionIndex >= 0 ? `suggestion-${selectedSuggestionIndex}` : undefined}
-              />
-              {searchQuery ? (
-                <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setShowSuggestions(false);
-                    setSelectedSuggestionIndex(-1);
-                  }}
-                  className="clear-btn p-2 text-slate-300 hover:text-slate-600 touch-target"
-                  aria-label="Wis zoekopdracht"
-                >
-                  <X size={20} className="sm:w-[22px] sm:h-[22px]" />
-                </button>
-              ) : (
-                <button
-                  onClick={handleUseLocation}
-                  disabled={isLocating}
-                  className={`p-2 mr-1 transition-colors touch-target ${isLocating ? 'text-sky-400 animate-pulse' : 'text-slate-300 hover:text-sky-600'}`}
-                  aria-label="Gebruik mijn locatie"
-                  title="Vind dichtstbijzijnde badstad"
-                >
-                  <MapPin size={20} className="sm:w-[22px] sm:h-[22px]" />
-                </button>
-              )}
-              <button
-                onClick={scrollToResults}
-                className="btn-lift bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white font-bold px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-full text-sm sm:text-base md:text-lg font-heading whitespace-nowrap touch-target"
-              >
-                Zoeken
-              </button>
-            </div>
-
-            {/* Autocomplete Suggestions Dropdown – rendered via portal to escape overflow:hidden */}
-            {showSuggestions && suggestions.length > 0 && createPortal(
-              <div 
-                id="search-suggestions"
-                style={{
-                  ...dropdownStyle,
-                  maxHeight: 'min(400px, 50vh)',
-                  WebkitOverflowScrolling: 'touch' as const,
-                }}
-                ref={dropdownRef}
-                className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
-              >
-                <div className="overflow-y-auto max-h-full overscroll-contain">
-                  {suggestions.map((city, index) => (
-                    <button
-                      key={city.slug}
-                      id={`suggestion-${index}`}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        handleSuggestionClick(city);
-                      }}
-                      onTouchEnd={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleSuggestionClick(city);
-                      }}
-                      onMouseEnter={() => setSelectedSuggestionIndex(index)}
-                      className={`w-full flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-5 text-left transition-all duration-150 active:scale-[0.98] ${
-                        index === selectedSuggestionIndex 
-                          ? 'bg-gradient-to-r from-sky-50 to-cyan-50 text-sky-700' 
-                          : 'bg-white text-slate-700 hover:bg-slate-50'
-                      } ${index === suggestions.length - 1 ? '' : 'border-b border-slate-100'}`}
-                      style={{ minHeight: '60px' }}
-                    >
-                      <div className={`flex-shrink-0 p-2 rounded-xl transition-colors ${
-                        index === selectedSuggestionIndex ? 'bg-sky-100' : 'bg-slate-50'
-                      }`}>
-                        <MapPin 
-                          size={20} 
-                          className={`${
-                            index === selectedSuggestionIndex ? 'text-sky-600' : 'text-slate-500'
-                          }`} 
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="font-bold text-base sm:text-lg block">{city.name}</span>
-                        <span className="text-xs text-slate-500 line-clamp-1">{city.description}</span>
-                      </div>
-                      <ArrowRight 
-                        size={20} 
-                        className={`ml-auto flex-shrink-0 transition-transform ${
-                          index === selectedSuggestionIndex ? 'text-sky-600 translate-x-1' : 'text-slate-300'
-                        }`} 
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>,
-              document.body
-            )}
+            <HomeSearch
+              query={searchQuery}
+              onQueryChange={setSearchQuery}
+              results={results}
+              loading={loading}
+              error={error}
+              onActivate={() => setSearchActivated(true)}
+              onSubmit={scrollToResults}
+              onSelect={selectSearchResult}
+              onUseLocation={handleUseLocation}
+              isLocating={isLocating}
+            />
 
             {locationMsg && (
               <div className="mt-4 bg-white/95 backdrop-blur-sm text-slate-700 text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center justify-between gap-3 animate-in fade-in">
@@ -745,8 +400,6 @@ const Home: React.FC = () => {
                   transition={{ type: 'spring', stiffness: 320, damping: 18 }}
                   onClick={() => {
                     setSearchQuery(pop);
-                    setShowSuggestions(false);
-                    setSelectedSuggestionIndex(-1);
                     // Wacht één frame zodat React de gefilterde grid heeft gerenderd
                     // vóór we ernaartoe scrollen — anders kan scrollIntoView de oude
                     // (kortere) hoogte gebruiken en op een verkeerde positie eindigen.
@@ -889,53 +542,20 @@ const Home: React.FC = () => {
         </div>
 
         <div id="steden" className="site-shell scroll-mt-24">
-          {/* Cities Grid Header */}
-          <div className="mb-10 flex items-center justify-between px-2">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-              <Waves size={24} className="text-sky-500" />
-              Onze Badsteden
-            </h2>
-            <div className="hidden sm:block text-sm font-bold text-slate-500 uppercase tracking-widest">
-              Totaal: {filteredCities.length} resultaten
-            </div>
-          </div>
-
-          {filteredCities.length > 0 ? (
-            <>
-              {isFullView ? (
-                <div className="flex flex-col">
-                  {fullViewRows.map((row, index) => (
-                    <HoverRow key={index} cities={row.cities} defaultFlexes={row.flexes} isThreeItems={row.flexes.length === 3} rowIndex={index} />
-                  ))}
-                </div>
-              ) : (
-                <div className={
-                  filteredCities.length >= 5
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
-                    : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
-                }>
-                  {filteredCities.map((city, index) => (
-                    <CityCard key={city.slug} city={city} index={index} total={filteredCities.length} />
-                  ))}
-                </div>
-              )}
-            </>
+          {searchQuery.trim() ? (
+            <HomeSearchResults key={searchQuery} query={searchQuery} results={results} loading={loading} error={error} onClear={() => setSearchQuery('')} />
           ) : (
-            <div className="text-center py-20 md:py-32 px-6 bg-white rounded-[4rem] border-2 border-dashed border-slate-100 animate-in fade-in shadow-inner">
-              <div className="bg-slate-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-10 text-slate-200">
-                <Search size={48} />
+            <>
+              <div className="mb-10 flex items-center justify-between px-2">
+                <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                  <Waves size={24} className="text-sky-500" />Onze Badsteden
+                </h2>
+                <div className="hidden sm:block text-sm font-bold text-slate-500 uppercase tracking-widest">Totaal: {sortedCities.length} badsteden</div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">Geen stad gevonden</h2>
-              <p className="text-slate-500 font-medium text-lg mb-10 max-w-md mx-auto">
-                We hebben geen match voor "<span className="text-slate-900 font-bold">{searchQuery}</span>". Probeer een andere badstad of bekijk de volledige lijst.
-              </p>
-              <button
-                onClick={() => setSearchQuery('')}
-                className="btn-lift bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-sky-600 shadow-2xl shadow-slate-900/20 flex items-center gap-3 mx-auto"
-              >
-                Reset zoekopdracht
-              </button>
-            </div>
+              <div className="flex flex-col">
+                {fullViewRows.map((row, index) => <HoverRow key={index} cities={row.cities} defaultFlexes={row.flexes} isThreeItems={row.flexes.length === 3} rowIndex={index} />)}
+              </div>
+            </>
           )}
         </div>
       </div>
