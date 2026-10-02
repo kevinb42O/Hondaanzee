@@ -1,16 +1,10 @@
 import type { Hotspot } from '../types';
 
-const createHotspotSlug = (name: string): string =>
-  name
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
+// Slugs are permanent: keep them when a business changes its display name.
+export const HOTSPOTS: Hotspot[] = [
   {
     id: 1,
+    slug: 'lakaiann',
     name: 'Lakaiann',
     type: 'Koffiebar',
     recommendationNote: 'Lakaiann is een aanrader omdat het geen gewone koffiestop is. Je springt binnen voor een goede koffie, maar de combinatie van rustige sfeer, originele winkel en vanzelfsprekende gastvrijheid maakt dit tot zo’n plek waar je met hond graag wat langer blijft hangen.',
@@ -35,6 +29,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 2,
+    slug: 'dune-hotel-nieuwpoort',
     name: 'Dune Hotel Nieuwpoort',
     type: 'Slapen',
     description: 'Het Dune Hotel staat bekend om het prachtige uitzicht vanuit de hotelkamers. Word uitgerust wakker, omgeven door de natuur, en wandel vervolgens direct de duinen in. Het hotel biedt verschillende type kamers voor 2 of 4 personen waar je hond mag mee overnachten, evenals kamers die aangepast zijn aan de noden van mindervaliden. Een zeer compleet ontbijt en een parkeerplaats voor je auto zijn altijd inbegrepen. Overnachten met je viervoeter was nog nooit zo comfortabel!',
@@ -47,6 +42,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 120,
+    slug: 'cosmopolite-hotel',
     name: 'Cosmopolite Hotel',
     type: 'Slapen',
     description: 'Een begrip aan de Belgische kust met een traditie van 100 jaar gastvrijheid! Dit 4 sterren hotel combineert luxe met een familiaire touch en ligt op slechts 80 meter van de zeedijk. Honden zijn hier van harte welkom en krijgen bij het inchecken zelfs een cadeautje — pure verwennerij! De Brasserie Carrousel, onderdeel van het hotel, beschikt over een aparte ruimte waar je rustig kunt ontbijten met je viervoeter. Met 130 moderne kamers, een privé wellness en een toplocatie (score 9,3 voor stellen) is dit een echte aanrader. Tip: vermeld bij je boeking dat je met je hond komt.',
@@ -58,6 +54,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 3,
+    slug: 'beachbar-de-kwinte',
     name: 'Beachbar De Kwinte',
     type: 'Café',
     description: 'Geniet van lokale gerechten terwijl je hond rustig onder tafel ligt.',
@@ -69,6 +66,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 121,
+    slug: 'madam-caravan',
     name: 'Madam Caravan',
     type: 'Koffiebar',
     description: 'Een kleinere koffiebar met een gigantisch groot hart voor honden! De eigenares heeft zelf ook een trouwe viervoeter en serveert de lekkerste koffie van Middelkerke. Dit charmante pandje werd volledig verbouwd en bekroond met een M-award als "De mooiste winkel van 2024". Het dient als werk atelier waar heerlijke ontbijt boxen worden klaargemaakte voor thuislevering. Geniet binnen aan de gezellige bar of buiten op het terras van overheerlijke koffie, verse croissants, home made energie koekjes en warme croissants met smakelijke toppings. Ook verkrijgbaar: verse confituur, granola, home made choco, losse thee en meer.',
@@ -80,6 +78,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 122,
+    slug: 'de-frietboetiek',
     name: 'De Frietboetiek',
     type: 'Restaurant',
     description: 'Een échte familiezaak met extreem lekkere huisbereide burgers van Dierendonck\'s rundsvlees en huisgemaakte sauzen die je bezoek écht onvergetelijk maken! Wat in 2009 startte als gewone frituur groeide uit tot een bloeiende zaak met Amerikaanse en Europese invloeden. Bij De Frietboetiek vind je naast overheerlijke burgers ook verschillende grillspecialiteiten, huisgemaakte vol-au-vent en heerlijk knapperige frietjes gebakken in 100% plantaardige olie. De super gezellige sfeer maakt het helemaal compleet. Het allerbeste nieuws? Je hond is meer dan welkom en mag zelfs bij je op de bank zitten op een knus dekentje! Een absolute aanrader voor wie houdt van lekker eten in een warme, hondvriendelijke setting.',
@@ -91,6 +90,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 4,
+    slug: 'bistrot-de-la-mer',
     name: 'Bistrot de la Mer',
     type: 'Restaurant',
     description: 'Sfeervol restaurant waar u samen met uw hond geniet van dagverse visgerechten en schaaldieren.',
@@ -102,6 +102,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 5,
+    slug: 'c-hotels-andromeda',
     name: 'C-Hotels Andromeda',
     type: 'Slapen',
     description: 'Luxe hotel aan de zeedijk waar honden (max. 10kg) van harte welkom zijn op de kamer.',
@@ -113,6 +114,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 6,
+    slug: 'gastrobar-sam',
     name: 'Gastrobar Sam',
     type: 'Restaurant',
     summary: 'Hondvriendelijke gastrobar in Oostende waar je hond welkom is, binnen en op het terras.',
@@ -137,6 +139,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 7,
+    slug: 'upstairs-hotel',
     name: 'Upstairs Hotel',
     type: 'Slapen',
     description: 'Hip en modern hotel vlakbij het strand waar honden welkom zijn in specifieke kamertypes.',
@@ -148,6 +151,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 8,
+    slug: 'siesta-bar',
     name: 'Siesta Bar',
     type: 'Restaurant',
     description: 'Unieke tapasbar die beroemd is om zijn speciale hondenmenu met snacks en \'hondenbier\'.',
@@ -159,6 +163,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 10,
+    slug: 'brasserie-rubens',
     name: 'Brasserie Rubens',
     type: 'Brasserie',
     description: 'Een vaste waarde in Knokke waar u en uw hond kunnen genieten van klassieke brasseriegerechten.',
@@ -170,6 +175,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 12,
+    slug: 'belgium-pier-brasserie',
     name: 'Belgium Pier Brasserie',
     type: 'Brasserie',
     summary: 'Brasserie op de iconische pier van Blankenberge waar je letterlijk boven zee eet en de locatie al de helft van de ervaring uitmaakt.',
@@ -185,6 +191,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 14,
+    slug: 'de-verloren-gernoare',
     name: 'De Verloren Gernoare',
     type: 'Café',
     description: 'Authentiek bruin café/estaminet waar honden als \'thuis\' worden ontvangen door de uitbater.',
@@ -196,6 +203,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 15,
+    slug: 'brasserie-carrousel',
     name: 'Brasserie Carrousel',
     type: 'Brasserie',
     description: 'Populaire brasserie waar honden overal welkom zijn! Voor het ontbijt hebben ze zelfs een extra ruimte waar je rustig kunt genieten van je ontbijt met je viervoeter aan je zijde. Als dat geen luxe is! Een prachtig voorbeeld van hoe gastvrijheid en comfort voor je hond hand in hand kunnen gaan.',
@@ -207,6 +215,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 16,
+    slug: 'brasserie-het-kompas',
     name: 'Brasserie Het Kompas',
     type: 'Brasserie',
     description: 'Gezellig tafelen op de Zeedijk, maximaal één hond per tafel toegelaten.',
@@ -218,6 +227,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 116,
+    slug: 'cafe-au-blason',
     name: 'Café Au Blason',
     type: 'Café',
     description: 'Een authentieke bruine kroeg zoals een café hoort te zijn! Au Blason staat bekend als een sfeervolle bar in Nieuwpoort waar jong en oud elkaar ontmoeten. Hier wordt kwaliteitsbier gedronken en goede muziek gedraaid in een échte huiselijke sfeer. De zeer vriendelijke eigenaar heeft zelf ook een hond en ontvangt je met open armen. Ontdek de heerlijke speciaalbieren en kom zelf de fijne sfeer proeven. Perfect voor een frisse pint of een lekkere koffie na een strandwandeling. Een authentiek adres waar je je meteen thuis voelt!',
@@ -229,6 +239,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 117,
+    slug: 'cremerie-artisanaal-ijs',
     name: 'Cremerie Artisanaal Ijs',
     type: 'Restaurant',
     description: 'Een heerlijk adresje voor de zoetekauwen! Bij Cremerie geniet je van het allerlekkerste artisanale ijs, krokante Luikse wafels en zachte Brusselse wafels. Perfect voor een verfrissend tussenstopje na een strandwandeling. En het beste? Je trouwe viervoeter wordt hier ook in de watten gelegd met een koekje – en als hij braaf is geweest, krijgt hij misschien zelfs een hoorntje van een ijsje!',
@@ -240,6 +251,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 118,
+    slug: 'bar-buvette',
     name: 'Bar Buvette',
     type: 'Café',
     description: 'Een ruime en gezellige zaak op de Albert I laan waar je met je viervoeter terecht kan voor een ontspannen moment. Bar Buvette biedt een uitgebreid aanbod aan bieren, wijnen en lekkere tapas – perfect om te genieten van een drankje en een hapje na een intensieve strandwandeling. Honden zijn er van harte welkom!',
@@ -251,6 +263,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 119,
+    slug: 'de-vismarkt-aan-zee',
     name: 'De Vismarkt Aan Zee',
     type: 'Café',
     description: 'Modern en eigentijds café waar je heerlijk kunt wegdromen met een goed glas wijn, een fris pintje of een perfecte koffie. Eigenaar Eduard, een jonge en gedreven ondernemer, heeft een stijlvolle zaak neergezet waar honden met open armen ontvangen worden. Er staat zelfs een waterbak klaar voor de deur, zodat je viervoeter meteen verfrist kan worden. Een aanrader voor wie houdt van een trendy sfeer en authentieke gastvrijheid!',
@@ -262,6 +275,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 17,
+    slug: 'bistro-noordzee',
     name: 'Bistro Noordzee',
     type: 'Restaurant',
     description: 'Bekende bistro op de zeedijk met prachtig zicht op zee en een groot hart voor dieren, perfect na een strandwandeling. Bistro Noordzee focust zich op al wat de zee te bieden heeft en specialiseert zich in de verfijnde Franse keuken. Geniet van heerlijke verse visgerechten en schaaldieren terwijl je uitkijkt over het prachtige kustlandschap. Een culinaire ervaring met je viervoeter aan je zijde!',
@@ -273,6 +287,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 18,
+    slug: 'de-lekpot',
     name: 'De Lekpot',
     type: 'Restaurant',
     description: 'Een gezellig familierestaurant met een super vriendelijke eigenaar en een gigantisch groot hart voor honden! Gespecialiseerd in heerlijke mosselen en andere Belgische klassiekers. De Lekpot beschikt over airconditioning, een terras om buiten te zitten, afhaalservice en gratis wifi. Reserveren wordt aangeraden — vergeet niet te vermelden dat je hond meekomt, zodat ze het allerbeste plekje voor jullie kunnen vrijhouden. Je viervoeter mag uiteraard gewoon mee naar binnen en rustig onder tafel liggen. Een echte aanrader voor een zorgeloos etentje met je trouwe vriend!',
@@ -284,6 +299,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 68,
+    slug: 'bistra-liva',
     name: 'Bistra Liva',
     type: 'Restaurant',
     description: 'Gezellige bistro op de Zeedijk waar "Liva" staat voor liefde voor allen – en dat geldt zeker ook voor je viervoeter! Geniet van de warme sfeer met prachtig zicht op zee, terwijl je proeft van de verse homemade kitchen. Van verse vol-au-vent en smelten-in-je-mond stoofvlees tot kabeljauw en pannenkoeken op grootmoeders wijze – alles à la minute bereid. Keuken doorlopend open tot 21u. Rustig genieten aan zee met je trouwe metgezel, dat is hier het concept!',
@@ -295,6 +311,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 19,
+    slug: 'restaurant-de-concessie',
     name: 'Restaurant De Concessie',
     type: 'Restaurant',
     description: 'Stijlvol genieten in het historische hart van De Haan, honden zijn hier toegelaten.',
@@ -306,6 +323,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 69,
+    slug: 'ibis-hotel',
     name: 'Ibis Hotel',
     type: 'Slapen',
     description: 'Modern en comfortabel hotel met 83 eigentijdse kamers, elk voorzien van airco, gratis WiFi en smart tv. Ontspan in het verwarmde buitenzwembad of in de groene tuin, en geniet van een drankje in de gezellige bar. Het hotel ligt in een rustige omgeving op wandelafstand van zee – de perfecte uitvalsbasis voor wie de natuur wil verkennen of gewoon wil relaxen op het strand. Jouw viervoeter is hier van harte welkom voor een zorgeloos verblijf aan de kust!',
@@ -317,6 +335,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 86,
+    slug: 'pizzeria-piano-piano',
     name: 'Pizzeria Piano Piano',
     type: 'Restaurant',
     description: 'Authentieke Italiaanse pizzeria met 34 jaar ervaring en een hart van goud. Dit warme familiebedrijf, nu overgenomen door de nieuwe generatie, serveert nog steeds dezelfde overheerlijke pizza\'s en pasta\'s die je van vroeger kent - misschien zelfs nog beter! Geniet van verse gerechten in een gezellige sfeer waar verhalen, lachen en uiteraard heerlijke pizza gedeeld worden. Je viervoeter is hier van harte welkom! Check hun website om te reserveren.',
@@ -328,6 +347,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 123,
+    slug: 'plaza-d-amante',
     name: 'Plaza d\'Amanté',
     type: 'Koffiebar',
     description: 'Een pareltje op de Zeedijk van De Haan waar specialty coffee, lokale producten en een warm hart voor honden samenkomen. De super lieve eigenaars werken uitsluitend met lokale koffiebranders en Belgische theeleveranciers — hier proef je vakmanschap én passie in elk kopje. Vergeet ook zeker niet het heerlijke gebak: taarten, brownies en koekjes, allemaal vers bereid door een lokale bakker uit De Haan. Alles wat je ziet, proeft en ruikt is te koop: van ambachtelijke olijfolie en gin tonics van lokale brouwers tot unieke producten in beperkte oplage. Je gaat hier simpelweg niet buiten zonder een lach op je gezicht. Een foodbar, boutique en beleving in één — en je viervoeter is er meer dan welkom!',
@@ -349,6 +369,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 22,
+    slug: 'cozy-moments',
     name: 'Cozy Moments',
     type: 'Café',
     summary: 'Super gezellige koffie- en cocktailbar op de Grote Markt, waar je makkelijk even neerstrijkt met je hond. Pal in het midden van centrum Blankenberge.',
@@ -373,6 +394,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 23,
+    slug: 'alaska',
     name: 'Alaska',
     type: 'Restaurant',
     description: 'Authentiek eethuis en frituur in het hart van Bredene waar je hond welkom is terwijl jij geniet van klassieke Belgische gerechten en verse frietjes. Een gezellige, ongedwongen sfeer waar iedereen zich thuis voelt.',
@@ -384,6 +406,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 24,
+    slug: 'coffee-wine-de-golf',
     name: 'Coffee & Wine De Golf',
     type: 'Koffiebar',
     description: 'Stijlvolle zaak waar je overdag kunt genieten van een heerlijke koffie en \'s avonds van een goed glas wijn. Honden zijn hier hartelijk welkom en worden in de watten gelegd tijdens je bezoek! Perfect om te relaxen in de gezellige sfeer terwijl je viervoeter geniet van alle aandacht. Let op: naast de deur hebben ze een hotel, maar daar kunnen honden helaas niet overnachten. In het café zelf zijn ze echter meer dan welkom om mee te genieten van het moment.',
@@ -395,6 +418,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 25,
+    slug: 'brasserie-shop-n-lunch-p-p',
     name: 'Brasserie Shop \'n Lunch P&P',
     type: 'Brasserie',
     description: 'Gezellige zaak waar je kunt genieten van een heerlijk ontbijt, verse koffie en smakelijke broodjes.Daarnaast worden ook diverse middagsnacks en pannekoeken,gebak en ijscoupes geserveerd om jouw middagpauze compleet te maken.Je hond is hier van harte welkom om mee te genieten van de relaxte sfeer.',
@@ -407,6 +431,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   // Oostende Hotels & Accommodations
   {
     id: 26,
+    slug: 'mercure-oostende',
     name: 'Mercure Oostende',
     type: 'Slapen',
     description: 'Modern 4-sterrenhotel in het centrum, vlakbij het strand en het casino. Huisdieren zijn welkom in dit comfortabele hotel met uitstekende ligging.',
@@ -418,6 +443,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 27,
+    slug: 'hotel-pacific',
     name: 'Hotel Pacific',
     type: 'Slapen',
     description: 'Gezellig driesterrenhotel op 50 meter van het strand. Perfect voor een ontspannen verblijf met je viervoeter aan zee.',
@@ -429,6 +455,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 28,
+    slug: 'hotel-royal-astrid',
     name: 'Hotel Royal Astrid',
     type: 'Slapen',
     description: '3-sterrenhotel met wellnessfaciliteiten (1000m²), gelegen nabij het strand. Geniet van ontspanning terwijl je hond welkom is.',
@@ -440,6 +467,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 29,
+    slug: 'hotel-albert-ii',
     name: 'Hotel Albert II',
     type: 'Slapen',
     description: 'Historisch pand met Belle Époque sfeer in het centrum, vlakbij de markt. Een charmant hotel waar geschiedenis en comfort samenkomen.',
@@ -451,6 +479,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 30,
+    slug: 'charmehotel-t-kruishof',
     name: 'Charmehotel \'t Kruishof',
     type: 'Slapen',
     description: 'Gelegen tussen stad en polders, met veel ruimte en groen. Ideaal voor wandelingen met je hond in een rustige omgeving.',
@@ -462,6 +491,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 31,
+    slug: 'b-b-huyze-elimonica',
     name: 'B&B Huyze Elimonica',
     type: 'Slapen',
     description: 'Stijlvolle B&B in een geklasseerd pand uit 1899, hondvriendelijk. Geniet van de charme van een historisch gebouw met moderne comfort.',
@@ -473,6 +503,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 32,
+    slug: 'villa-cecha-b-b-wellness',
     name: 'Villa Cecha B&B & Wellness',
     type: 'Slapen',
     description: 'Kleinschalige B&B met wellness in het rustige Stene-dorp. Perfect voor een ontspannen uitje met je viervoeter.',
@@ -484,6 +515,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 33,
+    slug: 'maison-martha',
     name: 'Maison Martha',
     type: 'Slapen',
     description: 'Ruime vakantiewoning (tot 12 personen) met sauna en jacuzzi. Ideaal voor een groepsverblijf met je hond.',
@@ -495,6 +527,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 34,
+    slug: 'villa-odette',
     name: 'Villa Odette',
     type: 'Slapen',
     description: 'Luxe vakantiehuis voor grote groepen (tot 14 personen), ingericht in beach-style. Perfect voor een strandvakantie met familie en hond.',
@@ -506,6 +539,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 35,
+    slug: 'sea-breeze',
     name: 'Sea Breeze',
     type: 'Slapen',
     description: 'Appartement in het centrum, op wandelafstand van de zeedijk. Ideale uitvalsbasis voor een stedentrip met je hond.',
@@ -517,6 +551,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 36,
+    slug: 'zilte-stilte',
     name: 'Zilte Stilte',
     type: 'Slapen',
     description: 'Vakantiewoning met focus op rust, huisdieren welkom. Geniet van een rustige vakantie in een hondvriendelijke omgeving.',
@@ -528,6 +563,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 37,
+    slug: 'les-cabanes-d-ostende',
     name: 'Les Cabanes d\'Ostende',
     type: 'Slapen',
     description: 'Unieke \'cabins\' in het groen nabij het Ensorpark, een oase van rust aan de rand van de stad. Bijzondere ervaring voor jou en je hond.',
@@ -540,6 +576,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   // Oostende Restaurants & Cafés
   {
     id: 38,
+    slug: 'taverne-de-klokke',
     name: 'Taverne De Klokke',
     type: 'Brasserie',
     description: 'Authentieke bruine kroeg/brasserie waar je hond welkom is. Geniet van een gezellige sfeer en klassieke gerechten.',
@@ -551,6 +588,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 39,
+    slug: 'yuzu',
     name: 'Yuzu',
     type: 'Restaurant',
     description: 'Sushi en seafood restaurant, fusion van Japans en Frans-Belgisch. Je hond mag mee genieten van deze culinaire ervaring.',
@@ -562,6 +600,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 40,
+    slug: 'brasserie-david',
     name: 'Brasserie David',
     type: 'Brasserie',
     description: 'Gezellige zaak met klassieke gerechten en verse vis. Je viervoeter is hier van harte welkom.',
@@ -573,6 +612,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 41,
+    slug: 'moby-dick',
     name: 'Moby Dick',
     type: 'Restaurant',
     description: 'Bekend visrestaurant met een toog in de vorm van een vissersboot. Een unieke ervaring waar je hond welkom is.',
@@ -584,6 +624,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 42,
+    slug: 'bottarga',
     name: 'Bottarga',
     type: 'Brasserie',
     description: 'Trendy brasserie op de zeedijk met zeezicht. Geniet van een heerlijke maaltijd terwijl je uitkijkt over zee met je hond naast je.',
@@ -595,6 +636,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 43,
+    slug: 'cappuccino-rooftop-bar',
     name: 'Cappuccino Rooftop Bar',
     type: 'Café',
     description: 'Tearoom en rooftop bar voor ontbijt, wafels en cocktails. Je hond mag mee genieten van het uitzicht.',
@@ -606,6 +648,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 44,
+    slug: 'han-s-centrum',
     name: 'HAN\'s centrum',
     type: 'Café',
     description: 'Gezonde lunch, soep en boterhammen. Perfect voor een snelle, gezonde hap met je viervoeter.',
@@ -617,6 +660,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 45,
+    slug: 'lloyd-coffee-eatery',
     name: 'Lloyd Coffee Eatery',
     type: 'Koffiebar',
     summary: 'Moderne coffee eatery in het centrum van Oostende voor specialty coffee, huisgemaakte brunchgerechten en een ontspannen stop waar huisdieren expliciet welkom zijn.',
@@ -630,6 +674,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 132,
+    slug: 'meerman-specialty-coffee',
     name: 'Meerman Specialty Coffee',
     type: 'Koffiebar',
     summary: 'Warme specialty coffee bar in de Christinastraat met matcha, thee en een gezellig welkom voor honden.',
@@ -654,6 +699,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 81,
+    slug: 'manuscript',
     name: 'Manuscript',
     type: 'Café',
     summary: 'Authentiek bruin café in de Langestraat met een indrukwekkende bierkaart, een vaste liefde voor rock, blues en jazz, en een sfeer die veel warmer aanvoelt dan de buurt errond soms doet vermoeden.',
@@ -669,6 +715,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 82,
+    slug: 'restaurant-de-golf',
     name: 'Restaurant De Golf',
     type: 'Restaurant',
     summary: 'Restaurant op de zeedijk van Mariakerke met zeezicht, doorlopende keuken en uitzonderlijk veel aandacht voor honden, inclusief hondenmaaltijden en hondenijsjes.',
@@ -684,6 +731,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 83,
+    slug: 'restaurant-le-touquet',
     name: 'Restaurant Le Touquet',
     type: 'Restaurant',
     summary: 'Traditioneel restaurant op de Albert I-promenade met lokale producten, verwarmd terras en een opvallend makkelijke ontvangst voor honden.',
@@ -698,6 +746,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 84,
+    slug: 'de-witte-ezel',
     name: 'De Witte Ezel',
     type: 'Restaurant',
     description: 'Charmant restaurant-tearoom in Gistel (vlakbij Oostende) waar je met je viervoeter terecht kan voor een heerlijk ontbijt, een verzorgde lunch of een gezellige namiddag met koffie en gebak. Bij mooi weer is het heerlijk vertoeven op het zonnige terras, perfect om samen met je hond te genieten van een ontspannen moment. Een warme, hondvriendelijke plek waar je altijd welkom bent!',
@@ -709,6 +758,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 85,
+    slug: 'la-vie',
     name: 'La Vie',
     type: 'Restaurant',
     summary: 'Hedendaagse tapasbar vlak bij de zeedijk waar sharing, cocktails en een losse avondsfeer centraal staan, zonder dat het zwaar of pretentieus wordt.',
@@ -724,6 +774,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 88,
+    slug: 'gastro-na-jo',
     name: 'Gastro Na\'Jo',
     type: 'Restaurant',
     summary: 'Kleinschalige gastrozaak in Stene met een beperkte kwaliteitskaart, snel wisselende suggesties en een rustige, hondvriendelijke sfeer.',
@@ -738,6 +789,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 71,
+    slug: 'residence-du-centre',
     name: 'Residence Du Centre',
     type: 'Slapen',
     description: 'Gezellig vakantieappartement op toplocatie in het centrum van Oostende, met het grootste pluspunt: een ruim terras waar je viervoeter naar hartenlust kan ontspannen en van de buitenlucht genieten! Het appartement beschikt over 2 slaapkamers, een comfortabele woonkamer met flatscreen-tv, een volledig uitgeruste keuken en een moderne badkamer. Geniet van tuinzicht vanaf het balkon en gratis WiFi in de hele accommodatie. Deze accommodatie aan het strand biedt ook toegang tot een patio – perfect voor een zorgeloze vakantie met je trouwe metgezel!',
@@ -750,6 +802,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   // Blankenberge - New Additions
   {
     id: 46,
+    slug: 'grand-cafe',
     name: 'Grand Café',
     type: 'Restaurant',
     summary: 'Grote zaak op de zeedijk met klassieke brasseriesfeer, brede kaart en extra aandacht voor honden, tot en met een eigen gerechtje.',
@@ -774,6 +827,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 47,
+    slug: 'fondue-co-t-keteltje',
     name: "Fondue & Co 't Keteltje",
     type: 'Restaurant',
     summary: 'Huiselijk restaurant vlak bij het strand waar eerlijke keuken, persoonlijke service en fondue centraal staan.',
@@ -789,6 +843,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 48,
+    slug: 'frituur-sparkle-chips',
     name: 'Frituur Sparkle Chips',
     type: 'Restaurant',
     description: 'Moderne frituur op de Zeedijk waar je kunt genieten van krokante frietjes en klassieke frituursnacks. Je hond mag mee aanschuiven terwijl jij geniet van authentieke Belgische frietcultuur met zicht op zee.',
@@ -800,6 +855,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 49,
+    slug: 'de-sleutel-la-clef',
     name: 'De Sleutel & La Clef',
     type: 'Restaurant',
     summary: 'Klassiek restaurant op de zeedijk met uitzicht op zee, een brede kaart en een lange familiegeschiedenis in Blankenberge.',
@@ -815,6 +871,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 50,
+    slug: 'frituur-taste',
     name: 'Frituur Taste',
     type: 'Restaurant',
     description: 'Populaire frituur in het centrum waar kwaliteit en smaak voorop staan. Geniet van verse frietjes en een ruim aanbod aan snacks, terwijl je hond welkom is om mee te genieten.',
@@ -827,6 +884,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 51,
+    slug: 'huisje-van-majutte',
     name: 'Huisje van Majutte',
     type: 'Café',
     description: 'Stap binnen in het oudste vissershuisje van de kust (1775) en laat je terugvoeren in de tijd. Gastheer Luc en gastvrouw Charlotte leggen je in de watten met hun dagverse taarten en — de absolute favoriet — garnaalkroketten volgens geheim familierecept. Kom spontaan langs, reserveren is niet nodig tenzij je met een groep komt. Ook je trouwe viervoeter is hier meer dan welkom!',
@@ -838,6 +896,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 52,
+    slug: 'tearoom-koffiepotje',
     name: 'Tearoom Koffiepotje',
     type: 'Café',
     description: 'Charmante tearoom waar je kunt genieten van verse koffie, thee en heerlijke gebakjes. Een rustige plek om even uit te rusten met je hond na een wandeling door het centrum.',
@@ -849,6 +908,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 53,
+    slug: 'my-home-my-coffee',
     name: 'My Home My Coffee',
     type: 'Koffiebar',
     summary: 'Kleine koffiebar met woonkamergevoel waar specialty coffee, rust en een heel persoonlijke ontvangst belangrijker zijn dan snelheid of drukte.',
@@ -862,6 +922,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 54,
+    slug: 'b-b-chez-ba-nus',
     name: "B&B Chez Ba'Nus",
     type: 'Slapen',
     summary: 'Persoonlijke B&B op wandelafstand van zee met themakamers, verzorgd ontbijt en een ontvangst waar honden echt mee zijn ingedacht.',
@@ -876,6 +937,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 55,
+    slug: 'vakantieappartement-ld383277',
     name: 'Vakantieappartement LD383277',
     type: 'Slapen',
     description: 'Comfortabel vakantieappartement ideaal gelegen nabij het Leopoldpark, lunapark en strandbars. Perfect voor een ontspannen vakantie met je hond in het hart van Blankenberge.',
@@ -887,6 +949,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 74,
+    slug: 'vakantieappartement-maison-clementine',
     name: 'Vakantieappartement Maison Clementine',
     type: 'Slapen',
     description: 'Luxueus ingericht appartement met alle voorzieningen, vlakbij de haven van Blankenberge. Geniet van het prachtige zicht op de haven vanaf je eigen balkon. Kleine huisdieren zijn hier van harte welkom voor een zorgeloos verblijf aan de kust.',
@@ -898,6 +961,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 56,
+    slug: 'brasserie-eloise',
     name: 'Brasserie Eloïse',
     type: 'Brasserie',
     description: 'Charmante brasserie in het hart van Wenduine waar kleine honden van harte welkom zijn! Geniet van een gezellige sfeer en heerlijke gerechten terwijl je kleine viervoeter comfortabel naast je kan zitten. Perfect voor een ontspannen moment met je trouwe metgezel.',
@@ -909,6 +973,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 57,
+    slug: 'hippo-12',
     name: 'Hippo 12',
     type: 'Café',
     description: 'Gezellig café met een levendige sfeer waar je kunt genieten van heerlijke cocktails en live muziek. Het ruime buitenterras is perfect om te ontspannen met je hond terwijl je geniet van de gezellige ambiance en de bruisende energie van dit populaire hotspot aan de kust.',
@@ -920,6 +985,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 58,
+    slug: 'bar-delta',
     name: 'Bar Delta',
     type: 'Café',
     description: 'Gezellige bar aan het einde van de zeedijk in Heist, richting Zeebrugge. Perfect om even tot rust te komen met een hele lekkere koffie terwijl je viervoeter naast je ligt. De waterbak met vers water staat altijd klaar voor elke viervoeter op de zeedijk. Een ontspannen plek met een enorme liefde voor honden en een warme, gezellige sfeer.',
@@ -931,6 +997,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 59,
+    slug: 'sea-sparkle',
     name: 'Sea Sparkle',
     type: 'Slapen',
     description: 'Prachtig afgewerkt vakantieappartement met adembenemend zeezicht voor maximaal zes personen. Chris en Tatiana verwennen hun gasten graag in dit luxueuze verblijf in het centrum van Blankenberge, tussen de pier en het casino. Alle activiteiten en bezienswaardigheden liggen op wandelafstand. Perfect voor een zorgeloze vakantie met je hond aan zee!',
@@ -942,6 +1009,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 60,
+    slug: 'pancho',
     name: 'Pancho',
     type: 'Slapen',
     description: 'Charmant vakantieappartement dat alle comfort biedt voor vier personen op een boogscheut van het strand. Chris en Tatiana verhuren dit gezellige appartement al drie jaar en maken er een punt van om hun gasten een zorgeloze vakantie te bezorgen. Dieren zijn hier van harte welkom!',
@@ -953,6 +1021,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 67,
+    slug: 'casa-mati',
     name: 'Casa MaTi',
     type: 'Slapen',
     description: 'Knus vakantieappartement op enkele minuten van het strand, met alle comfort voor een onvergetelijke strandvakantie. Het appartement beschikt over een gezellig balkon en een ruim terras met uitzicht over de stad. Extra fijn: er ligt een deken klaar zodat je viervoeter lekker met jou op de zetel kan relaxen. Ook zijn er voer- en drinkbakken voorzien – handig detail voor een zorgeloze vakantie! De omgeving nodigt uit voor mooie wandelingen en fietstochten.',
@@ -964,6 +1033,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 61,
+    slug: 'restaurant-t-pomptje',
     name: "Restaurant 't Pomptje",
     type: 'Restaurant',
     summary: 'Rustiek restaurant in Stene dat bekendstaat om gemarineerde ribbetjes, gegrilde gerechten en een uitgesproken persoonlijke sfeer aan tafel.',
@@ -980,6 +1050,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   // Wenduine Hotspots
   {
     id: 62,
+    slug: 'tearoom-wielingen-bar',
     name: 'Tearoom Wielingen Bar',
     type: 'Café',
     description: 'Gezellige tearoom en restaurant gelegen aan het zwembad van Wenduine, met twee grote windvrije terrassen in een aangenaam kader grenzend aan de duinen. Voor de kleinste bezoekers zijn er twee speelpleintjes om zich uit te leven. De hedendaagse keuken wordt aangevuld met dagverse suggesties van de chefs. Je viervoeter is hier van harte welkom om mee te genieten van de relaxte sfeer. Let op: gesloten op donderdag.',
@@ -991,6 +1062,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 63,
+    slug: 'maison-elza',
     name: 'Maison Elza',
     type: 'Koffiebar',
     description: 'Hippe nieuwe koffiebar in het hart van Wenduine waar je kunt genieten van heerlijke specialty coffee en huisgemaakte lekkernijen. Een modern en gezellig plekje waar koffieliefhebbers helemaal tot hun recht komen. Je trouwe viervoeter is hier meer dan welkom om mee te relaxen.',
@@ -1002,6 +1074,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 64,
+    slug: 'cafe-central',
     name: 'Café Central',
     type: 'Café',
     recommendationNote: 'Café Central is een aanrader omdat de eigenaar honden echt heel graag ziet. Je voelt dat meteen aan de warme ontvangst en de ontspannen sfeer, waardoor je hier met je hond vanzelf langer blijft hangen.',
@@ -1023,6 +1096,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 65,
+    slug: 'praatcafe-de-spioenkop',
     name: 'Praatcafé De Spioenkop',
     type: 'Café',
     description: 'Gezellig praatcafé op de Zeedijk met een heerlijke ambiance en prachtig zicht op zee. De volkse sfeer en hartelijke eigenaars maken dit tot een ideale plek om te genieten van een drankje terwijl je uitkijkt over het strand. Honden zijn hier hartelijk welkom!',
@@ -1035,6 +1109,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   // De Haan Hotspot
   {
     id: 66,
+    slug: 'de-zoete-zonde',
     name: 'De Zoete Zonde',
     type: 'Café',
     description: 'Knus café waar je komt voor de gezellige sfeer en heerlijke koffie. De fantastische eigenaars zorgen ervoor dat iedereen zich thuis voelt, inclusief je viervoeter. Een echte aanrader voor wie op zoek is naar warmte, goede gesprekken en een lekkere kop koffie.',
@@ -1046,6 +1121,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 70,
+    slug: 'bistro-thuus',
     name: 'Bistro THUUS',
     type: 'Restaurant',
     description: 'Bistro THUUS voelt als thuiskomen, maar dan zonder de afwas! De eigenaars zijn zelf trotse baasjes van Tess, hun Golden Retriever, en begrijpen als geen ander hoe fijn het is om samen met je viervoeter uit eten te gaan. Geniet zorgeloos van een topmaaltijd en lekkere cocktails op het gezellige buitenterras. Reserveren is aan te raden voor deze populaire hotspot, waar honden meer dan welkom zijn en zich meteen thuis voelen!',
@@ -1057,6 +1133,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 87,
+    slug: 'vissershuisje-89',
     name: 'Vissershuisje 89',
     type: 'Slapen',
     description: 'Charmant vissershuisje in het rustige Zeepark Haerendycke, perfect gelegen tussen Wenduine en Blankenberge. De ideale uitvalsbasis voor strandplezier en verkenning van de kust! Het strand is op wandelafstand via de Wrakhoutbrug, en de kusttram stopt voor het park - een auto is niet nodig. Comfortabel ingericht met parkeerplaats en alles voor een ontspannen verblijf. Maximaal 2 hondjes welkom na overleg. Ontdek de badsteden, ga fietsen in de zeepolders of geniet gewoon van de rust!',
@@ -1068,6 +1145,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 72,
+    slug: 'brasserie-bon-appetit',
     name: 'Brasserie Bon Appetit',
     type: 'Brasserie',
     description: 'Genieten met zicht op zee en je trouwe viervoeter aan je zijde? Bij Brasserie Bon Appetit op de Zeedijk van Blankenberge ben je aan het juiste adres! De sympathieke eigenaars verwelkomen je met een brede glimlach en serveren heerlijke gerechten en verfrissende cocktails terwijl je uitkijkt over de golven. Water staat altijd klaar voor dorstige viervoeters, en wie wil kan zelfs een snoepje krijgen voor de trouwe vriend onder de tafel. De warme sfeer, het prachtige zeezicht en de oprechte gastvrijheid maken dit de perfecte tussenstop voor een verwenmoment aan de kust — voor baasje én hond!',
@@ -1079,6 +1157,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 73,
+    slug: 'vakantiehuis-zee-hond',
     name: 'Vakantiehuis Zee-Hond',
     type: 'Slapen',
     description: 'Hondvriendelijk vakantiehuisje in De Panne met een mooie grote tuin. Op 3 km van het centrum, met een supermarkt in de straat. Aan de overkant ligt natuurreservaat De Westhoek en via daar wandel je in 1,5 km naar het strand. Richting Frankrijk zijn honden het hele jaar door los toegelaten. Het domein biedt gratis faciliteiten zoals een verwarmd openluchtzwembad (half juni tot half september), tennis en speelpleinen.',
@@ -1090,6 +1169,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 75,
+    slug: 'bungalowpark-jonckershof',
     name: 'Bungalowpark Jonckershof',
     type: 'Slapen',
     description: 'Geniet samen met je hond van een heerlijke vakantie in Westende-Bad. Jonckershof is een uitgestrekt domein (11 ha) waar je viervoeter alle ruimte heeft. Je wandelt zo naar het hondenstrand (Louis Logierlaan) of het gezellige centrum, beide op slechts 300 meter afstand. De perfecte mix van natuur, ruimte en comfort. Eigenaar Pieterjan is een uitstekende gastheer die met veel enthousiasme en toewijding zijn gasten ontvangt en ervoor zorgt dat iedereen zich welkom voelt. Een absolute aanrader!',
@@ -1101,6 +1181,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 76,
+    slug: 'surfers-paradise',
     name: 'Surfers Paradise',
     type: 'Café',
     description: 'Terwijl jij geniet van een cocktail in de Sunset lounge, kan je hond heerlijk bij de zitzakken of hangmatten liggen. Het is de ideale plek voor een hapje of drankje na een stevige strandwandeling. Of je nu met vrienden bent of met de familie: hier hangt een sfeer die je nergens anders aan de kust vindt.',
@@ -1112,6 +1193,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 77,
+    slug: 'zaelig-hotel',
     name: 'ZAELIG Hotel',
     type: 'Slapen',
     description: 'De naam zegt het zelf: hier beleef je echt een zaelig verblijf! Dit hotel in de polders is een droom voor hondenbaasjes. Terwijl jij geniet van het verwarmd zwembad of de honesty bar, kan je viervoeter ravotten in de gigantische tuin en speelweide. Uniek: je hond is hier gewoon welkom aan de ontbijttafel! TIP: Vraag bij boeking naar een kamer op het gelijkvloers voor je eigen privéterras.',
@@ -1123,6 +1205,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 78,
+    slug: 'restaurant-imperial',
     name: 'Restaurant Imperial',
     type: 'Restaurant',
     description: 'In een hip en vernieuwd interieur introduceert Imperial een gezellig foodsharing concept. Ideaal om samen te proeven van tapas, visgerechten of kreeft met zicht op zee! Zowel binnen als op het zonnige loungeterras (met privéstrand-vibes!) zit je heerlijk. Extra pluspunt: terwijl jij geniet, kunnen de kinderen zich uitleven in de Kids Room met PlayStation. Een feest voor de hele familie, inclusief de viervoeter.',
@@ -1134,6 +1217,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 79,
+    slug: 'club-north-by-icarus',
     name: 'Club North by Icarus',
     type: 'Café',
     description: 'Dé ultieme surfclub aan de rand van de Blankenbergse duinen waar honden het hele jaar door welkom zijn – zowel op het strand als binnen! Club North staat bij kenners bekend als een van de meest hondvriendelijke beachbars aan de kust. Met hun speciale dogs bar en een groot hart voor elke viervoeter die binnenstapt, is dit de perfecte plek om na een strandwandeling bij te komen met een drankje terwijl je hond geniet van zijn eigen verwennerij.',
@@ -1145,6 +1229,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 80,
+    slug: 'zina-s-place',
     name: 'Zina\'s Place',
     type: 'Slapen',
     description: 'Op zoek naar een vakantiehuisje waar je met meerdere honden welkom bent? Zina\'s Place, een charmant vissershuisje in Lombardsijde, is dé uitvalsbasis voor hondeneigenaars die écht willen uitwaaien aan de Belgische kust. Op amper 10 minuten van het hondenstrand en vlakbij de mooiste wandelknooppunten geniet je hier van totale rust – met een volledig afgesloten tuin waar je viervoeter(s) vrij kunnen ravotten. Het huisje biedt plaats aan 4 personen met 2 slaapkamers, een gezellige living met open keuken en alle comfort. Neem het oversteekbootje naar Nieuwpoort, ontdek de stripfiguurtjes op de Middelkerkse dijk, of rij in een halfuurtje naar De Panne. Vernoemd naar Zina – de allereerste hond van de eigenaars en hun trouwe metgezel bij hun eerste uitstapje naar zee – draagt dit huisje een verhaal van liefde, avontuur en samen uitwaaien. Hier voelen mens én hond zich thuis.',
@@ -1156,6 +1241,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 90,
+    slug: 'new-poseidon',
     name: 'New Poseidon',
     type: 'Brasserie',
     summary: 'Toegankelijke brasserie vlak bij zee waar dagverse producten, een losse sfeer en een warme ontvangst mooi samenkomen.',
@@ -1171,6 +1257,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 89,
+    slug: 'de-zeegeuzen',
     name: 'De Zeegeuzen',
     type: 'Café',
     summary: 'Traditioneel café vlak bij de visserskaai met een nautische toets, een stevige bierkaart en genoeg eigenheid om meer te zijn dan zomaar een bruin café.',
@@ -1186,6 +1273,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 133,
+    slug: 't-waterhuis',
     name: "'t Waterhuis",
     type: 'Brasserie',
     summary: "Bekende brasserie in Oostende waar honden met open armen worden ontvangen en je van lunch tot late avond terechtkunt.",
@@ -1211,6 +1299,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 128,
+    slug: 'ijssalon-tearoom-zeebries',
     name: 'IJssalon/Tearoom Zeebries',
     type: 'Brasserie',
     description: 'Pure passie en vakmanschap in elke hap en elke slok! Al 40 jaar draait deze gedreven eigenaar zelf het allerlekkerste ambachtelijke ijs van de kust, bereid met warme zorg en ingrediënten van topkwaliteit. Naast het hemelse ijs geniet je hier van overheerlijke koffie en heerlijke broodjes, elk met oog voor detail en smaak. De perfecte beloning na een lange strandwandeling met je viervoeter! Een verborgen juweeltje van de Belgische kust waar traditie, kwaliteit en échte gastvrijheid samensmelten. Wie hier één keer geproefd heeft, komt zeker terug. Mis deze ontdekking niet!',
@@ -1222,6 +1311,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 11,
+    slug: 'brasserie-montmartre',
     name: 'Brasserie Montmartre',
     type: 'Brasserie',
     description: 'Ruime brasserie op de Zeedijk waar gezinnen met honden graag gezien zijn.',
@@ -1233,6 +1323,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 20,
+    slug: 'bel-air',
     name: "Bel'air",
     type: 'Restaurant',
     description: 'Charmant restaurant op de Zeedijk waar gastronomie en een warme sfeer hand in hand gaan. Jouw viervoeter is hier van harte welkom om mee te genieten van een culinaire ervaring met zicht op zee.',
@@ -1245,6 +1336,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 21,
+    slug: 'beach-palace-hotel',
     name: 'Beach Palace Hotel',
     type: 'Slapen',
     description: 'Luxueus 5-sterren hotel direct aan de Zeedijk met 20 prachtig uitgeruste kamers speciaal ingericht voor gasten met honden. Geniet van topservice en comfort terwijl je viervoeter zich thuis voelt in dit exclusieve strandhotel.',
@@ -1256,6 +1348,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 91,
+    slug: 'seascape-penthouse',
     name: 'Seascape Penthouse',
     type: 'Slapen',
     summary: 'Stijlvol penthouse op de zeedijk met panoramisch zeezicht en een privé dakterras voor wie van een verblijf zelf al een bestemming wil maken.',
@@ -1273,6 +1366,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
 
   {
     id: 92,
+    slug: 'boutique-hotel-ter-duinen',
     name: 'Boutique-Hotel ter Duinen',
     type: 'Slapen',
     description: 'Sfeervol luxe boutique-hotel in Oostduinkerke-Bad waar honden oprecht van harte welkom zijn. Wat dit hotel echt onderscheidt: jouw viervoeter mag je zelfs vergezellen in de ontbijtzaal — zolang hij rustig onder je stoel blijft liggen, is er absoluut geen probleem. Comfortabel verblijven met je trouwe vriend, zonder compromissen. Tip: geef bij je reservatie even aan dat je met je viervoeter komt, zo kunnen ze je optimaal ontvangen.',
@@ -1284,6 +1378,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 93,
+    slug: 'hotel-apostroff',
     name: 'Hotel Apostroff',
     type: 'Slapen',
     description: 'Modern en populair hotel in Koksijde waar viervoeters véél meer zijn dan louter \'getolereerd\'. Het team ontvangt honden met oprechte warmte en enthousiasme, en de ruime faciliteiten maken een verblijf voor zowel jou als je trouwe vriend bijzonder aangenaam.\n\nExtra troef: Het bij het hotel horende Restaurant Akoté is minstens even hondvriendelijk! Een perfecte combinatie voor een zorgeloos verblijf met je viervoeter.',
@@ -1295,6 +1390,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 94,
+    slug: 'hotel-lehouck',
     name: 'Hotel Lehouck',
     type: 'Slapen',
     description: 'Charmant, familiaal gerund hotel in Koksijde dat er écht om bekend staat extreem gastvrij te zijn voor honden en hun baasjes. Dit gaat verder dan een tolerante houding: hier wordt je viervoeter oprecht verwelkomd als een volwaardige gast.',
@@ -1306,6 +1402,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 95,
+    slug: 'casino-hotel',
     name: 'Casino Hotel',
     type: 'Slapen',
     description: 'Luxueus en prachtig gelegen hotel in het centrum van Koksijde dat absoluut geen drempel vormt voor hondeneigenaars. Ondanks de verzorgde uitstraling zijn viervoeters hier gewoon welkom, wat dit hotel tot een vaste favoriet maakt bij baasjes die kwaliteit en hondvriendelijkheid combineren.',
@@ -1317,6 +1414,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 96,
+    slug: 'hotel-domein-westhoek',
     name: 'Hotel Domein Westhoek',
     type: 'Slapen',
     description: 'Rustig gelegen hotel op een uitgestrekt domein midden in het groen van de duinen in Oostduinkerke. De perfecte uitvalsbasis voor een wandelvakantie met je viervoeter: de duinen, de natuur en het strand liggen letterlijk voor je neus. Genieten van rust en ruimte, samen met je trouwe vriend.',
@@ -1328,6 +1426,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 97,
+    slug: 'bistronomie-eglantier',
     name: 'Bistronomie Eglantier',
     type: 'Restaurant',
     description: 'Trendy en verfijnd bistro verbonden aan Boutique-Hotel ter Duinen, waar gastronomisch eten gelukkig niet betekent dat je hond thuis moet achterblijven. Jouw viervoeter is gewoon welkom aan je tafel, zodat je ongestoord kunt genieten van een culinaire maaltijd. Het ruime terras is een extra troef voor wanneer je met je hond komt genieten van de zon en een heerlijke maaltijd. Tip: vermeld bij je reservatie dat je met je viervoeter komt, dan kunnen ze er optimaal rekening mee houden.',
@@ -1339,6 +1438,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 98,
+    slug: 'restaurant-akote',
     name: 'Restaurant Akoté',
     type: 'Restaurant',
     description: 'Hip en jong restaurant verbonden aan Hotel Apostroff, met een menu vol verse en seizoensgebonden gerechten. Niet enkel het eten scoort hier hoog — ook de oprechte gastvrije houding tegenover honden maakt dit adres tot een vaste favoriet voor viervoeters en hun baasjes.',
@@ -1350,6 +1450,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 99,
+    slug: 'de-spelleplekke',
     name: 'De Spelleplekke',
     type: 'Restaurant',
     description: 'Waanzinnig gezellige en jonge plek in Oostduinkerke voor een smakelijke lunch, een ontspannen diner of een relaxte apero. Het menu blinkt uit in originele visgerechten en veggie opties — en je hond is hier meer dan welkom om er gezellig bij te zitten.',
@@ -1361,6 +1462,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 100,
+    slug: 't-zoet-genot',
     name: "'t Zoet Genot",
     type: 'Brasserie',
     description: 'De absolute hotspot op de Zeedijk van Oostduinkerke voor een fantastische koffie, ambachtelijke pannenkoeken of een ijsje na het strandwandelen. Het team is hier oprecht dol op honden en je mag met je viervoeter gewoon naar binnen — zo hoort het.',
@@ -1372,6 +1474,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 101,
+    slug: 'tearoom-t-zand',
     name: "Tearoom 't Zand",
     type: 'Café',
     description: 'Vertrouwde tearoom op de Zeedijk, gekend om hun huisgemaakte garnaalkroketten en ontspannen sfeer. Het team is oprecht dierenvriendelijk: je hond hoort hier meteen bij de gezelligheid en wordt even hartelijk verwelkomd als jijzelf.',
@@ -1383,6 +1486,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 102,
+    slug: 'de-clochard',
     name: 'De Clochard',
     type: 'Restaurant',
     description: 'Authentieke grillzaak met een warm en huiselijk karakter die al jaren een vaste kustwaarde is. Honden zijn hier standaard welkom aan tafel — dat hoort bij het vertrouwde, gezellige karakter van deze plek. Steak en gegrilde specialiteiten gaan hier hand in poot met oprechte hondvriendelijkheid.',
@@ -1394,6 +1498,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 104,
+    slug: 'koffiebar-cafelito',
     name: 'Koffiebar Cafelito',
     type: 'Koffiebar',
     description: 'Een enorm sfeervolle koffiebar op de Zeelaan waar jij en je hond beiden van harte welkom zijn. Terwijl jij geniet van een goed kopje koffie met een speculaasje of een glaasje advocaat, kruipt je viervoeter gezellig onder tafel — precies zoals het hoort.',
@@ -1405,6 +1510,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 105,
+    slug: 'tearoom-chopin',
     name: 'Tearoom Chopin',
     type: 'Café',
     description: 'Een klassieker in Koksijde: een verzorgde en populaire tearoom die er bewust voor kiest honden met open armen te ontvangen. Geen spoor van aarzeling — jouw viervoeter is hier gewoon welkom, en dat merk je aan de hartelijke ontvangst van het team.',
@@ -1416,6 +1522,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 106,
+    slug: 'bistro-t-fornhuis',
     name: "Bistro 't Fornhuis",
     type: 'Restaurant',
     description: 'Een enorm gezellige, lokale bistro verscholen in Oostduinkerke, ver van het toeristisch gewoel van de dijk. Hier vind je eerlijke keuken in een warme sfeer — en je hond is er meer dan welkom. De perfecte adempauze voor baasje én viervoeter.',
@@ -1427,6 +1534,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 107,
+    slug: 'happy-times',
     name: 'Happy Times',
     type: 'Restaurant',
     description: 'Een heerlijk informele plek voor huisgemaakte burgers, tapas en fish & chips, ondergebracht in een uniek en eigenzinnig decor. De sfeer is hier altijd relaxed en familiaal — en honden? Die zijn er graag geziene gasten.',
@@ -1438,6 +1546,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 109,
+    slug: 'eethuis-t-blekkertje',
     name: "Eethuis 't Blekkertje",
     type: 'Restaurant',
     description: "Genieten van (h)eerlijke, huisbereide klassiekers in een warme sfeer? Bij 't Blekkertje leggen chef Steve en gastvrouw Grietje je compleet in de watten. Van verfijnde visgerechten tot topvlees van Dierendonck: hier proef je pure passie en vakmanschap.\n\nExtra troef voor hondenbaasjes: Jouw trouwe viervoeter is hier meer dan welkom! Steve en Grietje hebben zelf drie honden en weten precies hoe ze jullie een ontspannen, culinaire avond kunnen bezorgen.\n\nDé smaakmaker van Koksijde voor jou én je hond!",
@@ -1449,6 +1558,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 111,
+    slug: 'restaurant-lehouck',
     name: 'Restaurant Lehouck',
     type: 'Restaurant',
     description: "Een culinaire parel waar Franse verfijning en hondvriendelijkheid hand in hand gaan. Het uitgebreide menu biedt een overvloedige keuze aan klassieke gerechten, van huisgemaakte garnaalkroketten en mosselen tot zeetongetjes en een sappig tussenribstuk.\n\nExtra troef voor hondenbaasjes: Jouw viervoeter is hier niet alleen welkom, maar wordt écht in de watten gelegd. Een frisse waterbak staat al klaar, zodat ook je trouwe metgezel volledig kan genieten van jullie culinaire uitstap.\n\nEen verfijnde keuze in hartje Koksijde, voor mens én hond!",
@@ -1460,6 +1570,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 108,
+    slug: 'in-t-dorp',
     name: "In 't Dorp",
     type: 'Brasserie',
     description: "Zin in een avondje uit waar jouw viervoeter écht welkom is? Bij In 't Dorp vind je de ideale, gezellige plek voor een knabbel en een babbel. Eigenares Kate verwelkomt je samen met haar lieve therapiehond Bruno in een warme, huiselijke sfeer. Het absolute hoogtepunt is de Brunobar: een speciale bar waar jouw hond de ster van de avond is! Kom langs tussen 17u en middernacht om samen te genieten. Heb je specifieke vragen over het gedrag van je viervoeter? In 't Dorp biedt in huis ook deskundig advies aan, in samenwerking met een professionele hondenpsycholoog. Een absolute aanrader voor een ontspannen avond met jou én je hond!",
@@ -1471,6 +1582,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 110,
+    slug: 'agora-bar-food-drinks',
     name: 'Agora Bar Food & Drinks',
     type: 'Brasserie',
     description: 'De perfecte hondvriendelijke pitstop in hartje De Panne! Strijk neer op het grote, zonnige terras op de Markt voor een heerlijk ontbijt, verse koffie of huisbereide pannenkoeken.\n\nEn je hond? Die wordt hier net zo warm onthaald. Buiten staat de waterbak al klaar, zodat jouw trouwe viervoeter na een wandeling meteen even lekker kan bijtanken. Een gezellige, laagdrempelige plek waar mens & vievoeters écht welkom zijn!',
@@ -1482,6 +1594,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 112,
+    slug: 'd-appeti-jt',
     name: "d'Appeti(jt)",
     type: 'Brasserie',
     description: "Een heerlijk koffie- en eethuis met een enorm groot hart voor honden! De gastvrije uitbaters hebben zelf een superleuke Cocker, Mila genaamd, die meteen de toon zet: dit is een plek waar viervoeters zich écht thuis voelen.\n\nDe sfeer is warm, huiselijk en oprecht — je komt hier simpelweg niet buiten zonder een glimlach op je gezicht. En terwijl jij geniet van enorm lekkere koffie en verse hapjes, wordt je hond verwend met een waterbak én lekkere hondenkoekjes.\n\nEen absolute aanrader voor wie houdt van goede vibes, topkoffie en warme menselijkheid!",
@@ -1493,6 +1606,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 113,
+    slug: 'koffiebar-kantine',
     name: 'Koffiebar Kantine',
     type: 'Koffiebar',
     description: 'Een gezellige koffiebar waar je in een ontspannen sfeer kunt genieten van heerlijke koffie en verse versnaperingen. Het is de perfecte plek om even bij te komen na een verfrissende strand- of duinwandeling met je viervoeter. Honden zijn hier van harte welkom en kunnen rustig onder tafel liggen terwijl jij geniet van je welverdiende kopje koffie.',
@@ -1504,6 +1618,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 114,
+    slug: 'visrestaurant-ode',
     name: 'Visrestaurant Odé',
     type: 'Restaurant',
     description: 'Het enige visrestaurant in Oostduinkerke, gerund door de gepassioneerde eigenaar John die ook een viswinkel uitbaat aan de overkant van de straat. Hij haalt dagelijks zelf zijn vis op in de vismijn voor een absolute versheidsgarantie.\n\nEen bijzondere troef voor hondeneigenaars: John heeft zelf een Australische herder en klanten die met hun hond komen eten worden hier dubbel en dik in de watten gelegd. Reserveren is zeker aan te raden!\n\nEen zéér grote aanrader voor wie houdt van verse vis én een warm welkom voor hun viervoeter.',
@@ -1515,6 +1630,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 115,
+    slug: 'brasserie-de-barkentijn',
     name: 'Brasserie De Barkentijn',
     type: 'Brasserie',
     description: 'Bij strandrestaurant - tearoom De Barkentijn is het iedere dag genieten van het prachtige uitzicht. Ook bij stormachtig, guur weer zijn het strand en de zee een genot om naar te kijken!\n\nDe keuken is een al even groot plezier met voor elk wat wils: lekkere verzorgde snacks, een ruim aanbod aan heerlijke salades en verse visgerechten, de hele dag doorlopend. Tussen 14u30 en 17u30 kunt u ten volle genieten van de heerlijke tearoom. Absolute aanraders zijn de huisgemaakte garnaalkroketten en huisgemaakte vispannetjes.\n\nEen bijzonder pluspunt: de twee zéér vriendelijke eigenaars hebben zelfs een speciaal cozy hoekje ingericht om het je hond extra comfortabel te maken. Gezelschapsspelletjes zijn aanwezig in de zaak.',
@@ -1526,6 +1642,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 129,
+    slug: 'skateshop-daily-grind',
     name: 'Skateshop Daily Grind',
     type: 'Shoppen',
     summary: 'Skateshop met een eigen stijl, sterke selectie boards en streetwear, en een opvallend warme ontvangst voor honden.',
@@ -1541,6 +1658,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 124,
+    slug: 'restaurant-koekie-s',
     name: 'Restaurant Koekie\'s',
     type: 'Restaurant',
     summary: 'Sfeervol restaurant vlak bij haven en strand waar je terechtkunt voor sterke klassiekers zoals ribbetjes en huisgemaakte garnaalkroketten.',
@@ -1565,6 +1683,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 125,
+    slug: 'brasserie-cappuccino',
     name: 'Brasserie Cappuccino',
     type: 'Brasserie',
     description: 'Een trendy brasserie met een prachtig zeezicht op de Zeedijk van Blankenberge! Brasserie Cappuccino zet in op een Frans-Belgische en internationale keuken waarbij alles huisbereid wordt met eerlijke producten en dagverse ingrediënten — zodat je telkens geniet van pure smaken en kwaliteit.\n\nDe kaart biedt zowel verfijnde klassiekers als verrassende creaties: van een sappige gegrilde kalfsteak en heerlijke slibtongetjes tot een royaal zeebordje of een frisse salade scampi. En zeker niet te missen: de chocolade lava cake als afsluiter! Vegetariërs zijn ook meer dan welkom, met tal van plantaardige en groenterijke gerechten die met evenveel passie worden bereid.\n\nJe hond is van harte welkom en kan genieten van de frisse zeelucht op het terras. Gezellig tafelen met zicht op zee — niet te kloppen!',
@@ -1576,6 +1695,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 126,
+    slug: 'two-for-you-crystals-and-gifts',
     name: 'Two For You - Crystals and Gifts',
     type: 'Shoppen',
     summary: 'Sfeervolle winkel in Blankenberge met edelstenen, mineralen en spirituele cadeaus, gedragen door een heel persoonlijke ontvangst.',
@@ -1591,6 +1711,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 127,
+    slug: 'brasserie-la-potiniere',
     name: 'Brasserie La Potinière',
     type: 'Brasserie',
     description: 'Sfeervolle brasserie met uitzicht over het prachtige parkdomein van De Haan — dé plek om te ontspannen met je viervoeter na een wandeling! Nestel je in de loungezetels of schuif aan bij de bar voor een aperitief, een smakelijke lunch of een gezellige afternoon tea. Op de kaart staan heerlijke gerechten, pannenkoeken en wafels, aangevuld met een indrukwekkende selectie speciaalbieren. Het ruime terras is ideaal om samen met je hond te genieten van het uitzicht op het park, waar ook minigolf, petanquebanen en speeltuinen te vinden zijn. Op amper 5 minuten wandelen bereik je het strand — perfect voor een uitwaaimoment voor én na het tafelen. Een hondvriendelijke brasserie op een toplocatie!',
@@ -1605,6 +1726,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 130,
+    slug: 'abc-hotel',
     name: 'ABC Hotel',
     type: 'Slapen',
     summary: 'Kleinschalig viersterren eco-hotel in Blankenberge waar design, persoonlijke service en een hondvriendelijk verblijf mooi samenkomen.',
@@ -1620,6 +1742,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 131,
+    slug: 'au-pengouin',
     name: 'Au Pengouin',
     type: 'Brasserie',
     summary: 'Klassieke zaak in het centrum van Blankenberge die vooral bekendstaat om royale wafels, verse pannenkoeken en een vlotte bediening.',
@@ -1634,6 +1757,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 134,
+    slug: 'beachclub-blankenberge',
     name: 'Beachclub Blankenberge',
     type: 'Café',
     description: 'Beachclub Blankenberge is dé perfecte stop op de Zeedijk voor hondenbaasjes! Vanaf hier tot en met Zeebrugge mogen honden het hele jaar door op het strand — ideaal om even te ontprikkelen voor of na een drankje. Het terras is ruim en relaxt ingericht, er staat altijd een waterbak klaar voor je viervoeter en de sfeer is er heerlijk casual. Kom gewoon binnenwandelen met je hond en geniet van de zee.',
@@ -1656,6 +1780,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 135,
+    slug: 'brassi-beach-terrace',
     name: 'Brassi Beach Terrace',
     type: 'Café',
     description: 'Brassi Beach Terrace is een hondvriendelijk terras pal aan de Albert I-promenade in Oostende, met een onverslaanbaar zicht op zee. De zaak staat recent in de krant omdat ze als een van de weinige zaken aan de kust een echte hondenmaaltijd op de kaart hebben — jouw viervoeter wordt hier dus echt als gast behandeld. Verder is er een waterbak aanwezig, een warm en vriendelijk team en een ruim terras om zorgeloos van de omgeving te genieten.',
@@ -1678,6 +1803,7 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
   },
   {
     id: 136,
+    slug: 'riva-boutique',
     name: 'Riva Boutique',
     type: 'Shoppen',
     summary: 'Stijlvolle modeboetiek in hartje Blankenberge waar hondjes en hun baasjes met opvallend veel warmte worden ontvangen.',
@@ -1700,8 +1826,3 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     },
   },
 ];
-
-export const HOTSPOTS: Hotspot[] = HOTSPOT_ENTRIES.map((spot) => ({
-  ...spot,
-  slug: createHotspotSlug(spot.name),
-}));

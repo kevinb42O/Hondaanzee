@@ -1,5 +1,5 @@
 # HondAanZee.be - Robots.txt
-# Updated: 2026-09-14
+# Updated: 2026-10-02
 
 User-agent: *
 Allow: /
@@ -69,13 +69,7 @@ Allow: /*.svg$
 Allow: /*.css$
 Allow: /*.js$
 
-# Google-specific
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Googlebot-Image
-Allow: /
+# Googlebot uses the common public-page and private-path rules above.
 
 # Bing
 User-agent: Bingbot

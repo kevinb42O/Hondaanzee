@@ -111,7 +111,7 @@ const DropdownMenu: React.FC<{
     // `style={{ transform: '...' }}` with Tailwind translate classes causes the
     // inline style to win and completely overrides the Tailwind animation. By using
     // only Tailwind transforms, CSS variables compose correctly and everything works.
-    const panel = createPortal(
+    const panel = typeof document === 'undefined' ? null : createPortal(
         <div
             // pt-1.5 bridges the small gap so the mouse can move from button to panel
             // without triggering the close timer.

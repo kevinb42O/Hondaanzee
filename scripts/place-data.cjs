@@ -60,6 +60,10 @@ const { blogPosts } = loadTsModule('data/blogs.ts');
 const { EVENTS } = loadTsModule('data/events.ts');
 const { OFF_LEASH_AREAS } = loadTsModule('data/offLeashAreas.ts');
 const { PAGE_UPDATED_DATES } = loadTsModule('data/siteUpdates.ts');
+const { validatePlaceData } = require('./validate-place-data.cjs');
+
+// Fail every sitemap/build before a duplicate or incomplete business can disappear.
+validatePlaceData({ HOTSPOTS, SERVICES, CITIES });
 
 const getPlaceRoutes = () => [
   ...HOTSPOTS.map((spot) => `/${spot.city}/hotspots/${spot.slug}`),

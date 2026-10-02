@@ -7,6 +7,7 @@ import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import PlaceDirectory from '../components/PlaceDirectory.tsx';
 
 const INITIAL_SHOW = 12;
 const SEARCH_SUGGESTION_LIMIT = 6;
@@ -595,6 +596,7 @@ const AllHotspots: React.FC = () => {
             </div>
           </div>
         )}
+        {!hasActiveFilters && <PlaceDirectory kind="hotspot" />}
       </div>
 
     </div>

@@ -7,8 +7,11 @@ export default function handler(req, res) {
     requestPath = requestPath.slice(0, -1);
   }
 
-  // Find the requested route, or default to the homepage data if not found
-  const routeData = routes[requestPath] || routes['/'];
+  const routeData = routes[requestPath];
+  if (!routeData) {
+    res.setHeader('X-Robots-Tag', 'noindex');
+    return res.status(404).send('Pagina niet gevonden');
+  }
 
   return serveHtml(res, {
     ...routeData,
@@ -34,6 +37,7 @@ function serveHtml(res, data) {
   <title>${escapeHtml(data.title)}</title>
   <meta name="title" content="${escapeHtml(data.title)}">
   <meta name="description" content="${escapeHtml(data.description)}">
+  <link rel="canonical" href="${escapeHtml(data.url)}">
   
   <meta property="og:title" content="${escapeHtml(data.title)}">
   <meta property="og:description" content="${escapeHtml(data.description)}">

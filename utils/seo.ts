@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import type { City, Hotspot, OffLeashArea, OpeningHours, ReportItem, Service } from '../types.ts';
-import type { PlaceKind } from './placeRoutes.ts';
+import type { City, OffLeashArea, ReportItem } from '../types.ts';
 import { getCategoryMeta } from './reportHelpers.ts';
 import { getReportDetailPath } from './reportRoutes.ts';
 import { PAGE_UPDATED_DATES, SITE_UPDATE_DATE } from '../data/siteUpdates.ts';
 
-interface SEOProps {
+export interface SEOProps {
   title: string;
   description: string;
   keywords?: string;
@@ -79,6 +78,7 @@ export const useSEO = ({
     const resolvedCanonical = canonical || `${SITE_ORIGIN}${location.pathname}`;
 
     // Basic meta tags
+    updateMeta('title', title);
     updateMeta('description', description);
     if (keywords) updateMeta('keywords', keywords);
 
@@ -105,7 +105,7 @@ export const useSEO = ({
       ogImage.endsWith('.png') ? 'image/png' : ogImage.endsWith('.jpg') || ogImage.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp',
       true,
     );
-    if (ogImageAlt) updateMeta('og:image:alt', ogImageAlt, true);
+    updateMeta('og:image:alt', ogImageAlt || title, true);
     updateMeta('og:url', resolvedCanonical, true);
     updateMeta('og:type', ogType, true);
     updateMeta('og:site_name', 'HondAanZee.be', true);
@@ -132,7 +132,7 @@ export const useSEO = ({
     updateMeta('twitter:title', title);
     updateMeta('twitter:description', description);
     updateMeta('twitter:image', ogImage);
-    if (ogImageAlt) updateMeta('twitter:image:alt', ogImageAlt);
+    updateMeta('twitter:image:alt', ogImageAlt || title);
 
     // Canonical URL
     let linkCanonical = document.querySelector('link[rel="canonical"]');
@@ -142,10 +142,15 @@ export const useSEO = ({
       document.head.appendChild(linkCanonical);
     }
     linkCanonical.setAttribute('href', resolvedCanonical);
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((link) => {
+      link.setAttribute('href', resolvedCanonical);
+    });
 
     // Structured Data
     const pageModifiedDate = PAGE_UPDATED_DATES[location.pathname];
-    const pageSchema = pageModifiedDate ? {
+    const schemas = Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : [];
+    const hasPageSchema = schemas.some((schema) => (schema as { '@type'?: string })['@type'] === 'WebPage');
+    const pageSchema = pageModifiedDate && !hasPageSchema ? {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       '@id': `${resolvedCanonical}#webpage`,
@@ -189,157 +194,7 @@ export const useSEO = ({
   ]);
 };
 
-type Place = Hotspot | Service;
-
-// Maps Dutch day abbreviations to schema.org day-of-week URIs
-const SCHEMA_DAY: Record<string, string> = {
-  ma: 'https://schema.org/Monday',
-  di: 'https://schema.org/Tuesday',
-  wo: 'https://schema.org/Wednesday',
-  do: 'https://schema.org/Thursday',
-  vr: 'https://schema.org/Friday',
-  za: 'https://schema.org/Saturday',
-  zo: 'https://schema.org/Sunday',
-};
-
-/**
- * Converts the internal OpeningHours map to schema.org OpeningHoursSpecification
- * objects. Closed days (null values) are omitted.
- * Supports single periods ("HH:mm–HH:mm") and comma-separated multiple periods
- * per day ("HH:mm–HH:mm, HH:mm–HH:mm").
- */
-const buildOpeningHoursSpecification = (hours: OpeningHours): object[] =>
-  Object.entries(hours).flatMap(([day, value]) => {
-    if (!value) return [];
-    const schemaDay = SCHEMA_DAY[day];
-    // Split on comma to support multiple periods per day
-    return value.split(',').flatMap((period) => {
-      const parts = period.trim().split(/\u2013|–|-/);
-      if (parts.length !== 2) return [];
-      return [{
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: schemaDay,
-        opens: parts[0].trim(),
-        closes: parts[1].trim(),
-      }];
-    });
-  });
-
-const PLACE_SCHEMA_TYPES = {
-  hotspot: {
-    'Café': 'CafeOrCoffeeShop',
-    'Koffiebar': 'CafeOrCoffeeShop',
-    'Restaurant': 'Restaurant',
-    'Brasserie': 'Restaurant',
-    'Slapen': 'LodgingBusiness',
-    'Shoppen': 'Store',
-  },
-  service: {
-    'Dierenarts': 'VeterinaryCare',
-    'Dierenspeciaalzaak': 'Store',
-  },
-} as const;
-
-const getPlaceCollectionLabel = (kind: PlaceKind) =>
-  kind === 'hotspot' ? 'Hotspots' : 'Diensten';
-
-const getPlaceSchemaType = (place: Place, kind: PlaceKind): string =>
-  PLACE_SCHEMA_TYPES[kind][place.type as never] || 'LocalBusiness';
-
-const buildPlaceKeywords = (place: Place, city: City, kind: PlaceKind) => {
-  const baseTerms = [
-    place.name,
-    `${place.type} ${city.name}`,
-    `${kind === 'hotspot' ? 'hondvriendelijke hotspot' : 'praktische dienst'} ${city.name}`,
-    `${place.type.toLowerCase()} belgische kust`,
-    `${city.name} hond`,
-  ];
-
-  return [
-    ...baseTerms,
-    ...place.tags.slice(0, 4).map((tag) => `${tag} ${city.name}`),
-  ].join(', ');
-};
-
-const buildPlaceSummary = (place: Place, city: City, kind: PlaceKind) => {
-  if (place.summary) {
-    return place.summary;
-  }
-
-  const tagSummary = place.tags.filter((tag) => tag !== 'Aanrader').slice(0, 3).join(', ').toLowerCase();
-  const base = `${place.name} is een ${kind === 'hotspot' ? 'hondvriendelijke' : 'praktische'} ${place.type.toLowerCase()} in ${city.name}`;
-  return tagSummary ? `${base} met ${tagSummary}.` : `${base}.`;
-};
-
-export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps => {
-  const collectionLabel = getPlaceCollectionLabel(kind);
-  const canonical = `https://hondaanzee.be/${place.city}/${kind === 'hotspot' ? 'hotspots' : 'diensten'}/${place.slug}`;
-  const image = place.images?.[0] || place.image;
-  const schemaType = getPlaceSchemaType(place, kind);
-  const summary = buildPlaceSummary(place, city, kind);
-  const description = `${summary} ${place.description.replace(/\s+/g, ' ').trim()}`.slice(0, 158).trimEnd() + (summary.length + place.description.length > 158 ? '...' : '');
-
-  const openingHoursSpec =
-    'openingHours' in place && place.openingHours
-      ? buildOpeningHoursSpecification(place.openingHours)
-      : [];
-
-  const structuredData = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hondaanzee.be/' },
-        { '@type': 'ListItem', position: 2, name: city.name, item: `https://hondaanzee.be/${city.slug}` },
-        { '@type': 'ListItem', position: 3, name: collectionLabel, item: `https://hondaanzee.be/${kind === 'hotspot' ? 'hotspots' : 'diensten'}` },
-        { '@type': 'ListItem', position: 4, name: place.name, item: canonical },
-      ],
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': schemaType,
-      name: place.name,
-      description: [description, 'openingHoursNote' in place && place.openingHoursNote].filter(Boolean).join(' '),
-      url: canonical,
-      image: [`https://hondaanzee.be${image}`],
-      telephone: place.phone,
-      sameAs: place.sameAs,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: place.address,
-        addressLocality: city.name,
-        addressCountry: 'BE',
-      },
-      areaServed: {
-        '@type': 'City',
-        name: city.name,
-      },
-      ...(place.website ? { sameAs: [...(place.sameAs || []), place.website] } : {}),
-      ...(openingHoursSpec.length > 0 ? { openingHoursSpecification: openingHoursSpec } : {}),
-    },
-  ];
-
-  const TYPE_TAGLINE: Record<string, string> = {
-    Restaurant: 'Hondvriendelijk Eten & Drinken',
-    Brasserie: 'Hondvriendelijke Brasserie aan de Kust',
-    Café: 'Hondvriendelijk Café aan de Kust',
-    Koffiebar: 'Hondvriendelijke Koffiebar aan de Kust',
-    Shoppen: 'Hondvriendelijk Winkelen aan de Kust',
-    Slapen: 'Hondvriendelijk Verblijf aan de Kust',
-    Dierenarts: 'Dierenarts aan de Belgische Kust',
-    Dierenspeciaalzaak: 'Dierenspeciaalzaak aan de Belgische Kust',
-  };
-  const tagline = TYPE_TAGLINE[place.type] ?? 'Hondvriendelijk aan de Belgische Kust';
-
-  return {
-    title: `${place.type} ${place.name} in ${city.name} | ${tagline}`,
-    description,
-    keywords: buildPlaceKeywords(place, city, kind),
-    canonical,
-    ogImage: `https://hondaanzee.be${image}`,
-    structuredData,
-  };
-};
+export { getPlaceSEO } from './placeSEO.ts';
 
 export const getOffLeashAreaSEO = (area: OffLeashArea, cityName: string): SEOProps => {
   const canonical = `https://hondaanzee.be/losloopzones/${area.slug}`;

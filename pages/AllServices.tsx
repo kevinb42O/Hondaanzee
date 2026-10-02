@@ -7,6 +7,7 @@ import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { getServiceDetailPath } from '../utils/placeRoutes.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import PlaceDirectory from '../components/PlaceDirectory.tsx';
 
 const AllServices: React.FC = () => {
   const location = useLocation();
@@ -314,6 +315,7 @@ const AllServices: React.FC = () => {
             </div>
           </div>
         )}
+        {!hasActiveFilters && <PlaceDirectory kind="service" />}
       </div>
 
     </div>

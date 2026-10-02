@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import { FloatingSupport } from './components/FloatingSupport.tsx';
 import ScrollToTop from './components/ScrollToTop.tsx';
+import { getAnalyticsPath, normalizeAnalyticsEvent } from './utils/placeAnalytics.ts';
 
 // Lazy-loaded below-the-fold components
 const ResponsibilityBanner = React.lazy(() => import('./components/ResponsibilityBanner.tsx'));
@@ -184,7 +185,7 @@ const AppContent = () => {
       )}
       {!isAdminRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
       {!isAdminRoute && <ScrollToTop />}
-      <Analytics />
+      <Analytics route={getAnalyticsPath(pathname)} path={getAnalyticsPath(pathname)} beforeSend={normalizeAnalyticsEvent} />
     </div>
   );
 };

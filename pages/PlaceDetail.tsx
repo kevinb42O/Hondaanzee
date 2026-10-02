@@ -23,7 +23,8 @@ import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { getPlaceSEO, useSEO } from '../utils/seo.ts';
 import { getPlaceCollectionPath, type PlaceKind } from '../utils/placeRoutes.ts';
-import type { Hotspot, OpeningHours, Service } from '../types.ts';
+import type { City, Hotspot, OpeningHours, Service } from '../types.ts';
+import { trackPlaceAction } from '../utils/placeAnalytics.ts';
 import ImageModal from '../components/ImageModal.tsx';
 import Breadcrumb from '../components/Breadcrumb.tsx';
 import NotFound from './NotFound.tsx';
@@ -488,8 +489,7 @@ const OpeningHoursBlock: React.FC<OpeningHoursBlockProps> = ({ hours, accentLink
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
-  const { city, slug } = useParams<{ city: string; slug: string }>();
+const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; cityData: City }> = ({ kind, place, cityData }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -497,18 +497,6 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
   const [activeHeroImageIndex, setActiveHeroImageIndex] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
   const [thumbsPerPage, setThumbsPerPage] = useState(3);
-
-  const place = useMemo<Place | undefined>(() => {
-    if (!city || !slug) return undefined;
-    const collection = kind === 'hotspot' ? HOTSPOTS : SERVICES;
-    return collection.find((entry) => entry.city === city && entry.slug === slug);
-  }, [city, kind, slug]);
-
-  const cityData = CITIES.find((entry) => entry.slug === city);
-
-  if (!place || !cityData) {
-    return <NotFound />;
-  }
 
   const collection = kind === 'hotspot' ? HOTSPOTS : SERVICES;
   const images = place.images?.length ? place.images : [place.image];
@@ -642,6 +630,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
 
       <a
         href={getDirectionsUrl(place.address)}
+        onClick={() => trackPlaceAction(place, kind, 'route')}
         target="_blank"
         rel="noopener noreferrer"
         className="mb-4 flex rounded-2xl border border-slate-200 p-4 transition hover:border-slate-300 hover:bg-slate-50"
@@ -657,6 +646,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
       {place.phone && (
         <a
           href={`tel:${place.phone}`}
+          onClick={() => trackPlaceAction(place, kind, 'telefoon')}
           className="mb-4 flex rounded-2xl border border-slate-200 p-4 transition hover:border-slate-300 hover:bg-slate-50"
         >
           <Phone size={18} className="mt-0.5 shrink-0 text-slate-500" />
@@ -689,6 +679,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
       {place.website && (
         <a
           href={place.website}
+          onClick={() => trackPlaceAction(place, kind, 'website')}
           target="_blank"
           rel="noopener noreferrer"
           className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-bold text-white transition ${accents.button}`}
@@ -964,6 +955,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
                     <a
                       key={card.label}
                       href={card.href}
+                      onClick={() => trackPlaceAction(place, kind, 'route')}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex h-full min-h-[12.5rem] flex-col rounded-[1.75rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-slate-300"
@@ -1127,6 +1119,7 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
                   <a
                     key={url}
                     href={url}
+                    onClick={() => trackPlaceAction(place, kind, 'social')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`block ${accents.link}`}
@@ -1167,6 +1160,16 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
       />
     </div>
   );
+};
+
+const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
+  const { city, slug } = useParams<{ city: string; slug: string }>();
+  const collection = kind === 'hotspot' ? HOTSPOTS : SERVICES;
+  const place = collection.find((entry) => entry.city === city && entry.slug === slug);
+  const cityData = CITIES.find((entry) => entry.slug === city);
+  if (!place || !cityData) return <NotFound />;
+  // Keep hook ordering stable when moving between valid and missing businesses.
+  return <ResolvedPlaceDetail key={`${kind}/${city}/${slug}`} kind={kind} place={place} cityData={cityData} />;
 };
 
 export default PlaceDetail;

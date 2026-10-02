@@ -2,8 +2,8 @@
  * generate-og-data.cjs
  *
  * Extracts Open Graph metadata for all known routes and writes a lightweight
- * JSON file (`og-routes.json`) at the project root.  The Vercel Edge
- * Middleware imports this file at bundle-time so it can serve the correct
+ * module (`og-routes.js`) at the project root.  The Vercel social
+ * proxy imports this file at bundle-time so it can serve the correct
  * OG tags to social-media crawlers without needing a headless browser or
  * the full 160 KB blogs.ts payload.
  *
@@ -20,63 +20,8 @@ const YEAR = new Date().getFullYear();
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
-/** Cheap extraction of the blogPosts array from data/blogs.ts. */
-function extractBlogPosts() {
-  const raw = fs.readFileSync(
-    path.join(__dirname, '..', 'data', 'blogs.ts'),
-    'utf-8',
-  );
-
-  // Grab every top-level post object from the exported array.
-  // We only need slug, title, excerpt, image, ogImage and imageAlt.
-  const posts = [];
-  const slugRe = /slug:\s*'([^']+)'/g;
-  let m;
-  while ((m = slugRe.exec(raw)) !== null) {
-    const idx = m.index;
-
-    // Walk backwards to find the opening brace of this object literal.
-    let bracePos = raw.lastIndexOf('{', idx);
-
-    // Walk forward from the brace to the matching closing brace.
-    let depth = 0;
-    let end = bracePos;
-    for (let i = bracePos; i < raw.length; i++) {
-      if (raw[i] === '{') depth++;
-      if (raw[i] === '}') depth--;
-      if (depth === 0) {
-        end = i + 1;
-        break;
-      }
-    }
-
-    const block = raw.slice(bracePos, end);
-
-    const get = (key) => {
-      const re = new RegExp(`(?:^|\\n)\\s*${key}:\\s*'([^']*)'`);
-      const hit = re.exec(block);
-      return hit ? hit[1] : undefined;
-    };
-
-    // Only top-level post objects have slug + title + excerpt
-    const slug = get('slug');
-    const title = get('title');
-    const excerpt = get('excerpt');
-
-    if (!slug || !title || !excerpt) continue;
-
-    posts.push({
-      slug,
-      title,
-      excerpt,
-      image: get('image'),
-      ogImage: get('ogImage'),
-      imageAlt: get('imageAlt'),
-    });
-  }
-
-  return posts;
-}
+// Use the same typed data inventory as the sitemap and page build.
+const { HOTSPOTS, SERVICES, CITIES, blogPosts, EVENTS, OFF_LEASH_AREAS, getAllRoutes } = require('./place-data.cjs');
 
 // ── static page OG metadata ─────────────────────────────────────────────────
 
@@ -147,7 +92,6 @@ const staticPages = {
 
 const routes = { ...staticPages };
 
-const blogPosts = extractBlogPosts();
 for (const post of blogPosts) {
   const ogImage = post.ogImage
     ? `${SITE}${post.ogImage}`
@@ -162,6 +106,37 @@ for (const post of blogPosts) {
     type: 'article',
     imageAlt: post.imageAlt || post.title,
   };
+}
+
+// Every known URL needs its own share preview, including cities and services.
+const extraStaticPages = {
+  '/goed-om-te-weten': ['Goed om te weten | Honden aan de Belgische kust', 'Praktische informatie over wandelen, gezondheid en veilig op pad gaan met je hond aan de Belgische kust.'],
+  '/zaak-aanmelden': ['Zaak aanmelden | HondAanZee.be', 'Meld je hondvriendelijke zaak aan voor vermelding op HondAanZee.be.'],
+  '/privacy': ['Privacybeleid | HondAanZee.be', 'Lees hoe HondAanZee.be omgaat met privacy en anonieme bezoekersstatistieken.'],
+  '/algemene-voorwaarden': ['Algemene voorwaarden | HondAanZee.be', 'De algemene voorwaarden voor het gebruik van HondAanZee.be.'],
+  '/cookies': ['Cookiebeleid | HondAanZee.be', 'Informatie over cookies en bezoekersstatistieken op HondAanZee.be.'],
+  '/meldpunt/vrijwilligers': ['Vrijwilligers voor het meldpunt | HondAanZee.be', 'Help mee aan een veilige en schone Belgische kust voor honden en hun baasjes.'],
+  '/updates': ['Updates | HondAanZee.be', 'Bekijk de laatste wijzigingen en aanvullingen op HondAanZee.be.'],
+};
+for (const [route, [title, description]] of Object.entries(extraStaticPages)) {
+  routes[route] = { title, description, image: DEFAULT_IMAGE };
+}
+for (const city of CITIES) {
+  routes[`/${city.slug}`] = { title: `Met je hond naar ${city.name} | Strandregels en hondvriendelijke zaken`, description: city.description, image: `${SITE}${city.image}` };
+}
+for (const [collection, places] of [['hotspots', HOTSPOTS], ['diensten', SERVICES]]) {
+  for (const place of places) {
+    routes[`/${place.city}/${collection}/${place.slug}`] = { title: `${place.name} | ${place.type} in ${CITIES.find(city => city.slug === place.city).name}`, description: place.summary || place.description, image: `${SITE}${place.images?.[0] || place.image}` };
+  }
+}
+for (const event of EVENTS) {
+  routes[`/agenda/${event.slug}`] = { title: `${event.title} | Agenda HondAanZee.be`, description: event.description, image: `${SITE}${event.image}` };
+}
+for (const area of OFF_LEASH_AREAS) {
+  routes[`/losloopzones/${area.slug}`] = { title: `${area.name} | Losloopzones HondAanZee.be`, description: area.description, image: area.images?.[0] || area.image ? `${SITE}${area.images?.[0] || area.image}` : DEFAULT_IMAGE };
+}
+for (const route of getAllRoutes()) {
+  if (!routes[route]) throw new Error(`Missing share metadata: ${route}`);
 }
 
 // ── write ────────────────────────────────────────────────────────────────────

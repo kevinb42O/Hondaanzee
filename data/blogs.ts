@@ -2466,7 +2466,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'paragraph',
         text: 'Deze aanpak is niet enkel theorie — ze komt daadwerkelijk tot leven aan de Belgische kust. Kate, eigenares van In \'t Dorp in Koksijde, past de filosofie samen met haar hond Bruno dagelijks toe. Dit gezellige etablissement is een van de populairste hotspots op HondAanZee en staat bekend om de unieke Brunobar, waar jouw hond de ster van de avond is.',
-        links: [{ text: 'In \'t Dorp in Koksijde', url: 'https://www.hondaanzee.be/hotspots' }]
+        links: [{ text: 'In \'t Dorp in Koksijde', url: 'https://hondaanzee.be/koksijde/hotspots/in-t-dorp' }]
       },
       {
         type: 'image',

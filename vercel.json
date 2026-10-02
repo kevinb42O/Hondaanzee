@@ -1,5 +1,5 @@
 {
-    "buildCommand": "npm run build:no-prerender",
+    "buildCommand": "npm run build",
     "trailingSlash": false,
     "crons": [
         {
@@ -66,12 +66,28 @@
     ],
     "rewrites": [
         {
+            "source": "/:city/hotspots/:slug",
+            "destination": "/:city/hotspots/:slug/index.html"
+        },
+        {
+            "source": "/:city/diensten/:slug",
+            "destination": "/:city/diensten/:slug/index.html"
+        },
+        {
+            "source": "/hotspots",
+            "destination": "/hotspots/index.html"
+        },
+        {
+            "source": "/diensten",
+            "destination": "/diensten/index.html"
+        },
+        {
             "source": "/(.*)",
             "has": [
                 {
                     "type": "header",
                     "key": "user-agent",
-                    "value": "(?i).*(facebookexternalhit|twitterbot|linkedinbot|whatsapp|slackbot|telegrambot|skypeuripreview|discordbot|pinterest|vkshare|googlebot|bingbot|yandexbot).*"
+                    "value": "(?i).*(facebookexternalhit|twitterbot|linkedinbot|whatsapp|slackbot|telegrambot|skypeuripreview|discordbot|pinterest|vkshare).*"
                 }
             ],
             "destination": "/api/og-proxy?path=$1"

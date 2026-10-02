@@ -1,16 +1,10 @@
 import type { Service } from '../types';
 
-const createServiceSlug = (name: string): string =>
-  name
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
+// Slugs are permanent: keep them when a business changes its display name.
+export const SERVICES: Service[] = [
   {
     id: 1,
+    slug: 'dierenarts-frederik-galle',
     name: 'Dierenarts Frederik Galle',
     type: 'Dierenarts',
     description: 'Moderne dierenartsenpraktijk waar persoonlijke aanpak en het welzijn van uw huisdier centraal staan.',
@@ -22,6 +16,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 2,
+    slug: 'dier-tuincenter-rommel',
     name: 'Dier & Tuincenter Rommel',
     type: 'Dierenspeciaalzaak',
     description: 'Familiezaak met meer dan 20 jaar ervaring en een enorm aanbod aan voeding en accessoires.',
@@ -33,6 +28,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 3,
+    slug: 'dierenarts-ilse-kerckhof',
     name: 'Dierenarts Ilse Kerckhof',
     type: 'Dierenarts',
     description: 'Professionele praktijk in Westkapelle met een groot hart voor honden en katten.',
@@ -44,6 +40,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 4,
+    slug: 'dierenplezier-heist',
     name: 'Dierenplezier Heist',
     type: 'Dierenspeciaalzaak',
     description: 'Gezellige dierenwinkel waar u deskundig advies krijgt en uw hond mee mag komen shoppen.',
@@ -55,6 +52,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 5,
+    slug: 'de-praktijk-227',
     name: 'De Praktijk 227',
     type: 'Dierenarts',
     description: 'Moderne dierenartsenpraktijk met ruime openingsuren en aandacht voor elk huisdier.',
@@ -66,6 +64,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 6,
+    slug: 'snuffels',
     name: 'Snuffels',
     type: 'Dierenspeciaalzaak',
     description: 'Honden- en kattenspeciaalzaak met een ruim aanbod aan buggy\'s, draagtasjes en kledij. Daarnaast vind je hier een uitgebreide collectie harnasjes en halsbandjes.',
@@ -78,6 +77,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 7,
+    slug: 'de-dierendokter-alex-salomez',
     name: 'De Dierendokter (Alex Salomez)',
     type: 'Dierenarts',
     description: 'Ervaren dierenarts die ook \'Cat Friendly\' gecertificeerd is, maar honden met open armen ontvangt.',
@@ -89,6 +89,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 8,
+    slug: 'dierenarts-elise-buyse',
     name: 'Dierenarts Elise Buyse',
     type: 'Dierenarts',
     description: 'Betrokken dierenarts in het centrum van Nieuwpoort, gespecialiseerd in kleine huisdieren.',
@@ -100,6 +101,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 9,
+    slug: 'dierenartsenpraktijk-katty',
     name: 'Dierenartsenpraktijk Katty',
     type: 'Dierenarts',
     description: 'Warme praktijk waar uw hond de beste medische zorgen krijgt in een rustige omgeving.',
@@ -111,6 +113,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 10,
+    slug: 'dogs-co',
     name: 'Dogs & Co',
     type: 'Dierenspeciaalzaak',
     description: 'Bij Dogs & Co vind je het beste van twee werelden onder één dak:\n\nDe Winkel: Een stijlvolle shop met topproducten voor honden en katten. Je vindt hier werkelijk álles wat je hond ooit nodig kan hebben in zijn leven: van hoogwaardige voeding tot de mooiste accessoires en het leukste speelgoed.\n\nHet Trimsalon: Vakkundige vachtverzorging met rust, respect en eindeloos geduld. Door ruim 15 jaar ervaring in de hondenwereld (van gedrag en sport tot het doceren van trimopleidingen) krijgt elke hond vol passie de perfecte behandeling.\n\nSpeciaal voor pups: Tot de leeftijd van 6 maanden is een puppygewenning in het salon helemaal gratis!\n\nDogs & Co: hét adres voor een onovertroffen winkelassortiment én vakkundig trimmen met een écht hart voor dieren.',
@@ -122,6 +125,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 11,
+    slug: 'dierenartsenpraktijk-breemersch',
     name: 'Dierenartsenpraktijk Breemersch',
     type: 'Dierenarts',
     description: 'Goed uitgeruste praktijk waar een persoonlijke band met dier en eigenaar voorop staat.',
@@ -133,6 +137,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 12,
+    slug: 'happy-dog',
     name: 'Happy Dog',
     type: 'Dierenspeciaalzaak',
     description: 'Hondentrimsalon dat ook voeding en verzorgingsproducten verkoopt in het centrum.',
@@ -144,6 +149,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 13,
+    slug: 'dogs-cats',
     name: 'Dogs & Cats',
     type: 'Dierenspeciaalzaak',
     description: 'Complete dierenwinkel voor honden en katten met voeding, accessoires en verzorgingsproducten van topkwaliteit.',
@@ -155,6 +161,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 14,
+    slug: 'q-ties',
     name: 'Q-ties',
     type: 'Dierenspeciaalzaak',
     description: 'Gespecialiseerde hondenwinkel met een breed assortiment aan kwaliteitsvoeding, speelgoed en accessoires voor je trouwe viervoeter. Deskundig advies en persoonlijke service staan hier centraal.',
@@ -166,6 +173,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 15,
+    slug: 'dierenkliniek-anicura',
     name: 'Dierenkliniek AniCura',
     type: 'Dierenarts',
     description: 'Moderne spoedkliniek nabij Oostende, dagelijks bereikbaar van 7.30u tot 21.00u. Professionele zorg voor je huisdier wanneer je het nodig hebt.',
@@ -177,6 +185,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 16,
+    slug: 'dierenarts-vanhee-s',
     name: 'Dierenarts Vanhee S.',
     type: 'Dierenarts',
     description: 'Warme praktijk voor kleine huisdieren waar persoonlijke zorg en vertrouwen centraal staan. Dankzij moderne apparatuur en nauwe samenwerking met collega-dierenartsen krijgt uw viervoeter steeds de beste behandeling. Ruime hospitalisatie en parkeermogelijkheid aanwezig.',
@@ -188,6 +197,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 17,
+    slug: 'panimalia-trimsalon-hondenboetiek',
     name: 'Panimalia Trimsalon & Hondenboetiek',
     type: 'Dierenspeciaalzaak',
     description: 'Panimalia is een gepassioneerde hondenboetiek en trimsalon in het hart van De Panne, pal op de Markt. Hier draait alles om het welzijn van jouw viervoeter: van premium hondenvoeding en verzorgingsproducten tot stijlvolle accessoires en speelgoed. Daarnaast biedt Panimalia professionele trimbehandelingen en toilettage aan, uitgevoerd door ervaren vakmensen. Ze organiseren ook trimopleidingen en workshops voor wie zelf de kneepjes van het vak wil leren. Een vaste waarde voor elke hondeneigenaar aan de kust!',
@@ -199,6 +209,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 18,
+    slug: 'famiflora-de-panne',
     name: 'Famiflora De Panne',
     type: 'Dierenspeciaalzaak',
     description: 'Famiflora is het grootste tuin- en decoratiecenter van België en de vestiging in De Panne beschikt over een uitgebreide dierenafdeling waar hondeneigenaars hun hart kunnen ophalen. Je vindt er een ruim assortiment hondenvoeding van topmerken zoals Royal Canin, Pedigree, Purina en Hills, aangevuld met een brede selectie accessoires, speelgoed, mandjes, harnassen en verzorgingsproducten. De deskundige medewerkers staan klaar om je te adviseren over de beste voeding en producten voor jouw hond. Famiflora is 7 dagen op 7 geopend — ideaal voor een bezoekje tijdens je vakantie aan de kust.',
@@ -210,6 +221,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 19,
+    slug: 'dierenarts-johan-devloo',
     name: 'Dierenarts Johan Devloo',
     type: 'Dierenarts',
     description: 'Derde generatie dierenarts met een hart van goud voor viervoeters. Sinds 1985 runt Johan Devloo zijn privépraktijk voor kleine huisdieren in De Panne, recht tegenover de Leopold I Esplanade. Met jarenlange ervaring, een persoonlijke aanpak en voortdurende bijscholing garandeert hij kwalitatieve diergeneeskunde. Gratis privéparking vlak voor de deur maakt een bezoek extra vlot. Al sinds 1989 zet hij zich ook vrijwillig in voor dierenasiel Ganzeweide — want de liefde voor dieren zit in zijn genen.',
@@ -221,6 +233,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 20,
+    slug: 'bazouf',
     name: 'Bazouf',
     type: 'Dierenspeciaalzaak',
     description: 'Bij Bazouf, de charmante dierenwinkel van eigenaars Véronique en Robine in Koksijde, draait alles om het welzijn van jouw trouwe viervoeter. Het aanbod is zorgvuldig samengesteld met oog voor kwaliteit, duurzaamheid en originaliteit — met een uitgesproken voorkeur voor lokale, handgemaakte en ecologische producten. Naast stijlvolle accessoires en speelgoed vind je er een ruim gamma aan natuurlijke voeding, lekkernijen en kauwsnacks, want de gezondheid van je harige vriend staat er altijd voorop. Persoonlijk advies op maat van jouw hond? Daar kan je bij Bazouf altijd op rekenen.',
@@ -233,6 +246,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 21,
+    slug: 'vets-for-pets',
     name: 'Vets For Pets',
     type: 'Dierenarts',
     description: 'Vets For Pets is een moderne en toegankelijke dierenartsenpraktijk in Koksijde waar het welzijn van jouw hond centraal staat. Het enthousiaste team staat klaar voor zowel routinebezoeken als meer complexe zorgen, altijd met de nodige aandacht en vakkennis. Een vlotte planning voor jou en zo min mogelijk wachttijd voor je viervoeter — afspraken maak je eenvoudig online via de website.',
@@ -244,6 +258,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 22,
+    slug: 'dierenartsencentrum-anoa',
     name: 'Dierenartsencentrum Anoa',
     type: 'Dierenarts',
     description: 'Dierenartsencentrum Anoa combineert echte passie voor dieren met topkwaliteit diergeneeskunde. Dankzij het modernste materiaal en voortdurende bijscholing blijft het team scherp op de nieuwste inzichten en technieken — want het stopt nooit met investeren in kennis en vernieuwende uitrusting. Van een snelle routineconsultatie tot een complexere diagnose: er wordt altijd gezocht naar de juiste oplossing, in open overleg met de eigenaar. Want alleen met eerlijke communicatie kom je samen tot de beste keuze voor jouw huisdier.',
@@ -255,6 +270,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 23,
+    slug: 'dierenarts-debakker-olivier',
     name: 'Dierenarts Debakker Olivier',
     type: 'Dierenarts',
     description: 'Olivier Debakker is een dierenarts met meer dan dertig jaar praktijkervaring — opgegroeid met paarden en teckels, en al van jongs af aan geroepen voor het vak. Na zijn afstuderen in Gent deed hij stages in Frankrijk en bleef hij sindsdien constant bijleren. In de hoofdpraktijk in Koksijde kunnen naast gewone consultaties ook meer geavanceerde ingrepen terecht: chirurgie, digitale radiografie, echografie en bloedonderzoeken. Een tweede praktijk bevindt zich in Oostduinkerke.',
@@ -266,6 +282,7 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
   },
   {
     id: 24,
+    slug: 'dierenartsencentrum-clos-fleuri',
     name: 'Dierenartsencentrum Clos Fleuri',
     type: 'Dierenarts',
     description: 'Dierenartsencentrum Clos Fleuri in Koksijde werkt uitsluitend op afspraak — zo krijgt elk dier de volledige aandacht het verdient en blijft de wachtzaal rustig en aangenaam. Je kan er terecht voor preventieve geneeskunde zoals vaccinaties, gezondheidsonderzoeken, seniorscreenings en osteo-artrose consultaties, maar ook voor eerstelijns zorgen bij klachten als manken, diarree, braken, oorontstekingen, blaasontstekingen en wondes.',
@@ -276,8 +293,3 @@ const SERVICE_ENTRIES: Omit<Service, 'slug'>[] = [
     website: 'https://www.clos-fleuri.be/'
   }
 ];
-
-export const SERVICES: Service[] = SERVICE_ENTRIES.map((service) => ({
-  ...service,
-  slug: createServiceSlug(service.name),
-}));

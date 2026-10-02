@@ -8,6 +8,7 @@ const NotFound: React.FC = () => {
   useSEO({
     title: 'Pagina niet gevonden | HondAanZee.be',
     description: 'Deze pagina bestaat helaas niet (meer). Ga terug naar de homepage voor alle informatie over honden aan de Belgische kust.',
+    noindex: true,
   });
 
   return (
