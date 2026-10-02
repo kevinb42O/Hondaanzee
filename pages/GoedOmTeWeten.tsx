@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { useSEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
 import { FAQItem } from '../components/goed-om-te-weten/SharedComponents.tsx';
 import MedischSection from '../components/goed-om-te-weten/MedischSection.tsx';
 import SeizoenSection from '../components/goed-om-te-weten/SeizoenSection.tsx';
@@ -222,7 +223,7 @@ const GoedOmTeWeten: React.FC = () => {
       "description": "Uitgebreide gids over kwallenbeten, pietermansteken, zoutwatervergiftiging, oververhitting en strandetiquette voor hondenbezitters aan de Belgische kust.",
       "url": "https://hondaanzee.be/goed-om-te-weten",
       "datePublished": "2026-02-10",
-      "dateModified": "2026-09-14",
+      "dateModified": SITE_UPDATE_DATE,
       "publisher": {
         "@type": "Organization",
         "name": "HondAanZee.be",
@@ -297,7 +298,7 @@ const GoedOmTeWeten: React.FC = () => {
           {/* Freshness Signal */}
           <div className="inline-flex items-center gap-1.5 bg-emerald-400/16 backdrop-blur-md border border-emerald-200/28 text-emerald-50 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider mb-6 rounded-full">
             <Calendar size={12} strokeWidth={2.5} />
-            <span>Laatst bijgewerkt: april 2026</span>
+            <span>Laatst bijgewerkt: <time dateTime={SITE_UPDATE_DATE}>{SITE_UPDATE_LABEL}</time></span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.1] drop-shadow-[0_12px_34px_rgba(0,0,0,0.38)]">

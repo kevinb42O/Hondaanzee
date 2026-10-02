@@ -8,6 +8,7 @@ import {
 import { useSEO } from '../utils/seo.ts';
 import { blogPosts, BlogSection } from '../data/blogs.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import { SITE_UPDATE_DATE } from '../data/siteUpdates.ts';
 
 const BlogDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -21,7 +22,7 @@ const BlogDetail: React.FC = () => {
     ogType: 'article',
     canonical: post ? `https://hondaanzee.be/blog/${post.slug}` : undefined,
     articlePublishedTime: post?.date,
-    articleModifiedTime: post?.date,
+    articleModifiedTime: SITE_UPDATE_DATE,
     articleSection: post?.category,
     articleAuthor: 'HondAanZee.be',
     ogImageAlt: post?.imageAlt || post?.title,
@@ -32,7 +33,7 @@ const BlogDetail: React.FC = () => {
         "headline": post.title,
         "description": post.excerpt,
         "datePublished": post.date,
-        "dateModified": "2026-09-14",
+        "dateModified": SITE_UPDATE_DATE,
         "url": `https://hondaanzee.be/blog/${post.slug}`,
         "mainEntityOfPage": {
           "@type": "WebPage",

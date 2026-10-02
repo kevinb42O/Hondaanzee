@@ -15,6 +15,12 @@ interface UpdateEntry {
   tag: UpdateTag;
 }
 
+interface UpdateSection {
+  id: string;
+  title: string;
+  entries: UpdateEntry[];
+}
+
 interface UpdateRelease {
   version: string;
   date: string;
@@ -23,6 +29,7 @@ interface UpdateRelease {
   subtitle: string;
   isLaunch?: boolean;
   entries: UpdateEntry[];
+  sections?: UpdateSection[];
   searchExamples?: string[];
 }
 
@@ -43,9 +50,84 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
-    version: '2.9',
+    version: '3.0',
     date: SITE_UPDATE_LABEL,
     dateISO: SITE_UPDATE_DATE,
+    title: 'Mijn Hond aan Zee, reviews en een vernieuwde gids',
+    subtitle: 'Een grote dag voor HondAanZee: bewaar je favoriete plekken, plan je uitstap en deel je ervaring. Hieronder vind je alle vernieuwingen per onderwerp.',
+    entries: [],
+    sections: [
+      {
+        id: 'accounts',
+        title: 'Gratis account & je eigen kustplannen',
+        entries: [
+          { text: 'Nieuw: Mijn Hond aan Zee. Maak gratis een account met je e-mailadres en wachtwoord en log rechtstreeks in. De gids blijft ook zonder account toegankelijk.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Bewaar hotspots, diensten en losloopzones met het hartje. Je vindt je privéfavorieten terug in een lijst of op een kaart per gemeente. Ook je eerste bewaarde plek gaat mee wanneer je daarna een account aanmaakt.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Stel je eigen uitstap samen met plekken uit de gids, een datum en persoonlijke notities. Deel desgewenst een leeslink: anderen zien je geselecteerde plekken, titel en datum; je privénotities blijven voor jou. Je kunt de link weer intrekken.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Volg je favoriete kustgemeenten en voeg optioneel een profiel voor je hond toe. In je account kun je je gegevens aanpassen, downloaden en je account verwijderen.', tag: { label: 'Nieuw', color: 'cyan' } },
+        ],
+      },
+      {
+        id: 'reviews',
+        title: 'Publieke likes & echte bezoekersreviews',
+        entries: [
+          { text: 'Je kunt nu als ingelogd lid een hotspot een publieke like geven met het duimpje. Het openbare likeaantal staat los van het hartje waarmee je een plek privé bewaart.', tag: { label: 'Community', color: 'violet' } },
+          { text: 'Deel je eigen ervaring bij een hotspot met 1 tot 5 sterren, een publieke naam en een review. Je e-mailadres blijft privé. Nieuwe reviews worden eerst nagekeken voordat ze openbaar verschijnen; ook nieuwe losloopzonereviews verlopen via een account.', tag: { label: 'Community', color: 'violet' } },
+          { text: 'Hotspotpagina’s tonen goedgekeurde ervaringen, het gemiddelde, het aantal reviews en de verdeling van de sterren. Op de kaarten zie je een compacte samenvatting. Zonder beoordelingen tonen we geen verzonnen sterrenwaarde; bij weinig reviews geven we extra context.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Je hebt één review per hotspot en kunt die later aanpassen of intrekken. Tijdens de controle van een wijziging blijft je eerder goedgekeurde review zichtbaar. Het formulier bewaart je concept in hetzelfde tabblad, zodat je invoer niet verloren gaat bij een mislukte inzending.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Ongepaste reviews kun je melden. Hotspot- en losloopzonereviews worden samen opgevolgd, met controle, moderatie en behoud van de oorspronkelijke inzendingen.', tag: { label: 'Verbeterd', color: 'amber' } },
+        ],
+      },
+      {
+        id: 'zaakpaginas',
+        title: 'Rustigere zaakpagina’s & werkende kaarten',
+        entries: [
+          { text: 'Alle 133 hotspots en 24 diensten kregen een vernieuwde detailpagina met een rustigere opbouw, contactknoppen binnen handbereik, praktische informatie en suggesties voor andere plekken.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'De informatie sluit beter aan bij het soort zaak: eten en drinken, overnachten, een dierenarts bezoeken of winkelen. Hondenvoorzieningen en redactionele tips verschijnen op basis van de ingevulde informatie.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'De fotogalerij toont een hoofdfoto en compacte thumbnails. Alle beschikbare foto’s blijven bereikbaar in de beeldviewer. Pagina’s zonder zichtbare galerij houden een compacte indeling.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Openingstijden en bezoekvoorwaarden kunnen nu duidelijk verschillen: vaste uren, op afspraak, seizoensgebonden, weersafhankelijk of alleen een toelichting. Niet-bevestigde uren worden niet als vast uurrooster voorgesteld.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'De kaarten bij losloopzones werken opnieuw. Je kunt de zones weer op de kaart bekijken en de bijbehorende informatie openen.', tag: { label: 'Opgelost', color: 'emerald' } },
+        ],
+      },
+      {
+        id: 'beheer',
+        title: 'Achter de schermen: sneller en zorgvuldiger beheer',
+        entries: [
+          { text: 'Een volledig vernieuwd beheerdashboard brengt zaken, diensten, losloopzones, leden, reviews, meldingen en publicaties samen in één werkruimte, met zoeken en gerichte filters.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Nieuwe en aangepaste vermeldingen worden eerst als concept bewaard en kunnen vóór publicatie worden bekeken. Inhoudsgeschiedenis en controles helpen voorkomen dat wijzigingen elkaar overschrijven.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Publiceren heeft nu een eigen overzicht met de bouwstatus en een controle of de nieuwe versie werkelijk op de website staat. Foto’s worden vanuit de editor beheerd; bestaande afbeeldingen blijven behouden.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Beheerders kunnen per onderdeel bepalen wat op een zaakpagina verschijnt, zoals contactgegevens, uren, kenmerken en foto’s. Een onderdeel verbergen bewaart de ingevulde gegevens voor later.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'De 27 losloopzones kunnen nu vanuit het dashboard worden bijgewerkt, met locatie, toegang, voorzieningen, foto’s, bronnen en tijdelijke sluitingen. Bestaande zonelinks en reviews blijven behouden.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Het meldpunt heeft een duidelijkere werklijst, filters en een detailpaneel voor opvolging. Conceptantwoorden blijven bewaard; status en openbare terugkoppeling worden bewust opgeslagen. Afgehandelde meldingen blijven raadpleegbaar in het logboek.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Pushmeldingen hebben een rustigere editor, een voorvertoning en een afzonderlijke verzendhistoriek. Titel, tekst en bestemming worden vóór verzending gecontroleerd, met een duidelijk resultaat na het versturen.', tag: { label: 'Verbeterd', color: 'amber' } },
+        ],
+      },
+      {
+        id: 'statistieken',
+        title: 'Meer inzicht in wat bezoekers gebruiken',
+        entries: [
+          { text: 'Het dashboard toont eigen statistieken voor openbare pagina’s en contactklikken, met overzichten per plek, herkomst en apparaat. De meting gebruikt geen meetcookies of bezoeker-ID; beheerverkeer telt niet mee.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'De eigen meting en Vercel-historiek hebben afzonderlijke overzichten. Zo blijven oudere cijfers herkenbaar en worden verschillende meetbronnen niet zomaar opgeteld.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Een nieuwe 24-uursweergave toont echte uurcijfers. Langere periodes hebben duidelijke datums op de grafiek, met details via muis, aanraking of toetsenbord en een download naar CSV. Uren van vóór de start van de meting worden als niet gemeten aangeduid.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Beheerders zien ook hoe vaak plekken als privéfavoriet worden bewaard, met gezamenlijke aantallen en ranglijsten. Zo wordt duidelijk welke plekken bezoekers willen onthouden.', tag: { label: 'Nieuw', color: 'cyan' } },
+        ],
+      },
+      {
+        id: 'vindbaarheid',
+        title: 'Vindbaarheid, privacy & actuele datums',
+        entries: [
+          { text: 'Alle 224 openbare pagina’s leveren meteen hun volledige inhoud aan, ook voordat JavaScript geladen is. Elke zaak heeft een eigen paginatitel, beschrijving, deelvoorbeeld en vaste link; de overzichten linken naar alle vermeldingen.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'De sitemap en informatie voor zoekmachines zijn bijgewerkt. De openbare pagina’s, sociale previews en navigatie zijn gecontroleerd; onbekende adressen krijgen een duidelijke 404-pagina.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Privacybeleid, cookiebeleid en algemene voorwaarden zijn afgestemd op accounts, privéfavorieten, gedeelde uitstapjes, likes, reviews en de huidige bezoekersmeting.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'De laatste update in de footer, dit updateslog en de relevante wijzigingsdatums voor zoekmachines staan op 2 oktober 2026. Ook de zichtbare datum bij “Goed om te weten” is gelijkgetrokken.', tag: { label: 'Verbeterd', color: 'amber' } },
+        ],
+      },
+    ],
+  },
+  {
+    version: '2.9',
+    date: '2 oktober 2026',
+    dateISO: '2026-10-02',
     title: 'Vind je favoriete zaak met de vernieuwde zoekbalk',
     subtitle: 'Van La Potinière tot een losloopzone: vind sneller wat je zoekt, rechtstreeks op de homepage.',
     entries: [
@@ -60,7 +142,8 @@ const releases: UpdateRelease[] = [
   },
   {
     version: '2.8',
-    date: SITE_UPDATE_LABEL,
+    date: '2 oktober 2026',
+    dateISO: '2026-10-02',
     title: 'Praktische info La Potinière en actuele wijzigingsdatums',
     subtitle: 'Actuele contactinformatie en een duidelijke toelichting voor je bezoek',
     entries: [
@@ -466,6 +549,20 @@ function getReleaseStyles(isLaunch: boolean, isNewest: boolean): ReleaseStyles {
   };
 }
 
+const UpdateEntries: React.FC<{ entries: UpdateEntry[] }> = ({ entries }) => (
+  <ul className="space-y-3">
+    {entries.map(entry => (
+      <li key={entry.text} className="flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
+        <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full border shrink-0 mt-0.5 ${TAG_STYLES[entry.tag.color]}`}>
+          {tagIcon(entry.tag.label)}
+          {entry.tag.label}
+        </span>
+        <span className="text-sm text-slate-700 leading-relaxed">{entry.text}</span>
+      </li>
+    ))}
+  </ul>
+);
+
 const Updates: React.FC = () => {
   useSEO({
     title: `Updates & Nieuwigheden — laatste update ${SITE_UPDATE_LABEL} | HondAanZee.be`,
@@ -561,6 +658,10 @@ const Updates: React.FC = () => {
           <div className="inline-flex items-center justify-center p-4 bg-cyan-100 text-cyan-600 rounded-2xl mb-6 shadow-sm">
             <Sparkles size={40} strokeWidth={2} />
           </div>
+          <h2 className="text-xl font-black text-slate-900 sm:text-2xl">Een grote update op {SITE_UPDATE_LABEL}</h2>
+          <p className="mx-auto mb-6 mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
+            Gratis accounts, privéfavorieten, uitstapjes, publieke likes en sterrenreviews: ontdek wat je vanaf nu zelf kunt doen. Ook de zaakpagina’s en het beheer kregen een grondige vernieuwing.
+          </p>
 
           {/* Snapshot stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -646,19 +747,34 @@ const Updates: React.FC = () => {
                   </div>
 
                   {/* Entries */}
-                  <ul className="px-6 py-5 space-y-3">
-                    {release.entries.map((entry) => (
-                      <li key={entry.text} className="flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
-                        <span
-                          className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full border shrink-0 mt-0.5 ${TAG_STYLES[entry.tag.color]}`}
-                        >
-                          {tagIcon(entry.tag.label)}
-                          {entry.tag.label}
-                        </span>
-                        <span className="text-sm text-slate-700 leading-relaxed">{entry.text}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {release.sections ? (
+                    <div className="px-6 py-5">
+                      <nav aria-label="Onderwerpen in deze update" className="mb-7 rounded-2xl border border-sky-100 bg-sky-50/70 p-4">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-wider text-sky-800">Ga meteen naar jouw onderwerp</p>
+                        <div className="grid gap-2 sm:grid-cols-2">
+                          {release.sections.map(section => (
+                            <a key={section.id} href={`#update-${release.version}-${section.id}`} className="flex min-h-[44px] items-center justify-between gap-2 rounded-xl border border-sky-100 bg-white px-3 py-2 text-sm font-semibold text-sky-800 transition-colors hover:bg-sky-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                              {section.title}<ArrowRight size={15} className="shrink-0" aria-hidden="true" />
+                            </a>
+                          ))}
+                        </div>
+                      </nav>
+                      <div className="space-y-7">
+                        {release.sections.map(section => (
+                          <section key={section.id} aria-labelledby={`update-${release.version}-${section.id}`} className="border-t border-slate-100 pt-5">
+                            <h3 id={`update-${release.version}-${section.id}`} className="mb-4 scroll-mt-28 text-base font-black text-slate-900 sm:text-lg">{section.title}</h3>
+                            <UpdateEntries entries={section.entries} />
+                          </section>
+                        ))}
+                      </div>
+                      <div className="mt-7 flex flex-wrap gap-3 border-t border-slate-100 pt-5">
+                        <Link to="/account?mode=register" className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-sm font-bold text-white hover:bg-sky-700">Ontdek Mijn Hond aan Zee<ArrowRight size={16} aria-hidden="true" /></Link>
+                        <Link to="/hotspots" className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-sky-200 px-4 py-2 text-sm font-bold text-sky-800 hover:bg-sky-50">Bekijk de hotspots<ArrowRight size={16} aria-hidden="true" /></Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="px-6 py-5"><UpdateEntries entries={release.entries} /></div>
+                  )}
                   {release.searchExamples && (
                     <div className="mx-6 mb-6 rounded-2xl border border-sky-100 bg-sky-50/60 p-4 sm:p-5">
                       <h3 className="flex items-center gap-2 text-base font-bold text-slate-900"><Search size={18} className="text-sky-600" aria-hidden="true" />Probeer het zelf</h3>

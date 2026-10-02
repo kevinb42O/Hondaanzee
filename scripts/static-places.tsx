@@ -11,6 +11,8 @@ import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { getPlaceSEO, SEO_DATA } from '../utils/seo.ts';
 import { getPlaceDetailPath, type PlaceKind } from '../utils/placeRoutes.ts';
+import { StaticSEOContext } from '../utils/staticSEO';
+import type { SEOProps } from '../utils/seo';
 
 export function renderPlaceRoute(route: string) {
   const kind: PlaceKind = route === '/diensten' || route.includes('/diensten/') ? 'service' : 'hotspot';
@@ -19,10 +21,11 @@ export function renderPlaceRoute(route: string) {
   const city = place && CITIES.find((entry) => entry.slug === place.city);
   if (!place && route !== '/hotspots' && route !== '/diensten') throw new Error(`Unknown business route: ${route}`);
   if (place && !city) throw new Error(`Missing city: ${route}`);
-  const seo = place && city
+  let seo: SEOProps = place && city
     ? getPlaceSEO(place, city, kind)
     : { ...SEO_DATA[kind === 'hotspot' ? 'hotspots' : 'diensten'], canonical: `https://hondaanzee.be${route}` };
   const body = renderToStaticMarkup(
+    <StaticSEOContext.Provider value={value => { seo = value; }}>
     <StaticRouter location={route}>
       <div className="min-h-screen flex flex-col" style={{ overflowX: 'clip' }}>
         <Header />
@@ -37,7 +40,8 @@ export function renderPlaceRoute(route: string) {
         <ResponsibilityBanner />
         <Footer />
       </div>
-    </StaticRouter>,
+    </StaticRouter>
+    </StaticSEOContext.Provider>,
   );
   return { body, seo };
 }

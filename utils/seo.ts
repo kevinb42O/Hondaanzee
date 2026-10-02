@@ -47,7 +47,20 @@ export const useSEO = ({
 }: SEOProps) => {
   const location = useLocation();
   const collectStaticSEO = useContext(StaticSEOContext);
-  collectStaticSEO?.({ title, description, keywords, ogImage, ogImageAlt, ogType, canonical: canonical || `${SITE_ORIGIN}${location.pathname}`, structuredData, noindex, articlePublishedTime, articleModifiedTime, articleSection, articleAuthor });
+  const resolvedCanonical = canonical || `${SITE_ORIGIN}${location.pathname}`;
+  const pageModifiedDate = PAGE_UPDATED_DATES[location.pathname];
+  const schemas = Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : [];
+  const hasPageSchema = schemas.some(schema => (schema as { '@type'?: string })['@type'] === 'WebPage');
+  const resolvedStructuredData = pageModifiedDate && !hasPageSchema ? [...schemas, {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${resolvedCanonical}#webpage`,
+    url: resolvedCanonical,
+    name: title,
+    dateModified: pageModifiedDate,
+  }] : structuredData;
+  // The initial HTML and browser must expose the same modification dates.
+  collectStaticSEO?.({ title, description, keywords, ogImage, ogImageAlt, ogType, canonical: resolvedCanonical, structuredData: resolvedStructuredData, noindex, articlePublishedTime, articleModifiedTime, articleSection, articleAuthor });
 
   useEffect(() => {
     // Ensure html lang is set (also covered statically in index.html, but
@@ -77,8 +90,6 @@ export const useSEO = ({
       const element = document.querySelector(`meta[${attribute}="${name}"]`);
       if (element) element.remove();
     };
-
-    const resolvedCanonical = canonical || `${SITE_ORIGIN}${location.pathname}`;
 
     // Basic meta tags
     updateMeta('title', title);
@@ -150,18 +161,7 @@ export const useSEO = ({
     });
 
     // Structured Data
-    const pageModifiedDate = PAGE_UPDATED_DATES[location.pathname];
-    const schemas = Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : [];
-    const hasPageSchema = schemas.some((schema) => (schema as { '@type'?: string })['@type'] === 'WebPage');
-    const pageSchema = pageModifiedDate && !hasPageSchema ? {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      '@id': `${resolvedCanonical}#webpage`,
-      url: resolvedCanonical,
-      name: title,
-      dateModified: pageModifiedDate,
-    } : undefined;
-    if (structuredData || pageSchema) {
+    if (resolvedStructuredData) {
       let script = document.querySelector('script[type="application/ld+json"][data-dynamic]');
       if (!script) {
         script = document.createElement('script');
@@ -169,9 +169,7 @@ export const useSEO = ({
         (script as HTMLElement).dataset.dynamic = 'true';
         document.head.appendChild(script);
       }
-      script.textContent = JSON.stringify(pageSchema
-        ? [...(Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : []), pageSchema]
-        : structuredData);
+      script.textContent = JSON.stringify(resolvedStructuredData);
     }
 
     // Cleanup: remove dynamic structured data so stale schemas don't persist
