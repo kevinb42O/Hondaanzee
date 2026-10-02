@@ -19,7 +19,7 @@ Uitbreiding van het bestaande dashboard op `/admin`. De productiesite blijft op 
 
 `content_places.kind='offleash'` houdt een vaste identiteit met een wereldwijd unieke zone-slug. De oorspronkelijke 27 JSON-objecten werden ongewijzigd geïmporteerd. De oudere `?area=N`-links gebruiken de bevroren oorspronkelijke slugvolgorde, zodat nieuwe zones, sortering of archivering geen verkeerde selectie veroorzaken.
 
-Na de frontenduitrol activeert migratie `20261002192000_review_public_access.sql` de publieke afsluiting. Anonieme en gewone ingelogde gebruikers hebben geen rechtstreekse tabeltoegang tot reviews of moderatie. Publieke lees-RPCs geven alleen goedgekeurde, publieke velden en echte aantallen/gemiddelden terug. Ze pagineren met datum en UUID. De `site-reviews`-functie valideert nieuwe inzendingen en meldingen; accountidentiteit komt uitsluitend uit een gecontroleerde sessie.
+Na de frontenduitrol is migratie `20261002192000_review_public_access.sql` voor de publieke afsluiting geactiveerd. Anonieme en gewone ingelogde gebruikers hebben geen rechtstreekse tabeltoegang tot reviews of moderatie. Publieke lees-RPCs geven alleen goedgekeurde, publieke velden en echte aantallen/gemiddelden terug. Ze pagineren met datum en UUID. De `site-reviews`-functie valideert nieuwe inzendingen en meldingen; accountidentiteit komt uitsluitend uit een gecontroleerde sessie.
 
 Beheerfuncties controleren de echte Supabase-sessie en het beheeraccount op de server. Optimistisch versiebeheer voorkomt dat twee geopende editors of beoordelaars elkaar stilzwijgend overschrijven. Moderatiegegevens, notities, originele inhoud en misbruikgegevens zijn privé.
 
@@ -39,3 +39,7 @@ De publicatieketen gebruikt een bevroren catalogussnapshot en verifieert zowel V
 - Publieke tabelrechten, private beheerfuncties en goedgekeurde publieke RPCs worden na uitrol met echte HTTP-verzoeken gecontroleerd.
 
 Het R2-mediadomein is nog afhankelijk van de lopende DNS-overgang. De upload blijft expliciet onbeschikbaar tot dit domein aantoonbaar gereed is; bestaande afbeeldingen blijven werken.
+
+## 24 uur met uurdetails
+
+De eigen meting schrijft iedere geaccepteerde gebeurtenis één keer naar zowel het dagtotaal als het UTC-uurvak. De 24-uursweergave toont de laatste 24 uurvakken inclusief het lopende uur, met lokale Brussels uren in grafiek en tooltip. Het startmoment van de uurmeting komt uit de database. Oudere onbemeten uren blijven `null`; ze worden nooit afgeleid uit dagtotalen. Het eerste en lopende uur worden expliciet als gedeeltelijk aangeduid. Herhaalde uren bij wintertijd hebben afzonderlijke UTC-identiteiten en een verschillende tijdzone-offset in de tooltip. Uurdetails blijven 8 dagen bewaard; dagtotalen behouden hun bestaande 397 dagen. De weergave ververst elke minuut wanneer het tabblad zichtbaar is.
