@@ -1599,7 +1599,17 @@ const HOTSPOT_ENTRIES: Omit<Hotspot, 'slug'>[] = [
     images: ['/poti1.webp', '/poti2.webp', '/poti3.webp'],
     city: 'de-haan',
     address: 'Leopoldlaan 13, 8420 De Haan',
+    phone: '+32 59 42 83 93',
     website: 'https://www.brasserielapotiniere.be/nl/home',
+    openingHours: {
+      ma: '11:00–21:00',
+      di: '11:00–21:00',
+      wo: '11:00–21:00',
+      do: '11:00–21:00',
+      vr: '11:00–21:00',
+      za: '11:00–21:00',
+      zo: '11:00–21:00',
+    },
   },
   {
     id: 130,
