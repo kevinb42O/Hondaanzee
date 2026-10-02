@@ -1,3 +1,4 @@
+import { recordSiteEvent } from './utils/siteAnalytics.ts';
 
 import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useInRouterContext, useLocation } from 'react-router-dom';
@@ -42,6 +43,7 @@ const AdminWorkspace = React.lazy(() => import('./components/admin/AdminWorkspac
 const AdminOverview = React.lazy(() => import('./pages/AdminOverview.tsx'));
 const AdminPlaces = React.lazy(() => import('./pages/AdminPlaces.tsx'));
 const AdminPlaceEditor = React.lazy(() => import('./pages/AdminPlaceEditor.tsx'));
+const AdminPublication = React.lazy(() => import('./pages/AdminPublication.tsx'));
 const AdminAnalytics = React.lazy(() => import('./pages/AdminAnalytics.tsx'));
 
 // Loading fallback
@@ -172,6 +174,7 @@ const AppContent = () => {
                 <Route path="zaken" element={<AdminPlaces />} />
                 <Route path="zaken/nieuw" element={<AdminPlaceEditor />} />
                 <Route path="zaken/:id" element={<AdminPlaceEditor />} />
+                <Route path="publiceren" element={<AdminPublication />} />
                 <Route path="analytics" element={<AdminAnalytics />} />
                 <Route path="meldpunt" element={<MeldpuntAdmin />} />
                 <Route path="log" element={<MeldpuntAdminLog />} />
@@ -198,6 +201,7 @@ const AppContent = () => {
       )}
       {!isAdminRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
       {!isAdminRoute && <ScrollToTop />}
+      <SiteMeasurement />
       {!isAdminRoute && <Analytics route={getAnalyticsPath(pathname)} path={getAnalyticsPath(pathname)} beforeSend={normalizeAnalyticsEvent} />}
     </div>
   );
@@ -218,3 +222,9 @@ function App() {
 }
 
 export default App;
+
+function SiteMeasurement() {
+ const { pathname } = useLocation();
+ React.useEffect(() => { recordSiteEvent(getAnalyticsPath(pathname), 'pageview'); }, [pathname]);
+ return null;
+}

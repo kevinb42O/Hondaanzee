@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "npm run build:no-prerender && node scripts/render-places.mjs && node scripts/verify-place-pages.cjs",
     "build:prerender": "npm run build && node prerender.cjs",
-    "build:no-prerender": "node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
+    "build:no-prerender": "node scripts/prepare-catalog.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:places": "node scripts/verify-place-pages.cjs && node scripts/check-place-browser.cjs",

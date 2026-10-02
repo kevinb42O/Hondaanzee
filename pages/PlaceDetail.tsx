@@ -18,7 +18,7 @@ import NotFound from './NotFound';
 
 interface PlaceDetailProps { kind: PlaceKind }
 
-const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; cityData: City }> = ({ kind, place, cityData }) => {
+export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; cityData: City; preview?:boolean }> = ({ kind, place, cityData, preview=false }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const category = getPlaceCategory(place);
@@ -30,7 +30,7 @@ const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; cityData:
     .sort((a, b) => Number(b.type === place.type) - Number(a.type === place.type) || a.name.localeCompare(b.name, 'nl')).slice(0, 3);
   const paragraphs = place.description.split(/\n\s*\n/).map(paragraph => paragraph.trim()).filter(Boolean);
   const heroTitle = place.slug === 'cozy-moments' ? 'COZY Moments' : place.name;
-  useSEO(getPlaceSEO(place, cityData, kind));
+  useSEO(preview?{title:`Concept: ${place.name} | Hond aan Zee`,description:'Voorbeeld van een nog niet gepubliceerde vermelding.',canonical:`https://hondaanzee.be${location.pathname}`,noindex:true}:getPlaceSEO(place, cityData, kind));
 
   const back = () => {
     if (window.history.state?.idx > 0) return navigate(-1);

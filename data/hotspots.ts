@@ -1,7 +1,8 @@
+import dashboardCatalog from './dashboardCatalog.json';
 import type { Hotspot } from '../types';
 
 // Slugs are permanent: keep them when a business changes its display name.
-export const HOTSPOTS: Hotspot[] = [
+const LEGACY_HOTSPOTS: Hotspot[] = [
   {
     id: 1,
     slug: 'lakaiann',
@@ -1828,3 +1829,7 @@ export const HOTSPOTS: Hotspot[] = [
     },
   },
 ];
+
+// Build preparation freezes the same catalog for client and static HTML.
+export const HOTSPOTS: Hotspot[] = dashboardCatalog.hotspots ? dashboardCatalog.hotspots as Hotspot[] : LEGACY_HOTSPOTS;
+export { LEGACY_HOTSPOTS };

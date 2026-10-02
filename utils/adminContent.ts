@@ -7,10 +7,10 @@ export type ContentPlace = {
   archived_at: string | null; updated_at: string;
   draft: { content: Hotspot | Service }; published: { content: Hotspot | Service } | null;
 };
-export async function adminContent<T>(body: Record<string, unknown>): Promise<T> {
+export async function adminFunction<T>(name: string, body: Record<string, unknown>): Promise<T> {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error('Log eerst in met je beheeraccount.');
-  const { data, error } = await supabase.functions.invoke('admin-content', {
+  const { data, error } = await supabase.functions.invoke(name, {
     body, headers: { 'x-admin-access-token': session.access_token },
   });
   if (error) {
@@ -23,3 +23,5 @@ export async function adminContent<T>(body: Record<string, unknown>): Promise<T>
   }
   return data as T;
 }
+
+export const adminContent = <T,>(body: Record<string, unknown>) => adminFunction<T>('admin-content', body);

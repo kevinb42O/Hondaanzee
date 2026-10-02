@@ -28,15 +28,20 @@ const server = createServer((req, res) => {
     const analyticsRequests = [];
     const fakePlaces = [...HOTSPOTS.map(content => ({ kind: 'hotspot', content })), ...SERVICES.map(content => ({ kind: 'service', content }))].map(({kind, content}, index) => ({ id: `00000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`, kind, legacy_id: content.id, slug: content.slug, city_slug: content.city, version: 1, draft_revision_id: 'initial', published_revision_id: 'initial', draft: {content}, published: {content}, archived_at: null }));
     const savedRequests = [];
+    const publicationRequests=[];
+    const history={capturedAt:"2026-10-02T18:00:00Z",timezone:"UTC",lifetime:{query:{since:"2026-01-26",until:"2026-10-03"},data:{pageviews:100,visitors:15}},datasets:Object.fromEntries(["daily","pages","referrers","devices"].map(name=>[name,{query:{since:"2026-10-01",until:"2026-10-03"},data:[{timestamp:"2026-10-01T00:00:00Z",pageviews:10,visitors:10,requestPath:"/",referrerHostname:"",deviceType:"mobile"},{timestamp:"2026-10-02T00:00:00Z",pageviews:10,visitors:10,requestPath:"/",referrerHostname:"",deviceType:"mobile"}]}]))};
     let conflict = false;
     const cors = { 'Access-Control-Allow-Origin': base, 'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info, x-supabase-api-version, x-admin-access-token', 'Access-Control-Allow-Methods': 'OPTIONS, POST' };
     page.on('pageerror', error => errors.push(error.message));
     await page.setBypassServiceWorker(true);
     await page.setRequestInterception(true);
     page.on('request', request => {
-      if (request.url().includes('/_vercel/insights')) analyticsRequests.push(request.url());
+      if (request.url().includes('/_vercel/insights')||request.url().includes('/functions/v1/site-analytics')) analyticsRequests.push(request.url());
       // Test all admin pages without credentials or requests to real services.
       if (request.url().includes('/auth/v1/logout')) return request.respond({ status: 204, headers: cors });
+      if(request.url().includes('/functions/v1/admin-media'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({ready:false,message:'Mediadomein in voorbereiding',assets:[]})});
+      if(request.url().includes('/functions/v1/admin-analytics'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({today:'2026-10-02',history,rows:[{day:'2026-10-02',path:'/',event:'pageview',referrer:'direct',device:'desktop',count:7},{day:'2026-10-02',path:'/blankenberge/hotspots/lakaiann',event:'website',referrer:'google',device:'mobile',count:2}]})});
+      if(request.url().includes('/functions/v1/admin-publication')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());if(input.action==='publish')publicationRequests.push(input);return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({configured:true,jobs:[]})});}
       if (request.url().includes('/functions/v1/admin-content')) {
         if (request.method() === 'OPTIONS') return request.respond({ status: 204, headers: cors });
         const input = JSON.parse(request.postData());
@@ -89,7 +94,7 @@ const server = createServer((req, res) => {
     const lakaiann = fakePlaces.find(place => place.draft.content.name === 'Lakaiann');
     await page.goto(base + '/admin/zaken/' + lakaiann.id);
     await page.waitForSelector('input[name="name"]');
-    assert.equal(await page.$eval('.workspace-legacy-gallery img', el => el.getAttribute('src')), expected.image);
+    assert.equal(await page.$eval('.workspace-media-grid img', el => el.getAttribute('src')), expected.images[0]);
     await page.type('input[name="name"]', ' concept');
     await page.click('.workspace-savebar button');
     await page.waitForSelector('.workspace-success');
@@ -122,7 +127,19 @@ const server = createServer((req, res) => {
     await page.screenshot({path: path.join(process.env.TMPDIR || '/tmp', 'hondaanzee-admin-editor-desktop.png'), fullPage: true});
     await page.click('nav a[href="/admin/analytics"]');
     await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Analytics');
-    assert.match(await page.$eval('.workspace-empty', el => el.textContent), /geen eigen meetgegevens/);
+    await page.waitForSelector('.workspace-chart');
+    assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[7,0,2]);
+    assert.match(await page.$eval('.workspace-analytics-list',el=>el.textContent), /7/);
+    await page.click('[aria-label="Gegevensbron"] button:nth-child(2)');
+    await page.waitForFunction(()=>document.querySelector('.workspace-stat strong')?.textContent==='100');
+    assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[100,15,20], 'Historical daily visitors must never be summed into unique period visitors');
+    await page.click('nav a[href="/admin/publiceren"]');
+    await page.waitForSelector('.workspace-publication-list input[type=checkbox]');
+    assert.equal(await page.$$eval('.workspace-publication-list input',els=>els.length),1,'Only unpublished drafts are selected for publication');
+    await page.click('.workspace-publication-list input[type=checkbox]');
+    await page.click('.workspace-savebar button');
+    await page.waitForSelector('.workspace-success');
+    assert.deepEqual(publicationRequests[0].places,{[fakePlaces.at(-1).id]:1});
     for (const route of ['/admin/meldpunt', '/admin/log', '/admin/notificaties']) {
       await page.goto(base + route);
       await page.waitForSelector('.admin-title');
@@ -139,7 +156,7 @@ const server = createServer((req, res) => {
     await page.waitForFunction(() => document.querySelector('input[autocomplete="username"]') || document.querySelector('.workspace-error'), { timeout: 10000 });
     assert.equal(await page.$('.workspace-error'), null, await page.$eval('body', el => el.textContent));
     assert.equal(await page.$('.workspace-stats'), null, 'Sign out removes the dashboard');
-    assert.deepEqual(analyticsRequests, [], 'Admin navigation sends no Vercel analytics requests');
+    assert.deepEqual(analyticsRequests, [], 'Admin navigation sends no analytics requests');
     assert.deepEqual(errors, []);
     console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, legacy routes, noindex, mobile, sign out, no analytics requests.');
   } finally {

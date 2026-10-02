@@ -1,3 +1,5 @@
+import { isMeasuredPath } from '../supabase/functions/_shared/siteAnalytics.ts';
+import { recordSiteEvent } from './siteAnalytics.ts';
 import { track, type BeforeSendEvent } from '@vercel/analytics';
 import { getPlaceDetailPath, type PlaceKind } from './placeRoutes.ts';
 import type { Hotspot, Service } from '../types.ts';
@@ -15,6 +17,8 @@ export function normalizeAnalyticsEvent(event: BeforeSendEvent): BeforeSendEvent
 }
 
 export function trackPlaceAction(place: Hotspot | Service, kind: PlaceKind, action: 'website' | 'route' | 'telefoon' | 'social') {
+  if(typeof window!=='undefined' && !isMeasuredPath(window.location.pathname))return;
   // Two properties also fit the standard Pro plan, without Analytics Plus.
+  recordSiteEvent(getPlaceDetailPath(place, kind), action);
   track('Zaakcontact', { zaak: getPlaceDetailPath(place, kind), actie: action });
 }

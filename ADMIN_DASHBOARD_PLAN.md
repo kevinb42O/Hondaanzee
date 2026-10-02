@@ -28,7 +28,7 @@ Contactacties worden momenteel via `utils/placeAnalytics.ts` naar Vercel verstuu
 | Repository | Lokale broncode is beschikbaar; Git-remote is `kevinb42O/Hondaanzee`. | Geen toegang nodig om lokaal te bouwen. Pushrechten zijn nog niet gecontroleerd. |
 | Supabase productie | Browserlogin en Management API werken voor `zpllibfxaizavcvztnut`. Schema en policies gelezen; zes afgeschermde dashboardtabellen toegevoegd en 157 volledige zaakobjecten geïmporteerd. | Geen bijkomende projectlogin nodig. De tijdelijke bouwtoken vervalt op 9 oktober 2026. |
 | Supabase MCP-configuratie | De lokaal geconfigureerde server `supabase-test` wijst naar `eycdnjdwovwtoepvhjsf`, een ander project. In deze sessie zijn geen Supabase-beheertools beschikbaar. | Juiste projectkoppeling beschikbaar maken in deze chat; het andere project ongemoeid laten. |
-| Vercel | De Chrome-browser is ingelogd en toont project `hondaanzee` bij `lanternnetworks-projects`, productie op `hondaanzee.be` en gekoppelde repository. De eerdere CLI-token gaf HTTP 403; een normale Vercel CLI-login is op 2 oktober hersteld en account `kevinb42o` en het juiste project zijn via de CLI gecontroleerd. | CLI- en browserbeheer werken. Preview `dpl_FpCXQj49Ty93TPLDQMBavCjBDK6c` is Ready. Langdurige serverzijdige publicatie-automatisering heeft nog een geschikte credential of deployhook nodig; CLI-login is geen bewijs van langdurige servertoegang. |
+| Vercel | De Chrome-browser is ingelogd en toont project `hondaanzee` bij `lanternnetworks-projects`, productie op `hondaanzee.be` en gekoppelde repository. De eerdere CLI-token gaf HTTP 403; een normale Vercel CLI-login is op 2 oktober hersteld en account `kevinb42o` en het juiste project zijn via de CLI gecontroleerd. | CLI- en browserbeheer werken. Productie volgt main. De expliciet goedgekeurde token `hondaanzee-dashboard-publication` is beperkt tot dit project, vervalt 2 oktober 2027 en staat veilig in Supabase; toegang tot een ander project wordt geweigerd. |
 | Cloudflare R2 | Account `f066c9835dfd45eb7d23db73b9beaff9`: `hondaanzee-uploads` en `hondaanzee-media` aangemaakt in EU-jurisdictie, beide privé. Objectsleutel uitsluitend voor deze twee buckets, geldig tot 2 oktober 2027. R2-secrets ingesteld in de bestaande Supabase Edge Function-omgeving. | Openbare mediadomeinkoppeling en de uploadfunctie zelf. S3-endpoint moet `.eu.r2.cloudflarestorage.com` gebruiken. |
 | Easyhost / DNS | Ingelogde Chrome-sessie gelezen. Website verwijst naar Vercel; mail naar Mailprotect. Na expliciete toestemming is DNSSEC tijdelijk uitgezet bij Easyhost om 18.49 uur CEST. Om 19.09 uur CEST was het oude DS-record bij alle zes .be-servers afwezig. De huidige drie Easyhost-nameservers zijn behouden tijdens de cachetermijn. | Bevestigde route voor het openbare mediadomein. De gratis Cloudflare-zone is alleen voorbereid, nog niet autoritatief. |
 
@@ -38,7 +38,7 @@ De Supabase-bouwtoken heeft alleen projecttoegang: lezen van projectinstellingen
 
 - Migratie `20261002162247_admin_content_foundation` voegt `content_places`, `content_place_revisions`, `media_assets`, `content_releases`, `publication_jobs` en `admin_activity_log` toe. Alle zes gebruiken RLS en weigeren anon/authenticated-tabeltoegang; toekomstige adminfuncties moeten de bestaande serverzijdige admincontrole gebruiken.
 - De 133 hotspots en 24 diensten zijn exact geïmporteerd als volledige JSON-objecten. De oorspronkelijke IDs, slugs, gemeenten, optionele velden, foto-URLs en galerijvolgorde zijn vergeleken met de broncode. De openbare website gebruikt voorlopig nog steeds haar bestaande buildgegevens.
-- Conceptopslaan heeft een atomische functie met versiecontrole en behoud van de oorspronkelijke route. Elke save voegt een revisie toe; geschiedenis en releases kunnen inhoudelijk niet worden overschreven. De eerste webformulieren en `admin-content`-Edge Function zijn gebouwd. De create-RPC is met migratie `admin_create_draft` toegevoegd; nieuwe zaken beginnen zonder gepubliceerde revisie. Echte adminlogin en de volledige geauthenticeerde keten worden in de Vercel-preview gecontroleerd.
+- Conceptopslaan heeft een atomische functie met versiecontrole en behoud van de oorspronkelijke route. Elke save voegt een revisie toe; geschiedenis en releases kunnen inhoudelijk niet worden overschreven. De eerste webformulieren en `admin-content`-Edge Function zijn gebouwd. De create-RPC is met migratie `admin_create_draft` toegevoegd; nieuwe zaken beginnen zonder gepubliceerde revisie. Echte adminlogin en geauthenticeerde backendaanvragen zijn op productie gecontroleerd.
 - Schema, herhaalde import, conceptisolatie, versieconflict, vaste identiteit en onveranderlijke geschiedenis zijn eerst getest in een volledig teruggedraaide transactie. Daarna zijn de migratie en import toegepast. Werkelijke anonieme REST-verzoeken naar alle zes tabellen zijn geweigerd met HTTP 401 / `42501`.
 - De aantallen in alle zeven bestaande tabellen waren vóór en na deze stap gelijk. Geen bestaande tabel of policy is door de migratie gewijzigd.
 - R2 lezen en schrijven zijn met de nieuwe sleutel getest. Alleen een eigen tijdelijk controleobject in de nieuwe uploadbucket werd aangemaakt en opgeruimd. Geen bestaand beeld of andere bucket is gewijzigd.
@@ -61,25 +61,22 @@ Het herstellen van DNSSEC voor externe Cloudflare-nameservers is nog niet geveri
 
 De openbare, niet-geheime verificatie staat ook in `.admin-local/dns-transition-state.json` voor hervatting. Er is geen automatische vervolgtaak ingepland.
 
-## Reeds gebouwd in deze eerste stap
+## Gebouwd en gecontroleerd op 2 oktober 2026
 
-- De gedeelde adminlayout met desktopzijbalk, mobiele navigatie en bestaande Supabase-login.
-- Het werkoverzicht op `/admin`, met echte catalogusaantallen en links naar de bestaande beheertaken.
-- Het zakenoverzicht op `/admin/zaken`, dat via de afgeschermde Edge Function uit Supabase laadt, met zoeken, gemeente-/typefilters, conceptstatus, bewerklinks en links naar de bestaande gepubliceerde zaakpagina's. De huidige afbeeldings-URL's worden rechtstreeks hergebruikt.
-- Zaken bewerken op `/admin/zaken/:id` en nieuwe concepten toevoegen op `/admin/zaken/nieuw`: naam, samenvatting, beschrijving, bezoekadvies, adres, telefoon, websitelink/-label, kenmerken en categorie. Gemeente, soort en slug staan bij bestaande zaken vast. Overige optionele velden, openingstijden en fotoverwijzingen worden behouden. Foto-upload en volledige zaakpreview volgen nog.
-- Opslaan verstuurt alleen aangepaste velden; de server voegt ze samen met het oorspronkelijke hele object. UI meldt versieconflicten en bewaart niet-opgeslagen tekst. Nieuwe concepten worden nog niet gepubliceerd.
-- Een expliciete lege analyticstoestand op `/admin/analytics` zolang eigen meting niet is geactiveerd.
-- Het bestaande meldpunt op `/admin/meldpunt`, plus behoud van logboek en notificatiebeheer. `/_meldpunt-admin` verwijst naar het meldpunt.
-- Uitsluiting van adminroutes uit Vercel-metingen en noindex voor de adminomgeving.
-- Zichtbare foutmelding als uitloggen mislukt.
+- De dashboardlayout staat op main en productie op `https://www.hondaanzee.be/admin`, met mobiele navigatie, bestaande Supabase-login, noindex en uitsluiting van adminverkeer uit metingen.
+- Alle 157 oorspronkelijke zaken zijn geïmporteerd. Gepubliceerde JSON-inhoud wordt vóór de eerste catalogusrelease volledig vergeleken met de oorspronkelijke bron. Afbeeldingen en vaste URL's blijven behouden.
+- Zakenbeheer: bestaande zaken bewerken en nieuwe concepten maken; tekst, categorie, kenmerken, sociale links, openingstijden, galerijselectie en uitsnede. Alleen gewijzigde velden worden opgeslagen. Atomaire versiecontrole, revisies en waarschuwing bij niet-opgeslagen wijzigingen.
+- De conceptpreview gebruikt het bestaande openbare zaaktemplate binnen de afgeschermde admin.
+- R2-upload is gebouwd: browser bereidt statische WebP voor (maximaal 1800 px / 2 MB), rechtstreeks PUT naar private staging, server decodeert en hercodeert, verwijdert metadata en schrijft uitsluitend gecontroleerde nieuwe bestanden naar `hondaanzee-media`. Het gepinde npm-WASM-runtimebestand staat privé in R2 en wordt met SHA-256 gecontroleerd. De echte gedeployde decoder is getest. Bestaande afbeeldingen worden niet gemigreerd.
+- **R2-upload blijft geblokkeerd totdat `media.hondaanzee.be` actief en geverifieerd is.** DNS-overgang volgt het afzonderlijke veilige tijdvenster hieronder; DNSSEC-herstel voor externe nameservers moet nog met Easyhost geverifieerd worden. Er is nog geen automatische staging-opruimregel ingesteld; configureer deze voor alleen nieuwe tijdelijke uploads vóór activering.
+- Eigen analytics: dagelijkse paginaweergaven en website-/route-/telefoon-/socialkliks, populaire pagina's, bronnen, apparaten, CSV en perioden 7/30/90/365 dagen. Daggrenzen Brussel. Geen rauwe IP-adressen, bezoeker-ID's of analyticscookies; dagelijkse gezouten IP-hash alleen voor begrensd misbruikbeheer. Dagelijkse opruiming, 397 dagen aggregaatretentie, admin/testverkeer en bekende bots uitgesloten; DNT/GPC gerespecteerd.
+- Vercel-historiek is echt via de officiële API geïmporteerd en privé opgeslagen: 52.280 paginaweergaven, 16.093 unieke bezoekers volgens Vercel, oorspronkelijke totaaltelling vanaf 26 januari tot export op 2 oktober 2026 18:01 UTC. Dagdetails van 2 september tot exportmoment vandaag; laatste dag gedeeltelijk. Pagina-, bron- en apparaatdimensies hebben gecontroleerd hetzelfde weergavetotaal. Hobby geeft geen oudere dagdetails of custom events. Historiek en eigen meting staan afzonderlijk om overlap te voorkomen; unieke dagbezoekers worden niet opgeteld.
+- Publiceren: onveranderlijke catalogussnapshot, beperkte projecttoken, productiebuild van main, dezelfde snapshot voor React/HTML/sitemap/sociale metadata. Status wordt pas live nadat Vercel de juiste productieassignment én het domein de exacte release/hash bevestigen. Een private cron controleert lopende publicaties ook nadat de browser sluit.
+- Meldpunt, logboek en notificatiebeheer zijn in de layout geïntegreerd. Bestaande databasegegevens blijven behouden.
 
-De dashboardpagina's zijn lokaal geïmplementeerd en in een afzonderlijke Vercel-preview gedeployd: `https://hondaanzee-4kgh1gzis-lanternnetworks-projects.vercel.app/admin`. Deze preview is Ready en gebruikt de echte, afgeschermde Supabase-backend. De previewbron is een HEAD-snapshot met alleen dashboardbestanden, zonder andere gelijktijdige lokale edits. De CLI-uploadaudit bevestigde dat `.env.local` en lokale credentials niet zijn meegestuurd. De productieomgeving is niet naar deze dashboardpreview gepromoveerd.
+Authenticatie met het bestaande `admin@hondaanzee.be`-account en het door Kevin gevraagde nieuwe wachtwoord is via Supabase Auth succesvol getest. Het wachtwoord is niet opgenomen in deze documentatie of Git. De tijdelijk gebruikte server-Auth-credential is lokaal verwijderd.
 
-`admin-content` is live gedeployd; echte verzoeken zonder token en met een ongeldige token worden beide met HTTP 403 geweigerd. Create/save-RPCs zijn in een volledig teruggedraaide transactie getest vóór de aanvullende migratie. Na de tests staan nog steeds 157 oorspronkelijke zaken en 157 revisies in de database; geen testconcept bleef achter. Er is nog geen complete geauthenticeerde UI-keten bevestigd: Kevin is gevraagd om met zijn bestaande websitebeheeraccount in de preview in te loggen. De Supabase-beheerlogin is een andere sessie.
-
-Gecontroleerde R2-upload, eigen meting en publicatie zijn nog niet geïmplementeerd of geactiveerd.
-
-Validatie: de meest recente run van `npm test` slaagde met 133 tests (inclusief gelijktijdig toegevoegde bestaande-sitecontroles); de eerdere dashboardrun bevatte 70 tests, productiebuild met controle van 224 openbare HTML-routes en 157 zaakpagina's, adminbrowsercontrole en bestaande zaakbrowsercontrole. De adminbrowsercontrole gebruikt een synthetische sessie en nagebootste responses; zij controleert geen echte login, productiepermissies of ontvangst van live analytics.
+Validatie: 137 tests, productiebuild van alle 224 openbare routes en 157 zaakpagina's, adminbrowsercontrole (nagebootste responses), echte geauthenticeerde backendaanvragen, private R2-runtime-integriteit en gedeployde decoder. De eerste echte cataloguspublicatie moet na deze main-push nog volledig worden gecontroleerd; pas daarna is de publicatieketen bewezen.
 
 ## Bouwvolgorde en oplevercriteria
 
@@ -160,7 +157,7 @@ Validatie: de meest recente run van `npm test` slaagde met 133 tests (inclusief 
 
 ## Voorlopig datamodel
 
-De zes content-/mediatabellen zijn na de live schema-audit toegevoegd zonder botsingen. De analyticstabellen worden in de meetfase toegevoegd.
+De zes content-/mediatabellen zijn na de live schema-audit toegevoegd zonder botsingen. Analytics en het private Vercel-archief zijn toegevoegd met RLS; geen openbare lees- of schrijfpolicy.
 
 | Entiteit | Doel |
 | --- | --- |
@@ -170,7 +167,8 @@ De zes content-/mediatabellen zijn na de live schema-audit toegevoegd zonder bot
 | `content_releases` | Exacte catalogussnapshot per sitepublicatie. |
 | `publication_jobs` | Release, Vercel-deployment en status/foutmelding. |
 | `admin_activity_log` | Wie welke inhoud wanneer heeft gewijzigd. |
-| `analytics_events` | Tijdelijke, begrensde meetgegevens. |
+| `analytics_rate_limits` / `analytics_daily_budget` | Dagelijks begrensd misbruikbeheer. |
+| `analytics_imports` | Afzonderlijk, authentiek Vercel-archief met bron, meetperiode en integriteitshash. |
 | `analytics_daily` | Compacte rapportage per dag, pagina/zaak en actietype. |
 
 Adminrechten worden aan de serverzijde afgedwongen. Het bestaande beheeraccount is het uitgangspunt. Nieuwe rollen en bijkomende beheerders worden pas toegevoegd wanneer nodig.
@@ -179,7 +177,7 @@ Adminrechten worden aan de serverzijde afgedwongen. Het bestaande beheeraccount 
 
 1. **Supabase:** al geregeld. Geen wachtwoord of sleutel in de chat nodig. Tijdelijke beheertoegang is beschikbaar tot 9 oktober 2026.
 2. **Cloudflare/R2:** buckets en beperkte credentials zijn geregeld. De DNS-/domeinroute is expliciet goedgekeurd. De cachetermijn loopt tot 3 oktober rond 19.15 uur CEST; de externe DNSSEC-herstelroute moet nog gecontroleerd worden. Easyhost blijft desgewenst registrar en Vercel de host.
-3. **Vercel:** browsertoegang is aanwezig. CLI-authenticatie is hersteld. Voor langdurige serverzijdige publicatie moet nog geschikte beperkte API-toegang of een deployhook worden ingericht. Een eventuele nieuwe sleutel wordt concreet ter bevestiging voorgelegd.
+3. **Vercel:** browsertoegang is aanwezig. CLI-authenticatie is hersteld. De beperkte projecttoken is na expliciete goedkeuring aangemaakt en in Supabase ingesteld; de private buildcredential staat alleen in Vercel productie en Supabase.
 
 Geheime waarden worden via gekoppelde accounts of lokaal/extern secretbeheer ingesteld, niet in de chat of Git. `.env.admin.example` geeft de voorgestelde variabelen; echte lokale waarden horen in de reeds genegeerde `.env.local`.
 

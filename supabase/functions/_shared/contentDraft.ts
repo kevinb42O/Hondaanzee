@@ -25,7 +25,7 @@ export const contentDraftPatch = z.object({
 export const contentDraftRequest = z.discriminatedUnion('action', [
   z.object({ action: z.literal('list') }).strict(),
   z.object({ action: z.literal('detail'), id: z.uuid() }).strict(),
-  z.object({ action: z.literal('save'), id: z.uuid(), version: z.number().int().positive(), patch: contentDraftPatch }).strict(),
+  z.object({ action: z.literal('save'), id: z.uuid(), version: z.number().int().positive(), patch: contentDraftPatch, media: z.object({image:z.string().max(1000),images:z.array(z.string().max(1000)).max(30),imagePosition:z.string().max(80).refine(value=>/^(center|center top|center bottom|left center|right center|[0-9]{1,3}% [0-9]{1,3}%|center [0-9]{1,3}%)$/.test(value),'Kies een geldige uitsnede.')}).strict().optional() }).strict(),
   z.object({ action: z.literal('create'), kind: z.enum(['hotspot', 'service']), city: z.enum(CONTENT_CITIES), slug: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/).max(160), patch: contentDraftPatch.required({ name: true, type: true, description: true, address: true }) }).strict(),
 ]);
 

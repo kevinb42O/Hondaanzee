@@ -23,3 +23,18 @@ verify_jwt = false
 
 [functions.list-push-stats]
 verify_jwt = false
+
+[functions.site-analytics]
+verify_jwt = false
+
+[functions.admin-analytics]
+verify_jwt = false
+
+[functions.admin-media]
+verify_jwt = false
+
+[functions.catalog-build]
+verify_jwt = false
+
+[functions.admin-publication]
+verify_jwt = false

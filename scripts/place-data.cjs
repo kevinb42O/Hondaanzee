@@ -40,7 +40,8 @@ const loadTsModule = (relativePath) => {
   const sandbox = {
     module,
     exports: module.exports,
-    require: () => {
+    require: (specifier) => {
+      if(specifier === './dashboardCatalog.json') return {default:JSON.parse(fs.readFileSync(path.join(ROOT_DIR,'data/dashboardCatalog.json'),'utf8'))};
       throw new Error(`Unexpected runtime import while loading ${relativePath}`);
     },
     __dirname: path.dirname(absolutePath),

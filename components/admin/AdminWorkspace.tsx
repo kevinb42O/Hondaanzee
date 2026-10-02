@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart3, Bell, ExternalLink, LayoutDashboard, LogOut, PawPrint, ScrollText, ShieldCheck, Store } from 'lucide-react';
+import { BarChart3, Bell, ExternalLink, LayoutDashboard, LogOut, PawPrint, ScrollText, ShieldCheck, Store, UploadCloud } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import AdminLoginCard from '../meldpunt/AdminLoginCard.tsx';
 import { useAdminAuth } from '../../utils/useAdminAuth.ts';
@@ -9,6 +9,7 @@ import '../../admin.css';
 const navigation = [
   { path: '/admin', label: 'Overzicht', icon: LayoutDashboard, end: true },
   { path: '/admin/zaken', label: 'Zaken', icon: Store },
+  { path: '/admin/publiceren', label: 'Publiceren', icon: UploadCloud },
   { path: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { path: '/admin/meldpunt', label: 'Meldpunt', icon: ShieldCheck },
   { path: '/admin/log', label: 'Logboek', icon: ScrollText },

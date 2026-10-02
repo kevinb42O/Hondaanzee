@@ -33,6 +33,18 @@ Deno.serve(async req => {
     if (input.action === 'detail') return json({ place });
     const draft = place.draft as unknown as { content: Record<string, unknown> };
     const content = mergeContentDraft(place.kind, draft.content, input.patch);
+    if(input.media){
+      const requested=[input.media.image,...input.media.images].filter(Boolean);
+      if(input.media.image && input.media.image!==draft.content.image && !input.media.images.includes(input.media.image))return json({error:'De hoofdfoto moet in je galerij staan.'},400);
+      const original=new Set([draft.content.image,...(Array.isArray(draft.content.images)?draft.content.images:[])].filter(Boolean));
+      const added=[...new Set(requested.filter(url=>!original.has(url)))];
+      if(added.length){
+        const {data:assets,error:assetError}=await db.from('media_assets').select('public_url').eq('storage_provider','r2').eq('status','verified').in('public_url',added);
+        if(assetError)throw assetError;
+        if(assets.length!==added.length || added.some(url=>!url.startsWith('https://media.hondaanzee.be/zaken/')))return json({error:'Nieuwe foto’s moeten eerst via de gecontroleerde R2-upload worden toegevoegd.'},400);
+      }
+      Object.assign(content,input.media);
+    }
     const { data, error: saveError } = await db.rpc('save_content_place_draft', { p_place_id: input.id, p_expected_version: input.version, p_content: content, p_actor_id: actor.id });
     if (saveError) throw saveError;
     return json(data);

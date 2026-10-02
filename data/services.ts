@@ -1,7 +1,8 @@
+import dashboardCatalog from './dashboardCatalog.json';
 import type { Service } from '../types';
 
 // Slugs are permanent: keep them when a business changes its display name.
-export const SERVICES: Service[] = [
+const LEGACY_SERVICES: Service[] = [
   {
     id: 1,
     slug: 'dierenarts-frederik-galle',
@@ -294,3 +295,7 @@ export const SERVICES: Service[] = [
     website: 'https://www.clos-fleuri.be/'
   }
 ];
+
+// Build preparation freezes the same catalog for client and static HTML.
+export const SERVICES: Service[] = dashboardCatalog.services ? dashboardCatalog.services as Service[] : LEGACY_SERVICES;
+export { LEGACY_SERVICES };
