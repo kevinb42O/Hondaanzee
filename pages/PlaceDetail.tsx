@@ -24,6 +24,7 @@ export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; ci
   const place = resolvePublicPlace(draft);
   const location = useLocation();
   const navigate = useNavigate();
+  const hasGallery = isPlaceBlockVisible(place, 'gallery');
   const category = getPlaceCategory(place);
   const copy = CATEGORY_COPY[category];
   const facts = getPlaceFacts(place);
@@ -48,7 +49,7 @@ export const ResolvedPlaceDetail: React.FC<PlaceDetailProps & { place: Place; ci
         <Breadcrumb items={[{ label: 'Home', to: '/' }, { label: cityData.name, to: `/${place.city}` }, { label: kind === 'hotspot' ? 'Hotspots' : 'Diensten', to: collectionPath }, { label: place.name }]} />
       </div>
 
-      <div className="grid items-start gap-8 pb-10 sm:gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:pb-14">
+      <div className={`grid items-start gap-8 pb-10 sm:gap-10 lg:gap-14 lg:pb-14 ${hasGallery ? 'lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]' : ''}`}>
         <div className="min-w-0 lg:py-5">
           <p className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] text-sky-800"><span>{copy.label}</span><span className="h-px w-6 bg-sky-800/40" aria-hidden="true" /><span>{cityData.name}</span></p>
           <h1 className="mb-5 break-words text-[clamp(2.25rem,4vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.045em]" style={{ overflowWrap: 'anywhere' }}>{heroTitle}</h1>
