@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Sparkles, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrint, Rocket } from 'lucide-react';
+import { Sparkles, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrint, Rocket, Search, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useSEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
 import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
@@ -17,10 +18,12 @@ interface UpdateEntry {
 interface UpdateRelease {
   version: string;
   date: string;
+  dateISO?: string;
   title: string;
   subtitle: string;
   isLaunch?: boolean;
   entries: UpdateEntry[];
+  searchExamples?: string[];
 }
 
 const TAG_STYLES: Record<string, string> = {
@@ -39,6 +42,22 @@ const VERSION_ACCENT: Record<string, string> = {
 };
 
 const releases: UpdateRelease[] = [
+  {
+    version: '2.9',
+    date: SITE_UPDATE_LABEL,
+    dateISO: SITE_UPDATE_DATE,
+    title: 'Vind je favoriete zaak met de vernieuwde zoekbalk',
+    subtitle: 'Van La Potinière tot een losloopzone: vind sneller wat je zoekt, rechtstreeks op de homepage.',
+    entries: [
+      { text: 'Eén zoekbalk voor badsteden, hondvriendelijke zaken, diensten en losloopzones. Zoek op een naam, een categorie of een gemeente en ontdek de vermeldingen in onze gids.', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Zoek je La Potinière? Ook “de potiniere” en “potiniere” brengen je bij Brasserie La Potinière in De Haan. Hoofdletters en accenten maken geen verschil; ook kleine tikfouten worden herkend.', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Combineer wat je zoekt met waar je wilt zijn: “restaurant De Haan”, “hotel Oostende”, “dierenarts Oostende” of “losloopzone De Haan”. Zo krijg je meteen passende resultaten voor die gemeente.', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Tijdens het typen verschijnen suggesties met de naam, het soort plek en de gemeente. Tik op een suggestie om rechtstreeks de juiste pagina te openen. Een mogelijke match door een tikfout wordt duidelijk aangeduid.', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Liever een overzicht? Kies “Zoeken” om alle resultaten te bekijken. Met de filters Alles, Badsteden, Hotspots, Diensten en Losloopzones beperk je het overzicht tot wat je nodig hebt.', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'Je zoekopdracht blijft bewaard wanneer je de pagina vernieuwt of terugkeert vanuit een zaakpagina. Je kunt de link naar je zoekresultaten ook delen. De suggesties werken op mobiel en zijn met de pijltjestoetsen te bedienen.', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+    searchExamples: ['de potiniere', 'restaurant De Haan', 'dierenarts Oostende', 'losloopzone De Haan'],
+  },
   {
     version: '2.8',
     date: SITE_UPDATE_LABEL,
@@ -67,7 +86,7 @@ const releases: UpdateRelease[] = [
     title: 'Social sharing en slimme meta-tags',
     subtitle: 'Makkelijker delen en betere preview-afbeeldingen op sociale media',
     entries: [
-      { text: 'Social media share-knoppen (Facebook, X, WhatsApp) en een handige "Kopieer Link" voor Instagram toegevoegd aan alle blogartikels', tag: { label: 'Nieuw', color: 'sky' } },
+      { text: 'Social media share-knoppen (Facebook, X, WhatsApp) en een handige "Kopieer Link" voor Instagram toegevoegd aan alle blogartikels', tag: { label: 'Nieuw', color: 'cyan' } },
       { text: 'Vercel Edge serverless proxy opgezet voor dynamische Open Graph meta-tags (verbeterde weergave als je links deelt)', tag: { label: 'Verbeterd', color: 'amber' } },
       { text: 'Alle Google freshness-signalen en de footer bijgewerkt naar 13 augustus 2026', tag: { label: 'Verbeterd', color: 'amber' } },
     ],
@@ -610,7 +629,7 @@ const Updates: React.FC = () => {
                 <div className={`bg-white rounded-2xl border shadow-sm overflow-hidden ${cardClass}`}>
 
                   {/* Card header */}
-                  <div className={`px-6 pt-6 pb-5 border-b flex items-start justify-between gap-4 ${headerClass}`}>
+                  <div className={`px-6 pt-6 pb-5 border-b flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4 ${headerClass}`}>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${badgeClass}`}>
@@ -623,13 +642,13 @@ const Updates: React.FC = () => {
                       <h2 className="text-lg sm:text-xl font-black text-slate-900 leading-snug">{release.title}</h2>
                       <p className="text-sm text-slate-500 mt-0.5">{release.subtitle}</p>
                     </div>
-                    <time className="text-xs font-mono text-slate-400 whitespace-nowrap pt-1 shrink-0">{release.date}</time>
+                    <time dateTime={release.dateISO} className="text-xs font-mono text-slate-500 whitespace-nowrap pt-1 shrink-0">{release.date}</time>
                   </div>
 
                   {/* Entries */}
                   <ul className="px-6 py-5 space-y-3">
                     {release.entries.map((entry) => (
-                      <li key={entry.text} className="flex items-start gap-3">
+                      <li key={entry.text} className="flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
                         <span
                           className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full border shrink-0 mt-0.5 ${TAG_STYLES[entry.tag.color]}`}
                         >
@@ -640,6 +659,19 @@ const Updates: React.FC = () => {
                       </li>
                     ))}
                   </ul>
+                  {release.searchExamples && (
+                    <div className="mx-6 mb-6 rounded-2xl border border-sky-100 bg-sky-50/60 p-4 sm:p-5">
+                      <h3 className="flex items-center gap-2 text-base font-bold text-slate-900"><Search size={18} className="text-sky-600" aria-hidden="true" />Probeer het zelf</h3>
+                      <p className="mt-2 text-sm text-slate-600">Tik op een voorbeeld en bekijk de zoekresultaten.</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {release.searchExamples.map(query => (
+                          <Link key={query} to={`/?${new URLSearchParams({ search: query })}#steden`} aria-label={`Bekijk zoekresultaten voor ${query}`} className="inline-flex min-h-[44px] max-w-full items-center gap-2 rounded-xl border border-sky-200 bg-white px-3 py-2 text-sm font-semibold text-sky-800 transition-colors hover:border-sky-400 hover:bg-sky-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                            <span className="break-words min-w-0">{query}</span><ArrowRight size={16} className="shrink-0" aria-hidden="true" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </article>
               );
