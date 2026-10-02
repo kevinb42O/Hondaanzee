@@ -158,10 +158,10 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
 
       leafletInstance.current = map;
 
-      // Modern colorful map style - Carto Voyager (colorful & modern)
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
+      // Standard OpenStreetMap tiles do not require an API key.
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxNativeZoom: 19,
         maxZoom: 20
       }).addTo(map);
 

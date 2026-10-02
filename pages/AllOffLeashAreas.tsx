@@ -177,8 +177,10 @@ const AllOffLeashAreas: React.FC = () => {
         zoomControl: true,
       }).setView([51.2154, 2.927], 10);
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '© OpenStreetMap, © CARTO'
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxNativeZoom: 19,
+        maxZoom: 20
       }).addTo(map);
 
       leafletInstance.current = map;
@@ -386,7 +388,7 @@ const AllOffLeashAreas: React.FC = () => {
             <div className="bg-white rounded-xl shadow-md overflow-hidden border border-slate-200">
               <div
                 ref={mapRef}
-                className="w-full h-[500px] md:h-[600px]"
+                className="w-full !h-[500px] md:!h-[600px]"
               />
               {displayedArea && (
                 <div className="p-4 bg-sky-50 border-t border-sky-200">
