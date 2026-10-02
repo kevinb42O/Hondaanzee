@@ -1,10 +1,10 @@
 import {z} from 'zod';
 import {getSupabaseAdmin,handleOptions,json} from '../_shared/http.ts';
-import {requireAdminUser} from '../_shared/security.ts';
+import {requireAdminUser,sha256} from '../_shared/security.ts';
 import {r2Client,r2ObjectUrl,mediaBase} from '../_shared/r2.ts';
 import {checkWebpHeader,MAX_IMAGE_EDGE,MAX_UPLOAD_BYTES} from '../_shared/imageValidation.ts';
 const request=z.discriminatedUnion('action',[
- z.object({action:z.literal('check-runtime')}).strict(),z.object({action:z.literal('status')}).strict(),z.object({action:z.literal('list')}).strict(),
+ z.object({action:z.literal('cleanup')}).strict(),z.object({action:z.literal('check-runtime')}).strict(),z.object({action:z.literal('status')}).strict(),z.object({action:z.literal('list')}).strict(),
  z.object({action:z.literal('request'),byteSize:z.number().int().positive().max(MAX_UPLOAD_BYTES),altText:z.string().trim().min(1).max(300)}).strict(),
  z.object({action:z.literal('complete'),id:z.uuid()}).strict(),
 ]);
@@ -25,11 +25,19 @@ function imageDecoder(){return decoder ||= (async()=>{
 Deno.serve(async req=>{
  const options=handleOptions(req);if(options)return options;
  if(req.method!=='POST')return json({error:'Method not allowed'},405);
- let actor;try{actor=await requireAdminUser(req);}catch{return json({error:'Log in met je beheeraccount.'},403);}
+ const expected=Deno.env.get('PUBLICATION_WORKER_TOKEN'),provided=req.headers.get('x-publication-worker-token');
+ const worker=!!expected&&!!provided&&await sha256(expected)===await sha256(provided);
+ let actor; if(!worker){try{actor=await requireAdminUser(req);}catch{return json({error:'Log in met je beheeraccount.'},403);}}
  try{
  const raw=await req.text();if(raw.length>2048)return json({error:'Te groot verzoek.'},413);
  const parsed=request.safeParse(JSON.parse(raw));if(!parsed.success)return json({error:parsed.error.issues[0]?.message||'Controleer je upload.'},400);
  const input=parsed.data,db=getSupabaseAdmin(),base=mediaBase();
+ if(worker&&input.action!=='cleanup')return json({error:'Method not allowed'},403);
+ if(input.action==='cleanup'){
+  const {data:expired,error}=await db.from('media_assets').select('id,status').eq('storage_provider','r2').is('staging_cleaned_at',null).lt('created_at',new Date(Date.now()-86400000).toISOString()).limit(100);if(error)throw error;
+  for(const asset of expired){const deleted=await r2Client().fetch(r2ObjectUrl('hondaanzee-uploads',`staging/${asset.id}.webp`),{method:'DELETE'});if(!deleted.ok&&deleted.status!==404)throw new Error('Staging cleanup failed');const {error:updateError}=await db.from('media_assets').update({staging_cleaned_at:new Date().toISOString(),...(asset.status==='pending'?{status:'failed',expires_at:null}:{})}).eq('id',asset.id);if(updateError)throw updateError;}
+  return json({cleaned:expired.length});
+ }
  if(input.action==='check-runtime'){const {ImageMagick,MagickFormat}=await imageDecoder();return json(ImageMagick.read(new Uint8Array([82,73,70,70,36,0,0,0,87,69,66,80,86,80,56,32,24,0,0,0,48,1,0,157,1,42,1,0,1,0,1,64,38,37,164,0,3,112,0,254,252,244,0,0]),image=>{return {ok:image.width===1&&image.height===1,width:image.width,height:image.height};}));}
  if(input.action==='status')return json({ready:!!base,maxBytes:MAX_UPLOAD_BYTES,maxEdge:MAX_IMAGE_EDGE,message:base?'Nieuwe foto’s worden via R2 opgeslagen.':'Het mediadomein wacht nog op de DNS-overstap. Uploads komen beschikbaar zodra media.hondaanzee.be actief is.'});
  if(input.action==='list'){
@@ -39,15 +47,15 @@ Deno.serve(async req=>{
  if(!base)return json({error:'Het R2-mediadomein is nog niet actief. Probeer opnieuw na de DNS-overstap.'},503);
  const client=r2Client();
  if(input.action==='request'){
-  const {count,error:countError}=await db.from('media_assets').select('id',{count:'exact',head:true}).eq('created_by',actor.id).gte('created_at',new Date(Date.now()-3600000).toISOString());
+  const {count,error:countError}=await db.from('media_assets').select('id',{count:'exact',head:true}).eq('created_by',actor!.id).gte('created_at',new Date(Date.now()-3600000).toISOString());
   if(countError)throw countError;if((count||0)>=50)return json({error:'Maximaal 50 nieuwe uploads per uur. Probeer later opnieuw.'},429);
   const id=crypto.randomUUID(),key=`staging/${id}.webp`,expires=new Date(Date.now()+10*60000).toISOString();
-  const {error}=await db.from('media_assets').insert({id,storage_provider:'r2',bucket:'hondaanzee-uploads',object_key:key,status:'pending',mime_type:'image/webp',byte_size:input.byteSize,alt_text:input.altText,created_by:actor.id,expires_at:expires});if(error)throw error;
+  const {error}=await db.from('media_assets').insert({id,storage_provider:'r2',bucket:'hondaanzee-uploads',object_key:key,status:'pending',mime_type:'image/webp',byte_size:input.byteSize,alt_text:input.altText,created_by:actor!.id,expires_at:expires});if(error)throw error;
   const url=new URL(r2ObjectUrl('hondaanzee-uploads',key));url.searchParams.set('X-Amz-Expires','600');
   const signed=await client.sign(url.toString(),{method:'PUT',headers:{'Content-Type':'image/webp','If-None-Match':'*'},aws:{signQuery:true,allHeaders:true}});
   return json({id,url:signed.url,headers:{'Content-Type':'image/webp','If-None-Match':'*'},expiresAt:expires},201);
  }
- const {data:asset,error}=await db.from('media_assets').select('*').eq('id',input.id).eq('created_by',actor.id).eq('storage_provider','r2').maybeSingle();if(error)throw error;
+ const {data:asset,error}=await db.from('media_assets').select('*').eq('id',input.id).eq('created_by',actor!.id).eq('storage_provider','r2').maybeSingle();if(error)throw error;
  if(!asset)return json({error:'Upload niet gevonden.'},404);
  if(asset.status==='verified')return json({asset});
  if(asset.status!=='pending'||new Date(asset.expires_at).getTime()<Date.now())return json({error:'Deze upload is verlopen. Selecteer de afbeelding opnieuw.'},410);
@@ -68,7 +76,7 @@ Deno.serve(async req=>{
  if(!uploaded.ok && uploaded.status!==412)throw new Error('R2 kon de afbeelding niet opslaan.');
  const {data:verified,error:verificationError}=await db.from('media_assets').update({bucket:'hondaanzee-media',object_key:key,public_url:publicUrl,status:'verified',width:output.width,height:output.height,byte_size:output.bytes.length,verified_at:new Date().toISOString(),expires_at:null}).eq('id',asset.id).eq('status','pending').select('id,public_url,alt_text,width,height,created_at').single();
  if(verificationError)throw verificationError;
- // No deletion of original or public media. Staging expiry is handled separately.
+ // A daily worker deletes only our temporary UUID staging keys after 24 hours.
  return json({asset:verified});
  }catch(error){console.error('admin-media failed',{type:error instanceof Error?error.name:'unknown'});return json({error:'De afbeelding kon niet gecontroleerd worden. Gebruik een andere JPEG-, PNG- of WebP-foto.'},400);}
 });

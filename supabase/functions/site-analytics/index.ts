@@ -20,6 +20,9 @@ Deno.serve(async req => {
   if(match){
    const {data,error}=await db.from('content_places').select('id').eq('city_slug',match[1]).eq('kind',match[2]==='hotspots'?'hotspot':'service').eq('slug',match[3]).not('published_revision_id','is',null).is('archived_at',null).maybeSingle();
    if(error || !data) return new Response(null,{status:400,headers});
+  } else if(/^\/losloopzones\/[a-z0-9-]+$/.test(input.path)){
+   const {data,error}=await db.from('content_places').select('id').eq('kind','offleash').eq('slug',input.path.split('/')[2]).not('published_revision_id','is',null).is('archived_at',null).maybeSingle();
+   if(error||!data||!['pageview','route'].includes(input.event))return new Response(null,{status:400,headers});
   } else if(!ANALYTICS_ROUTES.has(input.path) || input.event!=='pageview') return new Response(null,{status:400,headers});
   const salt=Deno.env.get('ANALYTICS_IP_SALT'); if(!salt) throw new Error('Missing configuration');
   const fingerprint=await sha256(`${salt}:${new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}:${getClientIp(req)}`);

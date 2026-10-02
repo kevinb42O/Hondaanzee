@@ -76,4 +76,11 @@ describe('resolveOffLeashAreaSelection', () => {
       source: 'route',
     });
   });
+  it('keeps old indexed links attached to the original zone after reorder or archive', () => {
+    const original = OFF_LEASH_AREAS[0];
+    const reordered = [...OFF_LEASH_AREAS].reverse();
+    expect(resolveOffLeashAreaSelection(reordered, undefined, '0').selectedSlug).toBe(original.slug);
+    expect(resolveOffLeashAreaSelection(reordered.filter(z => z.slug !== original.slug), undefined, '0').source).toBe('invalid');
+  });
+
 });

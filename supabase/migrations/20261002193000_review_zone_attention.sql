@@ -1,0 +1,6 @@
+begin;
+create or replace function public.admin_review_overview()returns jsonb language sql stable set search_path='' as $$
+ select jsonb_build_object('counts',jsonb_build_object('all',(select count(*)from public.reviews),'pending',(select count(*)from public.reviews where status='pending'),'published',(select count(*)from public.reviews where status='published'),'hidden',(select count(*)from public.reviews where status='hidden'),'rejected',(select count(*)from public.reviews where status='rejected'),'attention',(select count(*)from public.reviews r where needs_review or exists(select 1 from public.review_flags f where f.review_id=r.id and f.resolved_at is null)),'flagged',(select count(distinct review_id)from public.review_flags where resolved_at is null)),
+ 'zones',coalesce((select jsonb_object_agg(zone_id::text,jsonb_build_object('published',published,'pending',pending,'attention',attention,'average',average))from(select zone_id,count(*)filter(where status='published')published,count(*)filter(where status='pending')pending,count(*)filter(where needs_review or exists(select 1 from public.review_flags f where f.review_id=reviews.id and f.resolved_at is null))attention,round(avg(rating)filter(where status='published')::numeric,1)average from public.reviews group by zone_id)s),'{}'::jsonb));
+$$;
+commit;

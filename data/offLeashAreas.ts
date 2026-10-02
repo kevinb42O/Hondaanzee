@@ -1,7 +1,8 @@
+import dashboardCatalog from './dashboardCatalog.json';
 import { OffLeashArea } from '../types';
 
 // Off-Leash Dog Areas / Losloopzones
-export const OFF_LEASH_AREAS: OffLeashArea[] = [
+export const LEGACY_OFF_LEASH_AREAS: OffLeashArea[] = [
   // Blankenberge
   {
     name: 'Hondenweide J. Vande Puttelaan',
@@ -311,3 +312,5 @@ export const OFF_LEASH_AREAS: OffLeashArea[] = [
   }
 ];
 
+
+export const OFF_LEASH_AREAS: OffLeashArea[] = (dashboardCatalog as {offLeashAreas?: OffLeashArea[] | null}).offLeashAreas ?? LEGACY_OFF_LEASH_AREAS;

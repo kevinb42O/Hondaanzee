@@ -1,104 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
-import StarRating from './StarRating';
-import { formatDistanceToNow } from 'date-fns';
-import { nl } from 'date-fns/locale';
-import { User, MessageSquare } from 'lucide-react';
-
-interface Review {
-    id: string;
-    rating: number;
-    comment: string;
-    created_at: string;
-    user_name: string; // Changed from profiles relation to direct column
+import React,{useEffect,useRef,useState}from'react';import{supabase}from'../utils/supabaseClient';import StarRating from'./StarRating';import{formatDistanceToNow}from'date-fns';import{nl}from'date-fns/locale';import{User,MessageSquare,Flag}from'lucide-react';import{siteReviewAction}from'../utils/zoneReviews.ts';
+type Review={id:string;rating:number;comment:string|null;created_at:string;user_name:string};
+function ReviewFlag({id}:{id:string}){const[open,setOpen]=useState(false),[reason,setReason]=useState(''),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState('');const submit=async()=>{setBusy(true);setError('');try{const r=await siteReviewAction({action:'flag',id,reason});setMessage(r.message);setOpen(false);}catch(e){setError((e as Error).message);}finally{setBusy(false);}};return <div className="review-flag">{message?<p role="status">{message}</p>:<button type="button" onClick={()=>setOpen(v=>!v)}><Flag size={12}/>Review melden</button>}{open&&<div><label>Reden<select value={reason} onChange={e=>setReason(e.target.value)}><option value="">Kies een reden</option>{[['spam','Spam'],['privacy','Persoonsgegevens'],['abuse','Belediging of bedreiging'],['off_topic','Niet over deze zone'],['other','Andere reden']].map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label><button disabled={busy||!reason} onClick={()=>void submit()}>{busy?'Versturen…':'Melding versturen'}</button></div>}{error&&<p role="alert">{error}</p>}</div>;}
+export default function ReviewList({areaSlug,refreshTrigger}:{areaSlug:string;refreshTrigger:number}){
+ const sequence=useRef(0);
+ const[reviews,setReviews]=useState<Review[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[total,setTotal]=useState(0),[average,setAverage]=useState<number|null>(null),[more,setMore]=useState(false);
+ const load=async(append=false)=>{const n=++sequence.current;setLoading(true);setError('');try{const last=append?reviews.at(-1):null;const{data,error}=await supabase.rpc('public_zone_reviews',{p_slug:areaSlug,p_limit:20,p_before:last?.created_at||null,p_before_id:last?.id||null});if(n!==sequence.current)return;if(error)throw error;setReviews(old=>append?[...old,...data.reviews.filter((r:Review)=>!old.some(x=>x.id===r.id))]:data.reviews);setTotal(data.count);setAverage(data.average);setMore(data.reviews.length===20);}catch{if(n===sequence.current)setError('De reviews konden niet geladen worden. Probeer opnieuw.');}finally{if(n===sequence.current)setLoading(false);}};
+ useEffect(()=>{let alive=true;sequence.current++;setReviews([]);setLoading(true);setError('');void supabase.rpc('public_zone_reviews',{p_slug:areaSlug,p_limit:20}).then(({data,error})=>{if(!alive)return;if(error){setError('De reviews konden niet geladen worden. Probeer opnieuw.');}else{setReviews(data.reviews);setTotal(data.count);setAverage(data.average);setMore(data.reviews.length===20);}setLoading(false);});return()=>{alive=false;sequence.current++;};},[areaSlug,refreshTrigger]);
+ useEffect(()=>{const focus=()=>{if(!document.hidden)void load();};window.addEventListener('focus',focus);const timer=setInterval(focus,30000);return()=>{window.removeEventListener('focus',focus);clearInterval(timer);};},[areaSlug]);
+ if(loading&&!reviews.length)return <div className="py-8 text-center text-slate-400" role="status">Reviews laden…</div>;
+ if(error)return <div role="alert" className="review-fetch-error"><p>{error}</p><button onClick={()=>void load()}>Opnieuw proberen</button></div>;
+ if(!reviews.length)return <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-100 border-dashed"><div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mx-auto mb-4 text-slate-300"><MessageSquare size={32}/></div><p className="text-slate-500 font-medium">Nog geen gepubliceerde reviews.</p><p className="text-slate-400 text-sm">Nieuwe inzendingen verschijnen na controle.</p></div>;
+ return <div className="space-y-6"><h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">Reviews <span className="text-sm font-normal text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{total}</span>{average!==null&&<span className="text-sm font-normal">{Number(average).toLocaleString('nl-BE')}/5 · bezoekersscore</span>}</h3><div className="grid gap-4">{reviews.map(r=><article key={r.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm"><div className="flex items-start justify-between mb-3"><div className="flex items-center gap-3"><div className="w-10 h-10 bg-gradient-to-br from-indigo-100 to-sky-100 rounded-full flex items-center justify-center text-indigo-600"><User size={20}/></div><div><div className="font-bold text-slate-800">{r.user_name||'Hondenliefhebber'}</div><div className="text-xs text-slate-400">{formatDistanceToNow(new Date(r.created_at),{addSuffix:true,locale:nl})}</div></div></div><StarRating rating={r.rating} size={16} readOnly/></div>{r.comment&&<p className="text-slate-600 leading-relaxed text-sm md:text-base pl-12 md:pl-14" style={{whiteSpace:'pre-line'}}>{r.comment}</p>}<ReviewFlag id={r.id}/></article>)}</div>{more&&<button className="review-load-more" disabled={loading} onClick={()=>void load(true)}>{loading?'Laden…':'Meer reviews bekijken'}</button>}</div>;
 }
-
-interface ReviewListProps {
-    areaSlug: string;
-    // Trigger to reload reviews
-    refreshTrigger: number;
-}
-
-const ReviewList: React.FC<ReviewListProps> = ({ areaSlug, refreshTrigger }) => {
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchReviews = async () => {
-            setLoading(true);
-            const { data, error } = await supabase
-                .from('reviews')
-                .select(`
-                    id,
-                    rating,
-                    comment,
-                    created_at,
-                    user_name
-                `)
-                .eq('area_slug', areaSlug)
-                .order('created_at', { ascending: false });
-
-            if (!error && data) {
-                setReviews(data as Review[]);
-            }
-            setLoading(false);
-        };
-
-        fetchReviews();
-    }, [areaSlug, refreshTrigger]);
-
-    if (loading) {
-        return <div className="py-8 text-center text-slate-400">Reviews laden...</div>;
-    }
-
-    if (reviews.length === 0) {
-        return (
-            <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-100 border-dashed">
-                <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mx-auto mb-4 text-slate-300">
-                    <MessageSquare size={32} />
-                </div>
-                <p className="text-slate-500 font-medium">Nog geen reviews.</p>
-                <p className="text-slate-400 text-sm">Wees de eerste die een ervaring deelt!</p>
-            </div>
-        );
-    }
-
-    return (
-        <div className="space-y-6">
-            <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                Reviews <span className="text-sm font-normal text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{reviews.length}</span>
-            </h3>
-
-            <div className="grid gap-4">
-                {reviews.map((review) => (
-                    <div key={review.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="flex items-start justify-between mb-3">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gradient-to-br from-indigo-100 to-sky-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <User size={20} />
-                                </div>
-                                <div>
-                                    <div className="font-bold text-slate-800">
-                                        {review.user_name || 'Hondenliefhebber'}
-                                    </div>
-                                    <div className="text-xs text-slate-400">
-                                        {formatDistanceToNow(new Date(review.created_at), { addSuffix: true, locale: nl })}
-                                    </div>
-                                </div>
-                            </div>
-                            <StarRating rating={review.rating} size={16} readOnly />
-                        </div>
-
-                        {review.comment && (
-                            <p className="text-slate-600 leading-relaxed text-sm md:text-base pl-12 md:pl-14">
-                                "{review.comment}"
-                            </p>
-                        )}
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-export default ReviewList;

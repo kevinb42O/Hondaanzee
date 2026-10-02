@@ -57,6 +57,15 @@ export interface RulePeriodOverride {
 }
 
 export interface OffLeashArea {
+  id?: number;
+  visibility?: 'visible' | 'archived';
+  access?: 'unknown' | 'always' | 'hours';
+  operationalStatus?: 'unknown' | 'open' | 'temporarily_closed';
+  closureNote?: string;
+  reopensOn?: string;
+  sourceUrl?: string;
+  lastVerifiedAt?: string;
+  features?: Partial<Record<'fenced'|'water'|'parking'|'accessible','yes'|'no'|'unknown'>>;
   name: string;
   slug: string; // Unique identifier for reviews
   address: string;

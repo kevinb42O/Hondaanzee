@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { createServer } = require('node:http');
 const puppeteer = require('puppeteer');
-const { HOTSPOTS, SERVICES } = require('./place-data.cjs');
+const { HOTSPOTS, SERVICES, OFF_LEASH_AREAS } = require('./place-data.cjs');
 
 const dist = path.resolve(__dirname, '../dist');
 const mime = { '.js': 'application/javascript', '.css': 'text/css', '.html': 'text/html', '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml', '.json': 'application/json' };
@@ -27,6 +27,10 @@ const server = createServer((req, res) => {
     const errors = [];
     const analyticsRequests = [];
     const fakePlaces = [...HOTSPOTS.map(content => ({ kind: 'hotspot', content })), ...SERVICES.map(content => ({ kind: 'service', content }))].map(({kind, content}, index) => ({ id: `00000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`, kind, legacy_id: content.id, slug: content.slug, city_slug: content.city, version: 1, draft_revision_id: 'initial', published_revision_id: 'initial', draft: {content}, published: {content}, archived_at: null }));
+    const fakeZones = OFF_LEASH_AREAS.map((content,index)=>({id:`10000000-0000-4000-8000-${String(index+1).padStart(12,'0')}`,kind:'offleash',legacy_id:index+1,slug:content.slug,city_slug:content.city,version:1,draft_revision_id:'original',published_revision_id:'original',draft:{content:{...content}},published:{content},archived_at:null}));
+    const zoneRequests=[], moderationRequests=[];
+    const fakeReviews=[{id:'20000000-0000-4000-8000-000000000001',zone_id:fakeZones[0].id,area_slug:fakeZones[0].slug,rating:2,user_name:'Bezoeker',comment:'Originele ervaring',public_name:'Bezoeker',public_comment:'Originele ervaring',status:'published',needs_review:true,version:1,created_at:'2026-09-20T12:00:00Z',with_account:false,zone_name:fakeZones[0].draft.content.name,city_slug:fakeZones[0].city_slug,flags:0}];
+    const reviewOverview=()=>({counts:{all:1,pending:0,published:fakeReviews[0].status==='published'?1:0,hidden:fakeReviews[0].status==='hidden'?1:0,rejected:0,attention:fakeReviews[0].needs_review?1:0,flagged:0},zones:{[fakeZones[0].id]:{published:fakeReviews[0].status==='published'?1:0,pending:0,attention:fakeReviews[0].needs_review?1:0,average:fakeReviews[0].status==='published'?2:null}}});
     const savedRequests = [];
     const publicationRequests=[];
     const history={capturedAt:"2026-10-02T18:00:00Z",timezone:"UTC",lifetime:{query:{since:"2026-01-26",until:"2026-10-03"},data:{pageviews:100,visitors:15}},datasets:Object.fromEntries(["daily","pages","referrers","devices"].map(name=>[name,{query:{since:"2026-10-01",until:"2026-10-03"},data:[{timestamp:"2026-10-01T00:00:00Z",pageviews:10,visitors:10,requestPath:"/",referrerHostname:"",deviceType:"mobile"},{timestamp:"2026-10-02T00:00:00Z",pageviews:10,visitors:10,requestPath:"/",referrerHostname:"",deviceType:"mobile"}]}]))};
@@ -39,6 +43,19 @@ const server = createServer((req, res) => {
       if (request.url().includes('/_vercel/insights')||request.url().includes('/functions/v1/site-analytics')) analyticsRequests.push(request.url());
       // Test all admin pages without credentials or requests to real services.
       if (request.url().includes('/auth/v1/logout')) return request.respond({ status: 204, headers: cors });
+      if(request.url().includes('/functions/v1/admin-zones')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());let body;
+        if(input.action==='list')body={zones:fakeZones};
+        else if(input.action==='detail')body={zone:fakeZones.find(z=>z.id===input.id),history:[]};
+        else {zoneRequests.push(input);const z=fakeZones.find(z=>z.id===input.id);if(input.action==='save'){if(input.version!==z.version)return request.respond({status:409,headers:cors,contentType:'application/json',body:JSON.stringify({error:'De zone is intussen gewijzigd. Laad de laatste versie.'})});z.draft={content:{...z.draft.content,...input.patch}};z.version++;z.draft_revision_id='saved';body={version:z.version};}}
+        return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify(body)});
+      }
+      if(request.url().includes('/functions/v1/admin-reviews')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());let body;
+        if(input.action==='overview')body=reviewOverview();
+        else if(input.action==='list')body={reviews:fakeReviews.filter(r=>input.filter==='all'||input.filter==='attention'&&r.needs_review||input.filter===r.status)};
+        else if(input.action==='detail')body={review:fakeReviews[0],history:moderationRequests.map((a,i)=>({...a,id:String(i),action:a.decision,from_status:'published',to_status:fakeReviews[0].status,created_at:'2026-10-02T12:00:00Z',actor_label:'admin@hondaanzee.be'})),revisions:[{id:'original',public_name:'Bezoeker',public_comment:'Originele ervaring',created_at:'2026-09-20T12:00:00Z'}],flags:[]};
+        else{moderationRequests.push(input);fakeReviews[0].version++;fakeReviews[0].needs_review=false;if(input.decision==='hide')fakeReviews[0].status='hidden';if(input.decision==='redact'){fakeReviews[0].public_name=input.publicName;fakeReviews[0].public_comment=input.publicComment;}body={version:fakeReviews[0].version};}
+        return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify(body)});
+      }
       if(request.url().includes('/functions/v1/admin-media'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({ready:false,message:'Mediadomein in voorbereiding',assets:[]})});
       if(request.url().includes('/functions/v1/admin-analytics'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({today:'2026-10-02',history,rows:[{day:'2026-10-02',path:'/',event:'pageview',referrer:'direct',device:'desktop',count:7},{day:'2026-10-02',path:'/blankenberge/hotspots/lakaiann',event:'website',referrer:'google',device:'mobile',count:2}]})});
       if(request.url().includes('/functions/v1/admin-publication')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());if(input.action==='publish')publicationRequests.push(input);return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({configured:true,jobs:[]})});}
@@ -74,8 +91,9 @@ const server = createServer((req, res) => {
     await page.evaluate(session => localStorage.setItem('sb-zpllibfxaizavcvztnut-auth-token', JSON.stringify(session)), { access_token: token, refresh_token: 'test-only', token_type: 'bearer', expires_at: exp, expires_in: 3600, user });
     await page.goto(base + '/admin');
     await page.waitForSelector('.workspace-stats');
-    assert.deepEqual(await page.$$eval('.workspace-stat strong', els => els.map(el => Number(el.textContent))), [HOTSPOTS.length + SERVICES.length, HOTSPOTS.length, SERVICES.length]);
+    assert.deepEqual(await page.$$eval('.workspace-stat strong', els => els.map(el => Number(el.textContent))), [HOTSPOTS.length + SERVICES.length, HOTSPOTS.length, SERVICES.length, OFF_LEASH_AREAS.length]);
     assert.equal(await page.$('header:not(.workspace-topbar)'), null, 'Public header is absent');
+    await page.waitForSelector('[aria-label="1 reviews te beoordelen"]');
     await page.screenshot({ path: path.join(process.env.TMPDIR || '/tmp', 'hondaanzee-admin-desktop.png'), fullPage: true });
     await page.click('nav a[href="/admin/zaken"]');
     await page.waitForSelector('.workspace-table');
@@ -133,6 +151,22 @@ const server = createServer((req, res) => {
     await page.click('[aria-label="Gegevensbron"] button:nth-child(2)');
     await page.waitForFunction(()=>document.querySelector('.workspace-stat strong')?.textContent==='100');
     assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[100,15,20], 'Historical daily visitors must never be summed into unique period visitors');
+    const chart=await page.$('.workspace-chart-interactive'), chartBox=await chart.boundingBox();
+    await page.mouse.move(chartBox.x+chartBox.width*.25,chartBox.y+chartBox.height*.5);
+    await page.waitForSelector('[role=tooltip]');
+    assert.match(await page.$eval('[role=tooltip]',el=>el.textContent),/Paginaweergaven10/);
+    const firstTip=await page.$eval('[role=tooltip]',el=>el.getBoundingClientRect().x);
+    await page.mouse.move(chartBox.x+chartBox.width*.65,chartBox.y+chartBox.height*.5);
+    await page.waitForFunction(x=>document.querySelector('[role=tooltip]')?.getBoundingClientRect().x!==x,{},firstTip);
+    assert.match(await page.$eval('[role=tooltip]',el=>el.textContent),/bezoekers.*10/i);
+    await page.$eval('.workspace-chart-interactive',el=>el.focus());await page.keyboard.press('Home');await page.keyboard.press('End');
+    assert.match(await page.$eval('[role=tooltip]',el=>el.textContent),/gedeeltelijke dag/);
+    await page.keyboard.press('Escape');assert.equal(await page.$('[role=tooltip]'),null);
+    await page.setViewport({width:390,height:844});
+    await page.$eval('.workspace-chart-interactive',el=>el.scrollIntoView({block:'center',behavior:'instant'}));
+    const mobilePoint=await page.$eval('.workspace-chart-interactive',el=>{const m=el.getScreenCTM();const p=new DOMPoint(900,140).matrixTransform(m);return{x:p.x,y:p.y};});await page.mouse.move(mobilePoint.x-5,mobilePoint.y);await page.mouse.move(mobilePoint.x,mobilePoint.y);
+    await page.waitForSelector('[role=tooltip]');assert.ok(await page.$eval('[role=tooltip]',el=>el.getBoundingClientRect().right<=innerWidth&&el.getBoundingClientRect().left>=0),'Tooltip stays inside mobile viewport');
+    await page.setViewport({width:1440,height:1000});
     await page.click('nav a[href="/admin/publiceren"]');
     await page.waitForSelector('.workspace-publication-list input[type=checkbox]');
     assert.equal(await page.$$eval('.workspace-publication-list input',els=>els.length),1,'Only unpublished drafts are selected for publication');
@@ -140,6 +174,24 @@ const server = createServer((req, res) => {
     await page.click('.workspace-savebar button');
     await page.waitForSelector('.workspace-success');
     assert.deepEqual(publicationRequests[0].places,{[fakePlaces.at(-1).id]:1});
+    await page.goto(base+'/admin/losloopzones');await page.waitForSelector('.workspace-table');
+    assert.equal(await page.$$eval('.workspace-table tbody tr',els=>els.length),27);
+    await page.type('input[type=search]',fakeZones[0].draft.content.name);
+    await page.waitForFunction(()=>document.querySelectorAll('.workspace-table tbody tr').length===1);
+    await page.goto(base+'/admin/losloopzones/'+fakeZones[0].id);await page.waitForSelector('input[name=name]');
+    const oldImage=fakeZones[0].draft.content.image;await page.type('input[name=name]',' concept');await page.click('.workspace-savebar button');await page.waitForSelector('.workspace-success');
+    assert.deepEqual(zoneRequests.at(-1).patch,{name:OFF_LEASH_AREAS[0].name+' concept'});assert.equal(fakeZones[0].draft.content.image,oldImage);
+    assert.equal(await page.$eval('.workspace-savebar button',el=>el.disabled),true);
+    await page.type('input[name=name]',' tweede');assert.equal(await page.$eval('.workspace-savebar button',el=>el.disabled),false,'Editor exits saving state after reload');
+    await page.goto(base+'/admin/reviews?filter=all');await page.waitForSelector('.workspace-review-row');
+    await page.click('.workspace-review-row a');await page.waitForSelector('.workspace-review-detail');
+    assert.match(await page.$eval('.workspace-review-detail',el=>el.textContent),/Originele ervaring/);
+    assert.equal(await page.$eval('.workspace-review-decisions button:nth-child(2)',el=>el.disabled),true,'Hide requires a reason');
+    await page.select('.workspace-review-detail select','privacy');await page.click('.workspace-review-decisions button:nth-child(2)');
+    await page.waitForSelector('.workspace-success');await page.waitForFunction(()=>document.querySelector('.workspace-review-detail .workspace-review-status')?.textContent==='Verborgen');
+    assert.equal(moderationRequests.at(-1).version,1);assert.equal(moderationRequests.at(-1).decision,'hide');assert.equal(fakeReviews[0].comment,'Originele ervaring');
+    await page.setViewport({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Review panel has no mobile overflow');
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-reviews-mobile.png'),fullPage:true});await page.setViewport({width:1440,height:1000});
     for (const route of ['/admin/meldpunt', '/admin/log', '/admin/notificaties']) {
       await page.goto(base + route);
       await page.waitForSelector('.admin-title');
@@ -158,7 +210,7 @@ const server = createServer((req, res) => {
     assert.equal(await page.$('.workspace-stats'), null, 'Sign out removes the dashboard');
     assert.deepEqual(analyticsRequests, [], 'Admin navigation sends no analytics requests');
     assert.deepEqual(errors, []);
-    console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, legacy routes, noindex, mobile, sign out, no analytics requests.');
+    console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, cursor tooltip, legacy routes, noindex, mobile, sign out, no analytics requests.');
   } finally {
     if (browser) await browser.close();
     server.close();

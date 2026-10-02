@@ -1,4 +1,5 @@
-import React from 'react';
+import {adminFunction} from '../../utils/adminContent.ts';
+import React,{useEffect,useState} from 'react';
 import { BarChart3, Bell, ExternalLink, LayoutDashboard, LogOut, PawPrint, ScrollText, ShieldCheck, Store, UploadCloud } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import AdminLoginCard from '../meldpunt/AdminLoginCard.tsx';
@@ -9,6 +10,8 @@ import '../../admin.css';
 const navigation = [
   { path: '/admin', label: 'Overzicht', icon: LayoutDashboard, end: true },
   { path: '/admin/zaken', label: 'Zaken', icon: Store },
+  { path: '/admin/losloopzones', label: 'Losloopzones', icon: PawPrint },
+  { path: '/admin/reviews', label: 'Reviews', icon: ShieldCheck },
   { path: '/admin/publiceren', label: 'Publiceren', icon: UploadCloud },
   { path: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { path: '/admin/meldpunt', label: 'Meldpunt', icon: ShieldCheck },
@@ -18,6 +21,8 @@ const navigation = [
 
 export default function AdminWorkspace() {
   const auth = useAdminAuth();
+  const [attention,setAttention]=useState(0);
+  useEffect(()=>{if(!auth.session){setAttention(0);return;}let alive=true;const refresh=()=>{if(!document.hidden)void adminFunction<{counts:{attention:number}}> ('admin-reviews',{action:'overview'}).then(data=>{if(alive)setAttention(data.counts.attention);}).catch(()=>{});};refresh();const timer=setInterval(refresh,30000);window.addEventListener('haz-review-moderated',refresh);return()=>{alive=false;clearInterval(timer);window.removeEventListener('haz-review-moderated',refresh);};},[auth.session?.access_token]);
   const { pathname } = useLocation();
   const current = navigation.find(item => item.end ? pathname === item.path : pathname.startsWith(item.path));
   useSEO({ title: `${current?.label || 'Admin'} | HondAanZee.be`, description: 'De beheeromgeving van Hond aan Zee.', canonical: `https://hondaanzee.be${pathname}`, noindex: true });
@@ -28,7 +33,7 @@ export default function AdminWorkspace() {
         <Link to="/admin" className="workspace-brand"><span className="workspace-brand-mark"><PawPrint size={22} /></span><span>hond aan zee<small>BEHEER JE KUSTGIDS</small></span></Link>
         <p className="workspace-nav-label">Werkruimte</p>
         <nav aria-label="Adminnavigatie">
-          {navigation.map(({ path, label, icon: Icon, end }) => <NavLink key={path} to={path} end={end} className={({ isActive }) => `workspace-nav${isActive ? ' is-active' : ''}`}><Icon size={19} /><span>{label}</span></NavLink>)}
+          {navigation.map(({ path, label, icon: Icon, end }) => <NavLink key={path} to={path} end={end} className={({ isActive }) => `workspace-nav${isActive ? ' is-active' : ''}`}><Icon size={19} /><span>{label}</span>{path==='/admin/reviews'&&attention>0&&<span className="workspace-nav-count" aria-label={`${attention} reviews te beoordelen`}>{attention}</span>}</NavLink>)}
         </nav>
         <div className="workspace-sidebar-footer">
           <Link to="/" className="workspace-nav"><ExternalLink size={18} /><span>Bekijk de website</span></Link>

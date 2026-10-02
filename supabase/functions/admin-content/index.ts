@@ -17,7 +17,7 @@ Deno.serve(async req => {
     const input = parsed.data;
     const db = getSupabaseAdmin();
     if (input.action === 'list') {
-      const { data, error } = await db.from('content_places').select(selection).order('updated_at', { ascending: false }).limit(1000);
+      const { data, error } = await db.from('content_places').select(selection).in('kind',['hotspot','service']).order('updated_at', { ascending: false }).limit(1000);
       if (error) throw error;
       return json({ places: data });
     }
@@ -29,7 +29,7 @@ Deno.serve(async req => {
     }
     const { data: place, error } = await db.from('content_places').select(selection).eq('id', input.id).maybeSingle();
     if (error) throw error;
-    if (!place) return json({ error: 'Deze zaak bestaat niet.' }, 404);
+    if (!place || place.kind==='offleash') return json({ error: 'Deze zaak bestaat niet.' }, 404);
     if (input.action === 'detail') return json({ place });
     const draft = place.draft as unknown as { content: Record<string, unknown> };
     const content = mergeContentDraft(place.kind, draft.content, input.patch);

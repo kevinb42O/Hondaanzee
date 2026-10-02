@@ -2,7 +2,7 @@ const fs=require('node:fs');const path=require('node:path');const {createHash}=r
 const root=path.resolve(__dirname,'..');
 async function prepareCatalog(){
  const token=process.env.CATALOG_BUILD_TOKEN,release=process.env.HAZ_RELEASE_ID;
- let catalog={releaseId:null,hotspots:null,services:null};
+ let catalog={releaseId:null,hotspots:null,services:null,offLeashAreas:null};
  if(release&&!token)throw new Error('An exact release requires CATALOG_BUILD_TOKEN.');
  if(process.env.VERCEL_ENV==='production'&&!token)throw new Error('Production requires catalog build configuration.');
  if(token){
@@ -16,7 +16,8 @@ async function prepareCatalog(){
    const snapshot=JSON.parse(body.snapshotJson);
    const {CITIES}=require('./place-data.cjs');const {validatePlaceData}=require('./validate-place-data.cjs');
    validatePlaceData({HOTSPOTS:snapshot.hotspots,SERVICES:snapshot.services,CITIES});
-   catalog={releaseId:body.releaseId,sha256:body.sha256,hotspots:snapshot.hotspots,services:snapshot.services};
+   if(snapshot.offLeashAreas){const slugs=new Set();for(const zone of snapshot.offLeashAreas){if(!zone.name||!zone.slug||slugs.has(zone.slug)||!CITIES.some(c=>c.slug===zone.city)||!Number.isFinite(zone.lat)||!Number.isFinite(zone.lng))throw new Error('Invalid zone catalog');slugs.add(zone.slug);}}
+   catalog={releaseId:body.releaseId,sha256:body.sha256,hotspots:snapshot.hotspots,services:snapshot.services,offLeashAreas:snapshot.offLeashAreas??null};
   }
  }
  fs.writeFileSync(path.join(root,'data/dashboardCatalog.json'),JSON.stringify(catalog));

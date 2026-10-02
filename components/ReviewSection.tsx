@@ -51,7 +51,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ areaSlug }) => {
                             areaSlug={areaSlug}
                             onReviewSubmitted={() => {
                                 setRefreshTrigger(prev => prev + 1);
-                                setIsFormOpen(false);
+                                // Keep the success notice visible: a submitted review is pending.
                             }}
                         />
                     </div>

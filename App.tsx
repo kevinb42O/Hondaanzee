@@ -45,6 +45,9 @@ const AdminPlaces = React.lazy(() => import('./pages/AdminPlaces.tsx'));
 const AdminPlaceEditor = React.lazy(() => import('./pages/AdminPlaceEditor.tsx'));
 const AdminPublication = React.lazy(() => import('./pages/AdminPublication.tsx'));
 const AdminAnalytics = React.lazy(() => import('./pages/AdminAnalytics.tsx'));
+const AdminZones = React.lazy(() => import('./pages/AdminZones.tsx'));
+const AdminZoneEditor = React.lazy(() => import('./pages/AdminZoneEditor.tsx'));
+const AdminReviews = React.lazy(() => import('./pages/AdminReviews.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -176,6 +179,11 @@ const AppContent = () => {
                 <Route path="zaken/:id" element={<AdminPlaceEditor />} />
                 <Route path="publiceren" element={<AdminPublication />} />
                 <Route path="analytics" element={<AdminAnalytics />} />
+                <Route path="losloopzones" element={<AdminZones />} />
+                <Route path="losloopzones/nieuw" element={<AdminZoneEditor />} />
+                <Route path="losloopzones/:id" element={<AdminZoneEditor />} />
+                <Route path="reviews" element={<AdminReviews />} />
+                <Route path="reviews/:id" element={<AdminReviews />} />
                 <Route path="meldpunt" element={<MeldpuntAdmin />} />
                 <Route path="log" element={<MeldpuntAdminLog />} />
                 <Route path="notificaties" element={<AdminNotifications />} />

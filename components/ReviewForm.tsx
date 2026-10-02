@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { supabase } from '../utils/supabaseClient';
+import { siteReviewAction } from '../utils/zoneReviews.ts';
 import StarRating from './StarRating';
 import { Loader2, Send } from 'lucide-react';
 
@@ -9,6 +9,7 @@ interface ReviewFormProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) => {
+    const [website,setWebsite]=useState('');
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [userName, setUserName] = useState('');
@@ -37,21 +38,14 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
         setMessage(null);
 
         try {
-            const { error } = await supabase.from('reviews').insert({
-                area_slug: areaSlug,
-                rating,
-                comment,
-                user_name: userName // New field
-            });
-
-            if (error) throw error;
-
-            setMessage({ type: 'success', text: 'Bedankt! Je review is geplaatst.' });
+            const response=await siteReviewAction({action:'submit',areaSlug,rating,comment,name:userName,website});
+            setMessage({type:'success',text:response.message});
             setRating(0);
             setComment('');
             setUserName('');
 
             setTimeout(() => {
+                window.dispatchEvent(new Event('haz-reviews-updated'));
                 onReviewSubmitted();
             }, 500);
         } catch (error: unknown) {
@@ -68,7 +62,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ areaSlug, onReviewSubmitted }) 
                 Deel jouw ervaring
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate><div className="review-honeypot" aria-hidden="true"><label>Website<input tabIndex={-1} autoComplete="off" value={website} onChange={e=>setWebsite(e.target.value)}/></label></div>
                 <fieldset ref={ratingRef}>
                     <legend className="block text-sm font-bold text-slate-700 mb-2">
                         Hoeveel sterren geef je?

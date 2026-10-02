@@ -1,3 +1,7 @@
+import {escapeMapText} from '../utils/mapText.ts';
+import {recordSiteEvent} from '../utils/siteAnalytics.ts';
+import ZonePracticalInfo from '../components/ZonePracticalInfo.tsx';
+import {useZoneReviewSummaries} from '../utils/zoneReviews.ts';
 
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -55,9 +59,9 @@ const addAreaMarker = (
   const cityData = CITIES.find(c => c.slug === area.city);
   marker.bindPopup(`
     <div class="text-center">
-      <strong class="text-sky-600 text-lg">${area.name}</strong><br>
+      <strong class="text-sky-600 text-lg">${escapeMapText(area.name)}</strong><br>
       <span class="text-slate-600">${cityData?.name || area.city}</span><br>
-      <span class="text-sm text-slate-500">${area.address}</span>
+      <span class="text-sm text-slate-500">${escapeMapText(area.address)}</span>
     </div>
   `);
 
@@ -75,7 +79,8 @@ const AllOffLeashAreas: React.FC = () => {
   const leafletInstance = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
   const areaDetailRef = useRef<HTMLDivElement>(null);
-  const [reviewCounts, setReviewCounts] = useState<Record<string, number>>({});
+  const {summaries:reviewSummaries}=useZoneReviewSummaries();
+  const reviewCounts=Object.fromEntries(Object.entries(reviewSummaries).map(([slug,data])=>[slug,data.count]));
 
   const legacyAreaParam = useMemo(() => new URLSearchParams(location.search).get('area'), [location.search]);
   const selection = useMemo(
@@ -106,23 +111,6 @@ const AllOffLeashAreas: React.FC = () => {
   const openAreaDetail = useCallback((areaSlug: string) => {
     navigate(getOffLeashAreaPath(areaSlug));
   }, [navigate]);
-
-  // Fetch review counts for all areas
-  useEffect(() => {
-    const fetchReviewCounts = async () => {
-      const { data, error } = await supabase
-        .from('reviews')
-        .select('area_slug');
-      if (!error && data) {
-        const counts: Record<string, number> = {};
-        data.forEach((row: { area_slug: string }) => {
-          counts[row.area_slug] = (counts[row.area_slug] || 0) + 1;
-        });
-        setReviewCounts(counts);
-      }
-    };
-    fetchReviewCounts();
-  }, []);
 
   useEffect(() => {
     if (!selection.canonicalPath) return;
@@ -428,7 +416,7 @@ const AllOffLeashAreas: React.FC = () => {
                         <img
                           src={displayedArea.image}
                           alt={displayedArea.name}
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" style={{objectPosition:displayedArea.imagePosition}}
                           width={800}
                           height={320}
                           loading="eager"
@@ -455,9 +443,9 @@ const AllOffLeashAreas: React.FC = () => {
                           <MapPin size={18} className="text-sky-500" />
                           <span className="text-lg">{displayedArea.address}</span>
                         </div>
-                        {!!displayedArea.rating && (
+                        {!!(reviewSummaries[displayedArea.slug]?.average??displayedArea.rating) && (
                           <div className="mb-4">
-                            {renderStars(displayedArea.rating)}
+                            {renderStars(reviewSummaries[displayedArea.slug]?.average??displayedArea.rating)}{reviewSummaries[displayedArea.slug]?.average!=null&&<strong className="text-sm text-slate-700">{reviewSummaries[displayedArea.slug].average!.toLocaleString('nl-BE')}/5</strong>}<small className="zone-score-source">{reviewCounts[displayedArea.slug]>0?'Bezoekersscore':'Onze inschatting'}</small>
                           </div>
                         )}
                       </div>
@@ -467,10 +455,12 @@ const AllOffLeashAreas: React.FC = () => {
                       <p className="text-slate-600 text-lg leading-relaxed mb-8">{displayedArea.description}</p>
                     )}
 
+                    <ZonePracticalInfo zone={displayedArea}/>
                     <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(displayedArea.address)}`}
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${displayedArea.lat},${displayedArea.lng}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={()=>recordSiteEvent(`/losloopzones/${displayedArea.slug}`,'route')}
                       className="inline-flex items-center gap-2 bg-sky-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-sky-700 transition-colors shadow-lg shadow-sky-600/30"
                     >
                       <Navigation size={20} />
@@ -523,9 +513,9 @@ const AllOffLeashAreas: React.FC = () => {
                             ) : (
                               <ImagePlaceholder areaName={area.name} className="w-full h-full" />
                             )}
-                            {!!area.rating && (
+                            {!!(reviewSummaries[area.slug]?.average??area.rating) && (
                               <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg">
-                                {renderStars(area.rating)}
+                                {renderStars(reviewSummaries[area.slug]?.average??area.rating)}{reviewSummaries[area.slug]?.average!=null&&<strong className="text-sm text-slate-700">{reviewSummaries[area.slug].average!.toLocaleString('nl-BE')}/5</strong>}<small className="zone-score-source">{reviewCounts[area.slug]>0?'Bezoekersscore':'Onze inschatting'}</small>
                               </div>
                             )}
                           </div>

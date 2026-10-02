@@ -1,3 +1,4 @@
+import legacySlugs from '../data/offLeashLegacySlugs.json';
 import type { OffLeashArea } from '../types.ts';
 
 const OFF_LEASH_AREAS_PATH = '/losloopzones';
@@ -47,8 +48,8 @@ export const resolveOffLeashAreaSelection = (
   if (legacyAreaParam != null) {
     const areaIndex = Number.parseInt(legacyAreaParam, 10);
     const matchedArea =
-      Number.isInteger(areaIndex) && areaIndex >= 0 && areaIndex < areas.length
-        ? areas[areaIndex]
+      Number.isInteger(areaIndex) && areaIndex >= 0 && areaIndex < legacySlugs.length
+        ? findOffLeashAreaBySlug(areas,legacySlugs[areaIndex])
         : null;
 
     if (matchedArea) {

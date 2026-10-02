@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, BarChart3, Bell, ShieldCheck, Store } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { HOTSPOTS, SERVICES } from '../data/index.ts';
+import { HOTSPOTS, SERVICES, OFF_LEASH_AREAS } from '../data/index.ts';
 
 export default function AdminOverview() {
   return <>
@@ -10,10 +10,11 @@ export default function AdminOverview() {
       <section className="workspace-stat"><span>Zaken in je gids</span><strong>{HOTSPOTS.length + SERVICES.length}</strong><small>De bestaande catalogus</small></section>
       <section className="workspace-stat"><span>Hondvriendelijke hotspots</span><strong>{HOTSPOTS.length}</strong><small>Eten, drinken, slapen en shoppen</small></section>
       <section className="workspace-stat"><span>Diensten aan de kust</span><strong>{SERVICES.length}</strong><small>Dierenartsen en dierenspeciaalzaken</small></section>
+      <section className="workspace-stat"><span>Losloopzones</span><strong>{OFF_LEASH_AREAS.length}</strong><small>Locaties en bezoekerservaringen</small></section>
     </div>
     <div className="workspace-columns">
       <section className="workspace-panel"><h2>Waar wil je aan werken?</h2><p className="workspace-muted">Je catalogus en bestaande beheertaken op één plek.</p>
-        {[{ to: '/admin/zaken', icon: Store, title: 'Bekijk je hondvriendelijke adressen', text: 'Zoek een zaak of controleer de vermelding.' }, { to: '/admin/meldpunt', icon: ShieldCheck, title: 'Beheer het meldpunt', text: 'Bekijk meldingen en werk hun status bij.' }, { to: '/admin/notificaties', icon: Bell, title: 'Beheer je notificaties', text: 'Open je bestaande verzend- en berichtbeheer.' }].map(({ to, icon: Icon, title, text }) => <Link key={to} to={to} className="workspace-task"><span className="workspace-task-icon"><Icon size={18} /></span><span><strong>{title}</strong><small>{text}</small></span><ArrowRight size={16} /></Link>)}
+        {[{to:'/admin/losloopzones',icon:Store,title:'Beheer je losloopzones',text:'Controleer locaties, praktische informatie en foto’s.'},{to:'/admin/reviews',icon:ShieldCheck,title:'Beoordeel bezoekersreviews',text:'Nieuwe inzendingen, meldingen en moderatiegeschiedenis.'},{ to: '/admin/zaken', icon: Store, title: 'Bekijk je hondvriendelijke adressen', text: 'Zoek een zaak of controleer de vermelding.' }, { to: '/admin/meldpunt', icon: ShieldCheck, title: 'Beheer het meldpunt', text: 'Bekijk meldingen en werk hun status bij.' }, { to: '/admin/notificaties', icon: Bell, title: 'Beheer je notificaties', text: 'Open je bestaande verzend- en berichtbeheer.' }].map(({ to, icon: Icon, title, text }) => <Link key={to} to={to} className="workspace-task"><span className="workspace-task-icon"><Icon size={18} /></span><span><strong>{title}</strong><small>{text}</small></span><ArrowRight size={16} /></Link>)}
       </section>
       <section className="workspace-panel workspace-analytics-empty"><BarChart3 size={24} /><h2>Wat levert je gids op?</h2><p>Volg vanaf nu echte paginaweergaven en contactkliks met je eigen meting.</p><Link to="/admin/analytics" className="workspace-text-link">Bekijk analytics <ArrowRight size={15} /></Link></section>
     </div>

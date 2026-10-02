@@ -208,7 +208,7 @@ export const getOffLeashAreaSEO = (area: OffLeashArea, cityName: string): SEOPro
     title: `${area.name} | Losloopzone in ${cityName} | HondAanZee.be`,
     description,
     canonical,
-    ogImage: `https://hondaanzee.be${image}`,
+    ogImage: image.startsWith('https://')?image:`https://hondaanzee.be${image}`,
     keywords: `${area.name}, losloopzone ${cityName.toLowerCase()}, hondenweide ${cityName.toLowerCase()}, losloopgebied belgische kust`,
     structuredData: [
       {
@@ -226,7 +226,7 @@ export const getOffLeashAreaSEO = (area: OffLeashArea, cityName: string): SEOPro
         name: area.name,
         description,
         url: canonical,
-        image: [`https://hondaanzee.be${image}`],
+        image: [image.startsWith('https://')?image:`https://hondaanzee.be${image}`],
         address: {
           '@type': 'PostalAddress',
           streetAddress: area.address,

@@ -1,3 +1,6 @@
+import {escapeMapText} from '../utils/mapText.ts';
+import {useZoneReviewSummaries} from '../utils/zoneReviews.ts';
+import {zoneAvailability} from '../utils/zoneAvailability.ts';
 
 import React, { useMemo, useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -32,12 +35,12 @@ interface OffLeashAreasProps {
   city: City;
 }
 
-const createCustomIcon = (isOpen: boolean, isPulsing: boolean) => {
+const createCustomIcon = (isOpen: boolean|null, isPulsing: boolean) => {
   const uniqueId = `marker-${Math.random().toString(36).substring(2, 11)}`;
   const gradientId = `${uniqueId}-gradient`;
   const filterId = `${uniqueId}-filter`;
-  const primaryColor = isOpen ? '#10b981' : '#f43f5e';
-  const secondaryColor = isOpen ? '#059669' : '#e11d48';
+  const primaryColor = isOpen===true?'#10b981':isOpen===false?'#f43f5e':'#94a3b8';
+  const secondaryColor=isOpen===true?'#059669':isOpen===false?'#e11d48':'#64748b';
   const glowColor = isOpen ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.4)';
 
   return L.divIcon({
@@ -77,35 +80,10 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
   const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
-  const [reviewCounts, setReviewCounts] = useState<Record<string, number>>({});
+  const {summaries:reviewSummaries}=useZoneReviewSummaries();
+  const reviewCounts=Object.fromEntries(Object.entries(reviewSummaries).map(([slug,data])=>[slug,data.count]));
 
-  // Fetch review counts for city areas
-  useEffect(() => {
-    const citySlugs = OFF_LEASH_AREAS.filter(a => a.city === city.slug).map(a => a.slug);
-    if (citySlugs.length === 0) return;
-    const fetchCounts = async () => {
-      const { data, error } = await supabase
-        .from('reviews')
-        .select('area_slug')
-        .in('area_slug', citySlugs);
-      if (!error && data) {
-        const counts: Record<string, number> = {};
-        data.forEach((row: { area_slug: string }) => {
-          counts[row.area_slug] = (counts[row.area_slug] || 0) + 1;
-        });
-        setReviewCounts(counts);
-      }
-    };
-    fetchCounts();
-  }, [city.slug]);
-
-  const isAreaOpen = (area: OffLeashArea): boolean => {
-    if (!area.openingHours) return true; // Default to always open if not specified
-
-    const now = new Date();
-    const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-    return currentTime >= area.openingHours.open && currentTime <= area.openingHours.close;
-  };
+  const isAreaOpen=(area:OffLeashArea)=>zoneAvailability(area).open;
 
   const nearestInfo = useMemo(() => {
     const cityAreas = OFF_LEASH_AREAS.filter(area => area.city === city.slug);
@@ -184,16 +162,16 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
             .bindPopup(`
             <div class="p-2 font-sans min-w-[180px] max-w-[240px]">
               <div class="flex items-center justify-between mb-2">
-                 <b class="text-slate-900 text-sm leading-tight">${area.name}</b>
-                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
-                    ${isOpen ? 'Open' : 'Gesloten'}
+                 <b class="text-slate-900 text-sm leading-tight">${escapeMapText(area.name)}</b>
+                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen===true?'bg-emerald-100 text-emerald-700':isOpen===false?'bg-rose-100 text-rose-700':'bg-slate-100 text-slate-600'}">
+                    ${isOpen===true?'Open':isOpen===false?'Gesloten':'Uren onbekend'}
                  </span>
               </div>
-              <p class="text-slate-500 text-xs mb-2">${area.address}</p>
-              ${area.description ? `<p class="text-slate-400 text-[10px] mb-2 leading-relaxed">${area.description}</p>` : ''}
+              <p class="text-slate-500 text-xs mb-2">${escapeMapText(area.address)}</p>
+              ${area.description ? `<p class="text-slate-400 text-[10px] mb-2 leading-relaxed">${escapeMapText(area.description)}</p>` : ''}
               <div class="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold border-t pt-2 border-slate-100">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                ${area.openingHours ? `${area.openingHours.open} - ${area.openingHours.close}` : '24/7 Toegankelijk'}
+                ${zoneAvailability(area).label}
               </div>
             </div>
           `);
@@ -220,12 +198,12 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
              <div class="p-2 font-sans min-w-[160px]">
               <span class="text-[10px] uppercase font-black text-sky-600 block mb-1">Dichtstbijzijnde</span>
               <div class="flex items-center justify-between mb-2">
-                 <b class="text-slate-900 text-sm leading-tight">${nearestInfo.area.name}</b>
-                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
-                    ${isOpen ? 'Open' : 'Gesloten'}
+                 <b class="text-slate-900 text-sm leading-tight">${escapeMapText(nearestInfo.area.name)}</b>
+                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen===true?'bg-emerald-100 text-emerald-700':isOpen===false?'bg-rose-100 text-rose-700':'bg-slate-100 text-slate-600'}">
+                    ${isOpen===true?'Open':isOpen===false?'Gesloten':'Uren onbekend'}
                  </span>
               </div>
-              <p class="text-slate-500 text-xs">${nearestInfo.area.address}</p>
+              <p class="text-slate-500 text-xs">${escapeMapText(nearestInfo.area.address)}</p>
             </div>
           `);
 
@@ -271,17 +249,17 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                         }}
                         className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer w-full text-left ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
                       >
-                        <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-400'}`}>
+                        <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen===true?'bg-emerald-50 text-emerald-600':isOpen===false?'bg-rose-50 text-rose-400':'bg-slate-50 text-slate-400'}`}>
                           <MapPin size={24} />
                         </div>
                         <div className="flex-grow">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="text-lg font-black text-slate-900 leading-tight">{area.name}</h3>
-                            {isOpen ? (
+                            {isOpen===true ? (
                               <span className="bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Open</span>
-                            ) : (
+                            ) : isOpen===false ? (
                               <span className="bg-rose-100 text-rose-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Gesloten</span>
-                            )}
+                            ) : <span className="bg-slate-100 text-slate-600 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Uren onbekend</span>}
                           </div>
                           <p className="text-slate-500 font-medium mb-2 text-xs md:text-sm flex items-center gap-1.5">
                             {area.address}
@@ -379,6 +357,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                 <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-rose-400 to-rose-600"></div>
                 <span className="text-[9px] sm:text-[10px] font-black uppercase text-rose-700">Gesloten</span>
               </div>
+              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-slate-100 shadow-lg"><span className="h-2 w-2 rounded-full bg-slate-400"/><span className="text-[9px] sm:text-[10px] font-black uppercase text-slate-500">Uren onbekend</span></div>
             </div>
           </div>
         </div>

@@ -38,3 +38,12 @@ verify_jwt = false
 
 [functions.admin-publication]
 verify_jwt = false
+
+[functions.admin-zones]
+verify_jwt = false
+
+[functions.admin-reviews]
+verify_jwt = false
+
+[functions.site-reviews]
+verify_jwt = false
