@@ -5,9 +5,6 @@ import { Bone } from 'lucide-react';
 export const FloatingSupport: React.FC = () => {
     const location = useLocation();
 
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = (() => { try { return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false; } catch { return false; } })();
-
     // Don't show on homepage, /steun-ons and /over-ons pages
     if (location.pathname === '/' || location.pathname === '/steun-ons' || location.pathname === '/over-ons') {
         return null;
@@ -23,12 +20,6 @@ export const FloatingSupport: React.FC = () => {
             }}
             aria-label="Steun ons"
         >
-            {!prefersReducedMotion && (
-                <span
-                    className="absolute inset-0 animate-shine bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                    style={{ animationDuration: '3s', animationIterationCount: 'infinite' }}
-                />
-            )}
             <Bone size={20} className="fill-white isolate z-10" />
         </Link>
     );

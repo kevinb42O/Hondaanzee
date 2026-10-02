@@ -680,8 +680,8 @@ export const SEO_DATA = {
   },
 
   steunOns: {
-    title: 'Steun HondAanZee.be | Trakteer ons op een Hondenkoekje 🐾',
-    description: 'HondAanZee.be is 100% gratis. Steun ons werk en help ons de leukste plekken aan de Belgische kust te blijven delen voor hondenbezitters.',
+    title: 'Steun HondAanZee.be | Help de gids gratis en actueel te houden 🐾',
+    description: 'Heeft HondAanZee je geholpen bij een uitstap met je hond? Steun het onderhoud van strandregels, losloopzones en hondvriendelijke adresjes. Jij kiest het bedrag.',
     keywords: 'steun hondaanzee, donatie hondaanzee, hondaanzee ondersteunen',
     structuredData: {
       "@context": "https://schema.org",

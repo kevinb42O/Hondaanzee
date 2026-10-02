@@ -1,256 +1,165 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Bone, Wallet, QrCode, Copy, Check, MapPin, Share2, Users } from 'lucide-react';
+import { Heart, Bone, QrCode, Copy, Check, MapPin, Share2, Users, ArrowRight } from 'lucide-react';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
-import KoekjesMeter from '../components/KoekjesMeter.tsx';
 import StickerMeter from '../components/StickerMeter.tsx';
+import { buildSupportQrUrl, formatSupportAmount, parseSupportAmount, SUPPORT_IBAN, SUPPORT_RECIPIENT, SUPPORT_REFERENCE } from '../utils/support.ts';
+import { trackSupportAction } from '../utils/supportAnalytics.ts';
 
-const KOEKJE_TIERS = [
-    { id: 'klein',  label: 'Klein koekje',  emoji: '🦴',     amount: 2  },
-    { id: 'zakje',  label: 'Zakje koekjes', emoji: '🦴🦴',   amount: 5  },
-    { id: 'doos',   label: 'Volle doos',    emoji: '🦴🦴🦴', amount: 10 },
-] as const;
-
-function buildQrUrl(amount?: number): string {
-    const euroParam = amount ? amount.toFixed(2) : '';
-    return `https://epc-qr.eu/?bname=Kevin%20Bourguignon&iban=BE43738004886701&euro=${euroParam}&info=Donatie%20Hond%20aan%20Zee&zero=blank`;
-}
+const AMOUNTS = [5, 10, 25] as const;
 
 const Support: React.FC = () => {
     useSEO(SEO_DATA.steunOns);
-
+    const [selectedAmount, setSelectedAmount] = useState<number | 'custom'>(5);
+    const [customAmount, setCustomAmount] = useState('');
     const [copied, setCopied] = useState(false);
-    const [donationTriggered, setDonationTriggered] = useState(false);
-    const [selectedTier, setSelectedTier] = useState<string | null>('zakje');
-    const [stickerRequested, setStickerRequested] = useState(false);
-
-    const selectedAmount = useMemo(
-        () => KOEKJE_TIERS.find(t => t.id === selectedTier)?.amount,
-        [selectedTier]
-    );
-    const qrUrl = useMemo(() => buildQrUrl(selectedAmount), [selectedAmount]);
+    const [copyError, setCopyError] = useState(false);
+    const [qrVisible, setQrVisible] = useState(false);
+    const [qrError, setQrError] = useState(false);
+    const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const amountInput = useRef<HTMLInputElement>(null);
+    const amount = selectedAmount === 'custom' ? parseSupportAmount(customAmount) ?? undefined : selectedAmount;
+    const invalidAmount = selectedAmount === 'custom' && customAmount.trim() !== '' && amount === undefined;
+    // The EPC QR format has a technical ceiling; direct transfers remain available.
+    const exceedsQrFormat = amount !== undefined && amount > 999999999.99;
+    const qrUrl = buildSupportQrUrl(amount);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        return () => { if (copyTimer.current) clearTimeout(copyTimer.current); };
     }, []);
-
-    const handleDonationAction = useCallback(() => {
-        setDonationTriggered(true);
-    }, []);
+    useEffect(() => { setQrError(false); }, [qrUrl]);
 
     const copyToClipboard = async () => {
         try {
-            await navigator.clipboard.writeText("BE43 7380 0488 6701");
+            await navigator.clipboard.writeText(SUPPORT_IBAN);
             setCopied(true);
-            handleDonationAction();
-            setTimeout(() => setCopied(false), 2000);
+            setCopyError(false);
+            trackSupportAction('iban-gekopieerd');
+            if (copyTimer.current) clearTimeout(copyTimer.current);
+            copyTimer.current = setTimeout(() => setCopied(false), 3000);
         } catch {
-            // Fallback: selecteer de tekst manueel
             setCopied(false);
+            setCopyError(true);
         }
     };
 
     const handleShare = async () => {
         const shareData = {
-            title: 'Hond aan Zee',
-            text: 'De leukste hondvriendelijke plekjes aan de Belgische kust! 🐾🏖️',
+            title: 'HondAanZee',
+            text: 'Met je hond naar de Belgische kust? Vind strandregels, losloopzones en hondvriendelijke adresjes op HondAanZee. 🐾',
             url: 'https://hondaanzee.be',
         };
         try {
-            if (navigator.share) {
-                await navigator.share(shareData);
-            } else {
-                // Fallback: open WhatsApp
-                window.open(
-                    `https://wa.me/?text=${encodeURIComponent(`${shareData.text} ${shareData.url}`)}`,
-                    '_blank'
-                );
-            }
-        } catch { /* user cancelled share */ }
+            if (navigator.share) await navigator.share(shareData);
+            else window.open(`https://wa.me/?text=${encodeURIComponent(`${shareData.text} ${shareData.url}`)}`, '_blank', 'noopener,noreferrer');
+            trackSupportAction('gedeeld');
+        } catch { /* Sharing cancelled. */ }
     };
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
             <div className="max-w-3xl mx-auto">
-
-                {/* Header Section */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center p-3 bg-amber-100 text-amber-600 rounded-2xl mb-6 shadow-sm transform -rotate-3">
-                        <Bone size={32} strokeWidth={2.5} />
+                <div className="text-center mb-7 sm:mb-9">
+                    <div className="inline-flex items-center justify-center p-3 bg-amber-100 text-amber-600 rounded-2xl mb-4 transform -rotate-3">
+                        <Bone size={28} strokeWidth={2.5} aria-hidden="true" />
                     </div>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
-                        Trakteer <span className="font-['Patrick_Hand'] text-4xl sm:text-5xl md:text-6xl"><span className="text-slate-900">Hond</span><span className="text-sky-600">Aan</span><span className="text-slate-900">Zee</span></span> op een <span className="text-amber-500">hondenkoekje</span> 🐾
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                        Help HondAanZee <span className="text-sky-600">gratis en actueel</span> te houden
                     </h1>
-                    <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-                        Help ons de leukste plekjes aan de kust te blijven delen!
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
+                        Heeft de gids je geholpen bij een uitstap met je hond? Met een vrijwillige bijdrage help je me de info te blijven bijhouden.
                     </p>
                 </div>
 
-                {/* content Card */}
                 <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
-                    <div className="p-6 sm:p-10 md:p-12">
-
-                        {/* Personal Message */}
-                        <div className="prose prose-slate max-w-none text-slate-600 mb-12">
-                            <p className="text-lg font-medium text-slate-800 mb-4">
-                                Hoi! Wat leuk dat je op deze pagina kijkt.
-                            </p>
-                            <p className="mb-4">
-                                Zoals je misschien wel weet, is Hond aan Zee een uit de hand gelopen hobbyproject. Ik vind het geweldig om de leukste plekjes aan de kust te delen waar onze viervoeters welkom zijn.
-                            </p>
-                            <p className="mb-4">
-                                Maar... eerlijk is eerlijk: het in de lucht houden van deze website kost geld (hosting, domeinnaam, onderhoud) en vooral heel veel tijd. Momenteel leg ik er geld op toe om de site online te houden voor jullie.
-                            </p>
-                            <p className="font-medium text-slate-800">
-                                Vind jij de info op Hond aan Zee nuttig? En wil je helpen de site online te houden?
-                            </p>
-                            <p>
-                                Dan zou je me enorm blij maken met een kleine bijdrage. Zie het als het trakteren op een koffie (of een zakje hondenkoekjes 😉).
-                            </p>
+                    <div className="p-5 sm:p-8 md:p-10">
+                        <div className="mb-6 text-slate-600 leading-relaxed">
+                            <p><span className="font-bold text-slate-900">Hoi, ik ben Kevin.</span> Ik onderhoud HondAanZee en trek met Jax de kust op. Je bijdrage helpt met de kosten en het uitzoekwerk achter deze gids.</p>
                         </div>
 
-                        {/* Koekjes Meter – direct boven donatie blok */}
-                        <KoekjesMeter
-                            onDonationTriggered={donationTriggered}
-                            onPopupShown={() => setDonationTriggered(false)}
-                        />
-
-                        {/* Donation Area */}
-                        <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200">
-
-                            {/* ── Koekjes Tier Picker ── */}
-                            <div className="mb-6">
-                                <p className="text-center text-sm font-medium text-slate-500 mb-3">
-                                    Kies je koekje
-                                </p>
-                                <div className="flex justify-center gap-2 sm:gap-3 flex-wrap">
-                                    {KOEKJE_TIERS.map(tier => {
-                                        const isActive = selectedTier === tier.id;
-                                        return (
-                                            <button
-                                                key={tier.id}
-                                                onClick={() => setSelectedTier(isActive ? null : tier.id)}
-                                                className={`
-                                                    relative flex flex-col items-center gap-1 px-4 py-3 sm:px-5 sm:py-3.5
-                                                    rounded-2xl border-2 transition-all duration-200 select-none
-                                                    ${isActive
-                                                        ? 'border-amber-400 bg-amber-50 shadow-md shadow-amber-100 scale-[1.04]'
-                                                        : 'border-slate-200 bg-white hover:border-amber-200 hover:bg-amber-50/40'
-                                                    }
-                                                `}
-                                            >
-                                                <span className="text-lg sm:text-xl leading-none" aria-hidden="true">{tier.emoji}</span>
-                                                <span className={`text-xs font-bold tracking-wide ${
-                                                    isActive ? 'text-amber-700' : 'text-slate-500'
-                                                }`}>
-                                                    {tier.label}
-                                                </span>
-                                                <span className={`text-base sm:text-lg font-black ${
-                                                    isActive ? 'text-amber-600' : 'text-slate-800'
-                                                }`}>
-                                                    €{tier.amount}
-                                                </span>
-                                                {isActive && (
-                                                    <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-amber-400 rounded-full flex items-center justify-center">
-                                                        <Check size={12} className="text-white" strokeWidth={3} />
-                                                    </span>
-                                                )}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                                {selectedTier === null && (
-                                    <p className="text-center text-xs text-slate-400 mt-2 italic">
-                                        Of scan zonder bedrag — je kiest zelf in je bank-app
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col md:flex-row gap-8 items-center">
-
-                                {/* QR Code Column */}
-                                <div className="w-full md:w-1/2 flex flex-col items-center">
-                                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-4">
-                                        <img
-                                            src={qrUrl}
-                                            alt={`QR Code${selectedAmount ? ` — €${selectedAmount}` : ''}`}
-                                            className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
-                                            width={224}
-                                            height={224}
-                                            loading="eager"
-                                            decoding="async"
-                                        />
-                                    </div>
-                                    <div className="flex items-center gap-2 text-sm font-bold text-slate-500 uppercase tracking-wider">
-                                        <QrCode size={16} />
-                                        <span>Scan met bank-app</span>
-                                    </div>
-                                </div>
-
-                                {/* Manual Transfer Column */}
-                                <div className="w-full md:w-1/2 text-center md:text-left">
-                                    <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center justify-center md:justify-start gap-2">
-                                        <Wallet className="text-sky-600" />
-                                        <span>Handmatig overmaken</span>
-                                    </h3>
-
-                                    <div className="space-y-4">
-                                        <p className="text-slate-500 text-sm">
-                                            Lukt scannen niet? Je mag ook handmatig iets overmaken:
-                                        </p>
-
-                                        <div className="bg-white border border-slate-200 rounded-xl p-4 relative group">
-                                            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">IBAN</div>
-                                            <div className="font-mono text-lg font-bold text-slate-800">BE43 7380 0488 6701</div>
-                                            <button
-                                                onClick={copyToClipboard}
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-sky-600 hover:bg-sky-50 rounded-lg transition-colors"
-                                                aria-label="Kopieer IBAN"
-                                            >
-                                                {copied ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
-                                            </button>
-                                        </div>
-
-                                        <div className="text-sm text-slate-600">
-                                            <span className="block mb-1">t.a.v. <span className="font-semibold text-slate-900">Kevin Bourguignon</span></span>
-                                            <span className="block">Mededeling: <span className="font-mono bg-slate-200 px-1.5 py-0.5 rounded text-slate-800">Donatie</span></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        {/* Footer Message */}
-                        <div className="mt-10 text-center">
-                            <p className="text-slate-500 italic mb-6">
-                                Elke euro wordt gebruikt om de site sneller en beter te maken.
-                            </p>
-                            <div className="inline-flex items-center gap-2 text-xl font-black text-slate-900">
-                                <span>Dikke merci!</span>
-                                <Heart className="text-rose-500 fill-rose-500 animate-pulse" />
-                            </div>
-                        </div>
-
-                        {/* ── Share Alternative CTA ── */}
-                        <div className="mt-8 pt-8 border-t border-slate-100">
-                            <div className="text-center">
-                                <p className="text-slate-500 text-sm mb-1">
-                                    Geen koekje? Helemaal oké! 💛
-                                </p>
-                                <p className="text-slate-400 text-xs mb-4">
-                                    Je helpt ons ook enorm door HondAanZee te delen met een hondenbaasje.
-                                </p>
-                                <button
-                                    onClick={handleShare}
-                                    className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition-colors duration-200 text-sm"
-                                >
-                                    <Share2 size={16} />
-                                    <span>Deel HondAanZee</span>
+                        <section aria-labelledby="support-amount-heading" className="rounded-3xl border border-amber-200 bg-amber-50/60 p-4 sm:p-6">
+                            <h2 id="support-amount-heading" className="text-xl font-black text-slate-900">Kies zelf je bijdrage 🐾</h2>
+                            <p id="support-amount-help" className="mt-1 mb-4 text-sm text-slate-600">Eenmalig, zonder abonnement. Elk bedrag is welkom.</p>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" role="group" aria-label="Bijdrage kiezen">
+                                {AMOUNTS.map(value => (
+                                    <button key={value} type="button" aria-pressed={selectedAmount === value}
+                                        onClick={() => { setSelectedAmount(value); trackSupportAction(`bedrag-${value}`); }}
+                                        className={`min-h-12 rounded-xl border-2 px-3 py-3 text-lg font-black transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 ${selectedAmount === value ? 'border-amber-500 bg-white text-amber-800' : 'border-slate-200 bg-white text-slate-700 hover:border-amber-400'}`}>
+                                        €{value}
+                                    </button>
+                                ))}
+                                <button type="button" aria-pressed={selectedAmount === 'custom'}
+                                    onClick={() => { setSelectedAmount('custom'); trackSupportAction('ander-bedrag'); requestAnimationFrame(() => amountInput.current?.focus()); }}
+                                    className={`min-h-12 rounded-xl border-2 px-3 py-3 text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 ${selectedAmount === 'custom' ? 'border-amber-500 bg-white text-amber-800' : 'border-slate-200 bg-white text-slate-700 hover:border-amber-400'}`}>
+                                    Ander bedrag
                                 </button>
                             </div>
-                        </div>
+                            {selectedAmount === 'custom' && (
+                                <div className="mt-4">
+                                    <label htmlFor="support-custom-amount" className="block text-sm font-bold text-slate-800 mb-2">Jouw bedrag in euro</label>
+                                    <div className="relative max-w-xs">
+                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true">€</span>
+                                        <input ref={amountInput} id="support-custom-amount" type="text" inputMode="decimal" autoComplete="off"
+                                            value={customAmount} onChange={event => setCustomAmount(event.target.value)} placeholder="Bijvoorbeeld 15,00"
+                                            aria-invalid={invalidAmount} aria-describedby="support-custom-help"
+                                            className="w-full min-h-12 rounded-xl border border-slate-300 bg-white py-3 pl-9 pr-4 text-base text-slate-900 focus:border-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-100" />
+                                    </div>
+                                    <p id="support-custom-help" className={`mt-2 text-sm ${invalidAmount ? 'text-red-700' : 'text-slate-600'}`}>
+                                        {invalidAmount ? 'Vul een positief bedrag in, met maximaal twee cijfers na de komma.' : 'Ook minder dan €5 of meer dan €25 kan. Laat dit leeg als je het bedrag liever in je bankapp kiest.'}
+                                    </p>
+                                </div>
+                            )}
 
+                            <div className="mt-5 border-t border-amber-200 pt-5">
+                                <h3 className="font-bold text-slate-900">Steun via een bankoverschrijving</h3>
+                                <p className="mt-1 text-sm text-slate-600">Kopieer het rekeningnummer en open je bankapp. Vul de gegevens hieronder in en bevestig daar je overschrijving.</p>
+                                <dl className="mt-4 space-y-3 text-sm">
+                                    <div><dt className="text-slate-500">Rekeningnummer</dt><dd className="font-mono font-bold text-slate-900 text-base sm:text-lg select-all break-words">{SUPPORT_IBAN}</dd></div>
+                                    <div><dt className="text-slate-500">Ontvanger</dt><dd className="font-semibold text-slate-900">{SUPPORT_RECIPIENT}</dd></div>
+                                    <div><dt className="text-slate-500">Mededeling</dt><dd className="font-semibold text-slate-900 select-all">{SUPPORT_REFERENCE}</dd></div>
+                                    <div><dt className="text-slate-500">Bedrag</dt><dd className="font-bold text-slate-900" aria-live="polite">{invalidAmount ? 'Controleer je bedrag hierboven' : amount === undefined ? 'Kies zelf in je bankapp' : formatSupportAmount(amount)}</dd></div>
+                                </dl>
+                                <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                                    <button type="button" onClick={copyToClipboard}
+                                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-sky-600 hover:bg-sky-700 px-4 py-3 font-bold text-white transition-colors">
+                                        {copied ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
+                                        {copied ? 'Rekeningnummer gekopieerd' : 'Kopieer rekeningnummer'}
+                                    </button>
+                                    <button type="button" aria-expanded={qrVisible} aria-controls="support-qr" disabled={invalidAmount || exceedsQrFormat}
+                                        onClick={() => { if (!qrVisible) trackSupportAction('qr-bekeken'); setQrVisible(!qrVisible); }}
+                                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 px-4 py-3 font-bold text-slate-700 transition-colors disabled:opacity-50">
+                                        <QrCode size={18} aria-hidden="true" />{qrVisible ? 'Verberg QR-code' : 'Toon QR-code'}
+                                    </button>
+                                </div>
+                                <p role="status" className={`mt-3 text-sm ${copyError ? 'text-red-700' : 'text-slate-600'}`}>
+                                    {copyError ? 'Kopiëren lukt niet in deze browser. Selecteer het rekeningnummer hierboven en kopieer het zelf.' : copied ? 'Plak het rekeningnummer in je bankapp. De overschrijving rond je daar af.' : 'Je bijdrage is volledig vrijwillig. De gids blijft gratis voor iedereen.'}
+                                </p>
+                                {exceedsQrFormat && <p className="mt-2 text-sm text-slate-600">Dit bedrag past niet in de QR-code. Je kunt het wel rechtstreeks overschrijven.</p>}
+                                {qrVisible && !invalidAmount && !exceedsQrFormat && (
+                                    <div id="support-qr" className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 text-center">
+                                        {qrError ? <p role="status" className="text-sm text-slate-600">De QR-code kon niet worden geladen. Gebruik de betaalgegevens hierboven.</p> : <img key={qrUrl} src={qrUrl} onError={() => setQrError(true)} alt={`QR-code voor een bijdrage${amount === undefined ? ' met een zelf te kiezen bedrag' : ` van ${formatSupportAmount(amount)}`}`} width={224} height={224} className="mx-auto h-56 w-56 max-w-full object-contain" decoding="async" />}
+                                        <p className="mt-3 text-sm font-bold text-slate-800">Scan met een bankapp die overschrijvingscodes ondersteunt.</p>
+                                        <p className="mt-1 text-xs leading-relaxed text-slate-500">Bekijk je de site op je telefoon? Gebruik de betaalgegevens hierboven. Controleer altijd de ontvanger en het bedrag in je bankapp.</p>
+                                    </div>
+                                )}
+                            </div>
+                        </section>
+
+                        <div className="mt-7">
+                            <h2 className="text-lg font-black text-slate-900">Wat je mee mogelijk maakt</h2>
+                            <ul className="mt-3 grid sm:grid-cols-3 gap-3 text-sm text-slate-600">
+                                <li className="rounded-xl bg-slate-50 p-4"><span className="block font-bold text-slate-900 mb-1">Regels blijven nakijken</span>Strandregels en seizoensuren per kustgemeente.</li>
+                                <li className="rounded-xl bg-slate-50 p-4"><span className="block font-bold text-slate-900 mb-1">De gids onderhouden</span>Losloopzones en hondvriendelijke adresjes bijhouden.</li>
+                                <li className="rounded-xl bg-slate-50 p-4"><span className="block font-bold text-slate-900 mb-1">De site online houden</span>Bijdragen aan hosting, domeinnaam en onderhoud.</li>
+                            </ul>
+                            <p className="mt-4 text-sm text-slate-600">Een koffie, een zakje hondenkoekjes of een ander bedrag: dankjewel dat je meehelpt. <Heart size={14} className="inline text-rose-500" aria-hidden="true" /></p>
+                        </div>
+                        <div className="mt-6 border-t border-slate-100 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                            <p className="text-sm text-slate-500">Je helpt ook door de gids met een hondenbaasje te delen.</p>
+                            <button type="button" onClick={handleShare} className="inline-flex shrink-0 min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-4 py-2.5 text-sm transition-colors"><Share2 size={16} aria-hidden="true" />Deel HondAanZee</button>
+                        </div>
+                        <Link to="/" className="mt-5 inline-flex items-center gap-2 py-2 text-sm font-semibold text-sky-700 hover:underline">Verder op ontdekking <ArrowRight size={15} aria-hidden="true" /></Link>
                     </div>
                 </div>
 
@@ -327,10 +236,7 @@ const Support: React.FC = () => {
                             </div>
 
                             {/* Sticker Meter – boven prijs/CTA */}
-                            <StickerMeter
-                                onStickerRequested={stickerRequested}
-                                onPopupShown={() => setStickerRequested(false)}
-                            />
+                            <StickerMeter />
 
                             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8 max-w-lg mx-auto">
                                 <div className="flex items-start gap-3">
@@ -382,7 +288,6 @@ const Support: React.FC = () => {
                                             href="https://wa.me/32494816714?text=Hallo%20Kevin%20en%20Jax!%20%F0%9F%90%BE%0A%0AIk%20zou%20graag%20een%20Hondaanzee%20keurmerk%20sticker%20aanvragen%20voor%20mijn%20zaak.%0A%0ANaam%20zaak%3A%20%0AAdres%3A%20"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            onClick={() => setStickerRequested(true)}
                                             className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 text-base"
                                         >
                                             <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>

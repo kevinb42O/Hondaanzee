@@ -9,6 +9,7 @@ import OffLeashAreas from '../components/OffLeashAreas.tsx';
 import BusinessCTA from '../components/BusinessCTA.tsx';
 import LocalHero from '../components/LocalHero.tsx';
 import CityFAQ from '../components/CityFAQ.tsx';
+import SupportPrompt from '../components/SupportPrompt.tsx';
 import { CITIES } from '../cityData.ts';
 import { useSEO, getCitySEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
@@ -105,6 +106,7 @@ const CityPage: React.FC = () => {
 
         <section className="pb-10 sm:pb-12 md:pb-20 px-4">
           <StatusCheck city={city} />
+          <SupportPrompt cityName={city.name} />
         </section>
       </div>
 

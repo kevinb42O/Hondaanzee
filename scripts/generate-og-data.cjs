@@ -63,9 +63,9 @@ const staticPages = {
     image: DEFAULT_IMAGE,
   },
   '/steun-ons': {
-    title: 'Steun HondAanZee.be | Trakteer ons op een Hondenkoekje 🐾',
+    title: 'Steun HondAanZee.be | Help de gids gratis en actueel te houden 🐾',
     description:
-      'HondAanZee.be is 100% gratis. Steun ons werk en help ons de leukste plekken aan de Belgische kust te blijven delen voor hondenbezitters.',
+      'Heeft HondAanZee je geholpen bij een uitstap met je hond? Steun het onderhoud van strandregels, losloopzones en hondvriendelijke adresjes. Jij kiest het bedrag.',
     image: DEFAULT_IMAGE,
   },
   '/agenda': {

@@ -34,7 +34,7 @@ const server = createServer((req, res) => {
     page.on('request', req => req.url().startsWith(base) ? req.continue() : req.abort());
     await page.setViewport({ width: 1440, height: 1000 });
     const examples = ['/', '/koksijde', '/de-panne', '/blog', routes.find(r => r.startsWith('/blog/')),
-      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies'];
+      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons'];
     const titles = new Map();
     await page.setJavaScriptEnabled(false);
     for (const route of examples) {
