@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:places": "node scripts/verify-place-pages.cjs && node scripts/check-place-browser.cjs",
+    "test:admin": "node scripts/check-admin-browser.cjs",
     "test:search": "vitest run utils/search.test.ts && node scripts/check-search-browser.cjs"
   },
   "dependencies": {

@@ -161,6 +161,7 @@ const AdminNotifications: React.FC = () => {
     title: 'Notificaties versturen | Admin',
     description: 'Verstuur push notificaties naar PWA-abonnees.',
     canonical: 'https://hondaanzee.be/admin/notificaties',
+    noindex: true,
   });
 
   const {

@@ -1,5 +1,8 @@
 project_id = "zpllibfxaizavcvztnut"
 
+[functions.admin-content]
+verify_jwt = false
+
 [functions.list-admin-reports]
 verify_jwt = false
 

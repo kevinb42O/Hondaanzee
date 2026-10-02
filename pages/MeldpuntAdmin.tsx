@@ -59,7 +59,8 @@ const MeldpuntAdmin: React.FC = () => {
   useSEO({
     title: 'Meldpunt Admin | HondAanZee.be',
     description: 'Interne adminpagina voor interventiestatus van meldingen.',
-    canonical: 'https://hondaanzee.be/admin',
+    canonical: 'https://hondaanzee.be/admin/meldpunt',
+    noindex: true,
   });
 
   const {

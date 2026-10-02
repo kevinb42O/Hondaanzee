@@ -6,6 +6,11 @@ import { getAnalyticsPath, normalizeAnalyticsEvent, trackPlaceAction } from './p
 vi.mock('@vercel/analytics', () => ({ track: vi.fn() }));
 
 describe('business analytics', () => {
+  it('excludes admin views, including late events after public navigation', () => {
+    for (const path of ['/admin', '/admin/zaken', '/admin/meldpunt', '/_meldpunt-admin']) {
+      expect(normalizeAnalyticsEvent({ type: 'pageview', url: `https://hondaanzee.be${path}` })).toBeNull();
+    }
+  });
   it('groups tracking parameters and trailing slashes under the same page', () => {
     expect(normalizeAnalyticsEvent({ type: 'pageview', url: 'https://hondaanzee.be/blankenberge/hotspots/lakaiann/?utm_source=google#foto' }))
       .toEqual({ type: 'pageview', url: 'https://hondaanzee.be/blankenberge/hotspots/lakaiann' });

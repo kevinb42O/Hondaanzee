@@ -36,6 +36,7 @@ const MeldpuntAdminLog: React.FC = () => {
     title: 'Meldpunt Logboek | HondAanZee.be',
     description: 'Intern logboek met alle meldingen en verwijderde items.',
     canonical: 'https://hondaanzee.be/admin/log',
+    noindex: true,
   });
 
   const {
