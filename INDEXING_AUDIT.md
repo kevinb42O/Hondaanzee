@@ -38,3 +38,16 @@ De algemene TypeScript-controle bevat bestaande fouten in onder meer het oude co
 Controleer na publicatie de live URL-inspectie van Koksijde en een zaak, dien de bestaande sitemap opnieuw in om de actuele lijst onder de aandacht te brengen en start validatie voor de foutieve duplicaten. Verwachte filtercanonicals en redirects hoeven niet te verdwijnen uit het uitsluitingsrapport. Een geslaagde live-test of sitemapinzending bewijst indexeerbaarheid en ontvangst, geen voltooide indexering of hogere ranking.
 
 Zie [Google over canonicals](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) en [de uitleg van het indexeringsrapport](https://support.google.com/webmasters/answer/7440203).
+
+## Uitgevoerd na publicatie
+
+De technische wijziging is gepusht naar `main` als `cd09a90`. Vercel bevestigde een geslaagde productiepublicatie.
+
+- Alle **224 productie-URLs** gecontroleerd met Googlebot-user-agent: HTTP 200, eigen canonical, een heading, geen `noindex` en **224 unieke titels**. Twee tijdelijke TLS-timeouts slaagden bij een gerichte herhaling.
+- De oude communityroute en drie onbekende test-URLs geven HTTP 404 met de eigen foutpagina. Adminroutes geven hun `noindex`-shell; dynamische meldingen blijven bereikbaar.
+- Search Console-live-test Koksijde op 2 oktober om 18:43: ophalen geslaagd, crawling en indexering toegestaan, opgegeven canonical `https://hondaanzee.be/koksijde`.
+- Search Console-live-test Lakaiann op 2 oktober om 18:49: **URL is beschikbaar voor Google**, **Pagina kan worden geïndexeerd**, één geldig breadcrumb-item.
+- De bestaande sitemap opnieuw ingediend op **2 oktober 2026**. Search Console bevestigt de nieuwe verzenddatum en de status **Succesvol**. De eerdere leesdatum en het oude aantal 184 zijn nog niet bijgewerkt; de live sitemap bevat 224 URLs.
+- Validatie voor **Dubbele pagina zonder door de gebruiker geselecteerde canonieke versie** gestart op **2 oktober 2026**. Search Console toont **Validatie gestart**.
+
+Er zijn geen 157 individuele indexeringsverzoeken nodig. De live-tests bewijzen dat Google de gewijzigde pagina’s kan ophalen en indexeren. De uiteindelijke indexkeuze, validatie-uitkomst en zoekposities zijn nog niet vastgesteld.
