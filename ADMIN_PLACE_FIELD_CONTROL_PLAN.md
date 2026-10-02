@@ -119,3 +119,9 @@ De fix is gebouwd in `codex/place-field-control`. Algemene velden, beschikbaarhe
 Productie is vóór de uitrol alleen-lezen geïnventariseerd: 133 hotspots, 24 diensten, 27 losloopzones en geen ongepubliceerde concepten. Bestaande revisies zijn niet herschreven. Nieuwe optionele velden passen in de bestaande JSONB-opslag; een SQL-migratie is niet nodig.
 
 Validatie in de afzonderlijke releasewerkmap: 23 testbestanden / 112 tests geslaagd; volledige build van 224 publieke pagina's en verificatie van 157 zaakpagina's geslaagd; admin- en publieke browsercontroles geslaagd. De browsercontrole omvat nu service-uren, verbergen/herladen/tonen, weersafhankelijkheid, categoriewissel, op afspraak, schema leegmaken en nieuwe diensten. Beide winkelcollecties worden publiek op desktop en mobiel gecontroleerd. De algemene TypeScriptcontrole heeft exact dezelfde 56 bestaande diagnoses als de ongewijzigde basis, zonder nieuwe diagnoses.
+
+### Live verificatie
+
+De backend en frontend zijn op productie uitgerold. Op de bestaande dienst Snuffels is een echte save, herlaadcontrole en publicatie uitgevoerd. Alleen `openingHours: null`, `openingHoursMode: unknown` en `presentation.hours: auto` zijn toegevoegd; alle oorspronkelijke zakelijke gegevens bleven exact behouden. De openbare voorstelling blijft zonder onbevestigde uren. De publicatie is live, haar release-ID en SHA-256 komen overeen met de marker op hondaanzee.be, en er zijn geen ongepubliceerde testconcepten achtergebleven. De latere analyticsdeployment bevat dezelfde gepubliceerde catalogus en behoudt deze fix.
+
+De openbare Git-versie met de fix staat op main (implementatie `3223fbf`, afronding `f402309`). De afzonderlijke releasewerkmap blijft beschikbaar voor inspectie. Het verificatierapport en de screenshot staan lokaal onder `.admin-local/place-fields-live-verification.json` en `.admin-local/place-field-control-live.jpg`.
