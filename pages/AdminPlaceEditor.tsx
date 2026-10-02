@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Save } from 'lucide-react';
 import AdminFavoriteCount from '../components/admin/AdminFavoriteCount.tsx';
+import AdminReviewCounts from '../components/admin/AdminReviewCounts.tsx';
 import AdminMediaPicker, { type PlaceMedia } from '../components/admin/AdminMediaPicker.tsx';
 import { ResolvedPlaceDetail } from './PlaceDetail.tsx';
 import type { Hotspot, Service } from '../types.ts';
@@ -98,6 +99,7 @@ export default function AdminPlaceEditor() {
     <Link to="/admin/zaken" className="workspace-text-link"><ArrowLeft size={15} />Alle zaken</Link>
     <div className="workspace-page-heading workspace-editor-heading"><div><p className="workspace-eyebrow">Zakenbeheer</p><h1>{isNew ? 'Nieuwe zaak' : values.name || 'Zaak bewerken'}</h1><p>{isNew ? 'Begin met een concept voor je kustgids.' : `Concept · versie ${place?.version || '…'}`}</p></div><button type="button" className="workspace-button" disabled={saving} onClick={() => setPreview(value => !value)}>{preview ? 'Verder bewerken' : 'Concept bekijken'}</button></div>
     {place && <AdminFavoriteCount key={place.id} id={place.id} />}
+    {place?.kind === 'hotspot' && <AdminReviewCounts key={`reviews-${place.id}`} id={place.id} />}
     {loading ? <section className="workspace-panel" role="status">Zaak laden…</section> : !isNew && !place ? <section className="workspace-panel"><p className="workspace-error" role="alert">{error}</p><button className="workspace-button" onClick={() => void load()}>Opnieuw proberen</button></section> : <form onSubmit={save}>
       <div className="workspace-editor-grid"><div className="workspace-panel workspace-form">
         {preview ? <div className="workspace-public-preview" onClickCapture={event => { if ((event.target as Element).closest('a')) { event.preventDefault(); event.stopPropagation(); } }}><ResolvedPlaceDetail preview kind={kind} cityData={CITIES.find(item => item.slug === city)!} place={{ ...current, name: current.name || 'Naam van je zaak' }} /></div> : <>

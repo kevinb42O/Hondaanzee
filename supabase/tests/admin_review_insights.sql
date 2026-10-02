@@ -1,0 +1,48 @@
+-- Run inside a transaction; fixtures and every interaction are rolled back.
+do $$
+declare a uuid=gen_random_uuid();b uuid=gen_random_uuid();c uuid=gen_random_uuid();p uuid;z uuid;rev uuid;review uuid;state jsonb;row jsonb;before_zones jsonb;author_date text;slug text='insights-rollback-'||a::text;
+begin
+ before_zones=(select jsonb_agg(to_jsonb(r)order by id)from public.reviews r);
+ insert into public.content_places(kind,legacy_id,city_slug,slug)values('hotspot',(select max(legacy_id)+1 from public.content_places where kind='hotspot'),'oostende',slug)returning id into p;
+ insert into public.content_place_revisions(place_id,revision_number,content,source)values(p,1,jsonb_build_object('name','Insight rollback hotspot'),'legacy_import')returning id into rev;
+ update public.content_places set draft_revision_id=rev,published_revision_id=rev where id=p;
+ insert into auth.users(id,aud,role,email,created_at,updated_at)values(a,'authenticated','authenticated',a||'@example.invalid',now(),now()),(b,'authenticated','authenticated',b||'@example.invalid',now(),now()),(c,'authenticated','authenticated',c||'@example.invalid',now(),now());
+ perform public.set_hotspot_like(a,'oostende',slug,true);perform public.set_hotspot_like(b,'oostende',slug,true);perform public.set_hotspot_like(c,'oostende',slug,true);
+ update public.place_likes set created_at=now()-interval '8 days'where member_id=a and place_id=p;
+ state=public.submit_hotspot_review(a,'oostende',slug,4,'Een heel fijne ervaring met onze hond.','Auteur A',null,null,repeat('a',64));review=(state->'review'->>'id')::uuid;
+ perform public.moderate_hotspot_review(review,1,'publish','','',null,null,null);
+ state=public.submit_hotspot_review(a,'oostende',slug,1,'Een tweede bezoek met een andere ervaring.','Auteur A',null,2,repeat('a',64));
+ perform public.submit_hotspot_review(b,'oostende',slug,2,'Een nog niet goedgekeurde bezoekerservaring.','Auteur B',null,null,repeat('b',64));
+ state=public.submit_hotspot_review(c,'oostende',slug,5,'Een ervaring van een later geschorst account.','Auteur C',null,null,repeat('c',64));
+ perform public.moderate_hotspot_review((state->'review'->>'id')::uuid,1,'publish','','',null,null,null);
+ perform public.flag_hotspot_review((state->'review'->>'id')::uuid,'privacy',repeat('d',64));
+ update public.member_profiles set status='suspended'where id=c;
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=p::text;
+ if(row->>'like_count')::int<>2 or(row->>'excluded_like_count')::int<>1 or(row->>'recent7_like_count')::int<>1 or(row->>'recent30_like_count')::int<>2 then raise exception 'LIKES_MULTIPLIED_OR_WRONG_ELIGIBILITY';end if;
+ if(row->>'review_count')::int<>3 or(row->>'published_count')::int<>1 or(row->>'pending_count')::int<>2 or(row->>'attention_count')::int<>3 or(row->>'average')::numeric<>4 then raise exception 'REVIEW_STATUS_OR_APPROVED_VERSION_WRONG';end if;
+ if row::text like '%member_id%'or row::text like '%@example.invalid%'then raise exception 'IDENTITY_LEAK';end if;
+ author_date=row->>'last_review_at';
+ perform public.moderate_hotspot_review(review,3,'redact','Privacy','', 'Veilige naam','Een veilige publieke tekst over de ervaring.',null);
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=p::text;
+ if row->>'last_review_at'<>author_date or(row->>'average')::numeric<>4 then raise exception 'MODERATION_CHANGED_AUTHOR_DATE_OR_SCORE';end if;
+ update public.content_places set archived_at=now()where id=p;
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=p::text;
+ if row->>'status'<>'archived' or(row->>'like_count')::int<>2 then raise exception 'ARCHIVED_PLACE_LOST';end if;
+ update public.content_places set archived_at=null where id=p;
+ perform public.set_hotspot_like(b,'oostende',slug,false);
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=p::text;
+ if(row->>'like_count')::int<>1 or(row->>'recent7_like_count')::int<>0 then raise exception 'UNLIKE_RETAINED';end if;
+ insert into public.content_places(kind,legacy_id,city_slug,slug)values('offleash',(select coalesce(max(legacy_id),0)+1 from public.content_places where kind='offleash'),'oostende',slug)returning id into z;
+ insert into public.content_place_revisions(place_id,revision_number,content,source)values(z,1,jsonb_build_object('name','Insight rollback zone'),'legacy_import')returning id into rev;
+ update public.content_places set draft_revision_id=rev,published_revision_id=rev where id=z;
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=z::text;
+ if(row->>'review_count')::int<>0 or row->'average'<>'null'::jsonb then raise exception 'EMPTY_SCORE_INVENTED';end if;
+ insert into public.reviews(zone_id,area_slug,rating,user_name,comment,status,needs_review,public_name,public_comment)values(z,slug,3,'Historische gast','Een historische ervaring.','published',true,'Historische gast','Een historische ervaring.');
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=z::text;
+ if(row->>'review_count')::int<>1 or(row->>'published_count')::int<>1 or(row->>'average')::numeric<>3 or(row->>'attention_count')::int<>1 or(row->>'like_count')::int<>0 then raise exception 'LEGACY_ZONE_MISSING';end if;
+ if before_zones is distinct from(select jsonb_agg(to_jsonb(r)order by id)from public.reviews r where zone_id<>z or zone_id is null)then raise exception 'LEGACY_REVIEWS_CHANGED';end if;
+ if has_function_privilege('anon','public.admin_review_insights()','execute')or has_function_privilege('authenticated','public.admin_review_insights()','execute')or not has_function_privilege('service_role','public.admin_review_insights()','execute')then raise exception 'PRIVATE_INSIGHTS_EXPOSED';end if;
+ delete from auth.users where id=b;
+ select e into row from jsonb_array_elements(public.admin_review_insights()->'places')e where e->>'place_id'=p::text;
+ if(row->>'review_count')::int<>2 then raise exception 'DELETED_ACCOUNT_RETAINED';end if;
+end$$;

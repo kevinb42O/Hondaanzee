@@ -11,7 +11,7 @@ const navigation = [
   { path: '/admin', label: 'Overzicht', icon: LayoutDashboard, end: true },
   { path: '/admin/zaken', label: 'Zaken', icon: Store },
   { path: '/admin/losloopzones', label: 'Losloopzones', icon: PawPrint },
-  { path: '/admin/reviews', label: 'Reviews', icon: ShieldCheck },
+  { path: '/admin/reviews', label: 'Likes & reviews', icon: ShieldCheck },
   { path: '/admin/publiceren', label: 'Publiceren', icon: UploadCloud },
   { path: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { path: '/admin/favorieten', label: 'Favorieten', icon: Heart },
@@ -35,7 +35,7 @@ export default function AdminWorkspace() {
         <Link to="/admin" className="workspace-brand"><span className="workspace-brand-mark"><PawPrint size={22} /></span><span>hond aan zee<small>BEHEER JE KUSTGIDS</small></span></Link>
         <p className="workspace-nav-label">Werkruimte</p>
         <nav aria-label="Adminnavigatie">
-          {navigation.map(({ path, label, icon: Icon, end }) => <NavLink key={path} to={path} end={end} className={({ isActive }) => `workspace-nav${isActive ? ' is-active' : ''}`}><Icon size={19} /><span>{label}</span>{path==='/admin/reviews'&&attention>0&&<span className="workspace-nav-count" aria-label={`${attention} reviews te beoordelen`}>{attention}</span>}</NavLink>)}
+          {navigation.map(({ path, label, icon: Icon, end }) => <NavLink key={path} to={path === '/admin/reviews' ? `${path}?view=insights` : path} end={end} className={({ isActive }) => `workspace-nav${isActive ? ' is-active' : ''}`}><Icon size={19} /><span>{label}</span>{path==='/admin/reviews'&&attention>0&&<span className="workspace-nav-count" aria-label={`${attention} reviews te beoordelen`}>{attention}</span>}</NavLink>)}
         </nav>
         <div className="workspace-sidebar-footer">
           <Link to="/" className="workspace-nav"><ExternalLink size={18} /><span>Bekijk de website</span></Link>

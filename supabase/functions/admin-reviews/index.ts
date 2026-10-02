@@ -3,6 +3,7 @@ import { getSupabaseAdmin, handleOptions, json } from '../_shared/http.ts';
 import { requireAdminUser } from '../_shared/security.ts';
 const cursor=z.object({date:z.iso.datetime({offset:true}),id:z.uuid()}).strict();
 const schema=z.discriminatedUnion('action',[
+ z.object({action:z.literal('insights')}).strict(),
  z.object({action:z.literal('overview')}).strict(),
  z.object({action:z.literal('places')}).strict(),
  z.object({action:z.literal('list'),filter:z.enum(['all','attention','pending','published','hidden','rejected','withdrawn','flagged']).default('attention'),kind:z.enum(['all','hotspot','offleash']).default('all'),city:z.string().max(80).default(''),zone:z.uuid().nullable().optional(),rating:z.number().int().min(1).max(5).nullable().optional(),search:z.string().max(200).default(''),cursor:cursor.nullable().optional()}).strict(),
@@ -16,6 +17,10 @@ Deno.serve(async req=>{
   const raw=await req.text();if(new TextEncoder().encode(raw).length>16384)return json({error:'Te groot verzoek.'},413);
   const parsed=schema.safeParse(JSON.parse(raw));if(!parsed.success)return json({error:'Controleer je verzoek.'},400);
   const input=parsed.data,db=getSupabaseAdmin();
+  if(input.action==='insights') {
+   const {data,error}=await db.rpc('admin_review_insights');if(error)throw error;
+   const response=json(data);response.headers.set('Cache-Control','no-store');return response;
+  }
   if(input.action==='overview') {
    const [legacy,hotspots]=await Promise.all([db.rpc('admin_review_overview'),db.rpc('admin_hotspot_review_overview')]);
    if(legacy.error)throw legacy.error;if(hotspots.error)throw hotspots.error;

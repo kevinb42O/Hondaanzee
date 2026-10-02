@@ -32,6 +32,11 @@ const server = createServer((req, res) => {
     const zoneRequests=[], moderationRequests=[];
     const fakeReviews=[{id:'20000000-0000-4000-8000-000000000001',zone_id:fakeZones[0].id,area_slug:fakeZones[0].slug,rating:2,user_name:'Bezoeker',comment:'Originele ervaring',public_name:'Bezoeker',public_comment:'Originele ervaring',status:'published',needs_review:true,version:1,created_at:'2026-09-20T12:00:00Z',with_account:false,zone_name:fakeZones[0].draft.content.name,city_slug:fakeZones[0].city_slug,flags:0}];
     const reviewOverview=()=>({counts:{all:1,pending:0,published:fakeReviews[0].status==='published'?1:0,hidden:fakeReviews[0].status==='hidden'?1:0,rejected:0,attention:fakeReviews[0].needs_review?1:0,flagged:0},zones:{[fakeZones[0].id]:{published:fakeReviews[0].status==='published'?1:0,pending:0,attention:fakeReviews[0].needs_review?1:0,average:fakeReviews[0].status==='published'?2:null}}});
+    let failReviewInsights = false;
+    const reviewInsights = () => {
+      const places = [...fakePlaces.filter(p=>p.kind==='hotspot'),...fakeZones].map((p,i)=>({place_id:p.id,kind:p.kind,city_slug:p.city_slug,place_slug:p.slug,name:p.draft.content.name,image:p.draft.content.image,status:p.archived_at?'archived':'published',like_count:i===0?7:i===1?2:0,excluded_like_count:i===0?1:0,recent7_like_count:i===0?3:0,recent30_like_count:i===0?5:0,review_count:i===0?2:i===fakePlaces.filter(p=>p.kind==='hotspot').length?1:0,published_count:i===0?1:0,pending_count:i===0?1:0,attention_count:i===0?1:0,average:i===0?4:null,last_like_at:i===0?'2026-10-03T08:00:00Z':null,last_review_at:i===0?'2026-10-03T09:00:00Z':null,last_activity_at:i===0?'2026-10-03T09:00:00Z':null}));
+      return {generated_at:'2026-10-03T10:00:00Z',summary:{like_count:9,excluded_like_count:1,recent7_like_count:3,recent30_like_count:5,review_count:3,published_count:1,attention_count:1},places};
+    };
     const reportRequests=[], pushRequests=[];
     const fakeReports = [
       {id:'r1',public_id:'melding-pending',category:'afval',city_slug:'oostende',location_text:'Duinenpad',description:'Oorspronkelijke melding over afval op het pad.',observed_at:'2026-10-02T10:00:00Z',created_at:'2026-10-02T11:00:00Z',status:'published',is_hidden:false,report_count:0,confirm_count:2,city_intervention_status:'pending',city_intervention_note:'',resolved_at:null},
@@ -60,6 +65,7 @@ const server = createServer((req, res) => {
       }
       if(request.url().includes('/functions/v1/admin-reviews')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());let body;
         if(input.action==='places')body={places:[...fakePlaces,...fakeZones].map(p=>({id:p.id,kind:p.kind,city_slug:p.city_slug,slug:p.slug,name:p.draft.content.name}))};
+        else if(input.action==='insights'){if(failReviewInsights)return request.respond({status:500,headers:cors,contentType:'application/json',body:JSON.stringify({error:'Test: cijfers niet beschikbaar.'})});body=reviewInsights();}
         else if(input.action==='overview')body=reviewOverview();
         else if(input.action==='list')body={reviews:fakeReviews.filter(r=>input.filter==='all'||input.filter==='attention'&&r.needs_review||input.filter===r.status)};
         else if(input.action==='detail')body={review:fakeReviews[0],history:moderationRequests.map((a,i)=>({...a,id:String(i),action:a.decision,from_status:'published',to_status:fakeReviews[0].status,created_at:'2026-10-02T12:00:00Z',actor_label:'admin@hondaanzee.be'})),revisions:[{id:'original',public_name:'Bezoeker',public_comment:'Originele ervaring',created_at:'2026-09-20T12:00:00Z'}],flags:[]};
@@ -322,6 +328,32 @@ const server = createServer((req, res) => {
     assert.deepEqual(zoneRequests.at(-1).patch,{name:OFF_LEASH_AREAS[0].name+' concept'});assert.equal(fakeZones[0].draft.content.image,oldImage);
     assert.equal(await page.$eval('.workspace-savebar button',el=>el.disabled),true);
     await page.type('input[name=name]',' tweede');assert.equal(await page.$eval('.workspace-savebar button',el=>el.disabled),false,'Editor exits saving state after reload');
+    // Insights join stable catalog IDs to true like/review counts, without reviving /community.
+    await page.goto(base+'/admin/reviews?view=insights');await page.waitForSelector('.workspace-review-insights-table');
+    assert.deepEqual(await page.$$eval('.workspace-review-insights .workspace-stat strong',els=>els.map(e=>Number(e.textContent))),[9,3,3,1]);
+    assert.equal(await page.$$eval('.workspace-review-insights-table tbody tr',els=>els.length),3,'Only places with interactions are shown');
+    assert.equal(await page.$eval('.workspace-review-insights-table tbody tr td:first-child strong',e=>e.textContent),fakePlaces[0].draft.content.name);
+    await page.select('[aria-label="Sorteer likes en reviews"]','review_count');
+    await page.type('[aria-label="Zoek likes en reviews per plek"]',fakePlaces[0].draft.content.name);
+    await page.waitForFunction(()=>document.querySelectorAll('.workspace-review-insights-table tbody tr').length===1);
+    const reviewHref=await page.$eval('.workspace-review-insights-table tbody tr td:nth-child(5) a',e=>e.getAttribute('href'));
+    assert.equal(reviewHref,`/admin/reviews?zone=${fakePlaces[0].id}&filter=all`);
+    failReviewInsights=true;await page.click('.workspace-page-heading button');await page.waitForSelector('.workspace-error');
+    assert.equal(await page.$eval('.workspace-review-insights .workspace-stat strong',e=>e.textContent),'9','Refresh failure retains previous snapshot');
+    assert.equal(await page.$eval('.workspace-section-heading button',e=>e.disabled),true,'Stale snapshot export is disabled');
+    await page.reload();await page.waitForSelector('.workspace-error');
+    assert.equal(await page.$('.workspace-review-insights'),null,'Initial read failure never invents zeros');
+    failReviewInsights=false;await page.click('.workspace-error button');await page.waitForSelector('.workspace-review-insights-table');
+    await page.setViewport({width:390,height:844});
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Insight tables scroll inside the panel on mobile');
+    await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp','hondaanzee-review-insights-mobile.png'),fullPage:true});
+    await page.setViewport({width:1440,height:1000});
+    await page.goto(base+'/admin/zaken');await page.waitForSelector('.workspace-place-insights-table .workspace-review-count');
+    assert.deepEqual(await page.$$eval('.workspace-place-insights-table th',els=>els.map(e=>e.textContent)),['Zaak','Gemeente','Bewaard','Likes','Reviews','Status','Acties']);
+    await page.select('[aria-label="Sorteer zaken"]','likes');
+    assert.equal(await page.$eval('.workspace-place-insights-table tbody tr td:first-child strong',e=>e.textContent),fakePlaces[0].draft.content.name);
+    await page.goto(base+'/admin/zaken/'+fakePlaces[0].id);await page.waitForSelector('.workspace-place-reviews .workspace-review-count');
+    assert.equal(await page.$eval('.workspace-place-reviews .workspace-review-count',e=>e.textContent),'7');
     await page.goto(base+'/admin/reviews?filter=all');await page.waitForSelector('.workspace-review-row');
     await page.click('.workspace-review-row a');await page.waitForSelector('.workspace-review-detail');
     assert.match(await page.$eval('.workspace-review-detail',el=>el.textContent),/Originele ervaring/);
@@ -410,7 +442,7 @@ const server = createServer((req, res) => {
     }
     assert.deepEqual(errors, []);
     if (analyticsOnly) console.log('All five analytics periods passed on desktop and mobile: calendar labels, midnight, month/year boundaries, cursor and keyboard tooltips, Vercel history and contained scrolling.');
-    else console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, cursor tooltip, report workbench, preserved originals, save failure recovery, archive, notification preview and confirmation, draft recovery, partial/failed delivery, legacy routes, noindex, mobile, sign out, no analytics requests.');
+    else console.log('Admin browser checks passed: sign-in gate, database catalog/filtering, draft save, conflict handling, new draft, original images and URLs, zone management, immutable review moderation, likes/review insights, stable place filters, current and stale/error snapshots, rating counts in the catalog and editor, mobile insight tables, cursor tooltip, report workbench, preserved originals, save failure recovery, archive, notification preview and confirmation, draft recovery, partial/failed delivery, legacy routes, noindex, mobile, sign out, no analytics requests.');
   } finally {
     if (browser) await browser.close();
     server.close();

@@ -54,3 +54,13 @@ Herhaalbare controles:
 De browserchecks onderscheppen externe writes. De SQL-fixtures worden volledig teruggedraaid. De livecontrole publiceert geen testreview, verstuurt geen e-mail en verwijdert het tijdelijke account in `finally`.
 
 De resterende TypeScript-fouten zijn daarna hersteld. `npm run typecheck` controleert de webapp, buildhelpers en tests met TypeScript, Node-endpoints met een aparte `NodeNext`-configuratie, en alle Supabase-functies en gedeelde modules met Deno. Alle drie controles zijn verplicht vóór iedere productiebuild. De verouderde, niet-gerouteerde Community-pagina is verwijderd; `/community` blijft een 404 met `noindex`.
+
+## Dashboardwaardering — 3 oktober 2026
+
+Het menu **Likes & reviews** opent `/admin/reviews?view=insights`. Dit overzicht toont alle hotspots en losloopzones met huidige likes, nog aanwezige likes van de laatste 7/30 dagen, reviews over alle statussen, goedgekeurde scorebijdragen, aandachtspunten, goedgekeurde sterren en de laatste auteurbijdrage. Filters, sortering, paginering en CSV gebruiken dezelfde volledige servermomentopname. Iedere plek verwijst naar zijn gefilterde moderatielijst. Bij Zaken staan likes en reviews naast Bewaard; de hotspoteditor verwijst naar de cijfers en inzendingen van die plek.
+
+De private `admin_review_insights()` RPC (`20261003100000_admin_review_insights.sql`) aggregeert likes en reviews afzonderlijk, om vermenigvuldiging door joins te voorkomen. Hotspotsterren gebruiken de goedgekeurde versie en actieve accounts. Historische zonereviews volgen hun bestaande publieke scoreregels. Geschorste likes worden apart uitgesloten; concepten en gearchiveerde plekken blijven traceerbaar. De snapshot bevat geen accountidentiteiten. Alleen de bestaande, met beheertoegang beschermde `admin-reviews` functie kan het overzicht opvragen.
+
+De laatste bijdrage telt auteurversies mee, zonder dat moderatie of redactie de datum opschuift. Een verdwenen like of verwijderd hotspotaccount telt niet meer mee. Dit is de huidige stand, geen historiek van iedere likeactie. Laadfouten tonen geen nulwaarden; een mislukte verversing bewaart zichtbaar de vorige momentopname en blokkeert CSV totdat verversen lukt.
+
+Controle: `utils/reviewInsights.test.ts`, `supabase/tests/admin_review_insights.sql` (transactioneel teruggedraaid) en de uitgebreide `npm run test:admin` voor filters, links, cijfers bij Zaken, foutafhandeling en mobiele overflow. De publieke `/community` route blijft een 404 met `noindex`.
