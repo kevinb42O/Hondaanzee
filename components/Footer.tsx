@@ -3,9 +3,10 @@ import React from 'react';
 import { PawPrint, ExternalLink, Mail, Check, Bike, Caravan, Baby } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NotificationOptIn from './NotificationOptIn.tsx';
+import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
 
 const SHOW_FOOTER_WAVE = false;
-const LAST_UPDATE = { day: '14', month: 'september', year: '2026' };
+const [UPDATE_DAY, UPDATE_MONTH, UPDATE_YEAR] = SITE_UPDATE_LABEL.split(' ');
 
 const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 18, className }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -274,11 +275,11 @@ const Footer: React.FC = () => {
             </p>
             <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
               <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-black text-white">{LAST_UPDATE.day}</span>
-                <span className="text-sm font-bold text-cyan-400">{LAST_UPDATE.month}</span>
-                <span className="text-xs font-mono text-slate-400">{LAST_UPDATE.year}</span>
-              </div>
+              <time dateTime={SITE_UPDATE_DATE} className="flex items-baseline gap-2">
+                <span className="text-2xl font-black text-white">{UPDATE_DAY}</span>
+                <span className="text-sm font-bold text-cyan-400">{UPDATE_MONTH}</span>
+                <span className="text-xs font-mono text-slate-400">{UPDATE_YEAR}</span>
+              </time>
             </div>
             <div className="mt-4 w-full">
               <NotificationOptIn />

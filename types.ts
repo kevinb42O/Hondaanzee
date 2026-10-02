@@ -22,6 +22,8 @@ export interface Hotspot {
   websiteLabel?: string;
   sameAs?: string[];
   openingHours?: OpeningHours;
+  openingHoursNote?: string;
+  openingHoursWeatherDependent?: boolean;
 }
 
 export interface Service {

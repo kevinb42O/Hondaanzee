@@ -4,6 +4,7 @@ import type { City, Hotspot, OffLeashArea, OpeningHours, ReportItem, Service } f
 import type { PlaceKind } from './placeRoutes.ts';
 import { getCategoryMeta } from './reportHelpers.ts';
 import { getReportDetailPath } from './reportRoutes.ts';
+import { PAGE_UPDATED_DATES, SITE_UPDATE_DATE } from '../data/siteUpdates.ts';
 
 interface SEOProps {
   title: string;
@@ -143,7 +144,16 @@ export const useSEO = ({
     linkCanonical.setAttribute('href', resolvedCanonical);
 
     // Structured Data
-    if (structuredData) {
+    const pageModifiedDate = PAGE_UPDATED_DATES[location.pathname];
+    const pageSchema = pageModifiedDate ? {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': `${resolvedCanonical}#webpage`,
+      url: resolvedCanonical,
+      name: title,
+      dateModified: pageModifiedDate,
+    } : undefined;
+    if (structuredData || pageSchema) {
       let script = document.querySelector('script[type="application/ld+json"][data-dynamic]');
       if (!script) {
         script = document.createElement('script');
@@ -151,7 +161,9 @@ export const useSEO = ({
         (script as HTMLElement).dataset.dynamic = 'true';
         document.head.appendChild(script);
       }
-      script.textContent = JSON.stringify(structuredData);
+      script.textContent = JSON.stringify(pageSchema
+        ? [...(Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : []), pageSchema]
+        : structuredData);
     }
 
     // Cleanup: remove dynamic structured data so stale schemas don't persist
@@ -287,7 +299,7 @@ export const getPlaceSEO = (place: Place, city: City, kind: PlaceKind): SEOProps
       '@context': 'https://schema.org',
       '@type': schemaType,
       name: place.name,
-      description,
+      description: [description, 'openingHoursNote' in place && place.openingHoursNote].filter(Boolean).join(' '),
       url: canonical,
       image: [`https://hondaanzee.be${image}`],
       telephone: place.phone,
@@ -411,7 +423,7 @@ export const SEO_DATA = {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "dateModified": "2026-09-14",
+      "dateModified": SITE_UPDATE_DATE,
       "mainEntity": [
         {
           "@type": "Question",

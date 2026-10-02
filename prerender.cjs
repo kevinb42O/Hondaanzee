@@ -112,6 +112,11 @@ async function prerender() {
       // Wait a bit for React to finish rendering
       await page.waitForSelector('#root > *', { timeout: 10000 });
       await new Promise(r => setTimeout(r, 500));
+
+      if (route === '/') {
+        // Remove the moved hero with the DOM so nested markup cannot swallow #root.
+        await page.evaluate(() => document.getElementById('hero-prerender')?.remove());
+      }
       
       const html = await page.content();
       
@@ -138,11 +143,6 @@ async function prerender() {
       //    The homepage hero mounts the prerender div into the React hero section.
       //    Restore the original position in body for clean HTML output.
       if (route === '/') {
-        // Remove any duplicated hero-prerender inside #root
-        processedHtml = processedHtml.replace(
-          /<div id="hero-prerender"[^>]*>[\s\S]*?<\/div>\s*<\/div>/gi,
-          ''
-        );
         // Re-insert clean prerender hero before #root
         const heroHtml = `<div id="hero-prerender" style="position:fixed;inset:0;z-index:0;background:#0f172a">` +
           `<img srcset="/lexi-mobile.webp 800w, /lexi.webp 1920w" sizes="100vw" src="/lexi.webp" alt="Hond aan het strand" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync">` +

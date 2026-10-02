@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Sparkles, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrint, Rocket } from 'lucide-react';
 import { useSEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
 
 interface UpdateTag {
   label: string;
@@ -38,6 +39,16 @@ const VERSION_ACCENT: Record<string, string> = {
 };
 
 const releases: UpdateRelease[] = [
+  {
+    version: '2.8',
+    date: SITE_UPDATE_LABEL,
+    title: 'Seizoensuren La Potinière en actuele wijzigingsdatums',
+    subtitle: 'Duidelijke openingsuren voor het huidige seizoen en een bijgewerkte datum op de website',
+    entries: [
+      { text: 'La Potinière: maandag, dinsdag en vrijdag gesloten in dit seizoen; de overige dagen open van 11:00 tot 21:00, met vermelding van weersafhankelijke wijzigingen en de zomeruren', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Laatste update in de footer, wijzigingsdatums in de gestructureerde gegevens en relevante sitemapdatums bijgewerkt naar 2 oktober 2026', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
   {
     version: '2.7',
     date: '14 september 2026',
@@ -438,12 +449,12 @@ function getReleaseStyles(isLaunch: boolean, isNewest: boolean): ReleaseStyles {
 
 const Updates: React.FC = () => {
   useSEO({
-    title: 'Updates & Nieuwigheden — laatste update 14 september 2026 | HondAanZee.be',
-    description: 'Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 14 september 2026.',
-    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, strandregels, september 2026',
+    title: `Updates & Nieuwigheden — laatste update ${SITE_UPDATE_LABEL} | HondAanZee.be`,
+    description: `Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op ${SITE_UPDATE_LABEL}.`,
+    keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, strandregels, oktober 2026',
     canonical: 'https://hondaanzee.be/updates',
     ogType: 'article',
-    articleModifiedTime: '2026-09-14T00:00:00+02:00',
+    articleModifiedTime: `${SITE_UPDATE_DATE}T00:00:00+02:00`,
   });
 
   useEffect(() => {
@@ -477,7 +488,7 @@ const Updates: React.FC = () => {
             />
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
               <Sparkles size={14} />
-              Laatste grote update: vandaag
+              Laatste update: {SITE_UPDATE_LABEL}
             </div>
             <h1 className="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
               Wat is er{' '}

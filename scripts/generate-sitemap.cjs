@@ -1,11 +1,15 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { execSync } = require('node:child_process');
-const { getAllRoutes } = require('./place-data.cjs');
+const { getAllRoutes, PAGE_UPDATED_DATES } = require('./place-data.cjs');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const OUTPUT_PATH = path.join(ROOT_DIR, 'public', 'sitemap.xml');
-const TODAY = new Date().toISOString().slice(0, 10);
+const previousSitemap = fs.existsSync(OUTPUT_PATH) ? fs.readFileSync(OUTPUT_PATH, 'utf8') : '';
+const previousLastmods = new Map(
+  [...previousSitemap.matchAll(/<loc>https:\/\/hondaanzee\.be([^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)]
+    .map((match) => [match[1], match[2]]),
+);
 
 const STATIC_ROUTE_FILES = {
   '/': ['pages/Home.tsx', 'components/Footer.tsx'],
@@ -87,8 +91,21 @@ const getRouteFiles = (route) => {
   return [];
 };
 
-// Site-wide freshness refresh: all published routes were reviewed today.
-const getLastmodForRoute = () => TODAY;
+// Keep existing dates unless a page's content actually changed.
+const getLastmodForRoute = (route) => {
+  if (PAGE_UPDATED_DATES[route]) return PAGE_UPDATED_DATES[route];
+  if (previousLastmods.has(route)) return previousLastmods.get(route);
+  const files = getRouteFiles(route);
+  const cacheKey = files.join('|');
+  if (!lastmodCache.has(cacheKey)) {
+    const date = execSync('git log -1 --format=%cs' + (files.length ? ` -- ${files.join(' ')}` : ''), {
+      cwd: ROOT_DIR,
+      encoding: 'utf8',
+    }).trim();
+    lastmodCache.set(cacheKey, date);
+  }
+  return lastmodCache.get(cacheKey);
+};
 
 const uniqueRoutes = [...new Set(getAllRoutes())];
 

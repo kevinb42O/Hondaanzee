@@ -28,6 +28,11 @@ HOTSPOTS.forEach(spot => {
   if (spot.recommendationNote) content += `Aanrader omdat: ${spot.recommendationNote}\n`;
   if (spot.tags && spot.tags.length > 0) content += `Kenmerken: ${spot.tags.join(', ')}\n`;
   if (spot.website) content += `Website: ${spot.website}\n`;
+  if (spot.openingHoursNote) {
+    content += `Telefoon: ${spot.phone}\n`;
+    content += `Openingstijden: ${Object.entries(spot.openingHours).map(([day, hours]) => `${day}: ${hours ?? 'gesloten'}`).join('; ')}\n`;
+    content += `Opmerking openingsuren: ${spot.openingHoursNote}\n`;
+  }
   content += `\n`;
 });
 

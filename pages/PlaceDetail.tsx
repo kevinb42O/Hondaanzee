@@ -430,15 +430,17 @@ function isOpenNow(hours: OpeningHours): boolean {
 interface OpeningHoursBlockProps {
   hours: OpeningHours;
   accentLink: string;
+  note?: string;
+  weatherDependent?: boolean;
 }
 
-const OpeningHoursBlock: React.FC<OpeningHoursBlockProps> = ({ hours, accentLink }) => {
+const OpeningHoursBlock: React.FC<OpeningHoursBlockProps> = ({ hours, accentLink, note, weatherDependent }) => {
   const todayKey = getTodayKey();
   const previousDayKey = getPreviousDayKey(todayKey);
   const todayValue = hours[todayKey];
   const previousDayValue = hours[previousDayKey];
   const openNow = isOpenNow(hours);
-  const showStatus = todayValue !== undefined || previousDayValue !== undefined;
+  const showStatus = !weatherDependent && (todayValue !== undefined || previousDayValue !== undefined);
 
   return (
     <div className="mb-4 rounded-2xl border border-slate-200 p-4">
@@ -479,6 +481,7 @@ const OpeningHoursBlock: React.FC<OpeningHoursBlockProps> = ({ hours, accentLink
           );
         })}
       </ul>
+      {note && <p className="mt-3 text-sm leading-relaxed text-slate-600">{note}</p>}
     </div>
   );
 };
@@ -664,8 +667,13 @@ const PlaceDetail: React.FC<PlaceDetailProps> = ({ kind }) => {
         </a>
       )}
 
-      {place.openingHours && (
-        <OpeningHoursBlock hours={place.openingHours} accentLink={accents.link} />
+      {'openingHours' in place && place.openingHours && (
+        <OpeningHoursBlock
+          hours={place.openingHours}
+          accentLink={accents.link}
+          note={place.openingHoursNote}
+          weatherDependent={place.openingHoursWeatherDependent}
+        />
       )}
 
       {place.website && (
