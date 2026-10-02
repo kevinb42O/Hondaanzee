@@ -58,7 +58,7 @@ const { HOTSPOTS } = require('./place-data.cjs');
         await page.waitForFunction(() => window.__analytics.some(x => x.type === 'event'));
         let event = await page.evaluate(() => window.__analytics.find(x => x.type === 'event'));
         assert.deepEqual(event.data, { zaak: '/blankenberge/hotspots/lakaiann', actie: 'website' });
-        await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('main > div')).opacity) > .99);
+        await page.waitForFunction(() => [...document.querySelectorAll('[data-place-gallery] img')].every(img => img.complete && img.naturalWidth > 0));
         await page.screenshot({ path: path.join(process.env.TMPDIR || '/tmp', 'hondaanzee-place-desktop.png'), fullPage: false });
         await page.evaluate(() => document.querySelector('a[href="/hotspots"]').click());
         await page.waitForFunction(() => location.pathname === '/hotspots' && document.querySelector('h1')?.textContent.includes('Hotspots'));
@@ -78,8 +78,51 @@ const { HOTSPOTS } = require('./place-data.cjs');
         assert(size.content <= size.width, `Mobile overflow: ${JSON.stringify(size)}`);
         await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('main > div')).opacity) > .99);
         await page.screenshot({ path: path.join(process.env.TMPDIR || '/tmp', 'hondaanzee-place-mobile.png'), fullPage: false });
+        const examples = [
+            { route: '/blankenberge/hotspots/lakaiann', category: 'food', heading: 'Voor je bezoek', title: 'Lakaiann' },
+            { route: '/nieuwpoort/hotspots/dune-hotel-nieuwpoort', category: 'stay', heading: 'Voor je verblijf', title: 'Dune Hotel Nieuwpoort' },
+            { route: '/oostende/diensten/dierenarts-frederik-galle', category: 'care', heading: 'Afspraak & consultatie', title: 'Dierenarts Frederik Galle' },
+        ];
+        for (const width of [390, 1440]) {
+            await page.setViewport({ width, height: width === 390 ? 844 : 1000 });
+            for (const example of examples) {
+                await page.goto(base + example.route);
+                await page.waitForFunction(title => document.querySelector('h1')?.textContent === title, {}, example.title);
+                await page.waitForFunction(() => [...document.querySelectorAll('[data-place-gallery] img')].every(img => img.complete && img.naturalWidth > 0));
+                assert.equal(await page.$eval('[data-place-category]', el => el.dataset.placeCategory), example.category);
+                assert.equal(await page.$eval('#practical-title', el => el.textContent), example.heading);
+                const layout = await page.evaluate(() => ({
+                    width: innerWidth, content: document.documentElement.scrollWidth,
+                    actions: document.querySelector('[data-place-actions]').getBoundingClientRect().bottom,
+                    about: document.querySelector('#over-de-zaak').getBoundingClientRect().top,
+                    text: document.querySelector('main').textContent,
+                }));
+                assert(layout.content <= layout.width, `Overflow: ${example.route} at ${width}`);
+                assert(layout.actions < layout.about, 'Contact actions must precede the long description');
+                assert(!layout.text.includes('Binnen zonder gedoe') && !layout.text.includes('Snel medische hulp'), 'Unsupported defaults must not return');
+                assert(!layout.text.includes('Nu open') && !layout.text.includes('Nu gesloten'), 'Static HTML must not show a stale live status');
+                // Load offscreen photos for the full-page visual audit only.
+                await page.evaluate(async () => {
+                    const images = [...document.querySelectorAll('main img')];
+                    images.forEach(img => { img.loading = 'eager'; });
+                    await Promise.all(images.map(img => img.decode()));
+                    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                });
+                await page.screenshot({ path: path.join(process.env.TMPDIR || '/tmp', `hondaanzee-${example.category}-${width}.png`), fullPage: true });
+                await page.screenshot({ path: path.join(process.env.TMPDIR || '/tmp', `hondaanzee-${example.category}-${width}-top.png`), fullPage: false });
+            }
+        }
+        await page.goto(base + examples[0].route);
+        await page.waitForSelector('[data-place-gallery] button');
+        await page.click('[data-place-gallery] button');
+        await page.waitForSelector('dialog[open]');
+        assert.equal(await page.$eval('dialog img', img => img.getAttribute('src')), HOTSPOTS[0].images[0]);
+        await page.click('button[aria-label="Volgende afbeelding"]');
+        assert.equal(await page.$eval('dialog img', img => img.getAttribute('src')), HOTSPOTS[0].images[1]);
+        await page.keyboard.press('Escape');
+        await page.waitForFunction(() => !document.querySelector('dialog[open]'));
         assert.deepEqual(errors, []);
-        console.log('Browser: unique pageviews on SPA navigation, website event, invalid/valid routes, mobile layout: OK. No runtime errors.');
+        console.log('Browser: pageviews, contact event, invalid/valid routes, all 3 category layouts on desktop/mobile, factual defaults and keyboard photo gallery: OK. No runtime errors.');
     }
     finally {
         await b.close();

@@ -42,7 +42,21 @@ npm run test:places
 
 De controles verifiëren alle 157 HTML-bestanden en testen in Chromium ook inhoud zonder JavaScript, navigatie tussen zaken, pageviews, een websiteklik, foutieve routes en een mobiel scherm. Alle bestaande zaak-URLs en hun zakelijke gegevens zijn behouden.
 
-De broncode en lokale build zijn bijgewerkt. Publicatie en controle van de echte Vercel Analytics-data vereisen een Vercel-deployment; de lokale browsercontrole bewijst de SDK-aanroepen, geen ontvangst in het productie-dashboard. Google beslist uiteindelijk over crawling, indexering en ranking; [technisch correcte pagina’s bieden geen indexeringsgarantie](https://developers.google.com/search/docs/fundamentals/how-search-works).
+Publicatie verloopt rechtstreeks via de Vercel Git-integratie bij een push naar `main`. Er zijn geen GitHub Actions nodig; de oude GitHub Pages-workflow is verwijderd. Vercel voert de productiebuild en de controle van alle statische zaakpagina’s zelf uit. De lokale browsercontrole bewijst de SDK-aanroepen, geen ontvangst in het productie-dashboard. Google beslist uiteindelijk over crawling, indexering en ranking; [technisch correcte pagina’s bieden geen indexeringsgarantie](https://developers.google.com/search/docs/fundamentals/how-search-works).
+
+## Presentatie per zaaktype
+
+`pages/PlaceDetail.tsx` gebruikt gedeelde onderdelen in `components/places/` voor contactacties, fotografie, hondeninformatie, praktische gegevens en suggesties. `utils/placePresentation.ts` onderscheidt eten en drinken, verblijven, dierenartsen en winkels. Dezelfde gegevens voeden zowel de React-pagina als de statische HTML.
+
+- Website, route en eventueel bellen staan vóór de lange beschrijving, ook op mobiel.
+- De fotogalerij heeft één vaste hoofdfoto en maximaal drie thumbnails. Alle foto's blijven bereikbaar in de toegankelijke beeldviewer; er is geen automatische carrousel.
+- Hondenkenmerken komen uitsluitend uit de ingevulde labels. Een terras of waterbak impliceert geen toegang binnen. Ontbrekende voorwaarden worden als ontbrekend vermeld.
+- Alleen een ingevulde `recommendationNote` verschijnt als redactionele tip. Een label `Aanrader` genereert geen aanbevelingsverhaal of kwaliteitsclaim.
+- De praktische informatie verschilt per categorie: bezoek, verblijf, consultatie of winkelbezoek. De websiteknop belooft geen boekings- of afspraakfunctie die de link niet biedt.
+- Openingstijden worden getoond zoals ingevuld, zonder tijdafhankelijke `Nu open`-status in de statische HTML.
+- De originele beschrijvingen blijven behouden. De drie ontwerpvoorbeelden hebben korte introducties op basis van bestaande gegevens; er is geen algemene inhoudsverrijking of verificatie van alle zaken uitgevoerd.
+
+De inhoudsvingerafdruk voor de wijzigingsdatum omvat ook de gedeelde presentatie-onderdelen. De browsercontrole test koffiebar, hotel en dierenarts op mobiel en desktop, zonder horizontale overflow, plus de fotoviewer en navigatie met toetsenbord.
 
 ## Google Search Console: één sitemap voor alle zaken
 

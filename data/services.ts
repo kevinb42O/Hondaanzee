@@ -6,6 +6,7 @@ export const SERVICES: Service[] = [
     id: 1,
     slug: 'dierenarts-frederik-galle',
     name: 'Dierenarts Frederik Galle',
+    summary: 'Dierenartsenpraktijk aan de Onafhankelijkheidsstraat in Oostende. Consultatie op afspraak.',
     type: 'Dierenarts',
     description: 'Moderne dierenartsenpraktijk waar persoonlijke aanpak en het welzijn van uw huisdier centraal staan.',
     tags: ['Hondvriendelijk team', 'Indoor toegelaten', 'Consultatie op afspraak'],

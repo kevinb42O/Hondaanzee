@@ -207,13 +207,13 @@ export default {
   },
   "/blankenberge/hotspots/lakaiann": {
     "title": "Lakaiann in Blankenberge | HondAanZee.be",
-    "description": "Lakaiann in Blankenberge. Zonder twijfel de meest hondvriendelijke hotspot op de Zeedijk! Hier word je met open armen ontvangen door de allerliefste eigenaars…",
+    "description": "Lakaiann in Blankenberge. Koffiebar en winkel op de Zeedijk, met specialty coffee, een waterbak en hondensnacks.",
     "image": "https://hondaanzee.be/lakaiannfinal.webp",
     "imageAlt": "Lakaiann in Blankenberge | HondAanZee.be"
   },
   "/nieuwpoort/hotspots/dune-hotel-nieuwpoort": {
     "title": "Dune Hotel Nieuwpoort in Nieuwpoort | HondAanZee.be",
-    "description": "Dune Hotel Nieuwpoort in Nieuwpoort. Het Dune Hotel staat bekend om het prachtige uitzicht vanuit de hotelkamers. Word uitgerust wakker, omgeven door de natuur, en…",
+    "description": "Dune Hotel Nieuwpoort in Nieuwpoort. Verblijf aan het Nieuwlandplein in Nieuwpoort, met honden op de kamer, ontbijt en gratis parking.",
     "image": "https://hondaanzee.be/dunehotel.webp",
     "imageAlt": "Dune Hotel Nieuwpoort in Nieuwpoort | HondAanZee.be"
   },
@@ -1005,7 +1005,7 @@ export default {
   },
   "/oostende/diensten/dierenarts-frederik-galle": {
     "title": "Dierenarts Frederik Galle in Oostende | HondAanZee.be",
-    "description": "Dierenarts Frederik Galle in Oostende. Moderne dierenartsenpraktijk waar persoonlijke aanpak en het welzijn van uw huisdier centraal staan.",
+    "description": "Dierenarts Frederik Galle in Oostende. Dierenartsenpraktijk aan de Onafhankelijkheidsstraat in Oostende. Consultatie op afspraak.",
     "image": "https://hondaanzee.be/dierenartsfredericgalle.webp",
     "imageAlt": "Dierenarts Frederik Galle in Oostende | HondAanZee.be"
   },
