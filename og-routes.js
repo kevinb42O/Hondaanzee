@@ -121,10 +121,10 @@ export default {
     "imageAlt": "Goed om te Weten | Veiligheid, EHBO & Etiquette voor Honden aan het Strand – HondAanZee.be"
   },
   "/zaak-aanmelden": {
-    "title": "Zaak Aanmelden | HondAanZee.be",
-    "description": "Heb jij een hondvriendelijke zaak aan de Belgische kust? Ontdek waarom een vermelding op HondAanZee.be interessant is en meld je zaak aan via WhatsApp of e-mail.",
+    "title": "Gratis je zaak aanmelden | HondAanZee.be",
+    "description": "Zijn honden welkom in jouw zaak aan de Belgische kust? Meld je gratis aan. Vertel ons over je zaak, maak kennis met Kevin en Jax en krijg een plek in onze gids.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
-    "imageAlt": "Zaak Aanmelden | HondAanZee.be"
+    "imageAlt": "Gratis je zaak aanmelden | HondAanZee.be"
   },
   "/privacy": {
     "title": "Privacybeleid | HondAanZee.be",

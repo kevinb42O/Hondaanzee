@@ -34,7 +34,7 @@ const STATIC_ROUTE_FILES = {
   '/over-ons': ['pages/About.tsx'],
   '/goed-om-te-weten': ['pages/GoedOmTeWeten.tsx', 'components/goed-om-te-weten/EtiquetteSection.tsx', 'components/goed-om-te-weten/NatuurSection.tsx', 'data/beachRules.ts', 'data/beachSafety.ts'],
   '/steun-ons': ['pages/Support.tsx'],
-  '/zaak-aanmelden': ['pages/ZaakAanmelden.tsx'],
+  '/zaak-aanmelden': ['pages/ZaakAanmelden.tsx', 'pages/ZaakAanmelden.css'],
   '/privacy': ['pages/Privacy.tsx'],
   '/algemene-voorwaarden': ['pages/Terms.tsx'],
   '/cookies': ['pages/Cookies.tsx'],

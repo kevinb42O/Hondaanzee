@@ -34,7 +34,7 @@ const server = createServer((req, res) => {
     page.on('request', req => req.url().startsWith(base) ? req.continue() : req.abort());
     await page.setViewport({ width: 1440, height: 1000 });
     const examples = ['/', '/koksijde', '/de-panne', '/blog', routes.find(r => r.startsWith('/blog/')),
-      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/agenda/fotoshoot-de-haan-2026', '/agenda/hondenwandeling-bredene-2027', '/agenda/zeeuwse-winterfair-2026', '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons'];
+      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/agenda/fotoshoot-de-haan-2026', '/agenda/hondenwandeling-bredene-2027', '/agenda/zeeuwse-winterfair-2026', '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons', '/zaak-aanmelden'];
     const titles = new Map();
     await page.setJavaScriptEnabled(false);
     for (const route of examples) {
@@ -76,7 +76,10 @@ const server = createServer((req, res) => {
     for (const route of examples) {
       await page.goto(base + route);
       await page.waitForFunction(() => document.querySelector('main') && !document.querySelector('#root[data-static-page]'));
-      await page.waitForNetworkIdle({ idleTime: 100, timeout: 10000 });
+      await page.waitForNetworkIdle({ idleTime: 100, timeout: 10000 }).catch(error => {
+        error.message += ` (public route: ${route})`;
+        throw error;
+      });
       assert.equal(await page.title(), titles.get(route), `Initial and client title mismatch: ${route}`);
       assert.equal(await page.$eval('link[rel=canonical]', el => el.href), `https://hondaanzee.be${route}`);
     }

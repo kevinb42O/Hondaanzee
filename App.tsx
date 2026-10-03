@@ -223,7 +223,7 @@ const AppContent = () => {
           </Suspense>
         </LocationAwareErrorBoundary>
       </main>
-      {!isAdminRoute && !isMemberRoute && (
+      {!isAdminRoute && !isMemberRoute && pathname !== '/zaak-aanmelden' && (
         <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
           <ResponsibilityBanner />
         </Suspense>
@@ -233,8 +233,8 @@ const AppContent = () => {
           {isMemberRoute ? <footer className="member-site-footer"><div><span>Hond aan Zee <small>· Voor honden, baasjes en fijne dagen.</small></span><nav aria-label="Account voettekst"><a href="/privacy">Privacy</a><a href="/algemene-voorwaarden">Voorwaarden</a><a href="/over-ons">Over ons</a></nav></div></footer> : <Footer />}
         </Suspense>
       )}
-      {!isAdminRoute && !isMemberRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
-      {!isAdminRoute && <ScrollToTop />}
+      {!isAdminRoute && !isMemberRoute && pathname !== '/zaak-aanmelden' && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
+      {!isAdminRoute && pathname !== '/zaak-aanmelden' && <ScrollToTop />}
       <SiteMeasurement />
       {!isAdminRoute && !isMemberRoute && <Analytics route={getAnalyticsPath(pathname)} path={getAnalyticsPath(pathname)} beforeSend={normalizeAnalyticsEvent} />}
     </div>

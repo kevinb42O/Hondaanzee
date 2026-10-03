@@ -60,7 +60,7 @@ export function renderPublicRoute(route: string) {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            <ResponsibilityBanner />
+            {route !== '/zaak-aanmelden' && <ResponsibilityBanner />}
             <Footer />
           </div>
         </StaticRouter>
