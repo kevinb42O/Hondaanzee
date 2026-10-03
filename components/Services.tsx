@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Stethoscope, ShoppingBag, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { SERVICES } from '../constants.ts';
-import { City, Service } from '../types.ts';
+import { City } from '../types.ts';
 import { getServiceDetailPath } from '../utils/placeRoutes.ts';
 import SavePlaceButton from './member/SavePlaceButton.tsx';
 
@@ -30,14 +30,6 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
   const allCityServices = SERVICES.filter(service => service.city === city.slug);
   const uniqueTypes = Array.from(new Set(allCityServices.map(s => s.type)));
   const filterOptions = ['Alles', ...uniqueTypes];
-  const topPicks = [...allCityServices]
-    .sort((a, b) => {
-      const aRecommended = a.tags.includes('Aanrader') ? 1 : 0;
-      const bRecommended = b.tags.includes('Aanrader') ? 1 : 0;
-      if (bRecommended !== aRecommended) return bRecommended - aRecommended;
-      return a.name.localeCompare(b.name, 'nl');
-    })
-    .slice(0, 3);
 
   const cityServices = allCityServices
     .filter(service => {
@@ -53,30 +45,17 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
   if (allCityServices.length === 0) return null;
 
   return (
-    <section id="diensten" className="py-10 sm:py-12 md:py-24 bg-slate-50 scroll-mt-24">
-      <div className="site-shell">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 md:mb-14 gap-4">
+    <section id="diensten" className="city-section city-services scroll-mt-28">
+      <div className="city-shell">
+        <div className="city-section-heading city-section-heading-row">
           <div className="max-w-xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Praktische Diensten in {city.name}</h2>
-            <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Dierenartsen en winkels waar jij en je hond met een gerust hart terecht kunt.</p>
-            {topPicks.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {topPicks.map((service) => (
-                  <Link
-                    key={service.slug}
-                    to={getServiceDetailPath(service)}
-                    className="text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] text-emerald-700 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-full hover:bg-emerald-100 transition-colors"
-                  >
-                    {service.name}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <h2 className="city-section-title">Praktische diensten in {city.name}</h2>
+            <p className="city-body-copy">Dierenartsen en winkels waar jij en je hond met een gerust hart terecht kunt.</p>
           </div>
           {allCityServices.length > 3 && (
             <Link
               to="/diensten"
-              className="flex items-center gap-2 text-emerald-600 font-bold hover:gap-3 transition-all text-sm md:text-base active:opacity-70 touch-target"
+              className="city-text-link"
             >
               Bekijk alle diensten <ChevronRight size={18} />
             </Link>
@@ -85,16 +64,13 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
 
         {/* Filter Buttons */}
         {uniqueTypes.length > 1 && (
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10">
+          <div className="city-filters" role="group" aria-label="Filter op type locatie">
             {filterOptions.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
-                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all active:scale-95 ${
-                  selectedFilter === filter
-                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
+                className="city-filter"
+                aria-pressed={selectedFilter === filter}
               >
                 {filter}
               </button>
@@ -104,7 +80,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
 
         {cityServices.length > 0 ? (
         <>
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
+        <div ref={gridRef} className="city-places-grid city-services-grid">
           {(showAll ? cityServices : cityServices.slice(0, INITIAL_SHOW)).map((service) => (
             <div key={service.id} className="relative flex">
                 <SavePlaceButton compact place={{ kind: 'service', city_slug: service.city, place_slug: service.slug }} className="absolute right-3 top-3 z-10" />
@@ -113,7 +89,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                 state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col w-full"
               >
-                <div className="relative aspect-[16/9] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-emerald-100">
+                <div className="city-place-image">
                   <img
                     src={service.image}
                     alt={service.name}
@@ -149,9 +125,9 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                   {service.address && (
                     <p className="text-slate-400 text-[10px] sm:text-xs mb-2 font-medium">{service.address}</p>
                   )}
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-                    {service.tags.filter(tag => tag !== 'Aanrader').map((tag) => (
-                      <span key={tag} className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black bg-emerald-50 text-emerald-700 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-emerald-100">
+                  <div className="city-place-tags">
+                    {service.tags.filter(tag => tag !== 'Aanrader').slice(0, 3).map((tag) => (
+                      <span key={tag}>
                         {tag}
                       </span>
                     ))}
@@ -172,7 +148,7 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
                 }
                 setShowAll(!showAll);
               }}
-              className="group flex items-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm sm:text-base bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 border-2 border-transparent hover:border-emerald-200 transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+              className="city-button"
             >
               {showAll ? (
                 <>
@@ -190,10 +166,10 @@ const Services: React.FC<ServicesProps> = ({ city }) => {
         )}
         </>
         ) : (
-          <div className="bg-white border-2 border-slate-200 rounded-3xl p-8 sm:p-12 text-center">
+          <div className="city-empty-state">
             <div className="max-w-lg mx-auto">
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">Geen {selectedFilter} in {city.name}</h3>
-              <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">
+              <p className="city-body-copy">
                 Er zijn momenteel geen diensten van het type "{selectedFilter}" in {city.name}. Probeer een ander filter.
               </p>
             </div>

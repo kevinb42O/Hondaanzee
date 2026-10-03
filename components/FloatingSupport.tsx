@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Bone } from 'lucide-react';
+import { CITIES } from '../cityData.ts';
 
 export const FloatingSupport: React.FC = () => {
     const location = useLocation();
 
     // Don't show on homepage, /steun-ons and /over-ons pages
-    if (location.pathname === '/' || location.pathname === '/steun-ons' || location.pathname === '/over-ons') {
+    if (location.pathname === '/' || location.pathname === '/steun-ons' || location.pathname === '/over-ons' || CITIES.some(city => location.pathname === `/${city.slug}`)) {
         return null;
     }
 

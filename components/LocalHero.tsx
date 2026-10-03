@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ExternalLink, MapPin } from 'lucide-react';
+import { ArrowRight, ExternalLink, MapPin } from 'lucide-react';
 import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { Hotspot, Service } from '../types.ts';
 import { getPlaceDetailPath } from '../utils/placeRoutes.ts';
@@ -8,11 +8,12 @@ import { getPlaceDetailPath } from '../utils/placeRoutes.ts';
 interface LocalHeroProps {
   citySlug: string;
   cityName: string;
+  compact?: boolean;
 }
 
 type Place = (Hotspot | Service) & { _source: 'hotspot' | 'service' };
 
-const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
+const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName, compact = false }) => {
   const location = useLocation();
 
   // Combine hotspots + services for this city, tag with source
@@ -34,6 +35,18 @@ const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
 
   const isAanrader = hero.tags.includes('Aanrader');
   const accentColor = hero._source === 'hotspot' ? 'sky' : 'emerald';
+
+  if (compact) return (
+    <Link to={getPlaceDetailPath(hero, hero._source)} state={{ from: `${location.pathname}${location.search}${location.hash}` }} className="city-local-tip group">
+      <img src={hero.image} alt={hero.name} width={88} height={88} loading="lazy" decoding="async" style={{ objectPosition: hero.imagePosition || 'center' }} />
+      <div className="min-w-0">
+        <p className="city-eyebrow">Lokale tip in {cityName}</p>
+        <h3 className="group-hover:text-sky-700">{hero.name}</h3>
+        <p className="line-clamp-2">{hero.description}</p>
+        <span className="city-text-link">Ontdek deze plek <ArrowRight size={15} aria-hidden="true" /></span>
+      </div>
+    </Link>
+  );
 
   return (
     <>

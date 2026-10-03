@@ -4,9 +4,10 @@ import React, { useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Star, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
-import { City, Hotspot } from '../types.ts';
+import { City } from '../types.ts';
 import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
 import SavePlaceButton from './member/SavePlaceButton.tsx';
+import LocalHero from './LocalHero.tsx';
 
 const HOTSPOT_WHATSAPP_MESSAGE = `Dag! 👋\n\nIk ben een hondvriendelijke ondernemer en ik zou graag mijn zaak op hondaanzee.be laten tonen bij de hotspots.\n\nKun je me meer info geven over de mogelijkheden?\n\nBedankt!`;
 
@@ -42,14 +43,6 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
     ...(hasShoppenTag ? ['Shoppen'] : []),
   ]));
   const filterOptions = ['Alles', ...uniqueTypes];
-  const topPicks = [...allCityHotspots]
-    .sort((a, b) => {
-      const aRecommended = a.tags.includes('Aanrader') ? 1 : 0;
-      const bRecommended = b.tags.includes('Aanrader') ? 1 : 0;
-      if (bRecommended !== aRecommended) return bRecommended - aRecommended;
-      return a.name.localeCompare(b.name, 'nl');
-    })
-    .slice(0, 3);
 
   const cityHotspots = HOTSPOTS
     .filter(spot => {
@@ -64,29 +57,16 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
     });
 
   return (
-    <section id="hotspots" className="py-10 sm:py-12 md:py-24 bg-white scroll-mt-24">
-      <div className="site-shell">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 md:mb-14 gap-4">
+    <section id="hotspots" className="city-section city-hotspots scroll-mt-28">
+      <div className="city-shell">
+        <div className="city-section-heading city-section-heading-row">
           <div className="max-w-xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Hondvriendelijke Hotspots in {city.name}</h2>
-            <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">Geen gedoe aan de deur. Hier zijn jij en je kwispelende vriend meer dan welkom voor koffie, lunch of een verblijf.</p>
-            {topPicks.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {topPicks.map((spot) => (
-                  <Link
-                    key={spot.slug}
-                    to={getHotspotDetailPath(spot)}
-                    className="text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] text-sky-700 bg-sky-50 border border-sky-100 px-3 py-1.5 rounded-full hover:bg-sky-100 transition-colors"
-                  >
-                    {spot.name}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <h2 className="city-section-title">Hondvriendelijke hotspots in {city.name}</h2>
+            <p className="city-body-copy">Geen gedoe aan de deur. Hier zijn jij en je kwispelende vriend meer dan welkom voor koffie, lunch of een verblijf.</p>
           </div>
           <Link
             to="/hotspots"
-            className="flex items-center gap-2 text-sky-600 font-bold hover:gap-3 transition-all text-sm md:text-base active:opacity-70 touch-target"
+            className="city-text-link"
           >
             Bekijk alle locaties <ChevronRight size={18} />
           </Link>
@@ -94,16 +74,13 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
 
         {/* Filter Buttons */}
         {allCityHotspots.length > 0 && (
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10">
+          <div className="city-filters" role="group" aria-label="Filter op type locatie">
             {filterOptions.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
-                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm transition-all active:scale-95 ${
-                  selectedFilter === filter
-                    ? 'bg-sky-600 text-white shadow-lg shadow-sky-200'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
+                className="city-filter"
+                aria-pressed={selectedFilter === filter}
               >
                 {filter}
               </button>
@@ -113,7 +90,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
 
         {cityHotspots.length > 0 ? (
           <>
-          <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
+          <div ref={gridRef} className="city-places-grid">
             {(showAll ? cityHotspots : cityHotspots.slice(0, INITIAL_SHOW)).map((spot) => (
               <div key={spot.id} className="relative flex">
                 <SavePlaceButton compact place={{ kind: 'hotspot', city_slug: spot.city, place_slug: spot.slug }} className="absolute right-3 top-3 z-10" />
@@ -122,7 +99,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                   state={{ from: `${location.pathname}${location.search}${location.hash}` }}
                   className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col w-full"
                 >
-                  <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
+                  <div className="city-place-image">
                     <img
                       src={spot.image}
                       alt={spot.name}
@@ -159,12 +136,9 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                     {spot.address && (
                       <p className="text-slate-400 text-[10px] sm:text-xs mb-2 font-medium">{spot.address}</p>
                     )}
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-                      {spot.tags.filter(tag => tag !== 'Aanrader').map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-widest font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border bg-sky-50 text-sky-600 border-sky-100"
-                        >
+                    <div className="city-place-tags">
+                      {spot.tags.filter(tag => tag !== 'Aanrader').slice(0, 3).map((tag) => (
+                        <span key={tag}>
                           {tag}
                         </span>
                       ))}
@@ -185,7 +159,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                   }
                   setShowAll(!showAll);
                 }}
-                className="group flex items-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm sm:text-base bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-sky-700 border-2 border-transparent hover:border-sky-200 transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+                className="city-button"
               >
                 {showAll ? (
                   <>
@@ -205,10 +179,10 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
         ) : (
           <>
             {selectedFilter !== 'Alles' && allCityHotspots.length > 0 ? (
-              <div className="bg-slate-50 border-2 border-slate-200 rounded-3xl p-8 sm:p-12 text-center">
+              <div className="city-empty-state">
                 <div className="max-w-lg mx-auto">
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">Geen {selectedFilter} in {city.name}</h3>
-                  <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-base">
+                  <p className="city-body-copy">
                     Er zijn momenteel geen hotspots van het type "{selectedFilter}" in {city.name}. Probeer een ander filter of bekijk alle locaties.
                   </p>
                 </div>
@@ -218,7 +192,7 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
                 href={`https://wa.me/32494816714?text=${encodeURIComponent(HOTSPOT_WHATSAPP_MESSAGE)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-8 sm:p-12 md:p-16 text-center hover:border-sky-300 hover:bg-sky-50/30 transition-all cursor-pointer group"
+                className="block city-empty-state group"
               >
                 <div className="max-w-lg mx-auto">
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-sky-600 transition-colors">Wil je jouw zaak hier tonen?</h3>
@@ -238,8 +212,8 @@ const Hotspots: React.FC<HotspotsProps> = ({ city }) => {
             )}
           </>
         )}
+        <LocalHero compact citySlug={city.slug} cityName={city.name} />
       </div>
-
     </section>
   );
 };

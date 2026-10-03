@@ -23,6 +23,7 @@
     "typecheck:api": "tsc --project tsconfig.api.json",
     "test:events": "vitest run utils/events.test.ts && node scripts/verify-event-pages.cjs",
     "test:beaches": "vitest run utils/rules.test.ts && node scripts/verify-beach-pages.cjs",
+    "test:cities": "node scripts/check-city-layout.cjs",
     "test:agenda-admin": "vitest run utils/adminEvents.test.ts && node scripts/check-agenda-admin.cjs && node scripts/check-event-actions.cjs"
   },
   "dependencies": {

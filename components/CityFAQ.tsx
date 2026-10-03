@@ -13,38 +13,38 @@ const CityFAQ: React.FC<CityFAQProps> = ({ city }) => {
   const faqEntries = useMemo(() => buildCityFAQEntries(city), [city]);
 
   return (
-    <section className="py-10 sm:py-12 md:py-16 bg-slate-50 border-y border-slate-200" aria-labelledby="city-faq-title">
-      <div className="max-w-3xl mx-auto px-4 md:px-6">
-        <div className="mb-6 sm:mb-8 text-center">
-          <h2 id="city-faq-title" className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-            Snelle FAQ voor {city.name}
+    <section className="city-section city-faq" aria-labelledby="city-faq-title">
+      <div className="city-shell">
+        <div className="city-section-heading">
+          <h2 id="city-faq-title" className="city-section-title">
+            Veelgestelde vragen over {city.name}
           </h2>
-          <p className="text-slate-600 mt-2 sm:mt-3 font-medium text-sm sm:text-base">
-            Alle antwoorden hieronder komen rechtstreeks uit de gegevens op deze pagina.
+          <p className="city-body-copy">
+            Nog iets weten voor je vertrekt? Hier vind je de antwoorden voor jouw bestemming.
           </p>
         </div>
 
-        <div className="space-y-3 sm:space-y-4">
+        <div className="city-faq-list">
           {faqEntries.map((entry, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <article key={entry.question} className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+              <article key={entry.question} className="city-faq-item">
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-start gap-3 sm:gap-4 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 rounded-2xl"
+                  className="city-faq-question"
                   aria-expanded={isOpen}
                   aria-controls={`city-faq-answer-${index}`}
                 >
-                  <span className="text-slate-900 font-extrabold text-sm sm:text-base leading-relaxed flex-1">{entry.question}</span>
+                  <span className="flex-1">{entry.question}</span>
                   <ChevronDown
                     size={22}
                     className={`mt-0.5 shrink-0 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
                     aria-hidden="true"
                   />
                 </button>
-                  <div id={`city-faq-answer-${index}`} hidden={!isOpen} className="px-5 sm:px-6 pb-4 sm:pb-5 text-slate-600 font-medium text-sm sm:text-base leading-relaxed">
+                  <div id={`city-faq-answer-${index}`} hidden={!isOpen} className="city-faq-answer">
                     {entry.answer}
                   </div>
               </article>

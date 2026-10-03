@@ -4,17 +4,12 @@ import { Heart, ArrowRight } from 'lucide-react';
 import { trackSupportAction } from '../utils/supportAnalytics.ts';
 
 export default function SupportPrompt({ cityName }: { cityName: string }) {
-  return <aside aria-label="Help de gids onderhouden" className="mx-auto mt-6 max-w-3xl rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-    <div className="flex items-start gap-3">
-      <Heart size={18} className="mt-0.5 shrink-0 text-amber-600" aria-hidden="true" />
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-bold text-slate-900">Geholpen met je uitstap naar {cityName}?</p>
-        <p className="mt-1 text-sm leading-relaxed text-slate-600">Fijn als de info je op weg heeft geholpen. Wil je iets terugdoen? Met een bijdrage help je me HondAanZee te blijven bijhouden.</p>
-        <Link to="/steun-ons" onClick={() => trackSupportAction('steunvraag')}
-          className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-sky-700 hover:underline">
-          Help de gids bijhouden <ArrowRight size={14} aria-hidden="true" />
-        </Link>
-      </div>
-    </div>
+  return <aside aria-label="Help de gids onderhouden">
+    <p className="city-eyebrow"><Heart size={15} aria-hidden="true" />Help de gids onderhouden</p>
+    <h2 className="city-small-title">Geholpen met je uitstap naar {cityName}?</h2>
+    <p className="city-body-copy">Met een bijdrage help je me HondAanZee te blijven bijhouden, zodat jij en je hond met een gerust hart op pad kunnen.</p>
+    <Link to="/steun-ons" onClick={() => trackSupportAction('steunvraag')} className="city-text-link">
+      Help de gids bijhouden <ArrowRight size={16} aria-hidden="true" />
+    </Link>
   </aside>;
 }

@@ -12,8 +12,8 @@ export const BeachRuleSources = ({ city }: { city: City }) => (
   </div>
 );
 export const BeachRulesOverview = ({ city }: { city: City }) => (
-  <details className="mt-5 rounded-3xl border border-slate-200 bg-white p-5 sm:p-8 text-slate-800" data-beach-annual-reference>
-    <summary className="min-h-[44px] cursor-pointer py-2 text-lg font-extrabold sm:text-xl">Volledige jaarregeling voor {city.name}</summary>
+  <details className="city-disclosure" data-beach-annual-reference>
+    <summary className="text-slate-800">Volledige jaarregeling voor {city.name}</summary>
     <p className="mt-3 text-sm leading-relaxed text-slate-600">Naslagwerk voor andere periodes. Bij overlappende datums geldt de specifiekere periode. Kies hierboven een datum voor de regels van die volledige dag. Uren verschijnen alleen bij zones waarvan de regels doorheen de dag veranderen.</p>
     <div className="mt-6 space-y-6">
       {getAnnualBeachRuleSections(city.rules).map((section, i) => <div key={i}><h3 className="font-bold mb-2">{section.label}</h3><p className="whitespace-pre-line text-sm leading-relaxed">{section.rule}</p></div>)}

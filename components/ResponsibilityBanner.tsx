@@ -7,20 +7,21 @@ import { CITIES } from '../cityData.ts';
 const ResponsibilityBanner: React.FC = () => {
   const location = useLocation();
   const isMapPage = location.pathname === '/kaart';
-  const isCityPage = CITIES.some((city) => `/${city.slug}` === location.pathname);
+  const city = CITIES.find((city) => `/${city.slug}` === location.pathname);
+  const isCityPage = Boolean(city);
 
   return (
     <section
       className="relative overflow-hidden"
       style={{ paddingTop: 'clamp(5rem, 10vw, 9rem)', paddingBottom: 'clamp(5rem, 10vw, 9rem)' }}
     >
-      {/* Parallax Background Image - keep only on non-city pages */}
-      {!isCityPage && (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/blankenberge.webp)' }}
-        />
-      )}
+      {/* Keep the city photograph here independently of the hero background. */}
+      <div
+        aria-hidden="true"
+        data-coastal-background={city?.slug ?? 'coast'}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${city?.image ?? '/blankenberge.webp'})` }}
+      />
 
       {/* Dark Overlay */}
       {!isCityPage && (

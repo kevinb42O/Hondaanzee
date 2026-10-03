@@ -2,6 +2,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './app.css';
+// Included in the entry stylesheet so prerendered city pages also work without JavaScript.
+import './pages/CityPage.css';
 import App from './App.tsx';
 
 const rootElement = document.getElementById('root');

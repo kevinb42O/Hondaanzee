@@ -2,8 +2,8 @@ import {escapeMapText} from '../utils/mapText.ts';
 import {useZoneReviewSummaries} from '../utils/zoneReviews.ts';
 
 import React, { useMemo, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { MapPin, Navigation, Info, ExternalLink, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, ArrowRight, MessageSquare } from 'lucide-react';
 import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
 import { OFF_LEASH_AREAS } from '../constants.ts';
@@ -55,7 +55,6 @@ const getAreaPopup = (area: OffLeashArea, nearest = false) => {
 };
 
 const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
-  const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletInstance = useRef<L.Map | null>(null);
   const {summaries:reviewSummaries}=useZoneReviewSummaries();
@@ -142,7 +141,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
         } else if (markers.length === 1 && cityAreas.length > 0) {
           map.setView([cityAreas[0].lat, cityAreas[0].lng], 15);
         }
-      } else if (nearestInfo) {
+      } else if (nearestInfo?.area) {
         const currentMarker = L.circleMarker([city.lat, city.lng], {
           color: '#0284c7',
           fillColor: '#0ea5e9',
@@ -170,151 +169,61 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
     };
   }, [city, nearestInfo]);
 
+  const cityAreas = OFF_LEASH_AREAS.filter(area => area.city === city.slug);
+
   return (
-    <section className="py-10 sm:py-12 md:py-24 bg-slate-50 border-y border-slate-200">
-      <div className="site-shell">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div>
-            <div className="mb-6 sm:mb-8 md:mb-10">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 sm:mb-3 tracking-tight">Losloopweides</h2>
-              <p className="text-slate-600 font-medium leading-relaxed max-w-2xl text-xs sm:text-sm md:text-base">
-                Even stoom afblazen? In deze zones mag je hond veilig loslopen en spelen met andere viervoeters.
-              </p>
-            </div>
-
-            {OFF_LEASH_AREAS.some(area => area.city === city.slug) ? (
-              <>
-                <div className="space-y-4">
-                  {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
-                    const image = getAreaImage(area);
-                    return (
-                      <button
-                        key={area.slug}
-                        onClick={() => {
-                          navigate(getOffLeashAreaPath(area.slug));
-                        }}
-                        className="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 transition-all hover:shadow-md hover:border-emerald-300 group flex items-start gap-4 cursor-pointer w-full text-left"
-                      >
-                        {image ? (
-                          <img
-                            src={image}
-                            alt={area.name}
-                            width={80}
-                            height={80}
-                            loading="lazy"
-                            decoding="async"
-                            className="h-16 w-16 md:h-20 md:w-20 rounded-xl object-cover shrink-0"
-                            style={{ objectPosition: area.imagePosition || 'center' }}
-                          />
-                        ) : (
-                          <div className="h-16 w-16 md:h-20 md:w-20 rounded-xl flex items-center justify-center shrink-0 shadow-inner bg-emerald-50 text-emerald-600">
-                            <MapPin size={24} />
-                          </div>
-                        )}
-                        <div className="flex-grow min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <h3 className="text-lg font-black text-slate-900 leading-tight">{area.name}</h3>
-                            {area.operationalStatus === 'temporarily_closed' && (
-                              <span className="bg-rose-100 text-rose-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Tijdelijk gesloten</span>
-                            )}
-                          </div>
-                          <p className="text-slate-500 font-medium mb-2 text-xs md:text-sm flex items-center gap-1.5">
-                            {area.address}
-                          </p>
-                          {area.description && (
-                            <p className="text-slate-400 text-xs mb-3 leading-relaxed">{area.description}</p>
-                          )}
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                            <div className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs">
-                              Bekijk details →
-                            </div>
-                            {reviewCounts[area.slug] > 0 && (
-                              <div className="inline-flex items-center gap-1 text-slate-400 font-semibold text-[10px]">
-                                <MessageSquare size={11} />
-                                {reviewCounts[area.slug]} {reviewCounts[area.slug] === 1 ? 'review' : 'reviews'}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-                <div className="mt-6">
-                  <Link
-                    to="/losloopzones"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 text-white rounded-xl font-bold text-sm hover:bg-sky-700 transition-colors shadow-md hover:shadow-lg active:scale-95 w-full sm:w-auto"
-                  >
-                    Bekijk alle losloopzones
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </Link>
-                </div>
-              </>
-            ) : (
-              <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 text-center lg:text-left">
-                <div className="bg-amber-50 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-6 text-amber-500">
-                  <Info size={32} />
-                </div>
-                <h3 className="text-xl font-black text-slate-900 mb-2">Geen losloopweides in {city.name}</h3>
-                <p className="text-slate-500 font-medium mb-8 leading-relaxed text-sm">
-                  Er zijn momenteel geen officiële losloopweides geregistreerd in deze gemeente.
-                </p>
-
-                {nearestInfo && (
-                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left">
-                    <span className="text-[10px] uppercase font-black tracking-widest text-sky-600 mb-2 block">Dichtstbijzijnde optie</span>
-                    <div className="flex items-center gap-3">
-                      {getAreaImage(nearestInfo.area) ? (
-                        <img
-                          src={getAreaImage(nearestInfo.area)}
-                          alt={nearestInfo.area.name}
-                          width={56}
-                          height={56}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-14 w-14 rounded-lg object-cover shrink-0"
-                          style={{ objectPosition: nearestInfo.area.imagePosition || 'center' }}
-                        />
-                      ) : (
-                        <div className="bg-white p-2 rounded-lg shadow-sm border border-slate-200 text-slate-400">
-                          <Navigation size={20} />
-                        </div>
-                      )}
-                      <div className="overflow-hidden">
-                        <h4 className="font-bold text-slate-900 text-sm truncate">{nearestInfo.area.name}</h4>
-                        <p className="text-slate-500 text-[11px] font-medium">{nearestInfo.city.name} ({nearestInfo.distanceLabel})</p>
+    <section id="losloopweides" className="city-section city-offleash scroll-mt-28" aria-labelledby="city-offleash-title">
+      <div className="city-shell city-offleash-grid">
+        <div>
+          <div className="city-section-heading">
+            <p className="city-eyebrow">Ruimte om te ravotten</p>
+            <h2 id="city-offleash-title" className="city-section-title">Losloopweides</h2>
+            <p className="city-body-copy">Even stoom afblazen? Ontdek de plekken waar je hond veilig los mag lopen en spelen.</p>
+          </div>
+          {cityAreas.length > 0 ? (
+            <div className="city-offleash-list">
+              {cityAreas.map(area => {
+                const image = getAreaImage(area);
+                return (
+                  <Link key={area.slug} to={getOffLeashAreaPath(area.slug)} className="city-offleash-item">
+                    {image ? <img src={image} alt={area.name} width={72} height={72} loading="lazy" decoding="async" className="city-offleash-image" style={{ objectPosition: area.imagePosition || 'center' }} /> : <span className="city-offleash-image city-offleash-placeholder"><MapPin size={24} aria-hidden="true" /></span>}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3>{area.name}</h3>
+                        {area.operationalStatus === 'temporarily_closed' && <span className="city-rule-label bg-rose-50 text-rose-800 border-rose-200">Tijdelijk gesloten</span>}
                       </div>
-                      <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nearestInfo.area.name + ' ' + nearestInfo.area.address)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-auto p-2 bg-white rounded-full text-slate-400 hover:text-sky-600 transition-colors shadow-sm"
-                      >
-                        <ExternalLink size={16} />
-                      </a>
+                      <p>{area.address}</p>
+                      {area.description && <p>{area.description}</p>}
+                      <div className="city-offleash-actions">
+                        <span className="inline-flex items-center gap-1.5">Bekijk details <ArrowRight size={14} aria-hidden="true" /></span>
+                        {reviewCounts[area.slug] > 0 && <span className="inline-flex items-center gap-1.5 text-slate-500"><MessageSquare size={13} aria-hidden="true" />{reviewCounts[area.slug]} {reviewCounts[area.slug] === 1 ? 'review' : 'reviews'}</span>}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          <div className="lg:sticky lg:top-28 h-[280px] sm:h-[350px] md:h-[400px] lg:h-[480px] relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-emerald-50 rounded-[1.5rem] sm:rounded-[2rem]" />
-            <div className="absolute -inset-1 bg-gradient-to-br from-sky-400/20 via-emerald-400/20 to-cyan-400/20 rounded-[1.75rem] sm:rounded-[2.25rem] blur-sm opacity-60 md:group-hover:opacity-100 transition-opacity duration-500" />
-            <div ref={mapRef} className="absolute inset-0 border-2 sm:border-4 border-white/80 shadow-xl sm:shadow-2xl shadow-sky-500/10 ring-1 ring-slate-200/50 rounded-[1.5rem] sm:rounded-[2rem]" style={{ touchAction: 'pan-x pan-y' }} />
-            <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 z-[20] lg:hidden">
-              <div className="bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase text-slate-600 shadow-lg border border-white/50 flex items-center gap-1.5 sm:gap-2">
-                <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
-                </svg>
-                Pinch om te zoomen
-              </div>
+                  </Link>
+                );
+              })}
             </div>
-
-          </div>
+          ) : (
+            <div className="city-offleash-empty">
+              <p>In {city.name} zijn momenteel geen officiële losloopweides geregistreerd.{nearestInfo?.area ? ' Er is wel een optie in de buurt.' : ''}</p>
+              {nearestInfo?.area && <>
+                <p className="city-eyebrow">Dichtstbijzijnde optie · {nearestInfo.city.name}</p>
+                <Link to={getOffLeashAreaPath(nearestInfo.area.slug)} className="city-offleash-item">
+                  {getAreaImage(nearestInfo.area) && <img src={getAreaImage(nearestInfo.area)} alt={nearestInfo.area.name} width={72} height={72} loading="lazy" decoding="async" className="city-offleash-image" style={{ objectPosition: nearestInfo.area.imagePosition || 'center' }} />}
+                  <div className="min-w-0">
+                    <h3>{nearestInfo.area.name}</h3>
+                    <p>{nearestInfo.area.address}</p>
+                    <span className="city-offleash-actions">Bekijk details <ArrowRight size={14} aria-hidden="true" /></span>
+                  </div>
+                </Link>
+              </>}
+            </div>
+          )}
+          <Link to="/losloopzones" className="city-text-link">Bekijk alle losloopzones <ArrowRight size={16} aria-hidden="true" /></Link>
+        </div>
+        <div className="city-offleash-map" aria-label={`Kaart met losloopweides bij ${city.name}`}>
+          <div ref={mapRef} style={{ touchAction: 'pan-x pan-y' }} />
+          <span className="city-map-hint">Gebruik twee vingers om te zoomen</span>
         </div>
       </div>
     </section>
