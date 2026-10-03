@@ -245,6 +245,9 @@ const server = createServer((req, res) => {
     await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Analytics');
     await page.waitForSelector('.workspace-chart');
     assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[7,3,0,2]);
+    assert.deepEqual(await page.$$eval('[aria-label="Meetwaarde"] button',els=>els.map(el=>el.textContent)),['Paginaweergaven','Bezoekers']);
+    assert.equal(await page.$('.workspace-visitor-method[open]'),null,'Method explanation is collapsed by default');
+    assert.doesNotMatch(await page.$eval('main',el=>el.textContent),/Eigen meting vanaf 2 oktober 2026|Uurmeting gestart op/,'Requested explanatory blocks are removed');
     assert.match(await page.$eval('.workspace-analytics-list',el=>el.textContent), /7/);
     await page.click('[aria-label="Meetperiode"] button:first-child');await page.waitForFunction(()=>document.querySelector('.workspace-chart-interactive')?.getAttribute('aria-label')?.includes('cijfers per uur.'));
     assert.match(await page.$eval('.workspace-panel .workspace-muted',el=>el.textContent),/Per uur/);

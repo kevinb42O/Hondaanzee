@@ -4,7 +4,7 @@ Aanvulling van 3 oktober 2026 op bronversie `812c7c2`. Kevin heeft gekozen voor 
 
 ## Gebruik en betekenis
 
-`/admin/analytics` → **Website** → **Eigen meting**. De knoppen **Paginaweergaven** en **Bezoekers** schakelen grafiek, pagina's, herkomst, apparaten en CSV samen om. Beide totalen blijven naast elkaar zichtbaar. Contactacties blijven aparte tellingen. Periodes: 24 uur, 7/30/90 dagen en 12 maanden; daggrenzen Brussel, opslag van uurgrenzen in UTC.
+`/admin/analytics` → **Website** → **Eigen meting**. De knoppen **Paginaweergaven** en **Bezoekers** schakelen grafiek, pagina's, herkomst, apparaten en CSV samen om. Beide totalen blijven naast elkaar zichtbaar. Op Kevins verzoek staan uitleg en meetstart uitsluitend achter een inklapbare knop; de lange start- en uurmetingstekstblokken zijn verwijderd. Contactacties blijven aparte tellingen. Periodes: 24 uur, 7/30/90 dagen en 12 maanden; daggrenzen Brussel, opslag van uurgrenzen in UTC.
 
 Bezoekers zijn dagelijkse schattingen: dezelfde IP/browsercombinatie telt per dag één keer voor de hele website. Een nieuwe pagina bekijken telt die combinatie daarnaast één keer voor die pagina. Pagina-aantallen mogen niet worden opgeteld tot websitebezoekers. Herkomst en apparaat worden voor de website bij het eerste bezoek van die dag toegekend.
 
