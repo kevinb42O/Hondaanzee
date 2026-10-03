@@ -5,13 +5,13 @@ import {useZoneReviewSummaries} from '../utils/zoneReviews.ts';
 
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, X, Star, MapPin, Navigation, MessageSquare } from 'lucide-react';
+import { X, Star, MapPin, Navigation, MessageSquare } from 'lucide-react';
 import { OFF_LEASH_AREAS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { getOffLeashAreaSEO, useSEO, SEO_DATA } from '../utils/seo.ts';
 import ImagePlaceholder from '../components/ImagePlaceholder.tsx';
 import ImageModal from '../components/ImageModal.tsx';
-import Breadcrumb from '../components/Breadcrumb.tsx';
+import DirectoryHero from '../components/DirectoryHero.tsx';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import ReviewSection from '../components/ReviewSection';
@@ -223,99 +223,22 @@ const AllOffLeashAreas: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-hidden">
-      <div data-header-hero="light" className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: 'url(/offleash.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-          }}
-        >
-          <div className="absolute inset-0 bg-slate-900/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/40"></div>
-        </div>
-        {/* Decorative Elements */}
-
-
-        <div className="site-shell relative z-10">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sky-200 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
-          >
-            <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
-            <span className="text-sm sm:text-base">Terug naar home</span>
-          </Link>
-
-          <Breadcrumb
-            variant="light"
-            className="mb-4 sm:mb-6"
-            items={
-              displayedArea && displayedCity
-                ? [
-                    { label: 'Home', to: '/' },
-                    { label: 'Losloopzones', to: '/losloopzones' },
-                    { label: displayedArea.name },
-                  ]
-                : [
-                    { label: 'Home', to: '/' },
-                    { label: 'Losloopzones' },
-                  ]
-            }
-          />
-
-          <div className="max-w-3xl relative">
-            <div className="absolute -left-20 sm:-left-24 md:-left-28 top-0 text-5xl sm:text-6xl md:text-7xl hidden sm:block" style={{ animation: 'float 2.5s ease-in-out infinite' }}>
-              🐕
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 leading-[1.1] tracking-tight">
-              Alle <span className="text-sky-400">Losloopzones</span>
-            </h1>
-            <p className="text-sky-100 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-              Ontdek alle hondenlosloopzones aan de Belgische kust. Filter op stad en klik op een zone voor meer info.
-            </p>
-          </div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
-          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-slate-50"
-              />
-            </svg>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-slate-50"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
+      <DirectoryHero
+        kind="losloopzones"
+        count={OFF_LEASH_AREAS.length}
+        breadcrumbItems={displayedArea && displayedCity ? [
+          { label: 'Home', to: '/' },
+          { label: 'Losloopzones', to: '/losloopzones' },
+          { label: displayedArea.name },
+        ] : undefined}
+      />
 
       {/* Main Content */}
-      <div className="bg-slate-50 min-h-screen -mt-1">
-        <div className="site-shell py-8 md:py-12">
+      <div className="bg-slate-50 min-h-screen">
+        <div className="site-shell pb-8 pt-2 sm:pt-4 md:pb-12">
 
           {/* Filters */}
-          <div className="mb-6 md:mb-8 bg-white rounded-xl p-4 md:p-6 shadow-sm border border-slate-200">
+          <div id="offleash-filters" className="mb-6 md:mb-8 bg-white rounded-xl p-4 md:p-6 shadow-sm border border-slate-200">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-black text-slate-900">Filter op stad</h2>
               {selectedCity !== 'all' && (
@@ -499,9 +422,9 @@ const AllOffLeashAreas: React.FC = () => {
                         <button
                           key={area.slug}
                           onClick={() => openAreaDetail(area.slug)}
-                          className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group w-full text-left"
+                          className="flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:border-sky-300 transition-all cursor-pointer group w-full text-left"
                         >
-                          <div className="relative h-56 bg-slate-200 overflow-hidden">
+                          <div className="relative h-56 w-full shrink-0 bg-slate-200 overflow-hidden">
                             {area.image && area.image !== '/placeholder.webp' ? (
                               <img
                                 src={area.image}
@@ -521,8 +444,8 @@ const AllOffLeashAreas: React.FC = () => {
                               </div>
                             )}
                           </div>
-                          <div className="p-5">
-                            <h3 className="text-xl font-black text-slate-900 group-hover:text-sky-600 transition-colors mb-3 line-clamp-2">
+                          <div className="flex flex-1 flex-col w-full p-5">
+                            <h3 className="min-h-14 text-xl font-black text-slate-900 group-hover:text-sky-600 transition-colors mb-3 line-clamp-2">
                               {area.name}
                             </h3>
                             <div className="flex items-center gap-2 text-slate-600 text-sm mb-3">
@@ -532,7 +455,7 @@ const AllOffLeashAreas: React.FC = () => {
                             {area.description && (
                               <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-4">{area.description}</p>
                             )}
-                            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">
                               <span className="text-sky-600 font-bold text-sm group-hover:gap-2 flex items-center transition-all">
                                 Bekijk details{' '}
                                 <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>

@@ -2,12 +2,12 @@ import SavePlaceButton from '../components/member/SavePlaceButton.tsx';
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Stethoscope, ShoppingBag, MapPin, Filter, X } from 'lucide-react';
+import { Stethoscope, ShoppingBag, MapPin, Filter, X } from 'lucide-react';
 import { SERVICES } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { getServiceDetailPath } from '../utils/placeRoutes.ts';
-import Breadcrumb from '../components/Breadcrumb.tsx';
+import DirectoryHero from '../components/DirectoryHero.tsx';
 import PlaceDirectory from '../components/PlaceDirectory.tsx';
 
 const AllServices: React.FC = () => {
@@ -74,91 +74,11 @@ const AllServices: React.FC = () => {
 
   return (
     <div className="animate-in fade-in overflow-x-hidden">
-      <div data-header-hero="light" className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: 'url(/diensten.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-          }}
-        >
-          <div className="absolute inset-0 bg-slate-900/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-sky-900/90 via-sky-900/40 to-slate-900/40"></div>
-        </div>
-        {/* Decorative Elements */}
+      <DirectoryHero kind="diensten" count={SERVICES.length} />
 
-        <div className="absolute top-1/2 right-8 text-sky-700/20 hidden md:block rotate-12">
-          <ShoppingBag size={50} strokeWidth={1.5} />
-        </div>
-
-        <div className="site-shell relative z-10">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sky-200 font-bold hover:text-white transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
-          >
-            <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
-            <span className="text-sm sm:text-base">Terug naar home</span>
-          </Link>
-
-          <Breadcrumb
-            variant="light"
-            className="mb-4 sm:mb-6"
-            items={[
-              { label: 'Home', to: '/' },
-              { label: 'Diensten' },
-            ]}
-          />
-
-          <div className="max-w-3xl relative">
-            <div className="absolute -left-20 top-0 text-6xl hidden xl:block animate-bounce" style={{ animationDuration: '2s', animationDelay: '0.5s' }}>
-              🏥
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 leading-[1.1] tracking-tight">
-              Praktische <span className="text-sky-300">Diensten</span>
-            </h1>
-            <p className="text-sky-100 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-              Alle dierenartsen en dierenwinkels aan de Belgische kust waar je met je hond terecht kunt.
-            </p>
-          </div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
-          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-slate-50"
-              />
-            </svg>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-slate-50"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div className="site-shell py-8 sm:py-12 md:py-16">
+      <div className="site-shell pb-8 pt-2 sm:pb-12 sm:pt-4 md:pb-16">
         {/* Filters */}
-        <div className="bg-white border-2 border-slate-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 shadow-sm">
+        <div id="service-filters" className="bg-white border-2 border-slate-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 shadow-sm">
           <div className="flex items-center gap-3 mb-4 sm:mb-6">
             <div className="bg-sky-100 text-sky-600 p-2 sm:p-2.5 rounded-xl">
               <Filter size={18} className="sm:w-5 sm:h-5" />

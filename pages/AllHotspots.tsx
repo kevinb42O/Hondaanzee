@@ -3,13 +3,15 @@ import HotspotSocialSummary from '../components/places/HotspotSocialSummary.tsx'
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, Star, MapPin, Filter, X, ChevronDown, ChevronUp, Search } from 'lucide-react';
+import { Check, Coffee, Utensils, Bed, ShoppingBag, Wine, Beer, Star, MapPin, X, ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { HOTSPOTS } from '../constants.ts';
 import { CITIES } from '../cityData.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { getHotspotDetailPath } from '../utils/placeRoutes.ts';
-import Breadcrumb from '../components/Breadcrumb.tsx';
+import DirectoryHero from '../components/DirectoryHero.tsx';
 import PlaceDirectory from '../components/PlaceDirectory.tsx';
+import CityFilterPicker from '../components/CityFilterPicker.tsx';
+import { buildHotspotFilterParams, readHotspotFilters } from '../utils/hotspotFilters.ts';
 
 const INITIAL_SHOW = 12;
 const SEARCH_SUGGESTION_LIMIT = 6;
@@ -27,8 +29,8 @@ const AllHotspots: React.FC = () => {
 
   // Apply SEO metadata. When filters are active we mark the URL noindex so
   // permutations don't dilute crawl budget; the canonical still points at /hotspots.
-  const hasActiveFilters = (searchParams.get('city') && searchParams.get('city') !== 'all')
-    || (searchParams.get('type') && searchParams.get('type') !== 'all')
+  const hasActiveFilters = searchParams.getAll('city').some(city => city !== 'all')
+    || searchParams.getAll('type').some(type => type !== 'all')
     || Boolean(searchParams.get('q'));
   useSEO({ ...SEO_DATA.hotspots, noindex: hasActiveFilters });
 
@@ -48,48 +50,63 @@ const AllHotspots: React.FC = () => {
     }
   };
 
-  const types = ['all', ...Array.from(new Set(HOTSPOTS.map(spot => spot.type)))];
+  const types = useMemo(() => ['Koffiebar', 'Restaurant', 'Café', 'Brasserie', 'Slapen', 'Shoppen']
+    .filter(type => HOTSPOTS.some(spot => spot.type === type)), []);
   const citiesWithHotspots = useMemo(() => {
     const citySet = new Set(HOTSPOTS.map(spot => spot.city));
     return CITIES.filter(city => citySet.has(city.slug));
   }, []);
 
-  const validCitySet = useMemo(() => new Set(['all', ...citiesWithHotspots.map((city) => city.slug)]), [citiesWithHotspots]);
+  const validCitySet = useMemo(() => new Set(citiesWithHotspots.map((city) => city.slug)), [citiesWithHotspots]);
   const validTypeSet = useMemo(() => new Set(types), [types]);
 
-  const selectedCity = validCitySet.has(searchParams.get('city') || 'all')
-    ? searchParams.get('city') || 'all'
-    : 'all';
-  const selectedType = validTypeSet.has(searchParams.get('type') || 'all')
-    ? searchParams.get('type') || 'all'
-    : 'all';
-  const selectedQuery = searchParams.get('q') || '';
+  const { cities: selectedCities, types: selectedTypes, query: selectedQuery } = useMemo(
+    () => readHotspotFilters(searchParams, validCitySet, validTypeSet),
+    [searchParams, validCitySet, validTypeSet],
+  );
+  const cityKey = selectedCities.join('|');
+  const typeKey = selectedTypes.join('|');
 
   useEffect(() => {
     setSearchQuery(selectedQuery);
   }, [selectedQuery]);
 
-  const buildFilterSearch = (city: string, type: string, query: string = selectedQuery) => {
-    const next = new URLSearchParams();
-    if (city !== 'all') next.set('city', city);
-    if (type !== 'all') next.set('type', type);
-    if (query.trim()) next.set('q', query.trim());
+  const buildFilterSearch = (cities: string[], types: string[], query: string = searchQuery) => {
+    const next = buildHotspotFilterParams({ cities, types, query });
     const nextQuery = next.toString();
     return nextQuery ? `?${nextQuery}` : '';
   };
 
-  const updateSearchParams = (city: string, type: string, query: string) => {
-    const next = new URLSearchParams();
-    if (city !== 'all') next.set('city', city);
-    if (type !== 'all') next.set('type', type);
-    if (query.trim()) next.set('q', query.trim());
-    setSearchParams(next, { replace: false });
+  const updateSearchParams = (cities: string[], types: string[], query: string) => {
+    setSearchParams(buildHotspotFilterParams({ cities, types, query }), { replace: false });
   };
+
+  const rememberFilters = () => {
+    const from = `${location.pathname}${buildFilterSearch(selectedCities, selectedTypes)}${location.hash}`;
+    if (from !== `${location.pathname}${location.search}${location.hash}`) {
+      navigate(from, { replace: true });
+    }
+    return from;
+  };
+
+  // Keep typed searches shareable without adding a history entry for each letter.
+  useEffect(() => {
+    if (searchQuery.trim() === selectedQuery) return;
+    const timer = window.setTimeout(() => {
+      setSearchParams(current => {
+        const next = new URLSearchParams(current);
+        if (searchQuery.trim()) next.set('q', searchQuery.trim());
+        else next.delete('q');
+        return next;
+      }, { replace: true });
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, [searchQuery, selectedQuery, setSearchParams]);
 
   // Reset show-all when filters change
   useEffect(() => {
     setShowAll(false);
-  }, [selectedCity, selectedType, selectedQuery]);
+  }, [cityKey, typeKey, searchQuery]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
@@ -110,13 +127,13 @@ const AllHotspots: React.FC = () => {
 
   const baseFilteredHotspots = useMemo(() => {
     return HOTSPOTS.filter((spot) => {
-      const cityMatch = selectedCity === 'all' || spot.city === selectedCity;
-      const typeMatch = selectedType === 'all' || spot.type === selectedType;
+      const cityMatch = selectedCities.length === 0 || selectedCities.includes(spot.city);
+      const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(spot.type);
       return cityMatch && typeMatch;
     });
-  }, [selectedCity, selectedType]);
+  }, [selectedCities, selectedTypes]);
 
-  const normalizedSearch = selectedQuery.trim().toLowerCase();
+  const normalizedSearch = searchQuery.trim().toLowerCase();
 
   const suggestions = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -142,18 +159,18 @@ const AllHotspots: React.FC = () => {
   }, [baseFilteredHotspots, searchQuery]);
 
   const handleSuggestionClick = (spot: typeof HOTSPOTS[number]) => {
-    setSearchQuery(spot.name);
+    const from = rememberFilters();
     setShowSuggestions(false);
     setSelectedSuggestionIndex(-1);
     navigate(getHotspotDetailPath(spot), {
       state: {
-        from: `${location.pathname}${buildFilterSearch(selectedCity, selectedType, spot.name)}`,
+        from,
       },
     });
   };
 
   const submitSearch = (query: string) => {
-    updateSearchParams(selectedCity, selectedType, query);
+    updateSearchParams(selectedCities, selectedTypes, query);
     setShowSuggestions(false);
     setSelectedSuggestionIndex(-1);
   };
@@ -184,7 +201,6 @@ const AllHotspots: React.FC = () => {
         event.preventDefault();
         if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
           handleSuggestionClick(suggestions[selectedSuggestionIndex]);
-          submitSearch(suggestions[selectedSuggestionIndex].name);
         } else {
           submitSearch(searchQuery);
         }
@@ -210,271 +226,153 @@ const AllHotspots: React.FC = () => {
     return CITIES.find(city => city.slug === slug)?.name || slug;
   };
 
-  const hasFilters = selectedCity !== 'all' || selectedType !== 'all' || normalizedSearch.length > 0;
+  const hasFilters = selectedCities.length > 0 || selectedTypes.length > 0 || normalizedSearch.length > 0;
+  const resetFilters = () => {
+    setSearchQuery('');
+    setShowSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+    updateSearchParams([], [], '');
+  };
 
   return (
     <div className="animate-in fade-in overflow-x-hidden">
-      <div data-header-hero="light" className="relative pt-12 sm:pt-16 md:pt-24 pb-24 sm:pb-32 md:pb-40 overflow-hidden min-h-[50vh] flex items-center text-white">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: 'url(/coffeedog.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-          }}
-        >
-          <div className="absolute inset-0 bg-slate-900/60"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/40"></div>
-        </div>
-        {/* Decorative Elements */}
-        <div className="absolute top-10 right-10 text-slate-700/30 hidden md:block" style={{ animation: 'float 3.5s ease-in-out infinite' }}>
-          <Coffee size={70} strokeWidth={1.5} />
-        </div>
-        <div className="absolute top-32 left-16 text-slate-700/30 hidden md:block" style={{ animation: 'pulse 3s ease-in-out infinite' }}>
-          <Bed size={60} strokeWidth={1.5} />
-        </div>
-        <div className="absolute top-1/2 right-8 text-slate-700/25 hidden md:block rotate-12">
-          <Star size={50} strokeWidth={1.5} />
-        </div>
-        <div className="absolute bottom-40 left-20 text-slate-700/30 hidden lg:block" style={{ animation: 'float 3s ease-in-out infinite', animationDelay: '0.5s' }}>
-          <MapPin size={55} strokeWidth={1.5} />
-        </div>
+      <DirectoryHero kind="hotspots" count={HOTSPOTS.length} />
 
-        <div className="site-shell relative z-10">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-slate-300 font-bold hover:text-sky-400 transition-colors mb-6 sm:mb-8 active:opacity-70 touch-target py-2"
-          >
-            <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" />
-            <span className="text-sm sm:text-base">Terug naar home</span>
-          </Link>
-
-          <Breadcrumb
-            variant="light"
-            className="mb-4 sm:mb-6"
-            items={[
-              { label: 'Home', to: '/' },
-              { label: 'Hotspots' },
-            ]}
-          />
-
-          <div className="max-w-3xl relative">
-            <div className="absolute -left-20 top-0 text-6xl hidden xl:block" style={{ animation: 'float 2.5s ease-in-out infinite' }}>
-              ☕
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 leading-[1.1] tracking-tight">
-              Alle Hondvriendelijke <span className="text-sky-400">Hotspots</span>
-            </h1>
-            <p className="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
-              Wij maken het verschil tussen plekken waar honden <em>getolereerd</em> worden en plekken waar ze écht welkom zijn — met een waterbak, een vriendelijk onthaal en de ruimte om zichzelf te zijn.
-            </p>
-          </div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
-          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-slate-50"
-              />
-            </svg>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-slate-50"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div className="site-shell py-8 sm:py-12 md:py-16">
-        {/* Filters */}
-        <div className="bg-white border-2 border-slate-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 shadow-sm">
-          <div className="flex items-center gap-3 mb-4 sm:mb-6">
-            <div className="bg-sky-100 text-sky-600 p-2 sm:p-2.5 rounded-xl">
-              <Filter size={18} className="sm:w-5 sm:h-5" />
-            </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Filters</h2>
-            {hasFilters && (
-              <Link
-                to="/hotspots"
-                className="ml-auto text-sm font-bold text-slate-500 hover:text-sky-600 transition-colors flex items-center gap-2"
-              >
-                <X size={16} /> Wis filters
-              </Link>
-            )}
-          </div>
-
-          <div ref={searchContainerRef} className="relative mb-6 sm:mb-8">
-            <label htmlFor="hotspot-search" className="mb-3 block text-sm font-bold text-slate-700">
-              Zoek op naam
-            </label>
-            <div className="flex items-center rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 shadow-sm transition focus-within:border-sky-300 focus-within:bg-white">
-              <Search size={18} className="shrink-0 text-slate-400" />
-              <input
-                id="hotspot-search"
-                type="text"
-                value={searchQuery}
-                onChange={(event) => {
-                  const nextValue = event.target.value;
-                  setSearchQuery(nextValue);
-                  setShowSuggestions(nextValue.trim().length > 0);
+      <div className="site-shell pb-8 pt-2 sm:pb-12 sm:pt-4 md:pb-16">
+        <section id="hotspot-filters" aria-label="Hotspots zoeken en filteren" data-hotspot-filters className="relative mb-6 rounded-xl border border-slate-200 bg-white p-4 sm:mb-8 sm:p-5">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_15rem]">
+            <div
+              ref={searchContainerRef}
+              className="relative min-w-0"
+              onBlur={event => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                  setShowSuggestions(false);
                   setSelectedSuggestionIndex(-1);
-                }}
-                onFocus={() => {
-                  if (searchQuery.trim()) {
-                    setShowSuggestions(true);
-                  }
-                }}
-                onKeyDown={handleSearchKeyDown}
-                placeholder="Bijvoorbeeld Gastrobar Sam"
-                autoComplete="off"
-                spellCheck="false"
-                className="min-w-0 flex-1 bg-transparent px-3 text-base font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none"
-                role="combobox"
-                aria-expanded={showSuggestions && suggestions.length > 0}
-                aria-controls="hotspot-search-suggestions"
-                aria-activedescendant={selectedSuggestionIndex >= 0 ? `hotspot-suggestion-${selectedSuggestionIndex}` : undefined}
-              />
-              {searchQuery ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSearchQuery('');
-                    setShowSuggestions(false);
+                }
+              }}
+            >
+              <label htmlFor="hotspot-search" className="sr-only">Zoek een hotspot op naam</label>
+              <div className="flex h-12 items-center gap-2.5 rounded-lg border border-slate-200 bg-white px-3.5 transition-colors focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-100">
+                <Search size={18} className="shrink-0 text-slate-400" aria-hidden="true" />
+                <input
+                  id="hotspot-search"
+                  type="search"
+                  value={searchQuery}
+                  onChange={event => {
+                    const nextValue = event.target.value;
+                    setSearchQuery(nextValue);
+                    setShowSuggestions(nextValue.trim().length > 0);
                     setSelectedSuggestionIndex(-1);
-                    updateSearchParams(selectedCity, selectedType, '');
                   }}
-                  className="rounded-full p-1 text-slate-400 transition hover:text-slate-700"
-                  aria-label="Wis zoekopdracht"
-                >
-                  <X size={18} />
-                </button>
-              ) : null}
+                  onFocus={() => {
+                    if (searchQuery.trim()) setShowSuggestions(true);
+                  }}
+                  onKeyDown={handleSearchKeyDown}
+                  placeholder="Zoek een hotspot op naam…"
+                  autoComplete="off"
+                  spellCheck="false"
+                  className="min-w-0 flex-1 bg-transparent text-base font-normal text-slate-900 placeholder:text-slate-400 focus:outline-none sm:text-sm [&::-webkit-search-cancel-button]:appearance-none"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-expanded={showSuggestions && suggestions.length > 0}
+                  aria-controls={showSuggestions && suggestions.length > 0 ? 'hotspot-search-suggestions' : undefined}
+                  aria-activedescendant={showSuggestions && selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length ? `hotspot-suggestion-${selectedSuggestionIndex}` : undefined}
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery('');
+                      setShowSuggestions(false);
+                      setSelectedSuggestionIndex(-1);
+                      updateSearchParams(selectedCities, selectedTypes, '');
+                    }}
+                    className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-400 transition hover:text-slate-700"
+                    aria-label="Wis zoekopdracht"
+                  >
+                    <X size={17} aria-hidden="true" />
+                  </button>
+                )}
+              </div>
+
+              {showSuggestions && suggestions.length > 0 && (
+                <div id="hotspot-search-suggestions" role="listbox" aria-label="Gevonden hotspots" className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 max-h-[min(28rem,55vh)] overflow-y-auto overscroll-contain rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl shadow-slate-900/10">
+                  {suggestions.map((spot, index) => (
+                    <Link
+                      key={spot.id}
+                      id={`hotspot-suggestion-${index}`}
+                      to={getHotspotDetailPath(spot)}
+                      role="option"
+                      aria-selected={index === selectedSuggestionIndex}
+                      onMouseDown={event => event.preventDefault()}
+                      onClick={event => {
+                        event.preventDefault();
+                        handleSuggestionClick(spot);
+                      }}
+                      onMouseEnter={() => setSelectedSuggestionIndex(index)}
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${index === selectedSuggestionIndex ? 'bg-sky-50 text-sky-800' : 'text-slate-700 hover:bg-slate-50'}`}
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-sky-600" aria-hidden="true">{getIcon(spot.type)}</span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-semibold">{spot.name}</span>
+                        <span className="block truncate text-xs text-slate-500">{getCityName(spot.city)} · {spot.type}</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {showSuggestions && suggestions.length > 0 && (
-              <div
-                id="hotspot-search-suggestions"
-                className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
-              >
-                {suggestions.map((spot, index) => (
+            <CityFilterPicker
+              cities={citiesWithHotspots}
+              selected={selectedCities}
+              onChange={cities => updateSearchParams(cities, selectedTypes, searchQuery)}
+              onOpen={() => { setShowSuggestions(false); setSelectedSuggestionIndex(-1); }}
+            />
+          </div>
+
+          <fieldset className="mt-3">
+            <legend className="sr-only">Type hotspot — je kunt meerdere types kiezen</legend>
+            <div className="flex flex-wrap gap-2">
+              {types.map(type => {
+                const selected = selectedTypes.includes(type);
+                return (
                   <button
-                    key={spot.id}
-                    id={`hotspot-suggestion-${index}`}
-                    type="button"
-                    onMouseDown={(event) => {
-                      event.preventDefault();
-                      handleSuggestionClick(spot);
-                    }}
-                    onMouseEnter={() => setSelectedSuggestionIndex(index)}
-                    className={`flex w-full items-center gap-3 px-4 py-3 text-left transition ${
-                      index === selectedSuggestionIndex
-                        ? 'bg-sky-50 text-sky-700'
-                        : 'bg-white text-slate-700 hover:bg-slate-50'
-                    } ${index === suggestions.length - 1 ? '' : 'border-b border-slate-100'}`}
-                  >
-                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-                      index === selectedSuggestionIndex ? 'bg-sky-100 text-sky-600' : 'bg-slate-100 text-slate-500'
-                    }`}>
-                      {getIcon(spot.type)}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-bold sm:text-base">{spot.name}</p>
-                      <p className="truncate text-xs font-medium text-slate-500 sm:text-sm">
-                        {getCityName(spot.city)} • {spot.type}
-                      </p>
-                    </div>
-                    {spot.tags.includes('Aanrader') && (
-                      <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-amber-700 ring-1 ring-amber-200">
-                        Aanrader
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {/* City Filter */}
-            <fieldset>
-              <legend className="block text-sm font-bold text-slate-700 mb-3">
-                <MapPin size={14} className="inline mr-2" />
-                Gemeente
-              </legend>
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  to={`/hotspots${buildFilterSearch('all', selectedType)}`}
-                  className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === 'all'
-                    ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                >
-                  Alle
-                </Link>
-                {citiesWithHotspots.map(city => (
-                  <Link
-                    key={city.slug}
-                    to={`/hotspots${buildFilterSearch(city.slug, selectedType)}`}
-                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${selectedCity === city.slug
-                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                      }`}
-                  >
-                    {city.name}
-                  </Link>
-                ))}
-              </div>
-            </fieldset>
-
-            {/* Type Filter */}
-            <fieldset>
-              <legend className="block text-sm font-bold text-slate-700 mb-3">
-                Type
-              </legend>
-              <div className="flex flex-wrap gap-2">
-                {types.map(type => (
-                  <Link
                     key={type}
-                    to={`/hotspots${buildFilterSearch(selectedCity, type)}`}
-                    className={`px-4 py-2 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${selectedType === type
-                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                      }`}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => {
+                      setShowSuggestions(false);
+                      setSelectedSuggestionIndex(-1);
+                      updateSearchParams(selectedCities, selected ? selectedTypes.filter(value => value !== type) : [...selectedTypes, type], searchQuery);
+                    }}
+                    className={`inline-flex min-h-11 items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors sm:min-h-10 ${selected ? 'border-sky-300 bg-sky-50 font-semibold text-sky-800' : 'border-slate-200 bg-white font-medium text-slate-600 hover:border-slate-300 hover:bg-slate-50'}`}
                   >
-                    {type !== 'all' && <span className="opacity-70">{getIcon(type)}</span>}
-                    {type === 'all' ? 'Alle' : type}
-                  </Link>
-                ))}
-              </div>
-            </fieldset>
-          </div>
-        </div>
+                    <span aria-hidden="true">{selected ? <Check size={14} /> : getIcon(type)}</span>
+                    {type}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
 
-        {/* Results Count */}
-        <div className="mb-6 sm:mb-8">
-          <p className="text-slate-600 font-bold text-sm sm:text-base">
-            <span className="text-sky-600 text-lg sm:text-xl">{filteredHotspots.length}</span> {filteredHotspots.length === 1 ? 'hotspot' : 'hotspots'} gevonden
-          </p>
-        </div>
+          {selectedCities.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2" aria-label="Geselecteerde gemeenten">
+              {selectedCities.map(slug => (
+                <button key={slug} type="button" aria-label={`Verwijder filter ${getCityName(slug)}`} onClick={() => updateSearchParams(selectedCities.filter(city => city !== slug), selectedTypes, searchQuery)} className="inline-flex min-h-11 items-center gap-2 rounded-md bg-sky-50 px-2.5 py-1.5 text-xs font-medium text-sky-800 transition-colors hover:bg-sky-100 sm:min-h-8">
+                  {getCityName(slug)} <X size={13} aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-4 flex min-h-9 items-center justify-between gap-3 border-t border-slate-100 pt-3">
+            <p className="text-sm font-medium text-slate-600" role="status" aria-live="polite" aria-atomic="true">
+              <span className="font-semibold text-slate-900">{filteredHotspots.length}</span> {filteredHotspots.length === 1 ? 'hotspot' : 'hotspots'} gevonden
+            </p>
+            {hasFilters && <button type="button" onClick={resetFilters} className="flex min-h-11 shrink-0 items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors hover:text-sky-900 sm:min-h-8"><X size={14} aria-hidden="true" /> Wis filters</button>}
+          </div>
+        </section>
 
         {/* Hotspots Grid */}
         {filteredHotspots.length > 0 ? (
@@ -485,7 +383,8 @@ const AllHotspots: React.FC = () => {
               <SavePlaceButton compact place={{ kind: 'hotspot', city_slug: spot.city, place_slug: spot.slug }} className="absolute right-3 top-14 z-10" />
               <Link
                 to={getHotspotDetailPath(spot)}
-                state={{ from: `${location.pathname}${location.search}${location.hash}` }}
+                state={{ from: `${location.pathname}${buildFilterSearch(selectedCities, selectedTypes)}${location.hash}` }}
+                onClick={() => { rememberFilters(); }}
                 className="group cursor-pointer active:scale-[0.98] transition-transform text-left flex flex-col"
               >
                 <div className="relative aspect-[4/3] rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[2rem] overflow-hidden mb-4 sm:mb-5 shadow-lg shadow-slate-100 md:transition-shadow md:group-hover:shadow-sky-100">
@@ -577,26 +476,19 @@ const AllHotspots: React.FC = () => {
                 <Coffee size={48} className="mx-auto" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
-                {selectedCity !== 'all' && selectedType !== 'all'
-                  ? `Geen ${selectedType.toLowerCase()} in ${getCityName(selectedCity)}`
-                  : selectedType !== 'all'
-                  ? `Geen ${selectedType.toLowerCase()} gevonden`
-                  : selectedCity !== 'all'
-                  ? `Geen hotspots in ${getCityName(selectedCity)}`
-                  : 'Geen hotspots gevonden'}
+                Geen hotspots gevonden
               </h3>
               <p className="text-slate-600 font-medium leading-relaxed mb-6">
-                {selectedCity !== 'all' && selectedType !== 'all'
-                  ? `Momenteel zijn er geen hotspots van het type "${selectedType}" in ${getCityName(selectedCity)}. Probeer een ander type of bekijk alle locaties in deze gemeente.`
-                  : 'Er zijn geen hotspots die aan deze filters voldoen. Probeer andere filters te selecteren.'}
+                Er zijn geen hotspots voor deze combinatie. Verwijder een filter of probeer een andere zoekterm.
               </p>
               {hasFilters && (
-                <Link
-                  to="/hotspots"
+                <button
+                  type="button"
+                  onClick={resetFilters}
                   className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-sky-700 transition-colors"
                 >
                   <X size={16} /> Wis alle filters
-                </Link>
+                </button>
               )}
             </div>
           </div>

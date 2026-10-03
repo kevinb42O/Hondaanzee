@@ -1,0 +1,150 @@
+.directory-hero {
+  --directory-ink: #183b46;
+  --directory-blue: #087d9b;
+  --directory-sand: #eee4d6;
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(6.5rem, 8.5vw, 8.5rem) clamp(2.75rem, 5vw, 5rem);
+  background: linear-gradient(180deg, #faf7f0 0%, #faf7f0 82%, #f8fafc 100%);
+  color: var(--directory-ink);
+}
+
+.directory-hero__breadcrumb {
+  margin-bottom: clamp(1.5rem, 2.8vw, 2.75rem);
+}
+
+.directory-hero__breadcrumb a { color: #637779; font-weight: 500; }
+.directory-hero__breadcrumb a:hover { color: var(--directory-blue); }
+.directory-hero__breadcrumb [aria-current] { color: var(--directory-ink); font-weight: 500; }
+
+.directory-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2.25rem, 4.5vw, 5rem);
+}
+
+.directory-hero__copy { min-width: 0; padding-block: 1rem; }
+
+.directory-hero__eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--directory-blue);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.directory-hero__title {
+  margin: 0;
+  font-size: clamp(2.75rem, 4.5vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.055em;
+}
+
+.directory-hero__title span, .directory-hero__title em { display: block; }
+.directory-hero__title em {
+  padding-top: .06em;
+  color: var(--directory-blue);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.08em;
+  font-weight: 400;
+  letter-spacing: -.05em;
+}
+
+.directory-hero__description {
+  max-width: 43ch;
+  margin: 1.65rem 0 0;
+  color: #52676c;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.directory-hero__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.directory-hero__action {
+  display: inline-flex;
+  min-height: 3.125rem;
+  align-items: center;
+  justify-content: center;
+  gap: .85rem;
+  padding: .8rem 1.4rem;
+  border-radius: 999px;
+  background: var(--directory-blue);
+  color: #fff;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: background-color 160ms ease;
+}
+.directory-hero__action:hover { background: #086780; }
+.directory-hero__count { color: #647779; font-size: .75rem; }
+
+.directory-hero__photo {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  aspect-ratio: 1.4;
+  margin: 0 .75rem 1rem 0;
+  border-radius: 5rem 1.75rem 5rem 1.75rem;
+  transform: rotate(1.5deg);
+}
+
+.directory-hero__photo::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 1.1rem -.85rem -.85rem 1.1rem;
+  border-radius: 4rem 2rem 4.5rem 2rem;
+  background: var(--directory-sand);
+  transform: rotate(-3deg);
+}
+
+.directory-hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 45%;
+  border-radius: inherit;
+}
+
+.directory-hero--diensten { --directory-sand: #dde8df; }
+.directory-hero--diensten .directory-hero__photo { transform: rotate(-1.5deg); border-radius: 1.75rem 5rem 1.75rem 5rem; }
+.directory-hero--diensten .directory-hero__photo::before { transform: rotate(3deg); border-radius: inherit; }
+.directory-hero--diensten .directory-hero__photo img { object-position: 96% center; }
+
+.directory-hero--losloopzones { --directory-sand: #e0e9d9; }
+.directory-hero--losloopzones .directory-hero__photo img { object-position: 50% 48%; }
+
+#hotspot-filters, #service-filters, #offleash-filters { scroll-margin-top: 6.5rem; }
+
+@media (max-width: 1023px) {
+  .directory-hero { padding-top: 6.5rem; }
+  .directory-hero__layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .directory-hero__copy { max-width: 42rem; padding-block: 0; }
+  .directory-hero__title { font-size: clamp(2.6rem, 6.5vw, 4rem); }
+  .directory-hero__description { max-width: 50ch; }
+  .directory-hero__photo { aspect-ratio: 1.75; max-width: 48rem; margin-inline: .3rem 1rem; }
+  .directory-hero--diensten .directory-hero__photo img { object-position: right center; }
+}
+
+@media (max-width: 639px) {
+  .directory-hero { padding-bottom: 2.5rem; }
+  .directory-hero__breadcrumb { margin-bottom: 1.75rem; }
+  .directory-hero__eyebrow { margin-bottom: .9rem; font-size: .6875rem; letter-spacing: .1em; }
+  .directory-hero__title { font-size: clamp(2.25rem, 10vw, 3.4rem); line-height: 1.12; }
+  .directory-hero__description { margin-top: 1.25rem; font-size: .9375rem; line-height: 1.75; }
+  .directory-hero__actions { align-items: flex-start; flex-direction: column; gap: .85rem; margin-top: 1.5rem; }
+  .directory-hero__layout { gap: 2rem; }
+  .directory-hero__photo { aspect-ratio: 1.55; border-radius: 2.75rem 1rem 2.75rem 1rem; margin-bottom: .5rem; }
+  .directory-hero__photo::before { inset: .6rem -.5rem -.5rem .6rem; border-radius: inherit; }
+  .directory-hero--diensten .directory-hero__photo { border-radius: 1rem 2.75rem 1rem 2.75rem; }
+}
