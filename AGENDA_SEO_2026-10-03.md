@@ -68,3 +68,11 @@ Het ontbrekende agendabeheer en de agenda-analytics zijn apart uitgewerkt in [he
 | `dierenfestival-waregem-2027` | Dierenfestival Waregem 2027 \| HondAanZee.be | Komend |
 | `dogs-friends-2027` | Dogs & Friends 2027 in La Hulpe (Terhulpen) \| HondAanZee.be | Komend |
 | `hondenwandeling-bredene-2027` | Hondenwandeling Bredene 2027 \| HondAanZee.be | Komend |
+
+## Definitieve controle na agendabeheer
+
+Na publicatie van release `0549afbd-fc3d-450c-b17a-e1ea87bb13ac` zijn alle 21 fiches opnieuw rechtstreeks op het productiedomein gecontroleerd: HTTP 200, volledige inhoud, eigen canonical en metadata, één correct Event-object, sitemap en links vanuit de agenda. Er zijn geen Supabase-afbeeldings-URL's aangetroffen. Bewijs: [definitieve live verificatie](research/agenda-admin-live-verificatie-2026-10-03.json).
+
+Search Console is daarna wél gecontroleerd via het bestaande Google-account. `/agenda` is geïndexeerd. De fiches `dierenzegening-knokke-2026` en `zwarteberg-2026` waren nog onbekend bij Google; voor beide heeft Google een indexatieaanvraag bevestigd. De bijgewerkte sitemap is op 3 oktober opnieuw ingediend. De bestaande sitemapstatus was succesvol, met 224 ontdekte pagina's en een laatste lezing op 2 oktober. Dat historische aantal bevestigt nog niet dat de 18 toegevoegde fiches al verwerkt zijn. De overige individuele fiche-indexstatussen zijn niet afzonderlijk in Search Console vastgesteld. Google bepaalt de uiteindelijke opname en timing.
+
+De volledige testset voor deze uitbreiding bevat 336 geslaagde tests in 30 bestanden. De productiebuild, adminbrowsertests, agendabrowsertests, publieke browsertests en de databasetest met gecontroleerde rollback slagen. Zie [de implementatie en gebruiksinstructies](ADMIN_AGENDA_IMPLEMENTATIE.md).

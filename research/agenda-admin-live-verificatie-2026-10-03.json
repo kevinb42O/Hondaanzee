@@ -1,0 +1,242 @@
+{
+  "checkedAt": "2026-10-03T16:02:54.922Z",
+  "sourceCommit": "bca4b8b48021ac05286947b1e9ad8dbffbe456a0",
+  "marker": {
+    "releaseId": "0549afbd-fc3d-450c-b17a-e1ea87bb13ac",
+    "sha256": "c45e4c14d7ac2c1f3e9a46e84f4c30c9fc25eee46d182352f2e048751d929ec2"
+  },
+  "events": 21,
+  "pages": [
+    {
+      "url": "https://hondaanzee.be/agenda/kwispelfestival-de-panne-2026",
+      "status": 200,
+      "title": "Kwispelfestival De Panne 2026 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/groot-oostends-hondenfestival-2026",
+      "status": 200,
+      "title": "Groot Oostends Hondenfestival 2026 in Oostende | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/grote-hondenwandeling-bredene-2026",
+      "status": 200,
+      "title": "Grote Hondenwandeling Bredene 2026 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dierenzegening-knokke-2026",
+      "status": 200,
+      "title": "Dierenzegening Knokke-Heist 2026 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/grote-dierenfeest-koolkerke-2026",
+      "status": 200,
+      "title": "Het Grote Dierenfeest 2026 in Koolkerke | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/zwarteberg-2026",
+      "status": 200,
+      "title": "Hondenwandeling Zwarteberg 2026 in Westouter (Heuvelland) | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/marke-2026",
+      "status": 200,
+      "title": "Hondenwandeling met Gianna en Maxim 2026 in Marke (Kortrijk) | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/hondenwandeling-de-schelde-2026",
+      "status": 200,
+      "title": "Hondenwandeling en welzijnsmarkt De Schelde 2026 in Berendrecht-Zandvliet-Lillo | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/stokroos-2026",
+      "status": 200,
+      "title": "Honden- en paardencafé De Stokroos 2026 in Nieuwerkerk | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/titan-paw-2026",
+      "status": 200,
+      "title": "Titan Paw 2026 in Lille (Gierle) | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/fotoshoot-de-haan-2026",
+      "status": 200,
+      "title": "Hondenwandeling + fotoshoot De Haan 2026 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/howl-o-ween-dudzele-2026",
+      "status": 200,
+      "title": "Howl-O-ween Het Blauwe Kruis Brugge 2026 in Dudzele (Brugge) | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/halloween-wevelgem-2026",
+      "status": 200,
+      "title": "Heksenbos / Halloweentocht Juttepaardje 2026 in Wevelgem | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/hondenhalloween-balen-2026",
+      "status": 200,
+      "title": "Hondenhalloween Balen-Olmen 2026 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/canicross-genendijk-2026",
+      "status": 200,
+      "title": "Canicross Genendijk 2026 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/lichtgolf-oostende-2026",
+      "status": 200,
+      "title": "Lichtgolf Oostende 2026–2027 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/zeeuwse-winterfair-2026",
+      "status": 200,
+      "title": "Zeeuwse Winterfair aan Zee 2026 in Noordwelle | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dogsurvival-winter-2026",
+      "status": 200,
+      "title": "Dogsurvival Therapy4Dogs — wintereditie 2026 in Merksplas | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dierenfestival-waregem-2027",
+      "status": 200,
+      "title": "Dierenfestival Waregem 2027 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dogs-friends-2027",
+      "status": 200,
+      "title": "Dogs & Friends 2027 in La Hulpe (Terhulpen) | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/hondenwandeling-bredene-2027",
+      "status": 200,
+      "title": "Hondenwandeling Bredene 2027 | HondAanZee.be",
+      "canonical": true,
+      "initialHtml": true,
+      "schemaMatches": true,
+      "sitemap": true,
+      "linkedFromAgenda": true,
+      "supabaseImages": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "checkedOn": "2026-10-03",
+  "source": "Google Search Console, bestaande domeinproperty hondaanzee.be, geverifieerd via ingelogde browser",
+  "urls": [
+    {"url": "https://hondaanzee.be/agenda", "indexed": true, "googleLabel": "URL is geïndexeerd door Google"},
+    {"url": "https://hondaanzee.be/agenda/dierenzegening-knokke-2026", "indexedAtInspection": false, "reason": "URL is onbekend bij Google", "indexingRequestConfirmed": true},
+    {"url": "https://hondaanzee.be/agenda/zwarteberg-2026", "indexedAtInspection": false, "reason": "URL is onbekend bij Google", "indexingRequestConfirmed": true}
+  ],
+  "sitemap": {"url": "https://hondaanzee.be/sitemap.xml", "priorStatus": "Succesvol", "lastReadAtInspection": "2026-10-02", "discoveredPagesAtInspection": 224, "resubmitted": "2026-10-03", "submissionConfirmed": true},
+  "limitation": "Overige individuele fiche-indexstatussen en verwerking van de opnieuw ingediende sitemap zijn nog niet bevestigd. Geen claim over opname of zoekpositie op basis van een indexatieverzoek."
+}

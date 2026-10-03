@@ -2,7 +2,7 @@
 
 Opgesteld en bijgewerkt op 2 oktober 2026. Het door Kevin goedgekeurde interactieve ontwerp is de visuele referentie. De onderstaande voortgang maakt onderscheid tussen lokaal gebouwde onderdelen, live ingerichte infrastructuur en nog te bouwen functies.
 
-Gerichte aanvulling van 3 oktober 2026: het ontbrekende agendabeheer en de evenementanalytics hebben nu een eigen [uitvoeringsplan](ADMIN_AGENDA_PLAN.md), gecontroleerd tegen bronversie `d2e4889` en de live agenda. Dat plan beschrijft de beginsituatie en de uitvoering. De 21 publieke fiches zijn technisch indexeerbaar. De agenda-editor, revisies, publicatiesnapshots en rapporten zijn inmiddels gebouwd; de backend is uitgerold en de laatste productiecontrole volgt. Analytics valideert evenementen nu tegen gepubliceerde database-identiteiten. Deze aanvulling actualiseert uitsluitend de agendastatus, niet alle overige onderdelen van dit historische dashboardplan.
+Gerichte aanvulling van 3 oktober 2026: het ontbrekende agendabeheer en de evenementanalytics hebben nu een eigen [uitvoeringsplan](ADMIN_AGENDA_PLAN.md), gecontroleerd tegen bronversie `d2e4889` en de live agenda. Dat plan beschrijft de beginsituatie en de uitvoering. De 21 publieke fiches zijn technisch indexeerbaar. De agenda-editor, revisies, publicatiesnapshots en rapporten staan live. Opslaan en publiceren zijn met het echte adminaccount gecontroleerd; de release is op productie bevestigd. Zie [het implementatierapport](ADMIN_AGENDA_IMPLEMENTATIE.md). Analytics valideert evenementen nu tegen gepubliceerde database-identiteiten. Deze aanvulling actualiseert uitsluitend de agendastatus, niet alle overige onderdelen van dit historische dashboardplan.
 
 ## Beslissingen die vaststaan
 

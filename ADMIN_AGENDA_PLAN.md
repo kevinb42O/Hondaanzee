@@ -1,6 +1,6 @@
 # Agenda beheren en meten vanuit /admin
 
-Opgesteld op 3 oktober 2026, op verzoek van Kevin. Gecontroleerde bronversie: `d2e4889a163a1de8d9bd543ea249c29a50d9299c`. De remote-defaultbranch `main` wees bij de controle naar dezelfde commit. Dit document bewaart het oorspronkelijke uitvoeringsplan. Uitvoering op 3 oktober 2026: de databasebasis en collector zijn uitgerold, de editor en rapporten zijn gebouwd en lokaal geverifieerd; de laatste productiepublicatie en ingelogde controle worden uitgevoerd. De hieronder beschreven beginsituatie is de situatie vóór deze implementatie.
+Opgesteld op 3 oktober 2026, op verzoek van Kevin. Gecontroleerde bronversie: `d2e4889a163a1de8d9bd543ea249c29a50d9299c`. De remote-defaultbranch `main` wees bij de controle naar dezelfde commit. Dit document bewaart het oorspronkelijke uitvoeringsplan. Uitvoering op 3 oktober 2026: het agendabeheer en de rapporten zijn uitgerold en met het echte adminaccount gecontroleerd. Een agendarelease is via het dashboard gepubliceerd en op het productiedomein bevestigd. Zie [het implementatierapport](ADMIN_AGENDA_IMPLEMENTATIE.md) voor de definitieve status, controles en Search Console-resultaten. De hieronder beschreven beginsituatie is de situatie vóór deze implementatie.
 
 ## Huidige situatie en prioriteit
 
