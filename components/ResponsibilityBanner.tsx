@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Trash2, Heart, ShieldAlert, Users, Sparkles, Fish } from 'lucide-react';
+import { Trash2, Heart, ShieldAlert, Users, PawPrint, Fish } from 'lucide-react';
 import { CITIES } from '../cityData.ts';
 
 const ResponsibilityBanner: React.FC = () => {
@@ -38,7 +38,7 @@ const ResponsibilityBanner: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16 md:mb-20">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest mb-6 shadow-xl">
-              <Sparkles size={12} className="text-amber-300" strokeWidth={2.5} />
+              <PawPrint size={12} className="text-amber-300" strokeWidth={2.5} />
               Samen houden we de kust fijn
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
@@ -130,7 +130,7 @@ const ResponsibilityBanner: React.FC = () => {
           <div className="group bg-white/10 backdrop-blur-xl border border-amber-400 p-6 sm:p-7 md:p-8 rounded-2xl transition-all duration-300 ease-out hover:bg-white/10 hover:border-amber-400 hover:-translate-y-1 shadow-lg shadow-amber-500/20 cursor-pointer">
             <div className="mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-sky-500/20 transition-colors duration-300">
-                <Sparkles size={24} strokeWidth={2} className="text-sky-300 transition-colors duration-300" />
+                <Trash2 size={24} strokeWidth={2} className="text-sky-300 transition-colors duration-300" />
               </div>
             </div>
             <h3 className="font-bold text-amber-400 text-lg sm:text-xl mb-3 tracking-tight transition-colors duration-300">

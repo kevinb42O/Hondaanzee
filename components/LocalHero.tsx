@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ExternalLink, Sparkles } from 'lucide-react';
+import { ExternalLink, MapPin } from 'lucide-react';
 import { HOTSPOTS, SERVICES } from '../constants.ts';
 import { Hotspot, Service } from '../types.ts';
 import { getPlaceDetailPath } from '../utils/placeRoutes.ts';
@@ -44,13 +44,6 @@ const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
           className="w-full text-left group cursor-pointer"
         >
           <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-amber-200/60 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 shadow-lg shadow-amber-100/40 hover:shadow-xl hover:shadow-amber-200/50 transition-all duration-300">
-            {/* Sparkle decoration */}
-            <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.07]">
-              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0L55 35L90 30L60 50L90 70L55 65L50 100L45 65L10 70L40 50L10 30L45 35Z" fill="#f59e0b" />
-              </svg>
-            </div>
-
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 sm:p-6">
               {/* Image */}
               <div className="relative w-full sm:w-28 md:w-32 h-40 sm:h-28 md:h-32 flex-shrink-0 rounded-xl sm:rounded-2xl overflow-hidden shadow-md">
@@ -85,7 +78,7 @@ const LocalHero: React.FC<LocalHeroProps> = ({ citySlug, cityName }) => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="bg-amber-100 text-amber-600 p-1.5 rounded-lg">
-                    <Sparkles size={14} />
+                    <MapPin size={14} />
                   </div>
                   <span className="text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-amber-600">
                     Lokale tip in {cityName}

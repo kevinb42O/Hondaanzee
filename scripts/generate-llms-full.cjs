@@ -62,9 +62,18 @@ blogPosts.forEach(blog => {
 });
 
 content += `## Evenementen\n\n`;
+const { isEventPast } = loadTsModule('utils/events.ts');
 EVENTS.forEach(event => {
   content += `### ${event.title}\n`;
+  content += `Evenementfiche: https://hondaanzee.be/agenda/${event.slug}\n`;
   content += `Datum: ${event.dateDisplay} | Locatie: ${event.cityName}\n`;
+  content += `Status: ${isEventPast(event) ? 'Voorbije editie' : event.status === 'save-the-date' ? 'Datum aangekondigd, details volgen' : event.status === 'announced' ? 'Aangekondigd, details controleren' : 'Komend evenement'}\n`;
+  content += `Uur: ${event.timeDisplay} | Prijs: ${event.price}\n`;
+  content += `Adres: ${event.address || 'Exact adres nog niet bekend'}\n`;
+  if (event.dogPolicy) content += `Hondenregels: ${event.dogPolicy}\n`;
+  if (event.website) content += `Organisator / inschrijving: ${event.website}\n`;
+  if (event.lastVerified) content += `Laatst gecontroleerd: ${event.lastVerified}\n`;
+  if (event.sources) content += `Bronnen: ${event.sources.map(s => s.url).join(' | ')}\n`;
   content += `Beschrijving: ${event.description}\n`;
   if (event.highlights && event.highlights.length > 0) {
     content += `Highlights:\n${event.highlights.map(h => `- ${h}`).join('\n')}\n`;
@@ -81,6 +90,10 @@ const citiesStart = concise.indexOf('## Kustgemeenten');
 const blogsStart = concise.indexOf('## Blog', citiesStart);
 if (citiesStart < 0 || blogsStart < 0) throw new Error('Missing llms overview boundaries');
 concise = concise.slice(0, citiesStart) + `## Kustgemeenten en strandregels\n\n${BEACH_ACCESS_GUIDANCE}\n\nDe strandgids toont standaard de actuele regels in Belgische tijd. Een gepland bezoek vraagt alleen een datum. Het dagoverzicht toont uren bij de strandzones waarvan de regels die dag veranderen.\n\nGecontroleerd op ${BEACH_RULES_VERIFIED_AT}. De volledige jaarregeling en bronlinks staan op de stadspagina's en in [llms-full.txt](https://hondaanzee.be/llms-full.txt).\n\n` + CITIES.map(city => `- [${city.name}](https://hondaanzee.be/${city.slug}): ${city.description}`).join('\n') + '\n\n' + concise.slice(blogsStart);
+const eventsStart = concise.indexOf('## Evenementen');
+const eventsEnd = concise.indexOf('## Veelgestelde Vragen', eventsStart);
+if (eventsStart < 0 || eventsEnd < 0) throw new Error('Missing llms event boundaries');
+concise = concise.slice(0, eventsStart) + '## Evenementen\n\n' + EVENTS.map(event => `- [${event.title} — ${event.dateDisplay}](https://hondaanzee.be/agenda/${event.slug}): ${event.cityName}. ${isEventPast(event) ? 'Voorbije editie.' : event.status === 'save-the-date' ? 'Datum aangekondigd; details volgen.' : 'Komend evenement.'}`).join('\n') + '\n\n' + concise.slice(eventsEnd);
 const faqStart = concise.indexOf('## Veelgestelde Vragen');
 const faqEnd = concise.indexOf('## Overige', faqStart);
 if (faqStart < 0 || faqEnd < 0) throw new Error('Missing llms FAQ boundaries');

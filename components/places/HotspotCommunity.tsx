@@ -159,7 +159,7 @@ function HotspotReviewEditor({own,onSaved}:{own:OwnReview|null;onSaved:()=>void}
  };
  if(submitted)return <MemberDialog title="Je ervaring is ontvangen" onClose={c.closeForm} wide>
   <div className="hotspot-review-celebration">
-   <div className="hotspot-review-success-art" aria-hidden="true"><span className="hotspot-review-success-halo"/><svg className="hotspot-review-success-check" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35"/><path d="M25 40l10 10 21-22"/></svg>{Array.from({length:8},(_,i)=><span className="hotspot-review-spark" key={i} style={{'--spark-angle':`${i*45}deg`,'--spark-delay':`${i%3*50}ms`} as React.CSSProperties}/>)}</div>
+   <div className="hotspot-review-success-art" aria-hidden="true"><span className="hotspot-review-success-halo"/><svg className="hotspot-review-success-check" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35"/><path d="M25 40l10 10 21-22"/></svg></div>
    <h3 ref={successRef} tabIndex={-1} aria-describedby="hotspot-review-received">Bedankt voor je ervaring!</h3>
    <div className="hotspot-review-success-rating"><StarRating rating={rating} readOnly size={23}/></div>
    <p id="hotspot-review-received">Je review bij <strong>{c.name}</strong> is veilig ontvangen en verschijnt na controle.</p><p className="hotspot-review-success-note">Je helpt andere baasjes op weg.</p>

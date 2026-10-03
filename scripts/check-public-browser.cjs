@@ -34,7 +34,7 @@ const server = createServer((req, res) => {
     page.on('request', req => req.url().startsWith(base) ? req.continue() : req.abort());
     await page.setViewport({ width: 1440, height: 1000 });
     const examples = ['/', '/koksijde', '/de-panne', '/blog', routes.find(r => r.startsWith('/blog/')),
-      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons'];
+      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/agenda/fotoshoot-de-haan-2026', '/agenda/hondenwandeling-bredene-2027', '/agenda/zeeuwse-winterfair-2026', '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons'];
     const titles = new Map();
     await page.setJavaScriptEnabled(false);
     for (const route of examples) {
@@ -68,6 +68,9 @@ const server = createServer((req, res) => {
       assert.equal(await page.$eval('h1', el => el.textContent), '404');
       assert.match(await page.$eval('meta[name=robots]', el => el.content), /noindex/);
     }
+    await page.goto(base + '/agenda');
+    const agendaLinks = await page.$$eval('main a[href^="/agenda/"]', elements => elements.map(el => el.getAttribute('href')));
+    for (const route of routes.filter(route => route.startsWith('/agenda/'))) assert(agendaLinks.includes(route), `No-JS agenda link: ${route}`);
     console.log('No JavaScript: visible complete home, towns, blogs, events, maps and policies; genuine 404s: OK.');
     await page.setJavaScriptEnabled(true);
     for (const route of examples) {
@@ -77,6 +80,16 @@ const server = createServer((req, res) => {
       assert.equal(await page.title(), titles.get(route), `Initial and client title mismatch: ${route}`);
       assert.equal(await page.$eval('link[rel=canonical]', el => el.href), `https://hondaanzee.be${route}`);
     }
+    await page.goto(base + '/agenda');
+    await page.waitForFunction(() => !document.querySelector('#root[data-static-page]'));
+    await page.waitForSelector('a[href="/agenda/fotoshoot-de-haan-2026"]');
+    await page.click('a[href="/agenda/fotoshoot-de-haan-2026"]');
+    await page.waitForFunction(() => document.querySelector('link[rel=canonical]')?.href.endsWith('/agenda/fotoshoot-de-haan-2026'));
+    assert.equal(await page.title(), titles.get('/agenda/fotoshoot-de-haan-2026'));
+    const dynamicSchema = await page.$eval('script[data-dynamic]', el => JSON.parse(el.textContent));
+    assert.equal(dynamicSchema.filter(schema => schema['@type'] === 'Event').length, 1);
+    assert.equal(dynamicSchema.find(schema => schema['@type'] === 'Event').url, 'https://hondaanzee.be/agenda/fotoshoot-de-haan-2026');
+    assert.equal(await page.$('meta[property="og:image:width"]'), null);
     await page.goto(base + '/losloopzones');
     await page.waitForSelector('.leaflet-container');
     await page.goto(base + '/koksijde');

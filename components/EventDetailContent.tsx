@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Accessibility, Calendar, ChevronRight, Clock, Globe, Mail, MapPin, PartyPopper, Phone, Sparkles, Tag, TreePine, Utensils } from 'lucide-react';
+import { Accessibility, Calendar, ChevronRight, Clock, Globe, Mail, MapPin, PartyPopper, Phone, Tag, TreePine, Utensils } from 'lucide-react';
+import EventVisual from './EventVisual.tsx';
+import { isEventPast } from '../utils/events.ts';
+import { useEventClock } from '../utils/useEventClock.ts';
 import ImageModal from './ImageModal.tsx';
 import LocalHero from './LocalHero.tsx';
 import type { DogEvent } from '../data/events.ts';
@@ -36,17 +39,14 @@ interface EventDetailContentProps {
 const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNavigate }) => {
   const [isEventImageModalOpen, setIsEventImageModalOpen] = useState(false);
   const [eventImageIndex, setEventImageIndex] = useState(0);
+  const now = useEventClock();
+  const isPast = isEventPast(event, now);
   const seasonColor = SEASON_COLORS[event.season] || SEASON_COLORS.Lente;
 
   return (
     <>
       <div className="relative h-[35vh] sm:h-[40vh] md:h-[50vh] min-h-[320px]">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full h-full object-cover"
-          style={{ objectPosition: event.imagePosition || 'center' }}
-        />
+        <EventVisual event={event} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
         <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-12">
@@ -57,9 +57,9 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
             <span className="bg-white/20 backdrop-blur text-white px-3 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider">
               {event.category}
             </span>
-            {event.price.toLowerCase().includes('gratis') && (
+            {event.isAccessibleForFree === true && (
               <span className="bg-emerald-500/90 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-1">
-                <Sparkles size={14} /> Gratis
+                Gratis
               </span>
             )}
           </div>
@@ -69,7 +69,6 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
             </h1>
             {event.tags.includes('Top-event') && (
               <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-400 to-amber-500 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg shadow-lg shadow-amber-500/40">
-                <Sparkles size={16} className="sm:w-5 sm:h-5 text-amber-50" />
                 <span className="text-[10px] sm:text-xs md:text-sm font-extrabold uppercase tracking-[0.15em] text-white whitespace-nowrap">Top</span>
               </div>
             )}
@@ -79,11 +78,16 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
       </div>
 
       <div className="p-5 sm:p-8 md:p-12 lg:p-16">
+        {isPast && <p className="mb-6 rounded-xl bg-slate-100 p-4 font-bold text-slate-700">Deze editie is afgelopen. De gegevens hieronder horen bij deze voorbije editie.</p>}
+        {!isPast && event.status === 'save-the-date' && <p className="mb-6 rounded-xl bg-amber-50 p-4 text-amber-900">De datum is aangekondigd. Uren, tarieven en het volledige programma volgen nog bij de organisator.</p>}
+        {!isPast && event.status === 'announced' && <p className="mb-6 rounded-xl bg-amber-50 p-4 text-amber-900">Dit evenement is aangekondigd. Controleer de organisator voor het definitieve programma en de deelnamevoorwaarden.</p>}
+        {event.image && (event.imageCaption || event.imageCredit) && <p className="mb-6 text-sm leading-relaxed text-slate-500">{event.imageCaption}{event.imageCredit && <> · Beeld: {event.imageCredit}</>}{event.imageSourceUrl && <> · <a href={event.imageSourceUrl} target="_blank" rel="noopener noreferrer" className="text-sky-700 underline">Beeldbron</a></>}</p>}
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
           <div className="bg-sky-50 border border-sky-100 rounded-2xl p-4 sm:p-5 text-center">
             <Calendar size={24} className="mx-auto text-sky-600 mb-2 sm:w-7 sm:h-7" />
             <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Datum</p>
-            <p className="text-sm sm:text-lg font-black text-slate-900">{event.dateDisplay}</p>
+            <p className="text-sm sm:text-lg font-black text-slate-900"><time dateTime={event.date}>{event.dateDisplay}</time></p>
           </div>
           <div className="bg-sky-50 border border-sky-100 rounded-2xl p-4 sm:p-5 text-center">
             <Clock size={24} className="mx-auto text-sky-600 mb-2 sm:w-7 sm:h-7" />
@@ -129,8 +133,8 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 {event.detailGallery.images.map((image, index) => (
+                  <div key={image.src}>
                   <button
-                    key={image.src}
                     type="button"
                     onClick={() => {
                       setEventImageIndex(index);
@@ -151,16 +155,23 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
                       <p className="text-slate-500 text-xs sm:text-sm font-semibold">Klik om groter te bekijken</p>
                     </div>
                   </button>
+                  {image.credit && <p className="mt-2 px-2 text-xs text-slate-500">Beeld: {image.credit}{image.sourceUrl && <> · <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sky-700 underline">Bron</a></>}</p>}
+                  </div>
                 ))}
               </div>
             </div>
           )}
         </div>
 
+        {event.dogPolicy && <section className="mb-8 rounded-2xl border border-emerald-100 bg-emerald-50 p-5 sm:p-7">
+          <h2 className="mb-3 text-xl font-black text-slate-900">Op stap met je hond</h2>
+          <p className="text-base leading-relaxed text-slate-700">{event.dogPolicy}</p>
+        </section>}
+
         {event.highlights.length > 0 && (
           <div className="mb-8 sm:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-4 sm:mb-5 flex items-center gap-2 sm:gap-3">
-              <Sparkles size={26} className="text-sky-600 sm:w-8 sm:h-8" />
+              <Calendar size={26} className="text-sky-600 sm:w-8 sm:h-8" />
               Wat te verwachten
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -203,9 +214,11 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
               <MapPin size={20} className="text-sky-600 flex-shrink-0 mt-0.5 sm:w-6 sm:h-6" />
               <div>
                 <p className="font-bold text-slate-900 text-base sm:text-lg">{event.location}</p>
-                <p className="text-slate-500 text-sm sm:text-base">{event.address}</p>
+                <p className="text-slate-500 text-sm sm:text-base">{event.address || 'Het exacte adres is nog niet bekend. Vraag de vertrekplek na bij de organisator.'}</p>
               </div>
             </div>
+            {event.organizerName && <p className="text-slate-600"><strong>Organisator:</strong> {event.organizerName}</p>}
+            {event.practicalNotes && <ul className="list-disc pl-5 space-y-3 text-slate-700 leading-relaxed">{event.practicalNotes.map(note => <li key={note}>{note}</li>)}</ul>}
             {event.phone && (
               <div className="flex items-center gap-3">
                 <Phone size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
@@ -233,6 +246,12 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
           </div>
         </div>
 
+        {event.sources?.length ? <section className="mb-8 sm:mb-12 rounded-2xl border border-sky-100 p-5 sm:p-7">
+          <h2 className="mb-3 text-xl font-black text-slate-900">Bronnen en controle</h2>
+          {event.lastVerified && <p className="mb-3 text-sm text-slate-500">Laatst gecontroleerd op {new Intl.DateTimeFormat('nl-BE', { dateStyle: 'long', timeZone: 'Europe/Brussels' }).format(new Date(`${event.lastVerified}T12:00:00Z`))}. Tickets en beschikbaarheid kunnen wijzigen.</p>}
+          <ul className="space-y-2">{event.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-sky-700 hover:underline">{source.label} ↗</a></li>)}</ul>
+        </section> : null}
+
         <div className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-12">
           {event.tags.filter(tag => tag !== 'Top-event').map((tag) => (
             <span
@@ -244,10 +263,10 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
           ))}
         </div>
 
-        <div className="bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 border-2 border-sky-100 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
+        {event.citySlug && <div className="bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 border-2 border-sky-100 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10">
           <div className="flex items-center gap-3 mb-4 sm:mb-5">
             <div className="bg-sky-100 text-sky-600 p-2.5 rounded-xl">
-              <Sparkles size={22} />
+              <MapPin size={22} />
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900">
               Meer ontdekken in {event.cityName}
@@ -305,13 +324,13 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
           </div>
 
           <LocalHero citySlug={event.citySlug} cityName={event.cityName} />
-        </div>
+        </div>}
       </div>
 
       {event.detailGallery && (
         <ImageModal
           images={event.detailGallery.images.map((image) => image.src)}
-          altText={`${event.title} - Stratier flyers`}
+          altText={`${event.title} — afbeeldingen`}
           isOpen={isEventImageModalOpen}
           onClose={() => setIsEventImageModalOpen(false)}
           initialIndex={eventImageIndex}

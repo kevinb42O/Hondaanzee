@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Bell, Check, ChevronRight, Copy, ExternalLink, History, Loader2, RefreshCw, Search, Send, Smartphone, Sparkles, Trash2, Users } from 'lucide-react';
+import { Bell, Check, ChevronRight, Copy, ExternalLink, History, Loader2, RefreshCw, Search, Send, Smartphone, ClipboardList, Trash2, Users } from 'lucide-react';
 import AdminDialog from '../components/admin/AdminDialog.tsx';
 import { adminFunction } from '../utils/adminContent.ts';
 import { normalizePushUrl, PUSH_BODY_LIMIT, PUSH_TITLE_LIMIT, pushDeliveryLabel, pushUrlError, type PushLogEntry } from '../utils/adminNotifications.ts';
@@ -12,7 +12,7 @@ const templates = [
   { label: 'Evenement', title: '📅 Hondvriendelijk event aan zee', body: 'Er staat een nieuw hondvriendelijk evenement in de agenda. Ideaal om samen met je hond te plannen.', url: '/agenda' },
 ];
 const destinations = [{label:'Home',value:'/'},{label:'Updates',value:'/updates'},{label:'Meldpunt',value:'/meldpunt'},{label:'Blog',value:'/blog'},{label:'Agenda',value:'/agenda'},{label:'Losloopzones',value:'/losloopzones'},{label:'Kaart',value:'/kaart'}];
-const emojis = ['🐾','🌊','🏖️','☀️','🌅','🐶','🦴','🐕','✅','⚠️','📍','ℹ️','🆕','💡','📢','🔔','👉','👇','📲','💙','✨','🎉','🙏','🧭'];
+const emojis = ['🐾','🌊','🏖️','☀️','🌅','🐶','🦴','🐕','✅','⚠️','📍','ℹ️','🆕','💡','📢','🔔','👉','👇','📲','💙','🎉','🙏','🧭'];
 interface Draft { title: string; body: string; url: string }
 interface SendResult { ok: boolean; sent: number; failed: number; total: number; expired: number }
 const emptyDraft: Draft = {title:'',body:'',url:'/'};
@@ -123,7 +123,7 @@ export default function AdminNotifications() {
       <form className="workspace-panel workspace-push-composer" onSubmit={event=>{event.preventDefault();if(canSend)setConfirmation({title:draft.title.trim(),body:draft.body.trim(),url:normalizedUrl});}}>
         <div className="workspace-section-heading"><h2>Je bericht</h2><span className="workspace-status">{hasDraft?(draftStored?'Concept bewaard':'Concept niet bewaard'):'Nieuw concept'}</span></div>
         <p className="workspace-muted">Schrijf eerst je boodschap. Controleer daarna wie ze ontvangt en waar ze naartoe leidt.</p>
-        <div className="workspace-push-template"><Sparkles size={16}/><select aria-label="Begin met een sjabloon" value="" disabled={sending} onChange={event=>{const template=templates[Number(event.target.value)];if(template)requestReplace({title:template.title,body:template.body,url:template.url},template.label);}}><option value="">Begin met een sjabloon</option>{templates.map((t,i)=><option key={t.label} value={i}>{t.label}</option>)}</select></div>
+        <div className="workspace-push-template"><ClipboardList size={16}/><select aria-label="Begin met een sjabloon" value="" disabled={sending} onChange={event=>{const template=templates[Number(event.target.value)];if(template)requestReplace({title:template.title,body:template.body,url:template.url},template.label);}}><option value="">Begin met een sjabloon</option>{templates.map((t,i)=><option key={t.label} value={i}>{t.label}</option>)}</select></div>
         <fieldset className="workspace-form workspace-push-fields" disabled={sending}>
           <label><span className="workspace-field-label">Titel <small>{draft.title.length}/{PUSH_TITLE_LIMIT}</small></span><input ref={titleRef} name="push-title" value={draft.title} maxLength={PUSH_TITLE_LIMIT} onFocus={()=>{activeField.current='title';}} onChange={e=>update('title',e.target.value)} placeholder="Wat wil je je bezoekers vertellen?" required/></label>
           <label><span className="workspace-field-label">Bericht <small>{draft.body.length}/{PUSH_BODY_LIMIT}</small></span><textarea ref={bodyRef} name="push-body" rows={4} value={draft.body} maxLength={PUSH_BODY_LIMIT} onFocus={()=>{activeField.current='body';}} onChange={e=>update('body',e.target.value)} placeholder="Hou het kort, duidelijk en relevant."/><small>Een korte tekst leest het prettigst op een telefoon.</small></label>

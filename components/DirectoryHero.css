@@ -124,7 +124,22 @@
 .directory-hero--losloopzones { --directory-sand: #e0e9d9; }
 .directory-hero--losloopzones .directory-hero__photo img { object-position: 50% 48%; }
 
-#hotspot-filters, #service-filters, #offleash-filters { scroll-margin-top: 6.5rem; }
+.directory-hero--agenda { --directory-sand: #e9e1cf; }
+.directory-hero--agenda .directory-hero__photo img { object-position: center 65%; }
+.directory-hero__credit {
+  position: absolute;
+  right: 0;
+  bottom: -2.2rem;
+  left: 1rem;
+  color: #647779;
+  font-size: .6875rem;
+  line-height: 1.6;
+  transform: rotate(-1.5deg);
+}
+.directory-hero__credit a { text-decoration: underline; text-underline-offset: .2em; }
+.directory-hero__credit a:hover { color: var(--directory-blue); }
+
+#hotspot-filters, #service-filters, #offleash-filters, #agenda-filters { scroll-margin-top: 6.5rem; }
 
 @media (max-width: 1023px) {
   .directory-hero { padding-top: 6.5rem; }

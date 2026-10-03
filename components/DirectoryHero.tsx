@@ -49,15 +49,31 @@ const content = {
     height: 667,
     alt: 'Twee honden rennen samen door het gras, waarvan één met een bal.',
   },
+  agenda: {
+    breadcrumb: 'Agenda',
+    eyebrow: 'De hondvriendelijke agenda',
+    title: 'Samen op pad,',
+    emphasis: 'iets leuks beleven.',
+    description: 'Van een gezellige wandeling tot een festival vol kwispelende staarten. Ontdek hondvriendelijke evenementen aan zee en daarbuiten, en plan jullie volgende uitstap.',
+    action: 'Ontdek de agenda',
+    target: 'agenda-filters',
+    countLabel: 'komende evenementen',
+    image: '/images/heroes/agenda-900.webp',
+    srcSet: '/images/heroes/agenda-480.webp 480w, /images/heroes/agenda-800.webp 800w, /images/heroes/agenda-900.webp 900w',
+    width: 900,
+    height: 1600,
+    alt: 'Bezoekers met hun honden op het gras voor het kasteel van La Hulpe tijdens Dogs & Friends.',
+  },
 } as const;
 
 interface DirectoryHeroProps {
   kind: keyof typeof content;
   count: number;
   breadcrumbItems?: BreadcrumbItem[];
+  imageCredit?: { name: string; href: string };
 }
 
-const DirectoryHero: React.FC<DirectoryHeroProps> = ({ kind, count, breadcrumbItems }) => {
+const DirectoryHero: React.FC<DirectoryHeroProps> = ({ kind, count, breadcrumbItems, imageCredit }) => {
   const hero = content[kind];
   return (
     <header className={`directory-hero directory-hero--${kind}`} data-directory-hero={kind}>
@@ -90,6 +106,11 @@ const DirectoryHero: React.FC<DirectoryHeroProps> = ({ kind, count, breadcrumbIt
               fetchPriority="high"
               decoding="async"
             />
+            {imageCredit && (
+              <figcaption className="directory-hero__credit">
+                Foto: <a href={imageCredit.href} target="_blank" rel="noopener noreferrer">{imageCredit.name}</a>
+              </figcaption>
+            )}
           </figure>
         </div>
       </div>

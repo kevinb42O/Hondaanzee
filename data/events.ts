@@ -1,15 +1,20 @@
+import { FUTURE_EVENTS } from './futureEvents.ts';
+
+export type EventRegion = 'kust' | 'west-vlaanderen' | 'belgie' | 'zeeland';
+
 export interface DogEvent {
   id: number;
   slug: string;
   title: string;
   subtitle: string;
   city: string; // internal id
-  citySlug: string; // URL slug for routing
+  citySlug?: string; // Only set when we have a coastal town guide.
   cityName: string;
   date: string; // YYYY-MM-DD for sorting
+  endDate?: string; // Inclusive final calendar day, including multi-day events.
   dateDisplay: string; // Human-readable date
   timeDisplay: string; // e.g. "11:00 - 17:00"
-  schemaStartDate: string;
+  schemaStartDate: string; // Use a date-only value when no start time is announced.
   schemaEndDate: string;
   season: 'Lente' | 'Zomer' | 'Herfst' | 'Winter';
   category: string; // e.g. 'Festival', 'Wandeling', 'Workshop'
@@ -17,10 +22,26 @@ export interface DogEvent {
   descriptionHighlight?: string;
   highlights: string[];
   location: string; // Venue name
-  address: string;
+  address?: string;
+  structuredAddress?: { streetAddress?: string; postalCode?: string; addressLocality?: string };
+  country?: 'BE' | 'NL';
+  region?: EventRegion;
   price: string; // e.g. 'Gratis' or '€10'
-  image: string;
+  isAccessibleForFree?: boolean; // Never infer this from a free child/dog ticket.
+  ticketUrl?: string; // Verified booking page; set only when the listed price is confirmed.
+  entryPrice?: number; // Main visitor/participant ticket, only when confirmed.
+  image?: string;
+  imageAlt?: string;
+  imageKind?: 'photo' | 'poster';
+  imageCaption?: string;
+  imageCredit?: string;
+  imageSourceUrl?: string;
   imagePosition?: string;
+  lastVerified?: string;
+  status?: 'confirmed' | 'save-the-date' | 'announced';
+  dogPolicy?: string;
+  practicalNotes?: string[];
+  sources?: Array<{ label: string; url: string }>;
   website?: string;
   websiteLabel?: string;
   organizerName?: string;
@@ -40,6 +61,8 @@ export interface DogEvent {
       src: string;
       alt: string;
       label: string;
+      credit?: string;
+      sourceUrl?: string;
     }>;
   };
   tags: string[];
@@ -71,8 +94,11 @@ export const EVENTS: DogEvent[] = [
       '👨‍👩‍👧‍👦 Leuk voor het hele gezin',
     ],
     location: 'Leopold I-Esplanade',
-    address: 'Zeelaan 21, 8660 De Panne',
+    address: 'Leopold I-Esplanade, 8660 De Panne',
+    structuredAddress: { streetAddress: 'Leopold I-Esplanade', postalCode: '8660' },
     price: 'Gratis — vrije toegang!',
+    isAccessibleForFree: true,
+    entryPrice: 0,
     image: '/kwispelfestival.webp',
     imagePosition: 'center',
     website: 'https://www.visitdepanne.be',
@@ -118,7 +144,10 @@ export const EVENTS: DogEvent[] = [
     ],
     location: 'Domein Duin & Zee',
     address: 'Fortstraat 128, 8400 Oostende',
+    structuredAddress: { streetAddress: 'Fortstraat 128', postalCode: '8400' },
     price: 'Festival gratis - Stratier-wandeling €3 p.p.',
+    isAccessibleForFree: true,
+    entryPrice: 0,
     image: '/oostendshondenfestival.webp',
     imagePosition: 'center',
     website: 'https://www.pooches.be',
@@ -187,7 +216,10 @@ export const EVENTS: DogEvent[] = [
     ],
     location: 'Jeugdhuis Creatuur',
     address: 'Kerkstraat 9, 8450 Bredene',
+    structuredAddress: { streetAddress: 'Kerkstraat 9', postalCode: '8450' },
     price: '€5 per deelnemer',
+    isAccessibleForFree: false,
+    entryPrice: 5,
     image: '/hondenbredene.webp',
     imagePosition: 'center',
     website: 'https://www.sosreptiel.be',
@@ -200,4 +232,5 @@ export const EVENTS: DogEvent[] = [
     ],
     tags: ['Wandeling', 'Duinen', 'Strand', 'Jaarlijks', 'Hondenvriendelijk'],
   },
+  ...FUTURE_EVENTS,
 ];

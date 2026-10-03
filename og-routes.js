@@ -43,10 +43,10 @@ export default {
     "imageAlt": "Steun HondAanZee.be | Help de gids gratis en actueel te houden 🐾"
   },
   "/agenda": {
-    "title": "Hondvriendelijke Evenementen Belgische Kust 2026 | Agenda & Events – HondAanZee.be",
-    "description": "Ontdek alle hondvriendelijke evenementen aan de Belgische kust in 2026: Kwispelfestival De Panne, Groot Oostends Hondenfestival met Stratier-benefietwandeling en Grote Hondenwandeling Bredene.",
-    "image": "https://hondaanzee.be/kwispelfestival.webp",
-    "imageAlt": "Hondvriendelijke Evenementen Belgische Kust 2026 | Agenda & Events – HondAanZee.be"
+    "title": "Hondvriendelijke Evenementen | Kust, West-Vlaanderen, België & Zeeland – HondAanZee.be",
+    "description": "Plan een uitstap met je hond: komende wandelingen, festivals en hondvriendelijke evenementen aan de kust, in West-Vlaanderen, België en Zeeland. Met praktische info en bronnen.",
+    "image": "https://hondaanzee.be/events/licht-real.webp",
+    "imageAlt": "Hondvriendelijke Evenementen | Kust, West-Vlaanderen, België & Zeeland – HondAanZee.be"
   },
   "/kaart": {
     "title": "Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart – HondAanZee.be",
@@ -1165,22 +1165,130 @@ export default {
     "imageAlt": "Dierenartsencentrum Clos Fleuri in Koksijde - Oostduinkerke | HondAanZee.be"
   },
   "/agenda/kwispelfestival-de-panne-2026": {
-    "title": "Kwispelfestival De Panne | Agenda HondAanZee.be",
-    "description": "17 mei 2026 in De Panne: Maak je klaar voor dé dag van het jaar waar jouw viervoeter de absolute ster is! Op het Kwispelfestival in De Panne draait alles om plezier, avontuur en heel veel kwispelende staartjes. Geniet samen van een prachtige wandeltocht langs de kust, ontdek leuke workshops waar je hond nieuwe tricks leert, en laat een professionele foto maken als aandenken. Terwijl jouw trouwe metgezel zich uitleeft, kun jij gezellig rondsnuffelen op de gezellige hondenmarkt vol leuke spulletjes, of kijk je ogen uit bij spectaculaire demonstraties. Een dag vol beleving, ontmoeting en onvergetelijke momenten — voor honden én hun baasjes!",
+    "title": "Kwispelfestival De Panne 2026 | HondAanZee.be",
+    "description": "Voorbije editie: Kwispelfestival De Panne, 17 mei 2026 in De Panne. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/kwispelfestival.webp",
-    "imageAlt": "Kwispelfestival De Panne | Agenda HondAanZee.be"
+    "imageAlt": "Kwispelfestival De Panne 2026 | HondAanZee.be"
   },
   "/agenda/groot-oostends-hondenfestival-2026": {
-    "title": "Groot Oostends Hondenfestival | Agenda HondAanZee.be",
-    "description": "23 & 24 mei 2026 in Oostende: Na het overweldigende succes van de eerste editie in 2025 keert het Groot Oostends Hondenfestival terug — en dit keer nog groter. Op zaterdag 23 en zondag 24 mei 2026 verandert Domein Duin & Zee opnieuw in een hondenparadijs van 12.000 m² vol demonstraties, standhouders, losloopplezier en food corners voor mens en dier. Nieuw dit jaar is de grote Stratier-hondenwandeling ten voordele van dierenasielen: beide dagen vertrekt die om 11:00 aan de Stratier-stand op het festivalterrein. Zo combineer je een gratis festivaldag aan zee met een extra wandeling die niet alleen leuk is, maar ook adoptie en asieldieren extra in de kijker zet.",
+    "title": "Groot Oostends Hondenfestival 2026 in Oostende | HondAanZee.be",
+    "description": "Voorbije editie: Groot Oostends Hondenfestival, 23 & 24 mei 2026 in Oostende. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/oostendshondenfestival.webp",
-    "imageAlt": "Groot Oostends Hondenfestival | Agenda HondAanZee.be"
+    "imageAlt": "Groot Oostends Hondenfestival 2026 in Oostende | HondAanZee.be"
   },
   "/agenda/grote-hondenwandeling-bredene-2026": {
-    "title": "Grote Hondenwandeling Bredene | Agenda HondAanZee.be",
-    "description": "24 mei 2026 in Bredene: De zee, het strand en de Bredense duinen vormen opnieuw het decor voor de jaarlijkse Grote Hondenwandeling! Vanaf 11 uur vertrek je aan het Jeugdhuis Creatuur en volg je de pijltjes doorheen het Bredense groen, de duinen en langs het strand. De bewegwijzering brengt je heen en terug samen met je favoriete viervoeter(s). Bij aankomst wacht er een superleuke attentie voor je beste vriend! Speciaal voor de oudere deelnemers is er opnieuw een verkorte route voorzien — zodat elke hond mee kan genieten van deze fantastische dag.",
+    "title": "Grote Hondenwandeling Bredene 2026 | HondAanZee.be",
+    "description": "Voorbije editie: Grote Hondenwandeling Bredene, 24 mei 2026 in Bredene. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/hondenbredene.webp",
-    "imageAlt": "Grote Hondenwandeling Bredene | Agenda HondAanZee.be"
+    "imageAlt": "Grote Hondenwandeling Bredene 2026 | HondAanZee.be"
+  },
+  "/agenda/dierenzegening-knokke-2026": {
+    "title": "Dierenzegening Knokke-Heist 2026 | HondAanZee.be",
+    "description": "Dierenzegening Knokke-Heist, 4 oktober 2026 in Knokke-Heist. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Dierenzegening Knokke-Heist 2026 | HondAanZee.be"
+  },
+  "/agenda/grote-dierenfeest-koolkerke-2026": {
+    "title": "Het Grote Dierenfeest 2026 in Koolkerke | HondAanZee.be",
+    "description": "Het Grote Dierenfeest, 4 oktober 2026 in Koolkerke. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Het Grote Dierenfeest 2026 in Koolkerke | HondAanZee.be"
+  },
+  "/agenda/zwarteberg-2026": {
+    "title": "Hondenwandeling Zwarteberg 2026 in Westouter (Heuvelland) | HondAanZee.be",
+    "description": "Hondenwandeling Zwarteberg, 3 & 4 oktober 2026 in Westouter (Heuvelland). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/zwarteberg.webp",
+    "imageAlt": "Hondenwandeling Zwarteberg 2026 in Westouter (Heuvelland) | HondAanZee.be"
+  },
+  "/agenda/marke-2026": {
+    "title": "Hondenwandeling met Gianna en Maxim 2026 in Marke (Kortrijk) | HondAanZee.be",
+    "description": "Hondenwandeling met Gianna en Maxim, 4 oktober 2026 in Marke (Kortrijk). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/marke.webp",
+    "imageAlt": "Hondenwandeling met Gianna en Maxim 2026 in Marke (Kortrijk) | HondAanZee.be"
+  },
+  "/agenda/hondenwandeling-de-schelde-2026": {
+    "title": "Hondenwandeling en welzijnsmarkt De Schelde 2026 in Berendrecht-Zandvliet-Lillo | HondAanZee.be",
+    "description": "Hondenwandeling en welzijnsmarkt De Schelde, 4 oktober 2026 in Berendrecht-Zandvliet-Lillo. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hondenwandeling en welzijnsmarkt De Schelde 2026 in Berendrecht-Zandvliet-Lillo | HondAanZee.be"
+  },
+  "/agenda/stokroos-2026": {
+    "title": "Honden- en paardencafé De Stokroos 2026 in Nieuwerkerk | HondAanZee.be",
+    "description": "Honden- en paardencafé De Stokroos, 3 & 4 oktober 2026 in Nieuwerkerk. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/stokroos.webp",
+    "imageAlt": "Honden- en paardencafé De Stokroos 2026 in Nieuwerkerk | HondAanZee.be"
+  },
+  "/agenda/titan-paw-2026": {
+    "title": "Titan Paw 2026 in Lille (Gierle) | HondAanZee.be",
+    "description": "Titan Paw, 10 oktober 2026 in Lille (Gierle). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Titan Paw 2026 in Lille (Gierle) | HondAanZee.be"
+  },
+  "/agenda/fotoshoot-de-haan-2026": {
+    "title": "Hondenwandeling + fotoshoot De Haan 2026 | HondAanZee.be",
+    "description": "Hondenwandeling + fotoshoot De Haan, 25 oktober 2026 in De Haan. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/dehaan.webp",
+    "imageAlt": "Hondenwandeling + fotoshoot De Haan 2026 | HondAanZee.be"
+  },
+  "/agenda/howl-o-ween-dudzele-2026": {
+    "title": "Howl-O-ween Het Blauwe Kruis Brugge 2026 in Dudzele (Brugge) | HondAanZee.be",
+    "description": "Howl-O-ween Het Blauwe Kruis Brugge, 25 oktober 2026 in Dudzele (Brugge). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Howl-O-ween Het Blauwe Kruis Brugge 2026 in Dudzele (Brugge) | HondAanZee.be"
+  },
+  "/agenda/halloween-wevelgem-2026": {
+    "title": "Heksenbos / Halloweentocht Juttepaardje 2026 in Wevelgem | HondAanZee.be",
+    "description": "Heksenbos / Halloweentocht Juttepaardje, 31 oktober 2026 in Wevelgem. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Heksenbos / Halloweentocht Juttepaardje 2026 in Wevelgem | HondAanZee.be"
+  },
+  "/agenda/hondenhalloween-balen-2026": {
+    "title": "Hondenhalloween Balen-Olmen 2026 | HondAanZee.be",
+    "description": "Hondenhalloween Balen-Olmen, 31 oktober – 8 november 2026 in Balen-Olmen. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Hondenhalloween Balen-Olmen 2026 | HondAanZee.be"
+  },
+  "/agenda/canicross-genendijk-2026": {
+    "title": "Canicross Genendijk 2026 | HondAanZee.be",
+    "description": "Canicross Genendijk, 15 november 2026 in Genendijk. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Canicross Genendijk 2026 | HondAanZee.be"
+  },
+  "/agenda/lichtgolf-oostende-2026": {
+    "title": "Lichtgolf Oostende 2026–2027 | HondAanZee.be",
+    "description": "Lichtgolf Oostende, 27 november 2026 – 3 januari 2027 in Oostende. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/licht-real.webp",
+    "imageAlt": "Lichtgolf Oostende 2026–2027 | HondAanZee.be"
+  },
+  "/agenda/zeeuwse-winterfair-2026": {
+    "title": "Zeeuwse Winterfair aan Zee 2026 in Noordwelle | HondAanZee.be",
+    "description": "Zeeuwse Winterfair aan Zee, 27–29 november 2026 in Noordwelle. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Zeeuwse Winterfair aan Zee 2026 in Noordwelle | HondAanZee.be"
+  },
+  "/agenda/dogsurvival-winter-2026": {
+    "title": "Dogsurvival Therapy4Dogs — wintereditie 2026 in Merksplas | HondAanZee.be",
+    "description": "Dogsurvival Therapy4Dogs — wintereditie, 12 december 2026 in Merksplas. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/survival-real.webp",
+    "imageAlt": "Dogsurvival Therapy4Dogs — wintereditie 2026 in Merksplas | HondAanZee.be"
+  },
+  "/agenda/dierenfestival-waregem-2027": {
+    "title": "Dierenfestival Waregem 2027 | HondAanZee.be",
+    "description": "Dierenfestival Waregem, 20 & 21 maart 2027 in Waregem. Datum aangekondigd; praktische details volgen.",
+    "image": "https://hondaanzee.be/og-imagefinal.webp",
+    "imageAlt": "Dierenfestival Waregem 2027 | HondAanZee.be"
+  },
+  "/agenda/dogs-friends-2027": {
+    "title": "Dogs & Friends 2027 in La Hulpe (Terhulpen) | HondAanZee.be",
+    "description": "Dogs & Friends, 23 mei 2027 in La Hulpe (Terhulpen). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "image": "https://hondaanzee.be/events/friends.webp",
+    "imageAlt": "Dogs & Friends 2027 in La Hulpe (Terhulpen) | HondAanZee.be"
+  },
+  "/agenda/hondenwandeling-bredene-2027": {
+    "title": "Hondenwandeling Bredene 2027 | HondAanZee.be",
+    "description": "Hondenwandeling Bredene, 13 juni 2027 in Bredene. Datum aangekondigd; praktische details volgen.",
+    "image": "https://hondaanzee.be/hondenbredene.webp",
+    "imageAlt": "Hondenwandeling Bredene 2027 | HondAanZee.be"
   },
   "/losloopzones/blankenberge-vande-puttelaan": {
     "title": "Hondenweide J. Vande Puttelaan | Losloopzone in Blankenberge | HondAanZee.be",

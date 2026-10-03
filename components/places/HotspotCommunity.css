@@ -13,8 +13,6 @@
 .hotspot-review-success-check{position:relative;width:80px;height:80px;overflow:visible;fill:none;stroke:#28796e;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .hotspot-review-success-check circle{stroke-dasharray:220;stroke-dashoffset:220;animation:hotspot-review-ring .65s ease .1s forwards}
 .hotspot-review-success-check path{stroke-dasharray:50;stroke-dashoffset:50;stroke-width:4;animation:hotspot-review-tick .4s cubic-bezier(.2,.8,.2,1) .45s forwards}
-.hotspot-review-spark{position:absolute;left:calc(50% - 3px);top:calc(50% - 3px);width:6px;height:6px;border-radius:2px;background:#d9ad55;opacity:0;animation:hotspot-review-spark .85s cubic-bezier(.15,.65,.25,1) calc(.25s + var(--spark-delay)) both}
-.hotspot-review-spark:nth-of-type(even){background:#6d9e87;border-radius:50%}
 .hotspot-review-celebration h3{font-size:26px;font-weight:650;letter-spacing:-.035em;line-height:1.25;color:#2d5159;outline:none}
 .hotspot-review-success-rating{margin:15px 0 18px}
 .hotspot-review-celebration p{max-width:390px;margin:0 auto;color:#617877;font-size:14px;line-height:1.8}
@@ -26,7 +24,6 @@
 @keyframes hotspot-review-halo{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes hotspot-review-ring{to{stroke-dashoffset:0}}
 @keyframes hotspot-review-tick{to{stroke-dashoffset:0}}
-@keyframes hotspot-review-spark{0%{opacity:0;transform:rotate(var(--spark-angle)) translateY(-30px) scale(.3)}25%{opacity:1}100%{opacity:0;transform:rotate(var(--spark-angle)) translateY(-82px) rotate(90deg) scale(.7)}}
 @keyframes hotspot-review-reveal{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){.hotspot-review-celebration{padding:30px 20px}.hotspot-review-celebration h3{font-size:23px}.hotspot-review-celebration>.member-button{width:100%}}
-@media(prefers-reduced-motion:reduce){.hotspot-rating-label,.hotspot-review-submit{transition:none}.hotspot-review-celebration *,.hotspot-review-submit.is-sending::after{animation:none!important}.hotspot-review-success-check circle,.hotspot-review-success-check path{stroke-dashoffset:0}.hotspot-review-spark,.hotspot-review-submit.is-sending::after{display:none}}
+@media(prefers-reduced-motion:reduce){.hotspot-rating-label,.hotspot-review-submit{transition:none}.hotspot-review-celebration *,.hotspot-review-submit.is-sending::after{animation:none!important}.hotspot-review-success-check circle,.hotspot-review-success-check path{stroke-dashoffset:0}.hotspot-review-submit.is-sending::after{display:none}}

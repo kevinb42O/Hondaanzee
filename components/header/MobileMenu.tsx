@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, CalendarDays, Sparkles, Siren, type LucideIcon } from 'lucide-react';
+import { X, ChevronRight, Home, Coffee, ShoppingBag, TreePine, MapPin, Globe, Info, ShieldAlert, BookOpen, Camera, CalendarDays, Newspaper, Siren, type LucideIcon } from 'lucide-react';
 import { CITIES } from '../../cityData.ts';
 import { SupportCard } from './SupportCard.tsx';
 import { useMember } from '../member/MemberProvider.tsx';
@@ -25,7 +25,7 @@ const MOBILE_NAV_ITEMS: readonly NavItem[] = [
     { to: '/goed-om-te-weten', label: 'Goed om te weten', icon: ShieldAlert },
     { to: '/blog', label: 'Blog', icon: BookOpen, startsWith: true },
     { to: '/over-ons', label: 'Over ons', icon: Info },
-    { to: '/updates', label: 'Wat is er nieuw?', icon: Sparkles },
+    { to: '/updates', label: 'Wat is er nieuw?', icon: Newspaper },
 ];
 
 function isNavActive(item: NavItem, currentPath: string, currentHash: string): boolean {

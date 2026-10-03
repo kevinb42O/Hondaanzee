@@ -5,6 +5,7 @@ import { ArrowLeft, Users } from 'lucide-react';
 import StatusCheck from '../components/StatusCheck.tsx';
 import Hotspots from '../components/Hotspots.tsx';
 import Services from '../components/Services.tsx';
+import { CityEventLinks } from '../components/EventLinks.tsx';
 import OffLeashAreas from '../components/OffLeashAreas.tsx';
 import BusinessCTA from '../components/BusinessCTA.tsx';
 import LocalHero from '../components/LocalHero.tsx';
@@ -115,6 +116,8 @@ const CityPage: React.FC = () => {
       <Hotspots city={city} />
 
       <Services city={city} />
+
+      <CityEventLinks citySlug={city.slug} cityName={city.name} />
 
       <CityFAQ city={city} />
 

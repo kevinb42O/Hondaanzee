@@ -21,7 +21,9 @@ const YEAR = new Date().getFullYear();
 // ── helpers ──────────────────────────────────────────────────────────────────
 
 // Use the same typed data inventory as the sitemap and page build.
-const { HOTSPOTS, SERVICES, CITIES, blogPosts, EVENTS, OFF_LEASH_AREAS, getAllRoutes } = require('./place-data.cjs');
+const { HOTSPOTS, SERVICES, CITIES, blogPosts, EVENTS, OFF_LEASH_AREAS, getAllRoutes, loadTsModule } = require('./place-data.cjs');
+
+const { getEventSEO } = loadTsModule('utils/events.ts');
 
 // ── static page OG metadata ─────────────────────────────────────────────────
 
@@ -69,10 +71,10 @@ const staticPages = {
     image: DEFAULT_IMAGE,
   },
   '/agenda': {
-    title: `Hondvriendelijke Evenementen Belgische Kust ${YEAR} | Agenda & Events – HondAanZee.be`,
+    title: 'Hondvriendelijke Evenementen | Kust, België & Zeeland – HondAanZee.be',
     description:
-      `Ontdek alle hondvriendelijke evenementen aan de Belgische kust in ${YEAR}: festivals, wandelingen en meer.`,
-    image: `${SITE}/kwispelfestival.webp`,
+      'Komende hondenwandelingen, festivals en hondvriendelijke uitstappen aan de kust, in West-Vlaanderen, België en Zeeland. Met praktische informatie en bronnen.',
+    image: `${SITE}/events/licht-real.webp`,
   },
   '/kaart': {
     title: 'Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart – HondAanZee.be',
@@ -130,7 +132,8 @@ for (const [collection, places] of [['hotspots', HOTSPOTS], ['diensten', SERVICE
   }
 }
 for (const event of EVENTS) {
-  routes[`/agenda/${event.slug}`] = { title: `${event.title} | Agenda HondAanZee.be`, description: event.description, image: `${SITE}${event.image}` };
+  const seo = getEventSEO(event);
+  routes[`/agenda/${event.slug}`] = { title: seo.title, description: seo.description, image: seo.ogImage, imageAlt: seo.ogImageAlt };
 }
 for (const area of OFF_LEASH_AREAS) {
   routes[`/losloopzones/${area.slug}`] = { title: `${area.name} | Losloopzones HondAanZee.be`, description: area.description, image: area.images?.[0] || area.image ? `${SITE}${area.images?.[0] || area.image}` : DEFAULT_IMAGE };

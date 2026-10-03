@@ -1,0 +1,1508 @@
+{
+  "researchDate": "2026-10-03",
+  "timezone": "Europe/Brussels",
+  "project": "Hondaanzee",
+  "horizon": "Vanaf 3 oktober 2026; toekomstige edities voor zover publiek aangekondigd, vooral 2026–2027",
+  "status": "Research only; not imported into the public agenda",
+  "totalRecords": 41,
+  "countsByPublishDecision": {
+    "publish_known_fields": 15,
+    "confirm_before_publish": 14,
+    "watch": 7,
+    "exclude": 5
+  },
+  "decisionDefinitions": {
+    "publish_known_fields": "Datum en hondgerichte aard/toegang bevestigd in actuele primaire bron. Alleen bekende velden publiceren; praktische hiaten zichtbaar laten.",
+    "confirm_before_publish": "Eerst organisator- of voorwaardencheck: secundaire bron, voorlopige datum of ontbrekende actuele hondentoegang.",
+    "watch": "Nog geen toekomstige datum. Alleen interne opvolglijst; niet als gedateerd evenement publiceren.",
+    "exclude": "Niet opnemen: geannuleerd of geen geschikte toegang voor bezoekers met gewone honden."
+  },
+  "records": [
+    {
+      "id": "dierenzegening-knokke-2026",
+      "title": "Dierenzegening Knokke-Heist",
+      "scope": "coast",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "location": "Alfred Verweeplein, Knokke-Heist",
+      "address": "Alfred Verweeplein 1, 8300 Knokke-Heist",
+      "timeDisplay": "11:00–12:00",
+      "priceDisplay": null,
+      "dogPolicy": "Alle huisdieren welkom; ook paarden aanwezig.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Concrete kustactiviteit voor baasjes met hun hond. Zeer urgent: morgen ten opzichte van de onderzoeksdatum.",
+      "missingInfo": [
+        "Toegangsprijs niet vermeld"
+      ],
+      "priority": 1,
+      "organizer": "Cultuur Knokke-Heist",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Cultuur Knokke-Heist — Dierenzegening",
+          "url": "https://www.knokke-heist.be/vrije-tijd/activiteitenkalender/dierenzegening",
+          "sourceType": "official_tourism",
+          "supports": "Datum, uur, locatie en welkom voor huisdieren"
+        }
+      ]
+    },
+    {
+      "id": "fotoshoot-de-haan-2026",
+      "title": "Hondenwandeling + fotoshoot De Haan",
+      "scope": "coast",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "location": "Duinbossen / De Zandpanne, De Haan",
+      "address": "Zwarte Kiezel, bij fietsenstalling en toilet, De Zandpanne, De Haan",
+      "timeDisplay": "Verzamelen 09:15; terug rond 12:00–12:30",
+      "priceDisplay": "€25 baasje + hond; €10 extra persoon volgens evenementpagina",
+      "dogPolicy": "Specifieke hondenwandeling; maximaal 10 honden volgens evenementpagina.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "secondary_corroboration",
+      "description": "Fotowandeling van ongeveer 6–7 km door bos, duinen en strand, met een losloopzone. Volgens de evenementtekst gaat 45% naar vzw Bright Eyes. De organisator is rechtstreeks vindbaar, maar de datum was niet in de uitleesbare primaire kalender te bevestigen.",
+      "missingInfo": [
+        "Datum en beschikbaarheid rechtstreeks bij fotograaf bevestigen",
+        "Prijs, bijdrage en exacte afspraakplek opnieuw bevestigen"
+      ],
+      "priority": 1,
+      "organizer": "FotografíaBarée / Nikki Barée",
+      "contact": {
+        "email": "info@fotografiabaree.com",
+        "phone": "+32 468 36 52 85"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Oazis — Hondenwandeling + fotoshoot",
+          "url": "https://oazis.app/en/event/hondenwandeling-fotoshoot",
+          "sourceType": "event_aggregator",
+          "supports": "Datum, uren, prijs, route, capaciteit en goed doel"
+        },
+        {
+          "title": "FotografíaBarée — organisator",
+          "url": "https://fotografiabaree.com/",
+          "sourceType": "organizer",
+          "supports": "Identiteit en contact van organisator; geen onafhankelijke bevestiging van deze datum"
+        }
+      ]
+    },
+    {
+      "id": "lichtgolf-oostende-2026",
+      "title": "Lichtgolf Oostende",
+      "scope": "coast",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-11-27",
+      "endDate": "2027-01-03",
+      "location": "Stadsparcours Oostende",
+      "address": "Monacoplein 2, 8400 Oostende",
+      "timeDisplay": "Dagelijks startslots 17:00–21:00; sluiting 23:00",
+      "priceDisplay": "€8 inclusief headset; €5 early bird t.e.m. 15 november",
+      "dogPolicy": "Actuele FAQ bevestigt dat de hond bij alle stops welkom is.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Sterke aanvulling op de winteragenda: lichtwandeling van 3 km, ongeveer 1,5–2 uur. Start bij Toerisme Oostende. De editie omvat ook binnenlocaties; de organisator bevestigt expliciet welkom voor honden bij alle stops. Het tarief is voor de audioheadset.",
+      "missingInfo": [],
+      "priority": 1,
+      "organizer": "Toerisme Oostende",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Lichtgolf — actuele editie en FAQ",
+          "url": "https://www.lichtgolfoostende.be/nl",
+          "sourceType": "organizer",
+          "supports": "Editie 2026–2027, tijden, startpunt, tarieven en actuele hondentoegang"
+        }
+      ]
+    },
+    {
+      "id": "kerstmarkt-blauwe-kruis-kust-2026",
+      "title": "Kerstmarkt Het Blauwe Kruis van de Kust",
+      "scope": "coast",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-12-13",
+      "endDate": "2026-12-13",
+      "location": "OC De Schaperye, Oostende",
+      "address": null,
+      "timeDisplay": "11:00–18:00 volgens deelnemersagenda",
+      "priceDisplay": null,
+      "dogPolicy": "Hondentoegang nog niet bevestigd.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Relevant asielevenement, met de datum bij twee deelnemers teruggevonden. Een asiel als organisator bewijst niet automatisch dat bezoekers hun hond binnen mogen meenemen. Gebruik het cultureel centrum als venue, niet het adres van het asiel.",
+      "missingInfo": [
+        "Primaire organisatorbevestiging",
+        "Honden welkom binnen?",
+        "Exact adres, prijs en uren"
+      ],
+      "priority": 1,
+      "organizer": "Het Blauwe Kruis van de Kust",
+      "contact": {
+        "email": "info@hetblauwekruiskust.be",
+        "phone": "059 70 44 37"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Lizzies Collective — deelnemersagenda",
+          "url": "https://lizziescollective.be/pages/agenda",
+          "sourceType": "participant",
+          "supports": "Datum, uur en venue als deelnemer"
+        },
+        {
+          "title": "Ark van Koekelare — activiteiten",
+          "url": "https://www.arkvankoekelare.be/activiteiten",
+          "sourceType": "organizer_or_participant",
+          "supports": "Datum als deelnemer"
+        },
+        {
+          "title": "Het Blauwe Kruis van de Kust",
+          "url": "https://www.hetblauwekruiskust.be/",
+          "sourceType": "organizer",
+          "supports": "Organisator en contact, geen uitgelezen evenementbevestiging"
+        }
+      ]
+    },
+    {
+      "id": "hondenwandeling-bredene-2027",
+      "title": "Hondenwandeling Bredene",
+      "scope": "coast",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2027-06-13",
+      "endDate": "2027-06-13",
+      "location": "Zaal Creatuur, Bredene",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondenwandeling aangekondigd door de organisator.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Belangrijkste rechtstreeks bevestigde hondenactiviteit aan zee in 2027. Geschikt als save the date. De actuele SOS Reptiel-kalender noemt 13 juni en Zaal Creatuur; praktische gegevens van 2026 niet overnemen.",
+      "missingInfo": [
+        "Startuur",
+        "Afstanden en route",
+        "Prijs en inschrijving",
+        "Exact straatadres"
+      ],
+      "priority": 1,
+      "organizer": "SOS Reptiel",
+      "contact": {
+        "email": "info@sosreptiel.be",
+        "phone": "+32 50 41 34 62"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "SOS Reptiel — activiteitenkalender",
+          "url": "https://www.sosreptiel.be/",
+          "sourceType": "organizer",
+          "supports": "Datum 13 juni 2027 en venue in eigen activiteitenkalender"
+        }
+      ]
+    },
+    {
+      "id": "summer-bloom-oostende-2027",
+      "title": "Summer Bloom Festival Oostende",
+      "scope": "coast",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2027-08-14",
+      "endDate": "2027-08-15",
+      "location": "Evenementenweide Duin & Zee, Oostende",
+      "address": "Fortstraat 128, 8400 Oostende",
+      "timeDisplay": "Zaterdag 13:00–21:00; zondag 10:00–18:00",
+      "priceDisplay": null,
+      "dogPolicy": "Vorige praktische editie liet honden aan de leiband of in draagzak toe; voorwaarden voor 2027 nog bevestigen.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "De organisator heeft datum, venue en uren voor 2027 gepubliceerd. Algemeen spiritueel festival, bruikbaar als hondvriendelijke uitstap wanneer de nieuwe hondentoegang bevestigd is. Geen gezondheidsclaims van standhouders opnemen in onze agenda.",
+      "missingInfo": [
+        "Hondentoegang voor editie 2027",
+        "Actuele ticketprijs"
+      ],
+      "priority": 2,
+      "organizer": "Bloom",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Summer Bloom Festival — editie 2027",
+          "url": "https://www.bloom.be/spirituele-beurzen/summer-bloom-festival-oostende",
+          "sourceType": "organizer",
+          "supports": "Datum, uren en exact adres editie 2027"
+        },
+        {
+          "title": "Summer Bloom — praktische informatie, nog editie 2026",
+          "url": "https://www.bloom.be/summer-bloom-festival-oostende-praktische-informatie",
+          "sourceType": "organizer_previous_edition",
+          "supports": "Hondenbeleid vorige editie; geen voldoende bewijs voor 2027"
+        }
+      ]
+    },
+    {
+      "id": "grote-dierenfeest-koolkerke-2026",
+      "title": "Het Grote Dierenfeest",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "location": "Brasserie Fort van Beieren, Koolkerke",
+      "address": "Gemeneweidestraat 51, 8000 Koolkerke",
+      "timeDisplay": "10:00–17:00",
+      "priceDisplay": "Vrije toegang; prijs aparte wandeling niet vastgesteld",
+      "dogPolicy": "Baasje en viervoeter expliciet welkom.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Dierenfeest met markt en een herfstwandeling van 4,5 km voor de dierenvoedselbank. Goed passend bij een uitstap vanuit de oostkust. Morgen: onmiddellijk publiceren als deze regio wordt opgenomen.",
+      "missingInfo": [
+        "Bijdrage voor de wandeling"
+      ],
+      "priority": 1,
+      "organizer": "Ark van Koekelare",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Ark van Koekelare — activiteiten",
+          "url": "https://www.arkvankoekelare.be/activiteiten",
+          "sourceType": "organizer_or_participant",
+          "supports": "Organisatorpublicatie met datum, uren, locatie en vrije toegang"
+        }
+      ]
+    },
+    {
+      "id": "howl-o-ween-dudzele-2026",
+      "title": "Howl-O-ween Het Blauwe Kruis Brugge",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "location": "Dierenasiel Het Blauwe Kruis Brugge, Dudzele",
+      "address": "Krinkelstraat 4, 8380 Dudzele",
+      "timeDisplay": "13:00–18:00 volgens deelnemers",
+      "priceDisplay": null,
+      "dogPolicy": "Hondenwedstrijd en Halloweenwandeling in evenementtekst; huisregels nog navragen.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "secondary_corroboration",
+      "description": "Hondgerichte Halloweenactiviteit met wandeling, markt, fotobooth en verkleedwedstrijd. Twee deelnemers bevestigen datum en plek. De overgenomen tekst zegt dat dit de kerstmarkt vervangt. De foutieve gemeente Oostrozebeke in de aggregatorkop niet overnemen: de locatie is Dudzele.",
+      "missingInfo": [
+        "Rechtstreekse bevestiging organisator",
+        "Prijs, inschrijving en hondenhuisregels"
+      ],
+      "priority": 1,
+      "organizer": "Het Blauwe Kruis Brugge",
+      "contact": {
+        "email": "events@blauwekruis-brugge.be"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Ark van Koekelare — activiteiten",
+          "url": "https://www.arkvankoekelare.be/activiteiten",
+          "sourceType": "organizer_or_participant",
+          "supports": "Datum en deelname"
+        },
+        {
+          "title": "Lizzies Collective — deelnemersagenda",
+          "url": "https://lizziescollective.be/pages/agenda",
+          "sourceType": "participant",
+          "supports": "Datum, uren en Krinkelstraat 4"
+        },
+        {
+          "title": "Howl-O-ween — overgenomen evenementtekst",
+          "url": "https://stayhappening.com/e/howl-o-ween-E2ISYOIBJMU",
+          "sourceType": "event_aggregator",
+          "supports": "Programma en vervanging kerstmarkt; foutieve automatische plaatsnaam"
+        },
+        {
+          "title": "Tieltse Perskring — persberichtvermelding",
+          "url": "https://tieltseperskring.be/persmomenten-overzicht/",
+          "sourceType": "press_release_index",
+          "supports": "Bestaan persbericht en contact, volledige tekst niet openbaar gelezen"
+        }
+      ]
+    },
+    {
+      "id": "zwarteberg-2026",
+      "title": "Hondenwandeling Zwarteberg",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04",
+      "location": "Alti Flora, Westouter / Heuvelland",
+      "address": "Bellestraat 45, 8954 Westouter (Heuvelland)",
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Expliciete hondenwandeling met goodybag per ingeschreven hond.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Eerste editie op 3 en 4 oktober; alleen de resterende dag 4 oktober is nog geschikt voor nieuwe promotie. De toeristische evenementpagina vermeldt Alti Flora. Een gratis consumptie en tombola zijn voorzien; dat betekent niet dat deelname gratis is.",
+      "missingInfo": [
+        "Vertrekuren",
+        "Deelnameprijs en route",
+        "Beschikbare inschrijvingen"
+      ],
+      "priority": 2,
+      "organizer": "Alti Flora",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Toerisme Heuvelland — Hondenwandeling Zwarteberg",
+          "url": "https://www.toerismeheuvelland.be/nl/hondenwandeling-zwarteberg",
+          "sourceType": "official_tourism",
+          "supports": "Data, locatie, omschrijving en inschrijflink"
+        }
+      ]
+    },
+    {
+      "id": "marke-2026",
+      "title": "Hondenwandeling met Gianna en Maxim",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "location": "Achter OC Marke, bij hondenweide, Kortrijk",
+      "address": "Hellestraat 6, 8510 Marke",
+      "timeDisplay": "Start 14:00; einduur niet vastgesteld",
+      "priceDisplay": "Gratis; vrijwillige gift voor Dierenasiel Leiestreek",
+      "dogPolicy": "Honden aan de leiband.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Wandeling van 3,5 km met dierenartsstop en goodybag. Benoem Vooruit / de initiatiefnemers als organisator: het gaat om een politiek georganiseerd evenement. De foutieve 14:00–14:00-weergave op de bron niet als einduur publiceren.",
+      "missingInfo": [
+        "Einduur"
+      ],
+      "priority": 3,
+      "organizer": "Vooruit / Gianna Werbrouck en Maxim Veys",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Vooruit — Hondenwandeling met Gianna en Maxim",
+          "url": "https://www.vooruit.org/hondenwandeling_met_gianna_en_maxim",
+          "sourceType": "organizer",
+          "supports": "Datum, startuur, route, toegang, bijdrage en leiband"
+        }
+      ]
+    },
+    {
+      "id": "dierenfestival-waregem-2027",
+      "title": "Dierenfestival Waregem",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2027-03-20",
+      "endDate": "2027-03-21",
+      "location": "Waregem Expo",
+      "address": "Zuiderlaan 26, 8790 Waregem",
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Bezoekers-FAQ bevestigt dat dieren toegelaten zijn.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Nieuwe dierenbeurs; tickets aangekondigd vanaf 1 december 2026. Datum en hondentoegang zijn bruikbaar, maar bezoekersuren en prijzen nog aanvullen. Standhoudervoorwaarden bevatten voorlopige uren en een foutieve weekdag; gebruik deze niet als definitief bezoekersprogramma.",
+      "missingInfo": [
+        "Bezoekersuren",
+        "Ticketprijs vanaf 1 december",
+        "Eventuele aanvullende voorwaarden voor honden"
+      ],
+      "priority": 2,
+      "organizer": "Dierenfestival",
+      "contact": {
+        "email": "hallo@dierenfestival.com",
+        "phone": "+32 471 88 20 36"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Dierenfestival Waregem — organisator",
+          "url": "https://dierenfestival.be/",
+          "sourceType": "organizer",
+          "supports": "Datum, locatie en aankondiging ticketstart"
+        },
+        {
+          "title": "Dierenfestival — FAQ voor bezoekers",
+          "url": "https://dierenfestival.be/pages/faq",
+          "sourceType": "organizer",
+          "supports": "Dieren toegelaten voor bezoekers"
+        },
+        {
+          "title": "Dierenfestival — voorwaarden voor standhouders",
+          "url": "https://dierenfestival.be/policies/terms-of-service",
+          "sourceType": "organizer_exhibitor_terms",
+          "supports": "Adres; standhouderuren niet als bezoekersuren gebruiken"
+        }
+      ]
+    },
+    {
+      "id": "canicross-maldegem-2026",
+      "title": "Canicross Maldegem-Kleit",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-11-28",
+      "endDate": "2026-11-29",
+      "location": "Maldegem-Kleit",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Sportwedstrijd met hond; deelnamevoorwaarden nog opvragen.",
+      "dateVerification": "provisional",
+      "dogAdmissionVerification": "provisional",
+      "description": "Sportief alternatief voor de agenda. Clubkalender noemt 28 én 29 november, maar noemt de kalender voorlopig. Een tweede sportkalender noemt alleen 28 november. Weekend en wedstrijddisciplines rechtstreeks laten bevestigen.",
+      "missingInfo": [
+        "Organisator/federatiebevestiging van één of twee dagen",
+        "Exact terrein en uren",
+        "Disciplines, hondenvoorwaarden, inschrijvingen en prijs"
+      ],
+      "priority": 3,
+      "organizer": "Team Maldegem-Kleit / BCF",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Cruybeeks Canicross — voorlopige wedstrijdkalender",
+          "url": "https://www.cruybeekscanicross.be/evenementen/wedstrijdkalender-canicross-2026/",
+          "sourceType": "sports_club_provisional",
+          "supports": "Voorlopige data 28–29 november"
+        },
+        {
+          "title": "Canisport2Enjoy — kalender 2026–2027",
+          "url": "https://www.canisports2enjoy.nl/canisportskalender-2026-2027/",
+          "sourceType": "sports_calendar",
+          "supports": "Alleen 28 november; verschil tussen bronnen"
+        }
+      ]
+    },
+    {
+      "id": "halloween-wevelgem-2026",
+      "title": "Heksenbos / Halloweentocht Juttepaardje",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-10-31",
+      "endDate": "2026-10-31",
+      "location": "Domein Bergelen, Wevelgem",
+      "address": "Domein Bergelen, Hemelhofweg, 8560 Wevelgem",
+      "timeDisplay": null,
+      "priceDisplay": "€10 volgens evenementvermeldingen; leeftijdsgrens tegenstrijdig",
+      "dogPolicy": "Wattedoen vermeldt expliciet dat honden welkom zijn.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "secondary_corroboration",
+      "description": "Gezinswandeling voor de gepensioneerde pony’s van vzw Juttepaardje. Twee vermeldingen ondersteunen 31 oktober. Uren verschillen: 17:00 versus 17:30 als eerste start; ook minimumleeftijd verschilt. Primaire ticketshop leverde geen uitleesbare informatie op.",
+      "missingInfo": [
+        "Rechtstreekse editiebevestiging",
+        "Startslots 17:00 of 17:30",
+        "Leeftijdsgrens, hondenregels, beschikbaarheid"
+      ],
+      "priority": 2,
+      "organizer": "vzw Juttepaardje",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Wattedoen — Halloweentocht Wevelgem",
+          "url": "https://www.wattedoen.be/halloweentocht-8769693.shtml",
+          "sourceType": "event_aggregator",
+          "supports": "Honden welkom, datum, venue, €10 en 17:30–21:00"
+        },
+        {
+          "title": "StayHappening — Heksenbos 31 oktober 2026",
+          "url": "https://stayhappening.com/e/gezinsvriendelijke-halloweentocht-domein-bergelen-E2ISYUYP1UF",
+          "sourceType": "event_aggregator",
+          "supports": "31 oktober 2026, 17:00–21:00 en afwijkende leeftijdsgrens"
+        }
+      ]
+    },
+    {
+      "id": "titan-paw-2026",
+      "title": "Titan Paw",
+      "scope": "optional_belgium",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-10",
+      "location": "De Lilse Bergen, Gierle / Lille",
+      "address": "Strandweg 6, 2275 Lille",
+      "timeDisplay": "10:00–19:00",
+      "priceDisplay": null,
+      "dogPolicy": "Obstacle run voor mens en hond; organisator vraagt hondenpaspoort en geldige vaccinaties.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Uitstap buiten de kustregio: parcours van 5 km met hindernissen. Menselijke deelnemers vanaf 12 jaar volgens organisator. Koppel dit aan een aparte categorie voor sportieve hondenuitstappen.",
+      "missingInfo": [
+        "Actuele ticketprijs en beschikbare starts"
+      ],
+      "priority": 3,
+      "organizer": "Titan Events",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Titan Events — Titan Paw",
+          "url": "https://www.titanevents.eu/titan-paw/",
+          "sourceType": "organizer",
+          "supports": "Datum, tijden, concept en deelnamevoorwaarden"
+        },
+        {
+          "title": "De Lilse Bergen — kalender",
+          "url": "https://www.delilsebergen.be/index.php/nl/kalender",
+          "sourceType": "venue",
+          "supports": "Kalender van evenementlocatie"
+        }
+      ]
+    },
+    {
+      "id": "hondenhalloween-balen-2026",
+      "title": "Hondenhalloween Balen-Olmen",
+      "scope": "optional_belgium",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-31",
+      "endDate": "2026-11-08",
+      "location": "Balen-Olmen",
+      "address": "De Stooter, Stotert 75; of Barélie, Grote Heideweg 4, 2490 Balen-Olmen",
+      "timeDisplay": "Vrij vertrek tijdens de evenementperiode",
+      "priceDisplay": "Gratis",
+      "dogPolicy": "Hondgerichte wandeling; honden ook welkom in deelnemende horeca.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Gezinszoektocht met hond van ongeveer 6 km, verspreid over meerdere dagen. Twee startlocaties vermeld. Geschikt als inspiratie voor bezoekers die verder reizen; niet voorstellen als kustactiviteit.",
+      "missingInfo": [
+        "Openingsuren individuele horecastartpunten"
+      ],
+      "priority": 3,
+      "organizer": "Gemeente Balen / lokale initiatiefnemers",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Gemeente Balen — Hondenhalloween 2026",
+          "url": "https://www.balen.be/activiteitendetail/13536/hondenhalloween-2026",
+          "sourceType": "municipality",
+          "supports": "Periode, route, twee startlocaties, gratis deelname en hondvriendelijke horeca"
+        }
+      ]
+    },
+    {
+      "id": "beestig-herfstfeest-2026",
+      "title": "Beestig Herfstfeest",
+      "scope": "optional_belgium",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-11-15",
+      "endDate": "2026-11-15",
+      "location": "Landal Park Eksel, Hechtel-Eksel",
+      "address": "Nieuwstraat 35, 3941 Hechtel-Eksel",
+      "timeDisplay": "10:00–18:00 volgens evenementenagenda",
+      "priceDisplay": null,
+      "dogPolicy": "Dieren-/hondenevenement; concrete hondenvoorwaarden nog bij organisator bevestigen.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Een specialistische hondenagenda en deelnemers kondigen dezelfde editie aan. De primaire Beestig-website bevat in de gelezen inhoud nog het festival van juni in Pelt; dat is geen bevestiging van dit herfstfeest.",
+      "missingInfo": [
+        "Primaire evenementbevestiging",
+        "Hondenvoorwaarden, toegang en inschrijving"
+      ],
+      "priority": 3,
+      "organizer": "Beestig België / Landal",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Hondenuitje — Beestig Herfstfeest",
+          "url": "https://hondenuitje.be/15-11-26-beestig-herfstfeest-hechtel-eksel/",
+          "sourceType": "specialist_event_calendar",
+          "supports": "Datum, uren en Landal Park Eksel"
+        },
+        {
+          "title": "Leather Belts Belgium — deelnemerskalender",
+          "url": "https://leatherbeltsbelgium.be/evenementen.php",
+          "sourceType": "participant",
+          "supports": "Deelname en datum"
+        },
+        {
+          "title": "Dogs & Drinks — deelnemerskalender",
+          "url": "https://www.dogsanddrinks.be/",
+          "sourceType": "participant",
+          "supports": "Deelname en datum"
+        },
+        {
+          "title": "Beestig België — nog informatie over juni 2026",
+          "url": "https://www.xn--beestigbelgi-dfb.com/",
+          "sourceType": "organizer_previous_edition",
+          "supports": "Primaire site nog andere, voorbije editie"
+        }
+      ]
+    },
+    {
+      "id": "dogsurvival-winter-2026",
+      "title": "Dogsurvival Therapy4Dogs — wintereditie",
+      "scope": "optional_belgium",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-12-12",
+      "endDate": "2026-12-12",
+      "location": "Merksplas",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondgerichte wandeling of run; organisator voorziet een rustiger ochtendmoment voor reactieve honden.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Parcours van 4,5 of 7 km. Relevant voor de sportieve doelgroep. Volgens organisator steunt de standhoudersbijdrage Villa Samson; niet beweren dat alle entreeopbrengsten naar het goede doel gaan.",
+      "missingInfo": [
+        "Exact startadres",
+        "Uren en startslots",
+        "Ticketprijs en inschrijvingen"
+      ],
+      "priority": 3,
+      "organizer": "Therapy4Dogs",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Therapy4Dogs — Dogsurvival",
+          "url": "https://therapy4dogs.be/andere-diensten/dogsurvival/",
+          "sourceType": "organizer",
+          "supports": "Winterdatum, gemeente, afstanden, concept en rustiger ochtendmoment"
+        }
+      ]
+    },
+    {
+      "id": "dogs-friends-2027",
+      "title": "Dogs & Friends",
+      "scope": "optional_belgium",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2027-05-23",
+      "endDate": "2027-05-23",
+      "location": "Kasteel van La Hulpe / Terhulpen",
+      "address": "Chaussée de Bruxelles 111, 1310 La Hulpe",
+      "timeDisplay": "Village 10:00–18:00; obstacles vanaf 09:00; begeleide wandelingen 13:00–16:30",
+      "priceDisplay": "Village €10 / €11 / €15 volgens verkoopfase; honden en kinderen onder 12 gratis",
+      "dogPolicy": "Honden welkom; leibandregels volgen.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Uitgebreid hondenfestival met dorp, hindernissen en wandelingen. De bron heeft tegenstrijdige prijzen voor begeleide wandelingen tussen prijskaart en FAQ; alleen het consistente villagetarief gebruiken. La Hulpe ligt buiten onze kustregio.",
+      "missingInfo": [
+        "Prijs begeleide wandelingen: tegenstrijdigheid oplossen",
+        "Actuele verkoopfase en beschikbaarheid"
+      ],
+      "priority": 3,
+      "organizer": "Dogs & Friends",
+      "contact": {
+        "email": "dogsandfriends@cinetelerevue.be"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Dogs & Friends — programma, tarieven en FAQ",
+          "url": "https://dogsandfriends.be/index-nl.php",
+          "sourceType": "organizer",
+          "supports": "Datum, venue, programma, hondenwelkom en villageprijzen; tegenstrijdige wandeltarieven"
+        }
+      ]
+    },
+    {
+      "id": "woefkes-2027",
+      "title": "Woefkes Festival",
+      "scope": "optional_belgium",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2027-04-25",
+      "endDate": "2027-04-25",
+      "location": "De Schorre, Boom",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondenfestival; huisregels van nieuwe editie nog niet gepubliceerd in gelezen primaire bron.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Twee deelnemers zetten 25 april 2027 in hun kalender. De eigen venuepagina verwijst nog naar 26 april 2026. De nieuwe datum is een sterke lead, maar oude gratis toegang en uren niet zonder nieuwe organisatorbevestiging kopiëren.",
+      "missingInfo": [
+        "Primaire datumbevestiging",
+        "Prijs, uren en hondenvoorwaarden 2027"
+      ],
+      "priority": 3,
+      "organizer": "What About Me Dogs",
+      "contact": {
+        "email": "kim@whataboutmedogs.be"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Leather Belts Belgium — deelnemerskalender",
+          "url": "https://leatherbeltsbelgium.be/evenementen.php",
+          "sourceType": "participant",
+          "supports": "Deelnemersdatum 25 april 2027"
+        },
+        {
+          "title": "Dogs & Drinks — deelnemerskalender",
+          "url": "https://www.dogsanddrinks.be/",
+          "sourceType": "participant",
+          "supports": "Deelnemersdatum 25 april 2027"
+        },
+        {
+          "title": "De Schorre — Woefkes Festival, nog editie 2026",
+          "url": "https://www.deschorre.be/nl/kalender/woefkes-festival",
+          "sourceType": "venue_previous_edition",
+          "supports": "Alleen voorbije editie"
+        }
+      ]
+    },
+    {
+      "id": "just-barking-2027",
+      "title": "Just Barking",
+      "scope": "optional_belgium",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2027-05-22",
+      "endDate": "2027-05-22",
+      "location": "Elewijt",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Vermoedelijk hondenfestival op basis van deelnemersagenda’s; actuele toelatingsregels onbekend.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Twee deelnemers noemen dezelfde datum. Nog geen uitleesbare actuele organisatorpublicatie gevonden. Alleen als onderzoekslead behandelen.",
+      "missingInfo": [
+        "Organisator en evenementpagina",
+        "Datum, venue, uren, prijs en hondenvoorwaarden"
+      ],
+      "priority": 3,
+      "organizer": null,
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Leather Belts Belgium — deelnemerskalender",
+          "url": "https://leatherbeltsbelgium.be/evenementen.php",
+          "sourceType": "participant",
+          "supports": "Naam, datum en Elewijt in deelnemersagenda"
+        },
+        {
+          "title": "Dogs & Drinks — deelnemerskalender",
+          "url": "https://www.dogsanddrinks.be/",
+          "sourceType": "participant",
+          "supports": "Tweede deelnemersvermelding"
+        }
+      ]
+    },
+    {
+      "id": "beestig-pelt-2027",
+      "title": "Beestig Dierenfestival Pelt",
+      "scope": "optional_belgium",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2027-05-30",
+      "endDate": "2027-05-30",
+      "location": "Hennemeeuwis, Pelt",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Actuele bezoekersvoorwaarden nog onbekend.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Deelnemers noemen 30 mei 2027. De organisatorwebsite verwijst nog naar 13–14 juni 2026. De één- versus tweedaagse opzet en exacte locatie van 2027 niet uit de oude editie afleiden.",
+      "missingInfo": [
+        "Primaire bevestiging 2027",
+        "Exact terrein, uren, prijs en hondenvoorwaarden"
+      ],
+      "priority": 3,
+      "organizer": "Beestig België",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Leather Belts Belgium — deelnemerskalender",
+          "url": "https://leatherbeltsbelgium.be/evenementen.php",
+          "sourceType": "participant",
+          "supports": "Deelnemersdatum en plaats 2027"
+        },
+        {
+          "title": "Dogs & Drinks — deelnemerskalender",
+          "url": "https://www.dogsanddrinks.be/",
+          "sourceType": "participant",
+          "supports": "Tweede deelnemersvermelding"
+        },
+        {
+          "title": "Beestig België — nog informatie over juni 2026",
+          "url": "https://www.xn--beestigbelgi-dfb.com/",
+          "sourceType": "organizer_previous_edition",
+          "supports": "Nog voorbije editie 2026"
+        }
+      ]
+    },
+    {
+      "id": "just-woofing-2027",
+      "title": "Just Woofing",
+      "scope": "optional_belgium",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2027-07-31",
+      "endDate": "2027-07-31",
+      "location": "Steenokkerzeel",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondenfestival; regels voor 2027 nog bevestigen.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Twee deelnemers publiceren 31 juli 2027. Organisator en gemeente tonen nog 1 augustus 2026. Het CKCSJ-adres, 10–17 uur en oude ticketprijzen daarom niet als gegevens van de nieuwe editie opnemen.",
+      "missingInfo": [
+        "Primaire datum en venue 2027",
+        "Uren, prijs en hondenregels"
+      ],
+      "priority": 3,
+      "organizer": "Just Woofing",
+      "contact": {
+        "email": "justwoofing@gmail.com"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Leather Belts Belgium — deelnemerskalender",
+          "url": "https://leatherbeltsbelgium.be/evenementen.php",
+          "sourceType": "participant",
+          "supports": "Datum 31 juli 2027"
+        },
+        {
+          "title": "Dogs & Drinks — deelnemerskalender",
+          "url": "https://www.dogsanddrinks.be/",
+          "sourceType": "participant",
+          "supports": "Tweede deelnemersdatum"
+        },
+        {
+          "title": "Just Woofing — nog editie 2026",
+          "url": "https://justwoofing.be/",
+          "sourceType": "organizer_previous_edition",
+          "supports": "Nog editie 2026"
+        },
+        {
+          "title": "Steenokkerzeel — Just Woofing, nog editie 2026",
+          "url": "https://www.steenokkerzeel.be/events/detail/2716/just-woofing-hondenevenement",
+          "sourceType": "municipality_previous_edition",
+          "supports": "Nog editie 2026 en contact"
+        }
+      ]
+    },
+    {
+      "id": "canicross-genendijk-2026",
+      "title": "Canicross Genendijk",
+      "scope": "optional_belgium",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-11-15",
+      "endDate": "2026-11-15",
+      "location": "Genendijk",
+      "address": "Bivakstraat, Genendijk (bron vermeldt 3945 Ham)",
+      "timeDisplay": "08:00–18:00; wedstrijdstarts vanaf 10:00",
+      "priceDisplay": null,
+      "dogPolicy": "Canicross, bikejöring en dogscooter; sportieve deelnamevoorwaarden volgen.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Federatie-evenement voor sport met de hond. Inschrijven volgens kalender vanaf 2 november om 08:00. Publiek en deelnemers niet gelijkstellen: vermeld de activiteit als wedstrijd.",
+      "missingInfo": [
+        "Deelnameprijs",
+        "Volledige honden- en materiaalvoorwaarden"
+      ],
+      "priority": 3,
+      "organizer": "CXP3 / Vlaamse Canicross Federatie",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Vlaamse Canicross Federatie — wedstrijden",
+          "url": "https://www.vlaamsecanicrossfederatie.org/events",
+          "sourceType": "federation",
+          "supports": "Datum, uren, start inschrijving, locatie en disciplines"
+        }
+      ]
+    },
+    {
+      "id": "hondenwandeling-de-schelde-2026",
+      "title": "Hondenwandeling en welzijnsmarkt De Schelde",
+      "scope": "optional_belgium",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-04",
+      "location": "Vrijetijdscentrum De Schelde, Berendrecht-Zandvliet-Lillo",
+      "address": "De Keyserhoeve 66, 2040 Berendrecht-Zandvliet-Lillo",
+      "timeDisplay": "10:00–15:00",
+      "priceDisplay": "Gratis",
+      "dogPolicy": "Hondgerichte wandelingen van 2, 5 en 7 km.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Hondenwandeling met infomarkt en hondencafé. Goodybagregistratie is gesloten, maar de organisator laat deelname zonder inschrijving nog toe. Daarom niet als volledig uitverkocht behandelen.",
+      "missingInfo": [],
+      "priority": 3,
+      "organizer": "Vrijetijdscentrum De Schelde",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Vrijetijdscentrum De Schelde — hondenwandeling",
+          "url": "https://vrijetijdscentrumdeschelde.antwerpen.be/hond",
+          "sourceType": "municipal_organizer",
+          "supports": "Datum, uren, locatie, gratis deelname en deelname zonder goodybaginschrijving"
+        }
+      ]
+    },
+    {
+      "id": "zeeuwse-winterfair-2026",
+      "title": "Zeeuwse Winterfair aan Zee",
+      "scope": "optional_zeeland",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-11-27",
+      "endDate": "2026-11-29",
+      "location": "Strandpark De Zeeuwse Kust, Noordwelle",
+      "address": "Helleweg 8, 4326 LJ Noordwelle; parkeren via Lange Moermondsweg",
+      "timeDisplay": "Vrijdag 12:00–20:00; zaterdag en zondag 10:00–18:00",
+      "priceDisplay": "Volwassenen vanaf €12,50; 5–12 jaar €5; onder 5 gratis; parkeren €5",
+      "dogPolicy": "Honden expliciet welkom aan de lijn.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Algemene wintermarkt met bevestigd hondenwelkom. Sterke Nederlandse aanvulling, maar Noordwelle op Schouwen-Duiveland is een verdere uitstap en ligt niet naast de Belgische kust. Parkeerroute wijkt af van het postadres.",
+      "missingInfo": [
+        "Actuele beschikbare ticketcategorie"
+      ],
+      "priority": 2,
+      "organizer": "Zeeuwse Winterfair",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Zeeuwse Winterfair — organisator",
+          "url": "https://zeeuwsewinterfair.nl/",
+          "sourceType": "organizer",
+          "supports": "Data, uren, hondentoegang en praktische info"
+        },
+        {
+          "title": "Zeeland — Zeeuwse Winterfair",
+          "url": "https://www.zeeland.com/nl-nl/visit/11831_nl/zeeuwse-winterfair",
+          "sourceType": "official_tourism",
+          "supports": "Officiële toeristische vermelding met adres en tarieven"
+        }
+      ]
+    },
+    {
+      "id": "stokroos-2026",
+      "title": "Honden- en paardencafé De Stokroos",
+      "scope": "optional_zeeland",
+      "publishDecision": "publish_known_fields",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04",
+      "location": "Theetuin De Stokroos, Nieuwerkerk",
+      "address": "Krabbenhoekseweg 2, Nieuwerkerk",
+      "timeDisplay": "12:00–16:00",
+      "priceDisplay": null,
+      "dogPolicy": "Honden, paarden en pony’s met hun begeleiders welkom; speciaal hondenmenu.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "confirmed_current_edition",
+      "description": "Bijzonder themacafé op 3 en 4 oktober; morgen resteert als toekomstige bezoekdag. Groepen reserveren volgens de toeristische vermelding. Het hondenmenu is geen bewijs van gratis consumpties.",
+      "missingInfo": [
+        "Eventuele toegangsprijs",
+        "Beschikbaarheid voor groepen"
+      ],
+      "priority": 3,
+      "organizer": "De Stokroos",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Zeeland — Honden- en paardencafé De Stokroos",
+          "url": "https://www.zeeland.com/nl-nl/visit/11810_nl/honden-en-paardencafe-de-stokroos",
+          "sourceType": "official_tourism",
+          "supports": "Data, uren, locatie, dierendoelgroep en menu"
+        }
+      ]
+    },
+    {
+      "id": "canicross-bruinisse-2027",
+      "title": "Canicross Bruinisse",
+      "scope": "optional_zeeland",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2027-03-21",
+      "endDate": "2027-03-21",
+      "location": "Bruinisse",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Canicross, bike en step; voorlopige wedstrijd.",
+      "dateVerification": "provisional",
+      "dogAdmissionVerification": "provisional",
+      "description": "Nederlandse federatiekalender noemt 21 maart 2027 onder voorbehoud. Alleen na definitieve vergunning-/organisatorbevestiging als vaste datum publiceren.",
+      "missingInfo": [
+        "Definitieve datum en doorgaan",
+        "Exact adres, uren, inschrijving en voorwaarden"
+      ],
+      "priority": 3,
+      "organizer": "Bastian Mathijssen / Canicross Nederland",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Canicross Nederland — kalender 2026–2027",
+          "url": "https://www.canicrossnederland.nl/kalender20262027.html",
+          "sourceType": "federation_provisional",
+          "supports": "Voorlopige datum, organisator en disciplines"
+        }
+      ]
+    },
+    {
+      "id": "wintergloed-brugge-2026",
+      "title": "Wintergloed Brugge",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-11-20",
+      "endDate": "2027-02-14",
+      "location": "Brugge",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondentoegang per onderdeel 2026–2027 nog verifiëren.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Officiële totale editieperiode bevestigd. De FAQ bevat nog informatie van de vorige editie. De lange periode betekent niet dat alle kerstmarkten of alle onderdelen tot 14 februari lopen; publiceer later per concreet hondvriendelijk onderdeel.",
+      "missingInfo": [
+        "Actueel programma en deelperiodes",
+        "Hondenvoorwaarden per onderdeel",
+        "Route, tijden en prijzen"
+      ],
+      "priority": 2,
+      "organizer": "Visit Bruges",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Visit Bruges — Wintergloed",
+          "url": "https://www.visitbruges.be/nl/wintergloed",
+          "sourceType": "official_tourism",
+          "supports": "Totale editieperiode 2026–2027"
+        },
+        {
+          "title": "Wintergloed — FAQ, nog informatie vorige editie",
+          "url": "https://www.visitbruges.be/nl/wintergloed/veelgestelde-vragen",
+          "sourceType": "official_tourism_previous_edition",
+          "supports": "FAQ bevat nog vorige editie; geen actuele hondbevestiging"
+        }
+      ]
+    },
+    {
+      "id": "winters-nieuwpoort-2026",
+      "title": "Winters Nieuwpoort",
+      "scope": "coast",
+      "publishDecision": "confirm_before_publish",
+      "startDate": "2026-12-11",
+      "endDate": "2027-01-03",
+      "location": "Nieuwpoort",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondentoegang nog niet bevestigd.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Toeristische vooruitblik en officiële brochure geven 11 december tot 3 januari. Programma kan nog wijzigen. Alleen concrete onderdelen met bevestigd hondenwelkom zijn geschikt voor onze agenda.",
+      "missingInfo": [
+        "Definitief programma",
+        "Hondentoegang per locatie",
+        "Uren, adres en tarieven"
+      ],
+      "priority": 2,
+      "organizer": "Visit Nieuwpoort",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Visit Nieuwpoort — vooruitblik 2026",
+          "url": "https://www.visit-nieuwpoort.be/nl/vooruitblik-2026",
+          "sourceType": "official_tourism",
+          "supports": "Toeristische vooruitblik"
+        },
+        {
+          "title": "Visit Nieuwpoort — lentebrochure 2026, p. 32",
+          "url": "https://visit-nieuwpoort.be/sites/default/files/2026-03/Lentebrochure-2026.pdf",
+          "sourceType": "official_tourism",
+          "supports": "Editieperiode in brochure, p. 32"
+        }
+      ]
+    },
+    {
+      "id": "kwispel-2027",
+      "title": "Kwispelfestival De Panne — volgende editie",
+      "scope": "coast",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "De Panne",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Voorbije editie is expliciet hondgericht; toekomstige voorwaarden nog onbekend.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Topprioriteit om te volgen voor 2027. De gevonden officiële publicatie gaat over 17 mei 2026. Geen nieuwe datum aangetroffen. De Leopold I-Esplanade is de evenementplek; Zeelaan 21 is het toerismekantoor en mag niet als festivaladres worden gekopieerd.",
+      "missingInfo": [
+        "Nieuwe editie aangekondigd?",
+        "Datum, venue, programma, prijs en huisregels"
+      ],
+      "priority": 1,
+      "organizer": "Visit De Panne",
+      "contact": {
+        "email": "visit@depanne.be",
+        "phone": "058 42 18 18"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "De Panne — Kwispelfestival 2026",
+          "url": "https://www.depanne.be/nl/kwispelfestival-2026",
+          "sourceType": "municipality_previous_edition",
+          "supports": "Voorbije editie en evenementplek; geen 2027-datum"
+        }
+      ]
+    },
+    {
+      "id": "groot-oostends-2027",
+      "title": "Groot Oostends Hondenfestival — volgende editie",
+      "scope": "coast",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "Oostende",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondenfestival; nieuwe editie nog niet bevestigd.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Zeer passend bij Hondaanzee. UiT bevestigt 23–24 mei 2026; geen 2027-datum gevonden. Oudere Pooches-informatie over juni 2025 niet verwarren met een nieuwe editie. De Stratierwandeling is een onderdeel en geen tweede festival.",
+      "missingInfo": [
+        "Aankondiging 2027",
+        "Datum, locatie, uren, prijs en wandelprogramma"
+      ],
+      "priority": 1,
+      "organizer": "Pooches / Anthony Devuyst",
+      "contact": {
+        "email": "info@pooches.be"
+      },
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "UiT in Vlaanderen — Groot Oostends Hondenfestival 2026",
+          "url": "https://www.uitinvlaanderen.be/agenda/e/groot-oostends-hondenfestival-2026/d6c51850-70bf-46de-8012-d3375d2fc7c6",
+          "sourceType": "public_event_calendar_previous_edition",
+          "supports": "Editie 2026, geen toekomstige editie"
+        }
+      ]
+    },
+    {
+      "id": "sint-bernardus-2027",
+      "title": "Sint-Bernardusfeesten / Sint-Bernardushondenwandeling — volgende editie",
+      "scope": "coast",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "Nieuwpoort",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Wandeling vorige editie uitsluitend voor sint-bernardshonden; niet als wandeling voor alle rassen aanbieden.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Voorbije feesten 21–23 augustus 2026 en hondenwandeling 23 augustus. Geen datum 2027 gevonden. Clubinformatie beperkt deelname tot sint-bernards. Een breed feestprogramma, inclusief vuurwerk, is niet automatisch een hondenactiviteit.",
+      "missingInfo": [
+        "Nieuwe datum en definitief hondenprogramma",
+        "Rasbeperking en voorwaarden nieuwe editie"
+      ],
+      "priority": 2,
+      "organizer": "Visit Nieuwpoort / Belgische Sint-Bernard Vrienden",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Visit Nieuwpoort — Sint-Bernardusfeesten",
+          "url": "https://www.visit-nieuwpoort.be/nl/zien-en-doen/sint-bernardusfeesten",
+          "sourceType": "official_tourism_previous_edition",
+          "supports": "Voorbije feesten en programma"
+        },
+        {
+          "title": "Belgische Sint-Bernard Vrienden — nieuwsbrief 02/2026",
+          "url": "https://fliphtml5.com/yiehwa/nieuwsbrief-02-2026-nl-lees-versie/",
+          "sourceType": "club_newsletter_previous_edition",
+          "supports": "Rasbeperking wandeling vorige editie, nieuwsbrief p. 8–9"
+        }
+      ]
+    },
+    {
+      "id": "dogs4blind-2027",
+      "title": "Dogs4Blind — open dag, puppyshower of sneukeltocht",
+      "scope": "coast",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "Knokke-Heist",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Activiteit voor geleidehondenorganisatie; bezoekers met eigen hond per editie navragen.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "Goede lokale partner om te volgen. De evenementcategorie bevat verschillende oude berichten; een puppyshower op 26 april 2026 is geen toekomstige editie. Ook bezoekers met eigen hond zijn niet vanzelfsprekend toegelaten.",
+      "missingInfo": [
+        "Nieuwe editie/datum",
+        "Publiek toegankelijk?",
+        "Eigen hond welkom?",
+        "Prijs, uren en venue"
+      ],
+      "priority": 2,
+      "organizer": "Dogs4Blind",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Dogs4Blind — evenementenarchief",
+          "url": "https://www.dogs4blind.be/category/event/",
+          "sourceType": "organizer_previous_edition",
+          "supports": "Evenementarchief zonder bevestigde toekomstige datum"
+        }
+      ]
+    },
+    {
+      "id": "zee-honden-wandeling-2027",
+      "title": "Nationale Zee-Honden-Wandeling — volgende editie",
+      "scope": "coast",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "De Haan",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Nog te bevestigen: Zee-Honden kan een wandelclubnaam zijn en bewijst geen hondentoegang.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Gemeentelijke kalender vermeldt de 33ste editie op 27 september 2026 en K.V. De Haan vzw. Bewaar als lokale onderzoekspiste, maar label niet automatisch als hondenfestival op basis van de naam.",
+      "missingInfo": [
+        "Datum nieuwe editie",
+        "Honden werkelijk toegelaten op alle routes?",
+        "Routes, vertrekuren, prijs en startplek"
+      ],
+      "priority": 2,
+      "organizer": "K.V. De Haan vzw",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Gemeente De Haan — activiteitenkalender",
+          "url": "https://www.dehaan.be/activiteiten?taxonomie%5B1%5D=2",
+          "sourceType": "municipality_previous_edition",
+          "supports": "Voorbije editie, organisator en datum"
+        }
+      ]
+    },
+    {
+      "id": "eurodogshow-2027",
+      "title": "Eurodogshow Kortrijk — mogelijke terugkeer",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "Kortrijk",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Hondenshow; regels voor bezoek met eigen hond voor nieuwe editie verifiëren.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "not_announced",
+      "description": "De organisator annuleert 2026 en spreekt de hoop uit in 2027 terug te keren. Dat is geen bevestigde editie of datum. Niet van een jaarlijks novemberweekend uitgaan.",
+      "missingInfo": [
+        "Terugkeer daadwerkelijk bevestigd?",
+        "Datum, locatie, tickets en bezoekershondenvoorwaarden"
+      ],
+      "priority": 2,
+      "organizer": "Eurodogshow",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Eurodogshow — geen show in 2026",
+          "url": "https://www.eurodogshow.be/static/pages/GeenShowIn2026.html",
+          "sourceType": "organizer",
+          "supports": "Annulering 2026 en hoop op terugkeer 2027"
+        }
+      ]
+    },
+    {
+      "id": "hondenfestival-sijsele-2027",
+      "title": "Het Hondenfestival Sijsele — volgende editie",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "watch",
+      "startDate": null,
+      "endDate": null,
+      "location": "Sijsele / locatie nieuwe editie onbekend",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Voorbije editie hondgericht; toekomstige editie nog onbekend.",
+      "dateVerification": "not_announced",
+      "dogAdmissionVerification": "previous_edition_only",
+      "description": "De gevonden editie 26–27 september 2026 is voorbij. De publicatie bevat bovendien gemengde locatieverwijzingen; voor de volgende editie exacte venue opnieuw controleren.",
+      "missingInfo": [
+        "Nieuwe editie aangekondigd?",
+        "Datum en eenduidige venue",
+        "Uren, ticketprijzen en voorwaarden"
+      ],
+      "priority": 2,
+      "organizer": "Het Hondenfestival",
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Het Hondenfestival — editie september 2026",
+          "url": "https://hethondenfestival.be/events/het-hondenfestival-26-27sep-2026/",
+          "sourceType": "organizer_previous_edition",
+          "supports": "Voorbije editie en te controleren venue-informatie"
+        }
+      ]
+    },
+    {
+      "id": "eurodogshow-2026-cancelled",
+      "title": "Eurodogshow 2026",
+      "scope": "nearby_west_flanders",
+      "publishDecision": "exclude",
+      "startDate": null,
+      "endDate": null,
+      "location": "Kortrijk",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": null,
+      "dateVerification": "cancelled",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Uitgesloten: de organisator meldt expliciet dat er geen show in 2026 is.",
+      "missingInfo": [],
+      "priority": 3,
+      "organizer": null,
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Eurodogshow — geen show in 2026",
+          "url": "https://www.eurodogshow.be/static/pages/GeenShowIn2026.html",
+          "sourceType": "organizer",
+          "supports": "Officiële annulering"
+        }
+      ]
+    },
+    {
+      "id": "garnaal-2026-excluded",
+      "title": "Garnaalkrokettenfestival Oostende 2026",
+      "scope": "coast",
+      "publishDecision": "exclude",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-12",
+      "location": "Oostende",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Gewone honden niet toegelaten; uitzondering voor assistentiehonden.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "not_allowed",
+      "description": "Geen kandidaat voor een algemene hondenagenda, ondanks de toekomstige datum en kustlocatie.",
+      "missingInfo": [],
+      "priority": 3,
+      "organizer": null,
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Garnaalkrokettenfestival — FAQ",
+          "url": "https://www.garnaalkrokettenfestival.be/nl/veelgestelde-vragen",
+          "sourceType": "organizer",
+          "supports": "Hondenverbod in organisator-FAQ"
+        }
+      ]
+    },
+    {
+      "id": "champagne-2026-excluded",
+      "title": "Champagnefestival Bredene 2026",
+      "scope": "coast",
+      "publishDecision": "exclude",
+      "startDate": "2026-10-02",
+      "endDate": "2026-10-04",
+      "location": "MEC Staf Versluys, Bredene",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Lokale berichtgeving vermeldt dat honden niet binnen mogen.",
+      "dateVerification": "secondary_corroboration",
+      "dogAdmissionVerification": "not_allowed_secondary",
+      "description": "Niet promoten als hondvriendelijke binnenactiviteit. Uitsluiting steunt op lokaal nieuws, niet op een gelezen primaire huisregel.",
+      "missingInfo": [],
+      "priority": 3,
+      "organizer": null,
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Lokaalnieuws — Champagnefestival Bredene",
+          "url": "https://www.lokaalnieuws.online/2026/10/02/champagnefestival-bredene-mec-staf-versluys-2-4-oktober-2026/",
+          "sourceType": "local_news",
+          "supports": "Datums, locatie en honden niet toegelaten binnen"
+        }
+      ]
+    },
+    {
+      "id": "nieuwjaarsduik-2027-excluded",
+      "title": "Nieuwjaarsduik Oostende 2027",
+      "scope": "coast",
+      "publishDecision": "exclude",
+      "startDate": "2027-01-02",
+      "endDate": "2027-01-02",
+      "location": "Oostende",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": "Honden niet toegelaten in de deelnemerszone.",
+      "dateVerification": "confirmed_current_edition",
+      "dogAdmissionVerification": "restricted",
+      "description": "Niet voorstellen als nieuwjaarsduik met de hond. Buiten de deelnemerszone wandelen is een andere activiteit en vormt geen bewijs van toegang tot het evenement.",
+      "missingInfo": [],
+      "priority": 3,
+      "organizer": null,
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "Visit Oostende — Nieuwjaarsduik",
+          "url": "https://www.visitoostende.be/nl/nieuwjaarsduik",
+          "sourceType": "official_tourism",
+          "supports": "Datum en beperking deelnemerszone"
+        }
+      ]
+    },
+    {
+      "id": "tragepaden-2026-cancelled",
+      "title": "Tragepadentocht De Panne 2026",
+      "scope": "coast",
+      "publishDecision": "exclude",
+      "startDate": "2026-10-18",
+      "endDate": "2026-10-18",
+      "location": "De Panne",
+      "address": null,
+      "timeDisplay": null,
+      "priceDisplay": null,
+      "dogPolicy": null,
+      "dateVerification": "cancelled",
+      "dogAdmissionVerification": "not_announced",
+      "description": "Uitgesloten: provinciale kalender labelt de activiteit geannuleerd.",
+      "missingInfo": [],
+      "priority": 3,
+      "organizer": null,
+      "contact": null,
+      "lastVerified": "2026-10-03",
+      "sources": [
+        {
+          "title": "West-Vlaanderen — kalender, Tragepadentocht geannuleerd",
+          "url": "https://www.west-vlaanderen.be/kalender?page=1&pid=4607",
+          "sourceType": "province_calendar",
+          "supports": "Annuleringsvermelding"
+        }
+      ]
+    }
+  ]
+}

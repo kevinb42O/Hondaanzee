@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Sparkles, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrint, Rocket, Search, ArrowRight } from 'lucide-react';
+import { Plus, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrint, Rocket, Search, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
@@ -521,7 +521,7 @@ const releases: UpdateRelease[] = [
 
 const tagIcon = (label: string) => {
   switch (label) {
-    case 'Nieuw': return <Sparkles size={11} />;
+    case 'Nieuw': return <Plus size={11} />;
     case 'Nieuwe zaken': return <MapPin size={11} />;
     case 'Verbeterd': return <Zap size={11} />;
     case 'Opgelost': return <Wrench size={11} />;
@@ -619,7 +619,7 @@ const Updates: React.FC = () => {
               ]}
             />
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
-              <Sparkles size={14} />
+              <Calendar size={14} />
               Laatste update: {SITE_UPDATE_LABEL}
             </div>
             <h1 className="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
@@ -672,7 +672,7 @@ const Updates: React.FC = () => {
         {/* Header */}
         <div className="mb-16 rounded-[2rem] border border-slate-200 bg-white/96 p-6 text-center shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:p-8">
           <div className="inline-flex items-center justify-center p-4 bg-cyan-100 text-cyan-600 rounded-2xl mb-6 shadow-sm">
-            <Sparkles size={40} strokeWidth={2} />
+            <PawPrint size={40} strokeWidth={2} />
           </div>
           <h2 className="text-xl font-black text-slate-900 sm:text-2xl">De strandgids staat centraal</h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-600">

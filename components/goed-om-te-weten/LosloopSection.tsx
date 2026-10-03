@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Fence, Dog, HandHeart, ShieldAlert, Eye, Siren, Sparkles, Heart,
+  Fence, Dog, HandHeart, ShieldAlert, Eye, Siren, Trash2, Heart,
   AlertTriangle, CheckCircle2, Lightbulb, ArrowRight, Users
 } from 'lucide-react';
 import { AccordionItem, KeyTakeaway, SectionHeading, StepCard } from './SharedComponents.tsx';
@@ -214,7 +214,7 @@ export default function LosloopSection({ openSections, toggleSection }: Props) {
           {/* ─── PROPERHEID & ONDERHOUD ─── */}
           <AccordionItem
             id="losloop-properheid"
-            icon={<Sparkles size={24} className="text-emerald-600" />}
+            icon={<Trash2 size={24} className="text-emerald-600" />}
             iconBg="bg-emerald-50"
             title="Properheid — Laat het Properder Achter dan Je het Aantrof"
             subtitle="De standaard die elke losloopweide verdient"
@@ -227,7 +227,7 @@ export default function LosloopSection({ openSections, toggleSection }: Props) {
               </p>
 
               <SectionHeading
-                icon={<Sparkles size={20} className="text-emerald-500" />}
+                icon={<Trash2 size={20} className="text-emerald-500" />}
                 title="Het +1 Principe"
                 description="Maak het beter dan je het vond"
               />
