@@ -47,6 +47,9 @@ const AdminPlaces = React.lazy(() => import('./pages/AdminPlaces.tsx'));
 const AdminPlaceEditor = React.lazy(() => import('./pages/AdminPlaceEditor.tsx'));
 const AdminPublication = React.lazy(() => import('./pages/AdminPublication.tsx'));
 const AdminAnalytics = React.lazy(() => import('./pages/AdminAnalytics.tsx'));
+const AdminEvents = React.lazy(() => import('./pages/AdminEvents.tsx'));
+const AdminEventEditor = React.lazy(() => import('./pages/AdminEventEditor.tsx'));
+const AdminEventAnalytics = React.lazy(() => import('./pages/AdminEventAnalytics.tsx'));
 const AdminZones = React.lazy(() => import('./pages/AdminZones.tsx'));
 const AdminZoneEditor = React.lazy(() => import('./pages/AdminZoneEditor.tsx'));
 const AdminReviews = React.lazy(() => import('./pages/AdminReviews.tsx'));
@@ -188,6 +191,11 @@ const AppContent = () => {
                 <Route path="zaken/:id" element={<AdminPlaceEditor />} />
                 <Route path="publiceren" element={<AdminPublication />} />
                 <Route path="analytics" element={<AdminAnalytics />} />
+                <Route path="agenda" element={<AdminEvents />} />
+                <Route path="agenda/nieuw" element={<AdminEventEditor />} />
+                <Route path="agenda/analytics" element={<AdminEventAnalytics />} />
+                <Route path="agenda/:id/analytics" element={<AdminEventAnalytics />} />
+                <Route path="agenda/:id" element={<AdminEventEditor />} />
                 <Route path="losloopzones" element={<AdminZones />} />
                 <Route path="losloopzones/nieuw" element={<AdminZoneEditor />} />
                 <Route path="losloopzones/:id" element={<AdminZoneEditor />} />

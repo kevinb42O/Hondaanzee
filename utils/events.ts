@@ -43,7 +43,7 @@ export function getEventCountdown(event: DogEvent, now: Date = new Date()): stri
 }
 
 export function getUpcomingEvents(events: DogEvent[], now: Date = new Date()): DogEvent[] {
-  return events.filter(event => !isEventPast(event, now)).sort((a, b) => a.date.localeCompare(b.date));
+  return events.filter(event => !isEventPast(event, now) && event.eventStatus !== 'cancelled' && event.eventStatus !== 'postponed' && event.visibility !== 'withdrawn').sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export function absoluteEventImage(event: DogEvent): string | undefined {
@@ -62,7 +62,8 @@ export function getEventStructuredData(event: DogEvent, now: Date = new Date()) 
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${url}#webpage` },
     startDate: event.schemaStartDate,
     endDate: event.schemaEndDate,
-    eventStatus: 'https://schema.org/EventScheduled',
+    eventStatus: `https://schema.org/${({scheduled:'EventScheduled',cancelled:'EventCancelled',postponed:'EventPostponed',rescheduled:'EventRescheduled'} as const)[event.eventStatus || 'scheduled']}`,
+    ...(event.eventStatus === 'rescheduled' && event.previousStartDate ? {previousStartDate:event.previousStartDate} : {}),
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: {
       '@type': 'Place',
@@ -79,7 +80,7 @@ export function getEventStructuredData(event: DogEvent, now: Date = new Date()) 
     isAccessibleForFree: event.isAccessibleForFree,
     // Publish an offer only for a confirmed price and a real booking page.
     // A generic organizer page, unknown fees or expired edition is not an offer.
-    ...(event.entryPrice !== undefined && event.ticketUrl && !isEventPast(event, now) ? {
+    ...(event.entryPrice !== undefined && event.ticketUrl && !isEventPast(event, now) && event.eventStatus !== 'cancelled' && event.eventStatus !== 'postponed' ? {
       offers: {
         '@type': 'Offer', price: event.entryPrice, priceCurrency: 'EUR',
         url: event.ticketUrl,
@@ -128,10 +129,11 @@ export function getEventSEO(event: DogEvent, now: Date = new Date()) {
   const edition = event.title.includes(years) ? '' : ` ${years}`;
   const title = `${event.title}${edition}${place} | HondAanZee.be`;
   const archive = isEventPast(event, now);
-  const intro = `${archive ? 'Voorbije editie: ' : ''}${event.title}, ${event.dateDisplay} in ${event.cityName}.`;
+  const statusPrefix = event.eventStatus === 'cancelled' ? 'Geannuleerd: ' : event.eventStatus === 'postponed' ? 'Uitgesteld: ' : event.eventStatus === 'rescheduled' ? 'Verplaatst: ' : '';
+  const intro = `${archive ? 'Voorbije editie: ' : statusPrefix}${event.title}, ${event.dateDisplay} in ${event.cityName}.`;
   const description = `${intro} ${archive ? 'Informatie over deze voorbije editie en de locatie.' : event.status === 'save-the-date' ? 'Datum aangekondigd; praktische details volgen.' : 'Bekijk het programma, de locatie, prijs en hondenvoorwaarden.'}`.replace(/\s+/g, ' ').replace(/\.\./g, '.').trim();
   return {
-    title, description,
+    title, description: description.length > 200 ? `${description.slice(0,197).trimEnd()}…` : description,
     canonical: url,
     ogImage: absoluteEventImage(event) || `${SITE}/og-imagefinal.webp`,
     ogImageAlt: event.image ? event.imageAlt || event.title : 'HondAanZee.be — gids voor honden aan de Belgische kust',

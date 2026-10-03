@@ -57,6 +57,7 @@ const server = createServer((req, res) => {
       if (request.url().includes('/_vercel/insights')||request.url().includes('/functions/v1/site-analytics')) analyticsRequests.push(request.url());
       // Test all admin pages without credentials or requests to real services.
       if (request.url().includes('/auth/v1/logout')) return request.respond({ status: 204, headers: cors });
+      if(request.url().includes('/functions/v1/admin-events'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({events:[]})});
       if(request.url().includes('/functions/v1/admin-zones')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());let body;
         if(input.action==='list')body={zones:fakeZones};
         else if(input.action==='detail')body={zone:fakeZones.find(z=>z.id===input.id),history:[]};

@@ -4,7 +4,7 @@ const {loadTsModule}=require('./place-data.cjs');
 const {resolvePublicPlace}=loadTsModule('supabase/functions/_shared/placeFields.ts');
 async function prepareCatalog(){
  const token=process.env.CATALOG_BUILD_TOKEN,release=process.env.HAZ_RELEASE_ID;
- let catalog={releaseId:null,hotspots:null,services:null,offLeashAreas:null};
+ let catalog={releaseId:null,hotspots:null,services:null,offLeashAreas:null,events:null};
  if(release&&!token)throw new Error('An exact release requires CATALOG_BUILD_TOKEN.');
  if(process.env.VERCEL_ENV==='production'&&!token)throw new Error('Production requires catalog build configuration.');
  if(token){
@@ -19,7 +19,8 @@ async function prepareCatalog(){
    const {CITIES}=require('./place-data.cjs');const {validatePlaceData}=require('./validate-place-data.cjs');
    validatePlaceData({HOTSPOTS:snapshot.hotspots,SERVICES:snapshot.services,CITIES});
    if(snapshot.offLeashAreas){const slugs=new Set();for(const zone of snapshot.offLeashAreas){if(!zone.name||!zone.slug||slugs.has(zone.slug)||!CITIES.some(c=>c.slug===zone.city)||!Number.isFinite(zone.lat)||!Number.isFinite(zone.lng))throw new Error('Invalid zone catalog');slugs.add(zone.slug);}}
-   catalog={releaseId:body.releaseId,sha256:body.sha256,hotspots:snapshot.hotspots.map(resolvePublicPlace),services:snapshot.services.map(resolvePublicPlace),offLeashAreas:snapshot.offLeashAreas??null};
+   if(snapshot.events){const slugs=new Set();for(const event of snapshot.events){if(!event.title||!event.slug||slugs.has(event.slug)||!event.date||!event.location)throw new Error('Invalid event catalog');slugs.add(event.slug);}}
+   catalog={releaseId:body.releaseId,sha256:body.sha256,hotspots:snapshot.hotspots.map(resolvePublicPlace),services:snapshot.services.map(resolvePublicPlace),offLeashAreas:snapshot.offLeashAreas??null,events:snapshot.events??null};
   }
  }
  fs.writeFileSync(path.join(root,'data/dashboardCatalog.json'),JSON.stringify(catalog));

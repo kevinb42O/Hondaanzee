@@ -39,7 +39,7 @@ const STATIC_ROUTE_FILES = {
   '/algemene-voorwaarden': ['pages/Terms.tsx'],
   '/cookies': ['pages/Cookies.tsx'],
   '/blog': ['pages/Blog.tsx', 'data/blogs.ts'],
-  '/agenda': ['pages/Agenda.tsx', 'components/EventVisual.tsx', 'components/EventLinks.tsx', 'utils/useEventClock.ts', 'data/events.ts', 'data/futureEvents.ts', 'utils/events.ts'],
+  '/agenda': ['pages/Agenda.tsx', 'components/EventVisual.tsx', 'components/EventLinks.tsx', 'utils/useEventClock.ts', 'data/events.ts', 'data/eventDefaults.ts', 'data/futureEvents.ts', 'utils/events.ts'],
   '/meldpunt': ['pages/Meldpunt.tsx'],
   '/meldpunt/vrijwilligers': ['pages/MeldpuntVrijwilligers.tsx', 'cityData.ts'],
   '/updates': ['pages/Updates.tsx', 'components/Footer.tsx'],
@@ -84,7 +84,7 @@ const getRouteFiles = (route) => {
   }
 
   if (/^\/agenda\/[^/]+$/.test(route)) {
-    return ['pages/EventDetail.tsx', 'components/EventDetailContent.tsx', 'components/EventVisual.tsx', 'components/EventLinks.tsx', 'utils/useEventClock.ts', 'data/events.ts', 'data/futureEvents.ts', 'utils/events.ts', 'utils/seo.ts'];
+    return ['pages/EventDetail.tsx', 'components/EventDetailContent.tsx', 'components/EventVisual.tsx', 'components/EventLinks.tsx', 'utils/useEventClock.ts', 'data/events.ts', 'data/eventDefaults.ts', 'data/futureEvents.ts', 'utils/events.ts', 'utils/seo.ts'];
   }
 
   if (/^\/[^/]+\/hotspots\/[^/]+$/.test(route)) {
@@ -100,7 +100,7 @@ const getRouteFiles = (route) => {
   }
 
   if (/^\/[^/]+$/.test(route)) {
-    return ['pages/CityPage.tsx', 'components/EventLinks.tsx', 'data/events.ts', 'data/futureEvents.ts', 'utils/events.ts', 'utils/useEventClock.ts', 'cityData.ts', 'data/beachRules.ts', 'components/StatusCheck.tsx', 'components/BeachRulesOverview.tsx', 'components/CityFAQ.tsx', 'utils/useRuleClock.ts', 'utils/rules.ts', 'utils/cityFaq.ts', 'data/hotspots.ts', 'data/services.ts'];
+    return ['pages/CityPage.tsx', 'components/EventLinks.tsx', 'data/events.ts', 'data/eventDefaults.ts', 'data/futureEvents.ts', 'utils/events.ts', 'utils/useEventClock.ts', 'cityData.ts', 'data/beachRules.ts', 'components/StatusCheck.tsx', 'components/BeachRulesOverview.tsx', 'components/CityFAQ.tsx', 'utils/useRuleClock.ts', 'utils/rules.ts', 'utils/cityFaq.ts', 'data/hotspots.ts', 'data/services.ts'];
   }
 
   return [];

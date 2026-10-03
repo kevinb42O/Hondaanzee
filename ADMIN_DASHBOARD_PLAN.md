@@ -2,6 +2,8 @@
 
 Opgesteld en bijgewerkt op 2 oktober 2026. Het door Kevin goedgekeurde interactieve ontwerp is de visuele referentie. De onderstaande voortgang maakt onderscheid tussen lokaal gebouwde onderdelen, live ingerichte infrastructuur en nog te bouwen functies.
 
+Gerichte aanvulling van 3 oktober 2026: het ontbrekende agendabeheer en de evenementanalytics hebben nu een eigen [uitvoeringsplan](ADMIN_AGENDA_PLAN.md), gecontroleerd tegen bronversie `d2e4889` en de live agenda. Dat plan beschrijft de beginsituatie en de uitvoering. De 21 publieke fiches zijn technisch indexeerbaar. De agenda-editor, revisies, publicatiesnapshots en rapporten zijn inmiddels gebouwd; de backend is uitgerold en de laatste productiecontrole volgt. Analytics valideert evenementen nu tegen gepubliceerde database-identiteiten. Deze aanvulling actualiseert uitsluitend de agendastatus, niet alle overige onderdelen van dit historische dashboardplan.
+
 ## Beslissingen die vaststaan
 
 - De admin krijgt de visuele taal van het goedgekeurde concept: een lichte achtergrond, witte oppervlakken, een vaste zijbalk op desktop, duidelijke titels, subtiele randen en blauw als accentkleur.
@@ -152,7 +154,7 @@ Validatie: 137 tests, productiebuild van alle 224 openbare routes en 157 zaakpag
 - Een eigen zakelijk aanmeldformulier maakt een voorstel in een inbox; ontvangen is geen automatische publicatie.
 - De bestaande contactmogelijkheden blijven bruikbaar.
 - Strandregels krijgen officiële bronnen, controledata, seizoensinformatie en een controleworkflow. De huidige regels worden exact als uitgangspunt overgenomen.
-- Daarna kunnen agenda, blog, homepageblokken en zakelijke rapportexports volgen.
+- Agenda krijgt voorrang als afzonderlijke uitbreiding volgens [ADMIN_AGENDA_PLAN.md](ADMIN_AGENDA_PLAN.md), inclusief beheer, publicatie en analytics. Blog, homepageblokken en zakelijke rapportexports blijven vervolgstappen.
 - Bestaande publieke workflows met afbeeldingen, zoals eventuele meldpuntfoto's, worden afzonderlijk geïnventariseerd. Hun bestaande foto's blijven behouden; nieuwe uploadondersteuning gebruikt hetzelfde R2-principe.
 
 ## Voorlopig datamodel

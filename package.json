@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "npm run build:no-prerender && node scripts/render-places.mjs && node scripts/verify-place-pages.cjs && node scripts/verify-beach-pages.cjs && node scripts/verify-event-pages.cjs",
     "build:prerender": "npm run build && node prerender.cjs",
-    "build:no-prerender": "npm run check:design && npm run typecheck && node scripts/prepare-catalog.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
+    "build:no-prerender": "npm run check:design && npm run typecheck && node scripts/prepare-catalog.cjs && node scripts/generate-analytics-routes.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
     "preview": "vite preview",
     "check:design": "node scripts/check-design-icons.cjs",
     "test": "vitest run",
@@ -22,7 +22,8 @@
     "test:public": "node scripts/check-public-browser.cjs",
     "typecheck:api": "tsc --project tsconfig.api.json",
     "test:events": "vitest run utils/events.test.ts && node scripts/verify-event-pages.cjs",
-    "test:beaches": "vitest run utils/rules.test.ts && node scripts/verify-beach-pages.cjs"
+    "test:beaches": "vitest run utils/rules.test.ts && node scripts/verify-beach-pages.cjs",
+    "test:agenda-admin": "vitest run utils/adminEvents.test.ts && node scripts/check-agenda-admin.cjs && node scripts/check-event-actions.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.93.3",

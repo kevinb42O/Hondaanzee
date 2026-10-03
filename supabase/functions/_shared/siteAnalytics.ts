@@ -1,7 +1,7 @@
 import { z } from 'zod';
 export const analyticsInput = z.object({
  path: z.string().max(240).regex(/^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*)?$/),
- event: z.enum(['pageview','website','route','telefoon','social']),
+ event: z.enum(['pageview','website','route','telefoon','social','ticket','email']),
  referrer: z.enum(['direct','google','bing','facebook','instagram','hondaanzee','other']),
  device: z.enum(['mobile','tablet','desktop']),
 }).strict();

@@ -1,5 +1,6 @@
 import {hourlySeries,type HourlyWindow} from '../utils/hourlyAnalytics.ts';
 import {chartDateLabel} from '../utils/analyticsChart.ts';
+import {Link} from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import { RefreshCw, BarChart3, Download } from 'lucide-react';
 import AdminAnalyticsChart from '../components/admin/AdminAnalyticsChart.tsx';
@@ -25,6 +26,7 @@ export default function AdminAnalytics(){
  const exportCsv=()=>{const csv=(days===1?'Uur (UTC)':'Datum')+',Pagina,Actie,Herkomst,Apparaat,Aantal\n'+rows.map(row=>[row.hour??row.day,row.path,row.event,row.referrer,row.device,row.count].map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');const url=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`hondaanzee-analytics-${days===1?'24-uur':days+'-dagen'}.csv`;a.click();URL.revokeObjectURL(url);};
  const list=(title:string,items:[string,number][],links=false)=><section className="workspace-panel"><h2>{title}</h2>{items.length?<div className="workspace-analytics-list">{items.slice(0,15).map(([name,count])=><div key={name}>{links?<a href={name} target="_blank" rel="noreferrer">{name}</a>:<span>{labels[name]||name}</span>}<strong>{format(count)}</strong></div>)}</div>:<p className="workspace-muted">Nog geen gegevens in deze periode.</p>}</section>;
  return <><div className="workspace-page-heading"><div><p className="workspace-eyebrow">Je gids in cijfers</p><h1>Analytics</h1><p>Paginaweergaven en contactkliks op je openbare website.</p></div><button className="workspace-button workspace-button-primary" disabled={loading} onClick={()=>void load()}><RefreshCw size={17}/>{loading?'Laden…':'Vernieuwen'}</button></div>
+ <Link to="/admin/agenda/analytics" className="workspace-button">Bekijk agenda-analytics</Link>
  <div className="workspace-period" aria-label="Gegevensbron"><button className={source==='own'?'is-active':''} aria-pressed={source==='own'} onClick={()=>setSource('own')}>Eigen meting</button><button className={source==='vercel'?'is-active':''} aria-pressed={source==='vercel'} onClick={()=>setSource('vercel')}>Vercel-historiek</button></div>
  {source==='vercel'?<>{error&&<p className="workspace-error" role="alert">{error}</p>}{loading?<section className="workspace-panel" role="status">Historiek laden…</section>:<AdminVercelHistory history={result?.history||null}/>}</>:<>
  <div className="workspace-period" aria-label="Meetperiode">{[1,7,30,90,365].map(value=><button key={value} className={days===value?'is-active':''} aria-pressed={days===value} onClick={()=>setDays(value)}>{value===1?'24 uur':value===365?'12 maanden':`${value} dagen`}</button>)}</div>

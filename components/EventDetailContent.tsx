@@ -1,3 +1,4 @@
+import { trackEventLink, eventRouteUrl } from '../utils/eventAnalytics.ts';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Accessibility, Calendar, ChevronRight, Clock, Globe, Mail, MapPin, PartyPopper, Phone, Tag, TreePine, Utensils } from 'lucide-react';
@@ -44,7 +45,11 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
   const seasonColor = SEASON_COLORS[event.season] || SEASON_COLORS.Lente;
 
   return (
-    <>
+    <div className="event-detail-content" onClick={e => {
+      const anchor = (e.target as Element)?.closest('a[href]');
+      const href = anchor?.getAttribute('href');
+      if(anchor?.hasAttribute('data-event-contact') && href && /^(https?:|tel:|mailto:)/.test(href)) trackEventLink(event, href);
+    }}>
       <div className="relative h-[35vh] sm:h-[40vh] md:h-[50vh] min-h-[320px]">
         <EventVisual event={event} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -78,6 +83,8 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
       </div>
 
       <div className="p-5 sm:p-8 md:p-12 lg:p-16">
+        {event.eventStatus && event.eventStatus !== 'scheduled' && <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-5" role="status"><strong>{({cancelled:'Geannuleerd',postponed:'Uitgesteld',rescheduled:'Verplaatst'} as const)[event.eventStatus]}</strong><p>{event.statusNote}</p>{event.previousStartDate && <p>Oorspronkelijke datum: {event.previousStartDate.slice(0,10)}</p>}</div>}
+        {event.ticketUrl && !isPast && event.eventStatus !== 'cancelled' && event.eventStatus !== 'postponed' && <a data-event-contact className="mb-6 inline-flex rounded-xl bg-sky-600 px-5 py-3 font-bold text-white" href={event.ticketUrl} target="_blank" rel="noopener noreferrer">Tickets / inschrijven</a>}
         {isPast && <p className="mb-6 rounded-xl bg-slate-100 p-4 font-bold text-slate-700">Deze editie is afgelopen. De gegevens hieronder horen bij deze voorbije editie.</p>}
         {!isPast && event.status === 'save-the-date' && <p className="mb-6 rounded-xl bg-amber-50 p-4 text-amber-900">De datum is aangekondigd. Uren, tarieven en het volledige programma volgen nog bij de organisator.</p>}
         {!isPast && event.status === 'announced' && <p className="mb-6 rounded-xl bg-amber-50 p-4 text-amber-900">Dit evenement is aangekondigd. Controleer de organisator voor het definitieve programma en de deelnamevoorwaarden.</p>}
@@ -217,30 +224,31 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
                 <p className="text-slate-500 text-sm sm:text-base">{event.address || 'Het exacte adres is nog niet bekend. Vraag de vertrekplek na bij de organisator.'}</p>
               </div>
             </div>
+            {eventRouteUrl(event) && <a data-event-contact href={eventRouteUrl(event)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-bold text-sky-700 hover:underline"><MapPin size={18}/>Route naar de locatie</a>}
             {event.organizerName && <p className="text-slate-600"><strong>Organisator:</strong> {event.organizerName}</p>}
             {event.practicalNotes && <ul className="list-disc pl-5 space-y-3 text-slate-700 leading-relaxed">{event.practicalNotes.map(note => <li key={note}>{note}</li>)}</ul>}
             {event.phone && (
               <div className="flex items-center gap-3">
                 <Phone size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                <a href={`tel:${event.phone}`} className="text-sky-600 font-bold text-base sm:text-lg hover:underline">{event.phone}</a>
+                <a data-event-contact href={`tel:${event.phone}`} className="text-sky-600 font-bold text-base sm:text-lg hover:underline">{event.phone}</a>
               </div>
             )}
             {event.email && (
               <div className="flex items-center gap-3">
                 <Mail size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                <a href={`mailto:${event.email}`} className="text-sky-600 font-bold text-base sm:text-lg hover:underline">{event.email}</a>
+                <a data-event-contact href={`mailto:${event.email}`} className="text-sky-600 font-bold text-base sm:text-lg hover:underline">{event.email}</a>
               </div>
             )}
             {event.website && (
               <div className="flex items-center gap-3">
                 <Globe size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                <a href={event.website} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{event.websiteLabel || event.website}</a>
+                <a data-event-contact href={event.website} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{event.websiteLabel || event.website}</a>
               </div>
             )}
             {event.additionalLinks?.map((link) => (
               <div key={link.url} className="flex items-center gap-3">
                 <Globe size={20} className="text-sky-600 flex-shrink-0 sm:w-6 sm:h-6" />
-                <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{link.label}</a>
+                <a data-event-contact href={link.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 font-bold text-base sm:text-lg hover:underline break-all">{link.label}</a>
               </div>
             ))}
           </div>
@@ -336,7 +344,7 @@ const EventDetailContent: React.FC<EventDetailContentProps> = ({ event, onNaviga
           initialIndex={eventImageIndex}
         />
       )}
-    </>
+    </div>
   );
 };
 

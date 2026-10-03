@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CalendarDays } from 'lucide-react';
 import { EVENTS, type DogEvent } from '../data/events.ts';
-import { getRelatedEvents, getUpcomingEvents } from '../utils/events.ts';
+import { getRelatedEvents, getUpcomingEvents, isEventPast } from '../utils/events.ts';
 import { useEventClock } from '../utils/useEventClock.ts';
 
 function EventLinks({ events }: { events: DogEvent[] }) {
@@ -33,12 +33,12 @@ export function CityEventLinks({ citySlug, cityName }: { citySlug: string; cityN
   const now = useEventClock();
   const events = getUpcomingEvents(EVENTS, now).filter(event => event.citySlug === citySlug);
   if (!events.length) return null;
-  return <section aria-labelledby="city-events-heading" className="bg-slate-50 py-10 sm:py-12">
-    <div className="max-w-6xl mx-auto px-4 md:px-6">
-      <h2 id="city-events-heading" className="mb-3 text-2xl font-black text-slate-900">Met je hond naar een evenement in {cityName}</h2>
-      <p className="mb-5 text-sm text-slate-600">Plan je uitstap met de datum, locatie en hondenvoorwaarden van elke editie.</p>
+  return <section aria-labelledby="city-events-heading" className="city-section city-events">
+    <div className="city-shell">
+      <h2 id="city-events-heading" className="city-section-title">Met je hond naar een evenement in {cityName}</h2>
+      <p className="city-body-copy mb-6">Plan je uitstap met de datum, locatie en hondenvoorwaarden van elke editie.</p>
       <EventLinks events={events} />
-      <Link to="/agenda" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sky-700 hover:underline">Bekijk de volledige hondenagenda <ArrowRight size={16} /></Link>
+      <Link to="/agenda" className="city-text-link">Bekijk de volledige hondenagenda <ArrowRight size={16} /></Link>
     </div>
   </section>;
 }
@@ -49,7 +49,7 @@ export function ArchivedEventLinks() {
   const archived = EVENTS.filter(event => !upcoming.has(event.slug)).sort((a, b) => b.date.localeCompare(a.date));
   if (!archived.length) return null;
   return <details className="mt-10 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
-    <summary className="cursor-pointer text-base font-black text-slate-900">Voorbije edities ({archived.length})</summary>
+    <summary className="cursor-pointer text-base font-black text-slate-900">{archived.some(e=>!isEventPast(e,now))?'Voorbije en gewijzigde edities':'Voorbije edities'} ({archived.length})</summary>
     <p className="mb-4 mt-3 text-sm text-slate-600">Deze evenementen zijn afgelopen. De informatie blijft beschikbaar per editie; de voorwaarden gelden niet automatisch voor een volgend jaar.</p>
     <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {archived.map(event => <li key={event.slug}><Link to={`/agenda/${event.slug}`} className="block rounded-xl bg-slate-50 p-4 text-sm font-bold text-sky-700 hover:bg-sky-50 hover:underline">{event.title}<span className="mt-1 block text-xs font-medium text-slate-600"><time dateTime={event.date}>{event.dateDisplay}</time> · {event.cityName}</span></Link></li>)}

@@ -52,8 +52,10 @@ Deno.serve(async req=>{
   if(input.action!=='publish')return json({error:'Ongeldig verzoek.'},400);
   if(!Deno.env.get('VERCEL_PUBLICATION_TOKEN'))return json({error:'De beperkte Vercel-publicatiesleutel is nog niet ingesteld.'},503);
   if(!input.places||typeof input.places!=='object'||Array.isArray(input.places)||Object.keys(input.places).length>200)return json({error:'Selecteer de zaken die je wilt publiceren.'},400);
-  for(const [id,version] of Object.entries(input.places))if(!/^[a-f0-9-]{36}$/.test(id)||typeof version!=='number'||!Number.isInteger(version)||version<1)return json({error:'Ongeldige zaakselectie.'},400);
-  const {data:job,error}=await db.rpc('request_content_publication',{p_places:input.places,p_actor_id:actor!.id});if(error)throw error;
+  input.events=input.events??{};
+  if(typeof input.events!=='object'||Array.isArray(input.events)||Object.keys(input.events).length>200)return json({error:'Ongeldige evenementselectie.'},400);
+  for(const [id,version] of Object.entries({...input.places,...input.events}))if(!/^[a-f0-9-]{36}$/.test(id)||typeof version!=='number'||!Number.isInteger(version)||version<1)return json({error:'Ongeldige zaakselectie.'},400);
+  const {data:job,error}=await db.rpc('request_full_content_publication',{p_places:input.places,p_events:input.events,p_actor_id:actor!.id});if(error)throw error;
   try{
    const deployment=await vercel('/v13/deployments?forceNew=1',{name:'hondaanzee',project:projectId,target:'production',gitSource:{type:'github',repoId:1139323284,ref:'main'},meta:{haz_job_id:job.id,haz_release_id:job.release_id},projectSettings:{buildCommand:`HAZ_RELEASE_ID=${job.release_id} npm run build`}});
    const {error:updateError}=await db.from('publication_jobs').update({status:'building',deployment_id:deployment.id,deployment_url:`https://${deployment.url}`,updated_at:new Date().toISOString()}).eq('id',job.id);if(updateError)throw updateError;
@@ -68,7 +70,8 @@ Deno.serve(async req=>{
  }catch(error){
   const message=typeof error==='object'&&error&&'message'in error?String(error.message):'';
   if(message.includes('PUBLICATION_BUSY'))return json({error:'Er loopt al een publicatie. Wacht tot deze klaar is.'},409);
-  if(message.includes('VERSION_CONFLICT'))return json({error:'Een geselecteerde zaak is gewijzigd. Vernieuw de lijst.'},409);
+  if(message.includes('VERSION_CONFLICT'))return json({error:'Een geselecteerd concept is gewijzigd. Vernieuw de lijst.'},409);
+  if(message.includes('INCOMPLETE_EVENT'))return json({error:'Vul titel, datum, beschrijving, plaats en locatie in voor je publiceert.'},400);
   if(message.includes('INCOMPLETE_PLACE'))return json({error:'Vul naam, beschrijving, adres en een gecontroleerde foto in voor je publiceert.'},400);
   if(message.includes('NO_CHANGES_SELECTED'))return json({error:'Selecteer minstens één concept.'},400);
   console.error('publication failed',{type:error instanceof Error?error.name:'unknown'});return json({error:'De publicatiestatus kon niet verwerkt worden. Je concepten zijn behouden.'},503);

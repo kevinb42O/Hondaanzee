@@ -33,11 +33,15 @@ De evenementcontrole draait voortaan automatisch tijdens `npm run build`. Los ui
 
 ## Publicatiestatus
 
-De live agenda gaf tijdens deze controle HTTP 200 maar bevatte de nieuwe De Haan-fiche nog niet. De nieuwe detail-URL's voor De Haan en Bredene gaven HTTP 404. Er is tijdens deze SEO-opdracht geen productiepublicatie uitgevoerd.
+Bij de oorspronkelijke lokale SEO-controle gaf de live agenda HTTP 200 maar stonden de nieuwe fiches nog niet online. Die eerdere waarneming is inmiddels achterhaald.
 
-Voor het effect in Google moet de nieuwe versie gepubliceerd zijn. Daarna kunnen de sitemap en de nieuwe URL's gecontroleerd worden in Search Console. Een verzoek tot indexering garandeert geen opname; Google bepaalt de verwerking en positie. Zie [Googles SEO-uitleg](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) en [opnieuw laten crawlen](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).
+Bij de hercontrole op 3 oktober 2026 staat de vernieuwde agenda live. Lokale HEAD en remote `main` wijzen naar `d2e4889a163a1de8d9bd543ea249c29a50d9299c`. Alle 21 fiches geven HTTP 200, bevatten dezelfde metadata en Event-gegevens als de broncode, hebben één eigen canonical zonder noindex en zijn beschikbaar in de eerste HTML. Alle 21 staan in de live sitemap en zijn gelinkt vanuit de live agenda. Het [live HTTP-controlerapport](research/agenda-live-indexatie-2026-10-03.json) bevat de resultaten per URL. Tijdens deze hercontrole is geen deployment gestart.
+
+Daarmee zijn de pagina's technisch klaar voor indexatie. De sitemapverwerking en daadwerkelijke Google-indexstatus zijn niet in Search Console gecontroleerd. De volgende stap is daar de sitemap en nieuwe URL's inspecteren en waar nodig indexatie aanvragen. Een verzoek tot indexering garandeert geen opname; Google bepaalt de verwerking en positie. Zie [Googles SEO-uitleg](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) en [opnieuw laten crawlen](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).
 
 De implementatie volgt [Googles Event-richtlijnen](https://developers.google.com/search/docs/appearance/structured-data/event). De speciale Google-evenementervaring heeft volgens die documentatie een beperkte landen- en taallijst; Nederlandstalig België en Nederland staan daar niet bij. Gewone zoekresultaten en de technische indexeerbaarheid blijven het doel.
+
+Het ontbrekende agendabeheer en de agenda-analytics zijn apart uitgewerkt in [het admin-agendaplan](ADMIN_AGENDA_PLAN.md). Het gevonden meetgat is tijdens de daaropvolgende uitvoering hersteld. De collector gebruikt inmiddels de gepubliceerde evenementidentiteiten in de database voor routevalidatie; nieuwe fiches vereisen geen handmatige aanvulling van de URL-lijst.
 
 ## Gecontroleerde fiches
 

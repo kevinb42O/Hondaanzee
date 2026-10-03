@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Breadcrumb from '../components/Breadcrumb.tsx';
 import EventDetailContent from '../components/EventDetailContent.tsx';
 import { RelatedEventLinks } from '../components/EventLinks.tsx';
+import NotFound from './NotFound.tsx';
 import { EVENTS } from '../data/events.ts';
 import { getEventSEO } from '../utils/events.ts';
 import { useEventClock } from '../utils/useEventClock.ts';
@@ -28,7 +29,7 @@ const EventDetail: React.FC = () => {
   }, [slug]);
 
   if (!event) {
-    return <Navigate to="/agenda" replace />;
+    return <NotFound />;
   }
 
   return (

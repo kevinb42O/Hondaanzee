@@ -1,6 +1,6 @@
 import {adminFunction} from '../../utils/adminContent.ts';
 import React,{useEffect,useState} from 'react';
-import { BarChart3, Bell, ExternalLink, Heart, LayoutDashboard, Loader2, LogOut, PawPrint, ScrollText, ShieldCheck, Store, UploadCloud, Users } from 'lucide-react';
+import { BarChart3, Bell, CalendarDays, ExternalLink, Heart, LayoutDashboard, Loader2, LogOut, PawPrint, ScrollText, ShieldCheck, Store, UploadCloud, Users } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import AdminLoginCard from '../meldpunt/AdminLoginCard.tsx';
 import { useAdminAuth } from '../../utils/useAdminAuth.ts';
@@ -10,6 +10,7 @@ import '../../admin.css';
 const navigation = [
   { path: '/admin', label: 'Overzicht', icon: LayoutDashboard, end: true },
   { path: '/admin/zaken', label: 'Zaken', icon: Store },
+  { path: '/admin/agenda', label: 'Agenda', icon: CalendarDays },
   { path: '/admin/losloopzones', label: 'Losloopzones', icon: PawPrint },
   { path: '/admin/reviews', label: 'Likes & reviews', icon: ShieldCheck },
   { path: '/admin/publiceren', label: 'Publiceren', icon: UploadCloud },

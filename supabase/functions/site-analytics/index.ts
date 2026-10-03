@@ -20,6 +20,9 @@ Deno.serve(async req => {
   if(match){
    const {data,error}=await db.from('content_places').select('id').eq('city_slug',match[1]).eq('kind',match[2]==='hotspots'?'hotspot':'service').eq('slug',match[3]).not('published_revision_id','is',null).is('archived_at',null).maybeSingle();
    if(error || !data) return new Response(null,{status:400,headers});
+  } else if(/^\/agenda\/[a-z0-9-]+$/.test(input.path)){
+   const {data,error}=await db.from('content_events').select('published:content_event_revisions!content_events_published_revision_fk(content)').eq('slug',input.path.split('/')[2]).not('published_revision_id','is',null).maybeSingle();
+   if(error||!data||(data.published as any)?.content?.visibility==='withdrawn'||!['pageview','website','ticket','telefoon','email','route','social'].includes(input.event))return new Response(null,{status:400,headers});
   } else if(/^\/losloopzones\/[a-z0-9-]+$/.test(input.path)){
    const {data,error}=await db.from('content_places').select('id').eq('kind','offleash').eq('slug',input.path.split('/')[2]).not('published_revision_id','is',null).is('archived_at',null).maybeSingle();
    if(error||!data||!['pageview','route'].includes(input.event))return new Response(null,{status:400,headers});
