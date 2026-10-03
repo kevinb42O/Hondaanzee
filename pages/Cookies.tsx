@@ -22,7 +22,7 @@ const sections: LegalSection[] = [
   { id: 'analytics', title: 'Cookie-loze statistieken', content: <>
     <p>We gebruiken Vercel Web Analytics en eigen geaggregeerde statistieken voor openbare pagina&apos;s en contactacties. Accountpagina&apos;s, beheerpagina&apos;s en gedeelde uitstapjes worden uitgesloten. De metingen gebruiken geen analyticscookies en onze eigen meting maakt geen bezoekerprofiel.</p>
     <p>Via Vercel meten we ook acties rond vrijwillige steun, zoals een steunlink openen, een bedragoptie kiezen, het rekeningnummer kopiëren of de QR-code bekijken. We sturen geen zelf ingevoerd bedrag of donorgegevens mee. Deze acties bevestigen geen betaling.</p>
-    <p>De eigen meting verwijdert uurgegevens ouder dan 8 dagen en dagtotalen ouder dan 397 kalenderdagen bij de dagelijkse opschoning. Voor misbruikbeperking wordt tijdelijk een dagelijks wisselende IP-hash verwerkt; oude daggegevens worden dagelijks opgeruimd. Onze eigen meting respecteert Do Not Track en Global Privacy Control. Dit beschrijft onze meting en is geen garantie voor het gedrag van externe websites.</p>
+    <p>De eigen meting verwijdert uurgegevens ouder dan 8 dagen en dagtotalen ouder dan 397 kalenderdagen bij de dagelijkse opschoning. Voor misbruikbeperking wordt tijdelijk een dagelijks wisselende IP-hash verwerkt. We schatten dagelijkse bezoekers met een aparte, dagelijks wisselende hash van IP-adres en browserinformatie, zonder cookies of opslag van een bezoeker-ID in je browser. Dezelfde combinatie telt op een dag één keer voor de website en per bezochte pagina; op een andere dag kan die opnieuw meetellen. Tijdelijke hashes en hun pagina&apos;s van eerdere dagen worden bij de dagelijkse opschoning verwijderd. Alleen de totalen blijven bewaard. Onze eigen meting respecteert Do Not Track en Global Privacy Control. Dit beschrijft onze meting en is geen garantie voor het gedrag van externe websites.</p>
     <p>Vercel licht zijn verwerking toe in het <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">privacyoverzicht van Web Analytics</a>. Meer over de gegevens, doeleinden en rechtsgronden staat in het <Link to="/privacy">privacybeleid</Link>.</p>
   </> },
   { id: 'meldingen', title: 'Pushmeldingen en browsertoestemming', content: <>
@@ -43,7 +43,7 @@ const sections: LegalSection[] = [
 
 const Cookies: React.FC = () => {
   useSEO(SEO_DATA.cookies);
-  return <LegalPage title="Cookiebeleid" icon={Cookie} intro="Wat je browser onthoudt voor je account, voorkeuren, meldingen en het laden van de website."
+  return <LegalPage updatedAt="2026-10-03" title="Cookiebeleid" icon={Cookie} intro="Wat je browser onthoudt voor je account, voorkeuren, meldingen en het laden van de website."
     summary={<><p>We gebruiken geen marketingcookies. Je login heeft wel functionele browseropslag nodig. Publieke statistieken gebruiken geen analyticscookies.</p><p>Uitloggen, sitegegevens wissen, pushmeldingen uitschakelen en je account verwijderen zijn verschillende acties. Hieronder lees je wat elke actie doet.</p></>} sections={sections} />;
 };
 

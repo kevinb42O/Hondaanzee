@@ -11,8 +11,8 @@ export function LegalContact() {
   </p>;
 }
 
-export default function LegalPage({ title, icon: Icon, intro, summary, sections }: {
-  title: string; icon: LucideIcon; intro: string; summary: React.ReactNode; sections: LegalSection[];
+export default function LegalPage({ title, icon: Icon, intro, summary, sections, updatedAt = '2026-10-02' }: {
+  title: string; icon: LucideIcon; intro: string; summary: React.ReactNode; sections: LegalSection[]; updatedAt?: string;
 }) {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return <div className="animate-in fade-in">
@@ -24,7 +24,7 @@ export default function LegalPage({ title, icon: Icon, intro, summary, sections 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight">{title}</h1>
         </div>
         <p className="text-slate-300 leading-relaxed max-w-2xl mb-5">{intro}</p>
-        <p className="text-slate-400 text-sm">Laatst bijgewerkt: <time dateTime="2026-10-02">2 oktober 2026</time></p>
+        <p className="text-slate-400 text-sm">Laatst bijgewerkt: <time dateTime={updatedAt}>{new Date(`${updatedAt}T12:00:00Z`).toLocaleDateString('nl-BE',{timeZone:'Europe/Brussels',day:'numeric',month:'long',year:'numeric'})}</time></p>
       </div>
     </div>
     <div className="max-w-4xl mx-auto px-4 md:px-6 py-10 sm:py-14">

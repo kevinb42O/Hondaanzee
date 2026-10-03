@@ -2,12 +2,12 @@ import React, { useId, useRef, useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { chartAxis, chartDateLabel, chartIndex, chartScale, chartSegments, chartX, type ChartPoint } from '../../utils/analyticsChart.ts';
 import './AdminAnalyticsChart.css';
-export default function AdminAnalyticsChart({ points, source, label }: { points: ChartPoint[]; source: string; label: string }) {
+export default function AdminAnalyticsChart({ points, source, label, metricLabel = 'Paginaweergaven' }: { points: ChartPoint[]; source: string; label: string; metricLabel?: string }) {
   const svg = useRef<SVGSVGElement>(null), scroll = useRef<HTMLDivElement>(null), frame = useRef<number>(0), fill = useId().replaceAll(':', '');
   const [hover, setHover] = useState<{ index: number; x: number; y: number; keyboard: boolean } | null>(null);
   const [scrollable, setScrollable] = useState(false);
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
-  useEffect(() => setHover(null), [points.length, source]);
+  useEffect(() => setHover(null), [points.length, source, metricLabel]);
   const axis = useMemo(() => chartAxis(points), [points]);
   useEffect(() => {
     const host = scroll.current; if (!host) return;
@@ -71,5 +71,5 @@ export default function AdminAnalyticsChart({ points, source, label }: { points:
       const text = shortMonth ? new Date(`${points[boundary.index].day}T12:00:00Z`).toLocaleDateString('nl-BE', { timeZone: 'UTC', month: 'short' }) : boundary.label;
       return <g key={boundary.index}><line x1={start} x2={end} y1="273" y2="273" stroke="#dce2ed"/><text x={hourly ? start : (start + end) / 2} y="294" textAnchor={hourly ? boundary.index > points.length - 3 ? 'end' : 'start' : 'middle'} fill="#475467" fontSize="11" fontWeight="600">{text}</text></g>;
     })}
-  </svg></div><p className="workspace-chart-caption"><strong>{axis.range}</strong><span>{axis.description}</span>{scrollable && <small className="workspace-chart-scroll-hint">Veeg of scroll horizontaal om de volledige tijdas te bekijken</small>}</p>{hover && active && createPortal(<div className="workspace-chart-tooltip" role="tooltip" style={{ left, top }} aria-live={hover.keyboard ? 'polite' : 'off'}><div className="workspace-chart-tooltip-date">{chartDateLabel(active)}</div>{active.value === null ? <p>Nog niet gemeten</p> : <><div className="workspace-chart-tooltip-value"><span><i/>Paginaweergaven</span><strong>{number(active.value)}</strong></div>{active.details?.map(row => <div className="workspace-chart-tooltip-value" key={row.label}><span>{row.label}</span><strong>{number(row.value)}</strong></div>)}</>}<small>{source}{active.partial ? ` · ${active.partialLabel||'gedeeltelijke dag'}` : ''}</small></div>, document.body)}</>;
+  </svg></div><p className="workspace-chart-caption"><strong>{axis.range}</strong><span>{axis.description}</span>{scrollable && <small className="workspace-chart-scroll-hint">Veeg of scroll horizontaal om de volledige tijdas te bekijken</small>}</p>{hover && active && createPortal(<div className="workspace-chart-tooltip" role="tooltip" style={{ left, top }} aria-live={hover.keyboard ? 'polite' : 'off'}><div className="workspace-chart-tooltip-date">{chartDateLabel(active)}</div>{active.value === null ? <p>Nog niet gemeten</p> : <><div className="workspace-chart-tooltip-value"><span><i/>{metricLabel}</span><strong>{number(active.value)}</strong></div>{active.details?.map(row => <div className="workspace-chart-tooltip-value" key={row.label}><span>{row.label}</span><strong>{number(row.value)}</strong></div>)}</>}<small>{source}{active.partial ? ` · ${active.partialLabel||'gedeeltelijke dag'}` : ''}</small></div>, document.body)}</>;
 }

@@ -9,6 +9,7 @@ Deno.serve(async req => {
  const headers = {'Access-Control-Allow-Origin':origin,'Vary':'Origin','Access-Control-Allow-Headers':'content-type','Access-Control-Allow-Methods':'POST,OPTIONS'};
  if(req.method==='OPTIONS') return new Response(null,{status:204,headers});
  if(req.method!=='POST') return new Response(null,{status:405,headers});
+ if(req.headers.get('dnt')==='1'||req.headers.get('sec-gpc')==='1')return new Response(null,{status:204,headers});
  if (/bot|crawler|spider|headless|puppeteer|playwright|curl|wget/i.test(req.headers.get('user-agent') || '')) return new Response(null,{status:204,headers});
  try {
   if (Number(req.headers.get('content-length') || 0)>1024) return new Response(null,{status:413,headers});
@@ -28,8 +29,10 @@ Deno.serve(async req => {
    if(error||!data||!['pageview','route'].includes(input.event))return new Response(null,{status:400,headers});
   } else if(!ANALYTICS_ROUTES.has(input.path) || input.event!=='pageview') return new Response(null,{status:400,headers});
   const salt=Deno.env.get('ANALYTICS_IP_SALT'); if(!salt) throw new Error('Missing configuration');
-  const fingerprint=await sha256(`${salt}:${new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}:${getClientIp(req)}`);
-  const {data,error}=await db.rpc('record_site_analytics',{p_path:input.path,p_event:input.event,p_referrer:input.referrer,p_device:input.device,p_fingerprint:fingerprint});
+  const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const fingerprint=await sha256(`${salt}:${day}:${getClientIp(req)}`);
+  const visitorFingerprint=await sha256(JSON.stringify(['visitor-v1',salt,day,getClientIp(req),(req.headers.get('user-agent')||'').slice(0,512)]));
+  const {data,error}=await db.rpc('record_site_analytics_with_visitors',{p_path:input.path,p_event:input.event,p_referrer:input.referrer,p_device:input.device,p_fingerprint:fingerprint,p_visitor_fingerprint:visitorFingerprint});
   if(error) throw error;
   return new Response(null,{status:data?204:429,headers});
  } catch { return new Response(null,{status:503,headers}); }

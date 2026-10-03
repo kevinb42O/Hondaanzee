@@ -385,8 +385,9 @@ export default function AdminEventAnalytics() {
         )
       )}
       <p className="workspace-note">
-        De eigen meting telt geen unieke bezoekers of sessieconversies. Zonder
-        meetcookies of bezoeker-ID; DNT/GPC en adblockers kunnen tellingen
+        Dit agendarapport toont paginaweergaven en klikacties, geen unieke
+        bezoekers of sessieconversies. Zonder
+        meetcookies of blijvende bezoeker-ID; DNT/GPC en adblockers kunnen tellingen
         beperken. Dagtotalen blijven 13 maanden bewaard, uurdetails 8 dagen.
         Admin, preview en bekende bots worden uitgesloten. Google-impressies,
         zoektermen en indexstatus horen bij Search Console; Vercel-historiek

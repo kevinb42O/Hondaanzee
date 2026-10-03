@@ -80,7 +80,7 @@ const server = createServer((req, res) => {
       }
       if (request.url().includes('/functions/v1/admin-members')) return request.respond({ status: 200, headers: cors, contentType: 'application/json', body: JSON.stringify({ allowed: true, members: [], total: 0, stats: { total: 0, new30: 0, active30: 0, saved: 0 } }) });
       if(request.url().includes('/functions/v1/admin-media'))return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({ready:false,message:'Mediadomein in voorbereiding',assets:[]})});
-      if(request.url().includes('/functions/v1/admin-analytics')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const hourly=JSON.parse(request.postData()).hours===24;return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({today:'2026-10-02',history,rows:[{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/',event:'pageview',referrer:'direct',device:'desktop',count:7},{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/blankenberge/hotspots/lakaiann',event:'website',referrer:'google',device:'mobile',count:2}],...(hourly?{window:{start:'2026-10-01T20:00:00Z',end:'2026-10-02T19:00:00Z',now:'2026-10-02T19:15:00Z',startedAt:'2026-10-02T18:30:00Z'}}:{})})});}
+      if(request.url().includes('/functions/v1/admin-analytics')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const hourly=JSON.parse(request.postData()).hours===24;return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({today:'2026-10-02',history,visitors:{method:'daily_estimate',startedAt:'2026-10-02T18:30:00Z',rows:[{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'@site',referrer:'google',device:'mobile',count:3},{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/',referrer:'google',device:'mobile',count:3},{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/agenda',referrer:'google',device:'mobile',count:2}]},rows:[{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/',event:'pageview',referrer:'direct',device:'desktop',count:7},{day:'2026-10-02',...(hourly?{hour:'2026-10-02T18:00:00Z'}:{}),path:'/blankenberge/hotspots/lakaiann',event:'website',referrer:'google',device:'mobile',count:2}],...(hourly?{window:{start:'2026-10-01T20:00:00Z',end:'2026-10-02T19:00:00Z',now:'2026-10-02T19:15:00Z',startedAt:'2026-10-02T18:30:00Z'}}:{})})});}
       if(request.url().includes('/functions/v1/admin-publication')){if(request.method()==='OPTIONS')return request.respond({status:204,headers:cors});const input=JSON.parse(request.postData());if(input.action==='publish')publicationRequests.push(input);return request.respond({status:200,headers:cors,contentType:'application/json',body:JSON.stringify({configured:true,jobs:[]})});}
       if (request.url().includes('/functions/v1/admin-content')) {
         if (request.method() === 'OPTIONS') return request.respond({ status: 204, headers: cors });
@@ -244,7 +244,7 @@ const server = createServer((req, res) => {
     await page.goto(base + '/admin/analytics');
     await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Analytics');
     await page.waitForSelector('.workspace-chart');
-    assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[7,0,2]);
+    assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[7,3,0,2]);
     assert.match(await page.$eval('.workspace-analytics-list',el=>el.textContent), /7/);
     await page.click('[aria-label="Meetperiode"] button:first-child');await page.waitForFunction(()=>document.querySelector('.workspace-chart-interactive')?.getAttribute('aria-label')?.includes('cijfers per uur.'));
     assert.match(await page.$eval('.workspace-panel .workspace-muted',el=>el.textContent),/Per uur/);
@@ -292,6 +292,21 @@ const server = createServer((req, res) => {
       await page.screenshot({path:path.join(process.env.TMPDIR||'/tmp',`hondaanzee-calendar-${period.mode}-mobile.png`),fullPage:true});
       await page.setViewport({width:1440,height:1000});
     }
+    await page.click('[aria-label="Meetwaarde"] button:nth-child(2)');
+    await page.waitForFunction(()=>document.querySelector('.workspace-chart-interactive')?.getAttribute('aria-label')?.includes('3 geschatte dagelijkse bezoekers'));
+    assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[7,3,0,2], 'Both totals stay visible; per-page visitor counts do not inflate the site total');
+    assert.match(await page.$eval('main',el=>el.textContent),/geen uniek aantal personen over de hele periode/);
+    await page.$eval('.workspace-chart-interactive',el=>el.focus());await page.keyboard.press('End');
+    await page.waitForFunction(()=>document.querySelector('[role=tooltip]')?.textContent.includes('Geschatte bezoekers3'));
+    await page.keyboard.press('Escape');
+    assert.match(await page.$$eval('.workspace-panel h2',els=>els.map(el=>el.textContent).join(' ')),/Herkomst bij eerste bezoek/);
+    await page.click('[aria-label="Meetperiode"] button:first-child');
+    await page.waitForFunction(()=>document.querySelector('.workspace-chart-interactive')?.dataset.axisMode==='hour');
+    await page.$eval('.workspace-chart-interactive',el=>el.focus());await page.keyboard.press('End');await page.keyboard.press('ArrowLeft');
+    await page.waitForFunction(()=>document.querySelector('[role=tooltip]')?.textContent.includes('Nieuwe bezoekers van de dag3'));
+    await page.keyboard.press('Home');await page.waitForFunction(()=>document.querySelector('[role=tooltip]')?.textContent.includes('Nog niet gemeten'));await page.keyboard.press('Escape');
+    await page.click('[aria-label="Meetwaarde"] button:first-child');
+    await page.waitForFunction(()=>document.querySelector('.workspace-chart-interactive')?.getAttribute('aria-label')?.includes('7 paginaweergaven'));
     await page.click('[aria-label="Gegevensbron"] button:nth-child(2)');
     await page.waitForFunction(()=>document.querySelector('.workspace-stat strong')?.textContent==='100');
     assert.deepEqual(await page.$$eval('.workspace-stat strong',els=>els.map(el=>Number(el.textContent))),[100,15,20], 'Historical daily visitors must never be summed into unique period visitors');

@@ -6,6 +6,8 @@ Opgeleverd op 3 oktober 2026. De implementatiecode staat op `main` (`75829dc`, g
 
 Op verzoek van Kevin zijn de rapporten onder **Analytics** ondergebracht, met submenu **Website** en **Agenda** en dezelfde tabknoppen bovenaan beide rapporten. De hoofdknop **Agenda** opent uitsluitend het beheer. Een rapport per editie hoort ook bij Analytics. Bestaande links onder `/admin/agenda/.../analytics` leiden automatisch naar de nieuwe rapport-URL. De algemene websitetotalen omvatten ook de agenda; het agendarapport geeft de uitsplitsing.
 
+De websiteanalytics heeft daarnaast een schakelaar voor paginaweergaven en dagelijks geschatte bezoekers zonder cookies. Zie [de afzonderlijke meetdefinitie](ADMIN_ANALYTICS_METING.md). Het agendarapport behoudt zijn tellingen van weergaven en klikacties.
+
 ## Gebruik
 
 - `/admin/agenda`: alle 21 fiches, zoekfunctie en filters; bewerken, publieke pagina en analytics per editie.
