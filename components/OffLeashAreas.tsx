@@ -1,10 +1,9 @@
 import {escapeMapText} from '../utils/mapText.ts';
 import {useZoneReviewSummaries} from '../utils/zoneReviews.ts';
-import {zoneAvailability} from '../utils/zoneAvailability.ts';
 
-import React, { useMemo, useEffect, useRef, useState } from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { MapPin, Navigation, Info, Clock, ExternalLink, MessageSquare } from 'lucide-react';
+import { MapPin, Navigation, Info, ExternalLink, MessageSquare } from 'lucide-react';
 import { City, OffLeashArea } from '../types.ts';
 import { CITIES } from '../cityData.ts';
 import { OFF_LEASH_AREAS } from '../constants.ts';
@@ -12,7 +11,6 @@ import { getDistanceFromLatLonInKm } from '../utils/geo.ts';
 import { getOffLeashAreaPath } from '../utils/offLeashRoutes.ts';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { supabase } from '../utils/supabaseClient';
 
 // Fix Leaflet's default icon path issues
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -35,45 +33,25 @@ interface OffLeashAreasProps {
   city: City;
 }
 
-const createCustomIcon = (isOpen: boolean|null, isPulsing: boolean) => {
-  const uniqueId = `marker-${Math.random().toString(36).substring(2, 11)}`;
-  const gradientId = `${uniqueId}-gradient`;
-  const filterId = `${uniqueId}-filter`;
-  const primaryColor = isOpen===true?'#10b981':isOpen===false?'#f43f5e':'#94a3b8';
-  const secondaryColor=isOpen===true?'#059669':isOpen===false?'#e11d48':'#64748b';
-  const glowColor = isOpen ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.4)';
+const getAreaImage = (area: OffLeashArea) =>
+  [area.image, ...(area.images || [])].find(image => image && image !== '/placeholder.webp');
 
-  return L.divIcon({
-    html: `
-      <div class="relative ${isPulsing ? 'marker-pulse' : ''}">
-        <svg width="44" height="52" viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg" class="custom-marker-pin">
-          <defs>
-            <linearGradient id="${gradientId}" x1="22" y1="0" x2="22" y2="44" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="${primaryColor}"/>
-              <stop offset="100%" stop-color="${secondaryColor}"/>
-            </linearGradient>
-            <filter id="${filterId}" x="-20%" y="-10%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="${glowColor}" flood-opacity="1"/>
-            </filter>
-          </defs>
-          <g filter="url(#${filterId})">
-            <path d="M22 2C12.06 2 4 10.06 4 20C4 34 22 50 22 50C22 50 40 34 40 20C40 10.06 31.94 2 22 2Z" fill="url(#${gradientId})"/>
-            <circle cx="22" cy="18" r="8" fill="white" fill-opacity="0.95"/>
-            <circle cx="22" cy="18" r="4" fill="${primaryColor}"/>
-          </g>
-          ${isOpen ? `
-            <circle cx="36" cy="10" r="6" fill="#10b981"/>
-            <circle cx="36" cy="10" r="4" fill="white"/>
-            <circle cx="36" cy="10" r="2" fill="#10b981"/>
-          ` : ''}
-        </svg>
+const getAreaPopup = (area: OffLeashArea, nearest = false) => {
+  const image = getAreaImage(area);
+  return `
+    <div class="p-2 font-sans min-w-[180px] max-w-[240px]">
+      ${nearest ? '<span class="text-[10px] uppercase font-black text-sky-600 block mb-1">Dichtstbijzijnde</span>' : ''}
+      <div class="flex items-start gap-3 mb-2">
+        ${image ? `<img src="${escapeMapText(image)}" alt="${escapeMapText(area.name)}" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-lg object-cover shrink-0" style="object-position:${escapeMapText(area.imagePosition || 'center')}"/>` : ''}
+        <div>
+          <b class="text-slate-900 text-sm leading-tight">${escapeMapText(area.name)}</b>
+          ${area.operationalStatus === 'temporarily_closed' ? '<span class="block mt-1 text-[10px] font-bold text-rose-700">Tijdelijk gesloten</span>' : ''}
+        </div>
       </div>
-    `,
-    className: '',
-    iconSize: [44, 52],
-    iconAnchor: [22, 52],
-    popupAnchor: [0, -52]
-  });
+      <p class="text-slate-500 text-xs mb-2">${escapeMapText(area.address)}</p>
+      ${area.description ? `<p class="text-slate-400 text-[10px] leading-relaxed">${escapeMapText(area.description)}</p>` : ''}
+    </div>
+  `;
 };
 
 const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
@@ -82,8 +60,6 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
   const leafletInstance = useRef<L.Map | null>(null);
   const {summaries:reviewSummaries}=useZoneReviewSummaries();
   const reviewCounts=Object.fromEntries(Object.entries(reviewSummaries).map(([slug,data])=>[slug,data.count]));
-
-  const isAreaOpen=(area:OffLeashArea)=>zoneAvailability(area).open;
 
   const nearestInfo = useMemo(() => {
     const cityAreas = OFF_LEASH_AREAS.filter(area => area.city === city.slug);
@@ -154,27 +130,9 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
       const markers: L.Marker[] = [];
 
       if (hasAreas) {
-        areasToShow.forEach((area, index) => {
-          const isOpen = isAreaOpen(area);
-          // TEMPORARILY USE DEFAULT MARKER FOR TESTING
-
+        areasToShow.forEach(area => {
           const marker = L.marker([area.lat, area.lng]).addTo(map)
-            .bindPopup(`
-            <div class="p-2 font-sans min-w-[180px] max-w-[240px]">
-              <div class="flex items-center justify-between mb-2">
-                 <b class="text-slate-900 text-sm leading-tight">${escapeMapText(area.name)}</b>
-                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen===true?'bg-emerald-100 text-emerald-700':isOpen===false?'bg-rose-100 text-rose-700':'bg-slate-100 text-slate-600'}">
-                    ${isOpen===true?'Open':isOpen===false?'Gesloten':'Uren onbekend'}
-                 </span>
-              </div>
-              <p class="text-slate-500 text-xs mb-2">${escapeMapText(area.address)}</p>
-              ${area.description ? `<p class="text-slate-400 text-[10px] mb-2 leading-relaxed">${escapeMapText(area.description)}</p>` : ''}
-              <div class="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold border-t pt-2 border-slate-100">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                ${zoneAvailability(area).label}
-              </div>
-            </div>
-          `);
+            .bindPopup(getAreaPopup(area));
           markers.push(marker);
         });
 
@@ -192,20 +150,8 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
           radius: 12
         }).addTo(map).bindPopup(`<b class="font-sans">${city.name} Centrum</b>`);
 
-        const isOpen = isAreaOpen(nearestInfo.area);
         const nearestMarker = L.marker([nearestInfo.area.lat, nearestInfo.area.lng]).addTo(map)
-          .bindPopup(`
-             <div class="p-2 font-sans min-w-[160px]">
-              <span class="text-[10px] uppercase font-black text-sky-600 block mb-1">Dichtstbijzijnde</span>
-              <div class="flex items-center justify-between mb-2">
-                 <b class="text-slate-900 text-sm leading-tight">${escapeMapText(nearestInfo.area.name)}</b>
-                 <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${isOpen===true?'bg-emerald-100 text-emerald-700':isOpen===false?'bg-rose-100 text-rose-700':'bg-slate-100 text-slate-600'}">
-                    ${isOpen===true?'Open':isOpen===false?'Gesloten':'Uren onbekend'}
-                 </span>
-              </div>
-              <p class="text-slate-500 text-xs">${escapeMapText(nearestInfo.area.address)}</p>
-            </div>
-          `);
+          .bindPopup(getAreaPopup(nearestInfo.area, true));
 
         const group = L.featureGroup([currentMarker, nearestMarker]);
         map.fitBounds(group.getBounds().pad(0.5));
@@ -240,26 +186,37 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
               <>
                 <div className="space-y-4">
                   {OFF_LEASH_AREAS.filter(area => area.city === city.slug).map((area) => {
-                    const isOpen = isAreaOpen(area);
+                    const image = getAreaImage(area);
                     return (
                       <button
                         key={area.slug}
                         onClick={() => {
                           navigate(getOffLeashAreaPath(area.slug));
                         }}
-                        className={`bg-white p-5 md:p-6 rounded-2xl border transition-all hover:shadow-md group flex items-start gap-4 cursor-pointer w-full text-left ${isOpen ? 'border-slate-200 hover:border-emerald-300' : 'border-slate-100 opacity-80'}`}
+                        className="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 transition-all hover:shadow-md hover:border-emerald-300 group flex items-start gap-4 cursor-pointer w-full text-left"
                       >
-                        <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner ${isOpen===true?'bg-emerald-50 text-emerald-600':isOpen===false?'bg-rose-50 text-rose-400':'bg-slate-50 text-slate-400'}`}>
-                          <MapPin size={24} />
-                        </div>
-                        <div className="flex-grow">
-                          <div className="flex items-center gap-2 mb-1">
+                        {image ? (
+                          <img
+                            src={image}
+                            alt={area.name}
+                            width={80}
+                            height={80}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-16 w-16 md:h-20 md:w-20 rounded-xl object-cover shrink-0"
+                            style={{ objectPosition: area.imagePosition || 'center' }}
+                          />
+                        ) : (
+                          <div className="h-16 w-16 md:h-20 md:w-20 rounded-xl flex items-center justify-center shrink-0 shadow-inner bg-emerald-50 text-emerald-600">
+                            <MapPin size={24} />
+                          </div>
+                        )}
+                        <div className="flex-grow min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 mb-1">
                             <h3 className="text-lg font-black text-slate-900 leading-tight">{area.name}</h3>
-                            {isOpen===true ? (
-                              <span className="bg-emerald-100 text-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Open</span>
-                            ) : isOpen===false ? (
-                              <span className="bg-rose-100 text-rose-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Gesloten</span>
-                            ) : <span className="bg-slate-100 text-slate-600 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Uren onbekend</span>}
+                            {area.operationalStatus === 'temporarily_closed' && (
+                              <span className="bg-rose-100 text-rose-700 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">Tijdelijk gesloten</span>
+                            )}
                           </div>
                           <p className="text-slate-500 font-medium mb-2 text-xs md:text-sm flex items-center gap-1.5">
                             {area.address}
@@ -267,12 +224,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                           {area.description && (
                             <p className="text-slate-400 text-xs mb-3 leading-relaxed">{area.description}</p>
                           )}
-                          <div className="flex items-center gap-4">
-                            {area.openingHours && (area.access === 'hours' || !area.access) && (
-                              <div className="flex items-center gap-1.5 text-slate-400 font-bold text-[10px] uppercase">
-                                <Clock size={12} /> {area.openingHours.open} - {area.openingHours.close}
-                              </div>
-                            )}
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                             <div className="inline-flex items-center gap-1.5 text-sky-600 font-bold text-xs">
                               Bekijk details →
                             </div>
@@ -314,9 +266,22 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                   <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left">
                     <span className="text-[10px] uppercase font-black tracking-widest text-sky-600 mb-2 block">Dichtstbijzijnde optie</span>
                     <div className="flex items-center gap-3">
-                      <div className="bg-white p-2 rounded-lg shadow-sm border border-slate-200 text-slate-400">
-                        <Navigation size={20} />
-                      </div>
+                      {getAreaImage(nearestInfo.area) ? (
+                        <img
+                          src={getAreaImage(nearestInfo.area)}
+                          alt={nearestInfo.area.name}
+                          width={56}
+                          height={56}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-14 w-14 rounded-lg object-cover shrink-0"
+                          style={{ objectPosition: nearestInfo.area.imagePosition || 'center' }}
+                        />
+                      ) : (
+                        <div className="bg-white p-2 rounded-lg shadow-sm border border-slate-200 text-slate-400">
+                          <Navigation size={20} />
+                        </div>
+                      )}
                       <div className="overflow-hidden">
                         <h4 className="font-bold text-slate-900 text-sm truncate">{nearestInfo.area.name}</h4>
                         <p className="text-slate-500 text-[11px] font-medium">{nearestInfo.city.name} ({nearestInfo.distanceLabel})</p>
@@ -348,17 +313,7 @@ const OffLeashAreas: React.FC<OffLeashAreasProps> = ({ city }) => {
                 Pinch om te zoomen
               </div>
             </div>
-            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-[20] flex flex-col gap-1.5 sm:gap-2">
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-emerald-100 shadow-lg shadow-emerald-500/10">
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 ring-2 ring-emerald-400/30"></div>
-                <span className="text-[9px] sm:text-[10px] font-black uppercase text-emerald-700">Nu open</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-rose-100 shadow-lg shadow-rose-500/10">
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-br from-rose-400 to-rose-600"></div>
-                <span className="text-[9px] sm:text-[10px] font-black uppercase text-rose-700">Gesloten</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-slate-100 shadow-lg"><span className="h-2 w-2 rounded-full bg-slate-400"/><span className="text-[9px] sm:text-[10px] font-black uppercase text-slate-500">Uren onbekend</span></div>
-            </div>
+
           </div>
         </div>
       </div>
