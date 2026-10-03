@@ -13,6 +13,8 @@ import type { SearchResult } from '../utils/search.ts';
 import { findNearestCity } from '../utils/geo.ts';
 import { evaluateCityRuleStatus } from '../utils/rules.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import { HOME_FAQ } from '../data/homeFaq.ts';
+import { useRuleClock } from '../utils/useRuleClock.ts';
 import NotificationOptIn from '../components/NotificationOptIn.tsx';
 
 // Kustlijn volgorde NO → ZW
@@ -69,18 +71,19 @@ const getResponsiveSrcSet = (image: string): string | undefined => {
 };
 
 const STATUS_BADGE_CONFIG = {
+  INFO: { label: 'Bekijk zonevoorwaarden', icon: AlertCircle, containerClass: 'bg-slate-600/90 text-white ring-slate-200/80' },
   JA: {
-    label: 'Toegelaten',
+    label: 'Nu toegelaten',
     icon: CheckCircle2,
     containerClass: 'bg-emerald-500/90 text-white ring-emerald-200/80'
   },
   DEELS: {
-    label: 'Beperkt',
+    label: 'Nu beperkt',
     icon: AlertCircle,
     containerClass: 'bg-amber-500/90 text-white ring-amber-200/80'
   },
   NEE: {
-    label: 'Verboden',
+    label: 'Nu verboden',
     icon: X,
     containerClass: 'bg-rose-600/90 text-white ring-rose-200/80'
   }
@@ -90,6 +93,7 @@ const STATUS_BADGE_CONFIG = {
 // Op desktop hover: hovered kaart groeit vloeiend, andere krimpt
 const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems: boolean, rowIndex: number }> = ({ cities, defaultFlexes, isThreeItems, rowIndex }) => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const now = useRuleClock();
 
   // Zorg dat ze op mobiel stacken (flex-col), en op tablet/desktop naast elkaar (flex-row)
   // Voor 3 items gebruiken we lg:flex-row zodat ze niet te smal worden op tablet
@@ -112,8 +116,8 @@ const HoverRow: React.FC<{ cities: City[], defaultFlexes: number[], isThreeItems
         const isFeatured = activeFlex >= 3;
 
         const srcSet = getResponsiveSrcSet(city.image);
-        const status = evaluateCityRuleStatus(city).status;
-        const badge = STATUS_BADGE_CONFIG[status];
+        const status = now ? evaluateCityRuleStatus(city, now).status : null;
+        const badge = status ? STATUS_BADGE_CONFIG[status] : { label: 'Bekijk strandregels', icon: AlertCircle, containerClass: 'bg-slate-600/90 text-white ring-slate-200/80' };
         const StatusIcon = badge.icon;
 
         return (
@@ -470,7 +474,7 @@ const Home: React.FC = () => {
               e.preventDefault();
               document.getElementById('steden')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            aria-label="Bekijk de actuele strandregels per kustgemeente vanaf 16 september"
+            aria-label="Bekijk de strandregels per kustgemeente"
             className="group relative block overflow-hidden rounded-[2rem] border border-sky-200/80 bg-gradient-to-br from-sky-50/90 via-white to-amber-50/70 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.25)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.35)]"
           >
             {/* Animated atmospheric glow */}
@@ -499,18 +503,18 @@ const Home: React.FC = () => {
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300/80 bg-white/90 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-emerald-700 shadow-sm backdrop-blur">
                     <PawPrint size={13} className="text-emerald-600" />
-                    Goed nieuws
+                    Voor je vertrekt
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/80 bg-white/90 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-sky-700 shadow-sm backdrop-blur">
                     <Calendar size={13} className="text-sky-500" />
-                    Vanaf 16 september
+                    Per gemeente
                   </span>
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl lg:text-[2.1rem] font-black leading-tight tracking-tight text-slate-900">
-                  Het strand is weer{' '}
+                  Strandwandeling gepland?{' '}
                   <span className="relative inline-block text-sky-600">
-                    van ons!
+                    Check de regels.
                     <svg
                       className="pointer-events-none absolute -bottom-1 left-0 h-2 w-full text-sky-400/60"
                       viewBox="0 0 100 8"
@@ -523,7 +527,7 @@ const Home: React.FC = () => {
                 </h2>
 
                 <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-700">
-                  Het officiële badseizoen loopt ten einde! Vanaf 16 september versoepelen de regels in de meeste badsteden en zijn honden weer de hele dag welkom op het strand. Tijd voor lange wandelingen, pootjebaden en samen lekker uitwaaien aan zee.
+                  Elke gemeente heeft eigen strandregels. Controleer de periode, de uren en de zonegrenzen van je bestemming. Ook wanneer je hond welkom is, kan een leiband verplicht blijven.
                 </p>
 
                 <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
@@ -552,6 +556,7 @@ const Home: React.FC = () => {
                 </h2>
                 <div className="hidden sm:block text-sm font-bold text-slate-500 uppercase tracking-widest">Totaal: {sortedCities.length} badsteden</div>
               </div>
+              <p className="mb-6 text-sm leading-relaxed text-slate-600">De kleuren tonen de strandtoegang nu, op dit uur in België. Toegelaten betekent niet automatisch loslopen. Kies je bestemming voor de zones en leibandregels, of plan je bezoek met een andere datum. Als de regels die dag veranderen, zie je de uren bij de betrokken zone.</p>
               <div className="flex flex-col">
                 {fullViewRows.map((row, index) => <HoverRow key={index} cities={row.cities} defaultFlexes={row.flexes} isThreeItems={row.flexes.length === 3} rowIndex={index} />)}
               </div>
@@ -640,36 +645,7 @@ const Home: React.FC = () => {
           </h2>
           <p className="text-slate-500 text-center text-sm sm:text-base mb-10">Concrete antwoorden — gebaseerd op de regels per kustgemeente</p>
           <div className="space-y-3">
-            {[
-              {
-                q: 'Wanneer mogen honden op het strand? Wat zijn de exacte data?',
-                a: 'De winterregeling (honden wél toegelaten op het strand) loopt in de meeste kustgemeenten van 1 of 16 oktober tot 14 of 31 maart. In de zomer zijn honden verboden op bewaakte stranden, meestal van 10:00 tot 20:00. Maar: er zijn uitzonderingen. Blankenberge heeft Zone West waar honden het héle jaar welkom zijn, ook in de zomer. De Haan staat honden toe op de onbewaakte stranden, 365 dagen per jaar. Knokke-Heist heeft een 24/7 losloopzone aan het Zwin. Bekijk op onze stadspagina\'s de exacte regels voor jouw bestemming — ze verschillen écht per gemeente.'
-              },
-              {
-                q: 'Hoeveel losloopzones zijn er aan de kust en waar vind ik ze?',
-                a: 'We hebben 28 losloopzones en hondenweides in kaart gebracht, verspreid over de hele kustlijn. Oostende springt eruit met 8 zones, waaronder het Schorrepark (5 sterren — met vijvers, bunkers en heuvels) en het Hondenbos van 3,5 hectare. De Haan en Wenduine hebben samen 5 zones, waarvan de Duinbossen-zone van 1,2 hectare de meest geliefde is. Elke zone op onze website bevat GPS-coördinaten, een beoordeling, parkeertips en of het terrein omheind is.'
-              },
-              {
-                q: 'Waar vind ik een dierenarts aan de kust — ook in het weekend of bij nood?',
-                a: 'We lijsten 14 dierenartspraktijken aan de volledige Belgische kust, van Knokke tot De Panne. Voor spoedgevallen buiten de openingsuren: AniCura in Oudenburg is elke dag open van 7:30 tot 21:00 en behandelt spoedgevallen. Tijdens kantooruren kun je bij o.a. Dierenarts Frederik Galle (Oostende), De Praktijk 227 (Blankenberge) of Dierenarts Elise Buyse (Nieuwpoort) terecht. Het volledige overzicht met telefoonnummers en specialisaties vind je op onze dienstenpagina.'
-              },
-              {
-                q: 'Welke hondvriendelijke restaurants en cafés moet ik kennen?',
-                a: 'We hebben 50+ hondvriendelijke horecazaken gecheckt langs de kust. Een paar opvallende: Siesta Bar in Knokke heeft een speciaal hondenmenu inclusief "hondenbier". Lakaiann in Blankenberge is een unieke koffiebar met kristalwinkel waar je hond een waterbak en snacks krijgt. De Frietboetiek in Middelkerke legt een dekentje op de bank voor je hond. En Madam Caravan in Middelkerke won een award in 2024 en serveert alles homemade, ook op het terras met je viervoeter erbij. Bekijk alle hotspots per badstad.'
-              },
-              {
-                q: 'Zijn er hondenevenementen aan de Belgische kust?',
-                a: 'Ja, jaarlijks worden er meerdere grote hondenfestivals georganiseerd. Het Kwispelfestival in De Panne (17 mei 2026) is gratis en biedt kustwandelingen, workshops en professionele hondenfotografie. Het Groot Oostends Hondenfestival (23-24 mei 2026) vindt plaats op een terrein van 12.000 m² met losloopzone, demonstraties en gratis parking. En de Grote Hondenwandeling Bredene (24 mei 2026) gaat door de duinen en over het strand, voor €5 deelname. Alle details vind je op onze agendapagina.'
-              },
-              {
-                q: 'Wat is het verschil tussen de zomer- en winterregeling per gemeente?',
-                a: 'Het verschil is groot. In de winter (grofweg oktober–maart) mogen honden in bijna alle kustgemeenten vrij op het strand, vaak zelfs los. In de zomer (april–september) gelden er strikte tijdsvensters: op bewaakte stranden zijn honden doorgaans verboden tussen 10:00 en 20:00. Buiten die uren mag het in sommige gemeentes wél, maar aan de leiband. Belangrijk: elke gemeente hanteert andere data. Bredene laat ze los in de winter op strand én duinen. Knokke-Heist is juist het strengst met boetes tot €350. Wij tonen de exacte regels per stad zodat je niet voor verrassingen staat.'
-              },
-              {
-                q: 'Kan ik mijn hondvriendelijke zaak aanmelden op hondaanzee.be?',
-                a: 'Absoluut — en het is gratis. Vandaag staan er al 132 hondvriendelijke horeca-, verblijf- en winkelzaken én 24 dienstverleners (dierenartsen en dierenspeciaalzaken) op de gids, verspreid over alle 11 kustgemeenten van De Panne tot Knokke-Heist. 54 daarvan dragen het Aanrader-label en 72 zaken hebben de officiële HondAanZee-sticker aan hun deur. Heb je een café, restaurant, hotel, vakantiewoning, winkel of dienst waar honden écht welkom zijn? Meld je aan via /zaak-aanmelden — we checken elke aanmelding persoonlijk, schrijven een eerlijke beschrijving en zorgen voor je eigen detailpagina met foto en route, volledig gratis.'
-              }
-            ].map(({ q, a }, i) => {
+            {HOME_FAQ.map(({ q, a }, i) => {
               const isOpen = openFaq === i;
               return (
                 <div key={q} className="relative">

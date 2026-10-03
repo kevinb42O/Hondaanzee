@@ -1,3 +1,5 @@
+import { SEAL_CONTACTS, SEAL_GUIDANCE } from '../data/beachSafety.ts';
+import { DUNE_GUIDANCE, PENALTY_GUIDANCE } from '../data/beachRules.ts';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -51,7 +53,7 @@ const GoedOmTeWeten: React.FC = () => {
           "name": "Mag ik een zeehond op het strand benaderen met mijn hond?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nee, houd altijd minstens 30 meter afstand en neem je hond onmiddellijk aan de lijn. Zeehonden die op het strand liggen zijn meestal niet in nood, maar rusten uit. Een hond kan extreme stress veroorzaken bij een zeehond. Meld gewonde zeehonden op 0800 99 899."
+            "text": SEAL_GUIDANCE
           }
         },
         {
@@ -67,7 +69,7 @@ const GoedOmTeWeten: React.FC = () => {
           "name": "Waarom mogen honden niet los in de duinen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "De duinen zijn beschermd natuurgebied. Loslopende honden verstoren broedende vogels (strandplevieren, dwergsternen), beschadigen kwetsbaar helmgras dat erosie tegengaat, en kunnen nesten van grondbroeders vertrappen. Honden moeten in duingebieden altijd aan de lijn."
+            "text": DUNE_GUIDANCE
           }
         },
         {
@@ -75,7 +77,7 @@ const GoedOmTeWeten: React.FC = () => {
           "name": "Hoe hoog zijn de boetes voor hondenpoep niet opruimen op het strand?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In de Belgische kustgemeenten riskeer je een GAS-boete (Gemeentelijke Administratieve Sanctie) van €75 tot €350, afhankelijk van de gemeente. Gemeentelijke vaststellers controleren actief, ook in de winter."
+            "text": PENALTY_GUIDANCE
           }
         },
         {
@@ -131,7 +133,7 @@ const GoedOmTeWeten: React.FC = () => {
           "name": "Hoe hoog zijn de boetes als mijn hond losloopt waar het niet mag?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Via GAS-boetes riskeer je €50 tot €350 afhankelijk van de gemeente. Hond op strand in verboden zone, loslopend op de zeedijk, of hondenpoep niet opruimen wordt actief gecontroleerd. In natuurgebieden kan het ANB boetes tot meer dan €500 opleggen."
+            "text": PENALTY_GUIDANCE
           }
         }
       ]
@@ -392,7 +394,7 @@ const GoedOmTeWeten: React.FC = () => {
           />
           <FAQItem
             question="Mag ik een zeehond op het strand benaderen met mijn hond?"
-            answer="Nee, houd altijd minstens 30 meter afstand en neem je hond onmiddellijk aan de lijn. Zeehonden die op het strand liggen rusten meestal gewoon uit of ruien. Een hond kan extreme stress veroorzaken bij de zeehond. Meld gewonde zeehonden op 0800 99 899 (Sea Life Blankenberge) of 059 34 21 41 (KBIN). Raak het dier nooit zelf aan."
+            answer={SEAL_GUIDANCE}
           />
           <FAQItem
             question="Wat als mijn hond te veel zeewater drinkt?"
@@ -400,15 +402,15 @@ const GoedOmTeWeten: React.FC = () => {
           />
           <FAQItem
             question="Waarom mogen honden niet los in de duinen?"
-            answer="De duinen zijn beschermd natuurgebied. Loslopende honden verstoren broedende grondvogels (strandplevier, dwergsternen), beschadigen kwetsbaar helmgras dat erosie tegengaat, en kunnen nesten vertrappen. Slechts 3,3% van de oorspronkelijke Belgische kustduinen is nog intact. Wandelen met je hond aan de lijn (max. 2 meter) op aangeduide paden is wél toegestaan."
+            answer={DUNE_GUIDANCE}
           />
           <FAQItem
             question="Hoe hoog zijn de boetes voor hondenpoep niet opruimen?"
-            answer="In de Belgische kustgemeenten riskeer je een GAS-boete (Gemeentelijke Administratieve Sanctie) van €75 tot €350, afhankelijk van de gemeente. Gemeentelijke vaststellers controleren actief, ook in de winter. Neem altijd meerdere zakjes mee en bevestig een houder aan de leiband."
+            answer={PENALTY_GUIDANCE}
           />
           <FAQItem
             question="Hoe test ik of het zand te heet is voor mijn hond?"
-            answer="Gebruik de 5-seconden regel: leg de rug van je hand op het zand of asfalt. Kun je dit 5 seconden volhouden? Dan is het veilig. Is het te heet voor jouw hand, dan is het te heet voor de poten van je hond. Wandel in de zomer bij voorkeur vóór 10u of na 18u, en loop via het natte zand aan de waterlijn."
+            answer="Gebruik de 5-seconden regel: leg de rug van je hand op het zand of asfalt. Kun je dit 5 seconden volhouden? Dan is het veilig. Is het te heet voor jouw hand, dan is het te heet voor de poten van je hond. Kies een koel moment binnen de toegelaten uren van de strandzone. De waterlijn is niet overal toegankelijk voor honden."
           />
           <FAQItem
             question="Wat is het 'Take 3 for the Sea' principe?"
@@ -436,7 +438,7 @@ const GoedOmTeWeten: React.FC = () => {
           />
           <FAQItem
             question="Hoe hoog zijn de boetes als mijn hond loslopen waar het niet mag?"
-            answer="Via GAS-boetes (Gemeentelijke Administratieve Sancties) riskeer je €50 tot €350, afhankelijk van de gemeente en het type overtreding. Hond op strand in verboden zone, loslopend op de zeedijk, of hondenpoep niet opruimen — het wordt allemaal actief gecontroleerd. In natuurgebieden (duinen, bossen) kan het Agentschap voor Natuur en Bos boetes tot meer dan €500 opleggen via het Natuurdecreet. Knokke-Heist en Oostende staan bekend als bijzonder streng."
+            answer={PENALTY_GUIDANCE}
           />
         </div>
 
@@ -484,10 +486,10 @@ const GoedOmTeWeten: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-black text-cyan-900 text-sm">Zeehondenmeldpunt</h3>
-                  <p className="text-cyan-600 text-xs">Sea Life Blankenberge</p>
+                  <p className="text-cyan-600 text-xs">{SEAL_CONTACTS.seaLife.name}</p>
                 </div>
               </div>
-              <a href="tel:080099899" className="text-2xl font-black text-cyan-700 hover:text-cyan-800 transition-colors">0800 99 899</a>
+              <a href={`tel:${SEAL_CONTACTS.seaLife.tel}`} className="text-2xl font-black text-cyan-700 hover:text-cyan-800 transition-colors">{SEAL_CONTACTS.seaLife.phone}</a><a href={SEAL_CONTACTS.seaLife.url} target="_blank" rel="noopener noreferrer" className="block text-xs underline mt-2">Bron: SEA LIFE zeehondenopvang</a>
             </div>
             <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5">
               <div className="flex items-center gap-3 mb-3">
@@ -495,11 +497,11 @@ const GoedOmTeWeten: React.FC = () => {
                   <span className="text-lg">🔬</span>
                 </div>
                 <div>
-                  <h3 className="font-black text-emerald-900 text-sm">KBIN — Natuurwetenschappen</h3>
-                  <p className="text-emerald-600 text-xs">Zeezoogdieren & stormschade</p>
+                  <h3 className="font-black text-emerald-900 text-sm">{SEAL_CONTACTS.northSealTeam.name}</h3>
+                  <p className="text-emerald-600 text-xs">Zeehond gezien op het strand?</p>
                 </div>
               </div>
-              <a href="tel:059342141" className="text-2xl font-black text-emerald-700 hover:text-emerald-800 transition-colors">059 34 21 41</a>
+              <a href={`tel:${SEAL_CONTACTS.northSealTeam.tel}`} className="text-2xl font-black text-emerald-700 hover:text-emerald-800 transition-colors">{SEAL_CONTACTS.northSealTeam.phone}</a><a href={SEAL_CONTACTS.northSealTeam.url} target="_blank" rel="noopener noreferrer" className="block text-xs underline mt-2">Bron: NorthSealTeam</a>
             </div>
           </div>
         </section>

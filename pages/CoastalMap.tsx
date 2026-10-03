@@ -114,11 +114,14 @@ const CoastalMap: React.FC = () => {
                             <ul className="text-[10px] md:text-xs text-sky-800 space-y-0.5 md:space-y-1">
                                 <li>• <strong>Klik</strong> op een gemeente voor details</li>
                                 <li>• <strong>Zoom</strong> met scroll of knoppen</li>
-                                <li>• <strong>Kleuren</strong> tonen huidige toegangssituatie</li>
+                                <li>• <strong>Kleuren</strong> tonen strandtoegang per gemeente (Belgische tijd)</li>
                             </ul>
                         </div>
                     )}
 
+                    <p className="px-3 pt-2 text-[10px] md:text-xs text-slate-600">De kleuren tonen de toegang nu, op dit uur in België. Gemeenteoverzicht, geen exacte strandzonekaart. Toegelaten betekent niet automatisch loslopen. Kies een bestemming voor zonegrenzen of plan je bezoek met een ander moment.</p>
+
+                    <p className="px-3 pt-1 text-[10px] md:text-xs text-slate-600">Grijs: bekijk de zonevoorwaarden; er is geen automatisch oordeel over de toegang.</p>
                     {/* Legend Section */}
                     <div className="p-1.5 md:p-3 flex items-center justify-between gap-1 md:gap-4">
                         <div className="flex-1 flex flex-col items-center gap-1 py-1.5 md:py-2 rounded-xl bg-emerald-50/50">
@@ -141,4 +144,3 @@ const CoastalMap: React.FC = () => {
 };
 
 export default CoastalMap;
-

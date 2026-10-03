@@ -17,41 +17,25 @@
 - [Updates](https://hondaanzee.be/updates): Changelog met alle recente wijzigingen en verbeteringen aan de website.
 - [Volledige Website Data (llms-full.txt)](https://hondaanzee.be/llms-full.txt): Een complete Markdown-export (200+ KB) met letterlijk álle inhoud: beschrijvingen van elke hotspot, exacte strandregels, details van losloopweides en de volledige tekst van alle blogartikelen. Bedoeld voor deep-dive LLM training.
 
-## Stadspagina's — Alle 11 Belgische Kuststeden
+## Kustgemeenten en strandregels
 
-- [Knokke-Heist](https://hondaanzee.be/knokke-heist): Mondaine badstad met luxe beachclubs en een unieke 24/7 losloopzone aan het Zwin. Strandregels, hondvriendelijke horeca en lokale tips.
-- [Zeebrugge](https://hondaanzee.be/zeebrugge): Breed strand met een jaarrond hondenzone richting Blankenberge. Strandregels, hondvriendelijke horeca en diensten.
-- [Blankenberge](https://hondaanzee.be/blankenberge): Bruisende badstad waar het strand ten westen van de pier 24/7 vrij is voor honden. Alle regels en hotspots.
-- [Wenduine](https://hondaanzee.be/wenduine): Charmant kustdorpje met gezellige cafés waar honden overal welkom zijn. Strandregels en lokale hotspots.
-- [De Haan](https://hondaanzee.be/de-haan): Eén van de meest hondvriendelijke badplaatsen, grote onbewaakte stranddelen altijd toegankelijk. Alle regels en tips.
-- [Bredene](https://hondaanzee.be/bredene): Enige badplaats zonder zeedijk. In winter vrij loslopen op strand én in duinen. Strandregels en losloopzones.
-- [Oostende](https://hondaanzee.be/oostende): Koningin der Badsteden met 3 jaarrond hondenzones: Oosteroever, Klein Strand en Raversijde. Complete gids.
-- [Middelkerke](https://hondaanzee.be/middelkerke): Strenge zomerregels, maar 3 uitzonderingszones (Carlton, Sportstrand, Cristal Palace) zijn jaarrond toegankelijk.
-- [Nieuwpoort](https://hondaanzee.be/nieuwpoort): Strengste regels van de kust! In zomer volledig verboden, geen uitzonderingen. Winter: strand onder voorwaarden.
-- [Koksijde](https://hondaanzee.be/koksijde): Drie jaarrond hondenzones (±3km totaal), maar altijd aan leiband (max 10m). Alle regels en kaarten.
-- [De Panne](https://hondaanzee.be/de-panne): Zone 4 (richting Frankrijk) is dé losloopzone. In winter 24/7 vrij, in zomer 's avonds en 's ochtends.
+Er is geen uniforme zomer- of winterregeling voor de Belgische kust. Toegang, uren, zonegrenzen en leibandplicht verschillen per gemeente. Bekijk vóór je vertrekt de volledige regeling en de gemeentelijke bronnen van je bestemming. Toegelaten betekent niet automatisch dat je hond los mag lopen.
 
-## Strandregels Belgische Kust — Samenvatting
+De strandgids toont standaard de actuele regels in Belgische tijd. Een gepland bezoek vraagt alleen een datum. Het dagoverzicht toont uren bij de strandzones waarvan de regels die dag veranderen.
 
-### Zomerseizoen (doorgaans 15 maart – 30 september)
+Gecontroleerd op 2026-10-03. De volledige jaarregeling en bronlinks staan op de stadspagina's en in [llms-full.txt](https://hondaanzee.be/llms-full.txt).
 
-- De meeste gemeenten verbieden honden op het strand overdag
-- Sommige gemeenten hebben uitzonderingszones waar honden wél jaarrond mogen
-- Honden moeten bijna overal aangelijnd zijn (leibandplicht)
-- Regels verschillen per gemeente — check altijd de specifieke stadspagina
-
-### Winterseizoen (doorgaans 1 oktober – 14 maart)
-
-- Honden zijn in bijna alle gemeenten welkom op het strand
-- In sommige gemeenten mogen honden in winter los lopen
-- Er gelden nog steeds opruimregels (hondenpoep)
-
-### Belangrijke basisregels (overal geldig)
-
-- Ruim ALTIJD hondenpoep op — boetes tot €350
-- Houd je hond onder controle
-- Respecteer andere strandgangers en honden
-- Zeehond gespot? Houd minstens 30m afstand, bel NorthSealTeam: 0491/74 32 78
+- [Blankenberge](https://hondaanzee.be/blankenberge): Westelijk van het Westerstaketsel mogen honden het hele jaar loslopen. Het middenstrand en het oostelijke strand hebben andere regels.
+- [Zeebrugge](https://hondaanzee.be/zeebrugge): De groene zone richting Blankenberge laat honden los toe. Van 15 maart tot en met 15 oktober gelden overdag drie verschillende strandzones.
+- [Knokke-Heist](https://hondaanzee.be/knokke-heist): Het strand ten oosten van Surfers Paradise tot de Nederlandse grens laat honden het hele jaar los toe onder toezicht. Elders geldt een seizoensgebonden dagverbod.
+- [De Haan](https://hondaanzee.be/de-haan): Onbewaakte stranddelen zijn toegankelijk; op bewaakte zones geldt van 15 juni tot en met 15 september een verbod van 10:00 tot 19:00.
+- [Wenduine](https://hondaanzee.be/wenduine): Onbewaakte stranddelen zijn toegankelijk; op bewaakte zones geldt van 15 juni tot en met 15 september een verbod van 10:00 tot 19:00.
+- [Bredene](https://hondaanzee.be/bredene): In de duinen blijft een leiband verplicht. Van 15 oktober tot en met 15 maart mogen honden op strand en in zee loslopen, behalve in de surfzone Twins.
+- [Oostende](https://hondaanzee.be/oostende): Drie strandzones zijn het hele jaar toegankelijk: Oosteroever (los), Klein Strand en Raversijde (korte leiband). Op de andere stranden wisselen de verboden uren per maand.
+- [Middelkerke - Westende](https://hondaanzee.be/middelkerke): Van 15 juni tot en met 15 september zijn honden uitsluitend in drie strandzones toegelaten. Leibandregels verschillen per zone.
+- [Nieuwpoort](https://hondaanzee.be/nieuwpoort): Van 15 juni tot en met 15 september geldt een strandverbod van 10:30 tot 18:30. Buiten die uren en buiten dat seizoen mag je hond mee aan een leiband van maximaal 10 meter.
+- [Koksijde - Oostduinkerke](https://hondaanzee.be/koksijde): Honden zijn toegelaten aan een leiband van maximaal 10 meter. Van 15 juni tot 15 september, 10:30–18:30, alleen in de drie hondenzones; anders op het hele strand. Zwemzones waar de reddingsdienst actief is, blijven verboden.
+- [De Panne](https://hondaanzee.be/de-panne): Vier strandzones met verschillende regels. Loslopen mag in zone 4 tot de slufter, in de winter op elk uur en in de zomer van 18:30 tot 10:30.
 
 ## Blog — Recente Artikelen
 
@@ -73,23 +57,29 @@
 
 ## Veelgestelde Vragen
 
-### Mag mijn hond op het strand in België?
-Ja, maar de regels verschillen per gemeente en seizoen. In het zomerseizoen (±15 maart–30 september) zijn honden op de meeste stranden overdag verboden, maar veel gemeenten hebben uitzonderingszones. In de winter zijn honden bijna overal welkom. Bekijk per stad de regels op [HondAanZee.be](https://hondaanzee.be/).
+### Wanneer mogen honden op het strand? Wat zijn de exacte data?
+Er is geen uniforme zomer- of winterregeling voor de Belgische kust. Toegang, uren, zonegrenzen en leibandplicht verschillen per gemeente. Bekijk vóór je vertrekt de volledige regeling en de gemeentelijke bronnen van je bestemming. Toegelaten betekent niet automatisch dat je hond los mag lopen.
 
-### Waar mag mijn hond los lopen aan de Belgische kust?
-Enkele gemeenten staan vrij loslopen toe: [De Panne Zone 4](https://hondaanzee.be/de-panne), [Bredene](https://hondaanzee.be/bredene) (winter), [De Haan](https://hondaanzee.be/de-haan) (onbewaakte zones) en het Zwin in [Knokke-Heist](https://hondaanzee.be/knokke-heist). In de meeste andere gemeenten geldt een leibandplicht (max 2-10m afhankelijk van de gemeente).
+### Waar mag mijn hond loslopen op het strand?
+Dat hangt af van de strandzone en de periode. Voorbeelden van permanente strandzones waar loslopen toegelaten is: westelijk van het Westerstaketsel in Blankenberge, de groene zone in Zeebrugge richting Blankenberge en het strand ten oosten van Surfers Paradise in Knokke-Heist tot de Nederlandse grens. Ook onbewaakte stranddelen in De Haan en Wenduine laten honden onder controle los toe. De toelating geldt niet automatisch in aangrenzende natuurgebieden. Bekijk de volledige gemeentelijke regeling op de stadspagina.
 
-### Wat is de boete voor hondenpoep op het strand?
-De boetes variëren per gemeente maar bedragen gemiddeld €150 tot €350. In sommige gemeenten gelden GAS-boetes. Ruim ALTIJD op.
+### Gelden de strandregels ook in de duinen?
+Een toelating op het strand geldt niet automatisch in de duinen of in een natuurreservaat. Blijf op toegankelijke, aangeduide paden, houd je hond aan de lijn en controleer plaatselijke toegangsverboden en leibandregels. Er is geen uniforme maximale leibandlengte voor alle kustduinen.
 
-### Welke kuststad is het meest hondvriendelijk?
-[De Haan](https://hondaanzee.be/de-haan), [Bredene](https://hondaanzee.be/bredene) en [De Panne](https://hondaanzee.be/de-panne) worden vaak als meest hondvriendelijk beschouwd vanwege hun ruime losloopzones en tolerante houding. [Knokke-Heist](https://hondaanzee.be/knokke-heist) biedt dan weer een unieke 24/7 zone aan het Zwin.
+### Wat is het verschil tussen de zomer- en winterregeling?
+De seizoensgrenzen verschillen: Oostende heeft een winterregeling vanaf 1 oktober, Bredene vanaf 15 oktober en Knokke-Heist en Zeebrugge vanaf 16 oktober. De Haan, Wenduine, Middelkerke, Nieuwpoort, Koksijde en De Panne wijzigen hun regeling op 16 september. Blankenberge heeft afzonderlijke periodes per zone. Ook in de winter geldt op sommige stranden een leibandplicht. Er is geen datum waarop alle stranden dezelfde regels krijgen.
 
-### Zijn er hondvriendelijke restaurants aan de Belgische kust?
-Ja, HondAanZee.be vermeldt 121 hondvriendelijke cafés, restaurants en hotels langs de volledige kust. Bekijk de lijst per stad op de [hotspotspagina](https://hondaanzee.be/hotspots).
+### Wat riskeer ik als ik de hondenregels niet naleef?
+Een overtreding van de gemeentelijke hondenregels of het niet opruimen van hondenpoep kan worden bestraft. De sanctie hangt af van het toepasselijke reglement en de overtreding; er is geen vast bedrag voor de hele kust. Neem poepzakjes mee en ruim altijd op.
 
-### Wat moet ik doen als ik een zeehond zie op het strand?
-Houd minstens 30 meter afstand, lijn je hond aan en bel het NorthSealTeam op 0491/74 32 78. Raak de zeehond niet aan, ook niet als die gewond lijkt. Lees meer op de pagina [Goed Om Te Weten](https://hondaanzee.be/goed-om-te-weten).
+### Hoeveel losloopzones en hondenweides staan er in de gids?
+De gids bevat 27 losloopzones en hondenweides. Bekijk per locatie de beschikbare informatie en controleer ter plaatse de toegangsregels.
+
+### Waar vind ik hondvriendelijke hotspots en praktische diensten?
+De gids bevat 133 hotspots en 24 praktische diensten, waaronder dierenartsen en dierenspeciaalzaken. Je vindt adressen en beschikbare contactgegevens op de detailpagina’s. Bel een dierenarts vooraf om de beschikbaarheid bij een spoedgeval te bevestigen.
+
+### Kan ik mijn hondvriendelijke zaak aanmelden?
+Ja, aanmelden voor een vermelding op HondAanZee.be is gratis. Bekijk de voorwaarden en meld je zaak aan via de pagina Zaak aanmelden.
 
 ## Overige Pagina's
 

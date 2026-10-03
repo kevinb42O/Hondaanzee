@@ -1,3 +1,5 @@
+import { SEAL_CONTACTS } from './beachSafety.ts';
+import { BEACH_ACCESS_GUIDANCE } from './beachRules.ts';
 export interface BlogPost {
   slug: string;
   title: string;
@@ -298,7 +300,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          '☀️ Kies het juiste moment. Kom in de vroege voormiddag (vóór 10u) of in de late namiddag (na 18u) naar het strand, wanneer zon en zand een stuk milder zijn.',
+          '☀️ Kies het juiste moment. Kies een koel moment en controleer de toegelaten uren van de strandzone. Een vroege of late wandeling is niet automatisch overal toegestaan.',
           '⛱️ Zorg voor je eigen schaduw. Breng altijd een parasol, een goed ventilerend strandtentje of een SPF-doek mee waar je hond onder kan liggen.',
           '💧 Neem véél vers drinkwater mee. Voorzie minstens 1,5 liter per hond, een handig opvouwbaar bakje, en bied elke 15 à 20 minuten fris water aan.',
           '🧊 Voorzie veilige afkoeling. Een koelmat, een nat T-shirt over de rug, of een frisse (zoetwater) douche op buik, liezen en pootjes doet wonderen.',
@@ -395,7 +397,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Niet elk strand of elke wandelplek is in de zomer even geschikt voor je hond. In de zomermaanden zijn honden bovendien op de meeste bewaakte stranden verboden tussen 10u en 20u — net tijdens de heetste uren. Wij raden aan om in juli en augustus uit te wijken naar plekken met schaduw, water en een lossere reglementering.',
+        text: BEACH_ACCESS_GUIDANCE,
         links: [
           { text: 'losloopzones aan de Belgische kust', url: '/losloopzones' },
           { text: 'hondvriendelijke zaken', url: '/hotspots' }
@@ -405,7 +407,7 @@ export const blogPosts: BlogPost[] = [
         type: 'list',
         items: [
           '🌳 Kies een losloopzone met schaduw en bomen, zoals het Hondenbos in Oostende of de Duinbossen in Wenduine. Bekijk alle losloopzones aan de Belgische kust voor een volledig overzicht.',
-          '🏖️ Op een hondenstrand? Ga vóór 10u of na 19u, en blijf dicht bij de waterlijn waar het zand vochtig en koel is.',
+          '🏖️ Op een hondenstrand? Kies een koel moment binnen de toegelaten uren van je strandzone. Blijf alleen bij de waterlijn waar honden daar ook toegelaten zijn.',
           '🍦 Kies hondvriendelijke terrasjes met schaduw, waterbakjes en koeling. Veel zaken aan de kust hebben een speciale plek voor honden — handig voor een tussenstop.',
           '🐕 Plan een korte stop bij een dierenarts in de buurt als je een dagje weggaat. Bekijk vooraf de lijst met kustdierenartsen zodat je weet waar je terecht kan in geval van nood.'
         ]
@@ -817,8 +819,8 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'list',
         items: [
-          'Bel het NorthSealTeam: +32 491 74 32 78 (ook via WhatsApp)',
-          'Of bel SEA LIFE Blankenberge: 050/42 43 00 (voor opvang van zeehonden)',
+          `Bel ${SEAL_CONTACTS.northSealTeam.name}: ${SEAL_CONTACTS.northSealTeam.phone} (ook via WhatsApp)`,
+          `Of bel ${SEAL_CONTACTS.seaLife.name}: ${SEAL_CONTACTS.seaLife.phone} (voor opvang van zeehonden)`,
           'Of bel het KBIN/OD Natuur in Oostende: 059/70 01 31 (voor dode of hulpeloze dolfijnen en bruinvissen)',
           'Bel eventueel de lokale politie of brandweer',
           'Raak het dier NIET aan — zeehonden kunnen bijten en bacteriën overdragen',

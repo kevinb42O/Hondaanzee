@@ -43,10 +43,12 @@ const loadTsModule = (relativePath) => {
     require: (specifier) => {
       if (specifier.endsWith('/placeFields.ts')) return loadTsModule('supabase/functions/_shared/placeFields.ts');
       if(specifier === './dashboardCatalog.json') return {default:JSON.parse(fs.readFileSync(path.join(ROOT_DIR,'data/dashboardCatalog.json'),'utf8'))};
+      if (specifier.startsWith('.') && specifier.endsWith('.ts')) return loadTsModule(path.relative(ROOT_DIR, path.resolve(path.dirname(absolutePath), specifier)));
       throw new Error(`Unexpected runtime import while loading ${relativePath}`);
     },
     __dirname: path.dirname(absolutePath),
     __filename: absolutePath,
+    Intl,
     console,
     process,
   };

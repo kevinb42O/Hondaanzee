@@ -1,40 +1,13 @@
 import { HOTSPOTS, OFF_LEASH_AREAS, SERVICES } from '../constants.ts';
 import type { City } from '../types.ts';
-import { evaluateCityRuleStatus } from './rules.ts';
+import { getAnnualBeachRuleText } from './rules.ts';
 
 export interface CityFAQEntry {
   question: string;
   answer: string;
 }
 
-const MONTHS_NL = [
-  'januari',
-  'februari',
-  'maart',
-  'april',
-  'mei',
-  'juni',
-  'juli',
-  'augustus',
-  'september',
-  'oktober',
-  'november',
-  'december'
-];
-
 const cleanText = (value: string): string => value.replace(/\s+/g, ' ').trim();
-
-const formatMmDdToDutch = (mmdd: string): string => {
-  const [monthRaw, dayRaw] = mmdd.split('-');
-  const month = Number(monthRaw);
-  const day = Number(dayRaw);
-
-  if (!month || !day || month < 1 || month > 12 || day < 1 || day > 31) {
-    return mmdd;
-  }
-
-  return `${day} ${MONTHS_NL[month - 1]}`;
-};
 
 const buildServicesBreakdown = (citySlug: string, cityName: string): string => {
   const cityServices = SERVICES.filter(service => service.city === citySlug);
@@ -87,15 +60,14 @@ const buildFavoriteSpotAnswer = (city: City): string | null => {
 };
 
 export const buildCityFAQEntries = (city: City): CityFAQEntry[] => {
-  const nowStatus = evaluateCityRuleStatus(city);
   const cityHotspotsCount = HOTSPOTS.filter(spot => spot.city === city.slug).length;
   const cityOffLeashCount = OFF_LEASH_AREAS.filter(area => area.city === city.slug).length;
   const favoriteSpotAnswer = buildFavoriteSpotAnswer(city);
 
   const entries: CityFAQEntry[] = [
     {
-      question: `Wat is de actuele strandstatus voor honden in ${city.name}?`,
-      answer: cleanText(`Op dit moment is de status ${nowStatus.status}. ${nowStatus.label}. ${nowStatus.rule}`)
+      question: `Welke strandregels gelden voor honden in ${city.name}?`,
+      answer: cleanText(getAnnualBeachRuleText(city.rules))
     },
     {
       question: `Hoeveel losloopzones staan er in ${city.name} op HondAanZee?`,
@@ -106,38 +78,15 @@ export const buildCityFAQEntries = (city: City): CityFAQEntry[] => {
       answer: `Voor ${city.name} tonen we momenteel ${cityHotspotsCount} hondvriendelijke hotspots op deze pagina.`
     },
     {
-      question: `Welke winterregel tonen jullie voor ${city.name}?`,
-      answer: cleanText(city.rules.winter.rule)
-    },
-    {
       question: `Zijn er praktische diensten zoals dierenartsen of dierenspeciaalzaken in ${city.name}?`,
       answer: buildServicesBreakdown(city.slug, city.name)
     }
   ];
 
-  if (city.rules.summer) {
-    const timeRange = city.rules.summer.startTime && city.rules.summer.endTime
-      ? ` met uurschijf ${city.rules.summer.startTime}-${city.rules.summer.endTime}`
-      : '';
-    entries.push({
-      question: `Wat is de zomerperiode in ${city.name} volgens jullie gegevens?`,
-      answer: `Volgens de info op deze pagina loopt de zomerperiode van ${formatMmDdToDutch(city.rules.summer.start)} tot ${formatMmDdToDutch(city.rules.summer.end)}${timeRange}.`
-    });
-  }
-
-  if (city.rules.special) {
-    entries.push({
-      question: `Welke extra opmerking geldt voor ${city.name}?`,
-      answer: cleanText(city.rules.special)
-    });
-  }
-
-  if (city.rules.note) {
-    entries.push({
-      question: `Welke bijkomende nota tonen jullie voor ${city.name}?`,
-      answer: cleanText(city.rules.note)
-    });
-  }
+  entries.push({
+    question: `Welke bronnen gebruiken jullie voor de strandregels in ${city.name}?`,
+    answer: `Gecontroleerd op ${city.rules.lastVerifiedAt}. ${(city.rules.sources ?? []).map(source => source.title).join('. ')} Volg de plaatselijke afbakening en tijdelijke maatregelen.`,
+  });
 
   if (favoriteSpotAnswer) {
     entries.push({

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:no-prerender && node scripts/render-places.mjs && node scripts/verify-place-pages.cjs",
+    "build": "npm run build:no-prerender && node scripts/render-places.mjs && node scripts/verify-place-pages.cjs && node scripts/verify-beach-pages.cjs",
     "build:prerender": "npm run build && node prerender.cjs",
     "build:no-prerender": "npm run typecheck && node scripts/prepare-catalog.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-llms-full.cjs && node scripts/generate-og-data.cjs && vite build",
     "preview": "vite preview",
@@ -19,7 +19,8 @@
     "typecheck:web": "tsc --noEmit",
     "typecheck:edge": "node scripts/check-edge-types.mjs",
     "test:public": "node scripts/check-public-browser.cjs",
-    "typecheck:api": "tsc --project tsconfig.api.json"
+    "typecheck:api": "tsc --project tsconfig.api.json",
+    "test:beaches": "vitest run utils/rules.test.ts && node scripts/verify-beach-pages.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.93.3",

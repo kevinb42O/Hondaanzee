@@ -26,13 +26,13 @@ const previousLastmods = new Map(
 );
 
 const STATIC_ROUTE_FILES = {
-  '/': ['pages/Home.tsx', 'components/Footer.tsx'],
+  '/': ['pages/Home.tsx', 'components/Footer.tsx', 'data/homeFaq.ts', 'data/beachRules.ts', 'data/beachSafety.ts'],
   '/hotspots': ['pages/AllHotspots.tsx', 'data/hotspots.ts'],
   '/diensten': ['pages/AllServices.tsx', 'data/services.ts'],
   '/losloopzones': ['pages/AllOffLeashAreas.tsx', 'data/offLeashAreas.ts', 'cityData.ts'],
-  '/kaart': ['pages/CoastalMap.tsx', 'cityData.ts'],
+  '/kaart': ['pages/CoastalMap.tsx', 'components/CoastalMapRenderer.tsx', 'utils/rules.ts', 'cityData.ts', 'data/beachRules.ts', 'data/beachSafety.ts'],
   '/over-ons': ['pages/About.tsx'],
-  '/goed-om-te-weten': ['pages/GoedOmTeWeten.tsx'],
+  '/goed-om-te-weten': ['pages/GoedOmTeWeten.tsx', 'components/goed-om-te-weten/EtiquetteSection.tsx', 'components/goed-om-te-weten/NatuurSection.tsx', 'data/beachRules.ts', 'data/beachSafety.ts'],
   '/steun-ons': ['pages/Support.tsx'],
   '/zaak-aanmelden': ['pages/ZaakAanmelden.tsx'],
   '/privacy': ['pages/Privacy.tsx'],
@@ -100,7 +100,7 @@ const getRouteFiles = (route) => {
   }
 
   if (/^\/[^/]+$/.test(route)) {
-    return ['pages/CityPage.tsx', 'cityData.ts', 'data/hotspots.ts', 'data/services.ts'];
+    return ['pages/CityPage.tsx', 'cityData.ts', 'data/beachRules.ts', 'components/StatusCheck.tsx', 'components/BeachRulesOverview.tsx', 'components/CityFAQ.tsx', 'utils/useRuleClock.ts', 'utils/rules.ts', 'utils/cityFaq.ts', 'data/hotspots.ts', 'data/services.ts'];
   }
 
   return [];

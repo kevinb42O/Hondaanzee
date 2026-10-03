@@ -3,6 +3,7 @@ import { Sparkles, Zap, Wrench, BookOpen, Calendar, Users, MapPin, Star, PawPrin
 import { Link } from 'react-router-dom';
 import { useSEO } from '../utils/seo.ts';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import { CITIES } from '../cityData.ts';
 import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
 
 interface UpdateTag {
@@ -50,9 +51,24 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '3.1', date: '3 oktober 2026', dateISO: '2026-10-03',
+    title: 'Strandgids: de juiste regels voor jouw moment en strandzone',
+    subtitle: 'Eerst je bezoek, dan de jaarregeling. Met zichtbare voorwaarden en gemeentelijke bronnen.',
+    entries: [
+      { text: 'Elke strandgids opent met de regels die nu gelden, berekend in Belgische tijd. Per strandzone zie je de toegangsvoorwaarde, de grens en of een leiband nodig is. Toegang en loslopen worden afzonderlijk getoond.', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Plan je bezoek met alleen een datum. Je ziet de regels voor die volledige dag; uren verschijnen alleen bij zones waarvan de toegang of leibandregel doorheen de dag verandert. Een toekomstige berekening is geen bevestiging van nieuwe of tijdelijke maatregelen.', tag: { label: 'Nieuw', color: 'cyan' } },
+      { text: 'De grote titel, gekleurde antwoordkaart en ruime vormgeving blijven behouden. De antwoordkaart zegt duidelijk ja of nee en benoemt eventuele beperkingen, in plaats van een algemeen advies om voorwaarden te controleren. De toepasbare zonevoorwaarden staan onder het antwoord, zodat de gids mooi én bruikbaar blijft.', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'De volledige jaarregeling blijft bereikbaar in een inklapbaar naslagwerk. Andere seizoenen overschaduwen het antwoord voor je bezoek niet meer. Bronlinks en de werkelijke controledatum blijven meteen zichtbaar.', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Koksijde krijgt een concreet antwoord: toegelaten aan maximaal 10 meter leiband, in de zomer overdag alleen in de drie hondenzones. Actief bewaakte zwemzones blijven verboden. Deze uitzondering staat direct in het hoofdantwoord en bij de zones.', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'De Panne: het dagoverzicht toont wanneer de leibandregel in zone 4 verandert. Het zomerverbod in zone 2 en op het Planché blijft ook ’s avonds gelden. Blankenberge: de paasvakantie en de onduidelijke overgang op 15 september krijgen expliciete zonevoorwaarden.', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'De regels voor alle 11 bestemmingen zijn op 3 oktober 2026 gecontroleerd tegen gemeentelijke informatie en politieverordeningen. Correcties betreffen onder meer Nieuwpoort, Zeebrugge, Bredene, De Haan/Wenduine en zonegrenzen in De Panne. De eerdere verificatieclaims worden door deze controle vervangen.', tag: { label: 'Opgelost', color: 'emerald' } },
+      { text: 'Kaart, strandgids, FAQ’s en de tekst voor zoekassistenten gebruiken dezelfde zonegegevens. De contactnummers voor zeehondenhulp zijn gecorrigeerd. Algemene claims over uniforme seizoenen, duinen en vaste kustbrede boetes zijn verwijderd.', tag: { label: 'Verbeterd', color: 'amber' } },
+    ],
+  },
+  {
     version: '3.0',
-    date: SITE_UPDATE_LABEL,
-    dateISO: SITE_UPDATE_DATE,
+    date: '3 oktober 2026',
+    dateISO: '2026-10-03',
     title: 'Mijn Hond aan Zee, reviews en een vernieuwde gids',
     subtitle: 'Een grote dag voor HondAanZee: bewaar je favoriete plekken, plan je uitstap en deel je ervaring. Hieronder vind je alle vernieuwingen per onderwerp.',
     entries: [],
@@ -155,9 +171,9 @@ const releases: UpdateRelease[] = [
     version: '2.7',
     date: '14 september 2026',
     title: 'Strandregels najaar 2026 en juridische verificatie',
-    subtitle: 'Alle strandregels voor de najaarsovergang van 15/16 september gecontroleerd en gecorrigeerd conform officiële politieverordeningen',
+    subtitle: 'Historische update; de onderstaande verificatieclaim is vervangen door de hercontrole van 3 oktober 2026',
     entries: [
-      { text: 'Strandregels en seizoensdatums voor alle 10 kustgemeenten geverifieerd conform de officiële gemeentelijke politiereglementen', tag: { label: 'Verbeterd', color: 'amber' } },
+      { text: 'Destijds als geverifieerd gepubliceerd; bij de hercontrole van 3 oktober 2026 zijn inhoudelijke fouten gevonden en gecorrigeerd', tag: { label: 'Verbeterd', color: 'amber' } },
       { text: 'Zomerregels voor Bredene en Nieuwpoort gecorrigeerd en najaarsregeling voor Blankenberge toegevoegd', tag: { label: 'Opgelost', color: 'emerald' } },
       { text: 'Juridische veiligheidsdisclaimer toegevoegd aan alle antwoordkaarten op de stadspagina’s', tag: { label: 'Nieuw', color: 'cyan' } },
       { text: 'Alle Google freshness-signalen en de footer bijgewerkt naar 14 september 2026', tag: { label: 'Verbeterd', color: 'amber' } },
@@ -616,7 +632,7 @@ const Updates: React.FC = () => {
               </span>
             </h1>
             <p className="mt-5 max-w-2xl text-base font-medium leading-relaxed text-slate-100 sm:text-lg md:text-xl">
-              Elke verbetering, elke nieuwe zaak en elk nieuw idee: hier houden we bij wat er groeit op HondAanZee.be. Geen codepraat, wel wat jij als bezoeker echt merkt.
+              Hier lees je de belangrijkste wijzigingen aan de gids. De nieuwste update staat bovenaan; oudere berichten beschrijven de website op dat moment.
             </p>
           </div>
         </div>
@@ -658,30 +674,12 @@ const Updates: React.FC = () => {
           <div className="inline-flex items-center justify-center p-4 bg-cyan-100 text-cyan-600 rounded-2xl mb-6 shadow-sm">
             <Sparkles size={40} strokeWidth={2} />
           </div>
-          <h2 className="text-xl font-black text-slate-900 sm:text-2xl">Een grote update op {SITE_UPDATE_LABEL}</h2>
-          <p className="mx-auto mb-6 mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
-            Gratis accounts, privéfavorieten, uitstapjes, publieke likes en sterrenreviews: ontdek wat je vanaf nu zelf kunt doen. Ook de zaakpagina’s en het beheer kregen een grondige vernieuwing.
+          <h2 className="text-xl font-black text-slate-900 sm:text-2xl">De strandgids staat centraal</h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
+            Wat geldt er voor jouw bezoek en strandzone? De nieuwste update brengt toegang, leibandregels en voorwaarden samen in één praktisch antwoord voor elk van onze {CITIES.length} bestemmingen.
           </p>
-
-          {/* Snapshot stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
-              <span className="text-3xl font-black text-cyan-600">{releases.length}</span>
-              <span className="text-xs text-slate-500 mt-1 font-medium">releases</span>
-            </div>
-            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
-              <span className="text-3xl font-black text-sky-600">10+</span>
-              <span className="text-xs text-slate-500 mt-1 font-medium">dagen verbeterd</span>
-            </div>
-            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
-              <span className="text-3xl font-black text-emerald-600">120+</span>
-              <span className="text-xs text-slate-500 mt-1 font-medium">aangesloten zaken</span>
-            </div>
-            <div className="bg-slate-50 rounded-2xl border border-slate-100 shadow-sm px-4 py-5 flex flex-col items-center">
-              <span className="text-3xl font-black text-amber-500">11</span>
-              <span className="text-xs text-slate-500 mt-1 font-medium">badsteden</span>
-            </div>
-          </div>
+          <Link to="/#steden" className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800">Kies je strandbestemming<ArrowRight size={16} aria-hidden="true" /></Link>
+          <p className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">De historiek hieronder is geen actuele strandregeling. Gebruik de gemeentegids voor je bezoek; daar staan de toepasselijke regels, officiële bronnen en laatste controledatum.</p>
         </div>
 
         {/* Legend */}

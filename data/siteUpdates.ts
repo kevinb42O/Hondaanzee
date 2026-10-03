@@ -1,12 +1,12 @@
-export const SITE_UPDATE_DATE = '2026-10-02';
-export const SITE_UPDATE_LABEL = '2 oktober 2026';
+export const SITE_UPDATE_DATE = '2026-10-03';
+export const SITE_UPDATE_LABEL = '3 oktober 2026';
 
 /** Dates of substantive page updates, independent of the build date. */
 export const PAGE_UPDATED_DATES: Record<string, string> = {
   '/': SITE_UPDATE_DATE,
-  '/hotspots': SITE_UPDATE_DATE,
-  '/diensten': SITE_UPDATE_DATE,
-  '/losloopzones': SITE_UPDATE_DATE,
+  '/hotspots': '2026-10-02',
+  '/diensten': '2026-10-02',
+  '/losloopzones': '2026-10-02',
   '/kaart': SITE_UPDATE_DATE,
   '/blankenberge': SITE_UPDATE_DATE,
   '/zeebrugge': SITE_UPDATE_DATE,
@@ -20,9 +20,11 @@ export const PAGE_UPDATED_DATES: Record<string, string> = {
   '/koksijde': SITE_UPDATE_DATE,
   '/de-panne': SITE_UPDATE_DATE,
   '/goed-om-te-weten': SITE_UPDATE_DATE,
-  '/privacy': SITE_UPDATE_DATE,
-  '/algemene-voorwaarden': SITE_UPDATE_DATE,
-  '/cookies': SITE_UPDATE_DATE,
+  '/privacy': '2026-10-02',
+  '/algemene-voorwaarden': '2026-10-02',
+  '/cookies': '2026-10-02',
+  '/blog/zeehonden-aan-de-belgische-kust': SITE_UPDATE_DATE,
+  '/blog/hond-strand-warm-weer': SITE_UPDATE_DATE,
   '/updates': SITE_UPDATE_DATE,
-  '/de-haan/hotspots/brasserie-la-potiniere': SITE_UPDATE_DATE,
+  '/de-haan/hotspots/brasserie-la-potiniere': '2026-10-02',
 };

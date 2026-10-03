@@ -8,7 +8,7 @@ interface CityFAQProps {
 }
 
 const CityFAQ: React.FC<CityFAQProps> = ({ city }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqEntries = useMemo(() => buildCityFAQEntries(city), [city]);
 
@@ -35,6 +35,7 @@ const CityFAQ: React.FC<CityFAQProps> = ({ city }) => {
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-start gap-3 sm:gap-4 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 rounded-2xl"
                   aria-expanded={isOpen}
+                  aria-controls={`city-faq-answer-${index}`}
                 >
                   <span className="text-slate-900 font-extrabold text-sm sm:text-base leading-relaxed flex-1">{entry.question}</span>
                   <ChevronDown
@@ -43,11 +44,9 @@ const CityFAQ: React.FC<CityFAQProps> = ({ city }) => {
                     aria-hidden="true"
                   />
                 </button>
-                {isOpen && (
-                  <div className="px-5 sm:px-6 pb-4 sm:pb-5 text-slate-600 font-medium text-sm sm:text-base leading-relaxed">
+                  <div id={`city-faq-answer-${index}`} hidden={!isOpen} className="px-5 sm:px-6 pb-4 sm:pb-5 text-slate-600 font-medium text-sm sm:text-base leading-relaxed">
                     {entry.answer}
                   </div>
-                )}
               </article>
             );
           })}

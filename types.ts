@@ -37,14 +37,36 @@ export interface Service extends PlaceBase {
   type: 'Dierenarts' | 'Dierenspeciaalzaak';
 }
 
-export type StatusValue = 'JA' | 'DEELS' | 'NEE';
+export type StatusValue = 'JA' | 'DEELS' | 'NEE' | 'INFO';
 
-export interface RulePeriodOverride {
+export interface BeachZoneRule {
+  id: string;
+  name: string;
+  boundary: string;
+  access: 'allowed' | 'prohibited' | 'conditional';
+  leash: 'loose' | 'leashed' | 'short' | 'max2' | 'max10' | 'unknown';
+  detail?: string;
+}
+
+export interface BeachRuleState {
+  status: StatusValue;
+  rule: string;
+  zones?: BeachZoneRule[];
+  conditions?: string[];
+  /** Known legal exclusions belong in the answer, not an unknown-access status. */
+  accessExclusions?: string[];
+}
+
+export interface RulePeriodOverride extends BeachRuleState {
   start: string; // MM-DD
   end: string;   // MM-DD
   status: StatusValue;
   rule: string;
   label?: string;
+  startTime?: string;
+  endTime?: string;
+  endInclusive?: boolean;
+  outsideHours?: BeachRuleState;
 }
 
 export interface OffLeashArea {
@@ -75,19 +97,13 @@ export interface OffLeashArea {
 }
 
 export interface CityRule {
+  summary?: string;
+  sources?: { title: string; url: string }[];
+  lastVerifiedAt?: string;
   overrides?: RulePeriodOverride[];
-  summer?: {
-    start: string; // MM-DD
-    end: string;   // MM-DD
-    startTime?: string; // HH:mm
-    endTime?: string;   // HH:mm
-    rule: string;
-    status: StatusValue;
-  };
-  winter: {
-    rule: string;
-    status: StatusValue;
-  };
+  summer?: RulePeriodOverride;
+  winter: BeachRuleState & { start?: string; end?: string; label?: string };
+  guidance?: string[];
   special?: string;
   note?: string;
 }

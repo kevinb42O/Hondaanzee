@@ -151,10 +151,10 @@ export default {
     "imageAlt": "Vrijwilligers voor het Meldpunt | HondAanZee.be"
   },
   "/updates": {
-    "title": "Updates & Nieuwigheden — laatste update 2 oktober 2026 | HondAanZee.be",
-    "description": "Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 2 oktober 2026.",
+    "title": "Updates & Nieuwigheden — laatste update 3 oktober 2026 | HondAanZee.be",
+    "description": "Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 3 oktober 2026.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
-    "imageAlt": "Updates & Nieuwigheden — laatste update 2 oktober 2026 | HondAanZee.be"
+    "imageAlt": "Updates & Nieuwigheden — laatste update 3 oktober 2026 | HondAanZee.be"
   },
   "/blankenberge": {
     "title": "Hond Strand Blankenberge 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Blankenberge",
@@ -764,7 +764,7 @@ export default {
   },
   "/zeebrugge/hotspots/club-north-by-icarus": {
     "title": "Club North by Icarus in Zeebrugge | HondAanZee.be",
-    "description": "Club North by Icarus in Zeebrugge. Dé ultieme surfclub aan de rand van de Blankenbergse duinen waar honden het hele jaar door welkom zijn – zowel op het strand als…",
+    "description": "Club North by Icarus in Zeebrugge. Dé ultieme surfclub aan de rand van de Blankenbergse duinen waar honden welkom zijn in de club. Op het aangrenzende strand…",
     "image": "https://hondaanzee.be/clubnorthicarus.webp",
     "imageAlt": "Club North by Icarus in Zeebrugge | HondAanZee.be"
   },
@@ -1004,7 +1004,7 @@ export default {
   },
   "/blankenberge/hotspots/beachclub-blankenberge": {
     "title": "Beachclub Blankenberge in Blankenberge | HondAanZee.be",
-    "description": "Beachclub Blankenberge in Blankenberge. Beachclub Blankenberge is dé perfecte stop op de Zeedijk voor hondenbaasjes! Vanaf hier tot en met Zeebrugge mogen honden…",
+    "description": "Beachclub Blankenberge in Blankenberge. Beachclub Blankenberge is dé perfecte stop op de Zeedijk voor hondenbaasjes! Voor een strandwandeling controleer je de…",
     "image": "https://hondaanzee.be/beachclub.webp",
     "imageAlt": "Beachclub Blankenberge in Blankenberge | HondAanZee.be"
   },

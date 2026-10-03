@@ -1,562 +1,158 @@
-
-import React, { useEffect, useMemo, useRef } from 'react';
-import {
-  Calendar,
-  Info,
-  MapPin,
-  CheckCircle2,
-  AlertCircle,
-  XCircle,
-  Clock,
-  ShieldCheck,
-} from 'lucide-react';
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useTransform,
-  type Variants,
-} from 'framer-motion';
-import { City } from '../types';
-import { evaluateCityRuleStatus } from '../utils/rules.ts';
+import React, { useMemo, useState } from 'react';
+import { CalendarDays, Clock, Info, MapPin, ShieldCheck, CheckCircle2, AlertCircle, XCircle, ArrowDown } from 'lucide-react';
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
+import type { BeachZoneRule, City, StatusValue } from '../types.ts';
+import { BEACH_LEASH_LABELS } from '../data/beachRules.ts';
+import { belgianDateInput, belgianTimeInput, evaluateCityRuleStatus, getBeachAnswer, getBeachDayAnswer, getBeachDayZoneVisits, getBeachRuleDay, getNextBeachRuleChange, type BeachRuleDay } from '../utils/rules.ts';
+import { useRuleClock } from '../utils/useRuleClock.ts';
+import { BeachRulesOverview, BeachRuleSources } from './BeachRulesOverview.tsx';
 import { WeatherWidget } from './WeatherWidget.tsx';
 
-interface StatusCheckProps {
-  city: City;
-}
-
-const LAST_VERIFIED_DATE = new Date('2026-09-15T00:00:00');
-
-// ── Status visual config ────────────────────────────────────────────
-type StatusKey = 'JA' | 'DEELS' | 'NEE';
-
-const STATUS_THEME: Record<StatusKey, {
-  card: string;
-  glow: string;
-  ring: string;
-  icon: React.ReactElement;
-}> = {
-  JA: {
-    card: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-    glow: 'bg-emerald-400/40',
-    ring: 'lg:hover:shadow-emerald-400/30',
-    icon: <CheckCircle2 className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16" />,
-  },
-  DEELS: {
-    card: 'text-orange-700 bg-orange-50 border-orange-200',
-    glow: 'bg-orange-400/40',
-    ring: 'lg:hover:shadow-orange-400/30',
-    icon: <AlertCircle className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16" />,
-  },
-  NEE: {
-    card: 'text-rose-700 bg-rose-50 border-rose-200',
-    glow: 'bg-rose-400/40',
-    ring: 'lg:hover:shadow-rose-400/30',
-    icon: <XCircle className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16" />,
-  },
+const dateFormat = new Intl.DateTimeFormat('nl-BE', { dateStyle: 'full', timeZone: 'Europe/Brussels' });
+const changeDateFormat = new Intl.DateTimeFormat('nl-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Brussels' });
+const ACCESS = {
+  allowed: { label: 'Toegestaan', style: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
+  prohibited: { label: 'Verboden', style: 'bg-rose-50 text-rose-800 border-rose-200' },
+  conditional: { label: 'Seizoensregeling hieronder', style: 'bg-amber-50 text-amber-900 border-amber-200' },
 };
-
-const StatusCheck: React.FC<StatusCheckProps> = ({ city }) => {
-  const prefersReducedMotion = useReducedMotion();
-
-  // ── JS-driven sticky for the desktop answer card ───────────────────
-  // We can't rely on CSS `position: sticky` because the app's html/body/#root
-  // all have `overflow-x: clip` (mobile horizontal-scroll guard) which
-  // poisons sticky's containing block in every major browser. Instead we
-  // translate the card by the scroll delta so it follows the viewport top
-  // (with a 96px header offset) and stops when its bottom hits the grid
-  // bottom. Pure transform, no layout thrash, runs in a single rAF.
-  const gridRef  = useRef<HTMLDivElement>(null);
-  const cardRef  = useRef<HTMLDivElement>(null);
-  const stickyY  = useMotionValue(0);
-  const STICKY_OFFSET = 96; // matches lg:top-24
-
-  useEffect(() => {
-    if (prefersReducedMotion) { stickyY.set(0); return; }
-    const grid = gridRef.current;
-    const card = cardRef.current;
-    if (!grid || !card) return;
-
-    let rafId = 0;
-    let enabled = false;
-
-    const isDesktop = () =>
-      typeof window !== 'undefined' &&
-      window.matchMedia('(min-width: 1024px)').matches;
-
-    const compute = () => {
-      rafId = 0;
-      if (!enabled) { stickyY.set(0); return; }
-      const gridRect = grid.getBoundingClientRect();
-      const cardH    = card.offsetHeight;
-      // How far the grid top has scrolled above the sticky line.
-      const overshoot = STICKY_OFFSET - gridRect.top;
-      if (overshoot <= 0) { stickyY.set(0); return; }
-      // Hard ceiling: card-bottom may not pass grid-bottom.
-      const maxOffset = Math.max(0, gridRect.height - cardH);
-      stickyY.set(Math.min(overshoot, maxOffset));
-    };
-
-    const onScroll = () => { if (!rafId) rafId = requestAnimationFrame(compute); };
-    const onResize = () => {
-      enabled = isDesktop();
-      if (!enabled) { stickyY.set(0); return; }
-      if (!rafId) rafId = requestAnimationFrame(compute);
-    };
-
-    onResize();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [prefersReducedMotion, stickyY]);
-
-  const statusInfo = useMemo(() => {
-    const evaluatedStatus = evaluateCityRuleStatus(city);
-    const theme = STATUS_THEME[evaluatedStatus.status as StatusKey];
-    return {
-      status: evaluatedStatus.status,
-      rule: evaluatedStatus.rule,
-      label: evaluatedStatus.label,
-      ...theme,
-    };
-  }, [city]);
-
-  const verifiedDate = new Intl.DateTimeFormat('nl-BE', { dateStyle: 'long' }).format(LAST_VERIFIED_DATE);
-  const todayLong    = new Intl.DateTimeFormat('nl-BE', { dateStyle: 'long' }).format(new Date());
-  const todayFull    = new Intl.DateTimeFormat('nl-BE', { dateStyle: 'full' }).format(new Date());
-
-  // ── Motion variants ────────────────────────────────────────────────
-  const fadeIn: Variants = {
-    hidden:  { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5 } },
-  };
-
-  const fadeUp: Variants = prefersReducedMotion
-    ? fadeIn
-    : {
-        hidden:  { opacity: 0, y: 28 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-      };
-
-  const stagger: Variants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
-  };
-
-  // Headline line mask reveal — used on desktop
-  const lineUp: Variants = prefersReducedMotion
-    ? fadeIn
-    : {
-        hidden:  { y: '110%', opacity: 0 },
-        visible: { y: '0%', opacity: 1, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
-      };
-
-  // SVG squiggle draw-on under the city name (desktop)
-  const pathDraw: Variants = prefersReducedMotion
-    ? { hidden: { pathLength: 1 }, visible: { pathLength: 1 } }
-    : {
-        hidden:  { pathLength: 0 },
-        visible: { pathLength: 1, transition: { duration: 0.9, delay: 0.55, ease: [0.65, 0, 0.35, 1] } },
-      };
-
-  // Status icon — spring entrance (desktop)
-  const iconSpring: Variants = prefersReducedMotion
-    ? fadeIn
-    : {
-        hidden:  { opacity: 0, scale: 0, rotate: -180 },
-        visible: {
-          opacity: 1, scale: 1, rotate: 0,
-          transition: { type: 'spring', stiffness: 140, damping: 12, delay: 0.35 },
-        },
-      };
-
-  // Numeral letter stagger (desktop)
-  const numeralContainer: Variants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.07, delayChildren: 0.55 } },
-  };
-
-  const letterPop: Variants = prefersReducedMotion
-    ? fadeIn
-    : {
-        hidden:  { opacity: 0, y: 30, scale: 0.6, filter: 'blur(8px)' },
-        visible: {
-          opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
-          transition: { type: 'spring', stiffness: 180, damping: 14 },
-        },
-      };
-
-  // Mobile-only simple numeral pop (kept from previous design)
-  const numeralPopMobile: Variants = prefersReducedMotion
-    ? fadeIn
-    : {
-        hidden:  { opacity: 0, scale: 0.6, y: 12, filter: 'blur(8px)' },
-        visible: {
-          opacity: 1, scale: 1, y: 0, filter: 'blur(0px)',
-          transition: { delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-        },
-      };
-
-  const cardPop: Variants = prefersReducedMotion
-    ? fadeIn
-    : {
-        hidden:  { opacity: 0, scale: 0.94, y: 32 },
-        visible: {
-          opacity: 1, scale: 1, y: 0,
-          transition: { delay: 0.1, duration: 0.85, ease: [0.22, 1, 0.36, 1] },
-        },
-      };
-
-  // ── City-name + squiggle underline helper ──────────────────────────
-  const cityNameWithUnderline = (
-    textColorClass: string,
-    underlineColorClass: string,
-    animatePath = false,
-  ) => (
-    <span className={`${textColorClass} relative inline-block whitespace-nowrap`}>
-      {city.name}
-      <svg
-        className={`absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 ${underlineColorClass}`}
-        viewBox="0 0 100 10"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        {animatePath ? (
-          <motion.path
-            d="M0 5 Q 25 0 50 5 T 100 5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="8"
-            strokeLinecap="round"
-            variants={pathDraw}
-          />
-        ) : (
-          <path
-            d="M0 5 Q 25 0 50 5 T 100 5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="8"
-            strokeLinecap="round"
-          />
-        )}
-      </svg>
-    </span>
-  );
-
-  // ── Headline line wrapper — masked slide-up ────────────────────────
-  const Line: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <span className="block overflow-hidden pb-[0.08em]">
-      <motion.span variants={lineUp} className="inline-block will-change-transform">
-        {children}
-      </motion.span>
-    </span>
-  );
-
-  // ── Reusable info cards (solid white surface in both layouts) ──────
-  const TodayCard = () => (
-    <div className="p-4 sm:p-5 md:p-6 rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-3xl border bg-white border-slate-200 shadow-sm active:bg-slate-50 transition-colors flex items-start gap-3 sm:gap-4">
-      <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl h-fit shrink-0 bg-sky-50 text-sky-600">
-        <Calendar size={18} className="sm:w-5 sm:h-5" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <h3 className="font-bold text-sm md:text-base mb-0.5 text-slate-900">Vandaag</h3>
-        <p className="text-xs sm:text-[13px] md:text-sm capitalize font-medium text-slate-500 leading-snug break-words">
-          {todayFull}
-        </p>
-      </div>
+const THEME = {
+  JA: { card: 'text-emerald-700 bg-emerald-50 border-emerald-200', glow: 'bg-emerald-400/25', Icon: CheckCircle2 },
+  DEELS: { card: 'text-orange-700 bg-orange-50 border-orange-200', glow: 'bg-orange-400/25', Icon: AlertCircle },
+  NEE: { card: 'text-rose-700 bg-rose-50 border-rose-200', glow: 'bg-rose-400/25', Icon: XCircle },
+  INFO: { card: 'text-sky-800 bg-sky-50 border-sky-200', glow: 'bg-sky-400/20', Icon: Info },
+};
+type ZoneVisit = { zone: BeachZoneRule; variants: { zone: BeachZoneRule; label?: string }[] };
+// If the complete beach has one identical rule, named summer subdivisions add
+// no information to this visit. Keep them in the annual reference instead.
+const compactZones = (zones: BeachZoneRule[]): BeachZoneRule[] => {
+  const first = zones[0];
+  if (first && zones.length > 1 && zones.some(zone => zone.id === 'other') && zones.every(zone => zone.access === 'allowed' && zone.leash === first.leash && zone.detail === first.detail)) {
+    return [{ ...first, id: 'all', name: 'Volledige strand', boundary: 'Alle stranddelen van deze bestemming' }];
+  }
+  return zones;
+};
+// Unchanged zones are shown once. Only the zones whose rules vary need hours.
+const dayZones = (day: BeachRuleDay): ZoneVisit[] => {
+  if (day.periods.length === 1) return compactZones(day.periods[0].state.zones ?? []).map(zone => ({ zone, variants: [{ zone }] }));
+  return getBeachDayZoneVisits(day);
+};
+const ZoneCard = ({ visit, index }: { visit: ZoneVisit; index: number }) => (
+  <article className="rounded-[1.5rem] border border-slate-200/90 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
+    <div className="flex items-start gap-3">
+      <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-50 text-xs font-black text-sky-700">{String(index + 1).padStart(2, '0')}</span>
+      <div><h3 className="text-base font-extrabold leading-snug text-slate-900">{visit.zone.name}</h3><p className="mt-1 text-sm leading-relaxed text-slate-500">{visit.zone.boundary}</p></div>
     </div>
-  );
-
-  const ZeedijkCard = () => (
-    <div className="p-4 sm:p-5 md:p-6 rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-3xl border bg-white border-slate-200 shadow-sm active:bg-slate-50 transition-colors flex items-start gap-3 sm:gap-4">
-      <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl h-fit shrink-0 bg-amber-50 text-amber-600">
-        <Info size={18} className="sm:w-5 sm:h-5" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <h3 className="font-bold text-sm md:text-base mb-0.5 text-slate-900">Zeedijk</h3>
-        <p className="text-xs sm:text-[13px] md:text-sm font-medium leading-snug text-slate-500 break-words">
-          Het hele jaar welkom aan de leiband.
-        </p>
-      </div>
-    </div>
-  );
-
-  // ════════════════════════════════════════════════════════════════════
-  // Desktop answer card — magnetic tilt + entrance, letter-staggered numeral
-  // ════════════════════════════════════════════════════════════════════
-  const DesktopAnswerCard: React.FC = () => {
-    // Magnetic 3-D tilt — mouse-tracked
-    const mx = useMotionValue(0);
-    const my = useMotionValue(0);
-    const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-6, 6]),  { stiffness: 160, damping: 18 });
-    const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [4, -4]),  { stiffness: 160, damping: 18 });
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (prefersReducedMotion) return;
-      const rect = e.currentTarget.getBoundingClientRect();
-      mx.set((e.clientX - rect.left) / rect.width  - 0.5);
-      my.set((e.clientY - rect.top)  / rect.height - 0.5);
-    };
-    const handleMouseLeave = () => {
-      mx.set(0);
-      my.set(0);
-    };
-
-    const tiltStyle = prefersReducedMotion ? undefined : {
-      rotateX,
-      rotateY,
-      transformStyle: 'preserve-3d' as const,
-    };
-
-    return (
-      <div
-        className="relative"
-        style={{ perspective: 1200 }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        {/* Pulsing colored glow */}
-        {!prefersReducedMotion && (
-          <motion.div
-            aria-hidden="true"
-            className={`pointer-events-none absolute -inset-6 rounded-[3.5rem] blur-3xl ${statusInfo.glow}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0.35, 0.6, 0.35], scale: [0.98, 1.04, 0.98] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          />
-        )}
-
-        <motion.div
-          style={tiltStyle}
-          className={`relative p-10 lg:p-12 xl:p-14 rounded-[3rem] border-2 shadow-2xl shadow-slate-900/30 ${statusInfo.card} ${statusInfo.ring} lg:transition-shadow lg:duration-500`}
-        >
-          <div className="flex flex-col items-center text-center">
-            {/* Status icon — spring entrance */}
-            <motion.div variants={iconSpring} className="mb-4 md:mb-6 will-change-transform">
-              {statusInfo.icon}
-            </motion.div>
-
-            {/* Label */}
-            <motion.span
-              variants={fadeUp}
-              className="text-xs uppercase tracking-[0.2em] font-black mb-2 opacity-80 flex items-center gap-2"
-            >
-              <Clock size={12} /> {statusInfo.label}
-            </motion.span>
-
-            {/* Letter-stagger numeral */}
-            <motion.div
-              variants={numeralContainer}
-              aria-label={statusInfo.status}
-              className="text-9xl xl:text-[10rem] 2xl:text-[11rem] font-black leading-none mb-6 md:mb-8 tracking-tighter flex"
-            >
-              {statusInfo.status.split('').map((ch, i) => (
-                <motion.span
-                  key={`${statusInfo.status}-${i}`}
-                  variants={letterPop}
-                  className="inline-block will-change-transform"
-                >
-                  {ch}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            {/* Rule */}
-            <motion.p
-              variants={fadeUp}
-              className="text-xl lg:text-2xl font-bold leading-relaxed max-w-lg text-slate-800 px-2 whitespace-pre-line"
-            >
-              {statusInfo.rule}
-            </motion.p>
-
-            {city.rules.special && (
-              <motion.p
-                variants={fadeUp}
-                className="text-sm md:text-base font-medium leading-relaxed max-w-2xl text-slate-600 px-2 mt-4 md:mt-6 whitespace-pre-line"
-              >
-                {city.rules.special}
-              </motion.p>
-            )}
-
-            <motion.p
-              variants={fadeUp}
-              className="text-[11px] lg:text-xs font-semibold text-slate-600/80 px-4 mt-6 pt-4 border-t border-current/10 flex items-center justify-center gap-1.5"
-            >
-              <Info size={13} className="shrink-0 text-slate-500" />
-              <span>Let op: Plaatselijke politieborden aan de strandopgang hebben altijd voorrang.</span>
-            </motion.p>
-          </div>
-        </motion.div>
-      </div>
-    );
-  };
-
-  // ── The mobile answer card (no tilt / simpler numeral) ─────────────
-  const MobileAnswerCard: React.FC = () => (
-    <div className="relative">
-      <div className={`relative p-5 sm:p-6 md:p-10 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] border-2 shadow-xl shadow-slate-200/50 ${statusInfo.card}`}>
-        <div className="flex flex-col items-center text-center">
-          <div className="mb-3 sm:mb-4 md:mb-6">{statusInfo.icon}</div>
-          <span className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-black mb-1 md:mb-2 opacity-80 flex items-center gap-1.5 sm:gap-2">
-            <Clock size={10} className="sm:w-3 sm:h-3" /> {statusInfo.label}
-          </span>
-          <motion.div
-            variants={numeralPopMobile}
-            initial="hidden"
-            animate="visible"
-            className="text-5xl sm:text-6xl md:text-8xl font-black leading-none mb-3 sm:mb-4 md:mb-8 tracking-tighter"
-          >
-            {statusInfo.status}
-          </motion.div>
-          <p className="text-base sm:text-lg md:text-xl font-bold leading-relaxed max-w-lg text-slate-800 px-2 whitespace-pre-line">
-            {statusInfo.rule}
-          </p>
-          {city.rules.special && (
-            <p className="text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-2xl text-slate-600 px-2 mt-3 sm:mt-4 md:mt-6 whitespace-pre-line">
-              {city.rules.special}
-            </p>
-          )}
-          <p className="text-[10px] sm:text-[11px] font-semibold text-slate-600/80 px-2 mt-4 pt-3 border-t border-current/10 flex items-center justify-center gap-1.5">
-            <Info size={12} className="shrink-0 text-slate-500" />
-            <span>Let op: Plaatselijke politieborden aan de strandopgang hebben altijd voorrang.</span>
-          </p>
+    <div className="mt-4 space-y-4">
+      {visit.variants.map(({ zone, label }, variantIndex) => <div key={variantIndex} className={variantIndex ? 'border-t border-slate-100 pt-4' : ''}>
+        {label && <p className="mb-2 flex items-start gap-1.5 text-xs font-bold leading-relaxed text-slate-600"><Clock size={13} className="mt-0.5 shrink-0" aria-hidden="true" />{label}</p>}
+        <div className="flex flex-wrap gap-2">
+          <span className={`rounded-lg border px-2.5 py-1 text-xs font-bold ${ACCESS[zone.access].style}`}>{ACCESS[zone.access].label}</span>
+          {zone.access !== 'prohibited' && zone.leash !== 'unknown' && <span className="rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-xs font-bold text-sky-900">{BEACH_LEASH_LABELS[zone.leash]}</span>}
         </div>
-      </div>
+        {zone.detail && <p className="mt-2 text-sm font-medium leading-relaxed text-slate-700">{zone.detail}</p>}
+      </div>)}
     </div>
-  );
+  </article>
+);
 
-  return (
-    <div className="max-w-3xl lg:max-w-7xl mx-auto px-1 sm:px-0">
-
-      {/* ════════════════════════════════════════════════════════════
-          MOBILE / TABLET  (<lg)  — solid cards, vertical stack
-          ════════════════════════════════════════════════════════════ */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={stagger}
-        className="lg:hidden space-y-4 sm:space-y-5"
-      >
-        <motion.div
-          variants={fadeUp}
-          className="rounded-[1.5rem] sm:rounded-[2rem] bg-white ring-1 ring-slate-200 shadow-2xl shadow-slate-900/30 px-4 sm:px-5 md:px-6 py-5 sm:py-6 md:py-7 text-center"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] sm:text-[11px] md:text-xs font-bold mb-3 sm:mb-4 uppercase tracking-widest border border-slate-200">
-            <MapPin size={12} className="text-sky-600 sm:w-[14px] sm:h-[14px]" /> {city.name}, België
-          </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 leading-[1.15] mb-3 sm:mb-4">
-            Mag mijn hond <span className="text-sky-600">nu</span> op het strand in{' '}
-            {cityNameWithUnderline('text-sky-600', 'text-sky-300/40', false)}?
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">
-            <span className="block sm:inline">Laatst geverifieerd: {verifiedDate}</span>
-            <span className="hidden sm:inline"> &middot; </span>
-            <span className="block sm:inline">Vandaag: {todayLong}</span>
-          </p>
-        </motion.div>
-
-        <motion.div variants={fadeUp}>
-          <MobileAnswerCard />
-        </motion.div>
-
-        <motion.div variants={fadeUp}>
-          <WeatherWidget city={city} />
-        </motion.div>
-
-        <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <TodayCard />
-          <ZeedijkCard />
-        </motion.div>
-      </motion.div>
-
-      {/* ════════════════════════════════════════════════════════════
-          DESKTOP  (lg+)  — editorial magazine layout
-          ════════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:block">
-        <motion.div
-          ref={gridRef}
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-          className="relative grid grid-cols-12 gap-10 xl:gap-14 items-start"
-        >
-          {/* ── LEFT: editorial text on the LIGHT pane ── */}
-          <div className="col-span-6 xl:col-span-5">
-            {/* Location chip — premium, with micro hover */}
-            <motion.div
-              variants={fadeUp}
-              whileHover={prefersReducedMotion ? undefined : { y: -2, scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 text-[11px] xl:text-xs font-extrabold uppercase tracking-[0.18em] shadow-sm hover:shadow-md mb-6 xl:mb-8 cursor-default"
-            >
-              <MapPin size={14} className="text-sky-600" />
-              {city.name}, België
-            </motion.div>
-
-            {/* Headline — line-by-line masked reveal.
-                The h1 uses `stagger` purely as a conduit so each <Line>
-                triggers its own slide-up via the parent's staggerChildren. */}
-            <motion.h1
-              variants={stagger}
-              aria-label={`Mag mijn hond nu op het strand in ${city.name}?`}
-              className="text-[2.75rem] xl:text-6xl 2xl:text-[4.5rem] font-black leading-[1.02] tracking-tight text-slate-900 mb-6 xl:mb-8"
-            >
-              <Line>
-                Mag mijn hond <span className="text-sky-600">nu</span>
-              </Line>
-              <Line>op het strand in</Line>
-              <Line>
-                {cityNameWithUnderline('text-sky-600', 'text-sky-300/70', true)}?
-              </Line>
-            </motion.h1>
-
-            {/* Meta row */}
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] xl:text-sm font-semibold text-slate-600 mb-8 xl:mb-10"
-            >
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck size={16} className="text-emerald-600" />
-                Geverifieerd op {verifiedDate}
-              </span>
-              <span className="hidden xl:inline-flex items-center gap-2">
-                <Calendar size={16} className="text-sky-600" />
-                Vandaag: {todayLong}
-              </span>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="mb-5">
-              <WeatherWidget city={city} />
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="grid grid-cols-2 gap-4">
-              <TodayCard />
-              <ZeedijkCard />
-            </motion.div>
-          </div>
-
-          {/* ── RIGHT: big animated answer card — JS-driven sticky follows
-              scroll alongside the left column and stops at the hero bottom ── */}
-          <motion.div
-            variants={cardPop}
-            className="col-span-6 xl:col-span-7"
-          >
-            <motion.div
-              ref={cardRef}
-              style={prefersReducedMotion ? undefined : { y: stickyY, willChange: 'transform' }}
-            >
-              <DesktopAnswerCard />
-            </motion.div>
-          </motion.div>
-        </motion.div>
+const AnswerCard = ({ status, planning, momentLabel, summary, city }: { status: StatusValue | null; planning: boolean; momentLabel: string; summary: string; city: City }) => {
+  const reducedMotion = useReducedMotion();
+  const mx = useMotionValue(0), my = useMotionValue(0);
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-4, 4]), { stiffness: 160, damping: 20 });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [3, -3]), { stiffness: 160, damping: 20 });
+  const theme = THEME[status ?? 'INFO'];
+  const Icon = theme.Icon;
+  return <div className="relative self-start lg:pt-3" style={{ perspective: 1200 }} onMouseMove={event => {
+    if (reducedMotion) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    mx.set((event.clientX - rect.left) / rect.width - 0.5);
+    my.set((event.clientY - rect.top) / rect.height - 0.5);
+  }} onMouseLeave={() => { mx.set(0); my.set(0); }}>
+    <div aria-hidden="true" className={`pointer-events-none absolute -inset-4 rounded-[3rem] blur-3xl ${theme.glow}`} />
+    <motion.div initial={false} animate={{ opacity: 1 }} style={reducedMotion ? undefined : { rotateX, rotateY }} className={`relative rounded-[2rem] border-2 px-6 py-7 text-center shadow-2xl shadow-slate-950/20 sm:p-9 lg:rounded-[3rem] lg:px-8 lg:py-12 xl:p-12 ${theme.card}`}>
+      <Icon className="mx-auto mb-4 h-10 w-10 lg:mb-6 lg:h-14 lg:w-14" aria-hidden="true" />
+      <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">{planning ? 'Op jouw gekozen datum' : 'Op dit moment'}</p>
+      <div aria-live="polite" aria-atomic="true">
+        <p className={`my-3 font-black leading-none tracking-tighter lg:my-5 ${status === 'INFO' ? 'text-4xl lg:text-6xl' : 'text-7xl lg:text-9xl'}`}>{status === 'INFO' ? 'ONBEKEND' : status === 'DEELS' ? 'JA' : status ?? '…'}</p>
+        {status === 'DEELS' && <p className="mb-3 text-xs font-black uppercase tracking-wider">{planning ? 'Beperkt tot bepaalde zones of uren' : 'Alleen in de toegelaten zones'}</p>}
+        <h2 className="mx-auto max-w-md text-lg font-bold leading-relaxed text-slate-800 lg:text-xl">{summary}</h2>
+        <p className="mt-4 text-xs font-semibold leading-relaxed text-slate-600">{momentLabel}</p>
       </div>
-    </div>
-  );
+      {status && <a href={`#strandzones-${city.slug}`} className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-current/15 bg-white/70 px-4 py-2 text-xs font-extrabold transition-colors hover:bg-white"><ArrowDown size={14} aria-hidden="true" />{planning ? 'Bekijk de regels voor je bezoek' : 'Bekijk de zones en leibandregels'}</a>}
+      <p className="mt-5 border-t border-current/10 pt-4 text-[11px] font-medium leading-relaxed text-slate-600">Toegang betekent niet automatisch loslopen. Controleer ook de borden en eventuele tijdelijke maatregelen ter plaatse.</p>
+    </motion.div>
+  </div>;
 };
 
+const StatusCheck: React.FC<{ city: City }> = ({ city }) => {
+  const now = useRuleClock();
+  const reducedMotion = useReducedMotion();
+  const [planning, setPlanning] = useState(false);
+  const [visitDate, setVisitDate] = useState('');
+  const planned = useMemo(() => planning ? getBeachRuleDay(city, visitDate) : { day: null }, [city, planning, visitDate]);
+  const current = useMemo(() => now ? evaluateCityRuleStatus(city, now) : null, [city, now]);
+  const nextChange = useMemo(() => !planning && now ? getNextBeachRuleChange(city, now) : null, [city, planning, now]);
+  const day = planned.day;
+  const status = planning ? day?.status ?? null : current?.status ?? null;
+  const moment = planning ? day?.date ?? null : now;
+  const visits = useMemo(() => planning ? day ? dayZones(day) : [] : compactZones(current?.zones ?? []).map(zone => ({ zone, variants: [{ zone }] })), [planning, day, current]);
+  const conditions = [...new Set(planning ? day?.periods.flatMap(period => [...(period.state.accessExclusions ?? []), ...(period.state.conditions ?? [])]) ?? [] : [...(current?.accessExclusions ?? []), ...(current?.conditions ?? [])])];
+  const hoursVary = planning && day && day.periods.length > 1;
+  const summary = planning ? day ? getBeachDayAnswer(day) : 'Kies een datum voor de regels van die dag.' : current ? getBeachAnswer(current) : 'We bekijken de regels voor jouw strandbezoek.';
+  const momentLabel = moment ? `${dateFormat.format(moment)}${planning ? ' · de volledige dag' : ` · ${belgianTimeInput(moment)} Belgische tijd`}` : planning ? 'Geen berekening: kies een geldige datum.' : 'De actuele status wordt in je browser berekend.';
+  const fadeUp = { initial: reducedMotion ? false as const : { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.65 } };
+
+  return <div className="mx-auto max-w-3xl text-slate-900 lg:max-w-7xl">
+    <div className="grid items-start gap-5 sm:gap-7 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12 xl:gap-20">
+      <motion.div {...fadeUp} className="min-w-0 rounded-[2rem] border border-slate-200 bg-white p-6 text-center shadow-xl sm:p-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:text-left lg:shadow-none">
+        <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-600 shadow-sm"><MapPin size={14} className="text-sky-600" aria-hidden="true" />{city.name}, België</p>
+        <h1 className="text-[1.8rem] font-black leading-[1.12] tracking-tight text-slate-900 sm:text-4xl lg:text-5xl xl:text-6xl">
+          <span className="lg:block">Mag mijn hond</span>{' '}<span className="text-sky-600">{planning ? 'dan' : 'nu'}</span>{' '}<span>op het </span><span className="lg:block">strand in{' '}</span>
+          <span className={`relative inline-block text-sky-600 ${city.name.length > 17 ? 'text-[1.65rem] sm:text-3xl lg:text-4xl xl:text-5xl' : ''}`}>{`${city.name}?`}<svg className="absolute -bottom-2 left-0 h-3 w-full text-sky-300/50 lg:-bottom-3 lg:h-4" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><motion.path initial={reducedMotion ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.9, delay: 0.4 }} d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /></svg></span>
+        </h1>
+        <p className="mx-auto mt-6 hidden max-w-sm sm:block text-sm font-medium leading-relaxed text-slate-500 lg:mx-0 lg:mt-8 lg:text-base">Een frisse neus, zand tussen de poten. Ontdek waar je hond welkom is tijdens jouw strandbezoek.</p>
+        <div className="mt-6 lg:mt-8">
+          <div className="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm" aria-label="Wanneer ga je naar het strand?">
+            <button type="button" aria-pressed={!planning} onClick={() => setPlanning(false)} className={`inline-flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${!planning ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-50'}`}><Clock size={15} aria-hidden="true" />Nu</button>
+            <button type="button" aria-pressed={planning} onClick={() => { if (!planning) { setVisitDate(belgianDateInput(now ?? new Date())); setPlanning(true); } }} className={`inline-flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${planning ? 'bg-sky-600 text-white shadow-sm' : 'text-slate-500 hover:bg-slate-50'}`}><CalendarDays size={15} aria-hidden="true" />Plan je bezoek</button>
+          </div>
+          {planning && <div className="mx-auto mt-4 max-w-xs text-left lg:mx-0">
+            <label className="text-xs font-bold text-slate-700">Op welke datum?<input type="date" min="2000-01-01" max="2100-12-31" value={visitDate} onInput={event => setVisitDate(event.currentTarget.value)} onChange={event => setVisitDate(event.target.value)} aria-describedby="visit-help visit-error" className="mt-2 block min-h-[48px] w-full min-w-0 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 shadow-sm" /></label>
+            <p id="visit-help" className="mt-2 text-xs leading-relaxed text-slate-500">Je kiest alleen een datum. Als regels doorheen de dag veranderen, tonen we de uren bij de betrokken zone.</p>
+            {planned.error && <p id="visit-error" role="alert" className="mt-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm font-bold text-rose-800">{planned.error}</p>}
+          </div>}
+        </div>
+        <p className="mt-5 text-xs leading-relaxed text-slate-500">Regels gecontroleerd op {city.rules.lastVerifiedAt ? changeDateFormat.format(new Date(`${city.rules.lastVerifiedAt}T12:00:00Z`)) : 'onbekende datum'}.</p>
+      </motion.div>
+      <motion.div {...fadeUp} transition={{ duration: 0.7, delay: reducedMotion ? 0 : 0.1 }} className="min-w-0"><AnswerCard status={status} planning={planning} momentLabel={momentLabel} summary={summary} city={city} /></motion.div>
+    </div>
+
+    {status && <section id={`strandzones-${city.slug}`} className="mt-8 scroll-mt-28 sm:mt-10 lg:mt-14" aria-labelledby="beach-zones-title">
+      <div className="mb-4 rounded-[1.5rem] bg-white px-5 py-5 shadow-sm sm:rounded-[2rem] sm:px-7">
+        <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-sky-600">{planning ? 'Jouw dag aan zee' : 'Jouw strandbezoek'}</p>
+        <h2 id="beach-zones-title" className="text-xl font-black tracking-tight sm:text-2xl">Waar mag je hond mee?</h2>
+        <p className="mt-1 text-sm leading-relaxed text-slate-500">{planning ? 'Alleen de regels voor je gekozen datum.' : 'Dit geldt nu voor de strandzones.'}{hoursVary ? ' Bij zones die veranderen, staan de uren erbij. Alle uren zijn Belgische tijd.' : ''}</p>
+        {planning && moment && now && belgianDateInput(moment) !== belgianDateInput(now) && <p className="mt-3 text-xs leading-relaxed text-slate-600">Gebaseerd op de laatst gecontroleerde regeling. Controleer de gemeentelijke bron opnieuw vóór je bezoek: tijdelijke of nieuwe maatregelen kunnen hiervan afwijken.</p>}
+      </div>
+      {conditions.length > 0 && <aside className="mb-4 rounded-[1.5rem] border border-amber-200 bg-amber-50 p-5 sm:p-6" aria-label="Voorwaarden die de toegang beperken">
+        <h3 className="flex items-start gap-2 text-sm font-extrabold text-amber-950"><Info size={18} className="shrink-0" aria-hidden="true" />Let hier op vóór je het strand op gaat</h3>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm font-medium leading-relaxed text-amber-950">{conditions.map(condition => <li key={condition}>{condition}</li>)}</ul>
+      </aside>}
+      <div className={`grid gap-4 ${visits.length > 1 ? 'sm:grid-cols-2' : ''}`} aria-label="Strandzones voor je bezoek">{visits.map((visit, index) => <ZoneCard key={visit.zone.id} visit={visit} index={index} />)}</div>
+      {!!city.rules.guidance?.length && <aside className="mt-4 rounded-[1.5rem] border border-slate-200 bg-white p-5 sm:p-6" aria-label="Aanvullende plaatselijke regels">
+        <h3 className="text-sm font-extrabold">Ook goed om te weten</h3>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-600">{city.rules.guidance.map(guidance => <li key={guidance}>{guidance}</li>)}</ul>
+      </aside>}
+      {nextChange && <details className="mt-4 rounded-[1.5rem] border border-slate-200 bg-white px-5 py-3 text-sm sm:px-6">
+        <summary className="min-h-[44px] cursor-pointer py-3 font-bold text-slate-700">Volgende verandering · {changeDateFormat.format(nextChange.at)} · {nextChange.afterEndTime ? `na ${nextChange.afterEndTime}` : belgianTimeInput(nextChange.at)}</summary>
+        <ul className="mb-3 list-disc space-y-2 pl-5 leading-relaxed text-slate-600">{nextChange.state.zones?.filter(zone => JSON.stringify(current?.zones?.find(previous => previous.id === zone.id)) !== JSON.stringify(zone)).map(zone => <li key={zone.id}>{zone.name}: {ACCESS[zone.access].label.toLowerCase()}{zone.access !== 'prohibited' && zone.leash !== 'unknown' ? ` · ${BEACH_LEASH_LABELS[zone.leash].toLowerCase()}` : ''}. {zone.detail}</li>)}</ul>
+      </details>}
+    </section>}
+    <div className="mt-5 rounded-[1.5rem] border border-slate-200 bg-white p-5 sm:mt-6 sm:rounded-[2rem] sm:p-6">
+      <h2 className="mb-3 flex items-center gap-2 text-sm font-extrabold"><ShieldCheck size={17} className="text-sky-600" aria-hidden="true" />Bronnen en laatste controle</h2><BeachRuleSources city={city} />
+    </div>
+    <BeachRulesOverview city={city} />
+    <details className="mt-5 rounded-[1.5rem] border border-slate-200 bg-white p-5 sm:rounded-[2rem] sm:p-6"><summary className="min-h-[44px] cursor-pointer py-2 text-sm font-bold">Het weer aan zee vandaag</summary><div className="pt-3"><WeatherWidget city={city} /></div></details>
+  </div>;
+};
 export default StatusCheck;

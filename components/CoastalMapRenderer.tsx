@@ -8,6 +8,7 @@ import type { City } from '../types.ts';
 import { getCityMapStatus } from '../utils/rules.ts';
 
 const STATUS_GRADIENTS: Record<string, string> = {
+    INFO: 'url(#grad-default)',
     JA: 'url(#grad-vrij)',
     VRIJ: 'url(#grad-vrij)',
     DEELS: 'url(#grad-deels)',
@@ -107,8 +108,8 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
                 <stop offset="100%" style="stop-color:#be123c;stop-opacity:1" />
             </linearGradient>
              <linearGradient id="grad-default" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                <stop offset="0%" style="stop-color:#94a3b8;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#475569;stop-opacity:1" />
             </linearGradient>
             <linearGradient id="grad-hover" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
@@ -164,7 +165,7 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
                 });
 
                 path.addEventListener('mouseleave', () => {
-                    path.style.fill = fillUrl;
+                    path.style.fill = getFillUrl(city);
                     onHoverCity(null);
 
                     const label = svgElement.querySelector(`#label-${city.slug}`);
@@ -286,8 +287,21 @@ export const CoastalMapRenderer: React.FC<CoastalMapRendererProps> = ({ mapRef, 
 
         tempContainer.remove();
         L.svgOverlay(svgElement, mapBounds, { interactive: true }).addTo(map);
+        const refreshStatuses = () => {
+            CITIES.forEach(city => {
+                const path = svgElement.querySelector<SVGPathElement>(`#sector-${city.slug}`);
+                if (path && !path.matches(':hover')) path.style.fill = getFillUrl(city);
+            });
+        };
+        const clock = window.setInterval(refreshStatuses, 1000);
+        window.addEventListener('focus', refreshStatuses);
+        document.addEventListener('visibilitychange', refreshStatuses);
+
 
         return () => {
+            window.clearInterval(clock);
+            window.removeEventListener('focus', refreshStatuses);
+            document.removeEventListener('visibilitychange', refreshStatuses);
             if (leafletInstance.current) {
                 leafletInstance.current.remove();
                 leafletInstance.current = null;

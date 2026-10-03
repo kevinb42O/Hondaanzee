@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { PawPrint, ExternalLink, Mail, Check, Bike, Caravan, Baby } from 'lucide-react';
+import { PawPrint, ExternalLink, Mail, Bike, Caravan, Baby } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NotificationOptIn from './NotificationOptIn.tsx';
 import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
-              Jouw digitale gids voor een zorgeloos verblijf met je viervoeter aan de Belgische kust. Altijd up-to-date met de laatste politieverordeningen.
+              Jouw digitale gids voor een zorgeloos verblijf met je viervoeter aan de Belgische kust. Strandregels op basis van gemeentelijke bronnen, met een controledatum per bestemming.
             </p>
 
             {/* Contact Email */}
@@ -261,20 +261,14 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Server Status */}
+          {/* Column 4: Information and publication date */}
           <div className="flex flex-col items-center sm:items-start">
-            <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Status</h4>
-            <div className="inline-flex items-center gap-2 bg-black/20 border border-white/5 rounded-full px-3 py-1.5 text-xs font-mono mb-4">
-              <Check size={14} className="text-emerald-400" strokeWidth={3} />
-              <span className="text-emerald-400">Actueel</span>
-            </div>
+            <h4 className="font-bold text-slate-500 mb-5 uppercase tracking-[0.2em] text-xs">Over de informatie</h4>
             <p className="text-slate-500 text-xs leading-relaxed">
-              Alle diensten operationeel.<br />
-              <span className="text-slate-400">Laadsnelheid: </span>
-              <span className="text-emerald-400 font-mono">0.04s</span>
+              Elke strandgids vermeldt de gemeentelijke bronnen en de datum waarop we die controleerden. De datum hieronder gaat over een wijziging aan de website.
             </p>
             <div className="mt-4 bg-black/30 border border-white/5 rounded-xl px-4 py-3">
-              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Laatste update</div>
+              <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Website bijgewerkt</div>
               <time dateTime={SITE_UPDATE_DATE} className="flex items-baseline gap-2">
                 <span className="text-2xl font-black text-white">{UPDATE_DAY}</span>
                 <span className="text-sm font-bold text-cyan-400">{UPDATE_MONTH}</span>

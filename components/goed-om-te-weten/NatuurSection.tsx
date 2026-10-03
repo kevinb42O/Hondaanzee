@@ -1,3 +1,5 @@
+import { SEAL_CONTACTS, SEAL_GUIDANCE } from '../../data/beachSafety.ts';
+import { DUNE_GUIDANCE } from '../../data/beachRules.ts';
 import React from 'react';
 import {
   Leaf, Bird, Dog, AlertTriangle, CheckCircle2
@@ -64,7 +66,7 @@ export default function NatuurSection({ openSections, toggleSection }: Props) {
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center text-xl font-black text-cyan-700">30m</div>
                   <div>
                     <h4 className="font-bold text-sm text-slate-900">Houd minstens 30 meter afstand</h4>
-                    <p className="text-slate-600 text-sm mt-1 leading-relaxed">Dit is de officiële richtlijn van het Koninklijk Belgisch Instituut voor Natuurwetenschappen (KBIN). Op 30 meter voelt een zeehond zich niet bedreigd.</p>
+                    <p className="text-slate-600 text-sm mt-1 leading-relaxed">Houd minstens 30 meter afstand, respecteer ruimere afzettingen en ga verder weg als het dier gewond of ziek lijkt. Houd de weg naar zee vrij.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 p-4 bg-cyan-50 rounded-xl">
@@ -78,7 +80,7 @@ export default function NatuurSection({ openSections, toggleSection }: Props) {
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center">📞</div>
                   <div>
                     <h4 className="font-bold text-sm text-slate-900">Bel het zeehondenmeldpunt als het dier gewond is</h4>
-                    <p className="text-slate-600 text-sm mt-1 leading-relaxed">Denk je dat de zeehond wél in nood is? (zichtbare wonden, mager, vissersnetten verstrikt?) Bel het zeehondennoodlijn op <strong>0800 99 899</strong> (Sea Life Blankenberge) of <strong>059 34 21 41</strong> (KBIN). Raak het dier nooit aan.</p>
+                    <p className="text-slate-600 text-sm mt-1 leading-relaxed">{SEAL_GUIDANCE}</p>
                   </div>
                 </div>
               </div>
@@ -95,13 +97,15 @@ export default function NatuurSection({ openSections, toggleSection }: Props) {
                 </div>
               </div>
 
+              <p className="text-xs text-slate-600">Bronnen: <a className="underline" href={SEAL_CONTACTS.northSealTeam.url} target="_blank" rel="noopener noreferrer">NorthSealTeam</a> en <a className="underline" href={SEAL_CONTACTS.seaLife.url} target="_blank" rel="noopener noreferrer">SEA LIFE zeehondenopvang</a>. Gecontroleerd op 3 oktober 2026.</p>
+
               <KeyTakeaway
                 variant="info"
                 items={[
                   'Houd altijd minstens 30 meter afstand — neem je hond aan de lijn',
                   'Een zeehond op het strand is meestal gewoon aan het rusten',
                   'Raak een zeehond nooit aan, ook niet om te "helpen"',
-                  'Meld gewonde zeehonden op 0800 99 899 (Sea Life) of 059 34 21 41 (KBIN)',
+                  SEAL_GUIDANCE,
                 ]}
               />
             </div>
@@ -155,7 +159,7 @@ export default function NatuurSection({ openSections, toggleSection }: Props) {
               <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5">
                 <h4 className="font-black text-emerald-900 text-sm mb-3">✅ Wat mag wél?</h4>
                 <ul className="space-y-2 text-sm text-emerald-800">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />Wandelen op de aangeduide paden met je hond <strong>aan de lijn</strong> (max. 2 meter)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />{DUNE_GUIDANCE}</li>
                   <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />Genieten van de natuur vanaf de wandelplanken en uitkijkpunten</li>
                   <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />Afval opruimen dat je tegenkomt (wees een held!)</li>
                 </ul>
@@ -164,7 +168,7 @@ export default function NatuurSection({ openSections, toggleSection }: Props) {
               <KeyTakeaway
                 variant="info"
                 items={[
-                  'Honden moeten in de duinen ALTIJD aan de lijn (max. 2 meter)',
+                  'Controleer de toegang en de leibandregels van het duingebied; strandregels gelden daar niet automatisch',
                   'Blijf op de aangeduide paden — verlaat deze nooit',
                   'Grondbroeders nestelen onzichtbaar — een loslopende hond ziet nesten niet',
                   'Beschadiging van helmgras kan tot duinerosie leiden',

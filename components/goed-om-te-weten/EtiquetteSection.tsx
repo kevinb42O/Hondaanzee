@@ -1,3 +1,4 @@
+import { PENALTY_GUIDANCE } from '../../data/beachRules.ts';
 import React from 'react';
 import {
   HandHeart, Trash2, PawPrint, Scale, Dog, Shield, Eye,
@@ -113,7 +114,7 @@ export default function EtiquetteSection({ openSections, toggleSection }: Props)
               </p>
 
               <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-5 sm:p-6 text-center">
-                <span className="text-3xl sm:text-4xl font-black text-red-600">€75 – €350</span>
+                <span className="text-3xl sm:text-4xl font-black text-red-600">Volgens lokaal reglement</span>
                 <p className="text-red-800 font-bold mt-2">GAS-boete voor niet opruimen</p>
                 <p className="text-red-600 text-sm mt-1">Gemeentelijke Administratieve Sanctie — varieert per gemeente</p>
               </div>
@@ -149,7 +150,7 @@ export default function EtiquetteSection({ openSections, toggleSection }: Props)
               <KeyTakeaway
                 variant="warning"
                 items={[
-                  'GAS-boetes variëren van €75 tot €350 — gemeentebesturen controleren actief',
+                  PENALTY_GUIDANCE,
                   'Hondenpoep bevat parasieten die gevaarlijk zijn voor kinderen en andere honden',
                   'Neem altijd meerdere zakjes mee — bevestig een houder aan de leiband',
                   'Niet opruimen schaadt het imago van alle hondeneigenaars',
@@ -221,60 +222,15 @@ export default function EtiquetteSection({ openSections, toggleSection }: Props)
             icon={<Scale size={24} className="text-slate-700" />}
             iconBg="bg-slate-100"
             title="Boetes & Wetgeving — Het Kan Duur Uitvallen"
-            subtitle="Échte bedragen die je portemonnee raken"
-            badge="€50–€350"
+            subtitle="De sanctie hangt af van het toepasselijke reglement"
+            badge="LOKALE REGELS"
             badgeColor="bg-red-100 text-red-700"
             isOpen={openSections.has('boetes')}
             onToggle={() => toggleSection('boetes')}
           >
             <div className="space-y-6">
-              <p className="text-slate-700 leading-relaxed">
-                Alle kustgemeenten handhaven via het <strong>GAS-systeem</strong> (Gemeentelijke Administratieve Sancties). Gemeentelijke vaststellers en politie controleren actief — ook buiten het seizoen. Dit zijn <strong>geen waarschuwingen</strong>; je ontvangt een aangetekende brief met een boete die je binnen 2 maanden moet betalen.
-              </p>
-
-              {/* Boetetabel */}
-              <div className="overflow-x-auto -mx-1">
-                <table className="w-full text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-slate-100">
-                      <th className="text-left p-3 font-black text-slate-900 rounded-tl-xl">Overtreding</th>
-                      <th className="text-right p-3 font-black text-slate-900 rounded-tr-xl whitespace-nowrap">GAS-boete</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    <tr className="hover:bg-red-50 transition-colors">
-                      <td className="p-3 text-slate-700">Hond op strand in <strong>verboden zone/periode</strong></td>
-                      <td className="p-3 text-right font-bold text-red-600 whitespace-nowrap">€50 – €350</td>
-                    </tr>
-                    <tr className="hover:bg-red-50 transition-colors">
-                      <td className="p-3 text-slate-700">Hond <strong>niet aan de leiband</strong> (zeedijk, duinen, bebouwde kom)</td>
-                      <td className="p-3 text-right font-bold text-red-600 whitespace-nowrap">€50 – €250</td>
-                    </tr>
-                    <tr className="hover:bg-red-50 transition-colors">
-                      <td className="p-3 text-slate-700">Hondenpoep <strong>niet opruimen</strong></td>
-                      <td className="p-3 text-right font-bold text-red-600 whitespace-nowrap">€75 – €350</td>
-                    </tr>
-                    <tr className="hover:bg-red-50 transition-colors">
-                      <td className="p-3 text-slate-700">Geen <strong>poepzakje bij zich</strong> hebben</td>
-                      <td className="p-3 text-right font-bold text-red-600 whitespace-nowrap">€50 – €150</td>
-                    </tr>
-                    <tr className="hover:bg-red-50 transition-colors">
-                      <td className="p-3 text-slate-700">Hond loslopend in <strong>duinen of natuurgebied</strong></td>
-                      <td className="p-3 text-right font-bold text-red-600 whitespace-nowrap">€50 – €250</td>
-                    </tr>
-                    <tr className="hover:bg-red-50 transition-colors">
-                      <td className="p-3 text-slate-700">Hond niet <strong>geregistreerd</strong> in DogID</td>
-                      <td className="p-3 text-right font-bold text-red-600 whitespace-nowrap">€50 – €250</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  <strong>Bron:</strong> Politiereglementen & GAS-verordeningen van de Belgische kustgemeenten (o.a. Oostende, Middelkerke, Blankenberge, Knokke-Heist). Exacte bedragen variëren per gemeente. De sanctionerend ambtenaar bepaalt het eindbedrag op basis van de ernst en eventuele herhaling. Boetes voor <strong>minderjarigen (16+)</strong> bedragen maximaal €175. Bij betwisting kan je verweer indienen binnen 15 dagen.
-                </p>
-              </div>
+              <p className="text-slate-700 leading-relaxed">{PENALTY_GUIDANCE}</p>
+              <p className="text-sm text-slate-600">Controleer de gemeentelijke bronlinks op de stadspagina van je bestemming. Voor natuurgebieden gelden ook de toegangsregels van de beheerder.</p>
 
               <SectionHeading
                 icon={<Eye size={20} className="text-slate-600" />}
@@ -284,15 +240,15 @@ export default function EtiquetteSection({ openSections, toggleSection }: Props)
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
                   <h4 className="font-bold text-sm text-slate-900 mb-1">🏖️ Op het strand</h4>
-                  <p className="text-xs text-slate-600">Gemeentelijke vaststellers patrouilleren dagelijks in het seizoen. Controles ook buiten het seizoen op aanvoer- en verbodszones. Oostende en Knokke-Heist zijn berucht streng.</p>
+                  <p className="text-xs text-slate-600">Respecteer de verboden zones en uren. De regels gelden ook buiten drukke stranddagen; raadpleeg de stadspagina voor de gemeentelijke bron.</p>
                 </div>
                 <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
                   <h4 className="font-bold text-sm text-slate-900 mb-1">🌲 In de duinen & bossen</h4>
-                  <p className="text-xs text-slate-600">Boswachters van het Agentschap voor Natuur en Bos (ANB) handhaven in natuurgebieden. In beschermde duingebieden (bv. Westhoek, Zwin) kan een PV tot <strong>€500+</strong> oplopen via het Natuurdecreet.</p>
+                  <p className="text-xs text-slate-600">In natuurgebieden gelden afzonderlijke toegangsregels en verboden. Een strandtoelating geeft geen toestemming om het natuurreservaat te betreden.</p>
                 </div>
                 <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
                   <h4 className="font-bold text-sm text-slate-900 mb-1">🚶 Op de zeedijk</h4>
-                  <p className="text-xs text-slate-600">Korte leiband verplicht in alle kustgemeenten. Flexilijn of rolllijn op de dijk is al een overtreding in sommige gemeenten — informeer je lokaal.</p>
+                  <p className="text-xs text-slate-600">Op de zeedijk gelden andere regels dan op het strand. Controleer de lokale leibandplicht en maximale lengte.</p>
                 </div>
                 <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
                   <h4 className="font-bold text-sm text-slate-900 mb-1">🅿️ Aan losloopzones</h4>
@@ -320,7 +276,7 @@ export default function EtiquetteSection({ openSections, toggleSection }: Props)
                   <div>
                     <h4 className="font-black text-violet-900 text-sm mb-1">Aansprakelijkheid: Jij bent verantwoordelijk</h4>
                     <p className="text-violet-800 text-sm leading-relaxed">
-                      Als je hond schade veroorzaakt — een beet, een fietser die valt, een ander dier verwondt — ben <strong>jij als eigenaar burgerlijk aansprakelijk</strong> (art. 1385 oud Burgerlijk Wetboek). Check vóór je naar de kust vertrekt of jouw <strong>familiale verzekering (BA Privé)</strong> schade door huisdieren dekt. De meeste polissen doen dit standaard, maar controleer de uitsluitingen (sommige rassen, niet-aangelijnd, etc.).
+                      Als je hond schade veroorzaakt — een beet, een fietser die valt, een ander dier verwondt — ben <strong>jij als eigenaar burgerlijk aansprakelijk</strong> . Check vóór je naar de kust vertrekt of jouw <strong>familiale verzekering (BA Privé)</strong> schade door huisdieren dekt. De meeste polissen doen dit standaard, maar controleer de uitsluitingen (sommige rassen, niet-aangelijnd, etc.).
                     </p>
                   </div>
                 </div>
@@ -329,8 +285,8 @@ export default function EtiquetteSection({ openSections, toggleSection }: Props)
               <KeyTakeaway
                 variant="danger"
                 items={[
-                  'GAS-boetes variëren van €50 tot €350 — gemeentelijke vaststellers controleren actief',
-                  'In duinen en natuurgebieden kan het ANB boetes tot €500+ opleggen',
+                  PENALTY_GUIDANCE,
+                  'De strandregels geven geen toegang tot beschermde natuurgebieden',
                   'Geen poepzakje bij je? Dát alleen is al een overtreding',
                   'Je hond moet geregistreerd zijn in DogID — verplicht in heel België',
                 ]}
