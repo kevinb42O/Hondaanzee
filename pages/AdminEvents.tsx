@@ -77,7 +77,7 @@ export default function AdminEvents() {
           </p>
         </div>
         <div className="workspace-event-buttons">
-          <Link to="/admin/agenda/analytics" className="workspace-button">
+          <Link to="/admin/analytics/agenda" className="workspace-button">
             <BarChart3 size={17} />
             Agenda-analytics
           </Link>
@@ -244,7 +244,7 @@ export default function AdminEvents() {
                     Bewerken
                   </Link>
                   <Link
-                    to={`/admin/agenda/${e.id}/analytics`}
+                    to={`/admin/analytics/agenda/${e.id}`}
                     className="workspace-button"
                     aria-label={`Analytics van ${e.draft.content.title}`}
                   >

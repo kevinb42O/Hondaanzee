@@ -489,7 +489,7 @@ export default function AdminEventEditor() {
               </Link>
               <Link
                 className="workspace-button"
-                to={`/admin/agenda/${record.id}/analytics`}
+                to={`/admin/analytics/agenda/${record.id}`}
               >
                 <BarChart3 size={16} />
                 Analytics

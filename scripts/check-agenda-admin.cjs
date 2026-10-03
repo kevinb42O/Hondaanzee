@@ -409,6 +409,13 @@ const server = createServer((req, res) => {
     );
     await page.goto(base + "/admin/agenda/analytics");
     await page.waitForSelector(".workspace-chart");
+    assert.equal(new URL(page.url()).pathname, "/admin/analytics/agenda");
+    assert.ok(await page.$('.workspace-nav-submenu a[href="/admin/analytics/agenda"].is-active'));
+    assert.equal(await page.$('nav[aria-label="Adminnavigatie"] > a[href="/admin/agenda"].is-active'), null);
+    await page.click('.workspace-analytics-navigation a[href="/admin/analytics"]');
+    await page.waitForFunction(() => document.querySelector('h1')?.textContent === 'Analytics');
+    await page.click('.workspace-nav-submenu a[href="/admin/analytics/agenda"]');
+    await page.waitForSelector(".workspace-chart");
     assert.deepEqual(
       await page.$$eval(".workspace-stat strong", (xs) =>
         xs.map((x) => x.textContent),
@@ -442,6 +449,11 @@ const server = createServer((req, res) => {
       /niet beschikbaar/,
     );
     failAnalytics = false;
+    await page.goto(base + "/admin/agenda/" + records[3].id + "/analytics");
+    await page.waitForSelector(".workspace-chart");
+    assert.equal(new URL(page.url()).pathname, "/admin/analytics/agenda/" + records[3].id);
+    assert.ok(await page.$('.workspace-nav-submenu a[href="/admin/analytics/agenda"].is-active'));
+    assert.equal(requests.filter(r => r.days).at(-1).eventSlug, records[3].slug);
     await page.goto(base + "/admin/agenda");
     await page.waitForSelector(".workspace-event-row");
     fs.mkdirSync(path.resolve(__dirname, "../.admin-local"), {

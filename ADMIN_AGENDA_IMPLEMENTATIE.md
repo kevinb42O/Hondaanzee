@@ -2,13 +2,17 @@
 
 Opgeleverd op 3 oktober 2026. De implementatiecode staat op `main` (`75829dc`, gevolgd door testafscherming `bca4b8b`). De agenda is voortaan onderdeel van dezelfde database- en publicatieketen als zaken en zones.
 
+## Navigatie
+
+Op verzoek van Kevin zijn de rapporten onder **Analytics** ondergebracht, met submenu **Website** en **Agenda** en dezelfde tabknoppen bovenaan beide rapporten. De hoofdknop **Agenda** opent uitsluitend het beheer. Een rapport per editie hoort ook bij Analytics. Bestaande links onder `/admin/agenda/.../analytics` leiden automatisch naar de nieuwe rapport-URL. De algemene websitetotalen omvatten ook de agenda; het agendarapport geeft de uitsplitsing.
+
 ## Gebruik
 
 - `/admin/agenda`: alle 21 fiches, zoekfunctie en filters; bewerken, publieke pagina en analytics per editie.
 - `/admin/agenda/nieuw`: privéconcept aanmaken of een bestaande editie dupliceren. Jaargebonden gegevens en bevestigingen worden niet als nieuwe waarheid gekopieerd.
 - Editor: inhoud, lokale datums en uren, plaats, organisator, prijzen, bronnen, hondenvoorwaarden, foto's en galerijgegevens. Slug en editie-identiteit blijven vast. Preview, revisievergelijking en herstel als nieuw concept zijn beschikbaar.
 - `/admin/publiceren`: selecteer opgeslagen agendaconcepten. Niet-geselecteerde concepten blijven privé; de volledige gepubliceerde catalogus gaat mee. De status wordt pas live na controle van de exacte release-ID en hash op het echte domein.
-- `/admin/agenda/analytics`: weergaven voor overzicht en fiches, organisator-, ticket-, telefoon-, e-mail-, route- en sociale klikken, periodes, grafiek, bronnen, apparaten en CSV. Dezelfde gegevens zijn per editie beschikbaar. Dit zijn paginaweergaven en klikinteresse, geen unieke bezoekers, ticketverkopen of Search Console-impressies.
+- `/admin/analytics/agenda`: weergaven voor overzicht en fiches, organisator-, ticket-, telefoon-, e-mail-, route- en sociale klikken, periodes, grafiek, bronnen, apparaten en CSV. Dezelfde gegevens zijn per editie beschikbaar. Dit zijn paginaweergaven en klikinteresse, geen unieke bezoekers, ticketverkopen of Search Console-impressies.
 
 Nieuwe dashboardfoto's gaan rechtstreeks naar Cloudflare R2 en worden via `media.hondaanzee.be` geserveerd. Supabase bevat metadata en toegangscontrole. Bestaande foto's, credits, uitsneden en galerijvolgorde zijn behouden. De agenda-hero is niet aangepast.
 

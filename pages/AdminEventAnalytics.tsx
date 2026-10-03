@@ -1,3 +1,4 @@
+import AdminAnalyticsNavigation from '../components/admin/AdminAnalyticsNavigation.tsx';
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, BarChart3, Download, RefreshCw } from "lucide-react";
@@ -215,6 +216,7 @@ export default function AdminEventAnalytics() {
           Vernieuwen
         </button>
       </div>
+      <AdminAnalyticsNavigation />
       {!id && (
         <section className="workspace-panel workspace-form">
           <label>
@@ -349,7 +351,7 @@ export default function AdminEventAnalytics() {
                     .map(({ e, count, clicks }) => (
                       <div className="workspace-event-row" key={e.id}>
                         <div>
-                          <Link to={`/admin/agenda/${e.id}/analytics`}>
+                          <Link to={`/admin/analytics/agenda/${e.id}`}>
                             <strong>{e.draft.content.title}</strong>
                           </Link>
                           <p>

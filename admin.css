@@ -220,3 +220,11 @@
 .workspace-table-scroll{overflow:auto;max-width:100%}.workspace-event-diff{border-collapse:collapse;width:100%;font-size:13px}.workspace-event-diff td,.workspace-event-diff th{border-bottom:1px solid #e2e8f0;padding:12px;text-align:left;vertical-align:top;min-width:140px;overflow-wrap:anywhere}
 .workspace-event-json{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:400px;overflow:auto}
 @media(max-width:767px){.workspace-event-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace-event-row{flex-direction:column;align-items:flex-start}.workspace-event-link{grid-template-columns:1fr}.workspace-event-buttons{width:100%}.workspace-event-seo{font-size:13px}}
+
+/* Analytics reports belong to their own navigation group. */
+.workspace-nav-submenu{margin:0 0 8px 21px;padding-left:15px;border-left:1px solid var(--workspace-border)}
+.workspace-nav-submenu .workspace-nav{padding:8px 12px;font-size:12px}
+.workspace-analytics-navigation{display:flex;gap:6px;border-bottom:1px solid var(--workspace-border);margin-bottom:24px;padding-bottom:10px}
+.workspace-analytics-navigation a{padding:9px 16px;border-radius:8px;color:var(--workspace-muted);font-size:14px;font-weight:600}
+.workspace-analytics-navigation a:hover{background:#f5f7fb}.workspace-analytics-navigation a.is-active{background:#eef2fc;color:var(--workspace-blue)}
+@media(max-width:700px){.workspace-nav-group{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.workspace-nav-submenu{display:contents}.workspace-sidebar nav .workspace-nav-submenu .workspace-nav{flex-direction:row;font-size:12px;min-height:47px}}

@@ -1,7 +1,7 @@
 import { recordSiteEvent } from './utils/siteAnalytics.ts';
 
 import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter, Navigate, Routes, Route, useInRouterContext, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route, useInRouterContext, useLocation, useParams } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header.tsx';
 import MemberProvider from './components/member/MemberProvider.tsx';
@@ -50,6 +50,11 @@ const AdminAnalytics = React.lazy(() => import('./pages/AdminAnalytics.tsx'));
 const AdminEvents = React.lazy(() => import('./pages/AdminEvents.tsx'));
 const AdminEventEditor = React.lazy(() => import('./pages/AdminEventEditor.tsx'));
 const AdminEventAnalytics = React.lazy(() => import('./pages/AdminEventAnalytics.tsx'));
+function LegacyAgendaAnalyticsRedirect() {
+  const { id } = useParams();
+  return <Navigate to={id ? `/admin/analytics/agenda/${id}` : '/admin/analytics/agenda'} replace />;
+}
+
 const AdminZones = React.lazy(() => import('./pages/AdminZones.tsx'));
 const AdminZoneEditor = React.lazy(() => import('./pages/AdminZoneEditor.tsx'));
 const AdminReviews = React.lazy(() => import('./pages/AdminReviews.tsx'));
@@ -193,8 +198,10 @@ const AppContent = () => {
                 <Route path="analytics" element={<AdminAnalytics />} />
                 <Route path="agenda" element={<AdminEvents />} />
                 <Route path="agenda/nieuw" element={<AdminEventEditor />} />
-                <Route path="agenda/analytics" element={<AdminEventAnalytics />} />
-                <Route path="agenda/:id/analytics" element={<AdminEventAnalytics />} />
+                <Route path="analytics/agenda" element={<AdminEventAnalytics />} />
+                <Route path="analytics/agenda/:id" element={<AdminEventAnalytics />} />
+                <Route path="agenda/analytics" element={<LegacyAgendaAnalyticsRedirect />} />
+                <Route path="agenda/:id/analytics" element={<LegacyAgendaAnalyticsRedirect />} />
                 <Route path="agenda/:id" element={<AdminEventEditor />} />
                 <Route path="losloopzones" element={<AdminZones />} />
                 <Route path="losloopzones/nieuw" element={<AdminZoneEditor />} />

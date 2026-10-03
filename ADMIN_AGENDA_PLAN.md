@@ -29,8 +29,8 @@ Het adminprobleem is een ontbrekende integratie:
 | `/admin/agenda` | Alle evenementen zoeken en filteren op periode, regio, categorie, informatiezekerheid en publicatiestatus. Per rij: titel, plaats, datum, status, laatste inhoudscontrole, bewerken, publieke pagina en analytics. |
 | `/admin/agenda/nieuw` | Een evenement als concept aanmaken; dupliceren naar een nieuwe editie met een eigen identiteit en URL. |
 | `/admin/agenda/:id` | Alle bestaande evenementvelden bewerken, concept opslaan, echte preview bekijken, revisies vergelijken en een oude revisie als nieuw concept herstellen. |
-| `/admin/agenda/analytics` | Agenda-overzicht en evenementfiches afzonderlijk meten; grafiek, populaire evenementen, bronnen, apparaten en CSV. |
-| `/admin/agenda/:id/analytics` | Weergaven en klikken voor één specifieke editie, meetdekking en dezelfde periodekeuze. |
+| `/admin/analytics/agenda` | Agenda-overzicht en evenementfiches afzonderlijk meten; grafiek, populaire evenementen, bronnen, apparaten en CSV. |
+| `/admin/analytics/agenda/:id` | Weergaven en klikken voor één specifieke editie, meetdekking en dezelfde periodekeuze. |
 | `/admin/publiceren` | Agendaconcepten selecteren naast zaken en zones, verschillen bekijken en de build- en livestatus opvolgen. |
 | `/admin` | Agenda-aantallen en shortcuts; signalen voor gewijzigde concepten en ontbrekende praktische gegevens. |
 
