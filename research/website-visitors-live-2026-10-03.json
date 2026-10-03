@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-10-03T16:47:12.546Z",
+  "collector": "site-analytics",
+  "method": "daily_estimate",
+  "startedAt": "2026-10-03 16:37:36.356386+00",
+  "rows": [
+    {
+      "day": "2026-10-03",
+      "path": "@site",
+      "count": "1"
+    },
+    {
+      "day": "2026-10-03",
+      "path": "/",
+      "count": "1"
+    },
+    {
+      "day": "2026-10-03",
+      "path": "/agenda",
+      "count": "1"
+    }
+  ],
+  "testRecordsRetained": 0,
+  "normalBrowserCheck": {
+    "agendaInitial": true,
+    "agendaReload": true,
+    "homeNavigation": true,
+    "websiteEstimateAfter": 1,
+    "agendaEstimateAfter": 1,
+    "homeEstimateAfter": 1
+  },
+  "serverResponses": {
+    "adminAnalyticsAnonymous": 403,
+    "adminEventsAnonymous": 403,
+    "DNT": 204,
+    "GPC": 204,
+    "knownBot": 204,
+    "invalidPayload": 400,
+    "adminRoute": 400
+  },
+  "deployment": {
+    "id": "dpl_E7RZzYnmqguXYv6o9fK6gph1tUwz",
+    "state": "READY",
+    "commit": "752a1bb253f5cdf86b3d27b3490479e9bdcb5c97"
+  },
+  "ui": {
+    "verifiedAt": "2026-10-03T16:54:13.316Z",
+    "route": "https://hondaanzee.be/admin/analytics",
+    "account": "real_admin",
+    "metricButtonsVisible": [
+      "Paginaweergaven",
+      "Bezoekers"
+    ],
+    "dayAndHourSwitch": true,
+    "bothTotalsVisible": true,
+    "methodCollapsed": true,
+    "requestedTextBlocksRemoved": true,
+    "csvDownloadVerified": true,
+    "selected24Hours": {
+      "pageviews": 231,
+      "dailyVisitorEstimates": 1
+    },
+    "privacyAndCookieDate": "2026-10-03"
+  },
+  "latestCompatibleDeployment": {
+    "id": "dpl_7vZHRgZ1gFUJb81f5Bhm6iqFzLHi",
+    "commit": "1d75c821812d716e75570470aab46f855509d66e",
+    "state": "READY"
+  }
+}

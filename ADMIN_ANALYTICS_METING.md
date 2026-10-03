@@ -1,6 +1,6 @@
 # Websiteanalytics: paginaweergaven en bezoekers
 
-Aanvulling van 3 oktober 2026 op bronversie `812c7c2`. Kevin heeft gekozen voor een schatting zonder cookies. De database en collector zijn live ingericht; de dashboardweergave is lokaal gebouwd en getest. De definitieve productiecontrole wordt hieronder vastgelegd.
+Aanvulling van 3 oktober 2026 op bronversie `812c7c2`. Kevin heeft gekozen voor een schatting zonder cookies. Database, collector en dashboard staan live. De definitieve dashboardversie `752a1bb` is op productie bevestigd via deployment `dpl_E7RZzYnmqguXYv6o9fK6gph1tUwz`. De daaropvolgende gelijktijdige zaakaanmeldingsrelease behoudt deze implementatie.
 
 ## Gebruik en betekenis
 
@@ -29,3 +29,13 @@ RLS staat aan; tabellen en registratie-RPC zijn uitsluitend toegankelijk voor `s
 - Browsertests controleren beide totalen, omschakelen van grafiek/herkomst, 24-uursbezoekers, terugschakelen naar paginaweergaven, kalenderlabels, mobiel en Vercel-historiek. Alle backendverzoeken onderschept; geen fictieve productiebezoeken.
 - De bestaande agendabrowsertests en openbare actiecontroles blijven geslaagd.
 - Een normaal bezoek in Chrome is door de echte collector verwerkt; startdekking en site/paginatelling gecontroleerd via de database. Dit echte bezoek blijft als eigen websiteverkeer meetellen.
+
+## Productiecontrole
+
+Met het echte ingelogde adminaccount zijn de zichtbare knoppen **Paginaweergaven** en **Bezoekers** gebruikt. De grafiek, herkomst en paginalijst veranderen mee; beide totalen blijven zichtbaar. Gecontroleerd voor 7 dagen en 24 uur, inclusief terugschakelen. De gevraagde lange start- en uurmetingstekstblokken staan niet meer in de pagina. De methode is standaard ingeklapt.
+
+De CSV-knop exporteerde daadwerkelijk `hondaanzee-visitors-24-uur.csv`; het gedownloade bestand is gecontroleerd op website/pagina-bereik, de dagelijkse meetdefinitie en startdekking. Het bevat geen pageviewrijen of bezoekerhashes. Live adminfuncties weigeren anonieme toegang met 403. DNT, GPC en bekende bots geven 204 zonder registratie; ongeldige payloads en adminroutes geven 400.
+
+Privacy- en cookiebeleid zijn live met datum 3 oktober 2026 en de beschrijving van de nieuwe verwerking. Alle 21 agenda-URL's zijn opnieuw gecontroleerd; de exacte catalogus-release en hash blijven behouden. Zie [het geaggregeerde bezoekersbewijs](research/website-visitors-live-2026-10-03.json) en [de agenda-verificatie](research/agenda-admin-live-verificatie-2026-10-03.json).
+
+De publieke browsertest had twee tijdelijke time-outs tijdens het wachten op volledige netwerkstilte op gemeentepagina's. Een aanvullende run met verzoekdiagnostiek slaagde voor alle pagina's, statische en interactieve SEO, kaarten en 404's zonder runtimefouten. De tijdelijke diagnostiek is verwijderd; de volledige admintest en de gerichte analytics-/agendatests slagen.
