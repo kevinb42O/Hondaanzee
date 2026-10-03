@@ -1,4 +1,5 @@
--- Run inside a transaction and roll back all test content, releases and counters.
+-- Always roll back all test content, releases and counters.
+begin;
 do $$
 declare e public.content_events%rowtype;actor uuid;changed jsonb;job jsonb;snapshot jsonb;before_count bigint;
 begin
@@ -27,3 +28,5 @@ begin
  perform public.record_site_analytics('/agenda/rollback-only','ticket','direct','desktop',repeat('e',64));
  if(select coalesce(sum(count),0)from public.analytics_daily where path='/agenda/rollback-only')<>before_count+1 then raise exception 'TICKET_COUNT_FAILED';end if;
 end$$;
+
+rollback;
