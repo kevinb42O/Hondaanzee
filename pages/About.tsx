@@ -1,330 +1,147 @@
 import React, { useEffect } from 'react';
-import { Heart, MapPin, Clock, Database, Coffee, PawPrint, Mail, MessageCircle, Camera } from 'lucide-react';
-import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import { Link } from 'react-router-dom';
+import { ArrowDown, ArrowUpRight, Camera, Heart, MessageCircle } from 'lucide-react';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import { useSEO, SEO_DATA } from '../utils/seo.ts';
+import './About.css';
+
+const WHATSAPP_URL = `https://wa.me/32494816714?text=${encodeURIComponent('Dag Kevin en Jax! Ik heb een vraag of een tip voor HondAanZee.')}`;
 
 const About: React.FC = () => {
-    useSEO(SEO_DATA.about);
+  useSEO(SEO_DATA.about);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    let cancelled = false;
+    // Align after loading and font layout, including the browser's scroll restoration.
+    const alignHash = () => {
+      document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (!cancelled) document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: 'auto' });
+      })));
+    };
+    if (document.readyState === 'complete') alignHash();
+    else window.addEventListener('load', alignHash, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener('load', alignHash);
+    };
+  }, []);
 
-    return (
-        <div className="min-h-screen pb-20 bg-gradient-to-b from-sky-50 to-slate-50">
-            <section
-                data-header-hero="light"
-                className="relative isolate min-h-[62vh] sm:min-h-[68vh] pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden flex items-center bg-cover bg-center"
-                style={{
-                    backgroundColor: '#0f172a',
-                    backgroundImage: "linear-gradient(to bottom, rgba(2, 6, 23, 0.72), rgba(2, 6, 23, 0.42) 45%, rgba(240, 249, 255, 0.96) 100%), url('/lexi.webp')",
-                    backgroundPosition: 'center 30%',
-                }}
-            >
-                <div className="absolute top-0 right-0 z-10 w-96 h-96 bg-sky-300/18 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-                <div className="absolute bottom-0 left-0 z-10 w-72 h-72 bg-cyan-300/14 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
-
-                <div className="relative z-20 max-w-4xl mx-auto text-center">
-                    <Breadcrumb
-                        variant="light"
-                        className="mb-4 sm:mb-6 justify-center [&>ol]:justify-center"
-                        items={[
-                            { label: 'Home', to: '/' },
-                            { label: 'Over ons' },
-                        ]}
-                    />
-                    <div className="inline-flex items-center justify-center p-4 bg-white/12 backdrop-blur-md border border-white/20 text-white rounded-2xl mb-6 shadow-sm">
-                        <PawPrint size={40} strokeWidth={2.5} />
-                    </div>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight drop-shadow-[0_12px_34px_rgba(0,0,0,0.38)]">
-                        Over <span className="text-sky-300 relative inline-block">
-                            HondAanZee
-                            <svg className="absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-300/30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0 5 Q 25 0 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="8" />
-                            </svg>
-                        </span>
-                    </h1>
-                    <p className="text-xl text-slate-100 leading-relaxed max-w-2xl mx-auto drop-shadow-[0_8px_24px_rgba(0,0,0,0.32)]">
-                        De complete gids voor een zorgeloos verblijf met je viervoeter aan de Belgische kust
-                    </p>
-                </div>
-
-                <div className="absolute -bottom-3 left-0 z-20 w-full overflow-hidden leading-[0]">
-                    <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-                        <svg
-                            className="block h-[60px] sm:h-[80px] md:h-[110px]"
-                            style={{ minWidth: '100%', flex: '0 0 50%' }}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 1200 120"
-                            preserveAspectRatio="none"
-                        >
-                            <path
-                                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                                className="fill-current text-sky-50"
-                            />
-                        </svg>
-                        <svg
-                            className="block h-[60px] sm:h-[80px] md:h-[110px]"
-                            style={{ minWidth: '100%', flex: '0 0 50%' }}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 1200 120"
-                            preserveAspectRatio="none"
-                        >
-                            <path
-                                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                                className="fill-current text-sky-50"
-                            />
-                        </svg>
-                    </div>
-                </div>
-            </section>
-
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Header Section */}
-                {/* Hero Image Section */}
-                <div className="relative z-30 mb-16 -mt-16 sm:-mt-20 md:-mt-24 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/70">
-                    <img 
-                        src="/jaxenikV5.webp" 
-                        alt="Kevin en Jax aan zee" 
-                        className="w-full h-auto object-contain"
-                        width={1200}
-                        height={675}
-                        loading="eager"
-                        decoding="async"
-                    />
-                </div>
-
-                {/* Story Section */}
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-xl overflow-hidden border-2 border-amber-100 mb-8">
-                    <div className="p-8 sm:p-12">
-                        <div className="flex items-center gap-3 mb-6">
-                            <Heart className="text-amber-600" size={28} strokeWidth={2.5} />
-                            <h2 className="text-3xl font-black text-slate-900">Het Verhaal</h2>
-                        </div>
-                        
-                        <div className="prose prose-lg prose-slate max-w-none">
-                            <p className="text-slate-700 leading-relaxed mb-4">
-                                Hoi! Ik ben Kevin, en dit is Jax — mijn 6-jarige Australische Herder en de echte inspiratie achter dit platform.
-                            </p>
-                            <p className="text-slate-700 leading-relaxed mb-4">
-                                Als rasechte kustbewoner dacht ik de weg wel te kennen. Maar telkens opnieuw botste ik op dezelfde vragen: <em>"Mag Jax hier nu los? Is dit strand in de zomer wel toegankelijk? En hoe vermijd ik die absurde boetes?"</em>
-                            </p>
-                            <p className="text-slate-700 leading-relaxed mb-4">
-                                Niets verpest een wandeling sneller dan de twijfel of je ergens wel <strong>mág</strong> lopen. Je wil gewoon van de zee genieten, zonder constant over je schouder te kijken naar de lokale politie of vage verbodsborden te ontcijferen.
-                            </p>
-                            <p className="text-slate-700 leading-relaxed mb-4">
-                                Ik was het beu om urenlang te graven in onduidelijke gemeentewebsites en verouderde PDF's. Als webdeveloper nam ik het heft in eigen handen: ik verzamelde alle info op één centrale plek. Wat begon als een persoonlijk project voor Jax en mezelf, is ondertussen uitgegroeid tot <strong>dé gids voor de hele kust.</strong>
-                            </p>
-                            <p className="text-slate-700 leading-relaxed mb-4">
-                                Vandaag helpt HondAanZee maandelijks duizenden hondeneigenaars de weg te vinden. Zo kun jij zorgeloos op stap, zonder schrik voor boetes of onaangename verrassingen.
-                            </p>
-                            <p className="text-slate-700 leading-relaxed font-medium text-lg">
-                                Zodat je je enkel nog druk hoeft te maken over de zandpoten in de auto. 🐾
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Mission Section */}
-                <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 mb-8">
-                    <div className="p-8 sm:p-12">
-                        <div className="flex items-center gap-3 mb-6">
-                            <MapPin className="text-sky-600" size={28} strokeWidth={2.5} />
-                            <h2 className="text-3xl font-black text-slate-900">De Missie</h2>
-                        </div>
-                        
-                        <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                            Mijn doel is simpel: <strong>ervoor zorgen dat jij en je hond zonder zorgen kunnen genieten van de Belgische kust.</strong>
-                        </p>
-
-                        <div className="grid sm:grid-cols-2 gap-4">
-                            <div className="bg-sky-50 p-6 rounded-2xl border border-sky-100">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="bg-sky-600 p-2 rounded-lg text-white">
-                                        <Database size={20} />
-                                    </div>
-                                    <h3 className="font-bold text-slate-900">Compleet</h3>
-                                </div>
-                                <p className="text-slate-600 text-sm leading-relaxed">
-                                    Alle kuststeden, stranden, losloopzones, hotspots en hondvriendelijke zaken op één plek.
-                                </p>
-                            </div>
-
-                            <div className="bg-sky-50 p-6 rounded-2xl border border-sky-100">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="bg-sky-600 p-2 rounded-lg text-white">
-                                        <Clock size={20} />
-                                    </div>
-                                    <h3 className="font-bold text-slate-900">Actueel</h3>
-                                </div>
-                                <p className="text-slate-600 text-sm leading-relaxed">
-                                    Regelmatig geüpdatet met de nieuwste politieverordeningen en seizoensregels.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* How it Works Section */}
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-xl overflow-hidden border-2 border-amber-100 mb-8">
-                    <div className="p-8 sm:p-12">
-                        <div className="flex items-center gap-3 mb-6">
-                            <Coffee className="text-amber-600" size={28} strokeWidth={2.5} />
-                            <h2 className="text-3xl font-black text-slate-900">Hoe Het Werkt</h2>
-                        </div>
-                        
-                        <div className="prose prose-lg prose-slate max-w-none">
-                            <p className="text-slate-700 leading-relaxed mb-4">
-                                <strong>Transparantie is belangrijk voor mij.</strong> Alle informatie op HondAanZee komt rechtstreeks uit:
-                            </p>
-                            <ul className="space-y-2 text-slate-700">
-                                <li>📜 Officiële gemeentelijke politieverordeningen</li>
-                                <li>🏖️ Websites van kuststeden en toeristische diensten</li>
-                                <li>🐾 Persoonlijke bezoeken en verificaties</li>
-                                <li>💬 Tips en feedback van andere hondenbezitters</li>
-                            </ul>
-                            <p className="text-slate-700 leading-relaxed mt-4">
-                                <strong>Dit is een passieproject.</strong> Ik ben geen grote organisatie, maar één persoon die in zijn vrije tijd deze site onderhoudt. Dat betekent ook dat het soms wat tijd kan kosten om nieuwe plekken toe te voegen of updates door te voeren – maar ik doe mijn best om alles zo actueel mogelijk te houden!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Privacy & No Corporate BS Section */}
-                <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-xl overflow-hidden text-white p-8 sm:p-12 mb-8 relative">
-                    <div className="absolute top-0 right-0 opacity-5">
-                        <PawPrint size={200} strokeWidth={1.5} />
-                    </div>
-                    <div className="relative z-10">
-                        <h2 className="text-3xl font-black mb-6">Geen Corporate Bullshit</h2>
-                        <div className="prose prose-lg prose-invert max-w-none">
-                            <p className="text-slate-200 leading-relaxed mb-4">
-                                We houden niet van grote corporate toestanden. HondAanZee is simpel, eerlijk en zonder poespas.
-                            </p>
-                            <p className="text-slate-200 leading-relaxed mb-6">
-                                <strong className="text-white">Dat betekent concreet:</strong>
-                            </p>
-                            <div className="grid sm:grid-cols-2 gap-4 not-prose">
-                                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20">
-                                    <div className="text-2xl mb-2">🚫🍪</div>
-                                    <h3 className="font-bold text-white mb-2">Geen Cookies</h3>
-                                    <p className="text-slate-300 text-sm leading-relaxed">
-                                        Geen tracking cookies, geen analytics die je volgen. Gewoon een website die doet wat hij moet doen.
-                                    </p>
-                                </div>
-                                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20">
-                                    <div className="text-2xl mb-2">🔒</div>
-                                    <h3 className="font-bold text-white mb-2">Jouw Privacy</h3>
-                                    <p className="text-slate-300 text-sm leading-relaxed">
-                                        We verzamelen geen persoonlijke data. Wat je bekijkt blijft tussen jou en je browser.
-                                    </p>
-                                </div>
-                                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20">
-                                    <div className="text-2xl mb-2">📱</div>
-                                    <h3 className="font-bold text-white mb-2">Installeer als App</h3>
-                                    <p className="text-slate-300 text-sm leading-relaxed">
-                                        Je kan deze site installeren als app op je telefoon! Klik in je browser op "Toevoegen aan beginscherm" (iOS) of "Installeren" (Android).
-                                    </p>
-                                </div>
-                                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20">
-                                    <div className="text-2xl mb-2">💙</div>
-                                    <h3 className="font-bold text-white mb-2">Simpel & Eerlijk</h3>
-                                    <p className="text-slate-300 text-sm leading-relaxed">
-                                        Geen verborgen agenda's. Gewoon nuttige info voor mensen die van honden en de zee houden.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Support Section */}
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-xl overflow-hidden border-2 border-amber-100 p-8 sm:p-12 relative">
-                    <div className="absolute top-0 right-0 opacity-5">
-                        <PawPrint size={200} strokeWidth={1.5} className="text-amber-600" />
-                    </div>
-                    <div className="relative z-10">
-                        <h2 className="text-3xl font-black mb-4 text-slate-900">Steun Het Project</h2>
-                        <p className="text-slate-700 text-lg leading-relaxed mb-4">
-                            HondAanZee is een volledig gratis platform dat Jax en ik met veel passie onderhouden. We verzamelen alle informatie over hondvriendelijke plekken aan de Belgische kust, houden politieverordeningen bij, en zorgen dat jij en je hond altijd weten waar jullie welkom zijn.
-                        </p>
-                        <p className="text-slate-700 text-lg leading-relaxed mb-6">
-                            Dit kost echter geld (hosting, domeinnaam, onderhoud) en vooral héél veel tijd en moeite. Van het updaten van seizoensregels tot het persoonlijk verifiëren van nieuwe hotspots – het is een uit de hand gelopen hobbyproject waar we ons hart en ziel in steken om alle baasjes en hun viervoeters een zorgeloos verblijf te bezorgen aan onze mooie Belgische kust. ❤️
-                        </p>
-                        <p className="text-slate-900 font-bold text-lg leading-relaxed mb-8 text-center">
-                            Vind je deze gratis kustgids voor honden nuttig? Trakteer Jax dan op een symbolisch hondenkoekje! 🐾
-                        </p>
-                        <div className="flex justify-center">
-                            <a 
-                                href="/steun-ons"
-                                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-4 rounded-2xl font-black text-lg hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg active:scale-95"
-                            >
-                                Trakteer een koekje
-                                <Heart size={20} className="fill-white" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Contact Section */}
-                <div className="mt-8 bg-gradient-to-br from-pink-500 via-purple-500 to-purple-600 rounded-3xl shadow-xl overflow-hidden text-white p-8 sm:p-12 relative">
-                    <div className="absolute top-0 right-0 opacity-10">
-                        <Camera size={180} strokeWidth={1.5} />
-                    </div>
-                    <div className="relative z-10">
-                        <h2 className="text-3xl font-black mb-4 text-center">Volg Ons & Deel Je Avonturen! 📸</h2>
-                        <p className="text-white/90 text-lg text-center mb-8 max-w-2xl mx-auto leading-relaxed">
-                            Tag ons op Instagram <strong>@hondaanzee</strong> met jullie mooiste strandmomenten! We delen graag jullie foto's en verhalen. 🐾
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-                            <a
-                                href="https://www.instagram.com/hondaanzee/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-3 bg-white text-purple-600 hover:bg-purple-50 px-8 py-4 rounded-2xl transition-all group w-full sm:w-auto justify-center shadow-xl font-black text-lg"
-                            >
-                                <Camera size={24} className="group-hover:scale-110 transition-transform" />
-                                <span>Instagram</span>
-                            </a>
-                            <a
-                                href="https://www.facebook.com/hondaanzee"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-3 bg-white text-[#1877F2] hover:bg-blue-50 px-8 py-4 rounded-2xl transition-all group w-full sm:w-auto justify-center shadow-xl font-black text-lg"
-                            >
-                                <svg className="w-6 h-6 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                                <span>Facebook</span>
-                            </a>
-                            <a
-                                href={"https://wa.me/32494816714?text=" + encodeURIComponent("Hallo Jax & Kevin! 👋\n\nIk heb net jullie \"Over ons\" pagina gelezen en wou even hallo zeggen!\n\nGroetjes! 🐾")}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-3 bg-white text-slate-900 hover:bg-slate-50 border-2 border-slate-200 px-8 py-4 rounded-2xl transition-all group w-full sm:w-auto justify-center shadow-xl font-black text-lg"
-                            >
-                                <MessageCircle size={24} className="text-green-500 group-hover:scale-110 transition-transform" />
-                                <span>Chat via WhatsApp</span>
-                            </a>
-                        </div>
-                        <div className="flex justify-center mb-6">
-                            <a
-                                href="mailto:info@hondaanzee.be"
-                                className="flex items-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/30 px-6 py-4 rounded-2xl transition-colors group w-full sm:w-auto justify-center font-bold"
-                            >
-                                <Mail size={20} className="group-hover:scale-110 transition-transform" />
-                                <span>info@hondaanzee.be</span>
-                            </a>
-                        </div>
-                        <p className="text-white/80 text-center text-sm leading-relaxed">
-                            💌 Stuur ons je mooiste strandfoto's, tips voor nieuwe plekken, of gewoon een leuk verhaal!<br />
-                            🐶 Samen maken we HondAanZee nóg beter voor alle viervoeters aan de kust.
-                        </p>
-                    </div>
-                </div>
-
+  return (
+    <div className="about-page">
+      <header className="about-hero">
+        <div className="about-shell">
+          <Breadcrumb className="about-breadcrumb" items={[{ label: 'Home', to: '/' }, { label: 'Over ons' }]} />
+          <div className="about-hero__layout">
+            <div className="about-hero__copy">
+              <p className="about-eyebrow">De mens en de hond achter HondAanZee</p>
+              <h1><span>Eén developer.</span><em>Eén hond.</em><span>Een kust vol plannen.</span></h1>
+              <p className="about-hero__intro">
+                Hoi, ik ben Kevin. <strong>Software developer, technologist en kustbewoner.</strong> Ik bouw graag dingen die het leven eenvoudiger maken. Naast mij staat Jax, mijn Australische Herder en de reden waarom dit project bestaat.
+              </p>
+              <p className="about-hero__aside">Ik bouw de website. Hij herinnert me eraan dat we ook nog naar buiten moeten.</p>
+              <div className="about-hero__actions">
+                <a href="#ons-verhaal" className="about-button">Lees ons verhaal <ArrowDown size={17} aria-hidden="true" /></a>
+                <a href="#contact" className="about-text-link">Zeg eens hallo <ArrowUpRight size={17} aria-hidden="true" /></a>
+              </div>
             </div>
+            <figure className="about-hero__photo">
+              <img src="/jaxenikV5.webp" alt="Kevin en zijn Australische Herder Jax samen op het strand." width={800} height={1108} sizes="(min-width: 1400px) 480px, (min-width: 900px) 38vw, calc(100vw - 3rem)" fetchPriority="high" decoding="async" />
+              <figcaption><span>Kevin &amp; Jax</span> Het hele team, inclusief zandpoten.</figcaption>
+            </figure>
+          </div>
+          <div className="about-reach" aria-label="Over HondAanZee">
+            <p><strong>Duizenden hondeneigenaars</strong><span>vinden hier maandelijks de weg</span></p>
+            <p><strong>Van De Panne tot Knokke-Heist</strong><span>fijne dagen langs de hele Belgische kust</span></p>
+            <p><strong>Persoonlijk gemaakt</strong><span>door Kevin, met Jax als vaste compagnon</span></p>
+          </div>
         </div>
-    );
+      </header>
+
+      <section id="ons-verhaal" className="about-story about-shell" aria-labelledby="about-story-title">
+        <div className="about-story__heading">
+          <p className="about-eyebrow">Van strandwandeling tot softwareproject</p>
+          <h2 id="about-story-title">Dit moest<br /><em>eenvoudiger kunnen.</em></h2>
+          <p className="about-story__side-note">We vertrokken voor een wandeling.<br />Ik kwam terug met een idee voor een website.</p>
+        </div>
+        <div className="about-story__copy">
+          <p>Als kustbewoner dacht ik de weg wel te kennen. Tot ik met Jax telkens weer op dezelfde vragen botste: mag hij hier los? Is dit strand in de zomer toegankelijk? En waar kunnen we na de wandeling samen iets gaan drinken?</p>
+          <p>Ik was het beu om daarvoor gemeentewebsites af te schuimen en PDF’s uit te pluizen. Je wilt een wandeling plannen, geen avondopleiding gemeentereglementen volgen.</p>
+          <p>Dus deed ik wat ik als software developer en technologist graag doe: een praktisch probleem uitzoeken en er iets bruikbaars voor bouwen. Ik bracht strandregels, losloopzones en hondvriendelijke adressen samen in één gids. Wat begon als een project voor Jax en mezelf, groeide uit tot HondAanZee.</p>
+          <p>Vandaag helpt HondAanZee <strong>maandelijks duizenden hondeneigenaars</strong> de weg te vinden aan de Belgische kust. Zodat je je vooral nog druk hoeft te maken over de zandpoten in de auto.</p>
+        </div>
+      </section>
+
+      <section className="about-method" aria-labelledby="about-method-title">
+        <div className="about-shell">
+          <div className="about-method__heading">
+            <div>
+              <p className="about-eyebrow">Met zorg gebouwd. Met de voeten in het zand.</p>
+              <h2 id="about-method-title">Een fijne wandeling begint<br /><em>met informatie die klopt.</em></h2>
+            </div>
+            <p>Achter de gids zitten brononderzoek, persoonlijke bezoeken en heel wat onderhoud. Mijn technische achtergrond helpt me om die informatie overzichtelijk en bruikbaar te maken.</p>
+          </div>
+          <ol className="about-method__steps">
+            <li>
+              <span className="about-method__number" aria-hidden="true">01</span>
+              <h3>Eerst de bronnen</h3>
+              <p>Voor strandregels vertrek ik van gemeentelijke bronnen en politieverordeningen. In de strandgidsen vind je de bronnen en de datum waarop we ze controleerden.</p>
+            </li>
+            <li>
+              <span className="about-method__number" aria-hidden="true">02</span>
+              <h3>Ook zelf op pad</h3>
+              <p>Jax en ik leren hondvriendelijke plekken persoonlijk kennen. Zo weten we wat baasjes en hun honden er mogen verwachten.</p>
+            </li>
+            <li>
+              <span className="about-method__number" aria-hidden="true">03</span>
+              <h3>Blijven verbeteren</h3>
+              <p>Regels veranderen, nieuwe plekken komen erbij en bezoekers sturen tips. Ik werk de gids bij en blijf sleutelen aan de website.</p>
+            </li>
+          </ol>
+          <p className="about-method__note">Zie je iets dat niet meer klopt? <a href="#contact">Laat het ons weten.</a> Ook een zorgvuldig gebouwde gids kan een update gebruiken.</p>
+        </div>
+      </section>
+
+      <section className="about-companion about-shell" aria-labelledby="about-companion-title">
+        <div>
+          <p className="about-eyebrow">Onze taakverdeling</p>
+          <h2 id="about-companion-title">Ik schrijf de code.<br /><em>Jax doet het veldwerk.</em></h2>
+        </div>
+        <div className="about-companion__copy">
+          <p>Ik onderzoek, bouw en onderhoud HondAanZee. Jax zorgt dat we de kust ook in het echt blijven ontdekken. Hij beoordeelt nieuwe plekken op ontvangst, waterbakjes en de beschikbaarheid van koekjes.</p>
+          <p className="about-companion__joke">Vooral dat laatste maakt zijn onafhankelijkheid als recensent soms discutabel.</p>
+          <p>Dit blijft een persoonlijk project dat ik in mijn vrije tijd onderhoud. Een nieuwe plek toevoegen of een wijziging nakijken kan dus even duren. Maar er wordt met aandacht aan gewerkt, tussen de wandelingen door.</p>
+        </div>
+      </section>
+
+      <section className="about-closing" aria-label="Steun en contact">
+        <div className="about-shell about-closing__layout">
+          <div className="about-support">
+            <p className="about-eyebrow">Help de gids op weg</p>
+            <h2>Een uit de hand<br /><em>gelopen hobbyproject.</em></h2>
+            <p>HondAanZee is gratis te gebruiken. De hosting, domeinnaam en het onderhoud kosten geld, en het uitzoeken en bijwerken van alle informatie vraagt tijd.</p>
+            <p>Vind je de gids nuttig? Met een bijdrage help je me om hem te onderhouden en verder uit te bouwen. Het hondenkoekje is symbolisch. Jax betreurt dat laatste.</p>
+            <Link to="/steun-ons" className="about-button">Trakteer een koekje <Heart size={17} aria-hidden="true" /></Link>
+          </div>
+          <div id="contact" className="about-contact" aria-labelledby="about-contact-title">
+            <p className="about-eyebrow">We horen graag van je</p>
+            <h2 id="about-contact-title">Een tip, een vraag,<br /><em>een goed verhaal?</em></h2>
+            <p>Een fijn adresje ontdekt? Een strandregel die veranderd is? Of gewoon een mooie foto van jullie dag aan zee? Stuur ze gerust door.</p>
+            <a href="mailto:info@hondaanzee.be" className="about-contact__email">info@hondaanzee.be <ArrowUpRight size={19} aria-hidden="true" /></a>
+            <div className="about-contact__links">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} aria-hidden="true" /> WhatsApp <ArrowUpRight size={15} aria-hidden="true" /></a>
+              <a href="https://www.instagram.com/hondaanzee/" target="_blank" rel="noopener noreferrer"><Camera size={17} aria-hidden="true" /> Instagram <ArrowUpRight size={15} aria-hidden="true" /></a>
+              <a href="https://www.facebook.com/hondaanzee" target="_blank" rel="noopener noreferrer">Facebook <ArrowUpRight size={15} aria-hidden="true" /></a>
+            </div>
+            <p className="about-contact__signoff">Groetjes van Kevin &amp; Jax.<br />Eén van ons heeft waarschijnlijk nog zand tussen de tenen.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default About;

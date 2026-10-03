@@ -34,7 +34,7 @@ const server = createServer((req, res) => {
     page.on('request', req => req.url().startsWith(base) ? req.continue() : req.abort());
     await page.setViewport({ width: 1440, height: 1000 });
     const examples = ['/', '/koksijde', '/de-panne', '/blog', routes.find(r => r.startsWith('/blog/')),
-      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/agenda/fotoshoot-de-haan-2026', '/agenda/hondenwandeling-bredene-2027', '/agenda/zeeuwse-winterfair-2026', '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons', '/zaak-aanmelden'];
+      '/agenda', routes.find(r => r.startsWith('/agenda/')), '/agenda/fotoshoot-de-haan-2026', '/agenda/hondenwandeling-bredene-2027', '/agenda/zeeuwse-winterfair-2026', '/losloopzones', routes.find(r => r.startsWith('/losloopzones/')), '/kaart', '/cookies', '/steun-ons', '/zaak-aanmelden', '/over-ons'];
     const titles = new Map();
     await page.setJavaScriptEnabled(false);
     for (const route of examples) {

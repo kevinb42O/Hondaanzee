@@ -60,7 +60,7 @@ export function renderPublicRoute(route: string) {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            {route !== '/zaak-aanmelden' && <ResponsibilityBanner />}
+            {!['/zaak-aanmelden', '/over-ons'].includes(route) && <ResponsibilityBanner />}
             <Footer />
           </div>
         </StaticRouter>

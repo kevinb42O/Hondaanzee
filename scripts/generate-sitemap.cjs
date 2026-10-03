@@ -31,7 +31,7 @@ const STATIC_ROUTE_FILES = {
   '/diensten': ['pages/AllServices.tsx', 'data/services.ts'],
   '/losloopzones': ['pages/AllOffLeashAreas.tsx', 'data/offLeashAreas.ts', 'cityData.ts'],
   '/kaart': ['pages/CoastalMap.tsx', 'components/CoastalMapRenderer.tsx', 'utils/rules.ts', 'cityData.ts', 'data/beachRules.ts', 'data/beachSafety.ts'],
-  '/over-ons': ['pages/About.tsx'],
+  '/over-ons': ['pages/About.tsx', 'pages/About.css'],
   '/goed-om-te-weten': ['pages/GoedOmTeWeten.tsx', 'components/goed-om-te-weten/EtiquetteSection.tsx', 'components/goed-om-te-weten/NatuurSection.tsx', 'data/beachRules.ts', 'data/beachSafety.ts'],
   '/steun-ons': ['pages/Support.tsx'],
   '/zaak-aanmelden': ['pages/ZaakAanmelden.tsx', 'pages/ZaakAanmelden.css'],

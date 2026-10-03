@@ -349,9 +349,10 @@ export const SEO_DATA = {
   },
 
   about: {
-    title: 'Over HondAanZee.be | Ons Verhaal & Missie – De Belgische Kust voor Hondenbezitters',
-    description: 'Leer het team achter HondAanZee.be kennen. Onze missie: de meest complete, gratis gids voor hondeneigenaars aan de Belgische kust. Van De Panne tot Knokke.',
-    keywords: 'over hondaanzee, hondaanzee team, hondvriendelijke kust belgie, missie hondaanzee',
+    title: 'Kevin & Jax | Het verhaal achter HondAanZee.be',
+    description: 'Maak kennis met Kevin, software developer, technologist en kustbewoner, en zijn hond Jax. Samen de inspiratie achter de gratis kustgids HondAanZee.be.',
+    keywords: 'over hondaanzee, Kevin en Jax, software developer, technologist, hondvriendelijke Belgische kust',
+    canonical: 'https://hondaanzee.be/over-ons',
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -366,7 +367,7 @@ export const SEO_DATA = {
         "@type": "AboutPage",
         "name": "Over HondAanZee.be",
         "url": "https://hondaanzee.be/over-ons",
-        "description": "De meest complete en actuele gids voor hondeneigenaars die de Belgische kust bezoeken.",
+        "description": "Het verhaal van Kevin, software developer en technologist, en zijn hond Jax achter de kustgids HondAanZee.be.",
         "publisher": {
           "@type": "Organization",
           "name": "HondAanZee.be",

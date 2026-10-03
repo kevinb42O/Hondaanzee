@@ -154,6 +154,7 @@ const AppContent = () => {
   const { pathname } = useLocation();
   const isAdminRoute = pathname === '/admin' || pathname.startsWith('/admin/') || pathname === '/_meldpunt-admin';
   const isMemberRoute = pathname === '/account' || pathname.startsWith('/uitstap/');
+  const isAboutOrSignupRoute = pathname === '/over-ons' || pathname === '/zaak-aanmelden';
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-sky-100 selection:text-sky-900" style={{ overflowX: 'clip' }}>
@@ -223,7 +224,7 @@ const AppContent = () => {
           </Suspense>
         </LocationAwareErrorBoundary>
       </main>
-      {!isAdminRoute && !isMemberRoute && pathname !== '/zaak-aanmelden' && (
+      {!isAdminRoute && !isMemberRoute && !isAboutOrSignupRoute && (
         <Suspense fallback={<div className="bg-gradient-to-b from-sky-900 to-blue-950" style={{ minHeight: '900px' }} />}>
           <ResponsibilityBanner />
         </Suspense>
@@ -233,8 +234,8 @@ const AppContent = () => {
           {isMemberRoute ? <footer className="member-site-footer"><div><span>Hond aan Zee <small>· Voor honden, baasjes en fijne dagen.</small></span><nav aria-label="Account voettekst"><a href="/privacy">Privacy</a><a href="/algemene-voorwaarden">Voorwaarden</a><a href="/over-ons">Over ons</a></nav></div></footer> : <Footer />}
         </Suspense>
       )}
-      {!isAdminRoute && !isMemberRoute && pathname !== '/zaak-aanmelden' && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
-      {!isAdminRoute && pathname !== '/zaak-aanmelden' && <ScrollToTop />}
+      {!isAdminRoute && !isMemberRoute && !isAboutOrSignupRoute && <ErrorBoundary><FloatingSupport /></ErrorBoundary>}
+      {!isAdminRoute && !isAboutOrSignupRoute && <ScrollToTop />}
       <SiteMeasurement />
       {!isAdminRoute && !isMemberRoute && <Analytics route={getAnalyticsPath(pathname)} path={getAnalyticsPath(pathname)} beforeSend={normalizeAnalyticsEvent} />}
     </div>

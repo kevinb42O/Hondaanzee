@@ -7,6 +7,7 @@ export const PAGE_UPDATED_DATES: Record<string, string> = {
   '/hotspots': '2026-10-02',
   '/diensten': '2026-10-02',
   '/zaak-aanmelden': SITE_UPDATE_DATE,
+  '/over-ons': SITE_UPDATE_DATE,
   '/losloopzones': '2026-10-02',
   '/kaart': SITE_UPDATE_DATE,
   '/blankenberge': SITE_UPDATE_DATE,

@@ -31,10 +31,10 @@ export default {
     "imageAlt": "Losloopzones Belgische Kust | Overzicht Hondenweides & Losloopgebieden aan Zee"
   },
   "/over-ons": {
-    "title": "Over HondAanZee.be | Ons Verhaal & Missie – De Belgische Kust voor Hondenbezitters",
-    "description": "Leer het team achter HondAanZee.be kennen. Onze missie: de meest complete, gratis gids voor hondeneigenaars aan de Belgische kust. Van De Panne tot Knokke.",
+    "title": "Kevin & Jax | Het verhaal achter HondAanZee.be",
+    "description": "Maak kennis met Kevin, software developer, technologist en kustbewoner, en zijn hond Jax. Samen de inspiratie achter de gratis kustgids HondAanZee.be.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
-    "imageAlt": "Over HondAanZee.be | Ons Verhaal & Missie – De Belgische Kust voor Hondenbezitters"
+    "imageAlt": "Kevin & Jax | Het verhaal achter HondAanZee.be"
   },
   "/steun-ons": {
     "title": "Steun HondAanZee.be | Help de gids gratis en actueel te houden 🐾",
