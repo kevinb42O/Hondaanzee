@@ -53,6 +53,7 @@ const server = createServer((req, res) => {
       for (const city of CITIES) {
         await page.goto(`${base}/${city.slug}`, { waitUntil: 'domcontentloaded' });
         await page.waitForSelector('.city-zone-row');
+        await page.waitForSelector('footer .site-shell > .grid');
         const layout = await page.evaluate(() => {
           const rect = selector => { const r = document.querySelector(selector).getBoundingClientRect(); return { x: r.x, right: r.right, y: r.y, width: r.width }; };
           const page = document.querySelector('.city-page');
@@ -60,6 +61,7 @@ const server = createServer((req, res) => {
             overflow: document.documentElement.scrollWidth - innerWidth,
             title: rect('.city-hero h1'), answer: rect('[data-beach-answer]'),
             back: rect('.city-back-link'), zones: rect('.city-beach-zones'),
+            footerContent: rect('footer .site-shell > .grid'),
             heroColumns: getComputedStyle(document.querySelector('.city-hero-grid')).gridTemplateColumns.split(' ').length,
             headings: page.querySelectorAll('h1').length,
             text: page.querySelector('h1').textContent,
@@ -70,6 +72,7 @@ const server = createServer((req, res) => {
         assert.equal(layout.headings, 1, `${city.slug}/${width}: multiple main headings`);
         assert(layout.text.includes(city.name), `${city.slug}/${width}: truncated city name`);
         assert.equal(layout.overflow, 0, `${city.slug}/${width}: horizontal overflow`);
+        assert(layout.footerContent.x >= 16 && layout.footerContent.right <= width - 16, `${city.slug}/${width}: footer content touches viewport edge`);
         assert(layout.answer.x >= 19 && layout.answer.right <= width - 19, `${city.slug}/${width}: answer clips outer gutter`);
         assert(layout.answer.width <= 641, `${city.slug}/${width}: oversized card grows without limit`);
         assert.equal(layout.heroColumns, width >= 1100 ? 2 : 1, `${city.slug}/${width}: squeezed hero columns`);
