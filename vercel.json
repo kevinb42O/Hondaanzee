@@ -9,6 +9,11 @@
     ],
     "redirects": [
         {
+            "source": "/sitemap-kustgidsen.xml",
+            "destination": "https://hondaanzee.be/sitemap.xml",
+            "permanent": true
+        },
+        {
             "source": "/",
             "has": [
                 {
