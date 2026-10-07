@@ -9,6 +9,17 @@
     ],
     "redirects": [
         {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.hondaanzee.be"
+                }
+            ],
+            "destination": "https://hondaanzee.be/",
+            "permanent": true
+        },
+        {
             "source": "/:path*",
             "has": [
                 {

@@ -3,7 +3,7 @@ const path = require('node:path');
 const { execSync } = require('node:child_process');
 const { createHash } = require('node:crypto');
 const placeData = require('./place-data.cjs');
-const { getAllRoutes, PAGE_UPDATED_DATES } = placeData;
+const { getAllRoutes, PAGE_UPDATED_DATES, CITIES } = placeData;
 const { getPlacePageRevisions } = require('./place-page-revisions.cjs');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
@@ -159,3 +159,13 @@ ${uniqueRoutes
 
 fs.writeFileSync(OUTPUT_PATH, xml);
 console.log(`Generated sitemap with ${uniqueRoutes.length} routes.`);
+
+// A stable subset lets Search Console follow the important coastal guides
+// separately from new event pages and expected alternate URL exclusions.
+const coastalRoutes = ['/', ...CITIES.map(city => `/${city.slug}`), '/kaart', '/losloopzones'];
+for (const route of coastalRoutes) {
+  if (!uniqueRoutes.includes(route)) throw new Error(`Unknown coastal sitemap route: ${route}`);
+}
+fs.writeFileSync(path.join(ROOT_DIR, 'public', 'sitemap-kustgidsen.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${coastalRoutes.map(route => `  <url><loc>https://hondaanzee.be${route}</loc><lastmod>${getLastmodForRoute(route)}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+console.log(`Generated coastal guide sitemap with ${coastalRoutes.length} routes.`);

@@ -1184,37 +1184,37 @@ export default {
   },
   "/agenda/dierenzegening-knokke-2026": {
     "title": "Dierenzegening Knokke-Heist 2026 | HondAanZee.be",
-    "description": "Dierenzegening Knokke-Heist, 4 oktober 2026 in Knokke-Heist. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Dierenzegening Knokke-Heist, 4 oktober 2026 in Knokke-Heist. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
     "imageAlt": "Dierenzegening Knokke-Heist 2026 | HondAanZee.be"
   },
   "/agenda/grote-dierenfeest-koolkerke-2026": {
     "title": "Het Grote Dierenfeest 2026 in Koolkerke | HondAanZee.be",
-    "description": "Het Grote Dierenfeest, 4 oktober 2026 in Koolkerke. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Het Grote Dierenfeest, 4 oktober 2026 in Koolkerke. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
     "imageAlt": "Het Grote Dierenfeest 2026 in Koolkerke | HondAanZee.be"
   },
   "/agenda/zwarteberg-2026": {
     "title": "Hondenwandeling Zwarteberg 2026 in Westouter (Heuvelland) | HondAanZee.be",
-    "description": "Hondenwandeling Zwarteberg, 3 & 4 oktober 2026 in Westouter (Heuvelland). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Hondenwandeling Zwarteberg, 3 & 4 oktober 2026 in Westouter (Heuvelland). Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/events/zwarteberg.webp",
     "imageAlt": "Hondenwandeling Zwarteberg 2026 in Westouter (Heuvelland) | HondAanZee.be"
   },
   "/agenda/marke-2026": {
     "title": "Hondenwandeling met Gianna en Maxim 2026 in Marke (Kortrijk) | HondAanZee.be",
-    "description": "Hondenwandeling met Gianna en Maxim, 4 oktober 2026 in Marke (Kortrijk). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Hondenwandeling met Gianna en Maxim, 4 oktober 2026 in Marke (Kortrijk). Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/events/marke.webp",
     "imageAlt": "Hondenwandeling met Gianna en Maxim 2026 in Marke (Kortrijk) | HondAanZee.be"
   },
   "/agenda/hondenwandeling-de-schelde-2026": {
     "title": "Hondenwandeling en welzijnsmarkt De Schelde 2026 in Berendrecht-Zandvliet-Lillo | HondAanZee.be",
-    "description": "Hondenwandeling en welzijnsmarkt De Schelde, 4 oktober 2026 in Berendrecht-Zandvliet-Lillo. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Hondenwandeling en welzijnsmarkt De Schelde, 4 oktober 2026 in Berendrecht-Zandvliet-Lillo. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
     "imageAlt": "Hondenwandeling en welzijnsmarkt De Schelde 2026 in Berendrecht-Zandvliet-Lillo | HondAanZee.be"
   },
   "/agenda/stokroos-2026": {
     "title": "Honden- en paardencafé De Stokroos 2026 in Nieuwerkerk | HondAanZee.be",
-    "description": "Honden- en paardencafé De Stokroos, 3 & 4 oktober 2026 in Nieuwerkerk. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Honden- en paardencafé De Stokroos, 3 & 4 oktober 2026 in Nieuwerkerk. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/events/stokroos.webp",
     "imageAlt": "Honden- en paardencafé De Stokroos 2026 in Nieuwerkerk | HondAanZee.be"
   },
