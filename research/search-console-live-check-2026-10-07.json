@@ -1,0 +1,215 @@
+{
+  "checked_on": "2026-10-07",
+  "results": [
+    {
+      "url": "https://www.hondaanzee.be/koksijde",
+      "error": "HTTP Error 308: Permanent Redirect",
+      "curl_redirect_verification": "HTTP/2 308 \ncache-control: public, max-age=0, must-revalidate\ncontent-type: text/plain\ndate: Wed, 07 Oct 2026 11:04:25 GMT\nlocation: https://hondaanzee.be/koksijde\nrefresh: 0;url=https://hondaanzee.be/koksijde\nserver: Vercel\nstrict-transport-security: max-age=63072000\nx-vercel-id: fra1::pknwk-1791371065714-d1452b5ce43e\n\nHTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 322354\ncache-control: no-cache, no-store, must-revalidate\ncontent-disposition: inline; filename=\"koksijde\"\ncontent-type: text/html; charset=utf-8\ndate: Wed, 07 Oct 2026 11:04:25 GMT\netag: \"f6831603c68b0eab94a3520e6746301d\"\nlast-modified: Sat, 03 Oct 2026 17:31:51 GMT\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000\nx-content-type-options: nosniff\nx-frame-options: DENY\nx-vercel-cache: HIT\nx-vercel-id: fra1::cvfz7-1791371065856-5ba455fa3606\nx-xss-protection: 1; mode=block\ncontent-length: 114031\n\nFINAL https://hondaanzee.be/koksijde 200",
+      "curl_exit_code": 0
+    },
+    {
+      "url": "https://hondaanzee.be/",
+      "final": "https://hondaanzee.be/",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/\">"
+      ],
+      "title": [
+        "Honden aan Zee België 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken aan de Belgische Kust"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 118794,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/oostende",
+      "final": "https://hondaanzee.be/oostende",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/oostende\">"
+      ],
+      "title": [
+        "Hond Strand Oostende 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Oostende"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 118872,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde",
+      "final": "https://hondaanzee.be/koksijde",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/koksijde\">"
+      ],
+      "title": [
+        "Hond Strand Koksijde - Oostduinkerke 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Koksijde - Oostduinkerke"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 113923,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne",
+      "final": "https://hondaanzee.be/de-panne",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/de-panne\">"
+      ],
+      "title": [
+        "Hond Strand De Panne 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken De Panne"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 95502,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/agenda",
+      "final": "https://hondaanzee.be/agenda",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/agenda\">"
+      ],
+      "title": [
+        "Hondvriendelijke Evenementen | Kust, West-Vlaanderen, België &amp; Zeeland – HondAanZee.be"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 166955,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/canicross-genendijk-2026",
+      "final": "https://hondaanzee.be/agenda/canicross-genendijk-2026",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/agenda/canicross-genendijk-2026\">"
+      ],
+      "title": [
+        "Canicross Genendijk 2026 | HondAanZee.be"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 64074,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-anoa",
+      "final": "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-anoa",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-anoa\">"
+      ],
+      "title": [
+        "Dierenartsencentrum Anoa in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "robots": [
+        "<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large\">"
+      ],
+      "h1_count": 1,
+      "bytes": 63323,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/robots.txt",
+      "final": "https://hondaanzee.be/robots.txt",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [],
+      "title": [],
+      "robots": [],
+      "h1_count": 0,
+      "bytes": 1392,
+      "sitemap_urls": null
+    },
+    {
+      "url": "https://hondaanzee.be/sitemap.xml",
+      "final": "https://hondaanzee.be/sitemap.xml",
+      "status": 200,
+      "x_robots": null,
+      "canonical": [],
+      "title": [],
+      "robots": [],
+      "h1_count": 0,
+      "bytes": 45315,
+      "sitemap_urls": 242
+    },
+    {
+      "url": "http://hondaanzee.be/",
+      "redirect_chain": [
+        {
+          "url": "http://hondaanzee.be/",
+          "status": 308,
+          "location": "https://hondaanzee.be/"
+        }
+      ],
+      "final": "https://hondaanzee.be/",
+      "status": 200,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/\">"
+      ]
+    },
+    {
+      "url": "http://www.hondaanzee.be/",
+      "redirect_chain": [
+        {
+          "url": "http://www.hondaanzee.be/",
+          "status": 308,
+          "location": "https://www.hondaanzee.be/"
+        }
+      ],
+      "final": "https://www.hondaanzee.be/",
+      "status": 200,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/\">"
+      ]
+    },
+    {
+      "url": "https://www.hondaanzee.be/",
+      "redirect_chain": [],
+      "final": "https://www.hondaanzee.be/",
+      "status": 200,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/\">"
+      ]
+    },
+    {
+      "url": "https://www.hondaanzee.be/oostende",
+      "redirect_chain": [
+        {
+          "url": "https://www.hondaanzee.be/oostende",
+          "status": 308,
+          "location": "https://hondaanzee.be/oostende"
+        }
+      ],
+      "final": "https://hondaanzee.be/oostende",
+      "status": 200,
+      "canonical": [
+        "<link rel=\"canonical\" href=\"https://hondaanzee.be/oostende\">"
+      ]
+    }
+  ]
+}

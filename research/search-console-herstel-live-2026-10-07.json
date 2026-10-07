@@ -1,0 +1,3681 @@
+{
+  "checked_on": "2026-10-07",
+  "commit": "b8eab83",
+  "total": 242,
+  "passed": 242,
+  "unique_titles": 242,
+  "coastal_sitemap": [
+    "https://hondaanzee.be/",
+    "https://hondaanzee.be/blankenberge",
+    "https://hondaanzee.be/zeebrugge",
+    "https://hondaanzee.be/knokke-heist",
+    "https://hondaanzee.be/de-haan",
+    "https://hondaanzee.be/wenduine",
+    "https://hondaanzee.be/bredene",
+    "https://hondaanzee.be/oostende",
+    "https://hondaanzee.be/middelkerke",
+    "https://hondaanzee.be/nieuwpoort",
+    "https://hondaanzee.be/koksijde",
+    "https://hondaanzee.be/de-panne",
+    "https://hondaanzee.be/kaart",
+    "https://hondaanzee.be/losloopzones"
+  ],
+  "redirects": [
+    {
+      "url": "https://www.hondaanzee.be/",
+      "exit_code": 0,
+      "chain": "HTTP/2 308 \nlocation: https://hondaanzee.be/\nHTTP/2 200 \nFINAL https://hondaanzee.be/ 200"
+    },
+    {
+      "url": "https://www.hondaanzee.be/?utm_source=seo-check",
+      "exit_code": 0,
+      "chain": "HTTP/2 308 \nlocation: https://hondaanzee.be/?utm_source=seo-check\nHTTP/2 200 \nFINAL https://hondaanzee.be/?utm_source=seo-check 200"
+    },
+    {
+      "url": "http://www.hondaanzee.be/",
+      "exit_code": 0,
+      "chain": "HTTP/1.0 308 Permanent Redirect\nLocation: https://www.hondaanzee.be/\nHTTP/2 308 \nlocation: https://hondaanzee.be/\nHTTP/2 200 \nFINAL https://hondaanzee.be/ 200"
+    },
+    {
+      "url": "https://www.hondaanzee.be/oostende",
+      "exit_code": 0,
+      "chain": "HTTP/2 308 \nlocation: https://hondaanzee.be/oostende\nHTTP/2 200 \nFINAL https://hondaanzee.be/oostende 200"
+    }
+  ],
+  "catalog_release": {
+    "releaseId": "0549afbd-fc3d-450c-b17a-e1ea87bb13ac",
+    "sha256": "c45e4c14d7ac2c1f3e9a46e84f4c30c9fc25eee46d182352f2e048751d929ec2"
+  },
+  "results": [
+    {
+      "url": "https://hondaanzee.be/",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/"
+      ],
+      "title": [
+        "Honden aan Zee België 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken aan de Belgische Kust"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/hotspots",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/hotspots"
+      ],
+      "title": [
+        "Hondvriendelijke Hotspots Belgische Kust | Cafés, Restaurants, Hotels &amp; Winkels waar Honden Welkom Zijn"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/diensten",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/diensten"
+      ],
+      "title": [
+        "Dierenartsen &amp; Dierenwinkels Belgische Kust | Praktische Diensten voor Hondenbezitters"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones"
+      ],
+      "title": [
+        "Losloopzones Belgische Kust | Overzicht Hondenweides &amp; Losloopgebieden aan Zee"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/kaart",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/kaart"
+      ],
+      "title": [
+        "Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart – HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/over-ons",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/over-ons"
+      ],
+      "title": [
+        "Kevin &amp; Jax | Het verhaal achter HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/goed-om-te-weten",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/goed-om-te-weten"
+      ],
+      "title": [
+        "Goed om te Weten | Veiligheid, EHBO &amp; Etiquette voor Honden aan het Strand – HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/steun-ons",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/steun-ons"
+      ],
+      "title": [
+        "Steun HondAanZee.be | Help de gids gratis en actueel te houden 🐾"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/zaak-aanmelden",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/zaak-aanmelden"
+      ],
+      "title": [
+        "Gratis je zaak aanmelden | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/privacy",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/privacy"
+      ],
+      "title": [
+        "Privacybeleid | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/algemene-voorwaarden",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/algemene-voorwaarden"
+      ],
+      "title": [
+        "Algemene Voorwaarden | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/cookies",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/cookies"
+      ],
+      "title": [
+        "Cookiebeleid | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog"
+      ],
+      "title": [
+        "Blog | HondAanZee.be — Tips, Natuur &amp; Nieuws over Honden aan de Belgische Kust"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda"
+      ],
+      "title": [
+        "Hondvriendelijke Evenementen | Kust, West-Vlaanderen, België &amp; Zeeland – HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/meldpunt",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/meldpunt"
+      ],
+      "title": [
+        "Meldpunt Gif &amp; Overlast Belgische Kust | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/meldpunt/vrijwilligers",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/meldpunt/vrijwilligers"
+      ],
+      "title": [
+        "Vrijwilligers voor het Meldpunt | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/updates",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/updates"
+      ],
+      "title": [
+        "Updates &amp; Nieuwigheden — laatste update 3 oktober 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge"
+      ],
+      "title": [
+        "Hond Strand Blankenberge 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Blankenberge"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/zeebrugge",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/zeebrugge"
+      ],
+      "title": [
+        "Hond Strand Zeebrugge 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Zeebrugge"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist"
+      ],
+      "title": [
+        "Hond Strand Knokke-Heist 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Knokke-Heist"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan"
+      ],
+      "title": [
+        "Hond Strand De Haan 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken De Haan"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine"
+      ],
+      "title": [
+        "Hond Strand Wenduine 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Wenduine"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/bredene",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/bredene"
+      ],
+      "title": [
+        "Hond Strand Bredene 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Bredene"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende"
+      ],
+      "title": [
+        "Hond Strand Oostende 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Oostende"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke"
+      ],
+      "title": [
+        "Hond Strand Middelkerke - Westende 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Middelkerke - Westende"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort"
+      ],
+      "title": [
+        "Hond Strand Nieuwpoort 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Nieuwpoort"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde"
+      ],
+      "title": [
+        "Hond Strand Koksijde - Oostduinkerke 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Koksijde - Oostduinkerke"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne"
+      ],
+      "title": [
+        "Hond Strand De Panne 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken De Panne"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/blauwalg-hond-strand-waarschuwing",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/blauwalg-hond-strand-waarschuwing"
+      ],
+      "title": [
+        "Doe de Water-Check: Zo Herken Je Blauwalg Voordat Je Hond Erin Zwemt Of Eruit Drinkt | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/hond-strand-warm-weer",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/hond-strand-warm-weer"
+      ],
+      "title": [
+        "Met je hond naar zee bij warm weer: do&#39;s en don&#39;ts voor een veilige stranddag | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/van-trekhond-tot-strandkoning-geschiedenis-kusthonden",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/van-trekhond-tot-strandkoning-geschiedenis-kusthonden"
+      ],
+      "title": [
+        "Van trekhond tot strandkoning: de vergeten geschiedenis van kusthonden | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/zeehonden-aan-de-belgische-kust",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/zeehonden-aan-de-belgische-kust"
+      ],
+      "title": [
+        "Zeehonden aan de Belgische kust: wat als je hond er eentje tegenkomt? | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/opruimacties-proper-strand-lopers",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/opruimacties-proper-strand-lopers"
+      ],
+      "title": [
+        "Opruimacties aan de kust: samen voor een proper strand | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/mooiste-bossen-belgische-kust-wandelen-met-hond",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/mooiste-bossen-belgische-kust-wandelen-met-hond"
+      ],
+      "title": [
+        "De 6 mooiste bossen aan de Belgische kust om te wandelen met je hond | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/zwemplekjes-honden-belgische-kust",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/zwemplekjes-honden-belgische-kust"
+      ],
+      "title": [
+        "De leukste zwemplekjes voor je hond aan de Belgische kust (en het is niet de zee!) | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/mentale-leiband-vrijheid-met-connectie",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/mentale-leiband-vrijheid-met-connectie"
+      ],
+      "title": [
+        "De Mentale Leiband: Vrijheid door middel van Connectie en Controle | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blog/spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blog/spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux"
+      ],
+      "title": [
+        "De Spiegel aan de Leiband: Waarom Echte Hondenliefde Begint in de Rust | HondAanZee.be Blog"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/kwispelfestival-de-panne-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/kwispelfestival-de-panne-2026"
+      ],
+      "title": [
+        "Kwispelfestival De Panne 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/groot-oostends-hondenfestival-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/groot-oostends-hondenfestival-2026"
+      ],
+      "title": [
+        "Groot Oostends Hondenfestival 2026 in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/grote-hondenwandeling-bredene-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/grote-hondenwandeling-bredene-2026"
+      ],
+      "title": [
+        "Grote Hondenwandeling Bredene 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dierenzegening-knokke-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/dierenzegening-knokke-2026"
+      ],
+      "title": [
+        "Dierenzegening Knokke-Heist 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/grote-dierenfeest-koolkerke-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/grote-dierenfeest-koolkerke-2026"
+      ],
+      "title": [
+        "Het Grote Dierenfeest 2026 in Koolkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/zwarteberg-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/zwarteberg-2026"
+      ],
+      "title": [
+        "Hondenwandeling Zwarteberg 2026 in Westouter (Heuvelland) | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/marke-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/marke-2026"
+      ],
+      "title": [
+        "Hondenwandeling met Gianna en Maxim 2026 in Marke (Kortrijk) | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/hondenwandeling-de-schelde-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/hondenwandeling-de-schelde-2026"
+      ],
+      "title": [
+        "Hondenwandeling en welzijnsmarkt De Schelde 2026 in Berendrecht-Zandvliet-Lillo | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/stokroos-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/stokroos-2026"
+      ],
+      "title": [
+        "Honden- en paardencafé De Stokroos 2026 in Nieuwerkerk | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/titan-paw-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/titan-paw-2026"
+      ],
+      "title": [
+        "Titan Paw 2026 in Lille (Gierle) | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/fotoshoot-de-haan-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/fotoshoot-de-haan-2026"
+      ],
+      "title": [
+        "Hondenwandeling + fotoshoot De Haan 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/howl-o-ween-dudzele-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/howl-o-ween-dudzele-2026"
+      ],
+      "title": [
+        "Howl-O-ween Het Blauwe Kruis Brugge 2026 in Dudzele (Brugge) | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/halloween-wevelgem-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/halloween-wevelgem-2026"
+      ],
+      "title": [
+        "Heksenbos / Halloweentocht Juttepaardje 2026 in Wevelgem | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/hondenhalloween-balen-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/hondenhalloween-balen-2026"
+      ],
+      "title": [
+        "Hondenhalloween Balen-Olmen 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/canicross-genendijk-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/canicross-genendijk-2026"
+      ],
+      "title": [
+        "Canicross Genendijk 2026 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/lichtgolf-oostende-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/lichtgolf-oostende-2026"
+      ],
+      "title": [
+        "Lichtgolf Oostende 2026–2027 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/zeeuwse-winterfair-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/zeeuwse-winterfair-2026"
+      ],
+      "title": [
+        "Zeeuwse Winterfair aan Zee 2026 in Noordwelle | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dogsurvival-winter-2026",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/dogsurvival-winter-2026"
+      ],
+      "title": [
+        "Dogsurvival Therapy4Dogs — wintereditie 2026 in Merksplas | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dierenfestival-waregem-2027",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/dierenfestival-waregem-2027"
+      ],
+      "title": [
+        "Dierenfestival Waregem 2027 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/dogs-friends-2027",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/dogs-friends-2027"
+      ],
+      "title": [
+        "Dogs &amp; Friends 2027 in La Hulpe (Terhulpen) | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/agenda/hondenwandeling-bredene-2027",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/agenda/hondenwandeling-bredene-2027"
+      ],
+      "title": [
+        "Hondenwandeling Bredene 2027 | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/lakaiann",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/lakaiann"
+      ],
+      "title": [
+        "Lakaiann in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/dune-hotel-nieuwpoort",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/dune-hotel-nieuwpoort"
+      ],
+      "title": [
+        "Dune Hotel Nieuwpoort in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/beachbar-de-kwinte",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/beachbar-de-kwinte"
+      ],
+      "title": [
+        "Beachbar De Kwinte in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/bistrot-de-la-mer",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/bistrot-de-la-mer"
+      ],
+      "title": [
+        "Bistrot de la Mer in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/c-hotels-andromeda",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/c-hotels-andromeda"
+      ],
+      "title": [
+        "C-Hotels Andromeda in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/gastrobar-sam",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/gastrobar-sam"
+      ],
+      "title": [
+        "Gastrobar Sam in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/upstairs-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/upstairs-hotel"
+      ],
+      "title": [
+        "Upstairs Hotel in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/hotspots/siesta-bar",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/siesta-bar"
+      ],
+      "title": [
+        "Siesta Bar in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/hotspots/brasserie-rubens",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/brasserie-rubens"
+      ],
+      "title": [
+        "Brasserie Rubens in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/brasserie-montmartre",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/brasserie-montmartre"
+      ],
+      "title": [
+        "Brasserie Montmartre in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/belgium-pier-brasserie",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/belgium-pier-brasserie"
+      ],
+      "title": [
+        "Belgium Pier Brasserie in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/hotspots/de-verloren-gernoare",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/hotspots/de-verloren-gernoare"
+      ],
+      "title": [
+        "De Verloren Gernoare in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/brasserie-carrousel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/brasserie-carrousel"
+      ],
+      "title": [
+        "Brasserie Carrousel in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/brasserie-het-kompas",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/brasserie-het-kompas"
+      ],
+      "title": [
+        "Brasserie Het Kompas in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/bistro-noordzee",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/bistro-noordzee"
+      ],
+      "title": [
+        "Bistro Noordzee in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/de-lekpot",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/de-lekpot"
+      ],
+      "title": [
+        "De Lekpot in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/hotspots/restaurant-de-concessie",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/restaurant-de-concessie"
+      ],
+      "title": [
+        "Restaurant De Concessie in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/bel-air",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/bel-air"
+      ],
+      "title": [
+        "Bel&#39;air in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/beach-palace-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/beach-palace-hotel"
+      ],
+      "title": [
+        "Beach Palace Hotel in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/cozy-moments",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/cozy-moments"
+      ],
+      "title": [
+        "Cozy Moments in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/bredene/hotspots/alaska",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/bredene/hotspots/alaska"
+      ],
+      "title": [
+        "Alaska in Bredene | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/bredene/hotspots/coffee-wine-de-golf",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/bredene/hotspots/coffee-wine-de-golf"
+      ],
+      "title": [
+        "Coffee &amp; Wine De Golf in Bredene | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/bredene/hotspots/brasserie-shop-n-lunch-p-p",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/bredene/hotspots/brasserie-shop-n-lunch-p-p"
+      ],
+      "title": [
+        "Brasserie Shop &#39;n Lunch P&amp;P in Bredene | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/mercure-oostende",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/mercure-oostende"
+      ],
+      "title": [
+        "Mercure Oostende in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/hotel-pacific",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/hotel-pacific"
+      ],
+      "title": [
+        "Hotel Pacific in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/hotel-royal-astrid",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/hotel-royal-astrid"
+      ],
+      "title": [
+        "Hotel Royal Astrid in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/hotel-albert-ii",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/hotel-albert-ii"
+      ],
+      "title": [
+        "Hotel Albert II in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/charmehotel-t-kruishof",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/charmehotel-t-kruishof"
+      ],
+      "title": [
+        "Charmehotel &#39;t Kruishof in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/b-b-huyze-elimonica",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/b-b-huyze-elimonica"
+      ],
+      "title": [
+        "B&amp;B Huyze Elimonica in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/villa-cecha-b-b-wellness",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/villa-cecha-b-b-wellness"
+      ],
+      "title": [
+        "Villa Cecha B&amp;B &amp; Wellness in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/maison-martha",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/maison-martha"
+      ],
+      "title": [
+        "Maison Martha in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/villa-odette",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/villa-odette"
+      ],
+      "title": [
+        "Villa Odette in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/sea-breeze",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/sea-breeze"
+      ],
+      "title": [
+        "Sea Breeze in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/zilte-stilte",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/zilte-stilte"
+      ],
+      "title": [
+        "Zilte Stilte in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/les-cabanes-d-ostende",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/les-cabanes-d-ostende"
+      ],
+      "title": [
+        "Les Cabanes d&#39;Ostende in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/taverne-de-klokke",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/taverne-de-klokke"
+      ],
+      "title": [
+        "Taverne De Klokke in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/yuzu",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/yuzu"
+      ],
+      "title": [
+        "Yuzu in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/brasserie-david",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/brasserie-david"
+      ],
+      "title": [
+        "Brasserie David in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/moby-dick",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/moby-dick"
+      ],
+      "title": [
+        "Moby Dick in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/bottarga",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/bottarga"
+      ],
+      "title": [
+        "Bottarga in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/cappuccino-rooftop-bar",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/cappuccino-rooftop-bar"
+      ],
+      "title": [
+        "Cappuccino Rooftop Bar in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/han-s-centrum",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/han-s-centrum"
+      ],
+      "title": [
+        "HAN&#39;s centrum in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/lloyd-coffee-eatery",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/lloyd-coffee-eatery"
+      ],
+      "title": [
+        "Lloyd Coffee Eatery in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/grand-cafe",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/grand-cafe"
+      ],
+      "title": [
+        "Grand Café in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/fondue-co-t-keteltje",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/fondue-co-t-keteltje"
+      ],
+      "title": [
+        "Fondue &amp; Co &#39;t Keteltje in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/frituur-sparkle-chips",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/frituur-sparkle-chips"
+      ],
+      "title": [
+        "Frituur Sparkle Chips in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/de-sleutel-la-clef",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/de-sleutel-la-clef"
+      ],
+      "title": [
+        "De Sleutel &amp; La Clef in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/frituur-taste",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/frituur-taste"
+      ],
+      "title": [
+        "Frituur Taste in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/huisje-van-majutte",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/huisje-van-majutte"
+      ],
+      "title": [
+        "Huisje van Majutte in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/tearoom-koffiepotje",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/tearoom-koffiepotje"
+      ],
+      "title": [
+        "Tearoom Koffiepotje in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/my-home-my-coffee",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/my-home-my-coffee"
+      ],
+      "title": [
+        "My Home My Coffee in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/b-b-chez-ba-nus",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/b-b-chez-ba-nus"
+      ],
+      "title": [
+        "B&amp;B Chez Ba&#39;Nus in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/vakantieappartement-ld383277",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/vakantieappartement-ld383277"
+      ],
+      "title": [
+        "Vakantieappartement LD383277 in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/brasserie-eloise",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/brasserie-eloise"
+      ],
+      "title": [
+        "Brasserie Eloïse in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/bredene/hotspots/hippo-12",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/bredene/hotspots/hippo-12"
+      ],
+      "title": [
+        "Hippo 12 in Bredene | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/hotspots/bar-delta",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/bar-delta"
+      ],
+      "title": [
+        "Bar Delta in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/sea-sparkle",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/sea-sparkle"
+      ],
+      "title": [
+        "Sea Sparkle in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/pancho",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/pancho"
+      ],
+      "title": [
+        "Pancho in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/restaurant-t-pomptje",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/restaurant-t-pomptje"
+      ],
+      "title": [
+        "Restaurant &#39;t Pomptje in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/tearoom-wielingen-bar",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/tearoom-wielingen-bar"
+      ],
+      "title": [
+        "Tearoom Wielingen Bar in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/maison-elza",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/maison-elza"
+      ],
+      "title": [
+        "Maison Elza in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/cafe-central",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/cafe-central"
+      ],
+      "title": [
+        "Café Central in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/praatcafe-de-spioenkop",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/praatcafe-de-spioenkop"
+      ],
+      "title": [
+        "Praatcafé De Spioenkop in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/de-zoete-zonde",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/de-zoete-zonde"
+      ],
+      "title": [
+        "De Zoete Zonde in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/casa-mati",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/casa-mati"
+      ],
+      "title": [
+        "Casa MaTi in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/bistra-liva",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/bistra-liva"
+      ],
+      "title": [
+        "Bistra Liva in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/hotspots/ibis-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/ibis-hotel"
+      ],
+      "title": [
+        "Ibis Hotel in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/bistro-thuus",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/bistro-thuus"
+      ],
+      "title": [
+        "Bistro THUUS in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/residence-du-centre",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/residence-du-centre"
+      ],
+      "title": [
+        "Residence Du Centre in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/brasserie-bon-appetit",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/brasserie-bon-appetit"
+      ],
+      "title": [
+        "Brasserie Bon Appetit in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/hotspots/vakantiehuis-zee-hond",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/hotspots/vakantiehuis-zee-hond"
+      ],
+      "title": [
+        "Vakantiehuis Zee-Hond in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/vakantieappartement-maison-clementine",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/vakantieappartement-maison-clementine"
+      ],
+      "title": [
+        "Vakantieappartement Maison Clementine in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/bungalowpark-jonckershof",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/bungalowpark-jonckershof"
+      ],
+      "title": [
+        "Bungalowpark Jonckershof in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/hotspots/surfers-paradise",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/surfers-paradise"
+      ],
+      "title": [
+        "Surfers Paradise in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/hotspots/zaelig-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/zaelig-hotel"
+      ],
+      "title": [
+        "ZAELIG Hotel in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/hotspots/restaurant-imperial",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/hotspots/restaurant-imperial"
+      ],
+      "title": [
+        "Restaurant Imperial in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/zeebrugge/hotspots/club-north-by-icarus",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/zeebrugge/hotspots/club-north-by-icarus"
+      ],
+      "title": [
+        "Club North by Icarus in Zeebrugge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/zina-s-place",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/zina-s-place"
+      ],
+      "title": [
+        "Zina&#39;s Place in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/manuscript",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/manuscript"
+      ],
+      "title": [
+        "Manuscript in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/restaurant-de-golf",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/restaurant-de-golf"
+      ],
+      "title": [
+        "Restaurant De Golf in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/restaurant-le-touquet",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/restaurant-le-touquet"
+      ],
+      "title": [
+        "Restaurant Le Touquet in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/de-witte-ezel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/de-witte-ezel"
+      ],
+      "title": [
+        "De Witte Ezel in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/la-vie",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/la-vie"
+      ],
+      "title": [
+        "La Vie in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/hotspots/pizzeria-piano-piano",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/pizzeria-piano-piano"
+      ],
+      "title": [
+        "Pizzeria Piano Piano in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/wenduine/hotspots/vissershuisje-89",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/vissershuisje-89"
+      ],
+      "title": [
+        "Vissershuisje 89 in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/gastro-na-jo",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/gastro-na-jo"
+      ],
+      "title": [
+        "Gastro Na&#39;Jo in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/de-zeegeuzen",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/de-zeegeuzen"
+      ],
+      "title": [
+        "De Zeegeuzen in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/new-poseidon",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/new-poseidon"
+      ],
+      "title": [
+        "New Poseidon in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/seascape-penthouse",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/seascape-penthouse"
+      ],
+      "title": [
+        "Seascape Penthouse in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/boutique-hotel-ter-duinen",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/boutique-hotel-ter-duinen"
+      ],
+      "title": [
+        "Boutique-Hotel ter Duinen in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/hotel-apostroff",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/hotel-apostroff"
+      ],
+      "title": [
+        "Hotel Apostroff in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/hotel-lehouck",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/hotel-lehouck"
+      ],
+      "title": [
+        "Hotel Lehouck in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/casino-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/casino-hotel"
+      ],
+      "title": [
+        "Casino Hotel in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/hotel-domein-westhoek",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/hotel-domein-westhoek"
+      ],
+      "title": [
+        "Hotel Domein Westhoek in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/bistronomie-eglantier",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/bistronomie-eglantier"
+      ],
+      "title": [
+        "Bistronomie Eglantier in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/restaurant-akote",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/restaurant-akote"
+      ],
+      "title": [
+        "Restaurant Akoté in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/de-spelleplekke",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/de-spelleplekke"
+      ],
+      "title": [
+        "De Spelleplekke in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/t-zoet-genot",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/t-zoet-genot"
+      ],
+      "title": [
+        "&#39;t Zoet Genot in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/tearoom-t-zand",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/tearoom-t-zand"
+      ],
+      "title": [
+        "Tearoom &#39;t Zand in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/de-clochard",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/de-clochard"
+      ],
+      "title": [
+        "De Clochard in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/koffiebar-cafelito",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/koffiebar-cafelito"
+      ],
+      "title": [
+        "Koffiebar Cafelito in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/tearoom-chopin",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/tearoom-chopin"
+      ],
+      "title": [
+        "Tearoom Chopin in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/bistro-t-fornhuis",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/bistro-t-fornhuis"
+      ],
+      "title": [
+        "Bistro &#39;t Fornhuis in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/happy-times",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/happy-times"
+      ],
+      "title": [
+        "Happy Times in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/in-t-dorp",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/in-t-dorp"
+      ],
+      "title": [
+        "In &#39;t Dorp in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/eethuis-t-blekkertje",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/eethuis-t-blekkertje"
+      ],
+      "title": [
+        "Eethuis &#39;t Blekkertje in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/hotspots/agora-bar-food-drinks",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/hotspots/agora-bar-food-drinks"
+      ],
+      "title": [
+        "Agora Bar Food &amp; Drinks in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/restaurant-lehouck",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/restaurant-lehouck"
+      ],
+      "title": [
+        "Restaurant Lehouck in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/d-appeti-jt",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/d-appeti-jt"
+      ],
+      "title": [
+        "d&#39;Appeti(jt) in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/koffiebar-kantine",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/koffiebar-kantine"
+      ],
+      "title": [
+        "Koffiebar Kantine in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/visrestaurant-ode",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/visrestaurant-ode"
+      ],
+      "title": [
+        "Visrestaurant Odé in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/hotspots/brasserie-de-barkentijn",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/brasserie-de-barkentijn"
+      ],
+      "title": [
+        "Brasserie De Barkentijn in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/cafe-au-blason",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/cafe-au-blason"
+      ],
+      "title": [
+        "Café Au Blason in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/cremerie-artisanaal-ijs",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/cremerie-artisanaal-ijs"
+      ],
+      "title": [
+        "Cremerie Artisanaal Ijs in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/bar-buvette",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/bar-buvette"
+      ],
+      "title": [
+        "Bar Buvette in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/de-vismarkt-aan-zee",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/de-vismarkt-aan-zee"
+      ],
+      "title": [
+        "De Vismarkt Aan Zee in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/hotspots/cosmopolite-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/cosmopolite-hotel"
+      ],
+      "title": [
+        "Cosmopolite Hotel in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/madam-caravan",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/madam-caravan"
+      ],
+      "title": [
+        "Madam Caravan in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/hotspots/de-frietboetiek",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/de-frietboetiek"
+      ],
+      "title": [
+        "De Frietboetiek in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/hotspots/plaza-d-amante",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/plaza-d-amante"
+      ],
+      "title": [
+        "Plaza d&#39;Amanté in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/restaurant-koekie-s",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/restaurant-koekie-s"
+      ],
+      "title": [
+        "Restaurant Koekie&#39;s in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/brasserie-cappuccino",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/brasserie-cappuccino"
+      ],
+      "title": [
+        "Brasserie Cappuccino in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/two-for-you-crystals-and-gifts",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/two-for-you-crystals-and-gifts"
+      ],
+      "title": [
+        "Two For You - Crystals and Gifts in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/hotspots/brasserie-la-potiniere",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/brasserie-la-potiniere"
+      ],
+      "title": [
+        "Brasserie La Potinière in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/hotspots/ijssalon-tearoom-zeebries",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/ijssalon-tearoom-zeebries"
+      ],
+      "title": [
+        "IJssalon/Tearoom Zeebries in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/skateshop-daily-grind",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/skateshop-daily-grind"
+      ],
+      "title": [
+        "Skateshop Daily Grind in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/abc-hotel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/abc-hotel"
+      ],
+      "title": [
+        "ABC Hotel in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/au-pengouin",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/au-pengouin"
+      ],
+      "title": [
+        "Au Pengouin in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/meerman-specialty-coffee",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/meerman-specialty-coffee"
+      ],
+      "title": [
+        "Meerman Specialty Coffee in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/t-waterhuis",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/t-waterhuis"
+      ],
+      "title": [
+        "&#39;t Waterhuis in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/beachclub-blankenberge",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/beachclub-blankenberge"
+      ],
+      "title": [
+        "Beachclub Blankenberge in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/hotspots/brassi-beach-terrace",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/brassi-beach-terrace"
+      ],
+      "title": [
+        "Brassi Beach Terrace in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/hotspots/riva-boutique",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/riva-boutique"
+      ],
+      "title": [
+        "Riva Boutique in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/diensten/dierenarts-frederik-galle",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/diensten/dierenarts-frederik-galle"
+      ],
+      "title": [
+        "Dierenarts Frederik Galle in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/diensten/dier-tuincenter-rommel",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/diensten/dier-tuincenter-rommel"
+      ],
+      "title": [
+        "Dier &amp; Tuincenter Rommel in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/diensten/dierenarts-ilse-kerckhof",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/diensten/dierenarts-ilse-kerckhof"
+      ],
+      "title": [
+        "Dierenarts Ilse Kerckhof in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/knokke-heist/diensten/dierenplezier-heist",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/diensten/dierenplezier-heist"
+      ],
+      "title": [
+        "Dierenplezier Heist in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/diensten/de-praktijk-227",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/de-praktijk-227"
+      ],
+      "title": [
+        "De Praktijk 227 in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/diensten/snuffels",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/snuffels"
+      ],
+      "title": [
+        "Snuffels in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/diensten/de-dierendokter-alex-salomez",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/de-dierendokter-alex-salomez"
+      ],
+      "title": [
+        "De Dierendokter (Alex Salomez) in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/nieuwpoort/diensten/dierenarts-elise-buyse",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/diensten/dierenarts-elise-buyse"
+      ],
+      "title": [
+        "Dierenarts Elise Buyse in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/diensten/dierenartsenpraktijk-katty",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/diensten/dierenartsenpraktijk-katty"
+      ],
+      "title": [
+        "Dierenartsenpraktijk Katty in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/middelkerke/diensten/dogs-co",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/diensten/dogs-co"
+      ],
+      "title": [
+        "Dogs &amp; Co in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/diensten/dierenartsenpraktijk-breemersch",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/diensten/dierenartsenpraktijk-breemersch"
+      ],
+      "title": [
+        "Dierenartsenpraktijk Breemersch in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-haan/diensten/happy-dog",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/diensten/happy-dog"
+      ],
+      "title": [
+        "Happy Dog in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/diensten/dogs-cats",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/dogs-cats"
+      ],
+      "title": [
+        "Dogs &amp; Cats in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/bredene/diensten/q-ties",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/bredene/diensten/q-ties"
+      ],
+      "title": [
+        "Q-ties in Bredene | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/oostende/diensten/dierenkliniek-anicura",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/oostende/diensten/dierenkliniek-anicura"
+      ],
+      "title": [
+        "Dierenkliniek AniCura in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/blankenberge/diensten/dierenarts-vanhee-s",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/dierenarts-vanhee-s"
+      ],
+      "title": [
+        "Dierenarts Vanhee S. in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/diensten/panimalia-trimsalon-hondenboetiek",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/panimalia-trimsalon-hondenboetiek"
+      ],
+      "title": [
+        "Panimalia Trimsalon &amp; Hondenboetiek in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/diensten/famiflora-de-panne",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/famiflora-de-panne"
+      ],
+      "title": [
+        "Famiflora De Panne in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/de-panne/diensten/dierenarts-johan-devloo",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/dierenarts-johan-devloo"
+      ],
+      "title": [
+        "Dierenarts Johan Devloo in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/diensten/bazouf",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/bazouf"
+      ],
+      "title": [
+        "Bazouf in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/diensten/vets-for-pets",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/vets-for-pets"
+      ],
+      "title": [
+        "Vets For Pets in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-anoa",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-anoa"
+      ],
+      "title": [
+        "Dierenartsencentrum Anoa in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/diensten/dierenarts-debakker-olivier",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/dierenarts-debakker-olivier"
+      ],
+      "title": [
+        "Dierenarts Debakker Olivier in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-clos-fleuri",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-clos-fleuri"
+      ],
+      "title": [
+        "Dierenartsencentrum Clos Fleuri in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/blankenberge-vande-puttelaan",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/blankenberge-vande-puttelaan"
+      ],
+      "title": [
+        "Hondenweide J. Vande Puttelaan | Losloopzone in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/blankenberge-van-ackersquare",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/blankenberge-van-ackersquare"
+      ],
+      "title": [
+        "Hondenweide A. Van Ackersquare | Losloopzone in Blankenberge | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/knokke-heist-losloopweide-heist",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/knokke-heist-losloopweide-heist"
+      ],
+      "title": [
+        "Losloopweide Heist | Losloopzone in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/de-haan-vosseslag",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/de-haan-vosseslag"
+      ],
+      "title": [
+        "Losloopzone Vosseslag | Losloopzone in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/de-haan-centrum-sport",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/de-haan-centrum-sport"
+      ],
+      "title": [
+        "Losloopzone Centrum/Sport | Losloopzone in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/de-haan-haneveld",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/de-haan-haneveld"
+      ],
+      "title": [
+        "Losloopzone Haneveld | Losloopzone in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/de-haan-duinbossen",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/de-haan-duinbossen"
+      ],
+      "title": [
+        "Losloopzone Duinbossen | Losloopzone in De Haan | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/wenduine-manitobastraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/wenduine-manitobastraat"
+      ],
+      "title": [
+        "Losloopzone Wenduine - Manitobastraat | Losloopzone in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/wenduine-westhinderlaan",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/wenduine-westhinderlaan"
+      ],
+      "title": [
+        "Losloopzone Wenduine - Westhinderlaan | Losloopzone in Wenduine | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/bredene-kerkstraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/bredene-kerkstraat"
+      ],
+      "title": [
+        "Hondenweide Kerkstraat | Losloopzone in Bredene | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-maria-hendrikapark",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-maria-hendrikapark"
+      ],
+      "title": [
+        "Maria Hendrikapark | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-raversijde",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-raversijde"
+      ],
+      "title": [
+        "Losloopzone Raversijde | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-leffingestraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-leffingestraat"
+      ],
+      "title": [
+        "Losloopzone Leffingestraat | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-lijndraaiersstraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-lijndraaiersstraat"
+      ],
+      "title": [
+        "Losloopzone Lijndraaiersstraat | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-ankerstraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-ankerstraat"
+      ],
+      "title": [
+        "Losloopzone Ankerstraat | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-hondenbos",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-hondenbos"
+      ],
+      "title": [
+        "Hondenbos | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-brigade-pironlaan",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-brigade-pironlaan"
+      ],
+      "title": [
+        "Losloopzone Brigade Pironlaan | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-provinciedomein-raversijde",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-provinciedomein-raversijde"
+      ],
+      "title": [
+        "Provinciedomein Raversijde | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/oostende-schorrepark",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/oostende-schorrepark"
+      ],
+      "title": [
+        "Losloopweide Schorrepark | Losloopzone in Oostende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/middelkerke-koninginnelaan",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/middelkerke-koninginnelaan"
+      ],
+      "title": [
+        "Hondenweide Middelkerke | Losloopzone in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/middelkerke-westende",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/middelkerke-westende"
+      ],
+      "title": [
+        "Hondenweide Westende | Losloopzone in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/nieuwpoort-prins-mauritspark",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/nieuwpoort-prins-mauritspark"
+      ],
+      "title": [
+        "Hondenweide Prins Mauritspark | Losloopzone in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/nieuwpoort-leopold-ii-park",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/nieuwpoort-leopold-ii-park"
+      ],
+      "title": [
+        "Hondenweide Leopold II Park | Losloopzone in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/koksijde-sportpark-oostduinkerke",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/koksijde-sportpark-oostduinkerke"
+      ],
+      "title": [
+        "Losloopzone Sportpark Oostduinkerke | Losloopzone in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/koksijde-ster-der-zee",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/koksijde-ster-der-zee"
+      ],
+      "title": [
+        "Losloopzone Koksijde Ster Der Zee | Losloopzone in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/de-panne-kerkstraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/de-panne-kerkstraat"
+      ],
+      "title": [
+        "Hondenweide Kerkstraat | Losloopzone in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    },
+    {
+      "url": "https://hondaanzee.be/losloopzones/adinkerke-doornstraat",
+      "status": 200,
+      "canonical": [
+        "https://hondaanzee.be/losloopzones/adinkerke-doornstraat"
+      ],
+      "title": [
+        "Hondenweide Doornstraat | Losloopzone in De Panne | HondAanZee.be"
+      ],
+      "h1_count": 1,
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "ok": true
+    }
+  ]
+}

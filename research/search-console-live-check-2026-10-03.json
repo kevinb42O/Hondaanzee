@@ -1,0 +1,107 @@
+{
+  "checked_on": "2026-10-03",
+  "results": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": [
+        "Honden aan Zee Belgi\u00eb 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken aan de Belgische Kust"
+      ],
+      "canonical": [
+        "https://hondaanzee.be/"
+      ],
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "h1": [
+        "Met je hond naar zee? <br class=\"hidden sm:block\"/><span class=\"text-sky-300 relative inline-block max-w-full\">Wij weten precies<svg class=\"absolute -bottom-1 sm:-bottom-2 md:-bottom-4 left-0 w-full h-3 sm:h-4 text-sky-300/30\" viewBox=\"0 0 100 10\" preserveAspectRatio=\"none\"><path d=\"M0 5 Q 25 0 50 5 T 100 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\" opacity=\"1\" pathLength=\"1\" stroke-dashoffset=\"0\" stroke-dasharray=\"1 1\"></path></svg></span> waar het mag."
+      ],
+      "html_bytes": 118794
+    },
+    {
+      "route": "/koksijde",
+      "status": 200,
+      "title": [
+        "Hond Strand Koksijde - Oostduinkerke 2026 | Strandregels, Losloopzones &amp; Hondvriendelijke Plekken Koksijde - Oostduinkerke"
+      ],
+      "canonical": [
+        "https://hondaanzee.be/koksijde"
+      ],
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "h1": [
+        "Mag mijn hond <span class=\"text-sky-600\">nu</span> op het strand in <span class=\"city-hero-name\"><span class=\"whitespace-nowrap\">Koksijde -</span> Oostduinkerke?</span>"
+      ],
+      "html_bytes": 113923
+    },
+    {
+      "route": "/kaart",
+      "status": 200,
+      "title": [
+        "Interactieve Kaart Belgische Kust | Alle Hondvriendelijke Locaties op de Kaart \u2013 HondAanZee.be"
+      ],
+      "canonical": [
+        "https://hondaanzee.be/kaart"
+      ],
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "h1": [
+        "Kustkaart"
+      ],
+      "html_bytes": 47481
+    },
+    {
+      "route": "/hotspots",
+      "status": 200,
+      "title": [
+        "Hondvriendelijke Hotspots Belgische Kust | Caf\u00e9s, Restaurants, Hotels &amp; Winkels waar Honden Welkom Zijn"
+      ],
+      "canonical": [
+        "https://hondaanzee.be/hotspots"
+      ],
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "h1": [
+        "<span>Fijne plekjes,</span> <em>voor jullie allebei.</em>"
+      ],
+      "html_bytes": 139245
+    },
+    {
+      "route": "/koksijde/diensten/dierenartsencentrum-anoa",
+      "status": 200,
+      "title": [
+        "Dierenartsencentrum Anoa in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/dierenartsencentrum-anoa"
+      ],
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "h1": [
+        "Dierenartsencentrum Anoa"
+      ],
+      "html_bytes": 63323
+    },
+    {
+      "route": "/de-haan/hotspots/restaurant-de-concessie",
+      "status": 200,
+      "title": [
+        "Restaurant De Concessie in De Haan | HondAanZee.be"
+      ],
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/restaurant-de-concessie"
+      ],
+      "robots": [
+        "index, follow, max-snippet:-1, max-image-preview:large"
+      ],
+      "h1": [
+        "Restaurant De Concessie"
+      ],
+      "html_bytes": 63541
+    }
+  ]
+}
