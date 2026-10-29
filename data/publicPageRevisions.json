@@ -1,342 +1,342 @@
 {
   "/": {
-    "hash": "0dac1eb67b70284cee1165e613b1415b855f080df19b646d206c87adf1b37047",
-    "lastmod": "2026-10-03"
+    "hash": "21118fe13a70e81a678ccf5413799fe1810502480e2b49e418d0366da9908d4e",
+    "lastmod": "2026-10-29"
   },
   "/hotspots": {
-    "hash": "f7d89a3b3de58d860d22e69310c0b0ca541ba2f97d0ca5a713e1eeaa1fc1eaff",
-    "lastmod": "2026-10-03"
+    "hash": "d659073e1171ab6932d72157cc8bd96055947755daa994973d29f32debbf7d3a",
+    "lastmod": "2026-10-29"
   },
   "/diensten": {
-    "hash": "148787eb01b3f829fd74b0cd18db0568e4cdc3d8bec81250de68677560a73ebe",
-    "lastmod": "2026-10-03"
+    "hash": "82fb2fb1aacc7f64a4cfdfb84de2645ad66845a3859c9d1328b104d91a0c2868",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones": {
-    "hash": "d24f0a0c714d785795b37fc08ae4f3018dd293764623e1d9c86096a9dac34fd0",
-    "lastmod": "2026-10-03"
+    "hash": "07c82f15065807bd4fc2524c6d49867d2c8818f480805699252da7986e97cbff",
+    "lastmod": "2026-10-29"
   },
   "/kaart": {
-    "hash": "f01c6213cdf3841f88562da9a155c40a63127766da25fe9e14a18b0a027d026a",
-    "lastmod": "2026-10-03"
+    "hash": "f64db68393789d84318ec9cf7435608a123e017ad462f9618da14aad2da0a352",
+    "lastmod": "2026-10-29"
   },
   "/over-ons": {
-    "hash": "cfda56c5f12f64f102909d9926a91957d0018d9805776ff467fc9e17e7a8baae",
-    "lastmod": "2026-10-03"
+    "hash": "3222ea29a7b6c2dc15a02f2b12b11eb6374669754f5cee8bf7230240268b5369",
+    "lastmod": "2026-10-29"
   },
   "/goed-om-te-weten": {
-    "hash": "a520ae39d30f358468fc982b86eb1f119b5edd6a9d2d65d07bf113c40840108e",
-    "lastmod": "2026-10-03"
+    "hash": "68ae0d795314fb048df7e1e312385ac90fedfb32f8613a77ee967618f5ec951f",
+    "lastmod": "2026-10-29"
   },
   "/steun-ons": {
-    "hash": "6bd155bdd2e9a08d4470a4d4dd16511d3c51f09375fa187117864ed7fb8f02a5",
-    "lastmod": "2026-10-03"
+    "hash": "3589c3008db2d2df63df19065a8f42454355d612f8463e8f58be1da89e454e17",
+    "lastmod": "2026-10-29"
   },
   "/zaak-aanmelden": {
-    "hash": "11dcec5c8c044d81573f4b15c908342004377132f6fb23bc3b84c0c13a0fb2d2",
-    "lastmod": "2026-10-03"
+    "hash": "2e350f2767351a6f224ff33779ba01c737d64d375edda81992fca3487d20a7a1",
+    "lastmod": "2026-10-29"
   },
   "/privacy": {
-    "hash": "b508e200a70caa170c2620563bada90b018291d8af932513249b66fb6766830d",
-    "lastmod": "2026-10-03"
+    "hash": "f768093a85316c8fb3313617e0918c9683e715727f714e37801649c7942b6ad9",
+    "lastmod": "2026-10-29"
   },
   "/algemene-voorwaarden": {
-    "hash": "77236065d017c3d9274d5c763c3472a538b2748d3c1735dbfe1da2926c0533c1",
-    "lastmod": "2026-10-03"
+    "hash": "a55218e795a35e1fa2f731fce2e356bcce55dd7d435a2d43c3e4122ed9ab56bc",
+    "lastmod": "2026-10-29"
   },
   "/cookies": {
-    "hash": "6066d593044a3b2553bd9a3c9be2df70f0ec763aff3ef26c05f98daacc2aa9a1",
-    "lastmod": "2026-10-03"
+    "hash": "5b911bb719b523c2c8bb027830b8c47f73a533bacd3a45b157c30995e5477c55",
+    "lastmod": "2026-10-29"
   },
   "/blog": {
-    "hash": "ab1223a526cab2b12bec3e38ef9f208e9fa28fbdfc39e7713cb48b0c13dc64db",
-    "lastmod": "2026-10-03"
+    "hash": "d220f54155c76297936c8621ce4b10e1aa0e1bcc23fbe12074119f857d555cb7",
+    "lastmod": "2026-10-29"
   },
   "/agenda": {
-    "hash": "aee87db13afc2cdb1122cade7bbac27f197c05a5da871e0fd46ece2ea369e45b",
-    "lastmod": "2026-10-03"
+    "hash": "e3cf7c8f1dfec57ec2abd2509e778a516d8995a6eb815618d3dc9af1fa56b66d",
+    "lastmod": "2026-10-29"
   },
   "/meldpunt": {
-    "hash": "86906446701c92342e34d4cb05170da57f52bb3d7c4c00e3ea4d3c5281b81ac4",
-    "lastmod": "2026-10-03"
+    "hash": "bf50c22607e708c4ca42638dd52ce0d670208e1654a42d14e5136549dddf48c9",
+    "lastmod": "2026-10-29"
   },
   "/meldpunt/vrijwilligers": {
-    "hash": "7430e62dca8b00f134dfde1d9c48196bda1746983ee7764aee4d7000f9e5d463",
-    "lastmod": "2026-10-03"
+    "hash": "8fd083eb5099f3d6b9000bf5a2a476a7a13d28e1d0ffd69c67562188e7dc070a",
+    "lastmod": "2026-10-29"
   },
   "/updates": {
-    "hash": "581db3d3341996a55bce592d81c0fe18ba85692ed230ed66cebcd1fb09653598",
-    "lastmod": "2026-10-03"
+    "hash": "b932c95a326d062c487bb4bf63ce1affefc2b1dbd66be49ec5fadaf9fd20775d",
+    "lastmod": "2026-10-29"
   },
   "/blankenberge": {
-    "hash": "f97e106262a39f9d2d136b8f4cf765856266427b7398b5e2ea537c6a6eb02c9d",
-    "lastmod": "2026-10-03"
+    "hash": "87bcbe5ee47a60fc3c07cb8c864d1890487ea7c6b00dfa10fa3558f6b62cd85d",
+    "lastmod": "2026-10-29"
   },
   "/zeebrugge": {
-    "hash": "2b4d4d059f6a6cc28b465d7e7d2ef3cb7da62ffe5c1624ad3a92222789feccbd",
-    "lastmod": "2026-10-03"
+    "hash": "f067e94a683225c4905946bf0718651eecc0c4de422e09fcd7b5cc211381e37d",
+    "lastmod": "2026-10-29"
   },
   "/knokke-heist": {
-    "hash": "6bae6d0d7bb4edceffde37aaf8e1c7d770b56a5484136aac9f3ef2b86dce8f03",
-    "lastmod": "2026-10-03"
+    "hash": "e523da96040b6adea57c353ee2307bb43bcc309c0966e2aad66d779efd275ad6",
+    "lastmod": "2026-10-29"
   },
   "/de-haan": {
-    "hash": "cd64de4003026f44206521e5807895576664111a6c82146dd59745bbd4ddaf25",
-    "lastmod": "2026-10-03"
+    "hash": "68a36f10f797e6b4dcf0a3c8be7c2dd64c2ab36fa117809c100278a90bbe87af",
+    "lastmod": "2026-10-29"
   },
   "/wenduine": {
-    "hash": "849d5756f55b3cb4b806e010d37ef5cb84f5f7563c5dcfbf750d3098d07f1db8",
-    "lastmod": "2026-10-03"
+    "hash": "fe4b713ad43991294c75aef3bbb6d28cda0377eb0fcef70dbeec8e16dbe33cbf",
+    "lastmod": "2026-10-29"
   },
   "/bredene": {
-    "hash": "775181eef3b8a29c51b2849188463444aee561936c12c69ee3dcfc765b4fe59d",
-    "lastmod": "2026-10-03"
+    "hash": "93197db93e2a8214b97914cea795a05754232aa3790798ec7a02d0299deef7e1",
+    "lastmod": "2026-10-29"
   },
   "/oostende": {
-    "hash": "d762643eb132c389d177962d3af73ea57768a2ff520c22b6beb50591faa52f36",
-    "lastmod": "2026-10-03"
+    "hash": "6a7a9c16e66ddaf794418f78f790f45fd18c1879f0832bed376b104ada71c41c",
+    "lastmod": "2026-10-29"
   },
   "/middelkerke": {
-    "hash": "6c0ab62448c50f0a5d9fb4a428a874495e6a114c7caf93141d37bc8e1de34b38",
-    "lastmod": "2026-10-03"
+    "hash": "b499c8c1ec0514c5d2eda58efd2698d2db563e36eb32ddd2ed9436ce1f342f11",
+    "lastmod": "2026-10-29"
   },
   "/nieuwpoort": {
-    "hash": "b568e5c8c6eeb24aa8924531f8cc09b06bcd0aab82e655be8c1707e229bb6d9b",
-    "lastmod": "2026-10-03"
+    "hash": "24e93fb8b9fd855fade651f0c02b429ed9f39803c86d6fa2c2f22e86aab0e99d",
+    "lastmod": "2026-10-29"
   },
   "/koksijde": {
-    "hash": "a98f6416f7b077239ef59876e00b2b9639baa622629fc6d6cbb77de21a15a294",
-    "lastmod": "2026-10-03"
+    "hash": "d9700313c0a3b120189cfacc09756cc9c1217430b33e2bc50c50712e623b75fe",
+    "lastmod": "2026-10-29"
   },
   "/de-panne": {
-    "hash": "8a07d17f21ce4ec32581df92c57cb42ef1af3482c8ab96a427cbf26646699c6f",
-    "lastmod": "2026-10-03"
+    "hash": "edc0ed539ba3eaba5c823eb0b1c3374e0a029c4363707c20ede48a1c99d47c44",
+    "lastmod": "2026-10-29"
   },
   "/blog/blauwalg-hond-strand-waarschuwing": {
-    "hash": "77f254fc214d722894142dfe9689d26c9520085b31ddf6275eabd3efadf0cee9",
-    "lastmod": "2026-10-03"
+    "hash": "934561c2998777bb67a3cf9bd8a0c7ec086b7a8997a59e2562d71710cdb5cbe0",
+    "lastmod": "2026-10-29"
   },
   "/blog/hond-strand-warm-weer": {
-    "hash": "55610e366bb39befbfdabb64cdad3e0a1fcfaf38110fe1b011881d1cf8eefa01",
-    "lastmod": "2026-10-03"
+    "hash": "8803244a976388a76a5afdfc96acd0ae76ccb97a88ac52c945991f8c0c002a43",
+    "lastmod": "2026-10-29"
   },
   "/blog/van-trekhond-tot-strandkoning-geschiedenis-kusthonden": {
-    "hash": "2fcfc20600f695f237a97975b231d11808a655415724acc2542d0fb9763d2b4d",
-    "lastmod": "2026-10-03"
+    "hash": "0ac81da97ebef3a953d01a0edfba0d34c89da6423b76f97256ad58d7def39fad",
+    "lastmod": "2026-10-29"
   },
   "/blog/zeehonden-aan-de-belgische-kust": {
-    "hash": "997c818052ad8542cccc75580cbb2a0eea5aea0ebb7362851c1fbd4b11af859a",
-    "lastmod": "2026-10-03"
+    "hash": "9a2a89df1cd939facf2cbc6a2673d582a987451b35c34c5379f9a000f54067d0",
+    "lastmod": "2026-10-29"
   },
   "/blog/opruimacties-proper-strand-lopers": {
-    "hash": "ac8b7d12216eda9b215176fa4424026df8384bce124392f033cae324aafc5147",
-    "lastmod": "2026-10-03"
+    "hash": "1938c6869cbb86bf3609a089a08546b850ff0dd7dc37e2bab5fcae33481f7cf2",
+    "lastmod": "2026-10-29"
   },
   "/blog/mooiste-bossen-belgische-kust-wandelen-met-hond": {
-    "hash": "a0c8e50e3aab30df6f12cd04e982156e53deeff35191f267aa6b1914c370478d",
-    "lastmod": "2026-10-03"
+    "hash": "bf10edbc75fd58e3784b13ecc94c4f8519413455d5161747b0798c52bd111b36",
+    "lastmod": "2026-10-29"
   },
   "/blog/zwemplekjes-honden-belgische-kust": {
-    "hash": "ab90c4af01202ef575eead9387c6735a3c3be5ee523d2aa495b2c8b5ee9e5b87",
-    "lastmod": "2026-10-03"
+    "hash": "15720dee3b301648814add586fa4151bf7c9cb52f966f03e7db0e8e211be02f3",
+    "lastmod": "2026-10-29"
   },
   "/blog/mentale-leiband-vrijheid-met-connectie": {
-    "hash": "1a59eda0ac15c9b612f0ea68616cc600c7b7319d4916a0519756937928d879b6",
-    "lastmod": "2026-10-03"
+    "hash": "4c3a877d9c80998a7a7ae4e5d5e13f79d2c0edfbd3848aec5ed32a34a1335a77",
+    "lastmod": "2026-10-29"
   },
   "/blog/spiegel-aan-de-leiband-hondenpsychologie-guillaume-dervaux": {
-    "hash": "8f5bb15629d9bc0f46605869ed7f1e8d734f81a82765fff1e9420b7e8a374197",
-    "lastmod": "2026-10-03"
+    "hash": "64aaaecd35f39709476e99c4ba70428c83ce03cd04ae186f8e9cf68126cfd930",
+    "lastmod": "2026-10-29"
   },
   "/agenda/kwispelfestival-de-panne-2026": {
-    "hash": "62b6a45c907d6c459413915c472222d9d10ebdb1ddae233ad6b25d2c031b9936",
-    "lastmod": "2026-10-03"
+    "hash": "661ea2c1218c4dd76673c476b5736f8dd85b72c874470187c5a5697d1f97a420",
+    "lastmod": "2026-10-29"
   },
   "/agenda/groot-oostends-hondenfestival-2026": {
-    "hash": "786248a1fd08c330eaa2ecde208737dd055765c6ee9ba4c89ca49da7c1af4c71",
-    "lastmod": "2026-10-03"
+    "hash": "df7a6af94a4bae3cb854b169f64d8ae66b5fe7633843035b95e7852940fffe2e",
+    "lastmod": "2026-10-29"
   },
   "/agenda/grote-hondenwandeling-bredene-2026": {
-    "hash": "f0edf5631a32c06d8dee1198c69dc6090f942e0e857f1bfb714785faa5cb2ffb",
-    "lastmod": "2026-10-03"
+    "hash": "3222cb5a2e23c0456f28b6f3fc609f885321cd6611f7912745f5b3716ee9738e",
+    "lastmod": "2026-10-29"
   },
   "/agenda/dierenzegening-knokke-2026": {
-    "hash": "4acb7e449d5f998644cb05f66d82f269936abba3d153becdf474e67bba393e60",
-    "lastmod": "2026-10-03"
+    "hash": "33777d0118f9668febad7f8e73d32f59f0c04a259da85ea2e6a2b0f43484132f",
+    "lastmod": "2026-10-29"
   },
   "/agenda/grote-dierenfeest-koolkerke-2026": {
-    "hash": "9fc1b6b73f36ff442fabd6df6469ce17bb128baf1ade84ca036b598d5a1912c7",
-    "lastmod": "2026-10-03"
+    "hash": "1c463871998ecf54006bc657d2d9b8a62e6c71fd13f27225895da2124652ae9e",
+    "lastmod": "2026-10-29"
   },
   "/agenda/zwarteberg-2026": {
-    "hash": "9610635c62dd3b0b189c357a8fe39a066191095d778bc6866a989a4c8e74b807",
-    "lastmod": "2026-10-03"
+    "hash": "78fc3ad45026a7eec6cf66cd01ae36b763993840a1ff58d5d4904be022159d30",
+    "lastmod": "2026-10-29"
   },
   "/agenda/marke-2026": {
-    "hash": "1cabd09bc440e0e4aaf8a1c1470eb02271b66723ad9aab3eee7494b4f5edf20d",
-    "lastmod": "2026-10-03"
+    "hash": "397c2837bbe279e73997928dd9eed58d6e669cf69c023ca39fd4c1c4d430332a",
+    "lastmod": "2026-10-29"
   },
   "/agenda/hondenwandeling-de-schelde-2026": {
-    "hash": "49c95630d842c54be8469a2f1a85d1958ef775dbf808105785639f2613975802",
-    "lastmod": "2026-10-03"
+    "hash": "35834fa40330bd9a3bbae5d76f3f80c48732c073edbdfb131a52217bcdd26b29",
+    "lastmod": "2026-10-29"
   },
   "/agenda/stokroos-2026": {
-    "hash": "da1f844ece7533c4ebc37c6619d83c79bd30f40aecd004e2f4499763efe61892",
-    "lastmod": "2026-10-03"
+    "hash": "90689df6dd3e9b3de41aeccfb4f89bdff56fb33aa76fcd36bf292b82b8609717",
+    "lastmod": "2026-10-29"
   },
   "/agenda/titan-paw-2026": {
-    "hash": "a5870c80fdca4d1ef7da69eca023fdaf90ce068da2e5058ceb89c45bc2381429",
-    "lastmod": "2026-10-03"
+    "hash": "822bc8b4d4e8a92c29eb2f1a2e3508d0ac6c125c2617af5695931f6418c35c9f",
+    "lastmod": "2026-10-29"
   },
   "/agenda/fotoshoot-de-haan-2026": {
-    "hash": "49e7843ab54d2a4e6281d1ba097dfab38f7f9556b8bb448e2699df79303ae990",
-    "lastmod": "2026-10-03"
+    "hash": "19feb1e1469438ec97bd702ef16f355bb35b1775715da654238119e428234398",
+    "lastmod": "2026-10-29"
   },
   "/agenda/howl-o-ween-dudzele-2026": {
-    "hash": "88509682f35ff9f74ad1aa8435de0ccee5297c5ee10f67dbcf3aa6d5fe600dee",
-    "lastmod": "2026-10-03"
+    "hash": "586f6bb78d15e328aa7d942145bbe05bc1a8c651045cc14789bf33eeebad6de4",
+    "lastmod": "2026-10-29"
   },
   "/agenda/halloween-wevelgem-2026": {
-    "hash": "aa031737cd59446a44a127f21d4a8f3a6f597fcc72a5b3d4a07a19542ab9c0d0",
-    "lastmod": "2026-10-03"
+    "hash": "b5cc4bd9171d926a371dee982eb1d9d4a7d5c5bc433da95d3c230bf844d7c3a7",
+    "lastmod": "2026-10-29"
   },
   "/agenda/hondenhalloween-balen-2026": {
-    "hash": "1a942ac98bbe3be59306ad1bc25bc527e915baf1daa2288a8f3564528f231fa0",
-    "lastmod": "2026-10-03"
+    "hash": "722da457db90d472d85055c86307f845208cf75ce51f094f36b695ec8bc296fb",
+    "lastmod": "2026-10-29"
   },
   "/agenda/canicross-genendijk-2026": {
-    "hash": "ff26329efc2d6bdac6be51da39ec69cc595223ab431375f7548845db195cd282",
-    "lastmod": "2026-10-03"
+    "hash": "65bce97130c837a1b5a6954ab2fa38893ec14496dd2bd74ae27f880a76ce8944",
+    "lastmod": "2026-10-29"
   },
   "/agenda/lichtgolf-oostende-2026": {
-    "hash": "677ddeb325aae41d4168b3cc63793ba50abc4ada7e529b85b1e73510afe19cfa",
-    "lastmod": "2026-10-03"
+    "hash": "6bad6bc80e49c9588ed07ef8505b180ba1203763d5b4fed067d614c901f001f6",
+    "lastmod": "2026-10-29"
   },
   "/agenda/zeeuwse-winterfair-2026": {
-    "hash": "c9a66cd6278f98e1d1d1dee63803c7e9bf1b07153390bce5f8dbcf9014a21e1d",
-    "lastmod": "2026-10-03"
+    "hash": "ddd4a49f1d5dde68ba1d2010d1160800a723ad863145ff3f2e03fc6ed8c32e52",
+    "lastmod": "2026-10-29"
   },
   "/agenda/dogsurvival-winter-2026": {
-    "hash": "e0c7f6aae2f1163acc6d4fb22b78dbed13ed0a6acc21032bf043c15093055885",
-    "lastmod": "2026-10-03"
+    "hash": "7d0d70659ccb0451145746d7ee672dcbf6a7e8f58e42e83a21fc177e5f1e6330",
+    "lastmod": "2026-10-29"
   },
   "/agenda/dierenfestival-waregem-2027": {
-    "hash": "c548ca817182b271fed98e46340731b25c5eb40e95cc9745c53599fa8977888e",
-    "lastmod": "2026-10-03"
+    "hash": "7b792f1120c1a73576c135458cfadd4a22f5d7980f6908659a89ec6eef03761b",
+    "lastmod": "2026-10-29"
   },
   "/agenda/dogs-friends-2027": {
-    "hash": "79860fed403b76627710323cfeff40ee5afa7ba7be9a5992c16438c776950675",
-    "lastmod": "2026-10-03"
+    "hash": "5b697f118e1dfe14e7f6e7c085b1af10e67250fafebdcb9b56b1552144ec0356",
+    "lastmod": "2026-10-29"
   },
   "/agenda/hondenwandeling-bredene-2027": {
-    "hash": "eb12bb8530baf871cf312ccdb671f44ce1b7092a35cee5113c9b6a9e46f34ee1",
-    "lastmod": "2026-10-03"
+    "hash": "a244476a98f9ef5d8114aeb8b6d2adb53105e3c5bb64b6c7307975f3e4f5cec0",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/blankenberge-vande-puttelaan": {
-    "hash": "4abadbe5c78902d3cead9f0d8c0a08d5305734eacb3b0407a72cb1703d7fd730",
-    "lastmod": "2026-10-03"
+    "hash": "c9f0da1d123006f4f0643fb6c8aeda1e9c50e58d4840989840e9173ff661311b",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/blankenberge-van-ackersquare": {
-    "hash": "ca6535b53298498355b346873df5967440ae1cb979f5c03b865197f7fa116025",
-    "lastmod": "2026-10-03"
+    "hash": "b9018db042fffd253d7aeec69ce7761d02dc0ae1442cd3ef03d6cde934320e9c",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/knokke-heist-losloopweide-heist": {
-    "hash": "daa8a1c61fcc0d8160247adef73613e938271f5a2d5ff155ea3d91821f5e0db9",
-    "lastmod": "2026-10-03"
+    "hash": "81b35c82bf7564cfa165656962cd4e794037c211847eb1372f7da03e927b0d3e",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/de-haan-vosseslag": {
-    "hash": "29f496e165c8cec973446e6bf125c32d36c03b5c02981edf13f1a11805675ffe",
-    "lastmod": "2026-10-03"
+    "hash": "504bdb021ae127ee3d64a71a4d1c22346d11d53a5411262e05d578db188f7e7b",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/de-haan-centrum-sport": {
-    "hash": "9f69c6929ec54bc26dadba91690e018943765fed05ff2a66174454f74cc34287",
-    "lastmod": "2026-10-03"
+    "hash": "16142fcac8de870bfcd92b1d4cfed35d0b4d0f0269017b3972e1b1052f784631",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/de-haan-haneveld": {
-    "hash": "618d6bad1cb1d131a82e2e49536bf06e249cb40fa1d962e9eb31c2086066dedf",
-    "lastmod": "2026-10-03"
+    "hash": "108159180d45b143830d60ba1f712d5f3687dd3af678db20380764078343e649",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/de-haan-duinbossen": {
-    "hash": "55443cd4953d775d8f56e7508160c444fe0b5e4a59ec3789172e744cb59dce05",
-    "lastmod": "2026-10-03"
+    "hash": "fbc57c763012e8015957436f0dcdeef227febfa6acd0dfb85ebfe211e61930be",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/wenduine-manitobastraat": {
-    "hash": "7d95429596ae48475bf40b5e4b5a630acb0e9a90094462af4c9a71dd55e79d9d",
-    "lastmod": "2026-10-03"
+    "hash": "cb48ccf1e43336faec2445a33472efb6cabb493f73bfc20727c3282b3908e1d0",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/wenduine-westhinderlaan": {
-    "hash": "7bd966e92c5fdbed2a14688caf91781e52d3713506e2108ca081e6195c3845fa",
-    "lastmod": "2026-10-03"
+    "hash": "dc9dd2087d594a8d86cd410e108b9ef09eed229f260362f09a3e1278ebcc84e4",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/bredene-kerkstraat": {
-    "hash": "5a8bfc8401babf01f3af9d5e27e9bff788f167ed27a8b128240a0f129ce535be",
-    "lastmod": "2026-10-03"
+    "hash": "8260ed4579622e717ddccfb21f2d628cab45a0938f5f1a86839ac5d6d305a5e2",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-maria-hendrikapark": {
-    "hash": "6e6ce00716dd190635216af6a344fc0b109635944c15ebd71818cb4a35c41f18",
-    "lastmod": "2026-10-03"
+    "hash": "0383c2d23e813d626266b84a5dc64f6cbf94036b4b554444109ce7a601e93db4",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-raversijde": {
-    "hash": "6696553200b07dd91378ddc787d1ebc3155e2bd4671e1ffe5491367b81ce0c0a",
-    "lastmod": "2026-10-03"
+    "hash": "73159b6f25c748987c98160a7fa4fb00f172d30f3077cdc2d370b55ae2946055",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-leffingestraat": {
-    "hash": "951e8389da9be9a2787d9a67a0e284d85245f6c0792b07f0f8caf3cee1f16283",
-    "lastmod": "2026-10-03"
+    "hash": "1eee851747e145afa8f80cc9568cef747b274c5442d5e3729d9f3e565e5a8ccf",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-lijndraaiersstraat": {
-    "hash": "6a9fd6fc258ac37163343b0d2edc0483739216bdeed29a5e689e984fb817cb2b",
-    "lastmod": "2026-10-03"
+    "hash": "6a6bff371c9739a73e9673dca3466b4e22dda44caa0cb85bab35c685a72fd9ff",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-ankerstraat": {
-    "hash": "2e07696a9301878efed136cd84908c281edcf769ca939a66331ea58b0b0a2ad7",
-    "lastmod": "2026-10-03"
+    "hash": "afe5f7c1a0cfeffff39e48ba77fe9c4e7b83c0b0b0da3f9f90e1a5d873a03641",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-hondenbos": {
-    "hash": "1481dd5ad6524a7b9355d90bf91d01b598765f6064516388333bbc67807cf924",
-    "lastmod": "2026-10-03"
+    "hash": "53051a62b2d7e8ea84753779530f2b36bc18418f98e2787b6f759ddbefd09bbf",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-brigade-pironlaan": {
-    "hash": "70f56800e368ca692e0530ba029ead19571943afdd31d0c8340fa1f5fdc82b98",
-    "lastmod": "2026-10-03"
+    "hash": "72d5e82533cae3aec1e195e261dd99242063360bf59f5461bd18fc5c91176197",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-provinciedomein-raversijde": {
-    "hash": "9277e4371788aff69bf6e58a1333d74486b80ace61ec6b92b5ff6386707caf4d",
-    "lastmod": "2026-10-03"
+    "hash": "86d082f608169383cf229e8d6c3a4facb61fae34fc3cbd12258d91a478e03b75",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/oostende-schorrepark": {
-    "hash": "adbcff49149fe32eaeb6e47e2642b83b678719967e3bb6779366586c4ca0fffb",
-    "lastmod": "2026-10-03"
+    "hash": "b8238e45574b55fc7b4cfff911b5f7697820deed232af6cc164675ce9ac1725b",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/middelkerke-koninginnelaan": {
-    "hash": "c6b79067274a1545c06a71cf9d57895b9dfb7bf47f276c925df9c153fc838f7e",
-    "lastmod": "2026-10-03"
+    "hash": "80ee2b8179c3ed016a1593a92a0ec30a4d86aac4e47ae72bb4b32744847ed6d3",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/middelkerke-westende": {
-    "hash": "c39a5b1bba8ae85f2c3fd236ce5183f249afb7abbd2d4331449fe0098b4335fd",
-    "lastmod": "2026-10-03"
+    "hash": "473f627b535e740845cf9c3140629624d0e0ec015e68e25e1996904f615c8834",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/nieuwpoort-prins-mauritspark": {
-    "hash": "13b97bd51e9a2f112520009b084c01db7379bcb922ccf9422f6cf38c1ce300cd",
-    "lastmod": "2026-10-03"
+    "hash": "bdfe01f5b09f6449cc0933708857c4521bc5b52ca08103f7d5739e797c6d780c",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/nieuwpoort-leopold-ii-park": {
-    "hash": "db691eb9ecbf3541085f914cda16fab85ac94a2de5bf893e70a62da39de50bb3",
-    "lastmod": "2026-10-03"
+    "hash": "92ebbf09f8dde837059142dc1a4671eed5ca3719240bbbb4cb72af04a5d004b6",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/koksijde-sportpark-oostduinkerke": {
-    "hash": "670df4b86cae50ef7675cee34c9f78401fadbf187b26d0bc181b5be86d18773c",
-    "lastmod": "2026-10-03"
+    "hash": "450fdf9f9c84121db1930d3fa39ebf6d6714ff1a555c82cd4fc1ba7c66046c76",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/koksijde-ster-der-zee": {
-    "hash": "9e68b0134266dc716ab0f082240e3b195c44c7c7daa7021bf4ff878e00e9f02c",
-    "lastmod": "2026-10-03"
+    "hash": "bd9a85316c39cc2c07a79a0f65aacd5892927e770c8a80bfbd32f1c1fb4802c2",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/de-panne-kerkstraat": {
-    "hash": "73bac61b4809e770b73208d788dabd8b3222ec98842c35a80cda26e82292b03e",
-    "lastmod": "2026-10-03"
+    "hash": "ad7e8dd459f645d6e8adbaa063606413bb06e7e50099e92e86179251b3beb368",
+    "lastmod": "2026-10-29"
   },
   "/losloopzones/adinkerke-doornstraat": {
-    "hash": "d7560718addbdf297acdf355aa2407f127782ef4ba47363c17d60fb41c79ff94",
-    "lastmod": "2026-10-03"
+    "hash": "87c9a70f34b4180052e1da8d26b3c3d69042ac55b8c26412ef8d52ee7c2c2702",
+    "lastmod": "2026-10-29"
   }
 }

@@ -43,7 +43,7 @@ const sections: LegalSection[] = [
 
 const Cookies: React.FC = () => {
   useSEO(SEO_DATA.cookies);
-  return <LegalPage updatedAt="2026-10-03" title="Cookiebeleid" icon={Cookie} intro="Wat je browser onthoudt voor je account, voorkeuren, meldingen en het laden van de website."
+  return <LegalPage title="Cookiebeleid" icon={Cookie} intro="Wat je browser onthoudt voor je account, voorkeuren, meldingen en het laden van de website."
     summary={<><p>We gebruiken geen marketingcookies. Je login heeft wel functionele browseropslag nodig. Publieke statistieken gebruiken geen analyticscookies.</p><p>Uitloggen, sitegegevens wissen, pushmeldingen uitschakelen en je account verwijderen zijn verschillende acties. Hieronder lees je wat elke actie doet.</p></>} sections={sections} />;
 };
 

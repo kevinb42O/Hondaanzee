@@ -6,12 +6,13 @@ const { publicPlaceText } = loadTsModule('supabase/functions/_shared/placeFields
 
 const { BEACH_RULES_VERIFIED_AT, BEACH_ACCESS_GUIDANCE } = loadTsModule('data/beachRules.ts');
 const { HOME_FAQ } = loadTsModule('data/homeFaq.ts');
+const { SITE_UPDATE_DATE } = loadTsModule('data/siteUpdates.ts');
 const { getAnnualBeachRuleText } = loadTsModule('utils/rules.ts');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const OUTPUT_PATH = path.join(ROOT_DIR, 'public', 'llms-full.txt');
 
-let content = `# HondAanZee.be - Volledige Inhoud\n\n`;
+let content = `# HondAanZee.be - Volledige Inhoud\n\nWebsite bijgewerkt: ${SITE_UPDATE_DATE}. Broncontroles hebben een eigen datum.\n\n`;
 content += `> Dit document bevat alle gedetailleerde informatie van HondAanZee.be: alle hondvriendelijke hotspots, diensten, losloopzones, strandregels per gemeente, evenementen en blogartikelen. Dit document is geoptimaliseerd voor LLM's en AI-crawlers om de volledige kennis van de website in één keer te kunnen indexeren.\n\n`;
 
 content += `## Kuststeden en Strandregels\n\n`;
@@ -86,6 +87,8 @@ console.log(`Generated llms-full.txt successfully!`);
 
 const concisePath = path.join(ROOT_DIR, 'public', 'llms.txt');
 let concise = fs.readFileSync(concisePath, 'utf8');
+concise = concise.replace(/^Website bijgewerkt:.*\n\n/m, '');
+concise = concise.replace(/^(# HondAanZee\.be[^\n]*\n\n)/, `$1Website bijgewerkt: ${SITE_UPDATE_DATE}. Broncontroles hebben een eigen datum.\n\n`);
 const citiesStart = concise.indexOf('## Kustgemeenten');
 const blogsStart = concise.indexOf('## Blog', citiesStart);
 if (citiesStart < 0 || blogsStart < 0) throw new Error('Missing llms overview boundaries');

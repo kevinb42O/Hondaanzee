@@ -132,7 +132,7 @@ const publicStatePath = path.join(ROOT_DIR, 'data', 'publicPageRevisions.json');
 const previousPublicState = fs.existsSync(publicStatePath) ? JSON.parse(fs.readFileSync(publicStatePath, 'utf8')) : {};
 const publicState = {};
 const sharedFiles = ['scripts/static-pages.tsx', 'scripts/static-html.cjs', 'utils/seo.ts',
-  'components/Header.tsx', 'components/Footer.tsx'];
+  'components/Header.tsx', 'components/Footer.tsx', 'data/siteUpdates.ts'];
 for (const route of uniqueRoutes.filter(route => !placeDates[route])) {
   const files = [...new Set([...sharedFiles, ...getRouteFiles(route)])].sort();
   const source = files.map(file => fs.readFileSync(path.join(ROOT_DIR, file), 'utf8')).join('\n');

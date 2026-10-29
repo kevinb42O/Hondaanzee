@@ -226,6 +226,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash
                         <Link
                             key={entry.item.to}
                             to={entry.item.to}
+                            data-nav-home={entry.item.isHome || undefined}
                             className={`px-3 py-1.5 text-[13px] font-semibold rounded-full transition-all duration-200 ${linkClass}`}
                         >
                             {entry.item.label}
@@ -249,11 +250,12 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ currentPath, currentHash
                 );
             })}
 
-            <Link to="/account" className={`ml-2 flex items-center gap-2 rounded-full px-3 py-2 text-[12px] font-semibold transition-colors ${useLightText && !isScrolled ? 'text-white bg-white/15 hover:bg-white/25' : 'text-sky-800 bg-sky-50/80 hover:bg-sky-100'}`}><UserRound size={15} />{member.session ? 'Mijn Hond aan Zee' : 'Inloggen'}</Link>
+            <Link to="/account" data-nav-account aria-label={member.session ? 'Mijn Hond aan Zee' : 'Inloggen'} className={`ml-2 flex items-center gap-2 rounded-full px-3 py-2 text-[12px] font-semibold transition-colors ${useLightText && !isScrolled ? 'text-white bg-white/15 hover:bg-white/25' : 'text-sky-800 bg-sky-50/80 hover:bg-sky-100'}`}><UserRound size={15} /><span>{member.session ? 'Mijn Hond aan Zee' : 'Inloggen'}</span></Link>
             {/* Steun ons CTA — amber pill button */}
             <div className="ml-1.5">
                 <Link
                     to="/steun-ons"
+                    data-nav-support aria-label="Steun ons"
                     className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full font-bold text-[13px] transition-all duration-200 ${
                         currentPath === '/steun-ons'
                             ? 'bg-amber-500 text-white shadow-md shadow-amber-400/30'

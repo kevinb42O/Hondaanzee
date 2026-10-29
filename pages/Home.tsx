@@ -1,8 +1,8 @@
 
 import React, { useState, useMemo, useEffect, useLayoutEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Waves, MapPin, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer, Calendar, PawPrint } from 'lucide-react';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { ArrowRight, Waves, MapPin, X, ChevronDown, CheckCircle2, AlertCircle, Users, Megaphone, Sun, Thermometer } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform, useMotionValueEvent, type Variants } from 'framer-motion';
 import { CITIES } from '../cityData.ts';
 import type { City } from '../types.ts';
 import HomeSearch from '../components/HomeSearch.tsx';
@@ -14,8 +14,13 @@ import { findNearestCity } from '../utils/geo.ts';
 import { evaluateCityRuleStatus } from '../utils/rules.ts';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import { HOME_FAQ } from '../data/homeFaq.ts';
+import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
 import { useRuleClock } from '../utils/useRuleClock.ts';
 import NotificationOptIn from '../components/NotificationOptIn.tsx';
+import HomeOutingGuide from '../components/home/HomeOutingGuide.tsx';
+
+// Set to false to undo only the outing guide; the existing homepage stays intact.
+const SHOW_HOME_OUTING_GUIDE = true;
 
 // Kustlijn volgorde NO → ZW
 const COASTLINE_ORDER = [
@@ -221,8 +226,38 @@ const Home: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Hero ref (kept for potential future parallax / measurements)
   const heroRef = useRef<HTMLDivElement>(null);
+  const [{ heroHeight, viewportHeight }, setHeroSize] = useState({ heroHeight: 0, viewportHeight: 0 });
+  const [heroCovered, setHeroCovered] = useState(false);
+  const { scrollY } = useScroll();
+  // A tall hero scrolls far enough to expose all controls before it pins.
+  const revealStart = Math.max(0, heroHeight - viewportHeight);
+  const revealEnd = Math.max(revealStart + 1, heroHeight);
+  const heroScale = useTransform(scrollY, [revealStart, revealEnd], [1, 1.06]);
+  const heroCopyY = useTransform(scrollY, [revealStart, revealEnd], [0, -48]);
+  const heroCopyOpacity = useTransform(scrollY, [revealStart, revealStart + (revealEnd - revealStart) * .8], [1, 0]);
+
+  useMotionValueEvent(scrollY, 'change', value => {
+    const covered = !prefersReducedMotion && heroHeight > 0 && value >= revealStart + (revealEnd - revealStart) * .8;
+    setHeroCovered(current => current === covered ? current : covered);
+  });
+
+  useLayoutEffect(() => {
+    const node = heroRef.current;
+    if (!node) return;
+    const measure = () => setHeroSize(current => {
+      const next = { heroHeight: node.offsetHeight, viewportHeight: window.innerHeight };
+      return current.heroHeight === next.heroHeight && current.viewportHeight === next.viewportHeight ? current : next;
+    });
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    window.addEventListener('resize', measure);
+    measure();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
 
   // On mount, hide the static hero-prerender div from index.html so it doesn't
   // double up with the React-rendered hero image. The prerender div exists only
@@ -297,14 +332,22 @@ const Home: React.FC = () => {
   }, [sortedCities]);
 
   return (
-    <div>
+    <div className="relative">
+      {/* Header contrast follows the covering surface, not the pinned video's bounds. */}
+      <div aria-hidden="true" data-header-hero="light" className="pointer-events-none absolute top-0 left-0 w-px" style={{ height: heroHeight }} />
       {/* Hero Section with Dynamic Background */}
-      <div ref={heroRef} data-header-hero="light" className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-32 sm:pb-40 md:pb-48 overflow-hidden bg-slate-900">
+      <div
+        ref={heroRef}
+        data-home-scroll-hero
+        inert={heroCovered && !prefersReducedMotion ? true : undefined}
+        className="min-h-[100svh] flex items-center justify-center px-4 pt-20 sm:pt-24 pb-24 sm:pb-28 md:pb-32 overflow-hidden bg-slate-900"
+        style={{ position: prefersReducedMotion ? 'relative' : 'sticky', top: prefersReducedMotion ? 0 : Math.min(0, viewportHeight - heroHeight) }}
+      >
         {/* ALWAYS render the hero image as a guaranteed fallback. The prerender hero from index.html
             (when present) is moved on top of this for parallax. If the prerender div is missing
             for any reason (cache, SW, prerender script change), this keeps the dark image visible
             so the white hero text stays readable. */}
-        <div className="absolute inset-0 z-0 bg-slate-900">
+        <motion.div className="absolute inset-0 z-0 bg-slate-900" style={prefersReducedMotion ? undefined : { scale: heroScale }}>
           <video
             ref={(el) => { if (el) el.playbackRate = 0.6; }}
             src="/dogshero.mp4"
@@ -315,10 +358,11 @@ const Home: React.FC = () => {
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center 30%' }}
           />
-        </div>
+        </motion.div>
         <div className="absolute inset-0 z-[1] bg-slate-950/50"></div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-slate-950/30"></div>
 
+        <motion.div style={prefersReducedMotion ? undefined : { y: heroCopyY, opacity: heroCopyOpacity }} className="relative z-20 w-full">
         <motion.div
           initial={prefersReducedMotion ? 'visible' : 'hidden'}
           animate="visible"
@@ -432,120 +476,28 @@ const Home: React.FC = () => {
             </motion.div>
           </motion.div>
         </motion.div>
+        </motion.div>
 
-        {/* Organic Wave Divider with Infinite Animation */}
-        <div className="absolute -bottom-3 left-0 w-full overflow-hidden leading-[0] z-10">
-          <div className="wave-animation" style={{ display: 'flex', width: '200%' }}>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-stone-50"
-              />
-            </svg>
-            <svg
-              className="block h-[60px] sm:h-[80px] md:h-[120px]"
-              style={{ minWidth: '100%', flex: '0 0 50%' }}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z"
-                className="fill-current text-stone-50"
-              />
-            </svg>
-          </div>
-        </div>
       </div>
 
-      {/* Cities Grid Section with Warm Background */}
-      <div className="bg-stone-50 py-12 sm:py-16 md:py-20">
-        {/* Autumn Beach Opening Announcement Banner */}
-        <div className="site-shell mb-10 sm:mb-14">
-          <a
-            href="#steden"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('steden')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            aria-label="Bekijk de strandregels per kustgemeente"
-            className="group relative block overflow-hidden rounded-[2rem] border border-sky-200/80 bg-gradient-to-br from-sky-50/90 via-white to-amber-50/70 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.25)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_-25px_rgba(15,23,42,0.35)]"
+      {/* The next surface rises over the pinned hero with native scroll. */}
+      <div className="relative z-30 bg-stone-50">
+      <div data-home-scroll-content className="relative bg-stone-50 pt-6 sm:pt-8 md:pt-10 pb-12 sm:pb-16 md:pb-20">
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-[calc(100%-1px)] left-0 w-full leading-[0]">
+          <svg
+            className="block w-full h-10 sm:h-16 md:h-[88px] fill-stone-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 100"
+            preserveAspectRatio="none"
           >
-            {/* Animated atmospheric glow */}
-            <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-br from-sky-300/30 via-cyan-200/20 to-transparent blur-3xl transition-opacity duration-700 group-hover:opacity-90" />
-            <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-gradient-to-tr from-amber-200/25 via-sky-100/20 to-transparent blur-3xl" />
-
-            <div className="relative grid gap-6 md:grid-cols-[1.15fr_1fr] md:gap-0">
-              {/* Image */}
-              <div className="relative h-56 sm:h-64 md:h-auto md:min-h-[320px] overflow-hidden md:order-2">
-                <img
-                  src="/happy-dog-strand.webp"
-                  srcSet="/happy-dog-strand-640w.webp 640w, /happy-dog-strand.webp 1024w"
-                  sizes="(min-width: 768px) 45vw, 100vw"
-                  alt="Dolgelukkige hond rent vrolijk door de branding op het strand aan de Belgische kust"
-                  loading="lazy"
-                  decoding="async"
-                  width={1024}
-                  height={765}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-sky-50/70 via-transparent to-transparent md:bg-gradient-to-l" />
-              </div>
-
-              {/* Text */}
-              <div className="relative flex flex-col justify-center gap-4 p-6 sm:p-8 lg:p-10 md:order-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300/80 bg-white/90 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-emerald-700 shadow-sm backdrop-blur">
-                    <PawPrint size={13} className="text-emerald-600" />
-                    Voor je vertrekt
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/80 bg-white/90 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-sky-700 shadow-sm backdrop-blur">
-                    <Calendar size={13} className="text-sky-500" />
-                    Per gemeente
-                  </span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl lg:text-[2.1rem] font-black leading-tight tracking-tight text-slate-900">
-                  Strandwandeling gepland?{' '}
-                  <span className="relative inline-block text-sky-600">
-                    Check de regels.
-                    <svg
-                      className="pointer-events-none absolute -bottom-1 left-0 h-2 w-full text-sky-400/60"
-                      viewBox="0 0 100 8"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                    >
-                      <path d="M0 4 Q 25 0 50 4 T 100 4" fill="none" stroke="currentColor" strokeWidth="6" />
-                    </svg>
-                  </span>
-                </h2>
-
-                <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-700">
-                  Elke gemeente heeft eigen strandregels. Controleer de periode, de uren en de zonegrenzen van je bestemming. Ook wanneer je hond welkom is, kan een leiband verplicht blijven.
-                </p>
-
-                <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                  <span className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-600 px-5 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-white shadow-lg shadow-sky-200/60 transition-all duration-300 group-hover:shadow-xl group-hover:from-sky-500 group-hover:to-cyan-500">
-                    Bekijk alle strandregels
-                    <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600 flex items-center gap-1.5">
-                    <Waves size={14} className="text-sky-600" />
-                    6 badsteden versoepelen meteen
-                  </span>
-                </div>
-              </div>
-            </div>
-          </a>
+            <path d="M0,48 C260,104 560,12 900,28 C1120,38 1280,76 1440,52 L1440,100 L0,100 Z" />
+          </svg>
         </div>
-
         <div id="steden" className="site-shell scroll-mt-24">
+          <p className="mb-6 px-2 text-sm text-slate-500">
+            Website bijgewerkt op <time dateTime={SITE_UPDATE_DATE}>{SITE_UPDATE_LABEL}</time>
+            {' · '}<Link to="/updates" className="font-semibold text-sky-700 underline underline-offset-4 hover:text-sky-900">Bekijk wat er nieuw is</Link>
+          </p>
           {searchQuery.trim() ? (
             <HomeSearchResults key={searchQuery} query={searchQuery} results={results} loading={loading} error={error} onClear={() => setSearchQuery('')} />
           ) : (
@@ -564,6 +516,8 @@ const Home: React.FC = () => {
           )}
         </div>
       </div>
+
+      {SHOW_HOME_OUTING_GUIDE && searchParams.get('uitstap') !== 'uit' && !searchQuery.trim() && <HomeOutingGuide />}
 
       <section className="bg-stone-50 pb-12 sm:pb-16 md:pb-20">
         <div className="site-shell">
@@ -692,6 +646,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { SITE_UPDATE_DATE } from '../data/siteUpdates.ts';
 import { ArrowLeft, type LucideIcon } from 'lucide-react';
 
 export type LegalSection = { id: string; title: string; content: React.ReactNode };
@@ -11,7 +12,7 @@ export function LegalContact() {
   </p>;
 }
 
-export default function LegalPage({ title, icon: Icon, intro, summary, sections, updatedAt = '2026-10-02' }: {
+export default function LegalPage({ title, icon: Icon, intro, summary, sections, updatedAt = SITE_UPDATE_DATE }: {
   title: string; icon: LucideIcon; intro: string; summary: React.ReactNode; sections: LegalSection[]; updatedAt?: string;
 }) {
   useEffect(() => { window.scrollTo(0, 0); }, []);

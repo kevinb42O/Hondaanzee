@@ -1,5 +1,7 @@
 # HondAanZee.be
 
+Website bijgewerkt: 2026-10-29. Broncontroles hebben een eigen datum.
+
 > De meest complete en actuele gids voor hondeneigenaars die de Belgische kust bezoeken. 100% gratis, onafhankelijk en up-to-date met de officiële politieverordeningen van alle 11 kustgemeenten. Taal: Nederlands (België). Regio: Belgische kust (67 km kustlijn).
 
 ## Hoofdpagina's
@@ -60,9 +62,9 @@ Gecontroleerd op 2026-10-03. De volledige jaarregeling en bronlinks staan op de 
 - [Hondenwandeling met Gianna en Maxim — 4 oktober 2026](https://hondaanzee.be/agenda/marke-2026): Marke (Kortrijk). Voorbije editie.
 - [Hondenwandeling en welzijnsmarkt De Schelde — 4 oktober 2026](https://hondaanzee.be/agenda/hondenwandeling-de-schelde-2026): Berendrecht-Zandvliet-Lillo. Voorbije editie.
 - [Honden- en paardencafé De Stokroos — 3 & 4 oktober 2026](https://hondaanzee.be/agenda/stokroos-2026): Nieuwerkerk. Voorbije editie.
-- [Titan Paw — 10 oktober 2026](https://hondaanzee.be/agenda/titan-paw-2026): Lille (Gierle). Komend evenement.
-- [Hondenwandeling + fotoshoot De Haan — 25 oktober 2026](https://hondaanzee.be/agenda/fotoshoot-de-haan-2026): De Haan. Komend evenement.
-- [Howl-O-ween Het Blauwe Kruis Brugge — 25 oktober 2026](https://hondaanzee.be/agenda/howl-o-ween-dudzele-2026): Dudzele (Brugge). Komend evenement.
+- [Titan Paw — 10 oktober 2026](https://hondaanzee.be/agenda/titan-paw-2026): Lille (Gierle). Voorbije editie.
+- [Hondenwandeling + fotoshoot De Haan — 25 oktober 2026](https://hondaanzee.be/agenda/fotoshoot-de-haan-2026): De Haan. Voorbije editie.
+- [Howl-O-ween Het Blauwe Kruis Brugge — 25 oktober 2026](https://hondaanzee.be/agenda/howl-o-ween-dudzele-2026): Dudzele (Brugge). Voorbije editie.
 - [Heksenbos / Halloweentocht Juttepaardje — 31 oktober 2026](https://hondaanzee.be/agenda/halloween-wevelgem-2026): Wevelgem. Komend evenement.
 - [Hondenhalloween Balen-Olmen — 31 oktober – 8 november 2026](https://hondaanzee.be/agenda/hondenhalloween-balen-2026): Balen-Olmen. Komend evenement.
 - [Canicross Genendijk — 15 november 2026](https://hondaanzee.be/agenda/canicross-genendijk-2026): Genendijk. Komend evenement.

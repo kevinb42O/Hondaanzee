@@ -1,5 +1,7 @@
 # HondAanZee.be - Volledige Inhoud
 
+Website bijgewerkt: 2026-10-29. Broncontroles hebben een eigen datum.
+
 > Dit document bevat alle gedetailleerde informatie van HondAanZee.be: alle hondvriendelijke hotspots, diensten, losloopzones, strandregels per gemeente, evenementen en blogartikelen. Dit document is geoptimaliseerd voor LLM's en AI-crawlers om de volledige kennis van de website in één keer te kunnen indexeren.
 
 ## Kuststeden en Strandregels
@@ -3046,7 +3048,7 @@ Highlights:
 ### Titan Paw
 Evenementfiche: https://hondaanzee.be/agenda/titan-paw-2026
 Datum: 10 oktober 2026 | Locatie: Lille (Gierle)
-Status: Komend evenement
+Status: Voorbije editie
 Uur: Startgolven 10:00–16:30; programma 10:00–19:00 | Prijs: Vanaf €47 voor baasje én hond; controleer eventuele extra kosten bij reservering
 Adres: Strandweg 6, 2275 Lille
 Hondenregels: Obstacle run voor mens en hond; organisator vraagt hondenpaspoort en geldige vaccinaties.
@@ -3062,7 +3064,7 @@ Highlights:
 ### Hondenwandeling + fotoshoot De Haan
 Evenementfiche: https://hondaanzee.be/agenda/fotoshoot-de-haan-2026
 Datum: 25 oktober 2026 | Locatie: De Haan
-Status: Komend evenement
+Status: Voorbije editie
 Uur: 09:15–12:30; terug rond 12:00–12:30 | Prijs: €25 voor baasje + hond; €10 per extra persoon bij dezelfde hond
 Adres: Zwarte Kiezel, De Haan
 Hondenregels: Je hond moet sociaal zijn naar honden en mensen. Tijdens de wandeling aangelijnd; loslopen mag in de hondenloopzone.
@@ -3079,7 +3081,7 @@ Highlights:
 ### Howl-O-ween Het Blauwe Kruis Brugge
 Evenementfiche: https://hondaanzee.be/agenda/howl-o-ween-dudzele-2026
 Datum: 25 oktober 2026 | Locatie: Dudzele (Brugge)
-Status: Aangekondigd, details controleren
+Status: Voorbije editie
 Uur: 13:00–18:00 volgens deelnemers | Prijs: Prijs nog niet bekend
 Adres: Krinkelstraat 4, 8380 Dudzele
 Hondenregels: Het aangekondigde programma omvat een hondenwedstrijd en wandeling. Concrete leiband- en toegangsvoorwaarden: navragen bij het asiel.

@@ -80,7 +80,7 @@ const sections: LegalSection[] = [
 
 const Privacy: React.FC = () => {
   useSEO(SEO_DATA.privacy);
-  return <LegalPage updatedAt="2026-10-03" title="Privacybeleid" icon={Shield} intro="Welke gegevens je deelt, waarvoor we ze gebruiken en welke keuzes jij hebt."
+  return <LegalPage title="Privacybeleid" icon={Shield} intro="Welke gegevens je deelt, waarvoor we ze gebruiken en welke keuzes jij hebt."
     summary={<><p>Je kiest zelf of je een account maakt. Je kustgids is privé totdat je zelf een uitstaplink deelt. Reviews en meldingen kunnen openbaar zijn.</p><p>Je kunt je ledengegevens downloaden en je account verwijderen. Hotspotlikes en hotspotreviews verdwijnen bij accountverwijdering. Historische zonereviews, andere openbare bijdragen en een afzonderlijk pushabonnement vragen een aparte actie. Voor privacyvragen: <a className="font-bold underline" href="mailto:info@hondaanzee.be">info@hondaanzee.be</a>.</p></>} sections={sections} />;
 };
 

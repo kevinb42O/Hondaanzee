@@ -151,10 +151,10 @@ export default {
     "imageAlt": "Vrijwilligers voor het Meldpunt | HondAanZee.be"
   },
   "/updates": {
-    "title": "Updates & Nieuwigheden — laatste update 3 oktober 2026 | HondAanZee.be",
-    "description": "Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 3 oktober 2026.",
+    "title": "Updates & Nieuwigheden — laatste update 29 oktober 2026 | HondAanZee.be",
+    "description": "Ontdek alle updates, nieuwe hondvriendelijke zaken en verbeteringen die we hebben doorgevoerd op HondAanZee.be — laatst bijgewerkt op 29 oktober 2026.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
-    "imageAlt": "Updates & Nieuwigheden — laatste update 3 oktober 2026 | HondAanZee.be"
+    "imageAlt": "Updates & Nieuwigheden — laatste update 29 oktober 2026 | HondAanZee.be"
   },
   "/blankenberge": {
     "title": "Hond Strand Blankenberge 2026 | Strandregels, Losloopzones & Hondvriendelijke Plekken Blankenberge",
@@ -1220,19 +1220,19 @@ export default {
   },
   "/agenda/titan-paw-2026": {
     "title": "Titan Paw 2026 in Lille (Gierle) | HondAanZee.be",
-    "description": "Titan Paw, 10 oktober 2026 in Lille (Gierle). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Titan Paw, 10 oktober 2026 in Lille (Gierle). Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
     "imageAlt": "Titan Paw 2026 in Lille (Gierle) | HondAanZee.be"
   },
   "/agenda/fotoshoot-de-haan-2026": {
     "title": "Hondenwandeling + fotoshoot De Haan 2026 | HondAanZee.be",
-    "description": "Hondenwandeling + fotoshoot De Haan, 25 oktober 2026 in De Haan. Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Hondenwandeling + fotoshoot De Haan, 25 oktober 2026 in De Haan. Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/events/dehaan.webp",
     "imageAlt": "Hondenwandeling + fotoshoot De Haan 2026 | HondAanZee.be"
   },
   "/agenda/howl-o-ween-dudzele-2026": {
     "title": "Howl-O-ween Het Blauwe Kruis Brugge 2026 in Dudzele (Brugge) | HondAanZee.be",
-    "description": "Howl-O-ween Het Blauwe Kruis Brugge, 25 oktober 2026 in Dudzele (Brugge). Bekijk het programma, de locatie, prijs en hondenvoorwaarden.",
+    "description": "Voorbije editie: Howl-O-ween Het Blauwe Kruis Brugge, 25 oktober 2026 in Dudzele (Brugge). Informatie over deze voorbije editie en de locatie.",
     "image": "https://hondaanzee.be/og-imagefinal.webp",
     "imageAlt": "Howl-O-ween Het Blauwe Kruis Brugge 2026 in Dudzele (Brugge) | HondAanZee.be"
   },

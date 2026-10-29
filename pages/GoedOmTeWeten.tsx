@@ -23,7 +23,24 @@ const GoedOmTeWeten: React.FC = () => {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    let cancelled = false;
+    // Align after this lazy-loaded page and its fonts are ready.
+    const alignHash = () => {
+      document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (!cancelled) document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: 'auto' });
+      })));
+    };
+    if (document.readyState === 'complete') alignHash();
+    else window.addEventListener('load', alignHash, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener('load', alignHash);
+    };
   }, []);
 
   // Combined structured data: FAQPage + HowTo (pieterman) + HowTo (kwallen) + BreadcrumbList + MedicalWebPage
@@ -369,6 +386,26 @@ const GoedOmTeWeten: React.FC = () => {
         <NatuurSection openSections={openSections} toggleSection={toggleSection} />
         <EtiquetteSection openSections={openSections} toggleSection={toggleSection} />
         <LosloopSection openSections={openSections} toggleSection={toggleSection} />
+
+        <section
+          id="verder-dan-de-kust"
+          aria-labelledby="verder-dan-de-kust-title"
+          className="scroll-mt-28 mb-16 border-y border-sky-200 py-6 sm:py-8"
+        >
+          <h2 id="verder-dan-de-kust-title" className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-3">
+            Verder dan de kust?
+          </h2>
+          <p className="max-w-prose text-base leading-relaxed text-slate-700">
+            Ook buiten de Belgische kust op stap met je hond? Op{' '}
+            <a
+              href="https://gopuppy.eu/"
+              className="font-bold text-sky-700 underline underline-offset-4 decoration-sky-300 hover:text-sky-900 hover:decoration-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700 rounded-sm"
+            >
+              GoPuppy.eu
+            </a>{' '}
+            vind je hondvriendelijke plekken in België en Nederland, van natuur en horeca tot overnachtingen en diensten.
+          </p>
+        </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             SECTIE 5: VEELGESTELDE VRAGEN (FAQ)

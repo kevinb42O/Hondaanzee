@@ -1,0 +1,934 @@
+{
+  "checked_at": "2026-10-27T17:10:00.993011+00:00",
+  "checks": [
+    {
+      "path": "/blankenberge/diensten/snuffels",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/snuffels"
+      ],
+      "title": [
+        "Snuffels in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "Snuffels"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 62057,
+      "linked_from_checked_pages": [
+        "/blankenberge",
+        "/diensten"
+      ]
+    },
+    {
+      "path": "/oostende/diensten/dierenarts-frederik-galle",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/oostende/diensten/dierenarts-frederik-galle"
+      ],
+      "title": [
+        "Dierenarts Frederik Galle in Oostende | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenarts Frederik Galle"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 61523,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/oostende"
+      ]
+    },
+    {
+      "path": "/oostende/diensten/dierenkliniek-anicura",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/oostende/diensten/dierenkliniek-anicura"
+      ],
+      "title": [
+        "Dierenkliniek AniCura in Oostende | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenkliniek AniCura"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 61587,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/oostende"
+      ]
+    },
+    {
+      "path": "/agenda/dierenzegening-knokke-2026",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/agenda/dierenzegening-knokke-2026"
+      ],
+      "title": [
+        "Dierenzegening Knokke-Heist 2026 | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenzegening Knokke-Heist"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 73385,
+      "linked_from_checked_pages": [
+        "/agenda"
+      ]
+    },
+    {
+      "path": "/updates",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/updates"
+      ],
+      "title": [
+        "Updates &amp; Nieuwigheden — laatste update 3 oktober 2026 | HondAanZee.be"
+      ],
+      "h1": [
+        "Wat is er <span class=\"relative inline-block text-sky-300\">nieuw?<svg class=\"absolute -bottom-1 sm:-bottom-2 md:-bottom-3 left-0 w-full h-3 sm:h-4 text-sky-300/30\" viewBox=\"0 0 100 10\" preserveAspectRatio=\"none\"><path d=\"M0 5 Q 25 0 50 5 T 100 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"8\"></path></svg></span>"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 266923,
+      "linked_from_checked_pages": [
+        "/agenda",
+        "/blankenberge",
+        "/blog",
+        "/diensten",
+        "/",
+        "/middelkerke",
+        "/knokke-heist",
+        "/nieuwpoort",
+        "/de-panne",
+        "/oostende",
+        "/de-haan",
+        "/hotspots",
+        "/koksijde",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/steun-ons",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/steun-ons"
+      ],
+      "title": [
+        "Steun HondAanZee.be | Help de gids gratis en actueel te houden 🐾"
+      ],
+      "h1": [
+        "Help HondAanZee <span class=\"text-sky-600\">gratis en actueel</span> te houden"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 59512,
+      "linked_from_checked_pages": [
+        "/agenda",
+        "/blankenberge",
+        "/blog",
+        "/diensten",
+        "/",
+        "/middelkerke",
+        "/knokke-heist",
+        "/nieuwpoort",
+        "/de-panne",
+        "/oostende",
+        "/de-haan",
+        "/hotspots",
+        "/koksijde",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/privacy"
+      ],
+      "title": [
+        "Privacybeleid | HondAanZee.be"
+      ],
+      "h1": [
+        "Privacybeleid"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65229,
+      "linked_from_checked_pages": [
+        "/agenda",
+        "/blankenberge",
+        "/blog",
+        "/diensten",
+        "/",
+        "/middelkerke",
+        "/knokke-heist",
+        "/nieuwpoort",
+        "/de-panne",
+        "/oostende",
+        "/de-haan",
+        "/hotspots",
+        "/koksijde",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/koksijde/diensten/dierenarts-debakker-olivier",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/dierenarts-debakker-olivier"
+      ],
+      "title": [
+        "Dierenarts Debakker Olivier in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenarts Debakker Olivier"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63829,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/koksijde"
+      ]
+    },
+    {
+      "path": "/oostende/diensten/dier-tuincenter-rommel",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/oostende/diensten/dier-tuincenter-rommel"
+      ],
+      "title": [
+        "Dier &amp; Tuincenter Rommel in Oostende | HondAanZee.be"
+      ],
+      "h1": [
+        "Dier &amp; Tuincenter Rommel"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 61525,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/oostende"
+      ]
+    },
+    {
+      "path": "/wenduine/hotspots/brasserie-eloise",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/brasserie-eloise"
+      ],
+      "title": [
+        "Brasserie Eloïse in Wenduine | HondAanZee.be"
+      ],
+      "h1": [
+        "Brasserie Eloïse"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63194,
+      "linked_from_checked_pages": [
+        "/hotspots",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/wenduine/hotspots/praatcafe-de-spioenkop",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/praatcafe-de-spioenkop"
+      ],
+      "title": [
+        "Praatcafé De Spioenkop in Wenduine | HondAanZee.be"
+      ],
+      "h1": [
+        "Praatcafé De Spioenkop"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63288,
+      "linked_from_checked_pages": [
+        "/hotspots",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/wenduine/hotspots/cafe-central",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/cafe-central"
+      ],
+      "title": [
+        "Café Central in Wenduine | HondAanZee.be"
+      ],
+      "h1": [
+        "Café Central"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65775,
+      "linked_from_checked_pages": [
+        "/hotspots",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/wenduine/hotspots/tearoom-wielingen-bar",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/wenduine/hotspots/tearoom-wielingen-bar"
+      ],
+      "title": [
+        "Tearoom Wielingen Bar in Wenduine | HondAanZee.be"
+      ],
+      "h1": [
+        "Tearoom Wielingen Bar"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 64907,
+      "linked_from_checked_pages": [
+        "/hotspots",
+        "/wenduine"
+      ]
+    },
+    {
+      "path": "/zee-hond2.avif",
+      "status": 200,
+      "type": "image/avif",
+      "x_robots": null,
+      "canonical": [],
+      "title": [],
+      "h1": [],
+      "noindex": false,
+      "in_sitemap": false,
+      "bytes": 46429,
+      "linked_from_checked_pages": []
+    },
+    {
+      "path": "/de-haan/hotspots/pizzeria-piano-piano",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/hotspots/pizzeria-piano-piano"
+      ],
+      "title": [
+        "Pizzeria Piano Piano in De Haan | HondAanZee.be"
+      ],
+      "h1": [
+        "Pizzeria Piano Piano"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65139,
+      "linked_from_checked_pages": [
+        "/de-haan",
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/blankenberge/hotspots/abc-hotel",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/abc-hotel"
+      ],
+      "title": [
+        "ABC Hotel in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "ABC Hotel"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 67730,
+      "linked_from_checked_pages": [
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/blankenberge/hotspots/au-pengouin",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/au-pengouin"
+      ],
+      "title": [
+        "Au Pengouin in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "Au Pengouin"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65906,
+      "linked_from_checked_pages": [
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/de-haan/diensten/dierenartsenpraktijk-breemersch",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/de-haan/diensten/dierenartsenpraktijk-breemersch"
+      ],
+      "title": [
+        "Dierenartsenpraktijk Breemersch in De Haan | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenartsenpraktijk Breemersch"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 59114,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/de-haan"
+      ]
+    },
+    {
+      "path": "/knokke-heist/diensten/dierenplezier-heist",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/diensten/dierenplezier-heist"
+      ],
+      "title": [
+        "Dierenplezier Heist in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenplezier Heist"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 60543,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/knokke-heist"
+      ]
+    },
+    {
+      "path": "/koksijde/diensten/vets-for-pets",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/diensten/vets-for-pets"
+      ],
+      "title": [
+        "Vets For Pets in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1": [
+        "Vets For Pets"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63195,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/koksijde"
+      ]
+    },
+    {
+      "path": "/blankenberge/diensten/de-praktijk-227",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/de-praktijk-227"
+      ],
+      "title": [
+        "De Praktijk 227 in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "De Praktijk 227"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 61900,
+      "linked_from_checked_pages": [
+        "/blankenberge",
+        "/diensten"
+      ]
+    },
+    {
+      "path": "/blankenberge/diensten/dierenarts-vanhee-s",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/dierenarts-vanhee-s"
+      ],
+      "title": [
+        "Dierenarts Vanhee S. in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenarts Vanhee S."
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63092,
+      "linked_from_checked_pages": [
+        "/blankenberge",
+        "/diensten"
+      ]
+    },
+    {
+      "path": "/blankenberge/diensten/dogs-cats",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/diensten/dogs-cats"
+      ],
+      "title": [
+        "Dogs &amp; Cats in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "Dogs &amp; Cats"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 62267,
+      "linked_from_checked_pages": [
+        "/blankenberge",
+        "/diensten"
+      ]
+    },
+    {
+      "path": "/de-panne/diensten/de-dierendokter-alex-salomez",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/de-dierendokter-alex-salomez"
+      ],
+      "title": [
+        "De Dierendokter (Alex Salomez) in De Panne | HondAanZee.be"
+      ],
+      "h1": [
+        "De Dierendokter (Alex Salomez)"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 62577,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/de-panne"
+      ]
+    },
+    {
+      "path": "/de-panne/diensten/dierenarts-johan-devloo",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/dierenarts-johan-devloo"
+      ],
+      "title": [
+        "Dierenarts Johan Devloo in De Panne | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenarts Johan Devloo"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63356,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/de-panne"
+      ]
+    },
+    {
+      "path": "/de-panne/diensten/famiflora-de-panne",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/de-panne/diensten/famiflora-de-panne"
+      ],
+      "title": [
+        "Famiflora De Panne in De Panne | HondAanZee.be"
+      ],
+      "h1": [
+        "Famiflora De Panne"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 63356,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/de-panne"
+      ]
+    },
+    {
+      "path": "/knokke-heist/diensten/dierenarts-ilse-kerckhof",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/diensten/dierenarts-ilse-kerckhof"
+      ],
+      "title": [
+        "Dierenarts Ilse Kerckhof in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenarts Ilse Kerckhof"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 60473,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/knokke-heist"
+      ]
+    },
+    {
+      "path": "/middelkerke/diensten/dierenartsenpraktijk-katty",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/diensten/dierenartsenpraktijk-katty"
+      ],
+      "title": [
+        "Dierenartsenpraktijk Katty in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenartsenpraktijk Katty"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 60586,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/middelkerke"
+      ]
+    },
+    {
+      "path": "/nieuwpoort/diensten/dierenarts-elise-buyse",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/diensten/dierenarts-elise-buyse"
+      ],
+      "title": [
+        "Dierenarts Elise Buyse in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1": [
+        "Dierenarts Elise Buyse"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 58548,
+      "linked_from_checked_pages": [
+        "/diensten",
+        "/nieuwpoort"
+      ]
+    },
+    {
+      "path": "/oostende/hotspots/residence-du-centre",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/residence-du-centre"
+      ],
+      "title": [
+        "Residence Du Centre in Oostende | HondAanZee.be"
+      ],
+      "h1": [
+        "Residence Du Centre"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65333,
+      "linked_from_checked_pages": [
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/knokke-heist/hotspots/surfers-paradise",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/knokke-heist/hotspots/surfers-paradise"
+      ],
+      "title": [
+        "Surfers Paradise in Knokke-Heist | HondAanZee.be"
+      ],
+      "h1": [
+        "Surfers Paradise"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 64738,
+      "linked_from_checked_pages": [
+        "/knokke-heist",
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/blankenberge/hotspots/lakaiann",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/lakaiann"
+      ],
+      "title": [
+        "Lakaiann in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "Lakaiann"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 70425,
+      "linked_from_checked_pages": [
+        "/blankenberge",
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/blog/mentale-leiband-vrijheid-met-connectie",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blog/mentale-leiband-vrijheid-met-connectie"
+      ],
+      "title": [
+        "De Mentale Leiband: Vrijheid door middel van Connectie en Controle | HondAanZee.be Blog"
+      ],
+      "h1": [
+        "De Mentale Leiband: Vrijheid door middel van Connectie en Controle"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 78109,
+      "linked_from_checked_pages": [
+        "/blog"
+      ]
+    },
+    {
+      "path": "/blankenberge/hotspots/b-b-chez-ba-nus",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/blankenberge/hotspots/b-b-chez-ba-nus"
+      ],
+      "title": [
+        "B&amp;B Chez Ba&#39;Nus in Blankenberge | HondAanZee.be"
+      ],
+      "h1": [
+        "B&amp;B Chez Ba&#x27;Nus"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65910,
+      "linked_from_checked_pages": [
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/middelkerke/hotspots/madam-caravan",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/middelkerke/hotspots/madam-caravan"
+      ],
+      "title": [
+        "Madam Caravan in Middelkerke - Westende | HondAanZee.be"
+      ],
+      "h1": [
+        "Madam Caravan"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65447,
+      "linked_from_checked_pages": [
+        "/middelkerke",
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/nieuwpoort/hotspots/cosmopolite-hotel",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/cosmopolite-hotel"
+      ],
+      "title": [
+        "Cosmopolite Hotel in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1": [
+        "Cosmopolite Hotel"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65370,
+      "linked_from_checked_pages": [
+        "/nieuwpoort",
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/nieuwpoort/hotspots/dune-hotel-nieuwpoort",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/nieuwpoort/hotspots/dune-hotel-nieuwpoort"
+      ],
+      "title": [
+        "Dune Hotel Nieuwpoort in Nieuwpoort | HondAanZee.be"
+      ],
+      "h1": [
+        "Dune Hotel Nieuwpoort"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 65005,
+      "linked_from_checked_pages": [
+        "/nieuwpoort",
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/koksijde/hotspots/brasserie-de-barkentijn",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/koksijde/hotspots/brasserie-de-barkentijn"
+      ],
+      "title": [
+        "Brasserie De Barkentijn in Koksijde - Oostduinkerke | HondAanZee.be"
+      ],
+      "h1": [
+        "Brasserie De Barkentijn"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 66045,
+      "linked_from_checked_pages": [
+        "/hotspots"
+      ]
+    },
+    {
+      "path": "/oostende/hotspots/villa-cecha-b-b-wellness",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "x_robots": null,
+      "canonical": [
+        "https://hondaanzee.be/oostende/hotspots/villa-cecha-b-b-wellness"
+      ],
+      "title": [
+        "Villa Cecha B&amp;B &amp; Wellness in Oostende | HondAanZee.be"
+      ],
+      "h1": [
+        "Villa Cecha B&amp;B &amp; Wellness"
+      ],
+      "noindex": false,
+      "in_sitemap": true,
+      "bytes": 64459,
+      "linked_from_checked_pages": [
+        "/hotspots"
+      ]
+    }
+  ],
+  "robots_txt": "# HondAanZee.be - Robots.txt\n# Updated: 2026-10-02\n\nUser-agent: *\nAllow: /\n\n# Sitemap location\nSitemap: https://hondaanzee.be/sitemap.xml\n\n# AI/LLM Crawlers — explicitly allowed\n# We want AI models to index and cite our content\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: GoogleOther\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: anthropic-ai\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: CCBot\nAllow: /\n\nUser-agent: cohere-ai\nAllow: /\n\nUser-agent: Bytespider\nAllow: /\n\n# Crawl-delay (be nice to smaller bots)\nCrawl-delay: 1\n\n# Block private/admin paths\nUser-agent: *\nDisallow: /admin\nDisallow: /account\nDisallow: /uitstap/\nDisallow: /admin/\nDisallow: /admin/log\nDisallow: /_meldpunt-admin\nDisallow: /api/\nDisallow: /*?city=\nDisallow: /*?type=\nDisallow: /*?q=\nDisallow: /*?area=\nDisallow: /*&city=\nDisallow: /*&type=\nDisallow: /*&q=\n\n# Allow all images and assets\nAllow: /*.jpg$\nAllow: /*.jpeg$\nAllow: /*.png$\nAllow: /*.webp$\nAllow: /*.svg$\nAllow: /*.css$\nAllow: /*.js$\n\n# Googlebot uses the common public-page and private-path rules above.\n\n# Bing\nUser-agent: Bingbot\nAllow: /\nCrawl-delay: 1\n\n# Yandex\nUser-agent: Yandex\nAllow: /\nCrawl-delay: 2\n\n# Block bad bots (optional - add as needed)\nUser-agent: AhrefsBot\nCrawl-delay: 10\n\nUser-agent: SemrushBot\nCrawl-delay: 10\n",
+  "sitemap_urls": 242,
+  "search_console": {
+    "report_updated": "2026-10-23",
+    "previous_validation": {
+      "started": "2026-10-10",
+      "failed": "2026-10-24",
+      "failed_urls": [
+        "/blankenberge/diensten/snuffels",
+        "/oostende/diensten/dierenarts-frederik-galle",
+        "/oostende/diensten/dierenkliniek-anicura"
+      ],
+      "pending_count": 36
+    },
+    "url_inspection": [
+      {
+        "path": "/blankenberge/diensten/snuffels",
+        "status": "indexed"
+      },
+      {
+        "path": "/oostende/diensten/dierenarts-frederik-galle",
+        "status": "indexed"
+      },
+      {
+        "path": "/oostende/diensten/dierenkliniek-anicura",
+        "status": "indexed"
+      },
+      {
+        "path": "/blankenberge/hotspots/lakaiann",
+        "status": "not indexed",
+        "last_crawl": "2026-05-22 17:11:23",
+        "indexing_request": "confirmed; added to priority crawl queue"
+      }
+    ],
+    "new_validation": {
+      "started": "2026-10-27",
+      "status": "started",
+      "pending_count": 39,
+      "failed_count": 0
+    },
+    "limitations": [
+      "Live HTTP checks establish technical accessibility, not Google indexing.",
+      "Only the four explicitly listed URLs have a verified individual Google index status.",
+      "New validation and a crawl request do not guarantee future indexing."
+    ],
+    "sitemap": {
+      "url": "https://hondaanzee.be/sitemap.xml",
+      "status": "successful",
+      "last_read": "2026-10-22",
+      "discovered_pages": 242
+    }
+  }
+}

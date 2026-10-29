@@ -159,12 +159,12 @@ const Header: React.FC = () => {
       {/* Fixed glassmorphism pill header — floats over content, pointer-events-none lets clicks pass through padding */}
       <header className="fixed top-0 left-0 right-0 z-[100] pointer-events-none safe-area-top">
         <div className={`site-shell transition-all duration-500 ease-out ${isScrolled ? 'pt-2' : 'pt-3 sm:pt-4'}`}>
-          <div className={`pointer-events-auto rounded-full border transition-all duration-500 ease-out ${
+          <div className={`site-navigation-pill pointer-events-auto rounded-full border transition-all duration-500 ease-out ${
             isScrolled
               ? 'bg-white/70 backdrop-blur-3xl backdrop-saturate-[1.8] border-white/50 shadow-lg shadow-black/[0.08]'
               : 'bg-white/10 backdrop-blur-sm border-white/15 shadow-sm shadow-black/[0.02]'
           }`}>
-            <div className="flex items-center justify-between px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5">
+            <div className="site-navigation-row flex items-center justify-between px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5">
 
               {/* Logo Section */}
               <Link to="/" className="flex items-center gap-1.5 sm:gap-2 group transition-transform active:scale-95 touch-target min-w-0 pointer-events-auto">
@@ -177,6 +177,8 @@ const Header: React.FC = () => {
                   </span>
                 </div>
               </Link>
+
+              <div id="desktop-home-search" className="desktop-home-search" />
 
               {/* Desktop Navigation */}
               <DesktopNav currentPath={location.pathname} currentHash={location.hash} isScrolled={isScrolled} useLightText={isOverHero && !isScrolled} />

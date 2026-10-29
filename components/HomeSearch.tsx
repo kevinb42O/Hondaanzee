@@ -1,5 +1,6 @@
 import React, { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Bed, Beer, Coffee, MapPin, PawPrint, Search, ShoppingBag, Stethoscope, Utensils, X } from 'lucide-react';
 import type { SearchKind, SearchResult } from '../utils/search.ts';
 
@@ -30,17 +31,74 @@ export default function HomeSearch({ query, onQueryChange, results, loading, err
   const container = useRef<HTMLDivElement>(null);
   const dropdown = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
+  const restoreFocus = useRef(false);
+  const searchHadFocus = useRef(false);
+  const anchorHeight = useRef(0);
+  const dockTarget = useRef<HTMLElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const [dock, setDock] = useState<HTMLElement | null>(null);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(-1);
   const [style, setStyle] = useState<React.CSSProperties>({});
   const suggestions = results.slice(0, 8);
   const visible = open && !!query.trim();
 
+  // The homepage hero is pinned: its contrast marker tracks the actual scroll
+  // boundary, whereas the video's bounding box remains in the viewport.
+  useLayoutEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const hero = document.querySelector<HTMLElement>('[data-header-hero="light"]');
+      const target = document.getElementById('desktop-home-search');
+      const shouldDock = desktop.matches && !!hero && hero.offsetHeight > 0 && hero.getBoundingClientRect().bottom <= 96;
+      const next = shouldDock ? target : null;
+      if (dockTarget.current === next) return;
+      restoreFocus.current = searchHadFocus.current || document.activeElement === input.current;
+      if (!dockTarget.current && container.current) anchorHeight.current = container.current.offsetHeight;
+      dockTarget.current = next;
+      setDock(next);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const hero = document.querySelector('[data-header-hero="light"]');
+    const observer = new ResizeObserver(schedule);
+    if (hero) observer.observe(hero);
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    desktop.addEventListener('change', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      desktop.removeEventListener('change', schedule);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!restoreFocus.current) return;
+    const restore = () => {
+      if (!restoreFocus.current || input.current?.closest('[inert]')) return;
+      input.current?.focus({ preventScroll: true });
+      if (document.activeElement === input.current) restoreFocus.current = false;
+    };
+    restore();
+    const hero = document.querySelector('[data-home-scroll-hero]');
+    const observer = new MutationObserver(restore);
+    if (!dock && hero) observer.observe(hero, { attributes: true, attributeFilter: ['inert'] });
+    const frame = requestAnimationFrame(restore);
+    return () => { cancelAnimationFrame(frame); observer.disconnect(); };
+  }, [dock]);
+
   useEffect(() => { setSelected(-1); }, [query]);
   useEffect(() => {
     const closeOutside = (event: PointerEvent) => {
       const target = event.target as Node;
       if (!container.current?.contains(target) && !dropdown.current?.contains(target)) {
+        searchHadFocus.current = false;
+        restoreFocus.current = false;
         setOpen(false);
         setSelected(-1);
       }
@@ -65,18 +123,26 @@ export default function HomeSearch({ query, onQueryChange, results, loading, err
         maxHeight: Math.max(100, Math.min(420, useAbove ? above : below)),
       });
     };
-    position();
+    // Follow the compact bar throughout its arrival, including an open list.
+    let frame = 0;
+    const started = performance.now();
+    const followArrival = () => {
+      position();
+      if (performance.now() - started < 600) frame = requestAnimationFrame(followArrival);
+    };
+    followArrival();
     window.addEventListener('scroll', position, { passive: true });
     window.addEventListener('resize', position);
     window.visualViewport?.addEventListener('resize', position);
     window.visualViewport?.addEventListener('scroll', position);
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener('scroll', position);
       window.removeEventListener('resize', position);
       window.visualViewport?.removeEventListener('resize', position);
       window.visualViewport?.removeEventListener('scroll', position);
     };
-  }, [visible]);
+  }, [visible, dock]);
 
   useEffect(() => {
     if (selected >= 0) document.getElementById(`${id}-option-${selected}`)?.scrollIntoView({ block: 'nearest' });
@@ -98,14 +164,25 @@ export default function HomeSearch({ query, onQueryChange, results, loading, err
     }
   };
 
-  return <>
+  const searchBar = <motion.div
+    key={dock ? 'navigation' : 'hero'}
+    initial={dock ? { opacity: 0 } : false}
+    animate={{ opacity: 1 }}
+    transition={{ duration: prefersReducedMotion ? .12 : .16 }}
+    className={dock ? 'home-search-docked' : undefined}
+  >
     <div ref={container} className="search-container focus-ring flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] border-2 border-white/50 p-1.5 sm:p-2 focus-within:border-sky-500">
       <Search size={20} aria-hidden="true" className="ml-3 sm:ml-5 shrink-0 text-slate-400" />
       <input
-        ref={input} type="text" value={query} placeholder="Zoek een badstad, zaak of losloopzone"
+        ref={input} type="text" value={query} placeholder={dock ? 'Zoek aan de kust' : 'Zoek een badstad, zaak of losloopzone'}
         onChange={event => { onQueryChange(event.target.value); setOpen(true); setSelected(-1); }}
-        onFocus={() => { onActivate(); setOpen(true); }}
-        onBlur={event => { if (!dropdown.current?.contains(event.relatedTarget as Node)) { setOpen(false); setSelected(-1); } }}
+        onFocus={() => { searchHadFocus.current = true; onActivate(); setOpen(true); }}
+        onBlur={event => {
+          // The covering homepage surface makes the old hero inert before the
+          // navigation handoff. Remember focus across that browser-driven blur.
+          if (!container.current?.closest('[inert]')) searchHadFocus.current = false;
+          if (!dropdown.current?.contains(event.relatedTarget as Node)) { setOpen(false); setSelected(-1); }
+        }}
         onKeyDown={handleKeyDown}
         className="search-input flex-1 min-w-0 px-2 sm:px-4 py-3 sm:py-4 md:py-5 bg-transparent text-base sm:text-lg md:text-xl text-slate-900 font-semibold placeholder:text-slate-400 focus:outline-none font-heading"
         aria-label="Zoek een badstad, zaak of losloopzone" role="combobox" aria-autocomplete="list"
@@ -116,6 +193,12 @@ export default function HomeSearch({ query, onQueryChange, results, loading, err
       {query ? <button onClick={() => { onQueryChange(''); setOpen(false); setSelected(-1); input.current?.focus(); }} className="clear-btn p-2 text-slate-400 hover:text-slate-600 touch-target" aria-label="Wis zoekopdracht"><X size={20} /></button>
         : <button onClick={onUseLocation} disabled={isLocating} className={`p-2 mr-1 touch-target ${isLocating ? 'text-sky-400 animate-pulse' : 'text-slate-400 hover:text-sky-600'}`} aria-label="Gebruik mijn locatie" title="Vind dichtstbijzijnde badstad"><MapPin size={20} /></button>}
       <button onClick={submit} className="btn-lift bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white font-bold px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-full text-sm sm:text-base md:text-lg font-heading whitespace-nowrap touch-target">Zoeken</button>
+    </div>
+  </motion.div>;
+
+  return <>
+    <div data-home-search-anchor style={dock ? { height: anchorHeight.current } : undefined}>
+      {dock ? createPortal(searchBar, dock) : searchBar}
     </div>
     {visible && createPortal(<div ref={dropdown} style={style} className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-y-auto overscroll-contain text-left">
       <div id={listId} role="listbox" aria-label="Zoeksuggesties" aria-busy={loading}>

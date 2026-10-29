@@ -51,6 +51,67 @@ const VERSION_ACCENT: Record<string, string> = {
 
 const releases: UpdateRelease[] = [
   {
+    version: '3.2',
+    date: SITE_UPDATE_LABEL,
+    dateISO: SITE_UPDATE_DATE,
+    title: 'Meer uitstapideeën, een uitgebreide agenda en een persoonlijkere gids',
+    subtitle: 'Alle nieuwtjes sinds het vorige bericht van 3 oktober: van de vernieuwde homepage tot eenvoudiger aanmelden en beter beheer achter de schermen.',
+    entries: [],
+    sections: [
+      {
+        id: 'ontdekken',
+        title: 'Meer inspiratie & makkelijker zoeken',
+        entries: [
+          { text: 'De homepage heeft een vernieuwde overgang van de strandvideo naar de kustgemeenten. Verderop ontdek je vier ideeën voor je uitstap: naar het strand, vrij rondlopen, samen pauzeren en iets beleven. Elk onderdeel brengt je rechtstreeks naar de bijbehorende gids.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Op een groot scherm schuift de zoekbalk bij het verder scrollen mee naar de navigatie. Zo kun je ook lager op de homepage een badstad, zaak of losloopzone zoeken. Op kleinere schermen blijft de zoekbalk bij de introductie staan.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Hotspots, diensten en losloopzones hebben een vernieuwde introductie met fotografie en een duidelijkere toegang tot het overzicht. Bij hotspots kun je meerdere gemeenten en soorten zaken combineren met een zoekterm. Je filters staan in de link en blijven behouden wanneer je terugkeert van een zaakpagina.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'De gemeentepagina’s hebben een rustigere indeling en tonen opnieuw foto’s bij de losloopzones. De kustcode heeft weer een herkenbare achtergrond.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Bij “Goed om te weten” vind je nu ook een verwijzing naar GoPuppy.eu voor hondvriendelijke plekken in België en Nederland. Rechtstreekse links naar een onderdeel van die pagina brengen je naar de juiste sectie.', tag: { label: 'Nieuw', color: 'cyan' } },
+        ],
+      },
+      {
+        id: 'agenda',
+        title: 'Een uitgebreidere agenda, aan zee en daarbuiten',
+        entries: [
+          { text: 'De agenda is uitgebreid met 18 evenementen, waaronder hondenwandelingen, Halloweenactiviteiten, winteruitstappen en aangekondigde edities voor 2027. Samen met de drie bestaande edities blijven ook eerdere activiteiten terug te vinden.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Kies tussen komende evenementen en voorbije edities en filter op seizoen of regio. Afgelopen activiteiten verhuizen op basis van hun datum naar de historiek, zodat het komende aanbod overzichtelijk blijft.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Elk evenement heeft een eigen pagina met datum, locatie, programma, bekende prijzen en uren, hondenvoorwaarden en links naar organisator, inschrijving en bronnen. Ontbrekende informatie en voorlopige aankondigingen worden expliciet aangeduid; controleer de organisator voor de actuele beschikbaarheid.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Evenementen zijn ook bereikbaar vanuit de bijbehorende gemeentegids. Foto’s, affiches en archiefbeelden krijgen bronvermelding en context. Elke evenementpagina heeft eigen informatie voor zoekmachines en sociale deelvoorbeelden.', tag: { label: 'Verbeterd', color: 'amber' } },
+        ],
+      },
+      {
+        id: 'persoonlijk',
+        title: 'Kevin & Jax, jouw zaak en steun aan de gids',
+        entries: [
+          { text: 'De vernieuwde pagina “Over ons” vertelt het verhaal van Kevin en Jax: hoe de gids ontstond, hoe de website wordt gebouwd en waarom samen op stap met de hond centraal staat.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Een hondvriendelijke zaak aanmelden gaat via een vernieuwde pagina. Vul de zaaknaam, gemeente en uitleg over het onthaal van honden in en open je bericht in e-mail of WhatsApp. Daar kun je het aanvullen, foto’s toevoegen en zelf versturen. Een vermelding blijft gratis.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Op “Steun ons” kies je zelf een vrijwillige bijdrage. De pagina zet de betaalgegevens en QR-code duidelijk bij elkaar en legt de stickeraanvraag afzonderlijk uit. De gids blijft gratis toegankelijk.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Bij een review reageert de sterrenkeuze nu visueel en krijg je een duidelijkere bevestiging na het inzenden. De moderatie blijft gelden: een nieuwe review verschijnt pas na goedkeuring.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Onderaan de website vind je nu het logo en de link van Webaanzee, met vermelding van design en ontwikkeling.', tag: { label: 'Nieuw', color: 'cyan' } },
+        ],
+      },
+      {
+        id: 'beheer',
+        title: 'Achter de schermen: agenda & bezoekersinzichten',
+        entries: [
+          { text: 'De agenda heeft een eigen beheeromgeving met zoeken, filters, privéconcepten en een voorvertoning. Een bestaande editie kan als vertrekpunt voor een nieuwe dienen, zonder jaargebonden gegevens automatisch als bevestigd over te nemen.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'Evenementteksten, praktische gegevens, bronnen, hondenvoorwaarden en foto’s kunnen vanuit het dashboard worden aangepast. Revisies vergelijken en herstellen is mogelijk. Bij het publiceren worden alleen geselecteerde concepten meegenomen en wordt gecontroleerd of de juiste versie op de website staat.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Onder Analytics staan nu afzonderlijke rapporten voor Website en Agenda. Het agendarapport toont paginaweergaven en klikken naar onder meer organisator, tickets en route, ook per editie en met een CSV-download. Klikken worden niet voorgesteld als ticketverkopen.', tag: { label: 'Nieuw', color: 'cyan' } },
+          { text: 'De websiteanalytics kan schakelen tussen paginaweergaven en dagelijks geschatte bezoekers, met bijpassende grafieken en CSV-export. Deze meting gebruikt geen meetcookies of blijvende bezoeker-ID. Totalen over meerdere dagen zijn de som van dagschattingen; de uitleg staat bij de rapporten.', tag: { label: 'Verbeterd', color: 'amber' } },
+          { text: 'Beheerders zien publieke hotspotlikes en reviewinzichten duidelijker bij elkaar. De rapporten houden likes, beoordelingen en privéfavorieten uit elkaar.', tag: { label: 'Verbeterd', color: 'amber' } },
+        ],
+      },
+      {
+        id: 'techniek',
+        title: 'Vindbaarheid & kleine herstellingen',
+        entries: [
+          { text: 'Het adres met www verwijst voortaan consequent naar de homepage zonder www. Zoekmachines krijgen één volledige sitemap; het overbodige extra sitemapadres verwijst door naar datzelfde overzicht. Dit maakt de technische verwijzingen consistenter, zonder een zoekpositie of indexering te beloven.', tag: { label: 'Opgelost', color: 'emerald' } },
+          { text: 'De ruimte langs de footer is gecorrigeerd voor schermen met een veilige schermrand, zodat de inhoud ook daar netjes uitgelijnd blijft.', tag: { label: 'Opgelost', color: 'emerald' } },
+        ],
+      },
+    ],
+  },
+  {
     version: '3.1', date: '3 oktober 2026', dateISO: '2026-10-03',
     title: 'Strandgids: de juiste regels voor jouw moment en strandzone',
     subtitle: 'Eerst je bezoek, dan de jaarregeling. Met zichtbare voorwaarden en gemeentelijke bronnen.',
@@ -586,7 +647,7 @@ const Updates: React.FC = () => {
     keywords: 'updates hondaanzee, nieuw, changelog, verbeteringen, strandregels, oktober 2026',
     canonical: 'https://hondaanzee.be/updates',
     ogType: 'article',
-    articleModifiedTime: `${SITE_UPDATE_DATE}T00:00:00+02:00`,
+    articleModifiedTime: `${SITE_UPDATE_DATE}T00:00:00+01:00`,
   });
 
   useEffect(() => {
@@ -674,9 +735,9 @@ const Updates: React.FC = () => {
           <div className="inline-flex items-center justify-center p-4 bg-cyan-100 text-cyan-600 rounded-2xl mb-6 shadow-sm">
             <PawPrint size={40} strokeWidth={2} />
           </div>
-          <h2 className="text-xl font-black text-slate-900 sm:text-2xl">De strandgids staat centraal</h2>
+          <h2 className="text-xl font-black text-slate-900 sm:text-2xl">Meer ideeën voor samen aan zee</h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
-            Wat geldt er voor jouw bezoek en strandzone? De nieuwste update brengt toegang, leibandregels en voorwaarden samen in één praktisch antwoord voor elk van onze {CITIES.length} bestemmingen.
+            Ontdek de vernieuwde homepage, de uitgebreidere agenda en de verhalen achter de gids. De strandregels voor onze {CITIES.length} bestemmingen blijven bereikbaar via de gemeentegidsen.
           </p>
           <Link to="/#steden" className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800">Kies je strandbestemming<ArrowRight size={16} aria-hidden="true" /></Link>
           <p className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">De historiek hieronder is geen actuele strandregeling. Gebruik de gemeentegids voor je bezoek; daar staan de toepasselijke regels, officiële bronnen en laatste controledatum.</p>
@@ -766,7 +827,7 @@ const Updates: React.FC = () => {
                         ))}
                       </div>
                       <div className="mt-7 flex flex-wrap gap-3 border-t border-slate-100 pt-5">
-                        <Link to="/account?mode=register" className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-sm font-bold text-white hover:bg-sky-700">Ontdek Mijn Hond aan Zee<ArrowRight size={16} aria-hidden="true" /></Link>
+                        <Link to={idx === 0 ? "/agenda" : "/account?mode=register"} className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-sm font-bold text-white hover:bg-sky-700">{idx === 0 ? "Ontdek de agenda" : "Ontdek Mijn Hond aan Zee"}<ArrowRight size={16} aria-hidden="true" /></Link>
                         <Link to="/hotspots" className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-sky-200 px-4 py-2 text-sm font-bold text-sky-800 hover:bg-sky-50">Bekijk de hotspots<ArrowRight size={16} aria-hidden="true" /></Link>
                       </div>
                     </div>
