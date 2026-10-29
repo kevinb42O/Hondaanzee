@@ -43,7 +43,7 @@ const chapters = [
   },
 ] as const;
 
-function Chapter({ index, phase, pinned, active }: { index: number; phase: MotionValue<number>; pinned: boolean; active: number }) {
+function Chapter({ index, phase, pinned, compact, active }: { index: number; phase: MotionValue<number>; pinned: boolean; compact: boolean; active: number }) {
   const chapter = chapters[index];
   const imageOpacity = useTransform(phase, value => Math.max(0, 1 - Math.abs(value - index)));
   const copyOpacity = useTransform(phase, value => Math.max(0, Math.min(1, (0.48 - Math.abs(value - index)) / .3)));
@@ -53,19 +53,20 @@ function Chapter({ index, phase, pinned, active }: { index: number; phase: Motio
     id={`uitstap-${chapter.id}`}
     className={`outing-guide__chapter outing-guide__chapter--${chapter.tone}`}
     aria-labelledby={`uitstap-title-${chapter.id}`}
-    aria-hidden={pinned && active !== index ? true : undefined}
-    inert={pinned && active !== index ? true : undefined}
+    hidden={compact && active !== index}
+    aria-hidden={(pinned || compact) && active !== index ? true : undefined}
+    inert={(pinned || compact) && active !== index ? true : undefined}
   >
-    <motion.figure className="outing-guide__visual" style={pinned ? { opacity: imageOpacity } : undefined}>
+    <motion.figure className="outing-guide__visual" style={{ opacity: pinned ? imageOpacity : 1 }}>
       <div className="outing-guide__image-crop">
-        <motion.img src={chapter.image} srcSet={chapter.srcSet} sizes="(min-width: 1000px) 52vw, 100vw" width={1024} height={760} alt={chapter.alt} loading="lazy" decoding="async" style={{ objectPosition: chapter.position, ...(pinned ? { scale } : {}) }} />
+        <motion.img src={chapter.image} srcSet={chapter.srcSet} sizes="(min-width: 1000px) 52vw, 100vw" width={1024} height={760} alt={chapter.alt} loading="lazy" decoding="async" style={{ objectPosition: chapter.position, scale: pinned ? scale : 1 }} />
       </div>
       <figcaption>
         <span><chapter.icon size={17} aria-hidden="true" />{chapter.label}</span>
         {chapter.id === 'agenda' && <a href="https://dogsandfriends.be/index-nl.php" target="_blank" rel="noopener noreferrer">Foto: Dogs &amp; Friends</a>}
       </figcaption>
     </motion.figure>
-    <motion.div className="outing-guide__copy" style={pinned ? { opacity: copyOpacity, y: copyY } : undefined}>
+    <motion.div className="outing-guide__copy" style={{ opacity: pinned ? copyOpacity : 1, y: pinned ? copyY : 0 }}>
       <h3 id={`uitstap-title-${chapter.id}`}>{chapter.title}<em>{chapter.emphasis}</em></h3>
       <p>{chapter.description}</p>
       <p className="outing-guide__detail">{chapter.detail}</p>
@@ -81,17 +82,27 @@ export default function HomeOutingGuide() {
   const stage = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
   const [fits, setFits] = useState(false);
+  const [mobile, setMobile] = useState(false);
   const [active, setActive] = useState(0);
   const pinned = fits && !reducedMotion;
+  const compact = mobile && !pinned && !reducedMotion;
   const { scrollYProgress } = useScroll({ target: root, offset: ['start start', 'end end'] });
   const phase = useTransform(scrollYProgress, value => Math.max(0, Math.min(3, value * 3)));
-  useMotionValueEvent(phase, 'change', value => setActive(Math.round(value)));
+  useMotionValueEvent(phase, 'change', value => { if (pinned) setActive(Math.round(value)); });
+  useEffect(() => {
+    if (pinned) setActive(Math.round(phase.get()));
+  }, [pinned, phase]);
 
   useEffect(() => {
     const media = window.matchMedia('(min-width: 1000px) and (min-height: 760px)');
     const measure = () => {
       const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-      setFits(media.matches && window.innerWidth >= fontSize * 62.5 && window.innerHeight >= fontSize * 47.5);
+      const narrow = window.innerWidth < 1000;
+      // Mobile gets its own shorter composition. Short viewports use direct chapter selection.
+      const mobileFits = narrow && window.innerWidth >= 360 && window.innerHeight >= 740 && fontSize <= 18;
+      const desktopFits = media.matches && window.innerWidth >= fontSize * 62.5 && window.innerHeight >= fontSize * 47.5;
+      setMobile(narrow);
+      setFits(mobileFits || desktopFits);
     };
     media.addEventListener('change', measure);
     window.addEventListener('resize', measure);
@@ -103,27 +114,25 @@ export default function HomeOutingGuide() {
 
   useEffect(() => {
     if (window.location.hash !== '#uitstap-inspiratie') return;
-    let disposed = false;
-    let frame = 0;
     // Align after the homepage's mount reset and the measured sticky layout.
-    document.fonts.ready.then(() => {
-      if (disposed) return;
-      frame = requestAnimationFrame(() => root.current?.scrollIntoView({ behavior: 'instant', block: 'start' }));
-    });
-    return () => { disposed = true; cancelAnimationFrame(frame); };
-  }, [pinned]);
+    // Do not wait for fonts: a late alignment can interrupt an already chosen chapter.
+    const frame = requestAnimationFrame(() => root.current?.scrollIntoView({ behavior: 'instant', block: 'start' }));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const navigate = (index: number) => {
     if (!root.current || !stage.current) return;
     if (pinned) {
       const start = root.current.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: start + index / 3 * (root.current.offsetHeight - stage.current.offsetHeight), behavior: 'smooth' });
+    } else if (compact) {
+      setActive(index);
     } else {
       document.getElementById(`uitstap-${chapters[index].id}`)?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' });
     }
   };
 
-  return <section ref={root} id="uitstap-inspiratie" className={`outing-guide${pinned ? ' outing-guide--pinned' : ''}`} aria-labelledby="outing-guide-title" data-outing-guide={pinned ? 'pinned' : 'flow'}>
+  return <section ref={root} id="uitstap-inspiratie" className={`outing-guide${pinned ? ' outing-guide--pinned' : ''}${compact ? ' outing-guide--compact' : ''}`} aria-labelledby="outing-guide-title" data-outing-guide={pinned ? 'pinned' : compact ? 'compact' : 'flow'}>
     <div ref={stage} className="outing-guide__stage site-shell">
       <header className="outing-guide__heading">
         <h2 id="outing-guide-title">Wat wil je <em>doen?</em></h2>
@@ -131,9 +140,9 @@ export default function HomeOutingGuide() {
         {pinned && <span className="outing-guide__hint">Scroll en ontdek<ArrowDown size={16} aria-hidden="true" /></span>}
       </header>
       <nav className="outing-guide__navigation" aria-label="Kies je uitstap">
-        {chapters.map((chapter, index) => <button key={chapter.id} type="button" aria-controls={`uitstap-${chapter.id}`} aria-current={pinned && active === index ? 'step' : undefined} onClick={() => navigate(index)}><chapter.icon size={18} aria-hidden="true" /><span>{chapter.label}</span><ArrowRight size={16} aria-hidden="true" /></button>)}
+        {chapters.map((chapter, index) => <button key={chapter.id} type="button" aria-controls={`uitstap-${chapter.id}`} aria-current={(pinned || compact) && active === index ? 'step' : undefined} onClick={() => navigate(index)}><chapter.icon size={18} aria-hidden="true" /><span>{chapter.label}</span><ArrowRight size={16} aria-hidden="true" /></button>)}
       </nav>
-      <div className="outing-guide__chapters">{chapters.map((chapter, index) => <Chapter key={chapter.id} index={index} phase={phase} pinned={pinned} active={active} />)}</div>
+      <div className="outing-guide__chapters">{chapters.map((chapter, index) => <Chapter key={chapter.id} index={index} phase={phase} pinned={pinned} compact={compact} active={active} />)}</div>
     </div>
   </section>;
 }

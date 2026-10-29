@@ -45,11 +45,36 @@
 .outing-guide--pinned .outing-guide__image-crop { flex: 1 1 0; min-height: 0; aspect-ratio: auto; }
 .outing-guide--pinned .outing-guide__visual figcaption { flex: 0 0 auto; }
 @media (max-width: 999px) {
+  .outing-guide__stage { padding-block: 2rem; }
+  .outing-guide__heading { margin-bottom: 1rem; }
+  .outing-guide__heading h2 { font-size: clamp(1.9rem, 6vw, 2.5rem); }
+  .outing-guide__heading p { margin-top: .5rem; font-size: .875rem; }
   .outing-guide__navigation { grid-template-columns: repeat(2, 1fr); column-gap: 1.5rem; row-gap: 0; }
+  .outing-guide__navigation { margin-bottom: 1.25rem; }
+  .outing-guide__navigation button { font-size: .75rem; }
+  .outing-guide__navigation button > svg { flex-shrink: 0; }
   .outing-guide__chapter { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .outing-guide__visual { max-width: 42rem; width: 100%; }
   .outing-guide__copy { padding-block: 0; }
   .outing-guide__copy h3 { max-width: 22ch; font-size: clamp(2rem, 6vw, 3rem); margin-bottom: 1rem; }
   .outing-guide__copy p { max-width: 54ch; }
   .outing-guide__chapter + .outing-guide__chapter { margin-top: 3.5rem; }
+  .outing-guide__chapter[hidden] { display: none; }
+  .outing-guide--compact .outing-guide__chapter { margin-top: 0; }
+  .outing-guide--compact .outing-guide__image-crop { aspect-ratio: 1.6; }
+  .outing-guide--pinned .outing-guide__stage { padding-block: 5.5rem max(1rem, env(safe-area-inset-bottom)); }
+  .outing-guide--pinned .outing-guide__heading { margin-bottom: .85rem; }
+  .outing-guide--pinned .outing-guide__hint { display: none; }
+  .outing-guide--pinned .outing-guide__chapter { margin: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; gap: .9rem; }
+  .outing-guide--pinned .outing-guide__visual { max-width: none; padding: .65rem; }
+  .outing-guide--pinned .outing-guide__visual figcaption { padding-top: .45rem; font-size: .6875rem; }
+  .outing-guide--pinned .outing-guide__copy { padding: 0; }
+  .outing-guide--pinned .outing-guide__copy h3 { max-width: none; margin-bottom: .6rem; font-size: 1.65rem; line-height: 1.1; }
+  .outing-guide--pinned .outing-guide__copy h3 em { margin-top: .1em; }
+  .outing-guide--pinned .outing-guide__copy p { font-size: .8125rem; line-height: 1.6; }
+  .outing-guide--pinned .outing-guide__copy .outing-guide__detail { margin-top: .6rem; padding-top: .6rem; font-size: .6875rem; }
+  .outing-guide--pinned .outing-guide__action { margin-top: .4rem; min-height: 44px; font-size: .875rem; }
+  .outing-guide--pinned .outing-guide__navigation { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .55rem; margin-top: .85rem; }
+  .outing-guide--pinned .outing-guide__navigation button { flex-direction: column; align-items: flex-start; gap: .4rem; padding: .65rem 0 0; line-height: 1.35; min-height: 60px; }
+  .outing-guide--pinned .outing-guide__navigation button > svg:last-child { display: none; }
 }
