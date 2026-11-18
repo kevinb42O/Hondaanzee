@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowUpRight, Check, Mail, MapPin, MessageCircle, PawPrint } from 'lucide-react';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import WebaanzeeOffer from '../components/WebaanzeeOffer.tsx';
 import { useSEO } from '../utils/seo.ts';
 import './ZaakAanmelden.css';
 
@@ -65,6 +66,7 @@ const ZaakAanmelden: React.FC = () => {
               <div className="business-hero__actions">
                 <a className="business-button" href="#aanmelden">Meld je zaak gratis aan <ArrowUpRight size={19} aria-hidden="true" /></a>
                 <a className="business-text-link" href="#hoe-werkt-het">Hoe werkt het? <ArrowDown size={16} aria-hidden="true" /></a>
+                <a className="business-text-link" href="#websitecheck">Hulp met je eigen website? <ArrowUpRight size={16} aria-hidden="true" /></a>
               </div>
               <p className="business-hero__note"><Check size={16} aria-hidden="true" /> Een gratis vermelding. Een persoonlijk contact.</p>
             </div>
@@ -158,6 +160,8 @@ const ZaakAanmelden: React.FC = () => {
           <li><span className="business-steps__number" aria-hidden="true">03</span><div><h3>Een plekje in de gids</h3><p>Is je zaak hondvriendelijk? Dan maken we een gratis vermelding met de praktische info die baasjes nodig hebben.</p></div></li>
         </ol>
       </section>
+
+      <WebaanzeeOffer source="zaak-aanmelden" />
 
       <section className="business-extra business-shell" aria-labelledby="business-extra-title">
         <div className="business-sticker">

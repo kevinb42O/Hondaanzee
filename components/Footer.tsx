@@ -2,6 +2,7 @@
 import React from 'react';
 import { PawPrint, ExternalLink, Mail, Bike, Caravan, Baby } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackWebaanzeeAction, webaanzeeUrl } from '../utils/webaanzeeAnalytics.ts';
 import NotificationOptIn from './NotificationOptIn.tsx';
 import { SITE_UPDATE_DATE, SITE_UPDATE_LABEL } from '../data/siteUpdates.ts';
 
@@ -366,27 +367,32 @@ const Footer: React.FC = () => {
             <div className="text-slate-500 text-xs">
               <span className="text-slate-400">Hond</span><span className="text-cyan-400">Aan</span><span className="text-slate-400">Zee</span>.be &copy; {new Date().getFullYear()}
             </div>
-            <a
-              href="https://www.webaanzee.be/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex min-h-11 flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-md py-2 text-xs text-slate-400 transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
-              aria-label="Design & development: Webaanzee (opent in een nieuw tabblad)"
-            >
-              <span>Design &amp; development</span>
-              <span className="inline-flex items-center gap-2.5">
-                <img
-                  src="/images/brands/webaanzee-wordmark.webp"
-                  alt="Webaanzee"
-                  width={1823}
-                  height={220}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto w-[166px]"
-                />
-                <ExternalLink size={13} aria-hidden="true" className="shrink-0 text-slate-500 transition-colors duration-200 group-hover:text-cyan-400 group-focus-visible:text-cyan-400" />
-              </span>
-            </a>
+            <div className="flex max-w-sm flex-col items-center gap-1 text-center sm:items-end sm:text-right">
+              <p className="text-sm text-slate-300">Ook een website voor jouw zaak?</p>
+              <p className="text-xs leading-relaxed text-slate-400">Webaanzee bouwt websites voor ondernemers aan de kust.</p>
+              <a
+                href={webaanzeeUrl('footer')}
+                onClick={() => trackWebaanzeeAction('footer', 'voorbeelden-bekeken')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex min-h-11 flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-md py-2 text-xs text-slate-400 transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
+                aria-label="Bekijk het werk van Webaanzee (opent in een nieuw tabblad)"
+              >
+                <span>Bekijk ons werk</span>
+                <span className="inline-flex items-center gap-2.5">
+                  <img
+                    src="/images/brands/webaanzee-wordmark.webp"
+                    alt="Webaanzee"
+                    width={1823}
+                    height={220}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-auto w-[166px]"
+                  />
+                  <ExternalLink size={13} aria-hidden="true" className="shrink-0 text-slate-500 transition-colors duration-200 group-hover:text-cyan-400 group-focus-visible:text-cyan-400" />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

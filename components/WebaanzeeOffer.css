@@ -1,0 +1,32 @@
+.webaanzee-offer {
+  color: #193d40;
+  background: #eaf0e9;
+  border-block: 1px solid #ccd9ce;
+  scroll-margin-top: 7rem;
+}
+.webaanzee-offer__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 6rem); width: min(100%, 88rem); margin-inline: auto; padding: clamp(3rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 4rem); }
+.webaanzee-offer .webaanzee-offer__intro h2 { margin: 0; font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 500; line-height: 1.2; letter-spacing: -.035em; text-wrap: balance; }
+.webaanzee-offer .webaanzee-offer__intro h2 em { color: #24675e; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.035em; }
+.webaanzee-offer .webaanzee-offer__check h3 { margin: 0; font-size: 1.25rem; font-weight: 600; line-height: 1.4; letter-spacing: -.02em; }
+.webaanzee-offer p { max-width: 52ch; margin: 1.25rem 0 0; color: #52696a; font-size: .9375rem; line-height: 1.8; }
+.webaanzee-offer .webaanzee-offer__instruction { margin-top: .75rem; }
+.webaanzee-offer a:focus-visible { outline: 3px solid #087d9b; outline-offset: 4px; }
+.webaanzee-offer__examples, .webaanzee-offer__whatsapp { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; color: #193d40; font-size: .875rem; text-decoration: underline; text-underline-offset: .25em; }
+.webaanzee-offer__examples { margin-top: 1.25rem; }
+.webaanzee-offer__examples:hover, .webaanzee-offer__whatsapp:hover { color: #24675e; }
+.webaanzee-offer__actions { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; margin-top: 1.5rem; }
+.webaanzee-offer__button { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem; padding: .8rem 1.25rem; border-radius: 999px; background: #24675e; color: #fff; font-size: .875rem; font-weight: 600; line-height: 1.5; transition: background-color 160ms ease; }
+.webaanzee-offer__button:hover { background: #194e47; }
+.webaanzee-offer svg { flex-shrink: 0; }
+.webaanzee-offer .webaanzee-offer__note { margin-top: .75rem; font-size: .75rem; }
+.webaanzee-offer ::selection { background: #c7d9cd; color: #193d40; }
+@media (max-width: 899px) {
+  .webaanzee-offer__layout { grid-template-columns: minmax(0, 1fr); }
+  .webaanzee-offer__check { padding-top: 2rem; border-top: 1px solid #ccd9ce; }
+}
+@media (max-width: 539px) {
+  .webaanzee-offer__button { width: 100%; font-size: .8125rem; }
+  .webaanzee-offer__actions { align-items: stretch; }
+  .webaanzee-offer__whatsapp { align-self: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { .webaanzee-offer__button { transition: none; } }

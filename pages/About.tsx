@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowUpRight, Camera, Heart, MessageCircle } from 'lucide-react';
 import Breadcrumb from '../components/Breadcrumb.tsx';
+import WebaanzeeOffer from '../components/WebaanzeeOffer.tsx';
 import { useSEO, SEO_DATA } from '../utils/seo.ts';
 import './About.css';
 
@@ -40,12 +41,12 @@ const About: React.FC = () => {
               <p className="about-eyebrow">De mens en de hond achter HondAanZee</p>
               <h1><span>Eén developer.</span><em>Eén hond.</em><span>Een kust vol plannen.</span></h1>
               <p className="about-hero__intro">
-                Hoi, ik ben Kevin. <strong>Software developer, technologist en kustbewoner.</strong> Ik bouw graag dingen die het leven eenvoudiger maken. Naast mij staat Jax, mijn Australische Herder en de reden waarom dit project bestaat.
+                Hoi, ik ben Kevin. <strong>Software developer, technologist en kustbewoner.</strong> Met Webaanzee bouw ik websites voor zelfstandigen en zaken aan de kust. Naast mij staat Jax, mijn Australische Herder en de reden waarom dit project bestaat.
               </p>
               <p className="about-hero__aside">Ik bouw de website. Hij herinnert me eraan dat we ook nog naar buiten moeten.</p>
               <div className="about-hero__actions">
                 <a href="#ons-verhaal" className="about-button">Lees ons verhaal <ArrowDown size={17} aria-hidden="true" /></a>
-                <a href="#contact" className="about-text-link">Zeg eens hallo <ArrowUpRight size={17} aria-hidden="true" /></a>
+                <a href="#websitecheck" className="about-text-link">Een website voor jouw zaak? <ArrowUpRight size={17} aria-hidden="true" /></a>
               </div>
             </div>
             <figure className="about-hero__photo">
@@ -116,6 +117,8 @@ const About: React.FC = () => {
           <p>Dit blijft een persoonlijk project dat ik in mijn vrije tijd onderhoud. Een nieuwe plek toevoegen of een wijziging nakijken kan dus even duren. Maar er wordt met aandacht aan gewerkt, tussen de wandelingen door.</p>
         </div>
       </section>
+
+      <WebaanzeeOffer source="over-ons" />
 
       <section className="about-closing" aria-label="Steun en contact">
         <div className="about-shell about-closing__layout">
